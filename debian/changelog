@@ -1,3 +1,13 @@
+glade-3 (3.0.0-1ubuntu2) edgy; urgency=low
+
+  * debian/control.in:
+    - fixed library package name to match the soname
+    - make libgladeui-1-2 Conflicts,Replaces libgladeui-1-1
+  * debian/libgladeui-1-2.install, debian/rules:
+    - fixed library package name to match the soname
+
+ -- Sebastien Bacher <seb128@canonical.com>  Wed, 16 Aug 2006 23:29:48 +0200
+
 glade-3 (3.0.0-1ubuntu1) edgy; urgency=low
 
   * Sync with Debian
