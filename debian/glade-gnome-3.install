@@ -1,0 +1,8 @@
+debian/tmp/usr/lib/glade3/modules/libgladegnome.so usr/lib/glade3/modules
+debian/tmp/usr/share/glade3/pixmaps/16x16/bonobo* usr/share/glade3/pixmaps/16x16
+debian/tmp/usr/share/glade3/pixmaps/16x16/gnome* usr/share/glade3/pixmaps/16x16
+debian/tmp/usr/share/glade3/pixmaps/22x22/bonobo* usr/share/glade3/pixmaps/22x22
+debian/tmp/usr/share/glade3/pixmaps/22x22/gnome* usr/share/glade3/pixmaps/22x22
+debian/tmp/usr/share/glade3/catalogs/bonobo.xml usr/share/glade3/catalogs
+debian/tmp/usr/share/glade3/catalogs/canvas.xml usr/share/glade3/catalogs
+debian/tmp/usr/share/glade3/catalogs/gnome.xml usr/share/glade3/catalogs

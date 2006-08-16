@@ -1,0 +1,86 @@
+This package was put together by Marcus Brinkmann <brinkmd@debian.org>
+from sources obtained from: http://glade.pn.org/glade/download.html.
+This package was debianized again by Mariusz Przygodzki <dune@home.pl>
+on Sat, 30 Dec 2000 01:53:12 +0100, and debianized by James Curbo
+<james@teyandei.net> based on Sebastian Bacher's work.
+
+It was downloaded from ftp://ftp.gnome.org/pub/GNOME/sources/glade/
+
+
+Upstream Authors:
+		  Chema Celorio <chema@ximian.com>
+		  Michal Palczewski <mpalczew@u.washington.edu>
+		  Archit Baweja <bighead@users.sourceforge.net>
+		  Shane Butler <shane_b@operamail.com>
+		  Tristan Van Berkom <tvb@gnome.org>
+	          Damon Chaplin <damon@helixcode.com>
+                  Martijn van Beers <martijn@earthling.net>
+
+Copyright:
+
+glade-accumulators.c: * Copyright (C) 2005 The GNOME Foundation.
+glade-app.c: * Copyright (C) 2001 Ximian, Inc.
+glade-app.h: * Copyright (C) 2001 Ximian, Inc.
+glade-builtins.c: * Copyright (C) 2005 The GNOME Foundation.
+glade-catalog.c: * Copyright (C) 2001 Ximian, Inc.
+glade-catalog.c: * Copyright (C) 2004 Imendio AB
+glade-catalog.h: * Copyright (C) 2001 Ximian, Inc.
+glade-catalog.h: * Copyright (C) 2004 Imendio AB
+glade-clipboard.c: * Copyright (C) 2001 The GNOME Foundation.
+glade-clipboard-view.c: * Copyright (C) 2001 The GNOME Foundation.
+glade-command.c: * Copyright (C) 2002 Joaquín Cuenca Abela
+glade-cursor.c: * Copyright (C) 2001 Ximian, Inc.
+glade-custom.c: * Copyright (C) 2005 The GNOME Foundation.
+glade-debug.c: * Copyright (C) 2003 Joaquin Cuenca Abela
+glade-editor.c: * Copyright (C) 2001 Ximian, Inc.
+glade-editor-property.c: * Copyright (C) 2001 Ximian, Inc.
+glade-fixed.c: * Copyright (C) 2006 The GNOME Foundation.
+glade-gnome.c: * Copyright (C) 2006 Juan Pablo Ugarte.
+glade-gtk.c: * Copyright (C) 2001 Ximian, Inc.
+glade-id-allocator.c: * Copyright (C) 2004 Owen Taylor
+glade-palette-box.c: * Copyright (C) 2006 The Gnome Foundation.
+glade-palette-box.h: * Copyright (C) 2006 The Gnome Foundation.
+glade-palette.c: * Copyright (C) 2006 The GNOME Foundation.
+glade-palette.c: * Copyright (C) 2001-2005 Ximian, Inc.
+glade-palette-expander.c: * Copyright (C) 2003 Sun Microsystems, Inc.
+glade-palette-expander.h: * Copyright (C) 2003 Sun Microsystems, Inc.
+glade-palette.h: * Copyright (C) 2006 The GNOME Foundation.
+glade-palette.h: * Copyright (C) 2001-2005 Ximian, Inc.
+glade-palette-item.c: * Copyright (C) 2006 The GNOME Foundation.
+glade-palette-item.h: * Copyright (C) 2006 The GNOME Foundation.
+glade-parameter.c: * Copyright (C) 2001 Ximian, Inc.
+glade-parser.c: * Copyright (C) 1998-2002  James Henstridge <james@daa.com.au>
+glade-parser.h: * Copyright (C) 1998-2002  James Henstridge <james@daa.com.au>
+glade-placeholder.c: * Copyright (C) 2003, 2004 Joaquin Cuenca Abela
+glade-popup.c: * Copyright (C) 2001 Ximian, Inc.
+glade-project.c: * Copyright (C) 2001 Ximian, Inc.
+glade-project-view.c: * Copyright (C) 2001 Ximian, Inc.
+glade-project-window.c: * Copyright (C) 2001 Ximian, Inc.
+glade-property.c: * Copyright (C) 2001 Ximian, Inc.
+glade-property-class.c: * Copyright (C) 2001 Ximian, Inc.
+glade-signal.c: * Copyright (C) 2001 Ximian, Inc.
+glade-signal-editor.c: * Copyright (C) 2001 Ximian, Inc.
+glade-utils.c: * Copyright (C) 2001 Ximian, Inc.
+glade-widget.c: * Copyright (C) 2004 Joaquin Cuenca Abela
+glade-widget.c: * Copyright (C) 2001, 2002, 2003 Ximian, Inc.
+glade-widget-class.c: * Copyright (C) 2001 Ximian, Inc.
+glade-widget-class.c: * Copyright (C) 2004 Imendio AB
+main.c: * Copyright (C) 2001 Ximian, Inc.
+
+License:
+
+   This package is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; version 2 dated June, 1991.
+
+   This package is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
+
+On Debian GNU/Linux systems, the complete text of the GNU General
+Public License can be found in `/usr/share/common-licenses/GPL'.

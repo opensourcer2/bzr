@@ -1,0 +1,5 @@
+debian/tmp/usr/lib/libgladeui-1.so usr/lib
+debian/tmp/usr/lib/libgladeui-1.a usr/lib
+debian/tmp/usr/include/* usr/include/
+debian/tmp/usr/lib/pkgconfig/* usr/lib/pkgconfig/
+debian/tmp/usr/share/gtk-doc/html/gladeui/* usr/share/doc/libgladeui-1-dev/html
