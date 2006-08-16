@@ -1,0 +1,376 @@
+<!-- ##### SECTION Title ##### -->
+GladeWidgetClass
+
+<!-- ##### SECTION Short_Description ##### -->
+Object Class-wide metadata
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+#GladeWidgetClass is a structure based on a #GType and parameters
+from the Glade catalog files and is the central metadata for object
+classes; it also provides an abstraction later to container apis.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GladeWidgetClass ##### -->
+<para>
+
+</para>
+
+@type: 
+@name: 
+@catalog: 
+@book: 
+@large_icon: 
+@small_icon: 
+@cursor: 
+@fixed: 
+@generic_name: 
+@palette_name: 
+@properties: 
+@signals: 
+@children: 
+@child_packings: 
+@module: 
+@toplevel: 
+@post_create_function: 
+@get_internal_child: 
+@launch_editor: 
+
+<!-- ##### STRUCT GladeSignalClass ##### -->
+<para>
+
+</para>
+
+@query: 
+@name: 
+@type: 
+
+<!-- ##### ENUM GladeCreateReason ##### -->
+<para>
+
+</para>
+
+@GLADE_CREATE_USER: 
+@GLADE_CREATE_COPY: 
+@GLADE_CREATE_LOAD: 
+@GLADE_CREATE_REBUILD: 
+@GLADE_CREATE_REASONS: 
+
+<!-- ##### USER_FUNCTION GladePostCreateFunc ##### -->
+<para>
+
+</para>
+
+@object: 
+@reason: 
+
+
+<!-- ##### USER_FUNCTION GladeChildSetPropertyFunc ##### -->
+<para>
+
+</para>
+
+@container: 
+@child: 
+@property_name: 
+@value: 
+
+
+<!-- ##### USER_FUNCTION GladeChildGetPropertyFunc ##### -->
+<para>
+
+</para>
+
+@container: 
+@child: 
+@property_name: 
+@value: 
+
+
+<!-- ##### USER_FUNCTION GladeGetChildrenFunc ##### -->
+<para>
+
+</para>
+
+@container: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION GladeAddChildFunc ##### -->
+<para>
+
+</para>
+
+@parent: 
+@child: 
+
+
+<!-- ##### USER_FUNCTION GladeRemoveChildFunc ##### -->
+<para>
+
+</para>
+
+@parent: 
+@child: 
+
+
+<!-- ##### USER_FUNCTION GladeReplaceChildFunc ##### -->
+<para>
+
+</para>
+
+@container: 
+@old: 
+@new: 
+
+
+<!-- ##### USER_FUNCTION GladeGetInternalFunc ##### -->
+<para>
+
+</para>
+
+@parent: 
+@name: 
+@child: 
+
+
+<!-- ##### USER_FUNCTION GladeEditorLaunchFunc ##### -->
+<para>
+
+</para>
+
+@object: 
+
+
+<!-- ##### FUNCTION glade_widget_class_new ##### -->
+<para>
+
+</para>
+
+@class_node: 
+@catname: 
+@library: 
+@domain: 
+@book: 
+@Returns: 
+
+
+<!-- ##### FUNCTION glade_widget_class_free ##### -->
+<para>
+
+</para>
+
+@widget_class: 
+
+
+<!-- ##### FUNCTION glade_widget_class_get_by_name ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION glade_widget_class_get_by_type ##### -->
+<para>
+
+</para>
+
+@type: 
+@Returns: 
+
+
+<!-- ##### MACRO glade_widget_class_from_pclass ##### -->
+<para>
+
+</para>
+
+@pclass: 
+
+
+<!-- ##### MACRO glade_widget_class_create_widget ##### -->
+<para>
+
+</para>
+
+@class: 
+@query: 
+@...: 
+
+
+<!-- ##### FUNCTION glade_widget_class_create_internal ##### -->
+<para>
+
+</para>
+
+@parent: 
+@internal_object: 
+@internal_name: 
+@parent_name: 
+@anarchist: 
+@reason: 
+@Returns: 
+
+
+<!-- ##### FUNCTION glade_widget_class_default_params ##### -->
+<para>
+
+</para>
+
+@class: 
+@construct: 
+@n_params: 
+@Returns: 
+
+
+<!-- ##### FUNCTION glade_widget_class_query ##### -->
+<para>
+
+</para>
+
+@class: 
+@Returns: 
+
+
+<!-- ##### FUNCTION glade_widget_class_get_derived_types ##### -->
+<para>
+
+</para>
+
+@type: 
+@Returns: 
+
+
+<!-- ##### FUNCTION glade_widget_class_dump_param_specs ##### -->
+<para>
+
+</para>
+
+@class: 
+
+
+<!-- ##### FUNCTION glade_widget_class_get_property_class ##### -->
+<para>
+
+</para>
+
+@class: 
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION glade_widget_class_get_child_support ##### -->
+<para>
+
+</para>
+
+@class: 
+@child_type: 
+@Returns: 
+
+
+<!-- ##### FUNCTION glade_widget_class_container_add ##### -->
+<para>
+
+</para>
+
+@class: 
+@container: 
+@child: 
+
+
+<!-- ##### FUNCTION glade_widget_class_container_remove ##### -->
+<para>
+
+</para>
+
+@class: 
+@container: 
+@child: 
+
+
+<!-- ##### FUNCTION glade_widget_class_container_has_child ##### -->
+<para>
+
+</para>
+
+@class: 
+@container: 
+@child: 
+@Returns: 
+
+
+<!-- ##### FUNCTION glade_widget_class_container_get_children ##### -->
+<para>
+
+</para>
+
+@class: 
+@container: 
+@Returns: 
+
+
+<!-- ##### FUNCTION glade_widget_class_container_set_property ##### -->
+<para>
+
+</para>
+
+@class: 
+@container: 
+@child: 
+@property_name: 
+@value: 
+
+
+<!-- ##### FUNCTION glade_widget_class_container_get_property ##### -->
+<para>
+
+</para>
+
+@class: 
+@container: 
+@child: 
+@property_name: 
+@value: 
+
+
+<!-- ##### FUNCTION glade_widget_class_container_replace_child ##### -->
+<para>
+
+</para>
+
+@class: 
+@container: 
+@old: 
+@new: 
+
+
+<!-- ##### FUNCTION glade_widget_class_contains_extra ##### -->
+<para>
+
+</para>
+
+@class: 
+@Returns: 
+
+
+<!-- ##### FUNCTION glade_widget_class_get_packing_default ##### -->
+<para>
+
+</para>
+
+@child_class: 
+@container_class: 
+@propert_id: 
+@Returns: 
+
+

@@ -1,0 +1,182 @@
+===========
+Glade 3.0.0
+===========
+
+New features and fixes
+======================
+    - DevHelp integration for a contextual help system
+    - GnomeUI and GnomeCanvas plugin (Juan Pablo Ugarte)
+    - New "Editor skeleton" provided by the core to ease the plugin's creation
+      of custom editors for toolbars and menus and such. (Juan Pablo Ugarte)
+    - Toolbar and popup menu support (Juan Pablo Ugarte)
+    - Added accelerators property dialog
+    - Drag/Resize support extended to GtkTable and GtkBox subclasses 
+      (and GnomeCanvas) from only GtkFixed and GtkLayout.
+    - Reverted "View" menu to match the Glade 2 style (Yevgen Muntyan)
+    - Now glade has 2 icon sets (16x16 & 22x22), all icons available (Vincent Geddes)
+    - New awesome palette (Vincent Geddes)
+    - Cute cursor when adding widgets (Vincent Geddes)
+    - General UI enhancements and desktop integration work (Vincent Geddes)
+    - Duplicated widgets id's are unique (Yevgen Muntyan)
+    - Spelling mistake fixes from Thierry Moisan and Clytie Siddall
+    - Many Many Many misc fixes by Juan Pablo Ugarte, Vincent Geddes, 
+      Yevgen Muntyan and myself.
+    - Much core/gtk+ backend refactoring done by Juan Pablo and myself.
+
+New and updated translations
+============================
+    - Funda Wang (zh_CN)
+    - Francisco Javier F. Serrador (es)
+    - Adam Weinberger (en_CA)
+    - Kjartan Maraas (nb, no)
+    - Raphael Higino (pt_BR)
+    - Clytie Siddall (vi)
+    - Jordi Mas (ca)
+    - Vincent van Adrighem (nl)
+    - Daniel Nylander (sv)
+    - Valek Filippov (ru)
+
+==============
+glade-3 2.91.1
+==============
+
+New features and fixes
+======================
+    - Full atk property support.
+    - Added full documentation with gtk-doc, imported adding-widgets.txt to sgml files.
+    - GtkTable packing properties now work seemlessly (Juan Pablo Ugarte)
+    - Misc fixes on menu editor (Juan Pablo Ugarte)
+    - Filtered out cut/copy/paste accelerators from the editor window (fixing bug 324389)
+    - Implemented "Custom widgets" (glade-2 file support)
+    - GladeEPropFlags now shows treeview directly in editor (Mikael Hermansson)
+    - Added generic object list type to the glade builtin types (currenty used for
+      atk relation properties)
+    - Added packing property recording mechianism to Create/Delete commands
+      (was only there for Cut/Paste)
+    - Added file filters "All Files" and "Glade Files" to FileChooser Dialog (Vincent Geddes)
+    - Initialize FileChooser to use project->name as loaded filename (Vincent Geddes)
+    - Lots of irrelevent properties disabled (Juan Pablo Ugarte)
+    - Rewrite of project list menu in glade-project-window (Vincent Geddes)
+    - Indicate whether projects have unsaved changes  (Vincent Geddes)
+    - Open leafs & scrolled-window position restored on the project view
+      when switching projects
+    - Added glade-3.pc for module packages to find out where to install
+      their modules/catalogs/pixmaps (Yevgen Muntyan)
+    - Implemented Adjustments glade-2 style for now (Juan Pablo Ugarte)
+    - Manage the sensitivities of all the ui actions in the project window (Vincent Geddes)
+    - Removed popt dependancy in favor of glib mechanism (Vincent Geddes)
+    - Detect read-only state of projects (Vincent Geddes)
+    - Implemented GtkDialog button children layout to match what glade-2 / libglade supports
+    - Changed GtkButton editing to support button "label" and "use-underline" properties.
+    - Many many misc bug fixes by Juan Pablo Ugarte, Yevgen Muntyan, Vincent Geddes,
+      Johannes Schmid and myself.
+
+New and updated translations
+============================
+    - Adam Weinberger (en_CA)
+    - Francisco Javier F. Serrador (es)
+    - Clytie Siddall (vi)
+    - Jordi Mas (ca)
+    - Raphael Higino (pt_BR)
+    - Vincent van Adrighem (nl)
+    - Daniel Nylander (sv)
+
+
+==============
+glade-3 2.91.0
+==============
+
+New features and fixes
+======================
+   - The amazing new menu editor is here ! (Juan Pablo Ugarte)
+   - Added GladeEditorProperty objects, a GtkWidget descendant
+     capable of editing properties (one subclass available for
+     every method of editing properties).
+   - GladeProjectView displays internal widget descriptors and
+     special-child-type descriptors
+   - Project menu item glitch fixed.
+   - Fixed "paste" using keyboard shortcuts
+   - Show "save as" dialog on save when previous save failed
+   - Added widgets GtkCombo, GtkList, GtkCList, ComboBox & ComboBoxEntry
+   - Delete in property editor not to delete project widgets (only text
+     in entries).
+   - Text properties now scroll (bugzilla 316232)
+   - Translate strings from catalog files (this includes translating
+     the gtk+.xml.in using intltool & using dgettext on strings parsed
+     from the catalog).
+   - Implemented command groups (for undo/redo actions on a complex
+     series of glade commands), used by the new editor.
+   - Undo/Redo buttons now display action content in tooltips.
+   - Added GladeEPropObject, generic support for object type properties.
+   - Updated plugin writer documentation (widgets/adding-widgets.txt)
+   - All project paths are now absolute canonical paths
+   - Added GladeEPropResource for resource file type properties,
+     glade will try to always keep a copy of all project resources
+     in the same directory as the glade file.
+   - Fixed signal loading (bug 326715)
+   - Fixed persisting i18n metadata (bug 325628)
+   - Implemented <requires> functionality in glade files
+     (save required plugins and gracefully display errors if
+     the requested catalog isnt available).
+   - Multiple projects with the same name now supported.
+   - Misc bugfixes and code improvements from myself Juan Pablo Ugarte and
+     Lluis Sanchez Gual
+
+
+New and updated translations
+============================
+
+   - Funda Wang (zh_CN)
+   - Francisco Javier F. Serrador (es)
+   - Adam Weinberger (en_CA)
+   - Kjartan Maraas (nb, no)
+   - Raphael Higino (pt_BR)
+
+
+
+What is new in glade-3 2.90.0
+=============================
+
+    Everything about glade-3 is definitly new in this first ever
+development snapshot, so I give you here a list of all the 
+all star players that helped up to this point to make it happen
+(anyone I have any kind of record of should be here).
+
+So welcome all to the new, unfinished glade-3, I hope you all enjoy.
+
+Contributors:
+=============
+ o Chema Celorio
+ o Jonathan Blandford
+ o Carlos Perello Marin
+ o Archit Baweja
+ o Ravi Pratap
+ o Shane Butler
+ o Joe Shaw
+ o Kjartan Maraas
+ o Michael Meeks
+ o James Willcox
+ o Joaquín Cuenca Abela
+ o Paolo Borelli
+ o Tommi Komulainen
+ o Damon Chaplin
+ o David Hoover
+ o Morten Welinder
+ o Tristan Van Berkom
+ o Ivan, Wong Yat Cheung
+ o Gustavo Noronha Silva
+ o Richard Hult
+ o Mikael Hallendal
+ o Naba Kumar
+ o Philip Van Hoof
+ o Juan Pablo Ugarte
+
+Translators:
+============
+ o Fatih Demir
+ o Christian Rose
+ o Pablo Saratxaga
+ o Duarte Loreto
+ o Zbigniew Chyla
+ o Hasbullah Bin Pit
+ o Takeshi AIHANA

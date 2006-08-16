@@ -1,0 +1,10 @@
+
+
+Tasks/Bugs Blocking glade-3 3.0:
+================================
+
+Wishlist items for 3.0 release:
+===============================
+ o Persist palette items on SHIFT-click (bug 303679)
+ o Order properties nicely in the editor (bug 345893)
+ o HIG-compliant default values for widget properties (bug 349447)
