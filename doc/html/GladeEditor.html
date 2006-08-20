@@ -1,0 +1,394 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>GladeEditor</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.68.1">
+<link rel="start" href="index.html" title="Glade UI Builder Reference Manual">
+<link rel="up" href="dockables.html" title="Part&#160;III.&#160;Dockable Glade UI Widgets">
+<link rel="prev" href="dockables.html" title="Part&#160;III.&#160;Dockable Glade UI Widgets">
+<link rel="next" href="GladeEditorProperty.html" title="GladeEditorProperty">
+<meta name="generator" content="GTK-Doc V1.4 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="part" href="catalog.html" title="Part&#160;I.&#160;Adding your custom widgets">
+<link rel="part" href="core.html" title="Part&#160;II.&#160;Glade Core">
+<link rel="part" href="dockables.html" title="Part&#160;III.&#160;Dockable Glade UI Widgets">
+<link rel="part" href="misc.html" title="Part&#160;IV.&#160;Miscellaneous utilities">
+<link rel="index" href="ix01.html" title="Index">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle">
+<td><a accesskey="p" href="dockables.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="dockables.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Glade UI Builder Reference Manual</th>
+<td><a accesskey="n" href="GladeEditorProperty.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr></table>
+<div class="refentry" lang="en">
+<a name="GladeEditor"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle">GladeEditor</span></h2>
+<p>GladeEditor &#8212; A Widget to edit a <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a></p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<h2>Synopsis</h2>
+<pre class="synopsis">
+
+#include &lt;glade.h&gt;
+
+
+            <a href="GladeEditor.html#GladeEditor-struct">GladeEditor</a>;
+<a href="GladeEditor.html" title="GladeEditor">GladeEditor</a>* <a href="GladeEditor.html#glade-editor-new">glade_editor_new</a>               (void);
+void        <a href="GladeEditor.html#glade-editor-load-widget">glade_editor_load_widget</a>        (<a href="GladeEditor.html" title="GladeEditor">GladeEditor</a> *editor,
+                                             <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);
+void        <a href="GladeEditor.html#glade-editor-refresh">glade_editor_refresh</a>            (<a href="GladeEditor.html" title="GladeEditor">GladeEditor</a> *editor);
+void        <a href="GladeEditor.html#glade-editor-update-widget-name">glade_editor_update_widget_name</a> (<a href="GladeEditor.html" title="GladeEditor">GladeEditor</a> *editor);
+gboolean    <a href="GladeEditor.html#glade-editor-query-dialog">glade_editor_query_dialog</a>       (<a href="GladeEditor.html" title="GladeEditor">GladeEditor</a> *editor,
+                                             <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);
+void        <a href="GladeEditor.html#glade-editor-show-info">glade_editor_show_info</a>          (<a href="GladeEditor.html" title="GladeEditor">GladeEditor</a> *editor);
+void        <a href="GladeEditor.html#glade-editor-hide-info">glade_editor_hide_info</a>          (<a href="GladeEditor.html" title="GladeEditor">GladeEditor</a> *editor);
+void        <a href="GladeEditor.html#glade-editor-show-context-info">glade_editor_show_context_info</a>  (<a href="GladeEditor.html" title="GladeEditor">GladeEditor</a> *editor);
+void        <a href="GladeEditor.html#glade-editor-hide-context-info">glade_editor_hide_context_info</a>  (<a href="GladeEditor.html" title="GladeEditor">GladeEditor</a> *editor);
+
+
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2591999"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+
+  GObject
+   +----GtkObject
+         +----GtkWidget
+               +----GtkContainer
+                     +----GtkBox
+                           +----GtkVBox
+                                 +----GladeEditor
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2592057"></a><h2>Implemented Interfaces</h2>
+<p>
+GladeEditor implements
+ AtkImplementorIface.</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2592074"></a><h2>Properties</h2>
+<pre class="synopsis">
+
+  "<a href="GladeEditor.html#GladeEditor--show-context-info">show-context-info</a>"    gboolean              : Read
+  "<a href="GladeEditor.html#GladeEditor--show-info">show-info</a>"            gboolean              : Read
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2592121"></a><h2>Signal Prototypes</h2>
+<pre class="synopsis">
+
+"<a href="GladeEditor.html#GladeEditor-gtk-doc-search">gtk-doc-search</a>"
+            void        user_function      (<a href="GladeEditor.html" title="GladeEditor">GladeEditor</a> *gladeeditor,
+                                            gchar *arg1,
+                                            gchar *arg2,
+                                            gchar *arg3,
+                                            gpointer user_data);
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2592188"></a><h2>Description</h2>
+<p>
+This is the Glade Notebook containing all the controls needed to
+configure a <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>.
+</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2592207"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="id2592213"></a><h3>
+<a name="GladeEditor-struct"></a>GladeEditor</h3>
+<a class="indexterm" name="id2592223"></a><pre class="programlisting">typedef struct _GladeEditor GladeEditor;</pre>
+<p>
+
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2592238"></a><h3>
+<a name="glade-editor-new"></a>glade_editor_new ()</h3>
+<a class="indexterm" name="id2592248"></a><pre class="programlisting"><a href="GladeEditor.html" title="GladeEditor">GladeEditor</a>* glade_editor_new               (void);</pre>
+<p>
+</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td>
+<span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> a new <a href="GladeEditor.html" title="GladeEditor"><span class="type">GladeEditor</span></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2592295"></a><h3>
+<a name="glade-editor-load-widget"></a>glade_editor_load_widget ()</h3>
+<a class="indexterm" name="id2592306"></a><pre class="programlisting">void        glade_editor_load_widget        (<a href="GladeEditor.html" title="GladeEditor">GladeEditor</a> *editor,
+                                             <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
+<p>
+Load <em class="parameter"><code>widget</code></em> into <em class="parameter"><code>editor</code></em>. If <em class="parameter"><code>widget</code></em> is <code class="literal">NULL</code>, clear the editor.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td>
+<span class="term"><em class="parameter"><code>editor</code></em>&#160;:</span></td>
+<td> a <a href="GladeEditor.html" title="GladeEditor"><span class="type">GladeEditor</span></a>
+</td>
+</tr>
+<tr>
+<td>
+<span class="term"><em class="parameter"><code>widget</code></em>&#160;:</span></td>
+<td> a <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2592416"></a><h3>
+<a name="glade-editor-refresh"></a>glade_editor_refresh ()</h3>
+<a class="indexterm" name="id2592428"></a><pre class="programlisting">void        glade_editor_refresh            (<a href="GladeEditor.html" title="GladeEditor">GladeEditor</a> *editor);</pre>
+<p>
+Synchronize <em class="parameter"><code>editor</code></em> with the currently loaded widget.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td>
+<span class="term"><em class="parameter"><code>editor</code></em>&#160;:</span></td>
+<td> a <a href="GladeEditor.html" title="GladeEditor"><span class="type">GladeEditor</span></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2592491"></a><h3>
+<a name="glade-editor-update-widget-name"></a>glade_editor_update_widget_name ()</h3>
+<a class="indexterm" name="id2592502"></a><pre class="programlisting">void        glade_editor_update_widget_name (<a href="GladeEditor.html" title="GladeEditor">GladeEditor</a> *editor);</pre>
+<p>
+TODO: write me</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td>
+<span class="term"><em class="parameter"><code>editor</code></em>&#160;:</span></td>
+<td> a <a href="GladeEditor.html" title="GladeEditor"><span class="type">GladeEditor</span></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2592560"></a><h3>
+<a name="glade-editor-query-dialog"></a>glade_editor_query_dialog ()</h3>
+<a class="indexterm" name="id2592571"></a><pre class="programlisting">gboolean    glade_editor_query_dialog       (<a href="GladeEditor.html" title="GladeEditor">GladeEditor</a> *editor,
+                                             <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td>
+<span class="term"><em class="parameter"><code>editor</code></em>&#160;:</span></td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<span class="term"><em class="parameter"><code>widget</code></em>&#160;:</span></td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td>
+
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2592648"></a><h3>
+<a name="glade-editor-show-info"></a>glade_editor_show_info ()</h3>
+<a class="indexterm" name="id2592659"></a><pre class="programlisting">void        glade_editor_show_info          (<a href="GladeEditor.html" title="GladeEditor">GladeEditor</a> *editor);</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td>
+<span class="term"><em class="parameter"><code>editor</code></em>&#160;:</span></td>
+<td>
+
+
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2592705"></a><h3>
+<a name="glade-editor-hide-info"></a>glade_editor_hide_info ()</h3>
+<a class="indexterm" name="id2592716"></a><pre class="programlisting">void        glade_editor_hide_info          (<a href="GladeEditor.html" title="GladeEditor">GladeEditor</a> *editor);</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td>
+<span class="term"><em class="parameter"><code>editor</code></em>&#160;:</span></td>
+<td>
+
+
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2592762"></a><h3>
+<a name="glade-editor-show-context-info"></a>glade_editor_show_context_info ()</h3>
+<a class="indexterm" name="id2592774"></a><pre class="programlisting">void        glade_editor_show_context_info  (<a href="GladeEditor.html" title="GladeEditor">GladeEditor</a> *editor);</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td>
+<span class="term"><em class="parameter"><code>editor</code></em>&#160;:</span></td>
+<td>
+
+
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2592820"></a><h3>
+<a name="glade-editor-hide-context-info"></a>glade_editor_hide_context_info ()</h3>
+<a class="indexterm" name="id2592831"></a><pre class="programlisting">void        glade_editor_hide_context_info  (<a href="GladeEditor.html" title="GladeEditor">GladeEditor</a> *editor);</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td>
+<span class="term"><em class="parameter"><code>editor</code></em>&#160;:</span></td>
+<td>
+
+
+</td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2592879"></a><h2>Properties</h2>
+<div class="refsect2" lang="en">
+<a name="id2592884"></a><h3>
+<a name="GladeEditor--show-context-info"></a>The "<code class="literal">show-context-info</code>" property</h3>
+<pre class="programlisting">  "show-context-info"    gboolean              : Read</pre>
+<p>Whether to show an informational button for each property and signal in the editor.</p>
+<p>Default value: FALSE</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2592923"></a><h3>
+<a name="GladeEditor--show-info"></a>The "<code class="literal">show-info</code>" property</h3>
+<pre class="programlisting">  "show-info"            gboolean              : Read</pre>
+<p>Whether to show an informational button for the loaded widget.</p>
+<p>Default value: FALSE</p>
+</div>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2592962"></a><h2>Signals</h2>
+<div class="refsect2" lang="en">
+<a name="id2592968"></a><h3>
+<a name="GladeEditor-gtk-doc-search"></a>The "gtk-doc-search" signal</h3>
+<pre class="programlisting">void        user_function                  (<a href="GladeEditor.html" title="GladeEditor">GladeEditor</a> *gladeeditor,
+                                            gchar *arg1,
+                                            gchar *arg2,
+                                            gchar *arg3,
+                                            gpointer user_data);</pre>
+<p>
+Emitted when the editor requests that a doc-search be performed.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td>
+<span class="term"><em class="parameter"><code>gladeeditor</code></em>&#160;:</span></td>
+<td> the <a href="GladeEditor.html" title="GladeEditor"><span class="type">GladeEditor</span></a> which received the signal.
+</td>
+</tr>
+<tr>
+<td>
+<span class="term"><em class="parameter"><code>arg1</code></em>&#160;:</span></td>
+<td> the (<span class="type">gchar</span> *) book to search or <code class="literal">NULL</code>
+</td>
+</tr>
+<tr>
+<td>
+<span class="term"><em class="parameter"><code>arg2</code></em>&#160;:</span></td>
+<td> the (<span class="type">gchar</span> *) page to search or <code class="literal">NULL</code>
+</td>
+</tr>
+<tr>
+<td>
+<span class="term"><em class="parameter"><code>arg3</code></em>&#160;:</span></td>
+<td> the (<span class="type">gchar</span> *) search string or <code class="literal">NULL</code>
+</td>
+</tr>
+<tr>
+<td>
+<span class="term"><em class="parameter"><code>user_data</code></em>&#160;:</span></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<table class="navigation" width="100%" summary="Navigation footer" cellpadding="2" cellspacing="0"><tr valign="middle">
+<td align="left"><a accesskey="p" href="dockables.html"><b>&lt;&lt;&#160;Part&#160;III.&#160;Dockable Glade UI Widgets</b></a></td>
+<td align="right"><a accesskey="n" href="GladeEditorProperty.html"><b>GladeEditorProperty&#160;&gt;&gt;</b></a></td>
+</tr></table>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<refentry id="GladeProjectView">
+<refmeta>
+<refentrytitle>GladeProjectView</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>GLADEUI Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>GladeProjectView</refname><refpurpose>A widget to view the project hierarchy</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv><title>Synopsis</title>
+
+<synopsis>
+
+#include &lt;glade.h&gt;
+
+
+enum        <link linkend="GladeProjectViewType">GladeProjectViewType</link>;
+            <link linkend="GladeProjectView-struct">GladeProjectView</link>;
+<link linkend="GladeProjectView">GladeProjectView</link>* <link linkend="glade-project-view-new">glade_project_view_new</link>    (<link linkend="GladeProjectViewType">GladeProjectViewType</link> type);
+<link linkend="GladeProject">GladeProject</link>* <link linkend="glade-project-view-get-project">glade_project_view_get_project</link>
+                                            (<link linkend="GladeProjectView">GladeProjectView</link> *view);
+<link linkend="void">void</link>        <link linkend="glade-project-view-set-project">glade_project_view_set_project</link>  (<link linkend="GladeProjectView">GladeProjectView</link> *view,
+                                             <link linkend="GladeProject">GladeProject</link> *project);
+
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title>Object Hierarchy</title>
+<synopsis>
+
+  <link linkend="GObject">GObject</link>
+   +----<link linkend="GtkObject">GtkObject</link>
+         +----<link linkend="GtkWidget">GtkWidget</link>
+               +----<link linkend="GtkContainer">GtkContainer</link>
+                     +----<link linkend="GtkBin">GtkBin</link>
+                           +----<link linkend="GtkScrolledWindow">GtkScrolledWindow</link>
+                                 +----GladeProjectView
+</synopsis>
+
+</refsect1>
+
+
+
+<refsect1>
+<title>Implemented Interfaces</title>
+<para>
+GladeProjectView implements
+ <link linkend="AtkImplementorIface">AtkImplementorIface</link>.</para>
+
+</refsect1>
+
+
+
+
+
+<refsect1>
+<title>Description</title>
+<para>
+The <link linkend="GladeProjectView"><type>GladeProjectView</type></link> is a heirarchical treeview that allows the
+user to control selection and cut/copy/paste/delete <link linkend="GladeWidget"><type>GladeWidget</type></link>
+objects in the <link linkend="GladeProject"><type>GladeProject</type></link>.
+</para>
+</refsect1>
+
+<refsect1>
+<title>Details</title>
+<refsect2>
+<title><anchor id="GladeProjectViewType"/>enum GladeProjectViewType</title>
+<indexterm><primary>GladeProjectViewType</primary></indexterm><programlisting>typedef enum {
+	GLADE_PROJECT_VIEW_LIST,
+	GLADE_PROJECT_VIEW_TREE,
+} GladeProjectViewType;
+</programlisting>
+<para>
+</para>
+<para>
+
+</para><variablelist role="enum">
+<varlistentry>
+<term><literal>GLADE_PROJECT_VIEW_LIST</literal></term>
+<listitem><simpara> View only toplevels as a flat list
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><literal>GLADE_PROJECT_VIEW_TREE</literal></term>
+<listitem><simpara> View as the entire project tree
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="GladeProjectView-struct"/>GladeProjectView</title>
+<indexterm><primary>GladeProjectView</primary></indexterm><programlisting>typedef struct _GladeProjectView GladeProjectView;</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="glade-project-view-new"/>glade_project_view_new ()</title>
+<indexterm><primary>glade_project_view_new</primary></indexterm><programlisting><link linkend="GladeProjectView">GladeProjectView</link>* glade_project_view_new    (<link linkend="GladeProjectViewType">GladeProjectViewType</link> type);</programlisting>
+<para>
+Creates a new <link linkend="GladeProjectView"><type>GladeProjectView</type></link> of type <parameter>type</parameter></para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>type</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GladeProjectViewType"><type>GladeProjectViewType</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a new <link linkend="GladeProjectView"><type>GladeProjectView</type></link>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-project-view-get-project"/>glade_project_view_get_project ()</title>
+<indexterm><primary>glade_project_view_get_project</primary></indexterm><programlisting><link linkend="GladeProject">GladeProject</link>* glade_project_view_get_project
+                                            (<link linkend="GladeProjectView">GladeProjectView</link> *view);</programlisting>
+<para>
+</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>view</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GladeProjectView"><type>GladeProjectView</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the <link linkend="GladeProject"><type>GladeProject</type></link> <parameter>view</parameter> represents
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-project-view-set-project"/>glade_project_view_set_project ()</title>
+<indexterm><primary>glade_project_view_set_project</primary></indexterm><programlisting><link linkend="void">void</link>        glade_project_view_set_project  (<link linkend="GladeProjectView">GladeProjectView</link> *view,
+                                             <link linkend="GladeProject">GladeProject</link> *project);</programlisting>
+<para>
+Sets the project of <parameter>view</parameter> to <parameter>project</parameter>. If <parameter>project</parameter> is <literal>NULL</literal>, <parameter>view</parameter> will
+stop being a view of a project.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>view</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GladeProjectView"><type>GladeProjectView</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>project</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GladeProject"><type>GladeProject</type></link> or <literal>NULL</literal>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

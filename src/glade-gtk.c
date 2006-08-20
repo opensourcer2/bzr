@@ -2495,7 +2495,7 @@ glade_gtk_expander_post_create (GObject *expander, GladeCreateReason reason)
 	g_return_if_fail (GTK_IS_EXPANDER (expander));
 	gexpander = glade_widget_get_from_gobject (expander);
 	g_return_if_fail (GLADE_IS_WIDGET (gexpander));
-	
+
 	/* If we didnt put this object here... */
 	if ((label = gtk_expander_get_label_widget (GTK_EXPANDER (expander))) == NULL ||
 	    (glade_widget_get_from_gobject (label) == NULL))
@@ -2513,6 +2513,11 @@ glade_gtk_expander_post_create (GObject *expander, GladeCreateReason reason)
 
 		gtk_widget_show (GTK_WIDGET (glabel->object));
 	}
+
+	gtk_expander_set_expanded (GTK_EXPANDER (expander), TRUE);
+	
+	gtk_container_add (GTK_CONTAINER (expander), glade_placeholder_new ());
+
 }
 
 void GLADEGTK_API
@@ -2550,8 +2555,29 @@ glade_gtk_expander_add_child (GObject *object, GObject *child)
 	}
 	else
 	{
+		glade_gtk_container_add_child (GTK_WIDGET (object), 
+					       GTK_WIDGET (child));
+	}
+}
+
+void GLADEGTK_API
+glade_gtk_expander_remove_child (GObject *object, GObject *child)
+{
+	gchar *special_child_type;
+
+	special_child_type = g_object_get_data (child, "special-child-type");
+	if (special_child_type &&
+	    !strcmp (special_child_type, "label_item"))
+	{
+		gtk_expander_set_label_widget (GTK_EXPANDER (object),
+					       glade_placeholder_new ());
+	}
+	else
+	{
+		gtk_container_remove (GTK_CONTAINER (object),
+				      GTK_WIDGET (child));
 		gtk_container_add (GTK_CONTAINER (object),
-				   GTK_WIDGET (child));
+				   glade_placeholder_new ());
 	}
 }
 
@@ -2733,6 +2759,14 @@ glade_gtk_dialog_post_create (GObject *object, GladeCreateReason reason)
 		actionarea_widget = glade_widget_class_create_internal
 			(vbox_widget, G_OBJECT(dialog->action_area),
 			 "action_area", "dialog", FALSE, reason);
+
+		/* These properties are controlled by the GtkDialog style properties:
+		 * "content-area-border", "button-spacing" and "action-area-border",
+		 * so we must disable thier use.
+		 */
+		glade_widget_remove_property (vbox_widget, "border-width");
+		glade_widget_remove_property (actionarea_widget, "border-width");
+		glade_widget_remove_property (actionarea_widget, "spacing");
 
 		/* Only set these on the original create. */
 		if (reason == GLADE_CREATE_USER)
@@ -3564,11 +3598,12 @@ glade_gtk_menu_shell_delete_child (GladeBaseEditor *editor,
 				   gpointer data)
 {
 	GObject *item = glade_widget_get_object (gparent);
-	GtkWidget *submenu;
+	GtkWidget *submenu = NULL;
 	GList list = {0, };
-	gint n_children = 0;
+	gint n_children;
 	
-	if ((submenu = gtk_menu_item_get_submenu (GTK_MENU_ITEM (item))))
+	if (GTK_IS_MENU_ITEM (item) &&
+	    (submenu = gtk_menu_item_get_submenu (GTK_MENU_ITEM (item))))
 	{
 		GList *l = gtk_container_get_children (GTK_CONTAINER (submenu));
 		n_children = g_list_length (l);
@@ -4656,7 +4691,7 @@ glade_gtk_text_view_post_create (GObject *object, GladeCreateReason reason)
 			  gtext);
 	
 	g_object_unref (G_OBJECT (buffy));
-	
+
 	/* Glade3 hangs when a TextView gets a double click. So we stop them */
 	g_signal_connect (object, "button-press-event",
 			  G_CALLBACK (glade_gtk_text_view_stop_double_click),

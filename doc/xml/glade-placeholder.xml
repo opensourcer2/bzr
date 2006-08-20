@@ -1,0 +1,103 @@
+<refentry id="GladePlaceholder">
+<refmeta>
+<refentrytitle>GladePlaceholder</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>GLADEUI Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>GladePlaceholder</refname><refpurpose>A <link linkend="GtkWidget"><type>GtkWidget</type></link> to fill empty places</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv><title>Synopsis</title>
+
+<synopsis>
+
+#include &lt;glade.h&gt;
+
+
+            <link linkend="GladePlaceholder-struct">GladePlaceholder</link>;
+<link linkend="GtkWidget">GtkWidget</link>*  <link linkend="glade-placeholder-new">glade_placeholder_new</link>           (void);
+<link linkend="GladeWidget">GladeWidget</link>* <link linkend="glade-placeholder-get-parent">glade_placeholder_get_parent</link>   (<link linkend="GladePlaceholder">GladePlaceholder</link> *placeholder);
+
+
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title>Object Hierarchy</title>
+<synopsis>
+
+  <link linkend="GObject">GObject</link>
+   +----<link linkend="GtkObject">GtkObject</link>
+         +----<link linkend="GtkWidget">GtkWidget</link>
+               +----GladePlaceholder
+</synopsis>
+
+</refsect1>
+
+
+
+<refsect1>
+<title>Implemented Interfaces</title>
+<para>
+GladePlaceholder implements
+ <link linkend="AtkImplementorIface">AtkImplementorIface</link>.</para>
+
+</refsect1>
+
+
+
+
+
+<refsect1>
+<title>Description</title>
+<para>
+Generally in Glade, container widgets are implemented with <link linkend="GladePlaceholder"><type>GladePlaceholder</type></link> 
+children to allow users to 'click' and add thier widgets to a container. 
+It is the responsability of the plugin writer to create placeholders for 
+container widgets where appropriate; usually in <link linkend="GladePostCreateFunc"><type>GladePostCreateFunc</type></link> 
+when the <link linkend="GladeCreateReason"><type>GladeCreateReason</type></link> is <literal>GLADE_CREATE_USER</literal>.
+</para>
+</refsect1>
+
+<refsect1>
+<title>Details</title>
+<refsect2>
+<title><anchor id="GladePlaceholder-struct"/>GladePlaceholder</title>
+<indexterm><primary>GladePlaceholder</primary></indexterm><programlisting>typedef struct _GladePlaceholder GladePlaceholder;</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="glade-placeholder-new"/>glade_placeholder_new ()</title>
+<indexterm><primary>glade_placeholder_new</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*  glade_placeholder_new           (void);</programlisting>
+<para>
+</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a new <link linkend="GladePlaceholder"><type>GladePlaceholder</type></link> cast as a <link linkend="GtkWidget"><type>GtkWidget</type></link>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-placeholder-get-parent"/>glade_placeholder_get_parent ()</title>
+<indexterm><primary>glade_placeholder_get_parent</primary></indexterm><programlisting><link linkend="GladeWidget">GladeWidget</link>* glade_placeholder_get_parent   (<link linkend="GladePlaceholder">GladePlaceholder</link> *placeholder);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>placeholder</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

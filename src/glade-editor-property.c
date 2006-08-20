@@ -419,6 +419,19 @@ static void
 glade_editor_property_load_common (GladeEditorProperty *eprop, 
 				   GladeProperty       *property)
 {
+	/* Hide properties that are removed for some particular widgets. 
+	 */
+	if (property)
+	{
+		gtk_widget_show (GTK_WIDGET (eprop));
+		gtk_widget_show (eprop->eventbox);
+	}
+	else
+	{
+		gtk_widget_hide (GTK_WIDGET (eprop));
+		gtk_widget_hide (eprop->eventbox);
+	}
+
 	/* disconnect anything from previously loaded property */
 	if (eprop->property != property && eprop->property != NULL) 
 	{
@@ -451,7 +464,9 @@ glade_editor_property_load_common (GladeEditorProperty *eprop,
 		 * without leeking signal connections to properties :-/
 		 */
 		if (property == NULL) 
+		{
 			eprop->property = NULL;
+		}
 	}
 
 	/* Connect new stuff, deal with tooltip
@@ -2855,30 +2870,27 @@ glade_eprop_adjustment_create_input (GladeEditorProperty *eprop)
 	GladeEPropAdjustment *eprop_adj = GLADE_EPROP_ADJUSTMENT (eprop);
 	GtkWidget *widget;
 	GtkTable *table;
-	
+
+	/* No decimal precision as we are only putting integer values
+	 * in the glade file (older glade files do this, we'll just respect it).
+	 */
 	eprop_adj->value = gtk_spin_button_new_with_range (-G_MAXDOUBLE, G_MAXDOUBLE, 1);
-	gtk_spin_button_set_digits (GTK_SPIN_BUTTON (eprop_adj->value), 2);
 	eprop_adj->ids.value = GLADE_EPROP_ADJUSTMENT_CONNECT (eprop_adj->value, value);
 	eprop_adj->value_adj = gtk_spin_button_get_adjustment (GTK_SPIN_BUTTON (eprop_adj->value));
 	
 	eprop_adj->lower = gtk_spin_button_new_with_range (-G_MAXDOUBLE, G_MAXDOUBLE, 1);
-	gtk_spin_button_set_digits (GTK_SPIN_BUTTON (eprop_adj->lower), 2);
 	eprop_adj->ids.lower = GLADE_EPROP_ADJUSTMENT_CONNECT (eprop_adj->lower, lower);
 	
 	eprop_adj->upper = gtk_spin_button_new_with_range (-G_MAXDOUBLE, G_MAXDOUBLE, 1);
-	gtk_spin_button_set_digits (GTK_SPIN_BUTTON (eprop_adj->upper), 2);
 	eprop_adj->ids.upper = GLADE_EPROP_ADJUSTMENT_CONNECT (eprop_adj->upper, upper);
 	
 	eprop_adj->step_increment = gtk_spin_button_new_with_range (0, G_MAXDOUBLE, 1);
-	gtk_spin_button_set_digits (GTK_SPIN_BUTTON (eprop_adj->step_increment), 2);
 	eprop_adj->ids.step_increment = GLADE_EPROP_ADJUSTMENT_CONNECT (eprop_adj->step_increment, step_increment);
 	
 	eprop_adj->page_increment = gtk_spin_button_new_with_range (0, G_MAXDOUBLE, 1);
-	gtk_spin_button_set_digits (GTK_SPIN_BUTTON (eprop_adj->page_increment), 2);
 	eprop_adj->ids.page_increment = GLADE_EPROP_ADJUSTMENT_CONNECT (eprop_adj->page_increment, page_increment);
 
 	eprop_adj->page_size = gtk_spin_button_new_with_range (0, G_MAXDOUBLE, 1);
-	gtk_spin_button_set_digits (GTK_SPIN_BUTTON (eprop_adj->page_size), 2);
 	eprop_adj->ids.page_size = GLADE_EPROP_ADJUSTMENT_CONNECT (eprop_adj->page_size, page_size);
 
 	/* Eprop */
@@ -3747,14 +3759,9 @@ glade_editor_property_load_by_widget (GladeEditorProperty *eprop,
 	g_return_if_fail (widget == NULL || GLADE_IS_WIDGET (widget));
 
 	if (widget)
-	{
-		if ((property = 
-		     glade_widget_get_property (widget, eprop->class->id)) == NULL)
-		{
-			g_critical ("Couldnt find property of class %s on widget of class %s\n",
-				    eprop->class->id, widget->widget_class->name);
-		}
-	}
+		/* properties are allowed to be missing on some internal widgets */
+		property = glade_widget_get_property (widget, eprop->class->id);
+
 	glade_editor_property_load (eprop, property);
 }
 

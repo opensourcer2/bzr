@@ -1,0 +1,254 @@
+<refentry id="GladePalette">
+<refmeta>
+<refentrytitle>GladePalette</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>GLADEUI Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>GladePalette</refname><refpurpose>A widget to select a <link linkend="GladeWidgetClass"><type>GladeWidgetClass</type></link> for addition</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv><title>Synopsis</title>
+
+<synopsis>
+
+#include &lt;glade.h&gt;
+
+
+            <link linkend="GladePalette-struct">GladePalette</link>;
+<link linkend="GtkWidget">GtkWidget</link>*  <link linkend="glade-palette-new">glade_palette_new</link>               (const <link linkend="GList">GList</link> *catalogs,
+                                             <link linkend="GladeItemAppearance">GladeItemAppearance</link> item_appearance);
+<link linkend="GladeItemAppearance">GladeItemAppearance</link> <link linkend="glade-palette-get-item-appearance">glade_palette_get_item_appearance</link>
+                                            (<link linkend="GladePalette">GladePalette</link> *palette);
+<link linkend="void">void</link>        <link linkend="glade-palette-set-item-appearance">glade_palette_set_item_appearance</link>
+                                            (<link linkend="GladePalette">GladePalette</link> *palette,
+                                             <link linkend="GladeItemAppearance">GladeItemAppearance</link> appearance);
+<link linkend="GladeWidgetClass">GladeWidgetClass</link>* <link linkend="glade-palette-get-current-item-class">glade_palette_get_current_item_class</link>
+                                            (<link linkend="GladePalette">GladePalette</link> *palette);
+<link linkend="void">void</link>        <link linkend="glade-palette-deselect-current-item">glade_palette_deselect_current_item</link>
+                                            (<link linkend="GladePalette">GladePalette</link> *palette);
+<link linkend="gboolean">gboolean</link>    <link linkend="glade-palette-get-use-small-item-icons">glade_palette_get_use_small_item_icons</link>
+                                            (<link linkend="GladePalette">GladePalette</link> *palette);
+<link linkend="void">void</link>        <link linkend="glade-palette-set-use-small-item-icons">glade_palette_set_use_small_item_icons</link>
+                                            (<link linkend="GladePalette">GladePalette</link> *palette,
+                                             <link linkend="gboolean">gboolean</link> use_small_item_icons);
+
+
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title>Object Hierarchy</title>
+<synopsis>
+
+  <link linkend="GObject">GObject</link>
+   +----<link linkend="GtkObject">GtkObject</link>
+         +----<link linkend="GtkWidget">GtkWidget</link>
+               +----<link linkend="GtkContainer">GtkContainer</link>
+                     +----<link linkend="GtkBox">GtkBox</link>
+                           +----<link linkend="GtkVBox">GtkVBox</link>
+                                 +----GladePalette
+</synopsis>
+
+</refsect1>
+
+
+
+<refsect1>
+<title>Implemented Interfaces</title>
+<para>
+GladePalette implements
+ <link linkend="AtkImplementorIface">AtkImplementorIface</link>.</para>
+
+</refsect1>
+
+
+<refsect1>
+<title>Properties</title>
+<synopsis>
+
+  &quot;<link linkend="GladePalette--current-item-class">current-item-class</link>&quot;   <link linkend="gpointer">gpointer</link>              : Read
+  &quot;<link linkend="GladePalette--item-appearance">item-appearance</link>&quot;      <link linkend="GladeItemAppearance">GladeItemAppearance</link>   : Read / Write
+  &quot;<link linkend="GladePalette--use-small-item-icons">use-small-item-icons</link>&quot; <link linkend="gboolean">gboolean</link>              : Read / Write
+</synopsis>
+</refsect1>
+
+<refsect1>
+<title>Signal Prototypes</title>
+<synopsis>
+
+&quot;<link linkend="GladePalette-toggled">toggled</link>&quot;   <link linkend="void">void</link>        user_function      (<link linkend="GladePalette">GladePalette</link> *gladepalette,
+                                            <link linkend="gpointer">gpointer</link> user_data);
+</synopsis>
+</refsect1>
+
+
+<refsect1>
+<title>Description</title>
+<para>
+<link linkend="GladePalette"><type>GladePalette</type></link> is responsible for displaying the list of available
+<link linkend="GladeWidgetClass"><type>GladeWidgetClass</type></link> types and publishing the currently selected class
+to the Glade core.
+</para>
+</refsect1>
+
+<refsect1>
+<title>Details</title>
+<refsect2>
+<title><anchor id="GladePalette-struct"/>GladePalette</title>
+<indexterm><primary>GladePalette</primary></indexterm><programlisting>typedef struct _GladePalette GladePalette;</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="glade-palette-new"/>glade_palette_new ()</title>
+<indexterm><primary>glade_palette_new</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*  glade_palette_new               (const <link linkend="GList">GList</link> *catalogs,
+                                             <link linkend="GladeItemAppearance">GladeItemAppearance</link> item_appearance);</programlisting>
+<para>
+Creates a new <link linkend="GladePalette"><type>GladePalette</type></link> widget</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>catalogs</parameter>&nbsp;:</term>
+<listitem><simpara> the widget catalogs for the palette.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>item_appearance</parameter>&nbsp;:</term>
+<listitem><simpara> the appearance of the palette items.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a new <link linkend="GladePalette"><type>GladePalette</type></link>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-palette-get-item-appearance"/>glade_palette_get_item_appearance ()</title>
+<indexterm><primary>glade_palette_get_item_appearance</primary></indexterm><programlisting><link linkend="GladeItemAppearance">GladeItemAppearance</link> glade_palette_get_item_appearance
+                                            (<link linkend="GladePalette">GladePalette</link> *palette);</programlisting>
+<para>
+</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>palette</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GladePalette"><type>GladePalette</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> The appearance of the palette items
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-palette-set-item-appearance"/>glade_palette_set_item_appearance ()</title>
+<indexterm><primary>glade_palette_set_item_appearance</primary></indexterm><programlisting><link linkend="void">void</link>        glade_palette_set_item_appearance
+                                            (<link linkend="GladePalette">GladePalette</link> *palette,
+                                             <link linkend="GladeItemAppearance">GladeItemAppearance</link> appearance);</programlisting>
+<para>
+Sets the appearance of the palette items.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>palette</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GladePalette"><type>GladePalette</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>appearance</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-palette-get-current-item-class"/>glade_palette_get_current_item_class ()</title>
+<indexterm><primary>glade_palette_get_current_item_class</primary></indexterm><programlisting><link linkend="GladeWidgetClass">GladeWidgetClass</link>* glade_palette_get_current_item_class
+                                            (<link linkend="GladePalette">GladePalette</link> *palette);</programlisting>
+<para>
+Gets the <link linkend="GladeWidgetClass"><type>GladeWidgetClass</type></link> of the currently selected item.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>palette</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GladePalette"><type>GladePalette</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the <link linkend="GladeWidgetClass"><type>GladeWidgetClass</type></link> of currently selected item, or NULL
+         if no item is selected.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-palette-deselect-current-item"/>glade_palette_deselect_current_item ()</title>
+<indexterm><primary>glade_palette_deselect_current_item</primary></indexterm><programlisting><link linkend="void">void</link>        glade_palette_deselect_current_item
+                                            (<link linkend="GladePalette">GladePalette</link> *palette);</programlisting>
+<para>
+Deselects the currently selected item</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>palette</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GladePalette"><type>GladePalette</type></link>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-palette-get-use-small-item-icons"/>glade_palette_get_use_small_item_icons ()</title>
+<indexterm><primary>glade_palette_get_use_small_item_icons</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    glade_palette_get_use_small_item_icons
+                                            (<link linkend="GladePalette">GladePalette</link> *palette);</programlisting>
+<para>
+</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>palette</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GladePalette"><type>GladePalette</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> Whether small item icons are used
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-palette-set-use-small-item-icons"/>glade_palette_set_use_small_item_icons ()</title>
+<indexterm><primary>glade_palette_set_use_small_item_icons</primary></indexterm><programlisting><link linkend="void">void</link>        glade_palette_set_use_small_item_icons
+                                            (<link linkend="GladePalette">GladePalette</link> *palette,
+                                             <link linkend="gboolean">gboolean</link> use_small_item_icons);</programlisting>
+<para>
+Sets whether to use small item icons.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>palette</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GladePalette"><type>GladePalette</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>use_small_item_icons</parameter>&nbsp;:</term>
+<listitem><simpara> Whether to use small item icons
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+<refsect1>
+<title>Properties</title>
+<refsect2><title><anchor id="GladePalette--current-item-class"/>The &quot;<literal>current-item-class</literal>&quot; property</title>
+<programlisting>  &quot;current-item-class&quot;   <link linkend="gpointer">gpointer</link>              : Read</programlisting>
+<para>The GladeWidgetClass of the currently selected item.</para></refsect2>
+<refsect2><title><anchor id="GladePalette--item-appearance"/>The &quot;<literal>item-appearance</literal>&quot; property</title>
+<programlisting>  &quot;item-appearance&quot;      <link linkend="GladeItemAppearance">GladeItemAppearance</link>   : Read / Write</programlisting>
+<para>The appearance of the palette items.</para><para>Default value: GLADE_ITEM_ICON_ONLY</para>
+</refsect2>
+<refsect2><title><anchor id="GladePalette--use-small-item-icons"/>The &quot;<literal>use-small-item-icons</literal>&quot; property</title>
+<programlisting>  &quot;use-small-item-icons&quot; <link linkend="gboolean">gboolean</link>              : Read / Write</programlisting>
+<para>Whether to use small icons to represent items.</para><para>Default value: FALSE</para>
+</refsect2>
+
+</refsect1>
+
+<refsect1>
+<title>Signals</title>
+<refsect2><title><anchor id="GladePalette-toggled"/>The &quot;toggled&quot; signal</title>
+<programlisting><link linkend="void">void</link>        user_function                  (<link linkend="GladePalette">GladePalette</link> *gladepalette,
+                                            <link linkend="gpointer">gpointer</link> user_data);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>gladepalette</parameter>&nbsp;:</term>
+<listitem><simpara>the object which received the signal.
+
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
+<listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+</refsect1>
+
+
+
+</refentry>

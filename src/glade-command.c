@@ -1205,6 +1205,23 @@ glade_command_create (GladeWidgetClass *class,
 	return widget;
 }
 
+static void
+glade_command_transfer_props (GladeWidget *gnew, GList *saved_props)
+{
+	GList *l;
+
+	for (l = saved_props; l; l = l->next)
+	{
+		GladeProperty *prop, *sprop = l->data;
+		
+		prop = glade_widget_get_pack_property (gnew, sprop->class->id);
+
+		if (prop && sprop->class->transfer_on_paste &&
+		    glade_property_class_match (prop->class, sprop->class))
+			glade_property_set_value (prop, sprop->value);
+	}
+}
+
 typedef enum {
 	GLADE_CUT,
 	GLADE_COPY,
@@ -1239,7 +1256,7 @@ glade_command_paste_execute (GladeCommandCutCopyPaste *me)
 {
 	GladeProject       *active_project = glade_app_get_project ();
 	CommandData        *cdata;
-	GList              *list, *remove = NULL, *l;
+	GList              *list, *remove = NULL, *l, *saved_props;
 	gchar              *special_child_type;
 
 	if (me->widgets)
@@ -1249,7 +1266,10 @@ glade_command_paste_execute (GladeCommandCutCopyPaste *me)
 		for (list = me->widgets; list && list->data; list = list->next)
 		{
 			cdata  = list->data;
-			remove = g_list_prepend (remove, cdata->widget);
+
+			/* Pasted widgets arent on the clipboard */
+			if (me->original_type == GLADE_CUT)
+				remove = g_list_prepend (remove, cdata->widget);
 
 			if (cdata->parent != NULL)
 			{
@@ -1267,6 +1287,8 @@ glade_command_paste_execute (GladeCommandCutCopyPaste *me)
 								g_strdup (cdata->special_type), 
 								g_free);
 				}
+
+				saved_props = glade_widget_dup_properties (cdata->widget->packing_properties, FALSE);
 
 				/* glade_command_paste ganauntees that if 
 				 * there we are pasting to a placeholder, 
@@ -1286,6 +1308,14 @@ glade_command_paste_execute (GladeCommandCutCopyPaste *me)
 								cdata->props_recorded == FALSE);
 				}
 
+				glade_command_transfer_props (cdata->widget, saved_props);
+				
+				if (saved_props)
+				{
+					g_list_foreach (saved_props, (GFunc)g_object_unref, NULL);
+					g_list_free (saved_props);
+				}
+				
 				/* Now that we've added, apply any packing props if nescisary. */
 				for (l = cdata->pack_props; l; l = l->next)
 				{
@@ -1374,10 +1404,12 @@ glade_command_cut_execute (GladeCommandCutCopyPaste *me)
 	for (list = me->widgets; list && list->data; list = list->next)
 	{
 		cdata = list->data;
-		add   = g_list_prepend (add, cdata->widget);
 
 		if (me->original_type == GLADE_CUT)
 		{
+			/* Pasted widgets dont return to the clipboard */
+			add = g_list_prepend (add, cdata->widget);
+
 			if ((special_child_type = 
 			     g_object_get_data (cdata->widget->object, 
 						"special-child-type")) != NULL)
@@ -1595,15 +1627,22 @@ glade_command_cut_copy_paste_common (GList                 *widgets,
 			g_critical ("Internal widget in Cut/Copy/Paste");
 
 		/* Widget */
-		if (type == GLADE_COPY)
+		if (type == GLADE_COPY || type == GLADE_PASTE)
 		{
 			cdata->widget = glade_widget_dup (widget);
+
 			/* Copy or not, we need a reference for GladeCommand, and
 			 * a global reference for Glade.
 			 */
 			cdata->widget = g_object_ref (G_OBJECT (cdata->widget));
-		} else
+		} 
+		else
+		{
+			/* Only cut widgets are used directly and moved to and from the
+			 *  clipboard.
+			 */
 			cdata->widget = g_object_ref (G_OBJECT (widget));
+		}
 		
 		/* Parent */
 		if (parent == NULL)
