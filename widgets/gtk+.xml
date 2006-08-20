@@ -115,12 +115,15 @@
 	  <remove-child-function>glade_gtk_box_remove_child</remove-child-function>
 	  <child-set-property-function>glade_gtk_box_set_child_property</child-set-property-function>
 	  <properties>
-	    <property id="pack-type">
+	    <property transfer-on-paste="True" id="expand"/>
+	    <property transfer-on-paste="True" id="fill"/>
+	    <property transfer-on-paste="True" id="pack-type">
 	      <displayable-values>
 		<value id="GTK_PACK_START" name="Start"></value>
 		<value id="GTK_PACK_END" name="End"></value>
 	      </displayable-values>
 	    </property>
+	    <property transfer-on-paste="True" id="padding"/>
 	  </properties>
 	</child>
       </children>
@@ -335,6 +338,8 @@
               <spec>glade_standard_int_spec</spec>
               <tooltip>The position of the tool item in the toolbar</tooltip>
             </property>
+	    <property transfer-on-paste="True" id="expand"/>
+	    <property transfer-on-paste="True" id="homogeneous"/>
           </properties>
 	</child>
       </children>
@@ -774,20 +779,22 @@
 	  <remove-child-function>glade_gtk_table_remove_child</remove-child-function>
 	  <replace-child-function>glade_gtk_table_replace_child</replace-child-function>
 	  <properties>
-	    <property id="x-options">
+	    <property transfer-on-paste="True" id="x-options">
 	      <displayable-values>
 		<value id="GTK_EXPAND" name="Expand"></value>
 		<value id="GTK_SHRINK" name="Shrink"></value>
 		<value id="GTK_FILL" name="Fill"></value>
 	      </displayable-values>
 	    </property>
-	    <property id="y-options">
+	    <property transfer-on-paste="True" id="y-options">
 	      <displayable-values>
 		<value id="GTK_EXPAND" name="Expand"></value>
 		<value id="GTK_SHRINK" name="Shrink"></value>
 		<value id="GTK_FILL" name="Fill"></value>
 	      </displayable-values>
 	    </property>
+	    <property transfer-on-paste="True" id="x-padding"/>
+	    <property transfer-on-paste="True" id="y-padding"/>
     	    <property id="right-attach">
 	      <verify-function>glade_gtk_table_verify_right_attach</verify-function>
 	    </property>
@@ -812,6 +819,10 @@
 	  <type>GtkWidget</type>
 	  <add-child-function>glade_gtk_paned_add_child</add-child-function>
 	  <remove-child-function>glade_gtk_paned_remove_child</remove-child-function>
+          <properties>
+            <property transfer-on-paste="True" id="resize"/>
+            <property transfer-on-paste="True" id="shrink"/>
+          </properties>
 	</child>
       </children>
     </glade-widget-class>
@@ -1061,6 +1072,7 @@
 	  <type>GtkWidget</type>
 	  <special-child-type>type</special-child-type>
 	  <add-child-function>glade_gtk_expander_add_child</add-child-function>
+	  <remove-child-function>glade_gtk_expander_remove_child</remove-child-function>
 	  <replace-child-function>glade_gtk_expander_replace_child</replace-child-function>
 	</child>
       </children>

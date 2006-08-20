@@ -1,3 +1,23 @@
+glade-3 (3.0.1-0ubuntu1) edgy; urgency=low
+
+  * New upstream version:
+    - Pasting a widget does not paste the packing options
+    - Now you can paste widgets to your hearts content
+    - Fixed expander widgets (they were missing placeholders).
+    - Adjustments are saved witout floating point precision in the glade file 
+      (reports of glade-- code generator disliking the decimal points).
+    - Fixed an embaressing segfault when removing items using the menu/toolbar 
+      editor
+    - Interface signals are now properly introspected + alphabetically sorted
+    - Removed some properties on children internal to composite widgets, 
+      properties that we're controlled by style properties on the GtkDialog 
+      widget
+    - Enhancements to the "Projects" menu + minor UI enhancements
+    - Palette items can be locked down with CNTL-click 
+      matching glade-2 behaviour
+
+ -- Sebastien Bacher <seb128@canonical.com>  Sun, 20 Aug 2006 19:51:15 +0200
+
 glade-3 (3.0.0-1ubuntu2) edgy; urgency=low
 
   * debian/control.in:

@@ -1,0 +1,558 @@
+<refentry id="GladeApp">
+<refmeta>
+<refentrytitle>GladeApp</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>GLADEUI Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>GladeApp</refname><refpurpose>The central control point of the Glade core</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv><title>Synopsis</title>
+
+<synopsis>
+
+#include &lt;glade.h&gt;
+
+
+            <link linkend="GladeApp-struct">GladeApp</link>;
+<link linkend="GladeApp">GladeApp</link>*   <link linkend="glade-app-get">glade_app_get</link>                   (void);
+<link linkend="void">void</link>        <link linkend="glade-app-update-ui">glade_app_update_ui</link>             (void);
+<link linkend="void">void</link>        <link linkend="glade-app-set-window">glade_app_set_window</link>            (<link linkend="GtkWidget">GtkWidget</link> *window);
+<link linkend="GtkWidget">GtkWidget</link>*  <link linkend="glade-app-get-window">glade_app_get_window</link>            (void);
+<link linkend="GladeEditor">GladeEditor</link>* <link linkend="glade-app-get-editor">glade_app_get_editor</link>           (void);
+<link linkend="GladePalette">GladePalette</link>* <link linkend="glade-app-get-palette">glade_app_get_palette</link>         (void);
+<link linkend="GladeClipboard">GladeClipboard</link>* <link linkend="glade-app-get-clipboard">glade_app_get_clipboard</link>     (void);
+<link linkend="GtkWidget">GtkWidget</link>*  <link linkend="glade-app-get-clipboard-view">glade_app_get_clipboard_view</link>    (void);
+<link linkend="void">void</link>        <link linkend="glade-app-set-project">glade_app_set_project</link>           (<link linkend="GladeProject">GladeProject</link> *project);
+<link linkend="GladeProject">GladeProject</link>* <link linkend="glade-app-get-project">glade_app_get_project</link>         (void);
+<link linkend="void">void</link>        <link linkend="glade-app-add-project">glade_app_add_project</link>           (<link linkend="GladeProject">GladeProject</link> *project);
+<link linkend="void">void</link>        <link linkend="glade-app-remove-project">glade_app_remove_project</link>        (<link linkend="GladeProject">GladeProject</link> *project);
+<link linkend="GladeProject">GladeProject</link>* <link linkend="glade-app-get-project-by-path">glade_app_get_project_by_path</link> (const <link linkend="gchar">gchar</link> *project_path);
+<link linkend="GList">GList</link>*      <link linkend="glade-app-get-projects">glade_app_get_projects</link>          (void);
+<link linkend="GKeyFile">GKeyFile</link>*   <link linkend="glade-app-get-config">glade_app_get_config</link>            (void);
+<link linkend="gboolean">gboolean</link>    <link linkend="glade-app-is-project-loaded">glade_app_is_project_loaded</link>     (const <link linkend="gchar">gchar</link> *project_path);
+<link linkend="void">void</link>        <link linkend="glade-app-show-properties">glade_app_show_properties</link>       (<link linkend="gboolean">gboolean</link> raise);
+<link linkend="void">void</link>        <link linkend="glade-app-hide-properties">glade_app_hide_properties</link>       (void);
+<link linkend="void">void</link>        <link linkend="glade-app-add-project-view">glade_app_add_project_view</link>      (<link linkend="GladeProjectView">GladeProjectView</link> *view);
+<link linkend="void">void</link>        <link linkend="glade-app-command-undo">glade_app_command_undo</link>          (void);
+<link linkend="void">void</link>        <link linkend="glade-app-command-redo">glade_app_command_redo</link>          (void);
+<link linkend="void">void</link>        <link linkend="glade-app-command-copy">glade_app_command_copy</link>          (void);
+<link linkend="void">void</link>        <link linkend="glade-app-command-cut">glade_app_command_cut</link>           (void);
+<link linkend="void">void</link>        <link linkend="glade-app-command-paste">glade_app_command_paste</link>         (<link linkend="GladePlaceholder">GladePlaceholder</link> *placeholder);
+<link linkend="void">void</link>        <link linkend="glade-app-command-delete">glade_app_command_delete</link>        (void);
+<link linkend="void">void</link>        <link linkend="glade-app-command-delete-clipboard">glade_app_command_delete_clipboard</link>
+                                            (void);
+<link linkend="gint">gint</link>        <link linkend="glade-app-config-save">glade_app_config_save</link>           (void);
+<link linkend="void">void</link>        <link linkend="glade-app-set-transient-parent">glade_app_set_transient_parent</link>  (<link linkend="GtkWindow">GtkWindow</link> *parent);
+<link linkend="GtkWindow">GtkWindow</link>*  <link linkend="glade-app-get-transient-parent">glade_app_get_transient_parent</link>  (void);
+<link linkend="void">void</link>        <link linkend="glade-app-set-accel-group">glade_app_set_accel_group</link>       (<link linkend="GtkAccelGroup">GtkAccelGroup</link> *accel_group);
+<link linkend="void">void</link>        <link linkend="glade-app-update-instance-count">glade_app_update_instance_count</link> (<link linkend="GladeProject">GladeProject</link> *project);
+<link linkend="GtkWidget">GtkWidget</link>*  <link linkend="glade-app-undo-button-new">glade_app_undo_button_new</link>       (void);
+<link linkend="GtkWidget">GtkWidget</link>*  <link linkend="glade-app-redo-button-new">glade_app_redo_button_new</link>       (void);
+<link linkend="void">void</link>        <link linkend="glade-app-selection-add">glade_app_selection_add</link>         (<link linkend="GObject">GObject</link> *object,
+                                             <link linkend="gboolean">gboolean</link> emit_signal);
+<link linkend="void">void</link>        <link linkend="glade-app-selection-remove">glade_app_selection_remove</link>      (<link linkend="GObject">GObject</link> *object,
+                                             <link linkend="gboolean">gboolean</link> emit_signal);
+<link linkend="void">void</link>        <link linkend="glade-app-selection-changed">glade_app_selection_changed</link>     (void);
+<link linkend="GList">GList</link>*      <link linkend="glade-app-get-selection">glade_app_get_selection</link>         (void);
+<link linkend="void">void</link>        <link linkend="glade-app-selection-clear">glade_app_selection_clear</link>       (<link linkend="gboolean">gboolean</link> emit_signal);
+<link linkend="void">void</link>        <link linkend="glade-app-selection-set">glade_app_selection_set</link>         (<link linkend="GObject">GObject</link> *object,
+                                             <link linkend="gboolean">gboolean</link> emit_signal);
+<link linkend="gboolean">gboolean</link>    <link linkend="glade-app-is-selected">glade_app_is_selected</link>           (<link linkend="GObject">GObject</link> *object);
+
+
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title>Object Hierarchy</title>
+<synopsis>
+
+  <link linkend="GObject">GObject</link>
+   +----GladeApp
+</synopsis>
+
+</refsect1>
+
+
+
+
+
+<refsect1>
+<title>Properties</title>
+<synopsis>
+
+  &quot;<link linkend="GladeApp--active-project">active-project</link>&quot;       <link linkend="GladeProject">GladeProject</link>          : Read / Write
+</synopsis>
+</refsect1>
+
+<refsect1>
+<title>Signal Prototypes</title>
+<synopsis>
+
+&quot;<link linkend="GladeApp-update-ui">update-ui</link>&quot; <link linkend="void">void</link>        user_function      (<link linkend="GladeApp">GladeApp</link> *gladeapp,
+                                            <link linkend="gpointer">gpointer</link> user_data);
+</synopsis>
+</refsect1>
+
+
+<refsect1>
+<title>Description</title>
+<para>
+This main control object is where we try to draw the line between
+what is the Glade core and what is the main application. The main
+application must derive from the GladeApp object and create an instance
+to initialize the Glade core.
+</para>
+</refsect1>
+
+<refsect1>
+<title>Details</title>
+<refsect2>
+<title><anchor id="GladeApp-struct"/>GladeApp</title>
+<indexterm><primary>GladeApp</primary></indexterm><programlisting>typedef struct _GladeApp GladeApp;</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="glade-app-get"/>glade_app_get ()</title>
+<indexterm><primary>glade_app_get</primary></indexterm><programlisting><link linkend="GladeApp">GladeApp</link>*   glade_app_get                   (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-app-update-ui"/>glade_app_update_ui ()</title>
+<indexterm><primary>glade_app_update_ui</primary></indexterm><programlisting><link linkend="void">void</link>        glade_app_update_ui             (void);</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="glade-app-set-window"/>glade_app_set_window ()</title>
+<indexterm><primary>glade_app_set_window</primary></indexterm><programlisting><link linkend="void">void</link>        glade_app_set_window            (<link linkend="GtkWidget">GtkWidget</link> *window);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>window</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-app-get-window"/>glade_app_get_window ()</title>
+<indexterm><primary>glade_app_get_window</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*  glade_app_get_window            (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-app-get-editor"/>glade_app_get_editor ()</title>
+<indexterm><primary>glade_app_get_editor</primary></indexterm><programlisting><link linkend="GladeEditor">GladeEditor</link>* glade_app_get_editor           (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-app-get-palette"/>glade_app_get_palette ()</title>
+<indexterm><primary>glade_app_get_palette</primary></indexterm><programlisting><link linkend="GladePalette">GladePalette</link>* glade_app_get_palette         (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-app-get-clipboard"/>glade_app_get_clipboard ()</title>
+<indexterm><primary>glade_app_get_clipboard</primary></indexterm><programlisting><link linkend="GladeClipboard">GladeClipboard</link>* glade_app_get_clipboard     (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-app-get-clipboard-view"/>glade_app_get_clipboard_view ()</title>
+<indexterm><primary>glade_app_get_clipboard_view</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*  glade_app_get_clipboard_view    (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-app-set-project"/>glade_app_set_project ()</title>
+<indexterm><primary>glade_app_set_project</primary></indexterm><programlisting><link linkend="void">void</link>        glade_app_set_project           (<link linkend="GladeProject">GladeProject</link> *project);</programlisting>
+<para>
+Sets the active project in the <link linkend="GladeApp"><type>GladeApp</type></link> to <parameter>project</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>project</parameter>&nbsp;:</term>
+<listitem><simpara> A <link linkend="GladeProject"><type>GladeProject</type></link>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-app-get-project"/>glade_app_get_project ()</title>
+<indexterm><primary>glade_app_get_project</primary></indexterm><programlisting><link linkend="GladeProject">GladeProject</link>* glade_app_get_project         (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-app-add-project"/>glade_app_add_project ()</title>
+<indexterm><primary>glade_app_add_project</primary></indexterm><programlisting><link linkend="void">void</link>        glade_app_add_project           (<link linkend="GladeProject">GladeProject</link> *project);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>project</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-app-remove-project"/>glade_app_remove_project ()</title>
+<indexterm><primary>glade_app_remove_project</primary></indexterm><programlisting><link linkend="void">void</link>        glade_app_remove_project        (<link linkend="GladeProject">GladeProject</link> *project);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>project</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-app-get-project-by-path"/>glade_app_get_project_by_path ()</title>
+<indexterm><primary>glade_app_get_project_by_path</primary></indexterm><programlisting><link linkend="GladeProject">GladeProject</link>* glade_app_get_project_by_path (const <link linkend="gchar">gchar</link> *project_path);</programlisting>
+<para>
+Finds an open project with <parameter>path</parameter></para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>project_path</parameter>&nbsp;:</term>
+<listitem><simpara> The path of an open project
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> A <link linkend="GladeProject"><type>GladeProject</type></link>, or NULL if no such open project was found
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-app-get-projects"/>glade_app_get_projects ()</title>
+<indexterm><primary>glade_app_get_projects</primary></indexterm><programlisting><link linkend="GList">GList</link>*      glade_app_get_projects          (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-app-get-config"/>glade_app_get_config ()</title>
+<indexterm><primary>glade_app_get_config</primary></indexterm><programlisting><link linkend="GKeyFile">GKeyFile</link>*   glade_app_get_config            (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-app-is-project-loaded"/>glade_app_is_project_loaded ()</title>
+<indexterm><primary>glade_app_is_project_loaded</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    glade_app_is_project_loaded     (const <link linkend="gchar">gchar</link> *project_path);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>project_path</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-app-show-properties"/>glade_app_show_properties ()</title>
+<indexterm><primary>glade_app_show_properties</primary></indexterm><programlisting><link linkend="void">void</link>        glade_app_show_properties       (<link linkend="gboolean">gboolean</link> raise);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>raise</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-app-hide-properties"/>glade_app_hide_properties ()</title>
+<indexterm><primary>glade_app_hide_properties</primary></indexterm><programlisting><link linkend="void">void</link>        glade_app_hide_properties       (void);</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="glade-app-add-project-view"/>glade_app_add_project_view ()</title>
+<indexterm><primary>glade_app_add_project_view</primary></indexterm><programlisting><link linkend="void">void</link>        glade_app_add_project_view      (<link linkend="GladeProjectView">GladeProjectView</link> *view);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>view</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-app-command-undo"/>glade_app_command_undo ()</title>
+<indexterm><primary>glade_app_command_undo</primary></indexterm><programlisting><link linkend="void">void</link>        glade_app_command_undo          (void);</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="glade-app-command-redo"/>glade_app_command_redo ()</title>
+<indexterm><primary>glade_app_command_redo</primary></indexterm><programlisting><link linkend="void">void</link>        glade_app_command_redo          (void);</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="glade-app-command-copy"/>glade_app_command_copy ()</title>
+<indexterm><primary>glade_app_command_copy</primary></indexterm><programlisting><link linkend="void">void</link>        glade_app_command_copy          (void);</programlisting>
+<para>
+Copy the active project's selection (the new copies
+will end up on the clipboard and will be set as
+the clipboards selection).</para>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="glade-app-command-cut"/>glade_app_command_cut ()</title>
+<indexterm><primary>glade_app_command_cut</primary></indexterm><programlisting><link linkend="void">void</link>        glade_app_command_cut           (void);</programlisting>
+<para>
+Cut the active project's selection (the cut objects
+will end up on the clipboard and will be set as
+the clipboards selection).</para>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="glade-app-command-paste"/>glade_app_command_paste ()</title>
+<indexterm><primary>glade_app_command_paste</primary></indexterm><programlisting><link linkend="void">void</link>        glade_app_command_paste         (<link linkend="GladePlaceholder">GladePlaceholder</link> *placeholder);</programlisting>
+<para>
+Paste the clipboard selection to the active project's 
+selection (the project must have only one object selected).</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>placeholder</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-app-command-delete"/>glade_app_command_delete ()</title>
+<indexterm><primary>glade_app_command_delete</primary></indexterm><programlisting><link linkend="void">void</link>        glade_app_command_delete        (void);</programlisting>
+<para>
+Delete the active project's selection.</para>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="glade-app-command-delete-clipboard"/>glade_app_command_delete_clipboard ()</title>
+<indexterm><primary>glade_app_command_delete_clipboard</primary></indexterm><programlisting><link linkend="void">void</link>        glade_app_command_delete_clipboard
+                                            (void);</programlisting>
+<para>
+Delete the clipboard's selection.</para>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="glade-app-config-save"/>glade_app_config_save ()</title>
+<indexterm><primary>glade_app_config_save</primary></indexterm><programlisting><link linkend="gint">gint</link>        glade_app_config_save           (void);</programlisting>
+<para>
+Saves the GKeyFile to "<link linkend="g-get-user-config-dir"><function>g_get_user_config_dir()</function></link>/GLADE_CONFIG_FILENAME"
+</para>
+<para>
+Return 0 on success.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-app-set-transient-parent"/>glade_app_set_transient_parent ()</title>
+<indexterm><primary>glade_app_set_transient_parent</primary></indexterm><programlisting><link linkend="void">void</link>        glade_app_set_transient_parent  (<link linkend="GtkWindow">GtkWindow</link> *parent);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>parent</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-app-get-transient-parent"/>glade_app_get_transient_parent ()</title>
+<indexterm><primary>glade_app_get_transient_parent</primary></indexterm><programlisting><link linkend="GtkWindow">GtkWindow</link>*  glade_app_get_transient_parent  (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-app-set-accel-group"/>glade_app_set_accel_group ()</title>
+<indexterm><primary>glade_app_set_accel_group</primary></indexterm><programlisting><link linkend="void">void</link>        glade_app_set_accel_group       (<link linkend="GtkAccelGroup">GtkAccelGroup</link> *accel_group);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>accel_group</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-app-update-instance-count"/>glade_app_update_instance_count ()</title>
+<indexterm><primary>glade_app_update_instance_count</primary></indexterm><programlisting><link linkend="void">void</link>        glade_app_update_instance_count (<link linkend="GladeProject">GladeProject</link> *project);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>project</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-app-undo-button-new"/>glade_app_undo_button_new ()</title>
+<indexterm><primary>glade_app_undo_button_new</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*  glade_app_undo_button_new       (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-app-redo-button-new"/>glade_app_redo_button_new ()</title>
+<indexterm><primary>glade_app_redo_button_new</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*  glade_app_redo_button_new       (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-app-selection-add"/>glade_app_selection_add ()</title>
+<indexterm><primary>glade_app_selection_add</primary></indexterm><programlisting><link linkend="void">void</link>        glade_app_selection_add         (<link linkend="GObject">GObject</link> *object,
+                                             <link linkend="gboolean">gboolean</link> emit_signal);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>emit_signal</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-app-selection-remove"/>glade_app_selection_remove ()</title>
+<indexterm><primary>glade_app_selection_remove</primary></indexterm><programlisting><link linkend="void">void</link>        glade_app_selection_remove      (<link linkend="GObject">GObject</link> *object,
+                                             <link linkend="gboolean">gboolean</link> emit_signal);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>emit_signal</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-app-selection-changed"/>glade_app_selection_changed ()</title>
+<indexterm><primary>glade_app_selection_changed</primary></indexterm><programlisting><link linkend="void">void</link>        glade_app_selection_changed     (void);</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="glade-app-get-selection"/>glade_app_get_selection ()</title>
+<indexterm><primary>glade_app_get_selection</primary></indexterm><programlisting><link linkend="GList">GList</link>*      glade_app_get_selection         (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-app-selection-clear"/>glade_app_selection_clear ()</title>
+<indexterm><primary>glade_app_selection_clear</primary></indexterm><programlisting><link linkend="void">void</link>        glade_app_selection_clear       (<link linkend="gboolean">gboolean</link> emit_signal);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>emit_signal</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-app-selection-set"/>glade_app_selection_set ()</title>
+<indexterm><primary>glade_app_selection_set</primary></indexterm><programlisting><link linkend="void">void</link>        glade_app_selection_set         (<link linkend="GObject">GObject</link> *object,
+                                             <link linkend="gboolean">gboolean</link> emit_signal);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>emit_signal</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="glade-app-is-selected"/>glade_app_is_selected ()</title>
+<indexterm><primary>glade_app_is_selected</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    glade_app_is_selected           (<link linkend="GObject">GObject</link> *object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+<refsect1>
+<title>Properties</title>
+<refsect2><title><anchor id="GladeApp--active-project"/>The &quot;<literal>active-project</literal>&quot; property</title>
+<programlisting>  &quot;active-project&quot;       <link linkend="GladeProject">GladeProject</link>          : Read / Write</programlisting>
+<para>The active project.</para></refsect2>
+
+</refsect1>
+
+<refsect1>
+<title>Signals</title>
+<refsect2><title><anchor id="GladeApp-update-ui"/>The &quot;update-ui&quot; signal</title>
+<programlisting><link linkend="void">void</link>        user_function                  (<link linkend="GladeApp">GladeApp</link> *gladeapp,
+                                            <link linkend="gpointer">gpointer</link> user_data);</programlisting>
+<para>
+Emitted when a project name changes or a cut/copy/paste/delete occurred.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>gladeapp</parameter>&nbsp;:</term>
+<listitem><simpara> the <link linkend="GladeApp"><type>GladeApp</type></link> which received the signal.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
+<listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+</refsect1>
+
+
+
+</refentry>
