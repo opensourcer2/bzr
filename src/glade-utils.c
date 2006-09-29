@@ -992,75 +992,6 @@ glade_util_container_get_all_children (GtkContainer *container)
 }
 
 /**
- * glade_util_uri_list_parse:
- * @uri_list: the text/urilist, must be NULL terminated.
- *
- * Extracts a list of file names from a standard text/uri-list,
- * such as one you would get on a drop operation.
- * This is mostly stolen from gnome-vfs-uri.c.
- *
- * Returns: a #GList of gchars.
- */
-GList *
-glade_util_uri_list_parse (const gchar *uri_list)
-{
-	const gchar *p, *q;
-	GList *result = NULL;
-
-	g_return_val_if_fail (uri_list != NULL, NULL);
-
-	p = uri_list;
-
-	/* We don't actually try to validate the URI according to RFC
-	 * 2396, or even check for allowed characters - we just ignore
-	 * comments and trim whitespace off the ends.  We also
-	 * allow LF delimination as well as the specified CRLF.
-	 */
-	while (p)
-	{
-		if (*p != '#')
-		{
-			gchar *retval;
-			gchar *path;
-
-			while (g_ascii_isspace (*p))
-				p++;
-
-			q = p;
-			while ((*q != '\0') && (*q != '\n') && (*q != '\r'))
-				q++;
-
-			if (q > p)
-			{
-				q--;
-				while (q > p && g_ascii_isspace (*q))
-					q--;
-
-				retval = g_new (gchar, q - p + 2);
-				memcpy (retval, p, q - p + 1);
-				retval[q - p + 1] = '\0';
-
-				path = g_filename_from_uri (retval, NULL, NULL);
-				if (!path)
-				{
-					g_free (retval);
-					continue;
-				}
-
-				result = g_list_prepend (result, path);
-
-				g_free (retval);
-			}
-		}
-		p = strchr (p, '\n');
-		if (p)
-			p++;
-	}
-
-	return g_list_reverse (result);
-}
-
-/**
  * glade_util_gtkcontainer_relation:
  * @widget: a GladeWidget
  * @parent: a GladeWidget
@@ -1800,4 +1731,27 @@ glade_util_get_placeholder_from_pointer (GtkContainer *container)
 	g_list_free (c);
 
 	return retval;
+}
+
+/**
+ * glade_util_object_is_loading:
+ * @object: A #GObject
+ *
+ * Returns: Whether the object's project is being loaded or not.
+ *       
+ */
+gboolean
+glade_util_object_is_loading (GObject *object)
+{
+	GladeProject *project;
+	GladeWidget *widget;
+
+	g_return_val_if_fail (G_IS_OBJECT (object), FALSE);
+	
+	widget = glade_widget_get_from_gobject (object);
+	g_return_val_if_fail (GLADE_IS_WIDGET (widget), FALSE);
+	
+	project = glade_widget_get_project (widget);
+	
+	return glade_project_is_loading (project);
 }

@@ -7,20 +7,20 @@ include /usr/share/cdbs/1/rules/debhelper.mk
 include /usr/share/cdbs/1/rules/simple-patchsys.mk
 include /usr/share/gnome-pkg-tools/1/rules/uploaders.mk
 
-DEB_CONFIGURE_EXTRA_FLAGS := --disable-gtk-doc --enable-static
+DEB_CONFIGURE_EXTRA_FLAGS := --enable-gtk-doc --enable-static
 
 # ensures that libgladeui's shlibs are in place when calling dh_shlibdeps
-binary-glade-3:: binary-libgladeui-1-2
-binary-glade-gnome-3:: binary-libgladeui-1-2
+binary-glade-3:: binary-libgladeui-1-4
+binary-glade-gnome-3:: binary-libgladeui-1-4
 
 # link with the freshly build libgladeui during dh_shlibdeps, and use freshly
 # generated shlib information
-DEB_SHLIBDEPS_LIBRARY_glade-3 += libgladeui-1-2
-DEB_SHLIBDEPS_INCLUDE_glade-3 += debian/libgladeui-1-2/usr/lib/
-DEB_SHLIBDEPS_LIBRARY_glade-gnome-3 += libgladeui-1-2
-DEB_SHLIBDEPS_INCLUDE_glade-gnome-3 += debian/libgladeui-1-2/usr/lib/
+DEB_SHLIBDEPS_LIBRARY_glade-3 += libgladeui-1-4
+DEB_SHLIBDEPS_INCLUDE_glade-3 += debian/libgladeui-1-4/usr/lib/
+DEB_SHLIBDEPS_LIBRARY_glade-gnome-3 += libgladeui-1-4
+DEB_SHLIBDEPS_INCLUDE_glade-gnome-3 += debian/libgladeui-1-4/usr/lib/
 
 # remove stuff that will go in glade-gnome
-binary-post-install/libgladeui-1-2::
-	find debian/libgladeui-1-2/usr/share/glade3/pixmaps/ -name gnome\* -exec rm {} \;
-	find debian/libgladeui-1-2/usr/share/glade3/pixmaps/ -name bonobo\* -exec rm {} \;
+binary-post-install/libgladeui-1-4::
+	find debian/libgladeui-1-4/usr/share/glade3/pixmaps/ -name gnome\* -exec rm {} \;
+	find debian/libgladeui-1-4/usr/share/glade3/pixmaps/ -name bonobo\* -exec rm {} \;

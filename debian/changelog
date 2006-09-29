@@ -1,3 +1,50 @@
+glade-3 (3.0.2-0ubuntu1) edgy; urgency=low
+
+  * New upstream version (UVF exception #63035):
+    New features and fixes:
+    - Fixed some properties to be translatable
+    - Now use non-locale specific functions to write out double values to 
+      glade files, revert to use floating precision in adjustments.
+    - Signal editor UI improved 
+    - Reimplemented file drag and drop
+    - Fixed accelerator dialog segfaults
+    - Improved GtkPaned support
+    - Backing out multiple consecutive pastes
+      (this fixes menu editor segfaults among other things)
+    - Fixed ComboBoxEntry crash
+    - Ordering of properties in the editor window 
+    - Allow a dynamic user-editable comment prepended to the glade file
+    - Added new stock listing that includes the stock "images" (which
+      are not gtk+ stock "items"), and enabled them for GtkImage and
+      GtkToolItem.
+    - GtkImage now defaults to an initial "gtk-broken-image" stock type.
+    - Ignore "enable-grid-lines" 2.10 property on treeview since it causes 
+      crashes on load 
+    - Added displayable values for "enable-grid-lines" 2.10 property
+    - Set some HIG-ish defaults on dialogs
+    - Fixed lost icons on images 
+    - Namespace issues with libglade initial fix 
+    - Few more misc fixes by Juan Pablo and myself.
+    New and updated translations:
+    - Changwoo Ryu (ko)
+    - David Lodge (en_GB)
+    - Francisco Javier F. Serrador (es)
+  * debian/control.in:
+    - Build-Depends on gtk-doc-tools to build the documentation since the html
+      files are not shipped with the tarball
+    - create a common package for translations, better than having to conflict
+      with the previous lib at every soname change
+    - updated for soname change
+  * debian/libgladeui-1-common.install:
+    - new common package
+  * debian/libgladeui-1-2.install, debian/libgladeui-1-4.install:
+    - updated for soname change and new common package
+  * debian/rules:
+    - build documentation since html files are not shipped with the tarball
+    - updated for soname change
+
+ -- Sebastien Bacher <seb128@canonical.com>  Fri, 29 Sep 2006 21:25:50 +0200
+
 glade-3 (3.0.1-0ubuntu1) edgy; urgency=low
 
   * New upstream version:

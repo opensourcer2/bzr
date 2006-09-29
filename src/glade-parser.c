@@ -434,7 +434,7 @@ glade_parser_start_document(GladeParseState *state)
     state->widget_depth = 0;
     state->content = g_string_sized_new(128);
 
-    state->interface = glade_interface_new ();
+    state->interface = glade_parser_interface_new ();
     state->widget = NULL;
 
     state->prop_type = PROP_NONE;
@@ -456,6 +456,13 @@ glade_parser_end_document(GladeParseState *state)
 	g_warning("unknown_depth != 0 (%d)", state->unknown_depth);
     if (state->widget_depth != 0)
 	g_warning("widget_depth != 0 (%d)", state->widget_depth);
+}
+
+static void
+glade_parser_comment (GladeParseState *state, const xmlChar *comment)
+{
+	if (state->state == PARSER_START)
+		state->interface->comment = g_strdup (CAST_BAD (comment));
 }
 
 static void
@@ -1083,7 +1090,7 @@ static xmlSAXHandler glade_parser = {
     (charactersSAXFunc)glade_parser_characters, /* characters */
     0, /* ignorableWhitespace */
     0, /* processingInstruction */
-    (commentSAXFunc)0, /* comment */
+    (commentSAXFunc)glade_parser_comment, /* comment */
     (warningSAXFunc)glade_parser_warning, /* warning */
     (errorSAXFunc)glade_parser_error, /* error */
     (fatalErrorSAXFunc)glade_parser_fatal_error, /* fatalError */
@@ -1110,12 +1117,12 @@ widget_info_free(GladeWidgetInfo *info)
 }
 
 /**
- * glade_interface_new
+ * glade_parser_interface_new
  *
  * Returns a newly allocated GladeInterface.
  */
 GladeInterface *
-glade_interface_new ()
+glade_parser_interface_new ()
 {
 	GladeInterface *interface;
 	interface = g_new0 (GladeInterface, 1);
@@ -1128,13 +1135,13 @@ glade_interface_new ()
 }
 
 /**
- * glade_interface_destroy
+ * glade_parser_interface_destroy
  * @interface: the GladeInterface structure.
  *
  * Frees a GladeInterface structure.
  */
 void
-glade_interface_destroy(GladeInterface *interface)
+glade_parser_interface_destroy (GladeInterface *interface)
 {
     gint i;
 
@@ -1153,11 +1160,13 @@ glade_interface_destroy(GladeInterface *interface)
      * of the strings. */
     g_hash_table_destroy(interface->strings);
 
+    g_free (interface->comment);
+    
     g_free(interface);
 }
 
 /**
- * glade_parser_parse_file
+ * glade_parser_interface_new_from_file
  * @file: the filename of the glade XML file.
  * @domain: the translation domain for the XML file.
  *
@@ -1171,7 +1180,7 @@ glade_interface_destroy(GladeInterface *interface)
  * Returns: the GladeInterface structure for the XML file.
  */
 GladeInterface *
-glade_parser_parse_file(const gchar *file, const gchar *domain)
+glade_parser_interface_new_from_file (const gchar *file, const gchar *domain)
 {
     GladeParseState state = { 0 };
 
@@ -1193,7 +1202,7 @@ glade_parser_parse_file(const gchar *file, const gchar *domain)
 			       GLADE_UI_ERROR,
 			       _("Errors parsing glade file %s"), file);
 	if (state.interface)
-	    glade_interface_destroy (state.interface);
+	    glade_parser_interface_destroy (state.interface);
 	return NULL;
     }
     if (state.state != PARSER_FINISH) {
@@ -1201,14 +1210,14 @@ glade_parser_parse_file(const gchar *file, const gchar *domain)
 			       GLADE_UI_ERROR,
 			       _("Errors parsing glade file %s"), file);
 	if (state.interface)
-	    glade_interface_destroy(state.interface);
+	    glade_parser_interface_destroy(state.interface);
 	return NULL;
     }
     return state.interface;
 }
 
 /**
- * glade_parser_parse_buffer
+ * glade_parser_interface_new_from_buffer
  * @buffer: a buffer in memory containing XML data.
  * @len: the length of @buffer.
  * @domain: the translation domain for the XML file.
@@ -1223,7 +1232,9 @@ glade_parser_parse_file(const gchar *file, const gchar *domain)
  * Returns: the GladeInterface structure for the XML buffer.
  */
 GladeInterface *
-glade_parser_parse_buffer(const gchar *buffer, gint len, const gchar *domain)
+glade_parser_interface_new_from_buffer (const gchar *buffer,
+					gint len,
+					const gchar *domain)
 {
     GladeParseState state = { 0 };
 
@@ -1236,13 +1247,13 @@ glade_parser_parse_buffer(const gchar *buffer, gint len, const gchar *domain)
     if (xmlSAXUserParseMemory(&glade_parser, &state, buffer, len) < 0) {
 	g_warning("document not well formed!");
 	if (state.interface)
-	    glade_interface_destroy (state.interface);
+	    glade_parser_interface_destroy (state.interface);
 	return NULL;
     }
     if (state.state != PARSER_FINISH) {
 	g_warning("did not finish in PARSER_FINISH state!");
 	if (state.interface)
-	    glade_interface_destroy(state.interface);
+	    glade_parser_interface_destroy(state.interface);
 	return NULL;
     }
     return state.interface;
@@ -1545,35 +1556,11 @@ dump_widget(xmlNode *parent, GladeWidgetInfo *info, gint indent)
 	xmlNodeAddContent(widget, BAD_CAST("  "));
 }
 
-static void
-glade_interface_add_comment (xmlDoc *doc)
-{
-	time_t now = time (NULL);
-	xmlNode *comment;
-	gchar *str;
-	
-	str = g_strdup_printf (_(" Generated with %s\n"
-				 "\tVersion: %s\n"
-				 "\tDate: %s"
-				 "\tUser: %s\n"
-				 "\tHost: %s\n"),
-				PACKAGE_NAME,
-				PACKAGE_VERSION,
-				ctime (&now),
-				g_get_user_name (),
-				g_get_host_name ());
-	
-	comment = xmlNewComment(BAD_CAST (str));
-	xmlDocSetRootElement(doc, comment);
-	
-	g_free (str);
-}
-
 static xmlDoc *
 glade_interface_make_doc (GladeInterface *interface)
 {
     xmlDoc *doc;
-    xmlNode *root;
+    xmlNode *root, *comment;
     gint i;
 
     doc = xmlNewDoc(BAD_CAST("1.0"));
@@ -1581,7 +1568,11 @@ glade_interface_make_doc (GladeInterface *interface)
     xmlCreateIntSubset(doc, BAD_CAST("glade-interface"),
 		       NULL, BAD_CAST("glade-2.0.dtd"));
 
-    glade_interface_add_comment (doc);
+    if (interface->comment)
+    {
+	comment = xmlNewComment(BAD_CAST (interface->comment));
+	xmlDocSetRootElement(doc, comment);
+    }
 	
     root = xmlNewNode(NULL, BAD_CAST("glade-interface"));
     xmlDocSetRootElement(doc, root);
@@ -1623,7 +1614,7 @@ glade_interface_buffer (GladeInterface  *interface,
 }
 
 /**
- * glade_interface_dump_full
+ * glade_parser_interface_dump
  * @interface: the GladeInterface
  * @filename: the filename to write the interface data to.
  * @error: a #GError for error handleing.
@@ -1634,7 +1625,9 @@ glade_interface_buffer (GladeInterface  *interface,
  * Returns whether the write was successfull or not.
  */
 gboolean
-glade_interface_dump_full(GladeInterface *interface, const gchar *filename, GError **error)
+glade_parser_interface_dump (GladeInterface *interface,
+			     const gchar *filename,
+			     GError **error)
 {
 	GIOChannel *fd;
 	gpointer buffer;
@@ -1660,21 +1653,6 @@ glade_interface_dump_full(GladeInterface *interface, const gchar *filename, GErr
 	
 	return (retval == G_IO_STATUS_NORMAL) ? TRUE : FALSE;
 }
-
-/**
- * glade_interface_dump
- * @interface: the GladeInterface
- * @filename: the filename to write the interface data to.
- *
- * This function dumps the contents of a GladeInterface into a file as
- * XML.  It was originaly intended as a debugging tool.
- */
-void
-glade_interface_dump(GladeInterface *interface, const gchar *filename)
-{
-	glade_interface_dump_full(interface, filename, NULL);
-}
-
 
 G_CONST_RETURN gchar *
 glade_parser_pvalue_from_winfo (GladeWidgetInfo *winfo,
