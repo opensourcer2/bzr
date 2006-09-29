@@ -77,13 +77,15 @@
             <value id="GNOME_EDGE_OTHER" name="Other"></value>
           </displayable-values>
 	</property>
-	<property id="title" name="Title">
+	<property translatable="True" id="title" name="Title">
 	  <spec>glade_standard_string_spec</spec>
 	  <set-function>glade_gnome_dpe_set_title</set-function>
+          <visible-lines>2</visible-lines>
 	</property>
-	<property id="text" name="Text">
+	<property translatable="True" id="text" name="Text">
 	  <spec>glade_standard_string_spec</spec>
 	  <set-function>glade_gnome_dpe_set_text</set-function>
+          <visible-lines>4</visible-lines>
 	</property>
 	<property id="title-foreground" default="#FFFFFF" name="Title Foreground Color">
 	  <spec>glade_standard_gdkcolor_spec</spec>
@@ -124,6 +126,10 @@
       <post-create-function>glade_gnome_dps_post_create</post-create-function>
       <get-internal-child-function>glade_gnome_dps_get_internal_child</get-internal-child-function>
       <properties>
+	<property translatable="True" id="title">
+          <visible-lines>2</visible-lines>
+	</property>
+
         <property id="background-set" disabled="True"/>
 	<property visible="False" save="False" id="background" default="#4B6983">
 	  <set-function>glade_gnome_dps_set_background</set-function>
@@ -169,6 +175,7 @@
     <glade-widget-class title="Gnome HRef" name="GnomeHRef" generic-name="gnomehref"/>
 
     <glade-widget-class title="Gnome Date Edit" name="GnomeDateEdit" generic-name="gnomedateedit">
+      <post-create-function>glade_gnome_date_edit_post_create</post-create-function>
       <properties>
         <property id="time" disabled="True"/>
         <property visible="False" query="False" ignore="True" id="size"/>

@@ -172,6 +172,7 @@ glade_property_class_new (gpointer handle)
 	property_class->type = GPC_NORMAL;
 	property_class->virtual = TRUE;
 	property_class->transfer_on_paste = FALSE;
+	property_class->weight = -1.0;
 
 	return property_class;
 }
@@ -293,10 +294,10 @@ glade_property_class_free (GladePropertyClass *property_class)
 		{
 			gchar *name, *nick;
 			
-			name = g_array_index(disp_val, GEnumValue, i).value_name;
+			name = (gchar *) g_array_index (disp_val, GEnumValue, i).value_name;
 			if (name) g_free(name);
 			
-			nick = g_array_index(disp_val, GEnumValue, i).value_nick;
+			nick = (gchar *) g_array_index (disp_val, GEnumValue, i).value_nick;
 			if (nick) g_free(nick);
 		}
 		
@@ -352,7 +353,7 @@ glade_property_class_make_string_from_flags (GladePropertyClass *class, guint fv
 	
 	while ((fvalue = g_flags_get_first_value(fclass, fvals)) != NULL)
 	{
-		gchar *val_str = NULL;
+		const gchar *val_str = NULL;
 		
 		fvals &= ~fvalue->value;
 		
@@ -362,7 +363,7 @@ glade_property_class_make_string_from_flags (GladePropertyClass *class, guint fv
 		if (string->str[0])
 			g_string_append(string, " | ");
 		
-		g_string_append(string, (val_str) ? val_str : fvalue->value_name);
+		g_string_append (string, (val_str) ? val_str : fvalue->value_name);
 		
 		/* If one of the flags value is 0 this loop become infinite :) */
 		if (fvalue->value == 0) break;
@@ -392,14 +393,36 @@ glade_property_class_make_string_from_object (GladePropertyClass *property_class
 	}
 	else if (property_class->pspec->value_type == GTK_TYPE_ADJUSTMENT)
 	{
+#define FLOAT_BUFSIZ 128
+
 		GtkAdjustment *adj = GTK_ADJUSTMENT (object);
-		
-		/* Glade format expects integers */
-		string = g_strdup_printf ("%d %d %d %d %d %d", 
-					  (gint)adj->value, (gint)adj->lower, (gint)adj->upper, 
-					  (gint)adj->step_increment, 
-					  (gint)adj->page_increment,
-					  (gint)adj->page_size);
+		GString       *str = g_string_new ("");
+		gchar          buff[FLOAT_BUFSIZ];
+
+		g_ascii_dtostr (buff, FLOAT_BUFSIZ, adj->value);
+		g_string_append (str, buff);
+
+		g_string_append_c (str, ' ');
+		g_ascii_dtostr (buff, FLOAT_BUFSIZ, adj->lower);
+		g_string_append (str, buff);
+
+		g_string_append_c (str, ' ');
+		g_ascii_dtostr (buff, FLOAT_BUFSIZ, adj->upper);
+		g_string_append (str, buff);
+
+		g_string_append_c (str, ' ');
+		g_ascii_dtostr (buff, FLOAT_BUFSIZ, adj->step_increment);
+		g_string_append (str, buff);
+
+		g_string_append_c (str, ' ');
+		g_ascii_dtostr (buff, FLOAT_BUFSIZ, adj->page_increment);
+		g_string_append (str, buff);
+
+		g_string_append_c (str, ' ');
+		g_ascii_dtostr (buff, FLOAT_BUFSIZ, adj->page_size);
+		g_string_append (str, buff);
+
+		string = g_string_free (str, FALSE);
 	}
 	else if ((gwidget = glade_widget_get_from_gobject (object)) != NULL)
 		string = g_strdup (gwidget->name);
@@ -483,7 +506,7 @@ gchar *
 glade_property_class_make_string_from_gvalue (GladePropertyClass *property_class,
 					      const GValue *value)
 {
-	gchar    *string = NULL, **strv;
+	gchar    *string = NULL, **strv, str[FLOAT_BUFSIZ];
 	GObject  *object;
 	GdkColor *color;
 	GList    *objects, *accels;
@@ -549,9 +572,15 @@ glade_property_class_make_string_from_gvalue (GladePropertyClass *property_class
 	else if (G_IS_PARAM_SPEC_UINT64(property_class->pspec))
 		string = g_strdup_printf ("%llu", g_value_get_uint64 (value));
 	else if (G_IS_PARAM_SPEC_FLOAT(property_class->pspec))
-		string = g_strdup_printf ("%f", g_value_get_float (value));
+	{
+		g_ascii_dtostr (str, FLOAT_BUFSIZ, g_value_get_float (value));
+		string = g_strdup (str);
+	}
 	else if (G_IS_PARAM_SPEC_DOUBLE(property_class->pspec))
-		string = g_strdup_printf ("%g", g_value_get_double (value));
+	{
+		g_ascii_dtostr (str, FLOAT_BUFSIZ, g_value_get_double (value));
+		string = g_strdup (str);
+	}
 	else if (G_IS_PARAM_SPEC_STRING(property_class->pspec))
 	{
 		if (property_class->resource && g_value_get_string (value) != NULL)
@@ -715,18 +744,32 @@ glade_property_class_make_object_from_string (GladePropertyClass *property_class
 	if (property_class->pspec->value_type == GDK_TYPE_PIXBUF && project)
 	{
 		GdkPixbuf *pixbuf;
-
+		
 		fullpath = glade_project_resource_fullpath (project, string);
-
-		if ((pixbuf = gdk_pixbuf_new_from_file (fullpath, NULL)) != NULL)
+ 
+		if ((pixbuf = gdk_pixbuf_new_from_file (fullpath, NULL)) == NULL)
 		{
-			g_object_set_data_full (G_OBJECT(pixbuf), 
-						"GladeFileName",
-						g_strdup (string),
-						g_free);
+			static GdkPixbuf *icon = NULL;
 
-			object = G_OBJECT(pixbuf);
+			if (icon == NULL)
+			{
+				GtkWidget *widget = gtk_label_new ("");
+				icon = gtk_widget_render_icon (widget,
+							       GTK_STOCK_MISSING_IMAGE,
+							       GTK_ICON_SIZE_MENU, NULL);
+				gtk_object_sink (GTK_OBJECT (widget));
+			}
+			
+			pixbuf = gdk_pixbuf_copy (icon);
 		}
+ 
+		if (pixbuf)
+		{
+			object = G_OBJECT (pixbuf);
+			g_object_set_data_full (object, "GladeFileName",
+						g_strdup (string), g_free);
+		}
+ 
 		g_free (fullpath);
 	}
 	if (property_class->pspec->value_type == GTK_TYPE_ADJUSTMENT)
@@ -1302,7 +1345,7 @@ glade_property_class_is_object (GladePropertyClass  *class)
  *
  * Returns: a (gchar *) if a diplayable value was found, otherwise NULL.
  */
-gchar *
+const gchar *
 glade_property_class_get_displayable_value(GladePropertyClass *class, gint value)
 {
 	gint i, len;
@@ -1628,6 +1671,7 @@ glade_property_class_update_from_node (GladeXmlNode        *node,
 	class->visible  = glade_xml_get_property_boolean (node, GLADE_TAG_VISIBLE,  class->visible);
 	class->ignore   = glade_xml_get_property_boolean (node, GLADE_TAG_IGNORE,   class->ignore);
 	class->resource = glade_xml_get_property_boolean (node, GLADE_TAG_RESOURCE, class->resource);
+	class->weight   = glade_xml_get_property_double  (node, GLADE_TAG_WEIGHT,   class->weight);
 	class->transfer_on_paste = glade_xml_get_property_boolean (node, GLADE_TAG_TRANSFER_ON_PASTE, class->transfer_on_paste);
 
 	/* No atk introspection here.

@@ -185,6 +185,42 @@ glade_widget_class_list_properties (GladeWidgetClass *class)
 	return g_list_concat (list, atk_list);
 }
 
+/*
+This function assignes "weight" to each property in its natural order staring from 1.
+If @parent is 0 weight will be set for every GladePropertyClass in the list.
+This function will not override weight if it is already set (weight >= 0.0)
+*/
+static void
+glade_widget_class_properties_set_weight (GList **properties, GType parent)
+{
+	gint normal = 0, common = 0, packing = 0;
+	GList *l;
+
+	for (l = *properties; l && l->data; l = g_list_next (l))
+	{
+		GladePropertyClass *class = l->data;
+		GPCType type = class->type;
+	
+		if (class->visible &&
+		    (parent) ? parent == class->pspec->owner_type : TRUE &&
+	    	    (type == GPC_NORMAL || type == GPC_ACCEL_PROPERTY))
+		{
+			/* Use a different counter for each tab (common, packing and normal) */
+			if (class->common) common++;
+			else if (class->packing) packing++;
+			else normal++;
+
+			/* Skip if it is already set */
+			if (class->weight >= 0.0) continue;
+			
+			/* Special-casing weight of properties for seperate tabs */
+			if (class->common) class->weight = common;
+			else if (class->packing) class->weight = packing;
+			else class->weight = normal;
+		}
+	}
+}
+
 static GList * 
 glade_widget_class_list_child_properties (GladeWidgetClass *class) 
 {
@@ -224,6 +260,10 @@ glade_widget_class_list_child_properties (GladeWidgetClass *class)
 		property_class = l->data;
 		property_class->packing = TRUE;
 	}
+	
+	/* Set default weight on packing properties */
+	glade_widget_class_properties_set_weight (&list, 0);
+	
 	return list;
 }
 
@@ -299,38 +339,24 @@ glade_widget_class_add_signals (GList **signals, GType type)
 	}
 }
 
-static gboolean
-gwc_iface_not_implemented_by_parent (GType type, GType iface)
-{
-	GType *i, *p;
-	
-	type = g_type_parent (type);
-	if (g_type_is_a (type, G_TYPE_OBJECT) == FALSE) return TRUE;
-	
-	for (i = p = g_type_interfaces (type, NULL); *i; i++)
-		if (*i == iface) { g_free (p); return FALSE; }
-		
-	g_free (p);
-	return TRUE;
-}
-
 static GList * 
 glade_widget_class_list_signals (GladeWidgetClass *class) 
 {
 	GList *signals = NULL;
-	GType type, *i, *p;
+	GType type, parent, *i, *p;
 
 	g_return_val_if_fail (class->type != 0, NULL);
 
-	for (type = class->type; g_type_is_a (type, G_TYPE_OBJECT);
-	     type = g_type_parent (type))
+	for (type = class->type; g_type_is_a (type, G_TYPE_OBJECT); type = parent)
 	{
+		parent = g_type_parent (type);
+		
 		/* Add class signals */
 		glade_widget_class_add_signals (&signals, type);
 	
 		/* Add class interfaces signals */
 		for (i = p = g_type_interfaces (type, NULL); *i; i++)
-			if (gwc_iface_not_implemented_by_parent (type, *i))
+			if (!glade_util_class_implements_interface (parent, *i))
 				glade_widget_class_add_signals (&signals, *i);
 
 		g_free (p);
@@ -1189,9 +1215,8 @@ glade_widget_class_new (GladeXmlNode *class_node,
 		parent_name  = g_type_name (parent_type);
 		parent_class = glade_widget_class_get_by_name (parent_name);
 
-		if (parent_class) {
+		if (parent_class)
 			glade_widget_class_merge (widget_class, parent_class);
-		}
 	}
 	
 	glade_widget_class_extend_with_node (widget_class, class_node, domain);
@@ -1203,6 +1228,13 @@ glade_widget_class_new (GladeXmlNode *class_node,
 	if (!widget_classes)
 		widget_classes = g_hash_table_new (g_str_hash, g_str_equal);		
 	g_hash_table_insert (widget_classes, widget_class->name, widget_class);
+
+	/* Set default weight on properties */
+	for (parent_type = widget_class->type;
+	     parent_type != 0;
+	     parent_type = g_type_parent (parent_type))
+		glade_widget_class_properties_set_weight (&widget_class->properties,
+							  parent_type);
 	
 	return widget_class;
 }
@@ -1756,7 +1788,7 @@ glade_widget_class_create_widget_real (gboolean          query,
 		g_critical ("No class found in glade_widget_class_create_widget_real args");
 		va_end (vl_copy);
 		return NULL;
-}
+	}
 
 	if (widget_class->fixed)
 		gwidget_type = GLADE_TYPE_FIXED;

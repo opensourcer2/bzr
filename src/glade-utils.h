@@ -82,9 +82,6 @@ LIBGLADEUI_API
 GList            *glade_util_container_get_all_children (GtkContainer *container);
 
 LIBGLADEUI_API
-GList            *glade_util_uri_list_parse (const gchar* uri_list);
-
-LIBGLADEUI_API
 gboolean          glade_util_gtkcontainer_relation     (GladeWidget *parent,
 							GladeWidget *widget);
 LIBGLADEUI_API
@@ -148,6 +145,9 @@ gboolean          glade_util_deep_fixed_event      (GtkWidget   *widget,
 
 LIBGLADEUI_API
 GtkWidget        *glade_util_get_placeholder_from_pointer (GtkContainer *container);
+
+LIBGLADEUI_API
+gboolean          glade_util_object_is_loading     (GObject *object);
 
 G_END_DECLS
 
