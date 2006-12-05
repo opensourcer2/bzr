@@ -29,9 +29,9 @@
 
 #include "glade.h"
 #include "glade-palette.h"
-#include "glade-widget-class.h"
+#include "glade-widget-adaptor.h"
 
-#include <gtk/gtkradiobutton.h>
+#include <gtk/gtktogglebutton.h>
 
 G_BEGIN_DECLS
 
@@ -57,29 +57,30 @@ enum _GladeItemAppearance {
 
 struct _GladePaletteItem
 {
-	GtkRadioButton button; /* The parent is a radio button */
+	GtkToggleButton button; /* The parent is a radio button */
+	
+	GladePaletteItemPrivate *priv;
 
 };
 
 struct _GladePaletteItemClass
 {
-	GtkRadioButtonClass parent_class;
+	GtkToggleButtonClass parent_class;
 
 
 };
 
 GType                 glade_palette_item_get_type (void) G_GNUC_CONST;
 
-GtkWidget            *glade_palette_item_new (const GladeWidgetClass* widget_class, 
-					      GtkRadioButton *group);
+GtkWidget            *glade_palette_item_new (GladeWidgetAdaptor *adaptor);
 
-GladeWidgetClass*     glade_palette_item_get_widget_class (GladePaletteItem *item) G_GNUC_CONST;
+GladeWidgetAdaptor   *glade_palette_item_get_adaptor (GladePaletteItem *item);
 
-GladeItemAppearance   glade_palette_item_get_appearance (GladePaletteItem *item) G_GNUC_CONST;
+GladeItemAppearance   glade_palette_item_get_appearance (GladePaletteItem *item);
 
 void		      glade_palette_item_set_appearance (GladePaletteItem *item, GladeItemAppearance appearance);
 
-gboolean              glade_palette_item_get_use_small_icon (GladePaletteItem *item) G_GNUC_CONST;
+gboolean              glade_palette_item_get_use_small_icon (GladePaletteItem *item);
 
 void		      glade_palette_item_set_use_small_icon (GladePaletteItem *item, gboolean use_small_icon);
 

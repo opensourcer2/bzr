@@ -2,31 +2,27 @@
 <glade-catalog name="canvas" library="gladegnome" domain="glade-3" depends="gnome">
   <glade-widget-classes>
     <glade-widget-class title="Gnome Canvas" name="GnomeCanvas" generic-name="gnomecanvas">
+      <set-property-function>glade_gnome_canvas_set_property</set-property-function>
       <properties>
         <property id="scroll-x1" name="Min X">
 	  <tooltip>The minimum x coordinate</tooltip>
 	  <spec>glade_standard_float_spec</spec>
-	  <set-function>glade_gnome_canvas_set_coordinate_x1</set-function>
 	</property>
         <property id="scroll-y1" name="Min Y">
 	  <tooltip>The minimum y coordinate</tooltip>
 	  <spec>glade_standard_float_spec</spec>
-	  <set-function>glade_gnome_canvas_set_coordinate_y1</set-function>
 	</property>
         <property id="scroll-x2" name="Max X">
 	  <tooltip>The maximum x coordinate</tooltip>
 	  <spec>glade_standard_float_spec</spec>
-	  <set-function>glade_gnome_canvas_set_coordinate_x2</set-function>
 	</property>
         <property id="scroll-y2" name="Max Y">
 	  <tooltip>The maximum y coordinate</tooltip>
 	  <spec>glade_standard_float_spec</spec>
-	  <set-function>glade_gnome_canvas_set_coordinate_y2</set-function>
 	</property> 
-        <property id="pixels-per-unit" name="Min X">
+        <property id="pixels-per-unit" name="Pixels per unit">
 	  <tooltip>The number of pixels corresponding to one unit</tooltip>
 	  <spec>glade_standard_float_spec</spec>
-	  <set-function>glade_gnome_canvas_set_pixels</set-function>
 	</property>
       </properties>
     </glade-widget-class>
@@ -34,47 +30,43 @@
     
     <glade-widget-class title="Gnome Icon List" name="GnomeIconList" generic-name="gnomeiconlist">
       <post-create-function>glade_gnome_icon_list_post_create</post-create-function>
+      <set-property-function>glade_gnome_icon_list_set_property</set-property-function>
       <properties>
         <property id="scroll-x1" disabled="True"/>
         <property id="scroll-y1" disabled="True"/>
         <property id="scroll-x2" disabled="True"/>
         <property id="scroll-y2" disabled="True"/>
         <property id="pixels-per-unit" disabled="True"/>
-        <property id="selection_mode" name="Selection Mode">
+        <property id="selection-mode" name="Selection Mode">
 	  <tooltip>The selection mode</tooltip>
 	  <spec>glade_gnome_icon_list_selection_mode_spec</spec>
-	  <set-function>glade_gnome_icon_list_set_selection_mode</set-function>
 	  <displayable-values>
 	    <value id="GTK_SELECTION_SINGLE" name="Single"></value>
 	    <value id="GTK_SELECTION_BROWSE" name="Browse"></value>
 	    <value id="GTK_SELECTION_MULTIPLE" name="Multiple"></value>
 	  </displayable-values>
 	</property>
-        <property id="icon_width" default="78" name="Icon Width">
+        <property id="icon-width" default="78" name="Icon Width">
           <tooltip>The width of each icon</tooltip>
           <spec>glade_standard_int_spec</spec>
-          <set-function>glade_gnome_icon_list_set_icon_width</set-function>
         </property>
-        <property id="row_spacing" default="4" name="Row Spacing">
+        <property id="row-spacing" default="4" name="Row Spacing">
           <tooltip>The number of pixels between rows of icons</tooltip>
           <spec>glade_standard_int_spec</spec>
-          <set-function>glade_gnome_icon_list_set_row_spacing</set-function>
         </property>
-        <property id="column_spacing" default="2" name="Column Spacing">
+        <property id="column-spacing" default="2" name="Column Spacing">
           <tooltip>The number of pixels between columns of icons</tooltip>
           <spec>glade_standard_int_spec</spec>
-          <set-function>glade_gnome_icon_list_set_column_spacing</set-function>
         </property>
-        <property id="text_spacing" default="2" name="Text Spacing">
+        <property id="text-spacing" default="2" name="Text Spacing">
           <tooltip>The number of pixels between the text and the icon</tooltip>
           <spec>glade_standard_int_spec</spec>
-          <set-function>glade_gnome_icon_list_set_text_spacing</set-function>
         </property>
-        <property id="text_editable" name="Text Editable">
+        <property id="text-editable" name="Text Editable">
           <tooltip>If the icon text can be edited by the user</tooltip>
           <spec>glade_standard_boolean_spec</spec>
         </property>
-        <property id="text_static" name="Text Static">
+        <property id="text-static" name="Text Static">
           <tooltip>If the icon text is static, in which case it will not be copied by the GnomeIconList</tooltip>
           <spec>glade_standard_boolean_spec</spec>
         </property>

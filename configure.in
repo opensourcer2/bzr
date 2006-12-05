@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.52)
-AC_INIT(glade3, 3.0.2,
+AC_INIT(glade3, 3.1.2,
 	http://bugzilla.gnome.org/enter_bug.cgi?product=glade3)
 AC_CANONICAL_SYSTEM
 
@@ -9,7 +9,7 @@ AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 AM_MAINTAINER_MODE
 AM_CONFIG_HEADER(config.h)
 
-AC_PROG_INTLTOOL([0.29])
+IT_PROG_INTLTOOL([0.35.0])
 AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)
 AC_PATH_PROG(DLLTOOL, dlltool)
 
@@ -41,7 +41,6 @@ dnl ================================================================
 GETTEXT_PACKAGE=AC_PACKAGE_NAME
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [Name of the gettext package.])
-ALL_LINGUAS="az da en_CA en_GB es fr ja ko ms nb nn pl pt pt_BR ru sk sv ta tr uk vi zh_CN"
 AM_GLIB_GNU_GETTEXT
 
 dnl ================================================================
@@ -52,7 +51,7 @@ GTK_DOC_CHECK(1.4)
 dnl ================================================================
 dnl Check for gtk+
 dnl ================================================================
-PKG_CHECK_MODULES(GTK, gtk+-2.0 >= 2.8.0  libxml-2.0 >= 2.4.0)
+PKG_CHECK_MODULES(GTK, gtk+-2.0 >= 2.10.0  libxml-2.0 >= 2.4.0)
 AC_SUBST(GTK_LIBS)
 AC_SUBST(GTK_CFLAGS)
 
@@ -74,6 +73,37 @@ fi
 
 AM_CONDITIONAL(BUILD_GNOME, test x"$have_gnome" = "xyes")
 
+dnl ===============================================================
+dnl Check for Python
+dnl ================================================================
+AC_ARG_ENABLE(python,
+[  --disable-python         disable python scripting module],
+     check_python=$enableval, check_python=yes)
+
+if test x"$check_python" = x"yes"; then
+    AC_PATH_PROGS([PYTHON], [python])
+    PYGTK_REQ_MAYOR=2
+    PYGTK_REQ_MINOR=10
+    PYGTK_REQ_MICRO=0
+    PKG_CHECK_MODULES(PYGTK, pygtk-2.0 >= $PYGTK_REQ_MAYOR.$PYGTK_REQ_MINOR.$PYGTK_REQ_MICRO, [have_pygtk=yes], [have_pygtk=no])
+    if test -f $PYTHON -a "$have_pygtk" = "yes"; then
+             PYTHON_CFLAGS="`$PYTHON -c "from distutils import sysconfig; getvar = sysconfig.get_config_var; flags = ['-I' + sysconfig.get_python_inc(), '-I' + sysconfig.get_python_inc(plat_specific=True)]; print ' '.join(flags)"` $PYGTK_CFLAGS"
+             PYTHON_LIBS="`$PYTHON -c "from distutils import sysconfig; pyver = sysconfig.get_config_var('VERSION'); getvar = sysconfig.get_config_var; libs = getvar('LIBS').split() + getvar('SYSLIBS').split(); libs.append('-lpython'+pyver); libs.insert(0, '-L' + getvar('LIBPL')); print ' '.join(libs)"` $PYGTK_LIBS"
+             AC_SUBST(PYTHON_CFLAGS)
+             AC_SUBST(PYTHON_LIBS)
+	     AC_DEFINE_UNQUOTED(PYGTK_REQ_MAYOR, $PYGTK_REQ_MAYOR, Pygtk mayor version required)
+	     AC_DEFINE_UNQUOTED(PYGTK_REQ_MINOR, $PYGTK_REQ_MINOR, Pygtk minor version required)
+	     AC_DEFINE_UNQUOTED(PYGTK_REQ_MICRO, $PYGTK_REQ_MICRO, Pygtk micro version required)
+             have_python=yes
+    else
+        have_python=no
+    fi
+else
+     have_python=no
+fi
+
+AM_CONDITIONAL(BUILD_PYTHON, test x"$have_python" = "xyes")
+
 dnl ================================================================
 dnl Check for windows
 dnl ================================================================
@@ -93,8 +123,10 @@ glade_datadir='${datadir}/${PACKAGE}'
 glade_libdir='${libdir}/${PACKAGE}'
 glade_catalogsdir='${glade_datadir}/catalogs'
 glade_pixmapsdir='${glade_datadir}/pixmaps'
+glade_scriptsdir='${glade_datadir}/scripts'
 glade_modulesdir='${glade_libdir}/modules'
 glade_pluginsdir='${glade_libdir}/plugins'
+glade_bindingsdir='${glade_libdir}/bindings'
 glade_icondir='${datadir}/pixmaps'
 glade_localedir='${prefix}/${DATADIRNAME}/locale'
 AC_SUBST(glade_version)
@@ -103,7 +135,9 @@ AC_SUBST(glade_libdir)
 AC_SUBST(glade_catalogsdir)
 AC_SUBST(glade_modulesdir)
 AC_SUBST(glade_pluginsdir)
+AC_SUBST(glade_bindingsdir)
 AC_SUBST(glade_pixmapsdir)
+AC_SUBST(glade_scriptsdir)
 AC_SUBST(glade_icondir)
 AC_SUBST(glade_localedir)
 
@@ -129,5 +163,5 @@ Configuration:
 	Source code location:	${srcdir}
 	Compiler:		${CC} 
 	GnomeUI Catalog:	${have_gnome}
-
+	Python Binding:		${have_python}
 "
