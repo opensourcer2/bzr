@@ -32,12 +32,22 @@ to the Glade core.
 
 @gladepalette: the object which received the signal.
 
-<!-- ##### ARG GladePalette:current-item-class ##### -->
+<!-- ##### ARG GladePalette:catalogs ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GladePalette:current-item ##### -->
 <para>
 
 </para>
 
 <!-- ##### ARG GladePalette:item-appearance ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GladePalette:show-selector-button ##### -->
 <para>
 
 </para>
@@ -53,10 +63,7 @@ to the Glade core.
 </para>
 
 @catalogs: 
-@item_appearance: 
 @Returns: 
-<!-- # Unused Parameters # -->
-@appearance: 
 
 
 <!-- ##### FUNCTION glade_palette_get_item_appearance ##### -->
@@ -77,21 +84,13 @@ to the Glade core.
 @appearance: 
 
 
-<!-- ##### FUNCTION glade_palette_get_current_item_class ##### -->
-<para>
-
-</para>
-
-@palette: 
-@Returns: 
-
-
 <!-- ##### FUNCTION glade_palette_deselect_current_item ##### -->
 <para>
 
 </para>
 
 @palette: 
+@sticky_aware: 
 
 
 <!-- ##### FUNCTION glade_palette_get_use_small_item_icons ##### -->

@@ -30,7 +30,7 @@ typedef struct _GladeProperty       GladeProperty;
 typedef struct _GladeProject        GladeProject;
 typedef enum   _GladeItemAppearance GladeItemAppearance;
 
-#include "glade-widget-class.h"
+#include "glade-widget-adaptor.h"
 #include "glade-widget.h"
 #include "glade-property-class.h"
 #include "glade-property.h"
@@ -52,6 +52,13 @@ typedef enum   _GladeItemAppearance GladeItemAppearance;
 #define GLADE_TAG_YES          "Yes"
 #define GLADE_TAG_NO           "No"
 #define GLADE_ENUM_DATA_TAG    "GladeEnumDataTag"
+
+#define GLADE_LARGE_ICON_SUBDIR "22x22"
+#define GLADE_LARGE_ICON_SIZE 22
+
+#define GLADE_SMALL_ICON_SUBDIR "16x16"
+#define GLADE_SMALL_ICON_SIZE 16
+
 
 #define GLADE_TAG_EVENT_HANDLER_CONNECTED "EventHandlerConnected"
 
@@ -79,6 +86,8 @@ typedef enum   _GladeItemAppearance GladeItemAppearance;
 #define GLADE_TAG_GLADE_WIDGET_GROUP              "glade-widget-group"
 #define GLADE_TAG_GLADE_WIDGET_CLASS_REF          "glade-widget-class-ref"
 
+#define GLADE_TAG_LANGUAGE                        "language"
+#define GLADE_TAG_ADAPTOR                         "adaptor"
 #define GLADE_TAG_LIBRARY                         "library"
 #define GLADE_TAG_DEPENDS                         "depends"
 #define GLADE_TAG_DOMAIN                          "domain"
@@ -96,15 +105,17 @@ typedef enum   _GladeItemAppearance GladeItemAppearance;
 #define GLADE_TAG_GET_CHILDREN_FUNCTION           "get-children-function"
 #define GLADE_TAG_CHILD_SET_PROP_FUNCTION         "child-set-property-function"
 #define GLADE_TAG_CHILD_GET_PROP_FUNCTION         "child-get-property-function"
+#define GLADE_TAG_CHILD_VERIFY_FUNCTION           "child-verify-function"
 #define GLADE_TAG_PROPERTIES                      "properties"
+#define GLADE_TAG_PACKING_PROPERTIES              "packing-properties"
 #define GLADE_TAG_PROPERTY                        "property"
 #define GLADE_TAG_TYPE                            "type"
 #define GLADE_TAG_SPEC                            "spec"
 #define GLADE_TAG_TOOLTIP                         "tooltip"
 #define GLADE_TAG_PARAMETERS                      "parameters"
 #define GLADE_TAG_PARAMETER                       "parameter"
-#define GLADE_TAG_SET_FUNCTION                    "set-function"
-#define GLADE_TAG_GET_FUNCTION                    "get-function"
+#define GLADE_TAG_SET_FUNCTION                    "set-property-function"
+#define GLADE_TAG_GET_FUNCTION                    "get-property-function"
 #define GLADE_TAG_VERIFY_FUNCTION                 "verify-function"
 #define GLADE_TAG_QUERY                           "query"
 #define GLADE_TAG_COMMON                          "common"
@@ -118,8 +129,6 @@ typedef enum   _GladeItemAppearance GladeItemAppearance;
 #define GLADE_TAG_ID                              "id"
 #define GLADE_TAG_KEY                             "key"
 #define GLADE_TAG_VALUE                           "value"
-#define GLADE_TAG_CHILD                           "child"
-#define GLADE_TAG_CHILDREN                        "children"
 #define GLADE_TAG_TRANSLATABLE                    "translatable"
 #define GLADE_TAG_PACKING_DEFAULTS                "packing-defaults"
 #define GLADE_TAG_PARENT_CLASS                    "parent-class"
@@ -138,6 +147,9 @@ typedef enum   _GladeItemAppearance GladeItemAppearance;
 #define GLADE_TAG_FIXED                           "fixed"
 #define GLADE_TAG_TRANSFER_ON_PASTE               "transfer-on-paste"
 #define GLADE_TAG_WEIGHT                          "weight"
+#define GLADE_TAG_ACTION_GROUP                    "action-group"
+#define GLADE_TAG_ACTION                          "action"
+#define GLADE_TAG_STOCK                           "stock"
 
 #define GLADE_NUMERICAL_STEP_INCREMENT             1
 #define GLADE_FLOATING_STEP_INCREMENT              0.01F
@@ -148,9 +160,11 @@ typedef enum   _GladeItemAppearance GladeItemAppearance;
 LIBGLADEUI_API gboolean glade_verbose;
 
 LIBGLADEUI_API gchar* glade_pixmaps_dir;
+LIBGLADEUI_API gchar* glade_scripts_dir;
 LIBGLADEUI_API gchar* glade_catalogs_dir;
 LIBGLADEUI_API gchar* glade_modules_dir;
 LIBGLADEUI_API gchar* glade_plugins_dir;
+LIBGLADEUI_API gchar* glade_bindings_dir;
 LIBGLADEUI_API gchar* glade_locale_dir;
 LIBGLADEUI_API gchar* glade_icon_dir;
 

@@ -7,7 +7,7 @@ include /usr/share/cdbs/1/rules/debhelper.mk
 include /usr/share/cdbs/1/rules/simple-patchsys.mk
 include /usr/share/gnome-pkg-tools/1/rules/uploaders.mk
 
-DEB_CONFIGURE_EXTRA_FLAGS := --enable-gtk-doc --enable-static
+DEB_CONFIGURE_EXTRA_FLAGS := --enable-static
 
 # ensures that libgladeui's shlibs are in place when calling dh_shlibdeps
 binary-glade-3:: binary-libgladeui-1-4

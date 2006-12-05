@@ -18,6 +18,8 @@
  *
  * Authors:
  *   Chema Celorio <chema@celorio.com>
+ *   Tristan Van Berkom <tvb@gnome.org>
+ *   Juan Pablo Ugarte <juanpablougarte@gmail.com>
  */
 
 #include <string.h>
@@ -242,34 +244,52 @@ empty (GObject *container, GladeCreateReason reason)
 
 /* ----------------------------- GtkWidget ------------------------------ */
 void GLADEGTK_API
-glade_gtk_widget_set_tooltip (GObject *object, GValue *value)
+glade_gtk_widget_set_property (GladeWidgetAdaptor *adaptor,
+			       GObject            *object, 
+			       const gchar        *id,
+			       const GValue       *value)
 {
-	GladeWidget   *glade_widget = glade_widget_get_from_gobject (GTK_WIDGET (object));
-	GladeProject  *project = (GladeProject *)glade_widget_get_project (glade_widget);
-	GtkTooltips   *tooltips = glade_project_get_tooltips (project);
-	const char    *tooltip;
-
-	/* TODO: handle GtkToolItems with gtk_tool_item_set_tooltip() */
-	tooltip = g_value_get_string (value);
-	if (tooltip && *tooltip)
-		gtk_tooltips_set_tip (tooltips, GTK_WIDGET (object), tooltip, NULL);
-	else
-		gtk_tooltips_set_tip (tooltips, GTK_WIDGET (object), NULL, NULL);
+	if (!strcmp (id, "tooltip"))
+	{
+		GladeWidget   *glade_widget = glade_widget_get_from_gobject (object);
+		GladeProject  *project      = glade_widget_get_project (glade_widget);
+		GtkTooltips   *tooltips     = glade_project_get_tooltips (project);
+		const gchar   *tooltip;
+		
+		/* TODO: handle GtkToolItems with gtk_tool_item_set_tooltip() */
+		tooltip = g_value_get_string (value);
+		if (tooltip && *tooltip)
+			gtk_tooltips_set_tip (tooltips, GTK_WIDGET (object), tooltip, NULL);
+		else
+			gtk_tooltips_set_tip (tooltips, GTK_WIDGET (object), NULL, NULL);
+	}
+	else 
+		GWA_GET_CLASS (G_TYPE_OBJECT)->set_property (adaptor, object, id, value);
 }
 
 void GLADEGTK_API
-glade_gtk_widget_get_tooltip (GObject *object, GValue *value)
+glade_gtk_widget_get_property (GladeWidgetAdaptor *adaptor,
+			       GObject            *object, 
+			       const gchar        *id,
+			       GValue             *value)
 {
-	GtkTooltipsData *tooltips_data = gtk_tooltips_data_get (GTK_WIDGET (object));
-	
-	g_value_reset (value);
-	g_value_set_string (value,
-			    tooltips_data ? tooltips_data->tip_text : NULL);
+	if (!strcmp (id, "tooltip"))
+	{
+		GtkTooltipsData *tooltips_data = gtk_tooltips_data_get (GTK_WIDGET (object));
+		
+		g_value_reset (value);
+		g_value_set_string (value,
+				    tooltips_data ? tooltips_data->tip_text : NULL);
+	}
+	else 
+		GWA_GET_CLASS (G_TYPE_OBJECT)->get_property (adaptor, object, id, value);
 }
 
 /* ----------------------------- GtkContainer ------------------------------ */
 void GLADEGTK_API
-glade_gtk_container_post_create (GObject *container, GladeCreateReason reason)
+glade_gtk_container_post_create (GladeWidgetAdaptor *adaptor,
+				 GObject            *container, 
+				 GladeCreateReason   reason)
 {
 	GList *children;
 	g_return_if_fail (GTK_IS_CONTAINER (container));
@@ -284,9 +304,10 @@ glade_gtk_container_post_create (GObject *container, GladeCreateReason reason)
 }
 
 void GLADEGTK_API
-glade_gtk_container_replace_child (GtkWidget *container,
-				   GtkWidget *current,
-				   GtkWidget *new)
+glade_gtk_container_replace_child (GladeWidgetAdaptor *adaptor,
+				   GtkWidget          *container,
+				   GtkWidget          *current,
+				   GtkWidget          *new)
 {
 	GParamSpec **param_spec;
 	GValue *value;
@@ -322,8 +343,9 @@ glade_gtk_container_replace_child (GtkWidget *container,
 }
 
 void GLADEGTK_API
-glade_gtk_container_add_child (GtkWidget *container,
-			       GtkWidget *child)
+glade_gtk_container_add_child (GladeWidgetAdaptor *adaptor,
+			       GtkWidget          *container,
+			       GtkWidget          *child)
 {
 	/* Get a placeholder out of the way before adding the child if its a GtkBin
 	 */
@@ -335,8 +357,9 @@ glade_gtk_container_add_child (GtkWidget *container,
 }
 
 void GLADEGTK_API
-glade_gtk_container_remove_child (GtkWidget *container,
-				  GtkWidget *child)
+glade_gtk_container_remove_child (GladeWidgetAdaptor *adaptor,
+				  GtkWidget          *container,
+				  GtkWidget          *child)
 {
 	gtk_container_remove (GTK_CONTAINER (container), child);
 
@@ -344,6 +367,38 @@ glade_gtk_container_remove_child (GtkWidget *container,
 	 */
 	if (gtk_container_get_children (GTK_CONTAINER (container)) == NULL)
 		gtk_container_add (GTK_CONTAINER (container), glade_placeholder_new ());
+}
+
+void GLADEGTK_API
+glade_gtk_container_set_child_property (GladeWidgetAdaptor *adaptor,
+					GObject            *container,
+					GObject            *child,
+					const gchar        *property_name,
+					const GValue       *value)
+{
+	gtk_container_child_set_property (GTK_CONTAINER (container),
+					  GTK_WIDGET (child),
+					  property_name, value);
+}
+
+void GLADEGTK_API
+glade_gtk_container_get_child_property (GladeWidgetAdaptor *adaptor,
+					GObject            *container,
+					GObject            *child,
+					const gchar        *property_name,
+					GValue             *value)
+{
+	gtk_container_child_get_property (GTK_CONTAINER (container),
+					  GTK_WIDGET (child),
+					  property_name, value);
+}
+
+
+GList * GLADEGTK_API
+glade_gtk_container_get_children (GladeWidgetAdaptor  *adaptor,
+				  GtkContainer        *container)
+{
+	return glade_util_container_get_all_children (container);
 }
 
 /* ----------------------------- GtkBox ------------------------------ */
@@ -549,7 +604,9 @@ glade_gtk_box_configure_end (GladeFixed  *fixed,
 }
 
 void GLADEGTK_API
-glade_gtk_box_post_create (GObject *container, GladeCreateReason reason)
+glade_gtk_box_post_create (GladeWidgetAdaptor *adaptor,
+			   GObject            *container, 
+			   GladeCreateReason   reason)
 {
 	GladeWidget    *gwidget =
 		glade_widget_get_from_gobject (container);
@@ -605,10 +662,11 @@ sort_box_children (GtkWidget *widget_a, GtkWidget *widget_b)
 }
 
 void GLADEGTK_API
-glade_gtk_box_set_child_property (GObject *container,
-				  GObject *child,
-				  const gchar *property_name,
-				  GValue *value)
+glade_gtk_box_set_child_property (GladeWidgetAdaptor *adaptor,
+				  GObject            *container,
+				  GObject            *child,
+				  const gchar        *property_name,
+				  GValue             *value)
 {
 	GladeWidget *gbox, *gchild, *gchild_iter;
 	GList       *children, *list;
@@ -640,8 +698,8 @@ glade_gtk_box_set_child_property (GObject *container,
 
 	if (is_position && recursion == FALSE)
 	{
-		children = glade_widget_class_container_get_children
-			(gbox->widget_class, container);
+		children = glade_widget_adaptor_get_children
+			(gbox->adaptor, container);
 
 		children = g_list_sort (children, (GCompareFunc)sort_box_children);
 
@@ -704,23 +762,33 @@ glade_gtk_box_set_child_property (GObject *container,
 
 	/* Chain Up */
 	if (is_position == FALSE)
-		gtk_container_child_set_property (GTK_CONTAINER (container),
-						  GTK_WIDGET (child),
-						  property_name,
-						  value);
-
+		GWA_GET_CLASS
+			(GTK_TYPE_CONTAINER)->child_set_property (adaptor, 
+								  container, 
+								  child,
+								  property_name, 
+								  value);
 
 	gtk_container_check_resize (GTK_CONTAINER (container));
 
 }
 
-void GLADEGTK_API
-glade_gtk_box_get_size (GObject *object, GValue *value)
-{
-	GtkBox *box = GTK_BOX (object);
 
-	g_value_reset (value);
-	g_value_set_int (value, g_list_length (box->children));
+void GLADEGTK_API
+glade_gtk_box_get_property (GladeWidgetAdaptor *adaptor,
+			    GObject            *object, 
+			    const gchar        *id,
+			    GValue             *value)
+{
+	if (!strcmp (id, "size"))
+	{
+		GtkBox *box = GTK_BOX (object);
+
+		g_value_reset (value);
+		g_value_set_int (value, g_list_length (box->children));
+	}
+	else 
+		GWA_GET_CLASS (GTK_TYPE_CONTAINER)->get_property (adaptor, object, id, value);
 }
 
 static gint
@@ -750,8 +818,8 @@ glade_gtk_box_get_first_blank (GtkBox *box)
 	return position;
 }
 
-void GLADEGTK_API
-glade_gtk_box_set_size (GObject *object, GValue *value)
+static void
+glade_gtk_box_set_size (GObject *object, const GValue *value)
 {
 	GtkBox      *box;
 	GList       *child;
@@ -801,8 +869,20 @@ glade_gtk_box_set_size (GObject *object, GValue *value)
 	}
 }
 
-gboolean GLADEGTK_API
-glade_gtk_box_verify_size (GObject *object, GValue *value)
+void GLADEGTK_API
+glade_gtk_box_set_property (GladeWidgetAdaptor *adaptor,
+			    GObject            *object, 
+			    const gchar        *id,
+			    const GValue       *value)
+{
+	if (!strcmp (id, "size"))
+		glade_gtk_box_set_size (object, value);
+	else 
+		GWA_GET_CLASS (GTK_TYPE_CONTAINER)->set_property (adaptor, object, id, value);
+}
+
+static gboolean
+glade_gtk_box_verify_size (GObject *object, const GValue *value)
 {
 	GtkBox *box = GTK_BOX(object);
 	GList  *child;
@@ -821,8 +901,26 @@ glade_gtk_box_verify_size (GObject *object, GValue *value)
 	return new_size >= 0;
 }
 
+
+gboolean GLADEGTK_API
+glade_gtk_box_verify_property (GladeWidgetAdaptor *adaptor,
+			       GObject            *object, 
+			       const gchar        *id,
+			       const GValue       *value)
+{
+	if (!strcmp (id, "size"))
+		return glade_gtk_box_verify_size (object, value);
+	else if (GWA_GET_CLASS (GTK_TYPE_CONTAINER)->verify_property)
+		return GWA_GET_CLASS (GTK_TYPE_CONTAINER)->verify_property (adaptor, object, 
+									    id, value);
+
+	return TRUE;
+}
+
 void GLADEGTK_API
-glade_gtk_box_add_child (GObject *object, GObject *child)
+glade_gtk_box_add_child (GladeWidgetAdaptor *adaptor,
+			 GObject            *object,
+			 GObject            *child)
 {
 	GladeWidget  *gbox, *gchild;
 	GladeProject *project;
@@ -867,33 +965,39 @@ glade_gtk_box_add_child (GObject *object, GObject *child)
 		glade_widget_pack_property_set (gchild, "position", num_children - 1);
 }
 
-void GLADEGTK_API
-glade_gtk_box_get_internal_child (GObject *object, 
-				  const gchar *name,
-				  GObject **child)
+GObject * GLADEGTK_API
+glade_gtk_box_get_internal_child (GladeWidgetAdaptor *adaptor,
+				  GObject            *object, 
+				  const gchar        *name)
 {
-	GList *children, *l;
-	
-	g_return_if_fail (GTK_IS_BOX (object));
+	GList   *children, *l;
+	GObject *child = NULL;	
+
+	g_return_val_if_fail (GTK_IS_BOX (object), NULL);
 	
 	children = l = gtk_container_get_children (GTK_CONTAINER (object));
-	*child = NULL;
 	
 	while (l)
 	{
 		GladeWidget *gw = glade_widget_get_from_gobject (l->data);
 		
 		if (gw && gw->internal && strcmp (gw->internal, name) == 0)
-			*child = G_OBJECT (l->data);
+		{
+			child = G_OBJECT (l->data);
+			break;
+		}
 		
 		l= l->next;
 	}
-	
 	g_list_free (children);
+
+	return child;
 }
 
 void GLADEGTK_API
-glade_gtk_box_remove_child (GObject *object, GObject *child)
+glade_gtk_box_remove_child (GladeWidgetAdaptor *adaptor,
+			    GObject            *object, 
+			    GObject            *child)
 {
 	GladeWidget *gbox;
 	gint size;
@@ -1328,7 +1432,9 @@ glade_gtk_table_configure_end (GladeFixed  *fixed,
 }
 
 void GLADEGTK_API
-glade_gtk_table_post_create (GObject *container, GladeCreateReason reason)
+glade_gtk_table_post_create (GladeWidgetAdaptor *adaptor,
+			     GObject            *container, 
+			     GladeCreateReason   reason)
 {
 	GladeWidget    *gwidget =
 		glade_widget_get_from_gobject (container);
@@ -1410,7 +1516,9 @@ glade_gtk_table_refresh_placeholders (GtkTable *table)
 
 
 void GLADEGTK_API
-glade_gtk_table_add_child (GObject *object, GObject *child)
+glade_gtk_table_add_child (GladeWidgetAdaptor *adaptor,
+			   GObject            *object, 
+			   GObject            *child)
 {
 	g_return_if_fail (GTK_IS_TABLE (object));
 	g_return_if_fail (GTK_IS_WIDGET (child));
@@ -1421,7 +1529,9 @@ glade_gtk_table_add_child (GObject *object, GObject *child)
 }
 
 void GLADEGTK_API
-glade_gtk_table_remove_child (GObject *object, GObject *child)
+glade_gtk_table_remove_child (GladeWidgetAdaptor *adaptor,
+			      GObject            *object, 
+			      GObject            *child)
 {
 	g_return_if_fail (GTK_IS_TABLE (object));
 	g_return_if_fail (GTK_IS_WIDGET (child));
@@ -1432,17 +1542,22 @@ glade_gtk_table_remove_child (GObject *object, GObject *child)
 }
 
 void GLADEGTK_API
-glade_gtk_table_replace_child (GtkWidget *container,
-			       GtkWidget *current,
-			       GtkWidget *new)
+glade_gtk_table_replace_child (GladeWidgetAdaptor *adaptor,
+			       GtkWidget          *container,
+			       GtkWidget          *current,
+			       GtkWidget          *new)
 {
 	g_return_if_fail (GTK_IS_TABLE (container));
 	g_return_if_fail (GTK_IS_WIDGET (current));
 	g_return_if_fail (GTK_IS_WIDGET (new));
 	
 	/* Chain Up */
-	glade_gtk_container_replace_child (container, current, new);
-
+	GWA_GET_CLASS
+		(GTK_TYPE_CONTAINER)->replace_child (adaptor, 
+						     G_OBJECT (container), 
+						     G_OBJECT (current), 
+						     G_OBJECT (new));
+	
 	/* If we are replacing a GladeWidget, we must refresh placeholders
 	 * because the widget may have spanned multiple rows/columns, we must
 	 * not do so in the case we are pasting multiple widgets into a table,
@@ -1456,7 +1571,7 @@ glade_gtk_table_replace_child (GtkWidget *container,
 }
 
 static void
-glade_gtk_table_set_n_common (GObject *object, GValue *value, gboolean for_rows)
+glade_gtk_table_set_n_common (GObject *object, const GValue *value, gboolean for_rows)
 {
 	GladeWidget *widget;
 	GtkTable    *table;
@@ -1538,19 +1653,22 @@ glade_gtk_table_set_n_common (GObject *object, GValue *value, gboolean for_rows)
 }
 
 void GLADEGTK_API
-glade_gtk_table_set_n_rows (GObject *object, GValue *value)
+glade_gtk_table_set_property (GladeWidgetAdaptor *adaptor,
+			      GObject            *object, 
+			      const gchar        *id,
+			      const GValue       *value)
 {
-	glade_gtk_table_set_n_common (object, value, TRUE);
-}
-
-void GLADEGTK_API
-glade_gtk_table_set_n_columns (GObject *object, GValue *value)
-{
-	glade_gtk_table_set_n_common (object, value, FALSE);
+	if (!strcmp (id, "n-rows"))
+		glade_gtk_table_set_n_common (object, value, TRUE);
+	else if (!strcmp (id, "n-columns"))
+		glade_gtk_table_set_n_common (object, value, FALSE);
+	else
+		GWA_GET_CLASS (GTK_TYPE_CONTAINER)->set_property (adaptor, object,
+								  id, value);
 }
 
 static gboolean 
-glade_gtk_table_verify_n_common (GObject *object, GValue *value, gboolean for_rows)
+glade_gtk_table_verify_n_common (GObject *object, const GValue *value, gboolean for_rows)
 {
 	GtkTable *table = GTK_TABLE(object);
 	guint new_size = g_value_get_uint (value);
@@ -1566,32 +1684,38 @@ glade_gtk_table_verify_n_common (GObject *object, GValue *value, gboolean for_ro
 }
 
 gboolean GLADEGTK_API
-glade_gtk_table_verify_n_rows (GObject *object, GValue *value)
+glade_gtk_table_verify_property (GladeWidgetAdaptor *adaptor,
+				 GObject            *object, 
+				 const gchar        *id,
+				 const GValue       *value)
 {
-	return glade_gtk_table_verify_n_common (object, value, TRUE);
-}
+	if (!strcmp (id, "n-rows"))
+		return glade_gtk_table_verify_n_common (object, value, TRUE);
+	else if (!strcmp (id, "n-columns"))
+		return glade_gtk_table_verify_n_common (object, value, FALSE);
+	else if (GWA_GET_CLASS (GTK_TYPE_CONTAINER)->verify_property)
+		GWA_GET_CLASS (GTK_TYPE_CONTAINER)->verify_property (adaptor, object,
+								     id, value);
 
-gboolean GLADEGTK_API
-glade_gtk_table_verify_n_columns (GObject *object, GValue *value)
-{
-	return glade_gtk_table_verify_n_common (object, value, FALSE);
+	return TRUE;
 }
 
 void GLADEGTK_API
-glade_gtk_table_set_child_property (GObject *container,
-				    GObject *child,
-				    const gchar *property_name,
-				    GValue *value)
+glade_gtk_table_set_child_property (GladeWidgetAdaptor *adaptor,
+				    GObject            *container,
+				    GObject            *child,
+				    const gchar        *property_name,
+				    GValue             *value)
 {
 	g_return_if_fail (GTK_IS_TABLE (container));
 	g_return_if_fail (GTK_IS_WIDGET (child));
 	g_return_if_fail (property_name != NULL && value != NULL);
 
-	gtk_container_child_set_property (GTK_CONTAINER (container),
-					  GTK_WIDGET (child),
-					  property_name,
-					  value);
-
+	GWA_GET_CLASS
+		(GTK_TYPE_CONTAINER)->child_set_property (adaptor, 
+							  container, child,
+							  property_name, value);
+	
 	if (strcmp (property_name, "bottom-attach") == 0 ||
 	    strcmp (property_name, "left-attach") == 0 ||
 	    strcmp (property_name, "right-attach") == 0 ||
@@ -1665,46 +1789,48 @@ glade_gtk_table_verify_right_bottom_attach (GObject *object,
 }
 
 gboolean GLADEGTK_API
-glade_gtk_table_verify_left_attach (GObject *object, GValue *value)
+glade_gtk_table_child_verify_property (GladeWidgetAdaptor *adaptor,
+				       GObject            *container,
+				       GObject            *child,
+				       const gchar        *id,
+				       GValue             *value)
 {
-	return glade_gtk_table_verify_left_top_attach (object, 
-						       value,
-						       "right-attach",
-						       "n-columns");
-}
+	if (!strcmp (id, "left-attach"))
+		return glade_gtk_table_verify_left_top_attach (child, 
+							       value,
+							       "right-attach",
+							       "n-columns");
+	else if (!strcmp (id, "right-attach"))
+		return glade_gtk_table_verify_right_bottom_attach (child,
+								   value,
+								   "left-attach",
+								   "n-columns");
+	else if (!strcmp (id, "top-attach"))
+		return glade_gtk_table_verify_left_top_attach (child, 
+							       value,
+							       "bottom-attach",
+							       "n-rows");
+	else if (!strcmp (id, "bottom-attach"))
+		return glade_gtk_table_verify_right_bottom_attach (child,
+								   value,
+								   "top-attach",
+								   "n-rows");
+	else if (GWA_GET_CLASS (GTK_TYPE_CONTAINER)->child_verify_property)
+		GWA_GET_CLASS
+			(GTK_TYPE_CONTAINER)->child_verify_property (adaptor, 
+								     container, child,
+								     id, value);
 
-gboolean GLADEGTK_API
-glade_gtk_table_verify_right_attach (GObject *object, GValue *value)
-{
-	return glade_gtk_table_verify_right_bottom_attach (object,
-							   value,
-							   "left-attach",
-							   "n-columns");
-}
-
-gboolean GLADEGTK_API
-glade_gtk_table_verify_top_attach (GObject *object, GValue *value)
-{
-	return glade_gtk_table_verify_left_top_attach (object, 
-						       value,
-						       "bottom-attach",
-						       "n-rows");
-}
-
-gboolean GLADEGTK_API
-glade_gtk_table_verify_bottom_attach (GObject *object, GValue *value)
-{
-	return glade_gtk_table_verify_right_bottom_attach (object,
-							   value,
-							   "top-attach",
-							   "n-rows");
+	return TRUE;
 }
 
 /* ----------------------------- GtkFrame ------------------------------ */
 void GLADEGTK_API
-glade_gtk_frame_post_create (GObject *frame, GladeCreateReason reason)
+glade_gtk_frame_post_create (GladeWidgetAdaptor *adaptor,
+			     GObject            *frame, 
+			     GladeCreateReason   reason)
 {
-	static GladeWidgetClass *label_class = NULL, *alignment_class = NULL;
+	static GladeWidgetAdaptor *label_adaptor = NULL, *alignment_adaptor = NULL;
 	GladeWidget *gframe, *glabel, *galignment;
 	GtkWidget *label;
 	gchar     *label_text;
@@ -1722,13 +1848,13 @@ glade_gtk_frame_post_create (GObject *frame, GladeCreateReason reason)
 	    (GTK_IS_ASPECT_FRAME (frame) == FALSE))
 	{
 
-		if (label_class == NULL)
-			label_class = glade_widget_class_get_by_type (GTK_TYPE_LABEL);
-		if (alignment_class == NULL)
-			alignment_class = glade_widget_class_get_by_type (GTK_TYPE_ALIGNMENT);
+		if (label_adaptor == NULL)
+			label_adaptor = glade_widget_adaptor_get_by_type (GTK_TYPE_LABEL);
+		if (alignment_adaptor == NULL)
+			alignment_adaptor = glade_widget_adaptor_get_by_type (GTK_TYPE_ALIGNMENT);
 
 		/* add label (as an internal child) */
-		glabel = glade_widget_class_create_widget (label_class, FALSE,
+		glabel = glade_widget_adaptor_create_widget (label_adaptor, FALSE,
 							   "parent", gframe, 
 							   "project", glade_widget_get_project (gframe), 
 							   NULL);
@@ -1744,7 +1870,7 @@ glade_gtk_frame_post_create (GObject *frame, GladeCreateReason reason)
 		g_free (label_text);
 
 		/* add alignment */
-		galignment = glade_widget_class_create_widget (alignment_class, FALSE,
+		galignment = glade_widget_adaptor_create_widget (alignment_adaptor, FALSE,
 						 	       "parent", gframe, 
 						               "project", glade_widget_get_project (gframe), 
 					                       NULL);
@@ -1754,13 +1880,15 @@ glade_gtk_frame_post_create (GObject *frame, GladeCreateReason reason)
 		gtk_widget_show (GTK_WIDGET (galignment->object));
 	}
 
-	glade_gtk_container_post_create (frame, reason);
+	/* Chain Up */
+	GWA_GET_CLASS (GTK_TYPE_CONTAINER)->post_create (adaptor, frame, reason);
 }
 
 void GLADEGTK_API
-glade_gtk_frame_replace_child (GtkWidget *container,
-			       GtkWidget *current,
-			       GtkWidget *new)
+glade_gtk_frame_replace_child (GladeWidgetAdaptor *adaptor,
+			       GtkWidget          *container,
+			       GtkWidget          *current,
+			       GtkWidget          *new)
 {
 	gchar *special_child_type;
 
@@ -1774,11 +1902,18 @@ glade_gtk_frame_replace_child (GtkWidget *container,
 		return;
 	}
 
-	glade_gtk_container_replace_child (container, current, new);
+	/* Chain Up */
+	GWA_GET_CLASS
+		(GTK_TYPE_CONTAINER)->replace_child (adaptor, 
+						     G_OBJECT (container), 
+						     G_OBJECT (current),
+						     G_OBJECT (new));
 }
 
 void GLADEGTK_API
-glade_gtk_frame_add_child (GObject *object, GObject *child)
+glade_gtk_frame_add_child (GladeWidgetAdaptor *adaptor,
+			   GObject            *object, 
+			   GObject            *child)
 {
 	gchar *special_child_type;
 
@@ -2070,7 +2205,9 @@ glade_gtk_notebook_switch_page (GtkNotebook     *notebook,
 
 
 void GLADEGTK_API
-glade_gtk_notebook_post_create (GObject *notebook, GladeCreateReason reason)
+glade_gtk_notebook_post_create (GladeWidgetAdaptor *adaptor,
+				GObject            *notebook, 
+				GladeCreateReason   reason)
 {
 	gtk_notebook_popup_disable (GTK_NOTEBOOK (notebook));
 
@@ -2101,8 +2238,8 @@ glade_gtk_notebook_get_first_blank_page (GtkNotebook *notebook)
 	return position;
 }
 
-void GLADEGTK_API
-glade_gtk_notebook_set_n_pages (GObject *object, GValue *value)
+static void
+glade_gtk_notebook_set_n_pages (GObject *object, const GValue *value)
 {
 	GladeWidget *widget;
 	GtkNotebook *notebook;
@@ -2160,8 +2297,21 @@ glade_gtk_notebook_set_n_pages (GObject *object, GValue *value)
 	}
 }
 
-gboolean GLADEGTK_API
-glade_gtk_notebook_verify_n_pages (GObject *object, GValue *value)
+void GLADEGTK_API
+glade_gtk_notebook_set_property (GladeWidgetAdaptor *adaptor,
+				 GObject            *object, 
+				 const gchar        *id,
+				 const GValue       *value)
+{
+	if (!strcmp (id, "pages"))
+		glade_gtk_notebook_set_n_pages (object, value);
+	else
+		GWA_GET_CLASS (GTK_TYPE_CONTAINER)->set_property (adaptor, object,
+								  id, value);
+}
+
+static gboolean
+glade_gtk_notebook_verify_n_pages (GObject *object, const GValue *value)
 {
 	GtkNotebook *notebook = GTK_NOTEBOOK(object);
 	GtkWidget *child_widget, *tab_widget;
@@ -2184,8 +2334,25 @@ glade_gtk_notebook_verify_n_pages (GObject *object, GValue *value)
 	return TRUE;
 }
 
+gboolean GLADEGTK_API
+glade_gtk_notebook_verify_property (GladeWidgetAdaptor *adaptor,
+				    GObject            *object, 
+				    const gchar        *id,
+				    const GValue       *value)
+{
+	if (!strcmp (id, "pages"))
+		return glade_gtk_notebook_verify_n_pages (object, value);
+	else if (GWA_GET_CLASS (GTK_TYPE_CONTAINER)->verify_property)
+		GWA_GET_CLASS (GTK_TYPE_CONTAINER)->verify_property (adaptor, object,
+								     id, value);
+
+	return TRUE;
+}
+
 void GLADEGTK_API 
-glade_gtk_notebook_add_child (GObject *object, GObject *child)
+glade_gtk_notebook_add_child (GladeWidgetAdaptor *adaptor,
+			      GObject            *object, 
+			      GObject            *child)
 {
 	GtkNotebook 	*notebook;
 	gint             num_page, position = 0;
@@ -2282,7 +2449,9 @@ glade_gtk_notebook_add_child (GObject *object, GObject *child)
 }
 
 void GLADEGTK_API
-glade_gtk_notebook_remove_child (GObject *object, GObject *child)
+glade_gtk_notebook_remove_child (GladeWidgetAdaptor *adaptor,
+				 GObject            *object, 
+				 GObject            *child)
 {
 	NotebookChildren *nchildren;
 
@@ -2318,9 +2487,10 @@ glade_gtk_notebook_remove_child (GObject *object, GObject *child)
 }
 
 void GLADEGTK_API
-glade_gtk_notebook_replace_child (GtkWidget *container,
-				  GtkWidget *current,
-				  GtkWidget *new)
+glade_gtk_notebook_replace_child (GladeWidgetAdaptor *adaptor,
+				  GtkWidget          *container,
+				  GtkWidget          *current,
+				  GtkWidget          *new)
 {
 	GtkNotebook *notebook;
 	GladeWidget *gcurrent, *gnew;
@@ -2344,13 +2514,17 @@ glade_gtk_notebook_replace_child (GtkWidget *container,
 	if (g_object_get_data (G_OBJECT (current), "special-child-type"))
 		g_object_set_data (G_OBJECT (new), "special-child-type", "tab");
 
-	glade_gtk_notebook_remove_child (G_OBJECT (container), G_OBJECT (current));
+	glade_gtk_notebook_remove_child (adaptor, 
+					 G_OBJECT (container), 
+					 G_OBJECT (current));
 
 	if (GLADE_IS_PLACEHOLDER (new) == FALSE)
 	{
 		gnew = glade_widget_get_from_gobject (new);
 
-		glade_gtk_notebook_add_child (G_OBJECT (container), G_OBJECT (new));
+		glade_gtk_notebook_add_child (adaptor, 
+					      G_OBJECT (container), 
+					      G_OBJECT (new));
 		
 		if (glade_widget_pack_property_set (gnew, "position", position) == FALSE)
 			g_critical ("No position property found on new widget");
@@ -2360,26 +2534,31 @@ glade_gtk_notebook_replace_child (GtkWidget *container,
 }	
 
 gboolean GLADEGTK_API
-glade_gtk_notebook_verify_position (GObject *object, GValue *value)
+glade_gtk_notebook_child_verify_property (GladeWidgetAdaptor *adaptor,
+					  GObject            *container,
+					  GObject            *child,
+					  const gchar        *id,
+					  GValue             *value)
 {
-	GtkWidget   *child    = GTK_WIDGET (object);
-	GtkNotebook *notebook = child->parent ? GTK_NOTEBOOK (child->parent) : NULL;
-
-	if (notebook)
+	if (!strcmp (id, "position"))
 		return g_value_get_int (value) >= 0 &&
-			g_value_get_int (value) < gtk_notebook_get_n_pages (notebook);
-	else
-	{
-		g_print ("No notebook!\n");
-		return TRUE;
-	}
+			g_value_get_int (value) < 
+			gtk_notebook_get_n_pages (GTK_NOTEBOOK (container));
+	else if (GWA_GET_CLASS (GTK_TYPE_CONTAINER)->child_verify_property)
+		GWA_GET_CLASS
+			(GTK_TYPE_CONTAINER)->child_verify_property (adaptor, 
+								     container, child,
+								     id, value);
+
+	return TRUE;
 }
 
 void GLADEGTK_API
-glade_gtk_notebook_set_child_property (GObject *container,
-				       GObject *child,
-				       const gchar *property_name,
-				       const GValue *value)
+glade_gtk_notebook_set_child_property (GladeWidgetAdaptor *adaptor,
+				       GObject            *container,
+				       GObject            *child,
+				       const gchar        *property_name,
+				       const GValue       *value)
 {
 	NotebookChildren *nchildren;
 
@@ -2396,17 +2575,18 @@ glade_gtk_notebook_set_child_property (GObject *container,
 	}
 	/* packing properties are unsupported on tabs ... except "position" */
 	else if (g_object_get_data (child, "special-child-type") == NULL)
-		gtk_container_child_set_property (GTK_CONTAINER (container),
-						  GTK_WIDGET (child),
-						  property_name,
-						  value);
+		GWA_GET_CLASS
+			(GTK_TYPE_CONTAINER)->child_set_property (adaptor, 
+								  container, child,
+								  property_name, value);
 }
 
 void GLADEGTK_API
-glade_gtk_notebook_get_child_property (GObject *container,
-				       GObject *child,
-				       const gchar *property_name,
-				       GValue *value)
+glade_gtk_notebook_get_child_property (GladeWidgetAdaptor *adaptor,
+				       GObject            *container,
+				       GObject            *child,
+				       const gchar        *property_name,
+				       GValue             *value)
 {
 	gint position;
 	
@@ -2438,7 +2618,9 @@ glade_gtk_notebook_get_child_property (GObject *container,
 
 /* ----------------------------- GtkPaned ------------------------------ */
 void GLADEGTK_API
-glade_gtk_paned_post_create (GObject *paned, GladeCreateReason reason)
+glade_gtk_paned_post_create (GladeWidgetAdaptor *adaptor,
+			     GObject            *paned, 
+			     GladeCreateReason   reason)
 {
 	g_return_if_fail (GTK_IS_PANED (paned));
 
@@ -2450,7 +2632,9 @@ glade_gtk_paned_post_create (GObject *paned, GladeCreateReason reason)
 }
 
 void GLADEGTK_API 
-glade_gtk_paned_add_child (GObject *object, GObject *child)
+glade_gtk_paned_add_child (GladeWidgetAdaptor *adaptor,
+			   GObject            *object, 
+			   GObject            *child)
 {
 	GtkPaned *paned;
 	GtkWidget *child1, *child2;
@@ -2500,18 +2684,21 @@ glade_gtk_paned_add_child (GObject *object, GObject *child)
 }
 
 void GLADEGTK_API 
-glade_gtk_paned_remove_child (GObject *object, GObject *child)
+glade_gtk_paned_remove_child (GladeWidgetAdaptor *adaptor,
+			      GObject            *object,
+			      GObject            *child)
 {
 	gtk_container_remove (GTK_CONTAINER (object), GTK_WIDGET (child));
 
-	glade_gtk_paned_post_create (object, GLADE_CREATE_USER);
+	glade_gtk_paned_post_create (adaptor, object, GLADE_CREATE_USER);
 }
 
 void GLADEGTK_API
-glade_gtk_paned_set_child_property (GObject *container,
-				    GObject *child,
-				    const gchar *property_name,
-				    const GValue *value)
+glade_gtk_paned_set_child_property (GladeWidgetAdaptor *adaptor,
+				    GObject            *container,
+				    GObject            *child,
+				    const gchar        *property_name,
+				    const GValue       *value)
 {
 	if (strcmp (property_name, "first") == 0)
 	{
@@ -2541,36 +2728,43 @@ glade_gtk_paned_set_child_property (GObject *container,
 			gtk_paned_add2 (paned, glade_placeholder_new ());
 	}
 	else
-		gtk_container_child_set_property (GTK_CONTAINER (container),
-						  GTK_WIDGET (child),
-						  property_name, value);
+		/* Chain Up */
+		GWA_GET_CLASS
+			(GTK_TYPE_CONTAINER)->child_set_property (adaptor, 
+								  container, child,
+								  property_name, value);
 }
 
 void GLADEGTK_API
-glade_gtk_paned_get_child_property (GObject *container,
-				    GObject *child,
-				    const gchar *property_name,
-				    GValue *value)
+glade_gtk_paned_get_child_property (GladeWidgetAdaptor *adaptor,
+				    GObject            *container,
+				    GObject            *child,
+				    const gchar        *property_name,
+				    GValue             *value)
 {
 	if (strcmp (property_name, "first") == 0)
 		g_value_set_boolean (value, GTK_WIDGET (child) ==
 				     gtk_paned_get_child1 (GTK_PANED (container)));
 	else
-		gtk_container_child_get_property (GTK_CONTAINER (container),
-						  GTK_WIDGET (child),
-						  property_name, value);
+		/* Chain Up */
+		GWA_GET_CLASS
+			(GTK_TYPE_CONTAINER)->child_get_property (adaptor, 
+								  container, child,
+								  property_name, value);
 }
 
 /* ----------------------------- GtkExpander ------------------------------ */
 void GLADEGTK_API
-glade_gtk_expander_post_create (GObject *expander, GladeCreateReason reason)
+glade_gtk_expander_post_create (GladeWidgetAdaptor *adaptor,
+				GObject            *expander, 
+				GladeCreateReason   reason)
 {
-	static GladeWidgetClass *wclass = NULL;
+	static GladeWidgetAdaptor *wadaptor = NULL;
 	GladeWidget *gexpander, *glabel;
 	GtkWidget *label;
 	
-	if (wclass == NULL)
-		wclass = glade_widget_class_get_by_type (GTK_TYPE_LABEL);
+	if (wadaptor == NULL)
+		wadaptor = glade_widget_adaptor_get_by_type (GTK_TYPE_LABEL);
 	
 	if (reason != GLADE_CREATE_USER) return;
 	
@@ -2582,7 +2776,7 @@ glade_gtk_expander_post_create (GObject *expander, GladeCreateReason reason)
 	if ((label = gtk_expander_get_label_widget (GTK_EXPANDER (expander))) == NULL ||
 	    (glade_widget_get_from_gobject (label) == NULL))
 	{
-		glabel = glade_widget_class_create_widget (wclass, FALSE,
+		glabel = glade_widget_adaptor_create_widget (wadaptor, FALSE,
 							   "parent", gexpander, 
 							   "project", glade_widget_get_project (gexpander), 
 							   NULL);
@@ -2603,9 +2797,10 @@ glade_gtk_expander_post_create (GObject *expander, GladeCreateReason reason)
 }
 
 void GLADEGTK_API
-glade_gtk_expander_replace_child (GtkWidget *container,
-				  GtkWidget *current,
-				  GtkWidget *new)
+glade_gtk_expander_replace_child (GladeWidgetAdaptor *adaptor,
+				  GtkWidget          *container,
+				  GtkWidget          *current,
+				  GtkWidget          *new)
 {
 	gchar *special_child_type;
 
@@ -2619,12 +2814,19 @@ glade_gtk_expander_replace_child (GtkWidget *container,
 		return;
 	}
 
-	glade_gtk_container_replace_child (container, current, new);
+	/* Chain Up */
+	GWA_GET_CLASS
+		(GTK_TYPE_CONTAINER)->replace_child (adaptor, 
+						     G_OBJECT (container), 
+						     G_OBJECT (current),
+						     G_OBJECT (new));
 }
 
 
 void GLADEGTK_API
-glade_gtk_expander_add_child (GObject *object, GObject *child)
+glade_gtk_expander_add_child (GladeWidgetAdaptor *adaptor,
+			      GObject            *object, 
+			      GObject            *child)
 {
 	gchar *special_child_type;
 
@@ -2636,14 +2838,14 @@ glade_gtk_expander_add_child (GObject *object, GObject *child)
 					       GTK_WIDGET (child));
 	}
 	else
-	{
-		glade_gtk_container_add_child (GTK_WIDGET (object), 
-					       GTK_WIDGET (child));
-	}
+		/* Chain Up */
+		GWA_GET_CLASS (GTK_TYPE_CONTAINER)->add (adaptor, object, child); 
 }
 
 void GLADEGTK_API
-glade_gtk_expander_remove_child (GObject *object, GObject *child)
+glade_gtk_expander_remove_child (GladeWidgetAdaptor *adaptor,
+				 GObject            *object, 
+				 GObject            *child)
 {
 	gchar *special_child_type;
 
@@ -2680,7 +2882,9 @@ glade_gtk_entry_changed (GtkEditable *editable, GladeWidget *gentry)
 }
 
 void GLADEGTK_API
-glade_gtk_entry_post_create (GObject *object, GladeCreateReason reason)
+glade_gtk_entry_post_create (GladeWidgetAdaptor *adaptor,
+			     GObject            *object,
+			     GladeCreateReason   reason)
 {
 	GladeWidget *gentry;
 	
@@ -2718,7 +2922,9 @@ glade_gtk_fixed_layout_realize (GtkWidget *widget)
 }
 
 void GLADEGTK_API
-glade_gtk_fixed_layout_post_create (GObject *object, GladeCreateReason reason)
+glade_gtk_fixed_layout_post_create (GladeWidgetAdaptor *adaptor,
+				    GObject            *object, 
+				    GladeCreateReason   reason)
 {
 	/* This is needed at least to set a backing pixmap. */
 	GTK_WIDGET_UNSET_FLAGS(object, GTK_NO_WINDOW);
@@ -2729,24 +2935,49 @@ glade_gtk_fixed_layout_post_create (GObject *object, GladeCreateReason reason)
 			       G_CALLBACK(glade_gtk_fixed_layout_realize), NULL);
 }
 
+void GLADEGTK_API
+glade_gtk_fixed_layout_add_child (GladeWidgetAdaptor  *adaptor,
+				  GObject             *object, 
+				  GObject             *child)
+{
+	g_return_if_fail (GTK_IS_CONTAINER (object));
+	g_return_if_fail (GTK_IS_WIDGET (child));
+
+	gtk_container_add (GTK_CONTAINER (object), GTK_WIDGET (child));
+}
+
+void GLADEGTK_API
+glade_gtk_fixed_layout_remove_child (GladeWidgetAdaptor  *adaptor,
+				     GObject             *object, 
+				     GObject             *child)
+{
+	g_return_if_fail (GTK_IS_CONTAINER (object));
+	g_return_if_fail (GTK_IS_WIDGET (child));
+
+	gtk_container_add (GTK_CONTAINER (object), GTK_WIDGET (child));
+}
 
 /* ----------------------------- GtkWindow ------------------------------ */
 void GLADEGTK_API
-glade_gtk_window_post_create (GObject *object, GladeCreateReason reason)
+glade_gtk_window_post_create (GladeWidgetAdaptor *adaptor,
+			      GObject            *object,
+			      GladeCreateReason   reason)
 {
 	GtkWindow *window = GTK_WINDOW (object);
 
 	g_return_if_fail (GTK_IS_WINDOW (window));
 
 	/* Chain her up first */
-	glade_gtk_container_post_create (object, reason);
+	GWA_GET_CLASS (GTK_TYPE_CONTAINER)->post_create (adaptor, object, reason);
 
 	gtk_window_set_default_size (window, 440, 250);
 }
 
 /* ----------------------------- GtkDialog(s) ------------------------------ */
 void GLADEGTK_API
-glade_gtk_dialog_post_create (GObject *object, GladeCreateReason reason)
+glade_gtk_dialog_post_create (GladeWidgetAdaptor *adaptor,
+			      GObject            *object, 
+			      GladeCreateReason   reason)
 {
 	GtkDialog    *dialog = GTK_DIALOG (object);
 	GladeWidget  *widget;
@@ -2769,40 +3000,40 @@ glade_gtk_dialog_post_create (GObject *object, GladeCreateReason reason)
 
 	if (GTK_IS_INPUT_DIALOG (object))
 	{
-		save_button = glade_widget_class_create_internal
+		save_button = glade_widget_adaptor_create_internal
 			(widget, G_OBJECT (GTK_INPUT_DIALOG (dialog)->save_button),
 			 "save_button", "inputdialog", FALSE, reason);
 
-		close_button = glade_widget_class_create_internal
+		close_button = glade_widget_adaptor_create_internal
 			(widget, G_OBJECT (GTK_INPUT_DIALOG (dialog)->close_button),
 			 "close_button", "inputdialog", FALSE, reason);
 
 	}
 	else if (GTK_IS_FILE_SELECTION (object))
 	{
-		ok_button = glade_widget_class_create_internal
+		ok_button = glade_widget_adaptor_create_internal
 			(widget, G_OBJECT (GTK_FILE_SELECTION (object)->ok_button),
 			 "ok_button", "filesel", FALSE, reason);
 
-		cancel_button = glade_widget_class_create_internal
+		cancel_button = glade_widget_adaptor_create_internal
 			(widget, G_OBJECT (GTK_FILE_SELECTION (object)->cancel_button),
 			 "cancel_button", "filesel", FALSE, reason);
 	}
 	else if (GTK_IS_COLOR_SELECTION_DIALOG (object))
 	{
-		ok_button = glade_widget_class_create_internal
+		ok_button = glade_widget_adaptor_create_internal
 			(widget, G_OBJECT (GTK_COLOR_SELECTION_DIALOG (object)->ok_button),
 			 "ok_button", "colorsel", FALSE, reason);
 
-		cancel_button = glade_widget_class_create_internal
+		cancel_button = glade_widget_adaptor_create_internal
 			(widget, G_OBJECT (GTK_COLOR_SELECTION_DIALOG (object)->cancel_button),
 			 "cancel_button", "colorsel", FALSE, reason);
 
-		help_button = glade_widget_class_create_internal
+		help_button = glade_widget_adaptor_create_internal
 			(widget, G_OBJECT (GTK_COLOR_SELECTION_DIALOG (object)->help_button),
 			 "help_button", "colorsel", FALSE, reason);
 
-		colorsel = glade_widget_class_create_internal
+		colorsel = glade_widget_adaptor_create_internal
 			(widget, G_OBJECT (GTK_COLOR_SELECTION_DIALOG (object)->colorsel),
 			 "color_selection", "colorsel", FALSE, reason);
 
@@ -2816,19 +3047,19 @@ glade_gtk_dialog_post_create (GObject *object, GladeCreateReason reason)
 	}
 	else if (GTK_IS_FONT_SELECTION_DIALOG (object))
 	{
-		ok_button = glade_widget_class_create_internal
+		ok_button = glade_widget_adaptor_create_internal
 			(widget, G_OBJECT (GTK_FONT_SELECTION_DIALOG (object)->ok_button),
 			 "ok_button", "fontsel", FALSE, reason);
 
-		apply_button = glade_widget_class_create_internal
+		apply_button = glade_widget_adaptor_create_internal
 			(widget, G_OBJECT (GTK_FONT_SELECTION_DIALOG (object)->apply_button),
 			 "apply_button", "fontsel", FALSE, reason);
 		
-		cancel_button = glade_widget_class_create_internal
+		cancel_button = glade_widget_adaptor_create_internal
 			(widget, G_OBJECT (GTK_FONT_SELECTION_DIALOG (object)->cancel_button),
 			 "cancel_button", "fontsel", FALSE, reason);
 
-		fontsel =  glade_widget_class_create_internal
+		fontsel =  glade_widget_adaptor_create_internal
 			(widget, G_OBJECT (GTK_FONT_SELECTION_DIALOG (object)->fontsel),
 			 "font_selection", "fontsel", FALSE, reason);
 
@@ -2841,11 +3072,11 @@ glade_gtk_dialog_post_create (GObject *object, GladeCreateReason reason)
 	}
 	else
 	{
-		vbox_widget = glade_widget_class_create_internal 
+		vbox_widget = glade_widget_adaptor_create_internal 
 			(widget, G_OBJECT(dialog->vbox),
 			 "vbox", "dialog", FALSE, reason);
 
-		actionarea_widget = glade_widget_class_create_internal
+		actionarea_widget = glade_widget_adaptor_create_internal
 			(vbox_widget, G_OBJECT(dialog->action_area),
 			 "action_area", "dialog", FALSE, reason);
 
@@ -2886,73 +3117,67 @@ glade_gtk_dialog_post_create (GObject *object, GladeCreateReason reason)
 }
 
 
-void GLADEGTK_API
-glade_gtk_dialog_get_internal_child (GtkDialog   *dialog,
-				     const gchar *name,
-				     GtkWidget **child)
+GtkWidget * GLADEGTK_API
+glade_gtk_dialog_get_internal_child (GladeWidgetAdaptor  *adaptor,
+				     GtkDialog           *dialog,
+				     const gchar         *name)
 {
-	g_return_if_fail (GTK_IS_DIALOG (dialog));
-	
+	GtkWidget *child = NULL;
+
+	g_return_val_if_fail (GTK_IS_DIALOG (dialog), NULL);
 
 	if (GTK_IS_INPUT_DIALOG (dialog))
 	{
 		if (strcmp ("close_button", name) == 0)
-			*child = GTK_INPUT_DIALOG (dialog)->close_button;
+			child = GTK_INPUT_DIALOG (dialog)->close_button;
 		else if (strcmp ("save_button", name) == 0)
-			*child = GTK_INPUT_DIALOG (dialog)->save_button;
-		else
-			*child = NULL;
+			child = GTK_INPUT_DIALOG (dialog)->save_button;
 	}
 	else if (GTK_IS_FILE_SELECTION (dialog))
 	{
 		if (strcmp ("ok_button", name) == 0)
-			*child = GTK_FILE_SELECTION (dialog)->ok_button;
+			child = GTK_FILE_SELECTION (dialog)->ok_button;
 		else if (strcmp ("cancel_button", name) == 0)
-			*child = GTK_FILE_SELECTION (dialog)->cancel_button;
-		else
-			*child = NULL;
+			child = GTK_FILE_SELECTION (dialog)->cancel_button;
 	}
 	else if (GTK_IS_COLOR_SELECTION_DIALOG (dialog))
 	{
 		if (strcmp ("ok_button", name) == 0)
-			*child = GTK_COLOR_SELECTION_DIALOG (dialog)->ok_button;
+			child = GTK_COLOR_SELECTION_DIALOG (dialog)->ok_button;
 		else if (strcmp ("cancel_button", name) == 0)
-			*child = GTK_COLOR_SELECTION_DIALOG (dialog)->cancel_button;
+			child = GTK_COLOR_SELECTION_DIALOG (dialog)->cancel_button;
 		else if (strcmp ("help_button", name) == 0)
-			*child = GTK_COLOR_SELECTION_DIALOG (dialog)->help_button;
+			child = GTK_COLOR_SELECTION_DIALOG (dialog)->help_button;
 		else if (strcmp ("color_selection", name) == 0)
-			*child = GTK_COLOR_SELECTION_DIALOG (dialog)->colorsel;
-		else
-			*child = NULL;
+			child = GTK_COLOR_SELECTION_DIALOG (dialog)->colorsel;
 	}
 	else if (GTK_IS_FONT_SELECTION_DIALOG (dialog))
 	{
 		if (strcmp ("ok_button", name) == 0)
-			*child = GTK_FONT_SELECTION_DIALOG (dialog)->ok_button;
+			child = GTK_FONT_SELECTION_DIALOG (dialog)->ok_button;
 		else if (strcmp ("apply_button", name) == 0)
-			*child = GTK_FONT_SELECTION_DIALOG (dialog)->apply_button;
+			child = GTK_FONT_SELECTION_DIALOG (dialog)->apply_button;
 		else if (strcmp ("cancel_button", name) == 0)
-			*child = GTK_FONT_SELECTION_DIALOG (dialog)->cancel_button;
+			child = GTK_FONT_SELECTION_DIALOG (dialog)->cancel_button;
 		else if (strcmp ("font_selection", name) == 0)
-			*child = GTK_FONT_SELECTION_DIALOG (dialog)->fontsel;
-		else
-			*child = NULL;
+			child = GTK_FONT_SELECTION_DIALOG (dialog)->fontsel;
 	}
 	else
 	{
 		/* Default generic dialog handling
 		 */
 		if (strcmp ("vbox", name) == 0)
-			*child = dialog->vbox;
+			child = dialog->vbox;
 		else if (strcmp ("action_area", name) == 0)
-			*child = dialog->action_area;
-		else
-			*child = NULL;
+			child = dialog->action_area;
 	}
+
+	return child;
 }
 
 GList * GLADEGTK_API
-glade_gtk_dialog_get_children (GtkDialog *dialog)
+glade_gtk_dialog_get_children (GladeWidgetAdaptor  *adaptor,
+			       GtkDialog           *dialog)
 {
 	GList *list = NULL;
 
@@ -3041,6 +3266,11 @@ glade_gtk_button_disable_stock (GladeWidget *gwidget)
 	glade_widget_property_set_sensitive
 		(gwidget, "stock", FALSE,
 		 _("This only applies with stock type buttons"));
+
+	glade_widget_property_set_sensitive
+		(gwidget, "image-position", FALSE,
+		 _("This only applies with stock type buttons"));
+
 }
 
 static void
@@ -3100,7 +3330,9 @@ glade_gtk_button_post_create_parse_finished (GladeProject *project,
 }
 
 void GLADEGTK_API
-glade_gtk_button_post_create (GObject *button, GladeCreateReason reason)
+glade_gtk_button_post_create (GladeWidgetAdaptor  *adaptor,
+			      GObject             *button, 
+			      GladeCreateReason    reason)
 {
 	GladeWidget *gbutton = glade_widget_get_from_gobject (button);
 
@@ -3140,8 +3372,8 @@ glade_gtk_button_post_create (GObject *button, GladeCreateReason reason)
 	}
 }
 
-void GLADEGTK_API
-glade_gtk_button_set_type (GObject *object, GValue *value)
+static void
+glade_gtk_button_set_type (GObject *object, const GValue *value)
 {
 	GladeWidget        *gwidget;
 	GladeGtkButtonType  type;
@@ -3168,6 +3400,7 @@ glade_gtk_button_set_type (GObject *object, GValue *value)
 	case GLADEGTK_BUTTON_STOCK:
 		glade_widget_property_set (gwidget, "use-stock", TRUE);
 		glade_widget_property_set_sensitive (gwidget, "stock", TRUE, NULL);
+		glade_widget_property_set_sensitive (gwidget, "image-position", TRUE, NULL);
 		glade_gtk_button_disable_label (gwidget);
 		break;
 	case GLADEGTK_BUTTON_CONTAINER:
@@ -3189,6 +3422,10 @@ glade_gtk_button_set_type (GObject *object, GValue *value)
 			glade_widget_property_set_sensitive
 				(gwidget, "stock", FALSE,
 				 _("This only applies with stock type buttons"));
+
+			glade_widget_property_set_sensitive
+				(gwidget, "image-position", FALSE,
+				 _("This only applies with stock type buttons"));
 			
 			glade_widget_property_set_sensitive
 				(gwidget, "label", FALSE,
@@ -3205,8 +3442,8 @@ glade_gtk_button_set_type (GObject *object, GValue *value)
 	g_object_set_data (object, "button-type-initially-set", GINT_TO_POINTER (1));
 }
 
-void GLADEGTK_API
-glade_gtk_button_set_stock (GObject *object, GValue *value)
+static void
+glade_gtk_button_set_stock (GObject *object, const GValue *value)
 {
 	GladeWidget   *gwidget;
 	GEnumClass    *eclass;
@@ -3258,14 +3495,35 @@ glade_gtk_button_set_stock (GObject *object, GValue *value)
 }
 
 void GLADEGTK_API
-glade_gtk_button_replace_child (GtkWidget *container,
-				GtkWidget *current,
-				GtkWidget *new)
+glade_gtk_button_set_property (GladeWidgetAdaptor *adaptor,
+			       GObject            *object, 
+			       const gchar        *id,
+			       const GValue       *value)
+{
+	if (!strcmp (id, "glade-type"))
+		glade_gtk_button_set_type (object, value);
+	else if (!strcmp (id, "stock"))
+		glade_gtk_button_set_stock (object, value);
+	else
+		GWA_GET_CLASS (GTK_TYPE_CONTAINER)->set_property (adaptor, object,
+								  id, value);
+}
+
+void GLADEGTK_API
+glade_gtk_button_replace_child (GladeWidgetAdaptor  *adaptor,
+				GtkWidget           *container,
+				GtkWidget           *current,
+				GtkWidget           *new)
 {
 	GladeWidget *gbutton = glade_widget_get_from_gobject (container);
 
 	g_return_if_fail (GLADE_IS_WIDGET (gbutton));
-	glade_gtk_container_replace_child (container, current, new);
+
+	GWA_GET_CLASS
+		(GTK_TYPE_CONTAINER)->replace_child (adaptor, 
+						     G_OBJECT (container), 
+						     G_OBJECT (current), 
+						     G_OBJECT (new));
 	
 	if (GLADE_IS_PLACEHOLDER (new))
 		glade_widget_property_set_sensitive (gbutton, "glade-type", TRUE, NULL);
@@ -3277,7 +3535,9 @@ glade_gtk_button_replace_child (GtkWidget *container,
 }
 
 void GLADEGTK_API
-glade_gtk_button_add_child (GObject *object, GObject *child)
+glade_gtk_button_add_child (GladeWidgetAdaptor  *adaptor,
+			    GObject             *object, 
+			    GObject             *child)
 {
 	GladeWidget *gwidget;
 
@@ -3297,7 +3557,9 @@ glade_gtk_button_add_child (GObject *object, GObject *child)
 }
 
 void GLADEGTK_API
-glade_gtk_button_remove_child (GObject *object, GObject *child)
+glade_gtk_button_remove_child (GladeWidgetAdaptor  *adaptor,
+			       GObject             *object, 
+			       GObject             *child)
 {
 	GladeWidget *gwidget = glade_widget_get_from_gobject (object);
 
@@ -3375,7 +3637,9 @@ glade_gtk_image_parse_finished (GladeProject *project, GladeWidget *gimage)
 }
 
 void GLADEGTK_API
-glade_gtk_image_post_create (GObject *object, GladeCreateReason reason)
+glade_gtk_image_post_create (GladeWidgetAdaptor  *adaptor,
+			     GObject             *object, 
+			     GladeCreateReason    reason)
 {
 	GladeWidget *gimage;
 	
@@ -3390,8 +3654,8 @@ glade_gtk_image_post_create (GObject *object, GladeCreateReason reason)
 	}
 }
 
-void GLADEGTK_API
-glade_gtk_image_set_icon_name (GObject *object, GValue *value)
+static void
+glade_gtk_image_set_icon_name (GObject *object, const GValue *value)
 {
 	GladeWidget *gimage;
 	gint icon_size;
@@ -3416,8 +3680,8 @@ glade_gtk_image_refresh (GladeWidget *gwidget, const gchar *property)
 	glade_widget_property_set (gwidget, property, p);
 }
 
-void GLADEGTK_API
-glade_gtk_image_set_type (GObject *object, GValue *value)
+static void
+glade_gtk_image_set_type (GObject *object, const GValue *value)
 {
 	GladeWidget       *gwidget;
 	GladeGtkImageType  type;
@@ -3455,18 +3719,18 @@ glade_gtk_image_set_type (GObject *object, GValue *value)
 /* This basicly just sets the virtual "glade-stock" property
  * based on the image's "stock" property (for glade file loading purposes)
  */
-void GLADEGTK_API
-glade_gtk_image_set_stock (GObject *object, GValue *value)
+static void
+glade_gtk_image_set_stock (GObject *object, const GValue *value)
 {
 	GladeWidget *gwidget;
-	const gchar *str;
-	gint icon_size;
+	gchar       *str;
+	gint         icon_size;
 
 	g_return_if_fail (GTK_IS_IMAGE (object));
 	gwidget = glade_widget_get_from_gobject (object);
 	g_return_if_fail (GLADE_IS_WIDGET (gwidget));
 
-	if ((str = g_value_get_string (value)) &&
+	if ((str = g_value_dup_string (value)) &&
 	    glade_util_object_is_loading (object))
 	{
 		GEnumClass *eclass = g_type_class_ref (GLADE_TYPE_STOCK);
@@ -3483,10 +3747,15 @@ glade_gtk_image_set_stock (GObject *object, GValue *value)
 	/* Set the real property */
 	glade_widget_property_get (gwidget, "icon-size", &icon_size);
 	gtk_image_set_from_stock (GTK_IMAGE (object), str, icon_size);
+
+	/* Sometimes it gets recursive around here, valgrind says
+	 * we should dup a string for this purpose ;-)
+	 */
+	g_free (str);
 }
 
-void GLADEGTK_API
-glade_gtk_image_set_glade_stock (GObject *object, GValue *value)
+static void
+glade_gtk_image_set_glade_stock (GObject *object, const GValue *value)
 {
 	GladeWidget   *gwidget;
 	GEnumClass    *eclass;
@@ -3510,10 +3779,30 @@ glade_gtk_image_set_glade_stock (GObject *object, GValue *value)
 	g_type_class_unref (eclass);
 }
 
+void GLADEGTK_API
+glade_gtk_image_set_property (GladeWidgetAdaptor *adaptor,
+			      GObject            *object, 
+			      const gchar        *id,
+			      const GValue       *value)
+{
+	if (!strcmp (id, "glade-type"))
+		glade_gtk_image_set_type (object, value);
+	else if (!strcmp (id, "stock"))
+		glade_gtk_image_set_stock (object, value);
+	else if (!strcmp (id, "glade-stock"))
+		glade_gtk_image_set_glade_stock (object, value);
+	else if (!strcmp (id, "icon-name"))
+		glade_gtk_image_set_icon_name (object, value);
+	else
+		GWA_GET_CLASS (GTK_TYPE_WIDGET)->set_property (adaptor, object,
+							       id, value);
+}
 
 /* ----------------------------- GtkMenuShell ------------------------------ */
 void GLADEGTK_API
-glade_gtk_menu_shell_add_item (GObject *object, GObject *child)
+glade_gtk_menu_shell_add_item (GladeWidgetAdaptor  *adaptor, 
+			       GObject             *object, 
+			       GObject             *child)
 {
 	
 	g_return_if_fail (GTK_IS_MENU_SHELL (object));
@@ -3524,7 +3813,9 @@ glade_gtk_menu_shell_add_item (GObject *object, GObject *child)
 
 
 void GLADEGTK_API
-glade_gtk_menu_shell_remove_item (GObject *object, GObject *child)
+glade_gtk_menu_shell_remove_item (GladeWidgetAdaptor  *adaptor,
+				  GObject             *object, 
+				  GObject             *child)
 {
 	g_return_if_fail (GTK_IS_MENU_SHELL (object));
 	g_return_if_fail (GTK_IS_MENU_ITEM (child));
@@ -3550,10 +3841,11 @@ glade_gtk_menu_shell_get_item_position (GObject *container, GObject *child)
 }
 
 void GLADEGTK_API
-glade_gtk_menu_shell_get_child_property (GObject *container,
-					 GObject *child,
-					 const gchar *property_name,
-					 GValue *value)
+glade_gtk_menu_shell_get_child_property (GladeWidgetAdaptor  *adaptor,
+					 GObject             *container,
+					 GObject             *child,
+					 const gchar         *property_name,
+					 GValue              *value)
 {
 	g_return_if_fail (GTK_IS_MENU_SHELL (container));
 	g_return_if_fail (GTK_IS_MENU_ITEM (child));
@@ -3566,16 +3858,20 @@ glade_gtk_menu_shell_get_child_property (GObject *container,
 	}
 	else
 		/* Chain Up */
-		gtk_container_child_get_property (GTK_CONTAINER (container),
-						  GTK_WIDGET (child),
-						  property_name, value);
+		GWA_GET_CLASS
+			(GTK_TYPE_CONTAINER)->child_get_property (adaptor, 
+								  container, 
+								  child, 
+								  property_name, 
+								  value);
 }
 
 void GLADEGTK_API
-glade_gtk_menu_shell_set_child_property (GObject *container,
-					 GObject *child,
-					 const gchar *property_name,
-					 GValue *value)
+glade_gtk_menu_shell_set_child_property (GladeWidgetAdaptor  *adaptor,
+					 GObject             *container,
+					 GObject             *child,
+					 const gchar         *property_name,
+					 GValue              *value)
 {
 	g_return_if_fail (GTK_IS_MENU_SHELL (container));
 	g_return_if_fail (GTK_IS_MENU_ITEM (child));
@@ -3605,11 +3901,12 @@ glade_gtk_menu_shell_set_child_property (GObject *container,
 	}
 	else
 		/* Chain Up */
-		gtk_container_child_set_property (GTK_CONTAINER (container),
-						  GTK_WIDGET (child),
-						  property_name,
-						  value);
+		GWA_GET_CLASS
+			(GTK_TYPE_CONTAINER)->child_set_property (adaptor, 
+								  container, child,
+								  property_name, value);
 }
+
 static gchar *
 glade_gtk_menu_shell_get_display_name (GladeBaseEditor *editor,
 				       GladeWidget *gchild,
@@ -3634,7 +3931,7 @@ glade_gtk_menu_shell_item_get_parent (GladeWidget *gparent, GObject *parent)
 	if ((submenu = gtk_menu_item_get_submenu (GTK_MENU_ITEM (parent))))
 		gparent = glade_widget_get_from_gobject (submenu);
 	else
-		gparent = glade_command_create (glade_widget_class_get_by_type (GTK_TYPE_MENU),
+		gparent = glade_command_create (glade_widget_adaptor_get_by_type (GTK_TYPE_MENU),
 						gparent, NULL, glade_widget_get_project (gparent));
 	return gparent;
 }
@@ -3656,7 +3953,7 @@ glade_gtk_menu_shell_build_child (GladeBaseEditor *editor,
 		gparent = glade_gtk_menu_shell_item_get_parent (gparent, parent);
 	
 	/* Build child */
-	gitem_new = glade_command_create (glade_widget_class_get_by_type (type),
+	gitem_new = glade_command_create (glade_widget_adaptor_get_by_type (type),
 					  gparent, NULL, 
 					  glade_widget_get_project (gparent));
 	
@@ -3769,18 +4066,19 @@ glade_gtk_menu_shell_child_selected (GladeBaseEditor *editor,
 			if ((internal = glade_widget_get_from_gobject (image)) &&
 				internal->internal)
 			{
-				glade_base_editor_add_label (editor, "Internal Image Properties");
-				glade_base_editor_add_properties (editor, internal, "glade-type", "pixbuf", "glade-stock", "icon-name", NULL);
+				glade_base_editor_add_label
+					(editor, "Internal Image Properties");
+				glade_base_editor_add_properties
+					(editor, internal, "glade-type", "pixbuf", 
+					 "glade-stock", "icon-name", NULL);
 			}
 		}
 	}
-	else
-	if (type == GTK_TYPE_CHECK_MENU_ITEM)
+	else if (type == GTK_TYPE_CHECK_MENU_ITEM)
 		glade_base_editor_add_properties (editor, gchild, 
 						  "active", "draw-as-radio",
 						  "inconsistent", NULL);
-	else
-	if (type == GTK_TYPE_RADIO_MENU_ITEM)
+	else if (type == GTK_TYPE_RADIO_MENU_ITEM)
 		glade_base_editor_add_properties (editor, gchild,
 						  "active", "group", NULL);
 }
@@ -3826,7 +4124,8 @@ glade_gtk_menu_shell_launch_editor (GObject *object, gchar *title)
 
 /* ----------------------------- GtkMenuItem(s) ------------------------------ */
 GList * GLADEGTK_API
-glade_gtk_menu_item_get_submenu (GObject *object)
+glade_gtk_menu_item_get_submenu (GladeWidgetAdaptor *adaptor,
+				 GObject *object)
 {
 	GList *list = NULL;
 	GtkWidget *child;
@@ -3841,7 +4140,8 @@ glade_gtk_menu_item_get_submenu (GObject *object)
 }
 
 void GLADEGTK_API
-glade_gtk_menu_item_add_submenu (GObject *object, GObject *child)
+glade_gtk_menu_item_add_submenu (GladeWidgetAdaptor *adaptor,
+				 GObject *object, GObject *child)
 {
 	g_return_if_fail (GTK_IS_MENU_ITEM (object));
 	g_return_if_fail (GTK_IS_MENU (child));
@@ -3856,7 +4156,8 @@ glade_gtk_menu_item_add_submenu (GObject *object, GObject *child)
 }
 
 void GLADEGTK_API
-glade_gtk_menu_item_remove_submenu (GObject *object, GObject *child)
+glade_gtk_menu_item_remove_submenu (GladeWidgetAdaptor *adaptor,
+				    GObject *object, GObject *child)
 {
 	g_return_if_fail (GTK_IS_MENU_ITEM (object));
 	g_return_if_fail (GTK_IS_MENU (child));
@@ -3868,7 +4169,9 @@ glade_gtk_menu_item_remove_submenu (GObject *object, GObject *child)
 	if ((v) == GPOINTER_TO_INT (g_object_get_data (G_OBJECT (o), p))) return; g_object_set_data (G_OBJECT (o), p, GINT_TO_POINTER ((v)))
 	
 void GLADEGTK_API
-glade_gtk_menu_item_post_create (GObject *object, GladeCreateReason reason)
+glade_gtk_menu_item_post_create (GladeWidgetAdaptor *adaptor, 
+				 GObject            *object, 
+				 GladeCreateReason   reason)
 {
 	GladeWidget  *gitem, *gimage;
 
@@ -3911,7 +4214,7 @@ glade_gtk_menu_item_post_create (GObject *object, GladeCreateReason reason)
 			{
 				GtkWidget *image = gtk_image_new ();
 
-				gimage = glade_widget_class_create_internal
+				gimage = glade_widget_adaptor_create_internal
 					(gitem, G_OBJECT (image),
 					 "image", "menu-item", FALSE, reason);
 				gtk_image_menu_item_set_image
@@ -3921,8 +4224,8 @@ glade_gtk_menu_item_post_create (GObject *object, GladeCreateReason reason)
 	}
 }
 
-void GLADEGTK_API
-glade_gtk_menu_item_set_label (GObject *object, GValue *value)
+static void
+glade_gtk_menu_item_set_label (GObject *object, const GValue *value)
 {
 	GladeWidget *gitem;
 	GtkWidget *label;
@@ -3974,8 +4277,8 @@ glade_gtk_menu_item_set_label (GObject *object, GValue *value)
 	gtk_label_set_use_underline (GTK_LABEL (label), use_underline);
 }
 
-void GLADEGTK_API
-glade_gtk_menu_item_set_use_underline (GObject *object, GValue *value)
+static void
+glade_gtk_menu_item_set_use_underline (GObject *object, const GValue *value)
 {
 	GtkMenuItem *item;
 	GtkWidget *label;
@@ -3991,105 +4294,13 @@ glade_gtk_menu_item_set_use_underline (GObject *object, GValue *value)
 	gtk_label_set_use_underline (GTK_LABEL (label), g_value_get_boolean (value));
 }
 
-void GLADEGTK_API
-glade_gtk_image_menu_item_get_internal_child (GObject *parent,
-					      const gchar *name,
-					      GObject **child)
-{
-	GtkWidget *image;
-	
-	if (GTK_IS_IMAGE_MENU_ITEM (parent) && strcmp (name, "image") == 0)
-	{
-		image = gtk_image_menu_item_get_image (GTK_IMAGE_MENU_ITEM (parent));
-		if (image == NULL)
-		{
-			GladeWidget  *gitem, *gimage;
-			
-			gitem = glade_widget_get_from_gobject (parent);
-			image = gtk_image_new ();
+GObject * GLADEGTK_API
+glade_gtk_image_menu_item_get_internal_child (GladeWidgetAdaptor *adaptor,
+					      GObject            *parent,
+					      const gchar        *name);
 
-			gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (parent), image);
-			
-			gimage = glade_widget_class_create_internal
-				(gitem, G_OBJECT (image), "image", "menu-item",
-				 FALSE, GLADE_CREATE_LOAD);
-		}
-		*child = G_OBJECT (image);
-	}
-	else *child = NULL;
-
-	return;
-}
-
-void GLADEGTK_API
-glade_gtk_image_menu_item_set_use_stock (GObject *object, GValue *value)
-{
-	GladeWidget  *gitem, *gimage;
-	gboolean      use_stock;
-	GtkWidget    *image;
-	
-	g_return_if_fail (GTK_IS_IMAGE_MENU_ITEM (object));
-	gitem = glade_widget_get_from_gobject (object);
-	g_return_if_fail (GLADE_IS_WIDGET (gitem));
-
-	use_stock = g_value_get_boolean (value);
-	
-	glade_return_if_re_entrancy (gitem, "use-stock", use_stock);
-
-	if ((image = gtk_image_menu_item_get_image (GTK_IMAGE_MENU_ITEM (object))))
-		if(glade_widget_get_from_gobject (G_OBJECT(image)))
-		{
-			glade_project_remove_object (glade_widget_get_project (gitem), G_OBJECT(image));
-			gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (object), NULL);
-		}
-	
-	if (use_stock)
-	{
-		glade_widget_property_set_sensitive (gitem, "label", FALSE,
-					_("This does not apply with stock items"));
-	}
-	else
-	{
-		image = gtk_image_new ();
-		gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (object), image);
-		gimage = glade_widget_class_create_internal
-			(gitem, G_OBJECT (image), "image", "menu-item", FALSE,
-			 GLADE_CREATE_LOAD);
-		glade_project_add_object (glade_widget_get_project (gitem), 
-					  NULL, G_OBJECT (image));
-
-		glade_widget_property_set_sensitive (gitem, "label", TRUE, NULL);
-	}
-}
-
-void GLADEGTK_API
-glade_gtk_image_menu_item_set_stock (GObject *object, GValue *value)
-{
-	GladeWidget *gitem;
-	GEnumClass *eclass;
-	GEnumValue *eval;
-	gint val;
-	
-	g_return_if_fail (GTK_IS_IMAGE_MENU_ITEM (object));
-	gitem = glade_widget_get_from_gobject (object);
-	g_return_if_fail (GLADE_IS_WIDGET (gitem));
-	
-	val = g_value_get_enum (value);
-	
-	glade_return_if_re_entrancy (gitem, "stock", val);
-	
-	glade_widget_property_set (gitem, "use-stock", val);
-		
-	eclass = g_type_class_ref (GLADE_TYPE_STOCK);
-	eval = g_enum_get_value (eclass, val);
-	if (eval && val)
-		glade_widget_property_set (gitem, "label", eval->value_nick);
-	
-	g_type_class_unref (eclass);
-}
-
-void GLADEGTK_API
-glade_gtk_menu_item_set_stock_item (GObject *object, GValue *value)
+static void
+glade_gtk_menu_item_set_stock_item (GObject *object, const GValue *value)
 {
 	GladeWidget *gitem, *gimage;
 	GEnumClass *eclass;
@@ -4208,7 +4419,9 @@ glade_gtk_menu_item_set_stock_item (GObject *object, GValue *value)
 		eval = g_enum_get_value_by_nick (eclass, icon);
 		g_type_class_unref (eclass);
 	
-		glade_gtk_image_menu_item_get_internal_child (object, "image", &image);
+		image = glade_gtk_image_menu_item_get_internal_child
+			(gitem->adaptor, object, "image");
+
 		gimage = glade_widget_get_from_gobject (image);
 		glade_widget_property_set (gimage, "icon-size", GTK_ICON_SIZE_MENU);
 		glade_widget_property_set (gimage, "glade-stock", eval->value);
@@ -4218,7 +4431,136 @@ glade_gtk_menu_item_set_stock_item (GObject *object, GValue *value)
 }
 
 void GLADEGTK_API
-glade_gtk_radio_menu_item_set_group (GObject *object, GValue *value)
+glade_gtk_menu_item_set_property (GladeWidgetAdaptor *adaptor,
+				  GObject            *object, 
+				  const gchar        *id,
+				  const GValue       *value)
+{
+	if (!strcmp (id, "use-underline"))
+		glade_gtk_menu_item_set_use_underline (object, value);
+	else if (!strcmp (id, "label"))
+		glade_gtk_menu_item_set_label (object, value);
+	else if (!strcmp (id, "stock-item"))
+		glade_gtk_menu_item_set_stock_item (object, value);
+	else
+		GWA_GET_CLASS (GTK_TYPE_CONTAINER)->set_property (adaptor, object,
+								  id, value);
+}
+
+GObject * GLADEGTK_API
+glade_gtk_image_menu_item_get_internal_child (GladeWidgetAdaptor *adaptor,
+					      GObject            *parent,
+					      const gchar        *name)
+{
+	GtkWidget *image;
+	GObject   *child = NULL;
+
+	if (GTK_IS_IMAGE_MENU_ITEM (parent) && strcmp (name, "image") == 0)
+	{
+		image = gtk_image_menu_item_get_image (GTK_IMAGE_MENU_ITEM (parent));
+		if (image == NULL)
+		{
+			GladeWidget  *gitem, *gimage;
+			
+			gitem = glade_widget_get_from_gobject (parent);
+			image = gtk_image_new ();
+
+			gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (parent), image);
+			
+			gimage = glade_widget_adaptor_create_internal
+				(gitem, G_OBJECT (image), "image", "menu-item",
+				 FALSE, GLADE_CREATE_LOAD);
+		}
+		child = G_OBJECT (image);
+	}
+
+	return child;
+}
+
+static void
+glade_gtk_image_menu_item_set_use_stock (GObject *object, const GValue *value)
+{
+	GladeWidget  *gitem, *gimage;
+	gboolean      use_stock;
+	GtkWidget    *image;
+	
+	g_return_if_fail (GTK_IS_IMAGE_MENU_ITEM (object));
+	gitem = glade_widget_get_from_gobject (object);
+	g_return_if_fail (GLADE_IS_WIDGET (gitem));
+
+	use_stock = g_value_get_boolean (value);
+	
+	glade_return_if_re_entrancy (gitem, "use-stock", use_stock);
+
+	if ((image = gtk_image_menu_item_get_image (GTK_IMAGE_MENU_ITEM (object))))
+		if(glade_widget_get_from_gobject (G_OBJECT(image)))
+		{
+			glade_project_remove_object (glade_widget_get_project (gitem), G_OBJECT(image));
+			gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (object), NULL);
+		}
+	
+	if (use_stock)
+	{
+		glade_widget_property_set_sensitive (gitem, "label", FALSE,
+					_("This does not apply with stock items"));
+	}
+	else
+	{
+		image = gtk_image_new ();
+		gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (object), image);
+		gimage = glade_widget_adaptor_create_internal
+			(gitem, G_OBJECT (image), "image", "menu-item", FALSE,
+			 GLADE_CREATE_LOAD);
+		glade_project_add_object (glade_widget_get_project (gitem), 
+					  NULL, G_OBJECT (image));
+
+		glade_widget_property_set_sensitive (gitem, "label", TRUE, NULL);
+	}
+}
+
+static void
+glade_gtk_image_menu_item_set_stock (GObject *object, const GValue *value)
+{
+	GladeWidget *gitem;
+	GEnumClass *eclass;
+	GEnumValue *eval;
+	gint val;
+	
+	g_return_if_fail (GTK_IS_IMAGE_MENU_ITEM (object));
+	gitem = glade_widget_get_from_gobject (object);
+	g_return_if_fail (GLADE_IS_WIDGET (gitem));
+	
+	val = g_value_get_enum (value);
+	
+	glade_return_if_re_entrancy (gitem, "stock", val);
+	
+	glade_widget_property_set (gitem, "use-stock", val);
+		
+	eclass = g_type_class_ref (GLADE_TYPE_STOCK);
+	eval = g_enum_get_value (eclass, val);
+	if (eval && val)
+		glade_widget_property_set (gitem, "label", eval->value_nick);
+	
+	g_type_class_unref (eclass);
+}
+
+void GLADEGTK_API
+glade_gtk_image_menu_item_set_property (GladeWidgetAdaptor *adaptor,
+					GObject            *object, 
+					const gchar        *id,
+					const GValue       *value)
+{
+	if (!strcmp (id, "stock"))
+		glade_gtk_image_menu_item_set_stock (object, value);
+	else if (!strcmp (id, "use-stock"))
+		glade_gtk_image_menu_item_set_use_stock (object, value);
+	else
+		GWA_GET_CLASS (GTK_TYPE_MENU_ITEM)->set_property (adaptor, object,
+								  id, value);
+}
+
+static void
+glade_gtk_radio_menu_item_set_group (GObject *object, const GValue *value)
 {
 	GObject *val;
 	
@@ -4233,17 +4575,32 @@ glade_gtk_radio_menu_item_set_group (GObject *object, GValue *value)
 	}
 }
 
+void GLADEGTK_API
+glade_gtk_radio_menu_item_set_property (GladeWidgetAdaptor *adaptor,
+					GObject            *object, 
+					const gchar        *id,
+					const GValue       *value)
+{
+
+	if (!strcmp (id, "group"))
+		glade_gtk_radio_menu_item_set_group (object, value);
+	else
+		GWA_GET_CLASS (GTK_TYPE_MENU_ITEM)->set_property (adaptor, object,
+								  id, value);
+}
+
+
 /* ----------------------------- GtkMenuBar ------------------------------ */
 static GladeWidget * 
 glade_gtk_menu_bar_append_new_submenu (GladeWidget *parent, GladeProject *project)
 {
-	static GladeWidgetClass *submenu_class = NULL;
+	static GladeWidgetAdaptor *submenu_adaptor = NULL;
 	GladeWidget *gsubmenu;
 	
-	if (submenu_class == NULL)
-		submenu_class = glade_widget_class_get_by_type (GTK_TYPE_MENU);
+	if (submenu_adaptor == NULL)
+		submenu_adaptor = glade_widget_adaptor_get_by_type (GTK_TYPE_MENU);
 
-	gsubmenu = glade_widget_class_create_widget (submenu_class, FALSE,
+	gsubmenu = glade_widget_adaptor_create_widget (submenu_adaptor, FALSE,
 						     "parent", parent, 
 						     "project", project, 
 						     NULL);
@@ -4259,19 +4616,19 @@ glade_gtk_menu_bar_append_new_item (GladeWidget *parent,
 				    const gchar *label,
 				    gboolean use_stock)
 {
-	static GladeWidgetClass *item_class = NULL, *image_item_class, *separator_class;
+	static GladeWidgetAdaptor *item_adaptor = NULL, *image_item_adaptor, *separator_adaptor;
 	GladeWidget *gitem;
 	
-	if (item_class == NULL)
+	if (item_adaptor == NULL)
 	{
-		item_class = glade_widget_class_get_by_type (GTK_TYPE_MENU_ITEM);
-		image_item_class = glade_widget_class_get_by_type (GTK_TYPE_IMAGE_MENU_ITEM);
-		separator_class = glade_widget_class_get_by_type (GTK_TYPE_SEPARATOR_MENU_ITEM);
+		item_adaptor = glade_widget_adaptor_get_by_type (GTK_TYPE_MENU_ITEM);
+		image_item_adaptor = glade_widget_adaptor_get_by_type (GTK_TYPE_IMAGE_MENU_ITEM);
+		separator_adaptor = glade_widget_adaptor_get_by_type (GTK_TYPE_SEPARATOR_MENU_ITEM);
 	}
 
 	if (label)
 	{
-		gitem = glade_widget_class_create_widget ((use_stock) ? image_item_class : item_class,
+		gitem = glade_widget_adaptor_create_widget ((use_stock) ? image_item_adaptor : item_adaptor,
 							  FALSE, "parent", parent,
 							  "project", project, 
 							  NULL);
@@ -4298,7 +4655,7 @@ glade_gtk_menu_bar_append_new_item (GladeWidget *parent,
 	}
 	else
 	{
-		gitem = glade_widget_class_create_widget (separator_class,
+		gitem = glade_widget_adaptor_create_widget (separator_adaptor,
 							  FALSE, "parent", parent,
 							  "project", project, 
 							  NULL);
@@ -4310,7 +4667,9 @@ glade_gtk_menu_bar_append_new_item (GladeWidget *parent,
 }
 
 void GLADEGTK_API
-glade_gtk_menu_bar_post_create (GObject *object, GladeCreateReason reason)
+glade_gtk_menu_bar_post_create (GladeWidgetAdaptor *adaptor,
+				GObject            *object, 
+				GladeCreateReason   reason)
 {
 	GladeProject *project;
 	GladeWidget *gmenubar, *gitem, *gsubmenu;
@@ -4351,24 +4710,25 @@ glade_gtk_menu_bar_post_create (GObject *object, GladeCreateReason reason)
 }
 
 void GLADEGTK_API
-glade_gtk_menu_bar_launch_editor (GObject *menubar)
+glade_gtk_menu_bar_launch_editor (GladeWidgetAdaptor *adaptor, GObject *menubar)
 {
 	glade_gtk_menu_shell_launch_editor (menubar, _("Menu Bar Editor"));
 }
 
 /* ------------------------------ GtkMenu -------------------------------- */
 void GLADEGTK_API
-glade_gtk_menu_launch_editor (GObject *menu)
+glade_gtk_menu_launch_editor (GladeWidgetAdaptor *adaptor, GObject *menu)
 {
 	glade_gtk_menu_shell_launch_editor (menu, _("Menu Editor"));
 }
 
 /* ----------------------------- GtkToolBar ------------------------------ */
 void GLADEGTK_API
-glade_gtk_toolbar_get_child_property (GObject *container,
-				      GObject *child,
-				      const gchar *property_name,
-				      GValue *value)
+glade_gtk_toolbar_get_child_property (GladeWidgetAdaptor *adaptor,
+				      GObject            *container,
+				      GObject            *child,
+				      const gchar        *property_name,
+				      GValue             *value)
 {
 	g_return_if_fail (GTK_IS_TOOLBAR (container));
 	if (GTK_IS_TOOL_ITEM (child) == FALSE) return;
@@ -4381,16 +4741,18 @@ glade_gtk_toolbar_get_child_property (GObject *container,
 	}
 	else
 		/* Chain Up */
-		gtk_container_child_get_property (GTK_CONTAINER (container),
-						  GTK_WIDGET (child),
-						  property_name, value);
+		GWA_GET_CLASS
+			(GTK_TYPE_CONTAINER)->child_get_property (adaptor, 
+								  container, child,
+								  property_name, value);
 }
 
 void GLADEGTK_API
-glade_gtk_toolbar_set_child_property (GObject *container,
-				      GObject *child,
-				      const gchar *property_name,
-				      GValue *value)
+glade_gtk_toolbar_set_child_property (GladeWidgetAdaptor *adaptor,
+				      GObject            *container,
+				      GObject            *child,
+				      const gchar        *property_name,
+				      GValue             *value)
 {
 	g_return_if_fail (GTK_IS_TOOLBAR (container));
 	g_return_if_fail (GTK_IS_TOOL_ITEM (child));
@@ -4414,14 +4776,15 @@ glade_gtk_toolbar_set_child_property (GObject *container,
 	}
 	else
 		/* Chain Up */
-		gtk_container_child_set_property (GTK_CONTAINER (container),
-						  GTK_WIDGET (child),
-						  property_name,
-						  value);
+		GWA_GET_CLASS
+			(GTK_TYPE_CONTAINER)->child_set_property (adaptor, 
+								  container, child,
+								  property_name, value);
 }
 
 void GLADEGTK_API
-glade_gtk_toolbar_add_child (GObject *object, GObject *child)
+glade_gtk_toolbar_add_child (GladeWidgetAdaptor *adaptor,
+			     GObject *object, GObject *child)
 {
 	GtkToolbar *toolbar;
 	GtkToolItem *item;
@@ -4446,7 +4809,8 @@ glade_gtk_toolbar_add_child (GObject *object, GObject *child)
 }
 
 void GLADEGTK_API
-glade_gtk_toolbar_remove_child (GObject *object, GObject *child)
+glade_gtk_toolbar_remove_child (GladeWidgetAdaptor *adaptor, 
+				GObject *object, GObject *child)
 {
 	gtk_container_remove (GTK_CONTAINER (object), GTK_WIDGET (child));
 }
@@ -4510,7 +4874,8 @@ glade_gtk_toolbar_child_selected (GladeBaseEditor *editor,
 }
 
 void GLADEGTK_API
-glade_gtk_toolbar_launch_editor (GObject *toolbar)
+glade_gtk_toolbar_launch_editor (GladeWidgetAdaptor *adaptor, 
+				 GObject            *toolbar)
 {
 	GladeBaseEditor *editor;
 	GtkWidget *window;
@@ -4544,7 +4909,9 @@ glade_gtk_toolbar_launch_editor (GObject *toolbar)
 
 /* ----------------------------- GtkToolItem ------------------------------ */
 void GLADEGTK_API
-glade_gtk_tool_item_post_create (GObject *object, GladeCreateReason reason)
+glade_gtk_tool_item_post_create (GladeWidgetAdaptor *adaptor, 
+				 GObject            *object, 
+				 GladeCreateReason   reason)
 {
 	g_return_if_fail (GTK_IS_TOOL_ITEM (object));
 	
@@ -4557,8 +4924,8 @@ glade_gtk_tool_item_post_create (GObject *object, GladeCreateReason reason)
 }
 
 /* ----------------------------- GtkToolButton ------------------------------ */
-void GLADEGTK_API
-glade_gtk_tool_button_set_type (GObject *object, GValue *value)
+static void
+glade_gtk_tool_button_set_type (GObject *object, const GValue *value)
 {
 	GladeWidget *gbutton;
 	
@@ -4595,8 +4962,8 @@ glade_gtk_tool_button_set_type (GObject *object, GValue *value)
 	}
 }
 
-void GLADEGTK_API
-glade_gtk_tool_button_set_label (GObject *object, GValue *value)
+static void
+glade_gtk_tool_button_set_label (GObject *object, const GValue *value)
 {
 	const gchar *label;
 	
@@ -4609,8 +4976,8 @@ glade_gtk_tool_button_set_label (GObject *object, GValue *value)
 	gtk_tool_button_set_label (GTK_TOOL_BUTTON (object), label);
 }
 
-void GLADEGTK_API
-glade_gtk_tool_button_set_stock_id (GObject *object, GValue *value)
+static void
+glade_gtk_tool_button_set_stock_id (GObject *object, const GValue *value)
 {
 	GladeWidget *gbutton;
 	GEnumClass *eclass;
@@ -4643,8 +5010,8 @@ glade_gtk_tool_button_set_stock_id (GObject *object, GValue *value)
 	gtk_tool_button_set_stock_id (GTK_TOOL_BUTTON (object), stock_id);
 }
 
-void GLADEGTK_API
-glade_gtk_tool_button_set_glade_stock (GObject *object, GValue *value)
+static void
+glade_gtk_tool_button_set_glade_stock (GObject *object, const GValue *value)
 {
 	GladeWidget *gbutton;
 	GEnumClass *eclass;
@@ -4673,8 +5040,8 @@ glade_gtk_tool_button_set_glade_stock (GObject *object, GValue *value)
 		glade_widget_property_set (gbutton, "stock-id", NULL);
 }
 
-void GLADEGTK_API
-glade_gtk_tool_button_set_icon (GObject *object, GValue *value)
+static void
+glade_gtk_tool_button_set_icon (GObject *object, const GValue *value)
 {
 	GladeWidget *gbutton;
 	GObject *pixbuf;
@@ -4692,8 +5059,8 @@ glade_gtk_tool_button_set_icon (GObject *object, GValue *value)
 	gtk_tool_button_set_icon_widget (GTK_TOOL_BUTTON (object), image);
 }
 
-void GLADEGTK_API
-glade_gtk_tool_button_set_icon_name (GObject *object, GValue *value)
+static void
+glade_gtk_tool_button_set_icon_name (GObject *object, const GValue *value)
 {
 	GladeWidget *gbutton;
 	const gchar *name;
@@ -4711,10 +5078,33 @@ glade_gtk_tool_button_set_icon_name (GObject *object, GValue *value)
 	gtk_tool_button_set_icon_name (GTK_TOOL_BUTTON (object), name);
 }
 
+void GLADEGTK_API
+glade_gtk_tool_button_set_property (GladeWidgetAdaptor *adaptor,
+				    GObject            *object, 
+				    const gchar        *id,
+				    const GValue       *value)
+{
+	if (!strcmp (id, "glade-type"))
+		glade_gtk_tool_button_set_type (object, value);
+	else if (!strcmp (id, "glade-stock"))
+		glade_gtk_tool_button_set_glade_stock (object, value);
+	else if (!strcmp (id, "icon-name"))
+		glade_gtk_tool_button_set_icon_name (object, value);
+	else if (!strcmp (id, "icon"))
+		glade_gtk_tool_button_set_icon (object, value);
+	else if (!strcmp (id, "stock-id"))
+		glade_gtk_tool_button_set_stock_id (object, value);
+	else if (!strcmp (id, "label"))
+		glade_gtk_tool_button_set_label (object, value);
+	else
+		GWA_GET_CLASS (GTK_TYPE_TOOL_ITEM)->set_property (adaptor,
+								  object,
+								  id, value);
+}
 
 /* ----------------------------- GtkLabel ------------------------------ */
-void GLADEGTK_API
-glade_gtk_label_set_label (GObject *object, GValue *value)
+static void
+glade_gtk_label_set_label (GObject *object, const GValue *value)
 {
 	GladeWidget *glabel;
 	gboolean use_markup = FALSE, use_underline = FALSE;
@@ -4733,6 +5123,20 @@ glade_gtk_label_set_label (GObject *object, GValue *value)
 	glade_widget_property_get (glabel, "use-underline", &use_underline);
 	if (use_underline)
 		gtk_label_set_use_underline (GTK_LABEL (object), use_underline);
+}
+
+void GLADEGTK_API
+glade_gtk_label_set_property (GladeWidgetAdaptor *adaptor,
+			      GObject            *object, 
+			      const gchar        *id,
+			      const GValue       *value)
+{
+	if (!strcmp (id, "label"))
+		glade_gtk_label_set_label (object, value);
+	else
+		GWA_GET_CLASS (GTK_TYPE_WIDGET)->set_property (adaptor,
+							       object,
+							       id, value);
 }
 
 /* ----------------------------- GtkTextView ------------------------------ */
@@ -4765,7 +5169,9 @@ glade_gtk_text_view_stop_double_click (GtkWidget *widget,
 }
 
 void GLADEGTK_API
-glade_gtk_text_view_post_create (GObject *object, GladeCreateReason reason)
+glade_gtk_text_view_post_create (GladeWidgetAdaptor *adaptor,
+				 GObject            *object, 
+				 GladeCreateReason   reason)
 {
 	GtkTextBuffer *buffy = gtk_text_buffer_new (NULL);
 	GladeWidget *gtext;
@@ -4787,8 +5193,8 @@ glade_gtk_text_view_post_create (GObject *object, GladeCreateReason reason)
 			  NULL);
 }
 
-void GLADEGTK_API
-glade_gtk_text_view_set_text (GObject *object, GValue *value)
+static void
+glade_gtk_text_view_set_text (GObject *object, const GValue *value)
 {
 	GtkTextBuffer *buffy;
 	GladeWidget *gtext;
@@ -4807,10 +5213,26 @@ glade_gtk_text_view_set_text (GObject *object, GValue *value)
 	g_signal_handlers_unblock_by_func (buffy, glade_gtk_text_view_changed, gtext);
 }
 
+void GLADEGTK_API
+glade_gtk_text_view_set_property (GladeWidgetAdaptor *adaptor,
+				  GObject            *object, 
+				  const gchar        *id,
+				  const GValue       *value)
+{
+	if (!strcmp (id, "text"))
+		glade_gtk_text_view_set_text (object, value);
+	else
+		GWA_GET_CLASS (GTK_TYPE_CONTAINER)->set_property (adaptor,
+								  object,
+								  id, value);
+}
+
 
 /* ----------------------------- GtkComboBox ------------------------------ */
 void GLADEGTK_API
-glade_gtk_combo_box_post_create (GObject *object, GladeCreateReason reason)
+glade_gtk_combo_box_post_create (GladeWidgetAdaptor *adaptor,
+				 GObject            *object, 
+				 GladeCreateReason   reason)
 {
 	GtkCellRenderer *cell;
 	GtkListStore *store;
@@ -4829,9 +5251,8 @@ glade_gtk_combo_box_post_create (GObject *object, GladeCreateReason reason)
 					"text", 0, NULL);
 }
 
-
-void GLADEGTK_API
-glade_gtk_combo_box_set_items (GObject *object, GValue *value)
+static void
+glade_gtk_combo_box_set_items (GObject *object, const GValue *value)
 {
 	GtkComboBox *combo;
 	gchar **split;
@@ -4853,88 +5274,53 @@ glade_gtk_combo_box_set_items (GObject *object, GValue *value)
 				gtk_combo_box_append_text (combo, split[i]);
 }
 
+void GLADEGTK_API
+glade_gtk_combo_box_set_property (GladeWidgetAdaptor *adaptor,
+				  GObject            *object, 
+				  const gchar        *id,
+				  const GValue       *value)
+{
+	if (!strcmp (id, "items"))
+		glade_gtk_combo_box_set_items (object, value);
+	else
+		GWA_GET_CLASS (GTK_TYPE_CONTAINER)->set_property (adaptor,
+								  object,
+								  id, value);
+}
+
 /* ----------------------------- GtkComboBoxEntry ------------------------------ */
 void GLADEGTK_API
-glade_gtk_combo_box_entry_post_create (GObject *object, GladeCreateReason reason)
+glade_gtk_combo_box_entry_post_create (GladeWidgetAdaptor *adaptor,
+				       GObject            *object, 
+				       GladeCreateReason   reason)
 {
 	GladeWidget *gcombo = glade_widget_get_from_gobject (object);
 
 	/* Chain up */
-	glade_gtk_combo_box_post_create (object, reason);
+	GWA_GET_CLASS (GTK_TYPE_CONTAINER)->post_create (adaptor, object, reason);
 
-	glade_widget_class_create_internal
+	glade_widget_adaptor_create_internal
 		(gcombo, G_OBJECT (GTK_BIN (object)->child),
 		 "entry", "comboboxentry", FALSE, reason);
 }
 
-void GLADEGTK_API
-glade_gtk_combo_box_entry_get_internal_child (GObject *object, 
-					      const gchar *name,
-					      GObject **child)
+GObject * GLADEGTK_API
+glade_gtk_combo_box_entry_get_internal_child (GladeWidgetAdaptor *adaptor,
+					      GObject *object, 
+					      const gchar *name)
 {
-	g_return_if_fail (GTK_IS_COMBO_BOX_ENTRY (object));
+	GObject *child = NULL;
+	g_return_val_if_fail (GTK_IS_COMBO_BOX_ENTRY (object), NULL);
 	
 	if (strcmp ("entry", name) == 0)
-		*child = G_OBJECT (gtk_bin_get_child (GTK_BIN (object)));
-	else
-		*child = NULL;
-}
+		child = G_OBJECT (gtk_bin_get_child (GTK_BIN (object)));
 
-/* ----------------------------- GtkOptionMenu ------------------------------ */
-void GLADEGTK_API
-glade_gtk_option_menu_set_items (GObject *object, GValue *value)
-{
-	GtkOptionMenu *option_menu; 
-	GtkWidget *menu;
-	const gchar *items;
-	const gchar *pos;
-	const gchar *items_end;
-
-	items = g_value_get_string (value);
-	pos = items;
-	items_end = &items[strlen (items)];
-	
-	option_menu = GTK_OPTION_MENU (object);
-	g_return_if_fail (GTK_IS_OPTION_MENU (option_menu));
-	menu = gtk_option_menu_get_menu (option_menu);
-	if (menu != NULL)
-		gtk_option_menu_remove_menu (option_menu);
-	
-	menu = gtk_menu_new ();
-	
-	while (pos < items_end) {
-		GtkWidget *menu_item;
-		gchar *item_end = strchr (pos, '\n');
-		if (item_end == NULL)
-			item_end = (gchar *) items_end;
-		*item_end = '\0';
-		
-		menu_item = gtk_menu_item_new_with_label (pos);
-		gtk_widget_show (menu_item);
-		gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
-		
-		pos = item_end + 1;
-	}
-	
-	gtk_option_menu_set_menu (GTK_OPTION_MENU (option_menu), menu);
-}
-
-/* ----------------------------- GtkProgressBar ------------------------------ */
-void GLADEGTK_API
-glade_gtk_progress_bar_set_format (GObject *object, GValue *value)
-{
-	GtkProgressBar *bar;
-	const gchar *format = g_value_get_string (value);
-
-	bar = GTK_PROGRESS_BAR (object);
-	g_return_if_fail (GTK_IS_PROGRESS_BAR (bar));
-	
-	gtk_progress_set_format_string (GTK_PROGRESS (bar), format);
+	return child;
 }
 
 /* ----------------------------- GtkSpinButton ------------------------------ */
-void GLADEGTK_API
-glade_gtk_spin_button_set_adjustment (GObject *object, GValue *value)
+static void
+glade_gtk_spin_button_set_adjustment (GObject *object, const GValue *value)
 {
 	GObject *adjustment;
 	GtkAdjustment *adj;
@@ -4951,10 +5337,25 @@ glade_gtk_spin_button_set_adjustment (GObject *object, GValue *value)
 	}
 }
 
+void GLADEGTK_API
+glade_gtk_spin_button_set_property (GladeWidgetAdaptor *adaptor,
+				    GObject            *object, 
+				    const gchar        *id,
+				    const GValue       *value)
+{
+	if (!strcmp (id, "adjustment"))
+		glade_gtk_spin_button_set_adjustment (object, value);
+	else
+		GWA_GET_CLASS (GTK_TYPE_ENTRY)->set_property (adaptor,
+							      object,
+							      id, value);
+}
 
 /* ----------------------------- GtkTreeView ------------------------------ */
 void GLADEGTK_API
-glade_gtk_tree_view_post_create (GObject *object, GladeCreateReason reason)
+glade_gtk_tree_view_post_create (GladeWidgetAdaptor *adaptor,
+				 GObject            *object, 
+				 GladeCreateReason   reason)
 {
 	GtkWidget *tree_view = GTK_WIDGET (object);
 	GtkTreeStore *store;
@@ -4980,7 +5381,9 @@ glade_gtk_tree_view_post_create (GObject *object, GladeCreateReason reason)
 
 /* ----------------------------- GtkCombo ------------------------------ */
 void GLADEGTK_API
-glade_gtk_combo_post_create (GObject *object, GladeCreateReason reason)
+glade_gtk_combo_post_create (GladeWidgetAdaptor *adaptor,
+			     GObject            *object,
+			     GladeCreateReason   reason)
 {
 	GladeWidget  *gcombo, *gentry, *glist;
 
@@ -4989,30 +5392,32 @@ glade_gtk_combo_post_create (GObject *object, GladeCreateReason reason)
 	if ((gcombo = glade_widget_get_from_gobject (object)) == NULL)
 		return;
 	
-	gentry = glade_widget_class_create_internal
+	gentry = glade_widget_adaptor_create_internal
 		(gcombo, G_OBJECT (GTK_COMBO (object)->entry),
 		 "entry", "combo", FALSE, reason);
 
 	/* We mark this 'anarchist' since its outside of the hierarchy */
-	glist  = glade_widget_class_create_internal
+	glist  = glade_widget_adaptor_create_internal
 		(gcombo, G_OBJECT (GTK_COMBO (object)->list),
 		 "list", "combo", TRUE, reason);
 
 }
 
-void GLADEGTK_API
-glade_gtk_combo_get_internal_child (GtkCombo    *combo,
-				    const gchar *name,
-				    GtkWidget **child)
+GObject * GLADEGTK_API
+glade_gtk_combo_get_internal_child (GladeWidgetAdaptor *adaptor,
+				    GtkCombo           *combo,
+				    const gchar        *name)
 {
-	g_return_if_fail (GTK_IS_COMBO (combo));
+	GObject *child = NULL;
+
+	g_return_val_if_fail (GTK_IS_COMBO (combo), NULL);
 	
 	if (strcmp ("list", name) == 0)
-		*child = combo->list;
+		child = G_OBJECT (combo->list);
 	else if (strcmp ("entry", name) == 0)
-		*child = combo->entry;
-	else
-		*child = NULL;
+		child = G_OBJECT (combo->entry);
+
+	return child;
 }
 
 GList * GLADEGTK_API
@@ -5033,7 +5438,9 @@ glade_gtk_combo_get_children (GtkCombo *combo)
 
 /* ----------------------------- GtkListItem ------------------------------ */
 void GLADEGTK_API
-glade_gtk_list_item_post_create (GObject *object, GladeCreateReason reason)
+glade_gtk_list_item_post_create (GladeWidgetAdaptor *adaptor,
+				 GObject            *object, 
+				 GladeCreateReason   reason)
 {
 	GtkWidget *label;
 
@@ -5047,8 +5454,8 @@ glade_gtk_list_item_post_create (GObject *object, GladeCreateReason reason)
 	gtk_widget_show (label);
 }
 
-void GLADEGTK_API
-glade_gtk_list_item_set_label (GObject *object, GValue *value)
+static void
+glade_gtk_list_item_set_label (GObject *object, const GValue *value)
 {
 	GtkWidget *label;
 
@@ -5059,7 +5466,7 @@ glade_gtk_list_item_set_label (GObject *object, GValue *value)
 	gtk_label_set_text (GTK_LABEL (label), g_value_get_string (value));
 }
 
-void GLADEGTK_API
+static void
 glade_gtk_list_item_get_label (GObject *object, GValue *value)
 {
 	GtkWidget *label;
@@ -5069,4 +5476,55 @@ glade_gtk_list_item_get_label (GObject *object, GValue *value)
 	label = GTK_BIN (object)->child;
 
 	g_value_set_string (value, gtk_label_get_text (GTK_LABEL (label)));
+}
+
+void GLADEGTK_API
+glade_gtk_list_item_set_property (GladeWidgetAdaptor *adaptor,
+				  GObject            *object, 
+				  const gchar        *id,
+				  const GValue       *value)
+{
+	if (!strcmp (id, "label"))
+		glade_gtk_list_item_set_label (object, value);
+	else
+		GWA_GET_CLASS (GTK_TYPE_CONTAINER)->set_property (adaptor,
+								  object,
+								  id, value);
+}
+
+void GLADEGTK_API
+glade_gtk_list_item_get_property (GladeWidgetAdaptor *adaptor,
+				  GObject            *object, 
+				  const gchar        *id,
+				  GValue             *value)
+{
+	if (!strcmp (id, "label"))
+		glade_gtk_list_item_get_label (object, value);
+	else
+		GWA_GET_CLASS (GTK_TYPE_CONTAINER)->set_property (adaptor,
+								  object,
+								  id, value);
+}
+
+
+void GLADEGTK_API
+glade_gtk_listitem_add_child (GladeWidgetAdaptor  *adaptor,
+			      GObject             *object, 
+			      GObject             *child)
+{
+	g_return_if_fail (GTK_IS_CONTAINER (object));
+	g_return_if_fail (GTK_IS_WIDGET (child));
+
+	gtk_container_add (GTK_CONTAINER (object), GTK_WIDGET (child));
+}
+
+void GLADEGTK_API
+glade_gtk_listitem_remove_child (GladeWidgetAdaptor  *adaptor,
+				 GObject             *object, 
+				 GObject             *child)
+{
+	g_return_if_fail (GTK_IS_CONTAINER (object));
+	g_return_if_fail (GTK_IS_WIDGET (child));
+
+	gtk_container_add (GTK_CONTAINER (object), GTK_WIDGET (child));
 }

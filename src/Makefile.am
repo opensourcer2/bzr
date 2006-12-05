@@ -52,18 +52,20 @@ libgladegtkinclude_HEADERS = glade-gtk.h
 
 # The glade-3 core library
 libgladeui_1_la_SOURCES = \
+	glade-widget-adaptor.c \
 	glade-debug.c \
 	glade-project.c \
 	glade-parameter.c \
 	glade-placeholder.c \
 	glade-custom.c \
 	glade-project-view.c \
-	glade-widget-class.c \
 	glade-xml-utils.c \
 	glade-palette.c \
 	glade-palette-item.c \
 	glade-palette-box.c \
 	glade-palette-expander.c \
+	glade-design-layout.c \
+	glade-design-view.c \
 	glade-cursor.c \
 	glade-property.c \
 	glade-property-class.c \
@@ -86,6 +88,7 @@ libgladeui_1_la_SOURCES = \
 	glade-app.c \
 	glade-keysyms.c \
 	glade-fixed.c \
+	glade-binding.c \
 	glade-base-editor.c
 
 libgladeui_1_la_CFLAGS =    \
@@ -114,9 +117,11 @@ libgladeuiinclude_HEADERS = \
 	glade-palette-item.h \
 	glade-palette-box.h \
 	glade-palette-expander.h \
+	glade-design-layout.h \
+	glade-design-view.h \
 	glade-cursor.h \
 	glade-widget.h \
-	glade-widget-class.h \
+	glade-widget-adaptor.h \
 	glade-property.h \
 	glade-property-class.h \
 	glade-popup.h \
@@ -134,12 +139,23 @@ libgladeuiinclude_HEADERS = \
 	glade-app.h \
 	glade-builtins.h \
 	glade-fixed.h \
+	glade-binding.h \
 	glade-base-editor.h \
 	fixed_bg.xpm \
 	atk.xpm
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libgladeui-1.0.pc glade-3.pc
+
+if BUILD_PYTHON
+gladepython_LTLIBRARIES = libgladepython.la
+gladepythondir = $(glade_bindingsdir)
+libgladepython_la_SOURCES = glade-python.c glade-python-gwa.c
+libgladepython_la_CFLAGS = -g -Wall $(PYTHON_CFLAGS) $(GTK_CFLAGS)
+libgladepython_la_LDFLAGS = -module -avoid-version $(PYTHON_LIBS)
+libgladepython_la_LIBADD = libgladeui-1.la $(PYTHON_LIBS)
+
+endif
 
 if BUILD_GNOME
 gladegnome_LTLIBRARIES = libgladegnome.la
@@ -156,6 +172,10 @@ if WITH_WIN32
 
 if BUILD_GNOME
   libgladegnome_la_LDFLAGS += -no-undefined
+endif
+
+if BUILD_PYTHON
+  libgladepython_la_LDFLAGS += -no-undefined
 endif
 
 endif

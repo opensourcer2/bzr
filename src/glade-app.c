@@ -30,25 +30,13 @@
 #include <glib/gi18n-lib.h>
 
 #include "glade.h"
-#include "glade-palette.h"
-#include "glade-editor.h"
-#include "glade-clipboard.h"
 #include "glade-clipboard-view.h"
-#include "glade-widget.h"
-#include "glade-widget-class.h"
-#include "glade-property.h"
-#include "glade-property-class.h"
-#include "glade-project.h"
-#include "glade-project-view.h"
-#include "glade-placeholder.h"
-#include "glade-command.h"
 #include "glade-debug.h"
-#include "glade-utils.h"
 #include "glade-cursor.h"
 #include "glade-catalog.h"
-#include "glade-app.h"
 #include "glade-paths.h"
 #include "glade-fixed.h"
+#include "glade-binding.h"
 
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtkstock.h>
@@ -94,8 +82,10 @@ enum
 static guint glade_app_signals[LAST_SIGNAL] = { 0 };
 
 gchar *glade_pixmaps_dir = GLADE_PIXMAPSDIR;
+gchar *glade_scripts_dir = GLADE_SCRIPTSDIR;
 gchar *glade_catalogs_dir = GLADE_CATALOGSDIR;
 gchar *glade_modules_dir = GLADE_MODULESDIR;
+gchar *glade_bindings_dir = GLADE_BINDINGSDIR;
 gchar *glade_plugins_dir = GLADE_PLUGINSDIR;
 gchar *glade_locale_dir = GLADE_LOCALEDIR;
 gchar *glade_icon_dir = GLADE_ICONDIR;
@@ -164,11 +154,17 @@ glade_app_finalize (GObject *app)
 
 #ifdef G_OS_WIN32 
 	g_free (glade_pixmaps_dir);
+	g_free (glade_scripts_dir);
 	g_free (glade_catalogs_dir);
 	g_free (glade_modules_dir);
+	g_free (glade_bindings_dir);	
 	g_free (glade_locale_dir);
 	g_free (glade_icon_dir);
 #endif
+	
+	glade_binding_unload_all ();
+	
+	glade_catalog_modules_close ();
 
 	g_free (GLADE_APP (app)->priv);
 	if (parent_class->finalize)
@@ -264,25 +260,25 @@ glade_app_update_ui_default (GladeApp *app)
 static void
 on_palette_button_clicked (GladePalette *palette, GladeApp *app)
 {
-	GladeWidgetClass *class;
-	GladeWidget *widget;
+	GladeWidgetAdaptor *adaptor;
+	GladeWidget        *widget;
 
 	g_return_if_fail (GLADE_IS_PALETTE (palette));
-	class = glade_palette_get_current_item_class (palette);
+	adaptor = glade_palette_get_current_item (palette);
 
 	/* class may be NULL if the selector was pressed */
-	if (class && class->toplevel)
+	if (adaptor && GWA_IS_TOPLEVEL (adaptor))
 	{
-		widget = glade_command_create (class, NULL, NULL, app->priv->active_project);
+		widget = glade_command_create (adaptor, NULL, NULL, app->priv->active_project);
 		
 		/* if this is a top level widget set the accel group */
-		if (app->priv->accel_group && GTK_IS_WINDOW (widget->object))
+		if (widget && app->priv->accel_group && GTK_IS_WINDOW (widget->object))
 		{
 			gtk_window_add_accel_group (GTK_WINDOW (widget->object),
 						    app->priv->accel_group);
 		}
 
-		glade_palette_deselect_current_item (palette);
+		glade_palette_deselect_current_item (palette, FALSE);
 	}
 }
 
@@ -320,14 +316,19 @@ glade_app_init (GladeApp *app)
 	
 		prefix = g_win32_get_package_installation_directory (NULL, NULL);
 		glade_pixmaps_dir = g_build_filename (prefix, "share", PACKAGE, "pixmaps", NULL);
+		glade_scripts_dir = g_build_filename (prefix, "share", PACKAGE, GLADE_BINDING_SCRIPT_DIR, NULL);
 		glade_catalogs_dir = g_build_filename (prefix, "share", PACKAGE, "catalogs", NULL);
 		glade_modules_dir = g_build_filename (prefix, "lib", PACKAGE, "modules", NULL);
+		glade_bindings_dir = g_build_filename (prefix, "lib", PACKAGE, "bindings", NULL);
 		glade_locale_dir = g_build_filename (prefix, "share", "locale", NULL);
 		glade_icon_dir = g_build_filename (prefix, "share", "pixmaps", NULL);
 		g_free (prefix);
 #endif
 	
 		glade_cursor_init ();
+		
+		glade_binding_load_all ();
+		
 		initialized = TRUE;
 	}
 	app->priv = g_new0 (GladeAppPriv, 1);
@@ -338,7 +339,7 @@ glade_app_init (GladeApp *app)
 	app->priv->catalogs = glade_catalog_load_all ();
 	
 	/* Create palette */
-	app->priv->palette = (GladePalette *) glade_palette_new (app->priv->catalogs, GLADE_ITEM_ICON_ONLY);
+	app->priv->palette = (GladePalette *) glade_palette_new (app->priv->catalogs);
 	g_object_ref (app->priv->palette);
 	gtk_object_sink (GTK_OBJECT (app->priv->palette));
 	gtk_widget_show_all (GTK_WIDGET (app->priv->palette));
@@ -756,7 +757,7 @@ glade_app_get_project_by_path (const gchar *project_path)
 	GList    *l;
 	gchar *canonical_path;
 
-	if (project_path == NULL) return FALSE;
+	if (project_path == NULL) return NULL;
 
 	app = glade_app_get ();
 

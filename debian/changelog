@@ -1,3 +1,33 @@
+glade-3 (3.1.2-0ubuntu1) feisty; urgency=low
+
+  * New upstream version
+
+ -- Sebastien Bacher <seb128@canonical.com>  Tue,  5 Dec 2006 16:57:50 +0100
+
+glade-3 (3.1.1-0ubuntu1) feisty; urgency=low
+
+  * New upstream version:
+    - Use GtkRecent and removed manual recent project handling
+    - Refactoring of UI frontend & palette code
+    - Selector button from the palette is now hidden and one is placed on the 
+      toolbar instead
+    - Refactoring of core/plugin interface, now the plugin derives an adaptor
+      type to interface with the core.
+    - New bindings framework, this includes a bindings core module and an 
+      initial implementation of the python binding
+    - Added core support for plugins to implement actions on the context menu,
+      AND support for scripted context menu actions
+    - Cleanup of gnome catalog code
+    - Misc bugfixes 
+  * debian/control.in:
+    - Build-Depends on python-gtk2-dev
+    - no need to Build-Depends on gtk-doc-tools
+    - updated GTK requirement to 2.10 according to configure
+  * debian/rules:
+    - don't build documentation the tarball ships it now
+
+ -- Sebastien Bacher <seb128@canonical.com>  Mon,  4 Dec 2006 11:52:50 +0100
+
 glade-3 (3.0.2-0ubuntu1) edgy; urgency=low
 
   * New upstream version (UVF exception #63035):
