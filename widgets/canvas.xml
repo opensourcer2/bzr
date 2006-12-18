@@ -62,11 +62,11 @@
           <tooltip>The number of pixels between the text and the icon</tooltip>
           <spec>glade_standard_int_spec</spec>
         </property>
-        <property id="text-editable" name="Text Editable">
+        <property ignore="True" id="text-editable" name="Text Editable">
           <tooltip>If the icon text can be edited by the user</tooltip>
           <spec>glade_standard_boolean_spec</spec>
         </property>
-        <property id="text-static" name="Text Static">
+        <property ignore="True" id="text-static" name="Text Static">
           <tooltip>If the icon text is static, in which case it will not be copied by the GnomeIconList</tooltip>
           <spec>glade_standard_boolean_spec</spec>
         </property>

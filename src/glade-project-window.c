@@ -26,11 +26,13 @@
 #endif
 
 #include <string.h>
+#include <glib/gstdio.h>
 #include <glib/gi18n.h>
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtkstock.h>
 
 #include "glade.h"
+#include "glade-paths.h"
 #include "glade-design-view.h"
 #include "glade-project-window.h"
 #include "glade-binding.h"
@@ -40,6 +42,9 @@
 #define GLADE_ACTION_GROUP_PROJECTS_LIST_MENU "GladeProjectsList"
 
 #define READONLY_INDICATOR (_("[Read Only]"))
+
+#define GLADE_URL_USER_MANUAL      "http://glade.gnome.org/doc/manual"
+#define GLADE_URL_DEVELOPER_MANUAL "http://glade.gnome.org/docs/index.html"
 
 #define GLADE_PROJECT_WINDOW_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object),  \
 					         GLADE_TYPE_PROJECT_WINDOW,              \
@@ -79,17 +84,109 @@ struct _GladeProjectWindowPrivate
 	
 };
 
-const gint   GLADE_WIDGET_TREE_WIDTH      = 230;
-const gint   GLADE_WIDGET_TREE_HEIGHT     = 300;
-const gint   GLADE_PALETTE_DEFAULT_HEIGHT = 450;
-
-static gpointer parent_class = NULL;
+static GladeAppClass *parent_class = NULL;
 
 static void gpw_refresh_undo_redo (GladeProjectWindow *gpw);
 
 static void gpw_recent_chooser_item_activated_cb (GtkRecentChooser *chooser, GladeProjectWindow *gpw);
 
+
 G_DEFINE_TYPE(GladeProjectWindow, glade_project_window, GLADE_TYPE_APP)
+
+static void
+about_dialog_activate_link_func (GtkAboutDialog *dialog, const gchar *link, GladeProjectWindow *gpw)
+{
+	GtkWidget *warning_dialog;
+	gboolean retval;
+	
+	retval = glade_util_url_show (link);
+	
+	if (!retval)
+	{
+		warning_dialog = gtk_message_dialog_new (GTK_WINDOW (gpw->priv->window),
+						 GTK_DIALOG_MODAL,
+						 GTK_MESSAGE_WARNING,
+						 GTK_BUTTONS_OK,
+						 _("Could not display the URL '%s'"),
+						 link);
+						 
+		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (warning_dialog),
+							  _("No suitable web browser executable could be found."));
+						 	
+		gtk_window_set_title (GTK_WINDOW (warning_dialog), "");
+
+		g_signal_connect_swapped (warning_dialog, "response",
+					  G_CALLBACK (gtk_widget_destroy),
+					  dialog);
+
+		gtk_widget_show (warning_dialog);
+	}	
+
+}
+
+/* locates the help file "glade.xml" with respect to current locale */
+static gchar*
+locate_help_file ()
+{
+	const gchar* const* locales = g_get_language_names ();
+
+	/* check if user manual has been installed, if not, GLADE_GNOMEHELPDIR is empty */
+	if (strlen (GLADE_GNOMEHELPDIR) == 0)
+		return NULL;
+
+	for (; *locales; locales++)
+	{
+		gchar *path;
+		
+		path = g_build_path (G_DIR_SEPARATOR_S, GLADE_GNOMEHELPDIR, "glade", *locales, "glade.xml", NULL);
+
+		if (g_file_test (path, G_FILE_TEST_EXISTS))
+		{
+			return (path);
+		}
+		g_free (path);
+	}
+	
+	return NULL;
+}
+
+static gboolean
+glade_project_window_help_show (const gchar *link_id)
+{
+	gchar *file, *url, *command;
+	gboolean retval;
+	gint exit_status = -1;
+	GError *error = NULL; 	
+
+	file = locate_help_file ();
+	if (file == NULL)
+		return FALSE;
+
+	if (link_id != NULL) {
+		url = g_strconcat ("ghelp://", file, "?", link_id, NULL);
+	} else {
+		url = g_strconcat ("ghelp://", file, NULL);	
+	}
+
+	command = g_strconcat ("gnome-open ", url, NULL);
+			
+	retval = g_spawn_command_line_sync (command,
+					    NULL,
+					    NULL,
+					    &exit_status,
+					    &error);
+
+	if (!retval) {
+		g_error_free (error);
+		error = NULL;
+	}		
+	
+	g_free (command);
+	g_free (file);
+	g_free (url);
+	
+	return retval && !exit_status;
+}
 
 static void
 gpw_refresh_title (GladeProjectWindow *gpw)
@@ -655,9 +752,52 @@ gpw_open_cb (GtkAction *action, GladeProjectWindow *gpw)
 static void
 gpw_save (GladeProjectWindow *gpw, GladeProject *project, const gchar *path)
 {
-	GError  *error = NULL;
-	gchar   *display_name, *display_path = g_strdup (path);
+	GError   *error = NULL;
+	gchar    *display_name, *display_path = g_strdup (path);
+	time_t    mtime;
+	GtkWidget *dialog;
+	GtkWidget *button;
+	gint       response;
 
+	/* check for external modification to the project file */
+	mtime = glade_util_get_file_mtime (project->path, NULL);
+	
+	if (mtime > glade_project_get_file_mtime (project)) {
+	
+		dialog = gtk_message_dialog_new (GTK_WINDOW (gpw->priv->window),
+						 GTK_DIALOG_MODAL,
+						 GTK_MESSAGE_WARNING,
+						 GTK_BUTTONS_NONE,
+						 _("The file %s has been modified since reading it"),
+						 project->path);
+						 
+		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), 				 
+							  _("If you save it, all the external changes could be lost. Save it anyway?"));
+							  
+		gtk_window_set_title (GTK_WINDOW (dialog), "");
+		
+	        button = gtk_button_new_with_mnemonic (_("_Save Anyway"));
+	        gtk_button_set_image (GTK_BUTTON (button),
+	        		      gtk_image_new_from_stock (GTK_STOCK_SAVE,
+	        		      				GTK_ICON_SIZE_BUTTON));
+	        gtk_widget_show (button);
+
+		gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button, GTK_RESPONSE_ACCEPT);	        		      			
+	        gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Don't Save"), GTK_RESPONSE_REJECT);			 
+						 
+		gtk_dialog_set_default_response	(GTK_DIALOG (dialog), GTK_RESPONSE_REJECT);
+		
+		response = gtk_dialog_run (GTK_DIALOG (dialog));
+		
+		gtk_widget_destroy (dialog);
+		
+		if (response == GTK_RESPONSE_REJECT)
+		{
+			g_free (display_path);
+			return;
+		}
+	}
+		  
 	/* Interestingly; we cannot use `path' after glade_project_reset_path
 	 * because we are getting called with project->path as an argument.
 	 */
@@ -1303,10 +1443,78 @@ gpw_toggle_editor_help_cb (GtkAction *action, GladeProjectWindow *gpw)
 		glade_editor_hide_context_info (glade_app_get_editor ());
 }
 
-static void 
-gpw_documentation_cb (GtkAction *action, GladeProjectWindow *gpw)
+static void
+gpw_show_help_cb (GtkAction *action, GladeProjectWindow *gpw)
 {
-	glade_util_search_devhelp ("gladeui", NULL, NULL);
+	GtkWidget *dialog;
+	gboolean retval;
+	
+	retval = glade_project_window_help_show (NULL);
+	if (retval)
+		return;
+	
+	/* fallback to displaying online user manual */ 
+	retval = glade_util_url_show (GLADE_URL_USER_MANUAL);	
+
+	if (!retval)
+	{
+		dialog = gtk_message_dialog_new (GTK_WINDOW (gpw->priv->window),
+						 GTK_DIALOG_MODAL,
+						 GTK_MESSAGE_ERROR,
+						 GTK_BUTTONS_OK,
+						 _("Could not display the online user manual"));
+						 
+		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+							  _("No suitable web browser executable could be found "
+							    "to be executed and to display the URL: %s"),
+							    GLADE_URL_USER_MANUAL);
+						 	
+		gtk_window_set_title (GTK_WINDOW (dialog), "");
+
+		g_signal_connect_swapped (dialog, "response",
+					  G_CALLBACK (gtk_widget_destroy),
+					  dialog);
+
+		gtk_widget_show (dialog);
+		
+	}
+}
+
+static void 
+gpw_show_developer_manual_cb (GtkAction *action, GladeProjectWindow *gpw)
+{
+	GtkWidget *dialog;
+	gboolean retval;
+	
+	if (glade_util_have_devhelp ())
+	{
+		glade_util_search_devhelp ("gladeui", NULL, NULL);
+		return;	
+	}
+	
+	retval = glade_util_url_show (GLADE_URL_DEVELOPER_MANUAL);	
+
+	if (!retval)
+	{
+		dialog = gtk_message_dialog_new (GTK_WINDOW (gpw->priv->window),
+						 GTK_DIALOG_MODAL,
+						 GTK_MESSAGE_ERROR,
+						 GTK_BUTTONS_OK,
+						 _("Could not display the online developer reference manual"));
+						 
+		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+							  _("No suitable web browser executable could be found "
+							    "to be executed and to display the URL: %s"),
+							    GLADE_URL_DEVELOPER_MANUAL);
+						 	
+		gtk_window_set_title (GTK_WINDOW (dialog), "");
+
+		g_signal_connect_swapped (dialog, "response",
+					  G_CALLBACK (gtk_widget_destroy),
+					  dialog);
+
+		gtk_widget_show (dialog);
+	}	
 }
 
 static void 
@@ -1426,7 +1634,8 @@ static const gchar *ui_info =
 "      <placeholder name='ProjectsListPlaceholder'/>\n"
 "    </menu>\n"
 "    <menu action='HelpMenu'>\n"
-"      <menuitem action='Manual'/>\n"
+"      <menuitem action='HelpContents'/>\n"
+"      <menuitem action='DeveloperReference'/>\n"
 "      <separator/>\n"
 "      <menuitem action='About'/>\n"
 "    </menu>\n"
@@ -1469,10 +1678,13 @@ static GtkActionEntry static_entries[] = {
 	
 	/* HelpMenu */
 	{ "About", GTK_STOCK_ABOUT, N_("_About"), NULL,
-	  N_("Shows the About Dialog"), G_CALLBACK (gpw_about_cb) },
+	  N_("About this application"), G_CALLBACK (gpw_about_cb) },
 
-	{ "Manual", NULL, N_("_Documentation"), NULL,
-	  N_("Documentation about Glade"), G_CALLBACK (gpw_documentation_cb) }
+	{ "HelpContents", GTK_STOCK_HELP, N_("_Contents"), "F1",
+	  N_("Display the user manual"), G_CALLBACK (gpw_show_help_cb) },
+
+	{ "DeveloperReference", NULL, N_("_Developer Reference"), NULL,
+	  N_("Display the developer reference manual"), G_CALLBACK (gpw_show_developer_manual_cb) }
 };
 static guint n_static_entries = G_N_ELEMENTS (static_entries);
 
@@ -1778,7 +1990,7 @@ glade_project_window_create (GladeProjectWindow *gpw)
 	GtkWidget *toolbar;
 	GladeProjectView *project_view;
 	GtkWidget *statusbar;
-	GtkWidget *editor_item, *docs_item;
+	GtkWidget *editor_item;
 	GtkWidget *palette;
 	GtkWidget *editor;
 	GtkWidget *dockitem;
@@ -1808,6 +2020,8 @@ glade_project_window_create (GladeProjectWindow *gpw)
 	hpaned1 = gtk_hpaned_new ();
 	hpaned2 = gtk_hpaned_new ();
 	vpaned = gtk_vpaned_new ();
+
+	gtk_container_set_border_width (GTK_CONTAINER (hpaned1), 2);
 
 	gtk_box_pack_start (GTK_BOX (vbox), hpaned1, TRUE, TRUE, 0);
 	gtk_paned_pack1 (GTK_PANED (hpaned1), hpaned2, TRUE, FALSE);
@@ -1864,12 +2078,8 @@ glade_project_window_create (GladeProjectWindow *gpw)
 	/* devhelp */
 	editor_item = gtk_ui_manager_get_widget (gpw->priv->ui,
 						 "/MenuBar/ViewMenu/PropertyEditorHelp");
-	docs_item = gtk_ui_manager_get_widget (gpw->priv->ui,
-					       "/MenuBar/HelpMenu/Manual");
-	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (editor_item), FALSE);
 
 	gtk_widget_set_sensitive (editor_item, FALSE);
-	gtk_widget_set_sensitive (docs_item, FALSE);
 	
 	/* Console */
 	gpw_construct_console (gpw);
@@ -2095,15 +2305,15 @@ glade_project_window_finalize (GObject *object)
 }
 
 static void
-glade_project_window_class_init (GladeProjectWindowClass * class)
+glade_project_window_class_init (GladeProjectWindowClass * klass)
 {
 	GObjectClass *object_class;
 	GladeAppClass *app_class;
-	g_return_if_fail (class != NULL);
+	g_return_if_fail (klass != NULL);
 
-	parent_class = g_type_class_peek_parent (class);
-	object_class = G_OBJECT_CLASS  (class);
-	app_class    = GLADE_APP_CLASS (class);
+	parent_class = g_type_class_peek_parent (klass);
+	object_class = G_OBJECT_CLASS  (klass);
+	app_class    = GLADE_APP_CLASS (klass);
 
 	object_class->finalize = glade_project_window_finalize;
 
@@ -2119,7 +2329,9 @@ glade_project_window_init (GladeProjectWindow *gpw)
 	
 	gpw->priv->label = NULL;
 	gpw->priv->default_path = NULL;
-
+	
+	gtk_about_dialog_set_url_hook ((GtkAboutDialogActivateLinkFunc) about_dialog_activate_link_func, gpw, NULL);
+	
 }
 
 GladeProjectWindow *
@@ -2149,12 +2361,10 @@ glade_project_window_new (void)
 void
 glade_project_window_check_devhelp (GladeProjectWindow *gpw)
 {
-	GtkWidget *editor_item, *docs_item;
+	GtkWidget *editor_item;
 	
 	editor_item = gtk_ui_manager_get_widget (gpw->priv->ui,
-						 "/MenuBar/ViewMenu/PropertyEditorHelp");
-	docs_item = gtk_ui_manager_get_widget (gpw->priv->ui,
-					       "/MenuBar/HelpMenu/Manual");
+						 "/MenuBar/ViewMenu/PropertyEditorHelp");	
 
 	if (glade_util_have_devhelp ())
 	{
@@ -2168,11 +2378,9 @@ glade_project_window_check_devhelp (GladeProjectWindow *gpw)
 				  G_CALLBACK (gpw_doc_search_cb), gpw);
 		
 		gtk_widget_set_sensitive (editor_item, TRUE);
-		gtk_widget_set_sensitive (docs_item, TRUE);
 	}
 	else
 	{
 		gtk_widget_set_sensitive (editor_item, FALSE);
-		gtk_widget_set_sensitive (docs_item, FALSE);
 	}
 }

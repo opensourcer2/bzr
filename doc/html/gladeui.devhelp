@@ -36,10 +36,10 @@
     <sub name="Index" link="ix01.html"/>
   </chapters>
   <functions>
-    <function name="Toplevel catalog properties and tags" link="catalogintro.html#id2503392"/>
-    <function name="Widget Class Parameters" link="widgetclasses.html#id2548122"/>
-    <function name="Displayable Values, Packing defaults and such" link="properties.html#id2549092"/>
-    <function name="Container Relationship Parameter Tag Definitions" link="children.html#id2549777"/>
+    <function name="Toplevel catalog properties and tags" link="catalogintro.html#id2479322"/>
+    <function name="Widget Class Parameters" link="widgetclasses.html#id2523392"/>
+    <function name="Displayable Values, Packing defaults and such" link="properties.html#id2524405"/>
+    <function name="Container Relationship Parameter Tag Definitions" link="children.html#id2525090"/>
     <function name="GladeApp" link="GladeApp.html#GladeApp-struct"/>
     <function name="glade_app_get ()" link="GladeApp.html#glade-app-get"/>
     <function name="glade_app_update_ui ()" link="GladeApp.html#glade-app-update-ui"/>

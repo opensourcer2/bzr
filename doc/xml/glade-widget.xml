@@ -43,7 +43,7 @@ const <link linkend="gchar">gchar</link>* <link linkend="glade-widget-get-intern
 <link linkend="void">void</link>        <link linkend="glade-widget-show">glade_widget_show</link>               (<link linkend="GladeWidget">GladeWidget</link> *widget);
 <link linkend="void">void</link>        <link linkend="glade-widget-hide">glade_widget_hide</link>               (<link linkend="GladeWidget">GladeWidget</link> *widget);
 <link linkend="void">void</link>        <link linkend="glade-widget-copy-properties">glade_widget_copy_properties</link>    (<link linkend="GladeWidget">GladeWidget</link> *widget,
-                                             <link linkend="GladeWidget">GladeWidget</link> *template);
+                                             <link linkend="GladeWidget">GladeWidget</link> *template_widget);
 <link linkend="void">void</link>        <link linkend="glade-widget-set-packing-properties">glade_widget_set_packing_properties</link>
                                             (<link linkend="GladeWidget">GladeWidget</link> *widget,
                                              <link linkend="GladeWidget">GladeWidget</link> *container);
@@ -102,7 +102,7 @@ const <link linkend="gchar">gchar</link>* <link linkend="glade-widget-get-intern
                                              <link linkend="GObject">GObject</link> *old_object,
                                              <link linkend="GObject">GObject</link> *new_object);
 <link linkend="void">void</link>        <link linkend="glade-widget-rebuild">glade_widget_rebuild</link>            (<link linkend="GladeWidget">GladeWidget</link> *glade_widget);
-<link linkend="GladeWidget">GladeWidget</link>* <link linkend="glade-widget-dup">glade_widget_dup</link>               (<link linkend="GladeWidget">GladeWidget</link> *template);
+<link linkend="GladeWidget">GladeWidget</link>* <link linkend="glade-widget-dup">glade_widget_dup</link>               (<link linkend="GladeWidget">GladeWidget</link> *template_widget);
 <link linkend="void">void</link>        <link linkend="glade-widget-add-signal-handler">glade_widget_add_signal_handler</link> (<link linkend="GladeWidget">GladeWidget</link> *widget,
                                              <link linkend="GladeSignal">GladeSignal</link> *signal_handler);
 <link linkend="void">void</link>        <link linkend="glade-widget-remove-signal-handler">glade_widget_remove_signal_handler</link>
@@ -445,17 +445,17 @@ Hide <parameter>widget</parameter></para>
 <refsect2>
 <title><anchor id="glade-widget-copy-properties" role="function"/>glade_widget_copy_properties ()</title>
 <indexterm><primary>glade_widget_copy_properties</primary></indexterm><programlisting><link linkend="void">void</link>        glade_widget_copy_properties    (<link linkend="GladeWidget">GladeWidget</link> *widget,
-                                             <link linkend="GladeWidget">GladeWidget</link> *template);</programlisting>
+                                             <link linkend="GladeWidget">GladeWidget</link> *template_widget);</programlisting>
 <para>
 Sets properties in <parameter>widget</parameter> based on the values of
-matching properties in <parameter>template</parameter></para>
+matching properties in <parameter>template_widget</parameter></para>
 <para>
 
 </para><variablelist role="params">
 <varlistentry><term><parameter>widget</parameter>&nbsp;:</term>
 <listitem><simpara>   a 'dest' <link linkend="GladeWidget"><type>GladeWidget</type></link>
 </simpara></listitem></varlistentry>
-<varlistentry><term><parameter>template</parameter>&nbsp;:</term>
+<varlistentry><term><parameter>template_widget</parameter>&nbsp;:</term>
 <listitem><simpara> a 'src' <link linkend="GladeWidget"><type>GladeWidget</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
@@ -883,13 +883,13 @@ takes care of reparenting.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="glade-widget-dup" role="function"/>glade_widget_dup ()</title>
-<indexterm><primary>glade_widget_dup</primary></indexterm><programlisting><link linkend="GladeWidget">GladeWidget</link>* glade_widget_dup               (<link linkend="GladeWidget">GladeWidget</link> *template);</programlisting>
+<indexterm><primary>glade_widget_dup</primary></indexterm><programlisting><link linkend="GladeWidget">GladeWidget</link>* glade_widget_dup               (<link linkend="GladeWidget">GladeWidget</link> *template_widget);</programlisting>
 <para>
 Creates a deep copy of <link linkend="GladeWidget"><type>GladeWidget</type></link>.</para>
 <para>
 
 </para><variablelist role="params">
-<varlistentry><term><parameter>template</parameter>&nbsp;:</term>
+<varlistentry><term><parameter>template_widget</parameter>&nbsp;:</term>
 <listitem><simpara> a <link linkend="GladeWidget"><type>GladeWidget</type></link>
 </simpara></listitem></varlistentry>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> The newly created <link linkend="GladeWidget"><type>GladeWidget</type></link>

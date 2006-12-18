@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
 <title>Glade Signal Editor</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<meta name="generator" content="DocBook XSL Stylesheets V1.68.1">
 <link rel="start" href="index.html" title="Glade UI Builder Reference Manual">
 <link rel="up" href="dockables.html" title="Part&#160;III.&#160;Dockable Glade UI Widgets">
 <link rel="prev" href="GladeProjectView.html" title="GladeProjectView">
@@ -25,16 +25,16 @@
 <th width="100%" align="center">Glade UI Builder Reference Manual</th>
 <td><a accesskey="n" href="misc.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr>
-<tr><td colspan="5" class="shortcuts"><nobr><a href="#id2633746" class="shortcut">Top</a>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#id2609018" class="shortcut">Top</a>
                   &#160;|&#160;
-                  <a href="#id2633851" class="shortcut">Description</a></nobr></td></tr>
+                  <a href="#id2609121" class="shortcut">Description</a></nobr></td></tr>
 </table>
 <div class="refentry" lang="en">
 <a name="gladeui-glade-signal-editor"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
 <h2>
-<a name="id2633746"></a><span class="refentrytitle">Glade Signal Editor</span>
+<a name="id2609018"></a><span class="refentrytitle">Glade Signal Editor</span>
 </h2>
 <p>Glade Signal Editor &#8212; An interface to edit signals for a <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a></p>
 </td>
@@ -56,7 +56,7 @@ void        <a href="gladeui-glade-signal-editor.html#glade-signal-editor-load-w
 </pre>
 </div>
 <div class="refsect1" lang="en">
-<a name="id2633851"></a><h2>Description</h2>
+<a name="id2609121"></a><h2>Description</h2>
 <p>
 This isnt really a dockable widget, since you need to access the
 <a href="gladeui-glade-signal-editor.html#GladeSignalEditor"><span class="type">GladeSignalEditor</span></a> struct's '-&gt;main_window' widget, the signal editor
@@ -64,11 +64,11 @@ is mostly of interest when implementing a custom object editor.
 </p>
 </div>
 <div class="refsect1" lang="en">
-<a name="id2633877"></a><h2>Details</h2>
+<a name="id2609147"></a><h2>Details</h2>
 <div class="refsect2" lang="en">
-<a name="id2633887"></a><h3>
+<a name="id2609157"></a><h3>
 <a name="GladeSignalEditor"></a>GladeSignalEditor</h3>
-<a class="indexterm" name="id2633900"></a><pre class="programlisting">typedef struct {
+<a class="indexterm" name="id2609170"></a><pre class="programlisting">typedef struct {
 	GtkWidget *main_window;  /* A vbox where all the widgets are added */
 
 	GladeWidget *widget;
@@ -91,9 +91,9 @@ is mostly of interest when implementing a custom object editor.
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2633921"></a><h3>
+<a name="id2609192"></a><h3>
 <a name="glade-signal-editor-get-widget"></a>glade_signal_editor_get_widget ()</h3>
-<a class="indexterm" name="id2633935"></a><pre class="programlisting">GtkWidget*  glade_signal_editor_get_widget  (<a href="gladeui-glade-signal-editor.html#GladeSignalEditor">GladeSignalEditor</a> *editor);</pre>
+<a class="indexterm" name="id2609205"></a><pre class="programlisting">GtkWidget*  glade_signal_editor_get_widget  (<a href="gladeui-glade-signal-editor.html#GladeSignalEditor">GladeSignalEditor</a> *editor);</pre>
 <p>
 </p>
 <p>
@@ -103,12 +103,14 @@ is mostly of interest when implementing a custom object editor.
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><span class="term"><em class="parameter"><code>editor</code></em>&#160;:</span></td>
+<td>
+<span class="term"><em class="parameter"><code>editor</code></em>&#160;:</span></td>
 <td> a <a href="gladeui-glade-signal-editor.html#GladeSignalEditor"><span class="type">GladeSignalEditor</span></a>
 </td>
 </tr>
 <tr>
-<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td>
+<span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td> the <span class="type">GtkWidget</span> that is the main window for <em class="parameter"><code>editor</code></em>, or <code class="literal">NULL</code> if
          it does not exist
 </td>
@@ -118,9 +120,9 @@ is mostly of interest when implementing a custom object editor.
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2634028"></a><h3>
+<a name="id2609299"></a><h3>
 <a name="glade-signal-editor-new"></a>glade_signal_editor_new ()</h3>
-<a class="indexterm" name="id2634042"></a><pre class="programlisting"><a href="gladeui-glade-signal-editor.html#GladeSignalEditor">GladeSignalEditor</a>* glade_signal_editor_new  (gpointer *editor);</pre>
+<a class="indexterm" name="id2609312"></a><pre class="programlisting"><a href="gladeui-glade-signal-editor.html#GladeSignalEditor">GladeSignalEditor</a>* glade_signal_editor_new  (gpointer *editor);</pre>
 <p>
 </p>
 <p>
@@ -130,12 +132,14 @@ is mostly of interest when implementing a custom object editor.
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><span class="term"><em class="parameter"><code>editor</code></em>&#160;:</span></td>
+<td>
+<span class="term"><em class="parameter"><code>editor</code></em>&#160;:</span></td>
 <td> a <a href="GladeEditor.html" title="GladeEditor"><span class="type">GladeEditor</span></a>
 </td>
 </tr>
 <tr>
-<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td>
+<span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td> a new <a href="gladeui-glade-signal-editor.html#GladeSignalEditor"><span class="type">GladeSignalEditor</span></a> associated with <em class="parameter"><code>editor</code></em>
 </td>
 </tr>
@@ -144,9 +148,9 @@ is mostly of interest when implementing a custom object editor.
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2634124"></a><h3>
+<a name="id2609394"></a><h3>
 <a name="glade-signal-editor-load-widget"></a>glade_signal_editor_load_widget ()</h3>
-<a class="indexterm" name="id2634137"></a><pre class="programlisting">void        glade_signal_editor_load_widget (<a href="gladeui-glade-signal-editor.html#GladeSignalEditor">GladeSignalEditor</a> *editor,
+<a class="indexterm" name="id2609407"></a><pre class="programlisting">void        glade_signal_editor_load_widget (<a href="gladeui-glade-signal-editor.html#GladeSignalEditor">GladeSignalEditor</a> *editor,
                                              <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
 <p>
 TODO: write me</p>
@@ -157,12 +161,14 @@ TODO: write me</p>
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><span class="term"><em class="parameter"><code>editor</code></em>&#160;:</span></td>
+<td>
+<span class="term"><em class="parameter"><code>editor</code></em>&#160;:</span></td>
 <td> a <a href="gladeui-glade-signal-editor.html#GladeSignalEditor"><span class="type">GladeSignalEditor</span></a>
 </td>
 </tr>
 <tr>
-<td><span class="term"><em class="parameter"><code>widget</code></em>&#160;:</span></td>
+<td>
+<span class="term"><em class="parameter"><code>widget</code></em>&#160;:</span></td>
 <td> a <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>
 </td>
 </tr>

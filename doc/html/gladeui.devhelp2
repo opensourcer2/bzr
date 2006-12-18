@@ -36,10 +36,10 @@
     <sub name="Index" link="ix01.html"/>
   </chapters>
   <functions>
-    <keyword type="" name="Toplevel catalog properties and tags" link="catalogintro.html#id2503392"/>
-    <keyword type="" name="Widget Class Parameters" link="widgetclasses.html#id2548122"/>
-    <keyword type="" name="Displayable Values, Packing defaults and such" link="properties.html#id2549092"/>
-    <keyword type="" name="Container Relationship Parameter Tag Definitions" link="children.html#id2549777"/>
+    <keyword type="" name="Toplevel catalog properties and tags" link="catalogintro.html#id2479322"/>
+    <keyword type="" name="Widget Class Parameters" link="widgetclasses.html#id2523392"/>
+    <keyword type="" name="Displayable Values, Packing defaults and such" link="properties.html#id2524405"/>
+    <keyword type="" name="Container Relationship Parameter Tag Definitions" link="children.html#id2525090"/>
     <keyword type="struct" name="GladeApp" link="GladeApp.html#GladeApp-struct"/>
     <keyword type="function" name="glade_app_get ()" link="GladeApp.html#glade-app-get"/>
     <keyword type="function" name="glade_app_update_ui ()" link="GladeApp.html#glade-app-update-ui"/>

@@ -20,11 +20,11 @@
 
 
 struct      <link linkend="GladeProperty-struct">GladeProperty</link>;
-<link linkend="GladeProperty">GladeProperty</link>* <link linkend="glade-property-new">glade_property_new</link>           (<link linkend="GladePropertyClass">GladePropertyClass</link> *class,
+<link linkend="GladeProperty">GladeProperty</link>* <link linkend="glade-property-new">glade_property_new</link>           (<link linkend="GladePropertyClass">GladePropertyClass</link> *klass,
                                              <link linkend="GladeWidget">GladeWidget</link> *widget,
                                              <link linkend="GValue">GValue</link> *value,
                                              <link linkend="gboolean">gboolean</link> catalog_default);
-<link linkend="GladeProperty">GladeProperty</link>* <link linkend="glade-property-dup">glade_property_dup</link>           (<link linkend="GladeProperty">GladeProperty</link> *template,
+<link linkend="GladeProperty">GladeProperty</link>* <link linkend="glade-property-dup">glade_property_dup</link>           (<link linkend="GladeProperty">GladeProperty</link> *template_prop,
                                              <link linkend="GladeWidget">GladeWidget</link> *widget);
 <link linkend="void">void</link>        <link linkend="glade-property-reset">glade_property_reset</link>            (<link linkend="GladeProperty">GladeProperty</link> *property);
 <link linkend="gboolean">gboolean</link>    <link linkend="glade-property-default">glade_property_default</link>          (<link linkend="GladeProperty">GladeProperty</link> *property);
@@ -155,12 +155,12 @@ the <link linkend="GladePropertyClass"><type>GladePropertyClass</type></link> de
 </para></refsect2>
 <refsect2>
 <title><anchor id="glade-property-new" role="function"/>glade_property_new ()</title>
-<indexterm><primary>glade_property_new</primary></indexterm><programlisting><link linkend="GladeProperty">GladeProperty</link>* glade_property_new           (<link linkend="GladePropertyClass">GladePropertyClass</link> *class,
+<indexterm><primary>glade_property_new</primary></indexterm><programlisting><link linkend="GladeProperty">GladeProperty</link>* glade_property_new           (<link linkend="GladePropertyClass">GladePropertyClass</link> *klass,
                                              <link linkend="GladeWidget">GladeWidget</link> *widget,
                                              <link linkend="GValue">GValue</link> *value,
                                              <link linkend="gboolean">gboolean</link> catalog_default);</programlisting>
 <para>
-Creates a <link linkend="GladeProperty"><type>GladeProperty</type></link> of type <parameter>class</parameter> for <parameter>widget</parameter> with <parameter>value</parameter>; if
+Creates a <link linkend="GladeProperty"><type>GladeProperty</type></link> of type <parameter>klass</parameter> for <parameter>widget</parameter> with <parameter>value</parameter>; if
 <parameter>value</parameter> is <link linkend="NULL:CAPS"><literal>NULL</literal></link>, then the introspected default value for that property
 will be used; unless otherwise specified by <parameter>catalog_default</parameter>.
 </para>
@@ -173,7 +173,7 @@ by the user).</para>
 <para>
 
 </para><variablelist role="params">
-<varlistentry><term><parameter>class</parameter>&nbsp;:</term>
+<varlistentry><term><parameter>klass</parameter>&nbsp;:</term>
 <listitem><simpara> A <link linkend="GladePropertyClass"><type>GladePropertyClass</type></link> defining this property
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>widget</parameter>&nbsp;:</term>
@@ -192,14 +192,14 @@ by the user).</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="glade-property-dup" role="function"/>glade_property_dup ()</title>
-<indexterm><primary>glade_property_dup</primary></indexterm><programlisting><link linkend="GladeProperty">GladeProperty</link>* glade_property_dup           (<link linkend="GladeProperty">GladeProperty</link> *template,
+<indexterm><primary>glade_property_dup</primary></indexterm><programlisting><link linkend="GladeProperty">GladeProperty</link>* glade_property_dup           (<link linkend="GladeProperty">GladeProperty</link> *template_prop,
                                              <link linkend="GladeWidget">GladeWidget</link> *widget);</programlisting>
 <para>
 </para>
 <para>
 
 </para><variablelist role="params">
-<varlistentry><term><parameter>template</parameter>&nbsp;:</term>
+<varlistentry><term><parameter>template_prop</parameter>&nbsp;:</term>
 <listitem><simpara> A <link linkend="GladeProperty"><type>GladeProperty</type></link>
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>widget</parameter>&nbsp;:</term>

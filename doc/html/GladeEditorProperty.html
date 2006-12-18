@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
 <title>GladeEditorProperty</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<meta name="generator" content="DocBook XSL Stylesheets V1.68.1">
 <link rel="start" href="index.html" title="Glade UI Builder Reference Manual">
 <link rel="up" href="dockables.html" title="Part&#160;III.&#160;Dockable Glade UI Widgets">
 <link rel="prev" href="GladeEditor.html" title="GladeEditor">
@@ -25,24 +25,24 @@
 <th width="100%" align="center">Glade UI Builder Reference Manual</th>
 <td><a accesskey="n" href="GladePalette.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr>
-<tr><td colspan="5" class="shortcuts"><nobr><a href="#id2624772" class="shortcut">Top</a>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#id2600044" class="shortcut">Top</a>
                   &#160;|&#160;
-                  <a href="#id2625242" class="shortcut">Description</a>
+                  <a href="#id2600513" class="shortcut">Description</a>
                   &#160;|&#160;
-                  <a href="#id2625007" class="shortcut">Object Hierarchy</a>
+                  <a href="#id2600278" class="shortcut">Object Hierarchy</a>
                   &#160;|&#160;
-                  <a href="#id2625076" class="shortcut">Implemented Interfaces</a>
+                  <a href="#id2600347" class="shortcut">Implemented Interfaces</a>
                   &#160;|&#160;
-                  <a href="#id2625099" class="shortcut">Properties</a>
+                  <a href="#id2600370" class="shortcut">Properties</a>
                   &#160;|&#160;
-                  <a href="#id2625168" class="shortcut">Signals</a></nobr></td></tr>
+                  <a href="#id2600439" class="shortcut">Signals</a></nobr></td></tr>
 </table>
 <div class="refentry" lang="en">
 <a name="GladeEditorProperty"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
 <h2>
-<a name="id2624772"></a><span class="refentrytitle">GladeEditorProperty</span>
+<a name="id2600044"></a><span class="refentrytitle">GladeEditorProperty</span>
 </h2>
 <p>GladeEditorProperty &#8212; A generic widget to edit a <a href="GladeProperty.html" title="GladeProperty"><span class="type">GladeProperty</span></a></p>
 </td>
@@ -57,7 +57,7 @@
 
             <a href="GladeEditorProperty.html#GladeEditorProperty-struct">GladeEditorProperty</a>;
 <a href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a>* <a href="GladeEditorProperty.html#glade-editor-property-new">glade_editor_property_new</a>
-                                            (<a href="gladeui-GladePropertyClass.html#GladePropertyClass">GladePropertyClass</a> *class,
+                                            (<a href="gladeui-GladePropertyClass.html#GladePropertyClass">GladePropertyClass</a> *klass,
                                              gboolean use_command);
 void        <a href="GladeEditorProperty.html#glade-editor-property-load">glade_editor_property_load</a>      (<a href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> *eprop,
                                              <a href="GladeProperty.html" title="GladeProperty">GladeProperty</a> *property);
@@ -75,7 +75,7 @@ void        <a href="GladeEditorProperty.html#glade-editor-property-show-info">g
 </pre>
 </div>
 <div class="refsect1" lang="en">
-<a name="id2625007"></a><h2>Object Hierarchy</h2>
+<a name="id2600278"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
 
   GObject
@@ -89,13 +89,13 @@ void        <a href="GladeEditorProperty.html#glade-editor-property-show-info">g
 </pre>
 </div>
 <div class="refsect1" lang="en">
-<a name="id2625076"></a><h2>Implemented Interfaces</h2>
+<a name="id2600347"></a><h2>Implemented Interfaces</h2>
 <p>
 GladeEditorProperty implements
  AtkImplementorIface.</p>
 </div>
 <div class="refsect1" lang="en">
-<a name="id2625099"></a><h2>Properties</h2>
+<a name="id2600370"></a><h2>Properties</h2>
 <pre class="synopsis">
 
   "<a href="GladeEditorProperty.html#GladeEditorProperty--property-class">property-class</a>"       gpointer              : Read / Write / Construct Only
@@ -104,7 +104,7 @@ GladeEditorProperty implements
 </pre>
 </div>
 <div class="refsect1" lang="en">
-<a name="id2625168"></a><h2>Signals</h2>
+<a name="id2600439"></a><h2>Signals</h2>
 <pre class="synopsis">
 
 "<a href="GladeEditorProperty.html#GladeEditorProperty-gtk-doc-search">gtk-doc-search</a>"
@@ -116,7 +116,7 @@ GladeEditorProperty implements
 </pre>
 </div>
 <div class="refsect1" lang="en">
-<a name="id2625242"></a><h2>Description</h2>
+<a name="id2600513"></a><h2>Description</h2>
 <p>
 The <a href="GladeEditorProperty.html" title="GladeEditorProperty"><span class="type">GladeEditorProperty</span></a> is a factory that will create the correct
 control for the <a href="gladeui-GladePropertyClass.html#GladePropertyClass"><span class="type">GladePropertyClass</span></a> it was created for and provides
@@ -124,21 +124,21 @@ a simple unified api to them.
 </p>
 </div>
 <div class="refsect1" lang="en">
-<a name="id2625275"></a><h2>Details</h2>
+<a name="id2600546"></a><h2>Details</h2>
 <div class="refsect2" lang="en">
-<a name="id2625285"></a><h3>
+<a name="id2600556"></a><h3>
 <a name="GladeEditorProperty-struct"></a>GladeEditorProperty</h3>
-<a class="indexterm" name="id2625299"></a><pre class="programlisting">typedef struct _GladeEditorProperty GladeEditorProperty;</pre>
+<a class="indexterm" name="id2600570"></a><pre class="programlisting">typedef struct _GladeEditorProperty GladeEditorProperty;</pre>
 <p>
 
 </p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2625315"></a><h3>
+<a name="id2600586"></a><h3>
 <a name="glade-editor-property-new"></a>glade_editor_property_new ()</h3>
-<a class="indexterm" name="id2625328"></a><pre class="programlisting"><a href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a>* glade_editor_property_new
-                                            (<a href="gladeui-GladePropertyClass.html#GladePropertyClass">GladePropertyClass</a> *class,
+<a class="indexterm" name="id2600599"></a><pre class="programlisting"><a href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a>* glade_editor_property_new
+                                            (<a href="gladeui-GladePropertyClass.html#GladePropertyClass">GladePropertyClass</a> *klass,
                                              gboolean use_command);</pre>
 <p>
 This is a factory function to create the correct type of
@@ -150,17 +150,20 @@ editor property that can edit the said type of <a href="gladeui-GladePropertyCla
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><span class="term"><em class="parameter"><code>class</code></em>&#160;:</span></td>
+<td>
+<span class="term"><em class="parameter"><code>klass</code></em>&#160;:</span></td>
 <td> A <a href="gladeui-GladePropertyClass.html#GladePropertyClass"><span class="type">GladePropertyClass</span></a>
 </td>
 </tr>
 <tr>
-<td><span class="term"><em class="parameter"><code>use_command</code></em>&#160;:</span></td>
+<td>
+<span class="term"><em class="parameter"><code>use_command</code></em>&#160;:</span></td>
 <td> Whether the undo/redo stack applies here.
 </td>
 </tr>
 <tr>
-<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td>
+<span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td> A newly created GladeEditorProperty of the correct type
 </td>
 </tr>
@@ -169,9 +172,9 @@ editor property that can edit the said type of <a href="gladeui-GladePropertyCla
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2625429"></a><h3>
+<a name="id2600699"></a><h3>
 <a name="glade-editor-property-load"></a>glade_editor_property_load ()</h3>
-<a class="indexterm" name="id2625443"></a><pre class="programlisting">void        glade_editor_property_load      (<a href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> *eprop,
+<a class="indexterm" name="id2600713"></a><pre class="programlisting">void        glade_editor_property_load      (<a href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> *eprop,
                                              <a href="GladeProperty.html" title="GladeProperty">GladeProperty</a> *property);</pre>
 <p>
 Loads <em class="parameter"><code>property</code></em> values into <em class="parameter"><code>eprop</code></em> and connects.</p>
@@ -182,12 +185,14 @@ Loads <em class="parameter"><code>property</code></em> values into <em class="pa
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><span class="term"><em class="parameter"><code>eprop</code></em>&#160;:</span></td>
+<td>
+<span class="term"><em class="parameter"><code>eprop</code></em>&#160;:</span></td>
 <td> A <a href="GladeEditorProperty.html" title="GladeEditorProperty"><span class="type">GladeEditorProperty</span></a>
 </td>
 </tr>
 <tr>
-<td><span class="term"><em class="parameter"><code>property</code></em>&#160;:</span></td>
+<td>
+<span class="term"><em class="parameter"><code>property</code></em>&#160;:</span></td>
 <td> A <a href="GladeProperty.html" title="GladeProperty"><span class="type">GladeProperty</span></a>
 </td>
 </tr>
@@ -196,9 +201,9 @@ Loads <em class="parameter"><code>property</code></em> values into <em class="pa
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2625542"></a><h3>
+<a name="id2600813"></a><h3>
 <a name="glade-editor-property-load-by-widget"></a>glade_editor_property_load_by_widget ()</h3>
-<a class="indexterm" name="id2625556"></a><pre class="programlisting">void        glade_editor_property_load_by_widget
+<a class="indexterm" name="id2600827"></a><pre class="programlisting">void        glade_editor_property_load_by_widget
                                             (<a href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> *eprop,
                                              <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
 <p>
@@ -211,12 +216,14 @@ Convenience function to load the appropriate <a href="GladeProperty.html" title=
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><span class="term"><em class="parameter"><code>eprop</code></em>&#160;:</span></td>
+<td>
+<span class="term"><em class="parameter"><code>eprop</code></em>&#160;:</span></td>
 <td> A <a href="GladeEditorProperty.html" title="GladeEditorProperty"><span class="type">GladeEditorProperty</span></a>
 </td>
 </tr>
 <tr>
-<td><span class="term"><em class="parameter"><code>widget</code></em>&#160;:</span></td>
+<td>
+<span class="term"><em class="parameter"><code>widget</code></em>&#160;:</span></td>
 <td> A <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>
 </td>
 </tr>
@@ -225,9 +232,9 @@ Convenience function to load the appropriate <a href="GladeProperty.html" title=
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2625664"></a><h3>
+<a name="id2600935"></a><h3>
 <a name="glade-editor-property-supported"></a>glade_editor_property_supported ()</h3>
-<a class="indexterm" name="id2625678"></a><pre class="programlisting">gboolean    glade_editor_property_supported (GParamSpec *pspec);</pre>
+<a class="indexterm" name="id2600949"></a><pre class="programlisting">gboolean    glade_editor_property_supported (GParamSpec *pspec);</pre>
 <p>
 </p>
 <p>
@@ -237,12 +244,14 @@ Convenience function to load the appropriate <a href="GladeProperty.html" title=
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><span class="term"><em class="parameter"><code>pspec</code></em>&#160;:</span></td>
+<td>
+<span class="term"><em class="parameter"><code>pspec</code></em>&#160;:</span></td>
 <td> A <span class="type">GParamSpec</span>
 </td>
 </tr>
 <tr>
-<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td>
+<span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td> whether this pspec is supported by GladeEditorProperties.
 </td>
 </tr>
@@ -251,9 +260,9 @@ Convenience function to load the appropriate <a href="GladeProperty.html" title=
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2625746"></a><h3>
+<a name="id2601017"></a><h3>
 <a name="glade-editor-property-new-from-widget"></a>glade_editor_property_new_from_widget ()</h3>
-<a class="indexterm" name="id2625760"></a><pre class="programlisting"><a href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a>* glade_editor_property_new_from_widget
+<a class="indexterm" name="id2601031"></a><pre class="programlisting"><a href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a>* glade_editor_property_new_from_widget
                                             (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                              const gchar *property,
                                              gboolean use_command);</pre>
@@ -267,22 +276,26 @@ to <em class="parameter"><code>property</code></em></p>
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><span class="term"><em class="parameter"><code>widget</code></em>&#160;:</span></td>
+<td>
+<span class="term"><em class="parameter"><code>widget</code></em>&#160;:</span></td>
 <td> A <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>
 </td>
 </tr>
 <tr>
-<td><span class="term"><em class="parameter"><code>property</code></em>&#160;:</span></td>
+<td>
+<span class="term"><em class="parameter"><code>property</code></em>&#160;:</span></td>
 <td> The widget's property
 </td>
 </tr>
 <tr>
-<td><span class="term"><em class="parameter"><code>use_command</code></em>&#160;:</span></td>
+<td>
+<span class="term"><em class="parameter"><code>use_command</code></em>&#160;:</span></td>
 <td> Whether the undo/redo stack applies here.
 </td>
 </tr>
 <tr>
-<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td>
+<span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td> A newly created and connected GladeEditorProperty
 </td>
 </tr>
@@ -291,9 +304,9 @@ to <em class="parameter"><code>property</code></em></p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2625880"></a><h3>
+<a name="id2601151"></a><h3>
 <a name="glade-editor-property-hide-info"></a>glade_editor_property_hide_info ()</h3>
-<a class="indexterm" name="id2625894"></a><pre class="programlisting">void        glade_editor_property_hide_info (<a href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> *eprop);</pre>
+<a class="indexterm" name="id2601164"></a><pre class="programlisting">void        glade_editor_property_hide_info (<a href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> *eprop);</pre>
 <p>
 Hide the control widget to access help for <em class="parameter"><code>eprop</code></em></p>
 <p>
@@ -302,7 +315,8 @@ Hide the control widget to access help for <em class="parameter"><code>eprop</co
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
-<td><span class="term"><em class="parameter"><code>eprop</code></em>&#160;:</span></td>
+<td>
+<span class="term"><em class="parameter"><code>eprop</code></em>&#160;:</span></td>
 <td> A <a href="GladeEditorProperty.html" title="GladeEditorProperty"><span class="type">GladeEditorProperty</span></a>
 </td>
 </tr></tbody>
@@ -310,9 +324,9 @@ Hide the control widget to access help for <em class="parameter"><code>eprop</co
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2625957"></a><h3>
+<a name="id2601228"></a><h3>
 <a name="glade-editor-property-show-info"></a>glade_editor_property_show_info ()</h3>
-<a class="indexterm" name="id2625971"></a><pre class="programlisting">void        glade_editor_property_show_info (<a href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> *eprop);</pre>
+<a class="indexterm" name="id2601242"></a><pre class="programlisting">void        glade_editor_property_show_info (<a href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> *eprop);</pre>
 <p>
 Show the control widget to access help for <em class="parameter"><code>eprop</code></em></p>
 <p>
@@ -321,7 +335,8 @@ Show the control widget to access help for <em class="parameter"><code>eprop</co
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
-<td><span class="term"><em class="parameter"><code>eprop</code></em>&#160;:</span></td>
+<td>
+<span class="term"><em class="parameter"><code>eprop</code></em>&#160;:</span></td>
 <td> A <a href="GladeEditorProperty.html" title="GladeEditorProperty"><span class="type">GladeEditorProperty</span></a>
 </td>
 </tr></tbody>
@@ -329,36 +344,36 @@ Show the control widget to access help for <em class="parameter"><code>eprop</co
 </div>
 </div>
 <div class="refsect1" lang="en">
-<a name="id2626035"></a><h2>Property Details</h2>
+<a name="id2601306"></a><h2>Property Details</h2>
 <div class="refsect2" lang="en">
-<a name="id2626046"></a><h3>
+<a name="id2601317"></a><h3>
 <a name="GladeEditorProperty--property-class"></a>The "<code class="literal">property-class</code>" property</h3>
-<a class="indexterm" name="id2626063"></a><pre class="programlisting">  "property-class"       gpointer              : Read / Write / Construct Only</pre>
+<a class="indexterm" name="id2601334"></a><pre class="programlisting">  "property-class"       gpointer              : Read / Write / Construct Only</pre>
 <p>The GladePropertyClass this GladeEditorProperty was created for.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2626087"></a><h3>
+<a name="id2601358"></a><h3>
 <a name="GladeEditorProperty--show-info"></a>The "<code class="literal">show-info</code>" property</h3>
-<a class="indexterm" name="id2626104"></a><pre class="programlisting">  "show-info"            gboolean              : Read / Write</pre>
+<a class="indexterm" name="id2601375"></a><pre class="programlisting">  "show-info"            gboolean              : Read / Write</pre>
 <p>Whether we should show an informational button.</p>
 <p>Default value: FALSE</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2626131"></a><h3>
+<a name="id2601402"></a><h3>
 <a name="GladeEditorProperty--use-command"></a>The "<code class="literal">use-command</code>" property</h3>
-<a class="indexterm" name="id2626148"></a><pre class="programlisting">  "use-command"          gboolean              : Read / Write</pre>
+<a class="indexterm" name="id2601418"></a><pre class="programlisting">  "use-command"          gboolean              : Read / Write</pre>
 <p>Whether we should use the command API for the undo/redo stack.</p>
 <p>Default value: FALSE</p>
 </div>
 </div>
 <div class="refsect1" lang="en">
-<a name="id2626176"></a><h2>Signal Details</h2>
+<a name="id2601447"></a><h2>Signal Details</h2>
 <div class="refsect2" lang="en">
-<a name="id2626187"></a><h3>
+<a name="id2601457"></a><h3>
 <a name="GladeEditorProperty-gtk-doc-search"></a>The "gtk-doc-search" signal</h3>
-<a class="indexterm" name="id2626198"></a><pre class="programlisting">void        user_function                  (<a href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> *gladeeditor,
+<a class="indexterm" name="id2601469"></a><pre class="programlisting">void        user_function                  (<a href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> *gladeeditor,
                                             gchar               *arg1,
                                             gchar               *arg2,
                                             gchar               *arg3,
@@ -372,27 +387,32 @@ Emitted when the editor property requests that a doc-search be performed.</p>
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><span class="term"><em class="parameter"><code>gladeeditor</code></em>&#160;:</span></td>
+<td>
+<span class="term"><em class="parameter"><code>gladeeditor</code></em>&#160;:</span></td>
 <td> the <a href="GladeEditorProperty.html" title="GladeEditorProperty"><span class="type">GladeEditorProperty</span></a> which received the signal.
 </td>
 </tr>
 <tr>
-<td><span class="term"><em class="parameter"><code>arg1</code></em>&#160;:</span></td>
+<td>
+<span class="term"><em class="parameter"><code>arg1</code></em>&#160;:</span></td>
 <td> the (<span class="type">gchar</span> *) book to search or <code class="literal">NULL</code>
 </td>
 </tr>
 <tr>
-<td><span class="term"><em class="parameter"><code>arg2</code></em>&#160;:</span></td>
+<td>
+<span class="term"><em class="parameter"><code>arg2</code></em>&#160;:</span></td>
 <td> the (<span class="type">gchar</span> *) page to search or <code class="literal">NULL</code>
 </td>
 </tr>
 <tr>
-<td><span class="term"><em class="parameter"><code>arg3</code></em>&#160;:</span></td>
+<td>
+<span class="term"><em class="parameter"><code>arg3</code></em>&#160;:</span></td>
 <td> the (<span class="type">gchar</span> *) search string or <code class="literal">NULL</code>
 </td>
 </tr>
 <tr>
-<td><span class="term"><em class="parameter"><code>user_data</code></em>&#160;:</span></td>
+<td>
+<span class="term"><em class="parameter"><code>user_data</code></em>&#160;:</span></td>
 <td>user data set when the signal handler was connected.</td>
 </tr>
 </tbody>

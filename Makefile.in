@@ -44,7 +44,9 @@ DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
 	ltmain.sh missing mkinstalldirs
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/configure.in
+am__aclocal_m4_deps = $(top_srcdir)/m4/gnome-doc-utils.m4 \
+	$(top_srcdir)/m4/gtk-doc.m4 $(top_srcdir)/m4/intltool.m4 \
+	$(top_srcdir)/configure.in
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
@@ -72,7 +74,7 @@ desktopDATA_INSTALL = $(INSTALL_DATA)
 DATA = $(appicon_DATA) $(desktop_DATA)
 ETAGS = etags
 CTAGS = ctags
-DIST_SUBDIRS = $(SUBDIRS)
+DIST_SUBDIRS = src po pixmaps widgets doc help
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 distdir = $(PACKAGE)-$(VERSION)
 top_distdir = $(distdir)
@@ -114,7 +116,10 @@ CYGPATH_W = @CYGPATH_W@
 DATADIRNAME = @DATADIRNAME@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
+DISABLE_USER_MANUAL_FALSE = @DISABLE_USER_MANUAL_FALSE@
+DISABLE_USER_MANUAL_TRUE = @DISABLE_USER_MANUAL_TRUE@
 DLLTOOL = @DLLTOOL@
+DOC_USER_FORMATS = @DOC_USER_FORMATS@
 ECHO = @ECHO@
 ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
@@ -122,9 +127,13 @@ ECHO_T = @ECHO_T@
 EGREP = @EGREP@
 ENABLE_GTK_DOC_FALSE = @ENABLE_GTK_DOC_FALSE@
 ENABLE_GTK_DOC_TRUE = @ENABLE_GTK_DOC_TRUE@
+ENABLE_SK_FALSE = @ENABLE_SK_FALSE@
+ENABLE_SK_TRUE = @ENABLE_SK_TRUE@
 EXEEXT = @EXEEXT@
 F77 = @F77@
 FFLAGS = @FFLAGS@
+GDU_MODULE_VERSION_CHECK_CFLAGS = @GDU_MODULE_VERSION_CHECK_CFLAGS@
+GDU_MODULE_VERSION_CHECK_LIBS = @GDU_MODULE_VERSION_CHECK_LIBS@
 GETTEXT_PACKAGE = @GETTEXT_PACKAGE@
 GLADE_AGE = @GLADE_AGE@
 GLADE_CURRENT = @GLADE_CURRENT@
@@ -139,6 +148,7 @@ GTK_CFLAGS = @GTK_CFLAGS@
 GTK_DOC_USE_LIBTOOL_FALSE = @GTK_DOC_USE_LIBTOOL_FALSE@
 GTK_DOC_USE_LIBTOOL_TRUE = @GTK_DOC_USE_LIBTOOL_TRUE@
 GTK_LIBS = @GTK_LIBS@
+HELP_DIR = @HELP_DIR@
 HTML_DIR = @HTML_DIR@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -186,6 +196,7 @@ MKINSTALLDIRS = @MKINSTALLDIRS@
 MSGFMT = @MSGFMT@
 OBJDUMP = @OBJDUMP@
 OBJEXT = @OBJEXT@
+OMF_DIR = @OMF_DIR@
 PACKAGE = @PACKAGE@
 PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
 PACKAGE_NAME = @PACKAGE_NAME@
@@ -206,6 +217,7 @@ PYTHON_LIBS = @PYTHON_LIBS@
 RANLIB = @RANLIB@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
+SK_CONFIG = @SK_CONFIG@
 STRIP = @STRIP@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
@@ -274,7 +286,9 @@ target_alias = @target_alias@
 target_cpu = @target_cpu@
 target_os = @target_os@
 target_vendor = @target_vendor@
-SUBDIRS = src po pixmaps widgets doc
+@DISABLE_USER_MANUAL_FALSE@SUBDIRS = src po pixmaps widgets doc help
+@DISABLE_USER_MANUAL_TRUE@SUBDIRS = src po pixmaps widgets doc
+ACLOCAL_AMFLAGS = -I m4
 DESKTOP_IN_FILES = glade-3.desktop.in
 DESKTOP_FILES = $(DESKTOP_IN_FILES:.desktop.in=.desktop)
 desktopdir = $(datadir)/applications
@@ -285,14 +299,21 @@ gtk_update_icon_cache = gtk-update-icon-cache -f -t $(datadir)/icons/hicolor
 EXTRA_DIST = \
 	COPYING.GPL \
 	COPYING.LGPL \
+	m4 \
 	glade-3.desktop.in \
 	glade-3.png \
 	intltool-extract.in \
 	intltool-merge.in \
-	intltool-update.in
+	intltool-update.in \
+	gnome-doc-utils.make
 
 CLEANFILES = $(DESKTOP_FILES)
-DISTCLEANFILES = intltool-extract intltool-merge intltool-update
+DISTCLEANFILES = intltool-extract \
+                 intltool-merge \
+                 intltool-update \
+                 gnome-doc-utils.make
+
+DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper --enable-gtk-doc
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
 
@@ -527,7 +548,7 @@ distclean-tags:
 distdir: $(DISTFILES)
 	$(am__remove_distdir)
 	mkdir $(distdir)
-	$(mkdir_p) $(distdir)/doc $(distdir)/po $(distdir)/src
+	$(mkdir_p) $(distdir)/doc $(distdir)/m4 $(distdir)/po $(distdir)/src
 	@srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`; \
 	topsrcdirstrip=`echo "$(top_srcdir)" | sed 's|.|.|g'`; \
 	list='$(DISTFILES)'; for file in $$list; do \

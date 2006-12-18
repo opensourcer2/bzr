@@ -54,15 +54,15 @@ enum        <link linkend="GPCType">GPCType</link>;
                                             (<link linkend="GladePropertyClass">GladePropertyClass</link> *property_class,
                                              <link linkend="va-list">va_list</link> vl);
 <link linkend="void">void</link>        <link linkend="glade-property-class-set-vl-from-gvalue">glade_property_class_set_vl_from_gvalue</link>
-                                            (<link linkend="GladePropertyClass">GladePropertyClass</link> *class,
+                                            (<link linkend="GladePropertyClass">GladePropertyClass</link> *klass,
                                              <link linkend="GValue">GValue</link> *value,
                                              <link linkend="va-list">va_list</link> vl);
 <link linkend="void">void</link>        <link linkend="glade-property-class-get-from-gvalue">glade_property_class_get_from_gvalue</link>
-                                            (<link linkend="GladePropertyClass">GladePropertyClass</link> *class,
+                                            (<link linkend="GladePropertyClass">GladePropertyClass</link> *klass,
                                              <link linkend="GValue">GValue</link> *value,
                                              ...);
 <link linkend="GValue">GValue</link>*     <link linkend="glade-property-class-make-gvalue">glade_property_class_make_gvalue</link>
-                                            (<link linkend="GladePropertyClass">GladePropertyClass</link> *class,
+                                            (<link linkend="GladePropertyClass">GladePropertyClass</link> *klass,
                                              ...);
 <link linkend="gboolean">gboolean</link>    <link linkend="glade-property-class-update-from-node">glade_property_class_update_from_node</link>
                                             (<link linkend="GladeXmlNode">GladeXmlNode</link> *node,
@@ -71,13 +71,13 @@ enum        <link linkend="GPCType">GPCType</link>;
                                              <link linkend="GladePropertyClass">GladePropertyClass</link> **property_class,
                                              const <link linkend="gchar">gchar</link> *domain);
 const <link linkend="gchar">gchar</link>* <link linkend="glade-property-class-get-displayable-value">glade_property_class_get_displayable_value</link>
-                                            (<link linkend="GladePropertyClass">GladePropertyClass</link> *class,
+                                            (<link linkend="GladePropertyClass">GladePropertyClass</link> *klass,
                                              <link linkend="gint">gint</link> value);
 <link linkend="GtkAdjustment">GtkAdjustment</link>* <link linkend="glade-property-class-make-adjustment">glade_property_class_make_adjustment</link>
                                             (<link linkend="GladePropertyClass">GladePropertyClass</link> *property_class);
-<link linkend="gboolean">gboolean</link>    <link linkend="glade-property-class-match">glade_property_class_match</link>      (<link linkend="GladePropertyClass">GladePropertyClass</link> *class,
+<link linkend="gboolean">gboolean</link>    <link linkend="glade-property-class-match">glade_property_class_match</link>      (<link linkend="GladePropertyClass">GladePropertyClass</link> *klass,
                                              <link linkend="GladePropertyClass">GladePropertyClass</link> *comp);
-<link linkend="gboolean">gboolean</link>    <link linkend="glade-property-class-void-value">glade_property_class_void_value</link> (<link linkend="GladePropertyClass">GladePropertyClass</link> *class,
+<link linkend="gboolean">gboolean</link>    <link linkend="glade-property-class-void-value">glade_property_class_void_value</link> (<link linkend="GladePropertyClass">GladePropertyClass</link> *klass,
                                              <link linkend="GValue">GValue</link> *value);
 const <link linkend="gchar">gchar</link>* <link linkend="glade-property-class-atk-realname">glade_property_class_atk_realname</link>
                                             (const <link linkend="gchar">gchar</link> *atk_name);
@@ -136,10 +136,10 @@ va_lists etc (back and forth).
 	gchar *tooltip; /* The default tooltip for the property editor rows.
 			 */
 
-	gboolean virtual; /* Whether this is a virtual property with its pspec supplied
-			   * via the catalog (or hard code-paths); or FALSE if its a real
-			   * GObject introspected property
-			   */
+	gboolean virt; /* Whether this is a virtual property with its pspec supplied
+			* via the catalog (or hard code-paths); or FALSE if its a real
+			* GObject introspected property
+			*/
 
 	GValue *def;      /* The default value for this property (this will exist
 			   * as a copy of orig_def if not specified by the catalog)
@@ -405,7 +405,7 @@ Sets <parameter>value</parameter> on <parameter>object</parameter> for a given <
 <title><anchor id="glade-property-class-free" role="function"/>glade_property_class_free ()</title>
 <indexterm><primary>glade_property_class_free</primary></indexterm><programlisting><link linkend="void">void</link>        glade_property_class_free       (<link linkend="GladePropertyClass">GladePropertyClass</link> *property_class);</programlisting>
 <para>
-Frees <parameter>class</parameter> and its associated memory.</para>
+Frees <parameter>klass</parameter> and its associated memory.</para>
 <para>
 
 </para><variablelist role="params">
@@ -510,15 +510,15 @@ that refers to another object in this project.
 <refsect2>
 <title><anchor id="glade-property-class-set-vl-from-gvalue" role="function"/>glade_property_class_set_vl_from_gvalue ()</title>
 <indexterm><primary>glade_property_class_set_vl_from_gvalue</primary></indexterm><programlisting><link linkend="void">void</link>        glade_property_class_set_vl_from_gvalue
-                                            (<link linkend="GladePropertyClass">GladePropertyClass</link> *class,
+                                            (<link linkend="GladePropertyClass">GladePropertyClass</link> *klass,
                                              <link linkend="GValue">GValue</link> *value,
                                              <link linkend="va-list">va_list</link> vl);</programlisting>
 <para>
-Sets <parameter>vl</parameter> from <parameter>value</parameter> based on <parameter>class</parameter> criteria.</para>
+Sets <parameter>vl</parameter> from <parameter>value</parameter> based on <parameter>klass</parameter> criteria.</para>
 <para>
 
 </para><variablelist role="params">
-<varlistentry><term><parameter>class</parameter>&nbsp;:</term>
+<varlistentry><term><parameter>klass</parameter>&nbsp;:</term>
 <listitem><simpara> A <link linkend="GladePropertyClass"><type>GladePropertyClass</type></link>
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>value</parameter>&nbsp;:</term>
@@ -526,13 +526,13 @@ Sets <parameter>vl</parameter> from <parameter>value</parameter> based on <param
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>vl</parameter>&nbsp;:</term>
 <listitem><simpara> a <link linkend="va-list"><type>va_list</type></link> holding one argument of the correct type
-     specified by <parameter>class</parameter>
+     specified by <parameter>klass</parameter>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="glade-property-class-get-from-gvalue" role="function"/>glade_property_class_get_from_gvalue ()</title>
 <indexterm><primary>glade_property_class_get_from_gvalue</primary></indexterm><programlisting><link linkend="void">void</link>        glade_property_class_get_from_gvalue
-                                            (<link linkend="GladePropertyClass">GladePropertyClass</link> *class,
+                                            (<link linkend="GladePropertyClass">GladePropertyClass</link> *klass,
                                              <link linkend="GValue">GValue</link> *value,
                                              ...);</programlisting>
 <para>
@@ -540,7 +540,7 @@ Assignes the provided return location to <parameter>value</parameter></para>
 <para>
 
 </para><variablelist role="params">
-<varlistentry><term><parameter>class</parameter>&nbsp;:</term>
+<varlistentry><term><parameter>klass</parameter>&nbsp;:</term>
 <listitem><simpara> A <link linkend="GladePropertyClass"><type>GladePropertyClass</type></link>
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>value</parameter>&nbsp;:</term>
@@ -553,14 +553,14 @@ Assignes the provided return location to <parameter>value</parameter></para>
 <refsect2>
 <title><anchor id="glade-property-class-make-gvalue" role="function"/>glade_property_class_make_gvalue ()</title>
 <indexterm><primary>glade_property_class_make_gvalue</primary></indexterm><programlisting><link linkend="GValue">GValue</link>*     glade_property_class_make_gvalue
-                                            (<link linkend="GladePropertyClass">GladePropertyClass</link> *class,
+                                            (<link linkend="GladePropertyClass">GladePropertyClass</link> *klass,
                                              ...);</programlisting>
 <para>
 </para>
 <para>
 
 </para><variablelist role="params">
-<varlistentry><term><parameter>class</parameter>&nbsp;:</term>
+<varlistentry><term><parameter>klass</parameter>&nbsp;:</term>
 <listitem><simpara> A <link linkend="GladePropertyClass"><type>GladePropertyClass</type></link>
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>...</parameter>&nbsp;:</term>
@@ -606,14 +606,14 @@ file. Only the values found in the xml file are overridden.</para>
 <refsect2>
 <title><anchor id="glade-property-class-get-displayable-value" role="function"/>glade_property_class_get_displayable_value ()</title>
 <indexterm><primary>glade_property_class_get_displayable_value</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>* glade_property_class_get_displayable_value
-                                            (<link linkend="GladePropertyClass">GladePropertyClass</link> *class,
+                                            (<link linkend="GladePropertyClass">GladePropertyClass</link> *klass,
                                              <link linkend="gint">gint</link> value);</programlisting>
 <para>
 Search a displayable values for <parameter>value</parameter> in this property class.</para>
 <para>
 
 </para><variablelist role="params">
-<varlistentry><term><parameter>class</parameter>&nbsp;:</term>
+<varlistentry><term><parameter>klass</parameter>&nbsp;:</term>
 <listitem><simpara> the property class to search in
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>value</parameter>&nbsp;:</term>
@@ -639,40 +639,40 @@ Creates and appropriate GtkAdjustment for use in the editor</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="glade-property-class-match" role="function"/>glade_property_class_match ()</title>
-<indexterm><primary>glade_property_class_match</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    glade_property_class_match      (<link linkend="GladePropertyClass">GladePropertyClass</link> *class,
+<indexterm><primary>glade_property_class_match</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    glade_property_class_match      (<link linkend="GladePropertyClass">GladePropertyClass</link> *klass,
                                              <link linkend="GladePropertyClass">GladePropertyClass</link> *comp);</programlisting>
 <para>
 </para>
 <para>
 
 </para><variablelist role="params">
-<varlistentry><term><parameter>class</parameter>&nbsp;:</term>
+<varlistentry><term><parameter>klass</parameter>&nbsp;:</term>
 <listitem><simpara> a <link linkend="GladePropertyClass"><type>GladePropertyClass</type></link>
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>comp</parameter>&nbsp;:</term>
 <listitem><simpara> a <link linkend="GladePropertyClass"><type>GladePropertyClass</type></link>
 </simpara></listitem></varlistentry>
-<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> whether <parameter>class</parameter> and <parameter>comp</parameter> are a match or not
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> whether <parameter>klass</parameter> and <parameter>comp</parameter> are a match or not
          (properties in seperate decendant heirarchies that
           have the same name are not matches).
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="glade-property-class-void-value" role="function"/>glade_property_class_void_value ()</title>
-<indexterm><primary>glade_property_class_void_value</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    glade_property_class_void_value (<link linkend="GladePropertyClass">GladePropertyClass</link> *class,
+<indexterm><primary>glade_property_class_void_value</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    glade_property_class_void_value (<link linkend="GladePropertyClass">GladePropertyClass</link> *klass,
                                              <link linkend="GValue">GValue</link> *value);</programlisting>
 <para>
 </para>
 <para>
 
 </para><variablelist role="params">
-<varlistentry><term><parameter>class</parameter>&nbsp;:</term>
+<varlistentry><term><parameter>klass</parameter>&nbsp;:</term>
 <listitem><simpara> a <link linkend="GladePropertyClass"><type>GladePropertyClass</type></link>
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>value</parameter>&nbsp;:</term>
 <listitem><simpara>
 </simpara></listitem></varlistentry>
-<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> Whether <parameter>value</parameter> for this <parameter>class</parameter> is voided; a voided value
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> Whether <parameter>value</parameter> for this <parameter>klass</parameter> is voided; a voided value
          can be a <link linkend="NULL:CAPS"><literal>NULL</literal></link> value for boxed or object type param specs.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
