@@ -2,17 +2,16 @@
 #ifndef __GLADE_UTILS_H__
 #define __GLADE_UTILS_H__
 
+#include <glib.h>
 
 G_BEGIN_DECLS
 
 
-typedef enum   _GladeUtilFileDialogType GladeUtilFileDialogType;
-
-enum _GladeUtilFileDialogType
+typedef enum _GladeUtilFileDialogType
 {
         GLADE_FILE_DIALOG_ACTION_OPEN,
         GLADE_FILE_DIALOG_ACTION_SAVE
-};
+} GladeUtilFileDialogType;
 
 typedef enum 
 {
@@ -23,11 +22,10 @@ typedef enum
 	GLADE_UI_YES_OR_NO
 } GladeUIMessageType;
 
-
 LIBGLADEUI_API
 void		glade_util_widget_set_tooltip	(GtkWidget *widget, const gchar *str);
 LIBGLADEUI_API
-GType		glade_util_get_type_from_name	(const gchar *name);
+GType		glade_util_get_type_from_name	(const gchar *name, gboolean have_func);
 LIBGLADEUI_API
 GParamSpec      *glade_utils_get_pspec_from_funcname (const gchar *funcname);
 LIBGLADEUI_API
@@ -106,11 +104,11 @@ gboolean          glade_util_basenames_match       (const gchar  *path1,
 LIBGLADEUI_API
 GList            *glade_util_purify_list           (GList        *list);
 LIBGLADEUI_API
-GList            *glade_util_added_in_list         (GList        *old,
-						    GList        *new);
+GList            *glade_util_added_in_list         (GList        *old_list,
+						    GList        *new_list);
 LIBGLADEUI_API
-GList            *glade_util_removed_from_list     (GList        *old,
-						    GList        *new);
+GList            *glade_util_removed_from_list     (GList        *old_list,
+						    GList        *new_list);
 LIBGLADEUI_API
 gchar            *glade_util_canonical_path        (const gchar  *path);
 
@@ -148,6 +146,12 @@ GtkWidget        *glade_util_get_placeholder_from_pointer (GtkContainer *contain
 
 LIBGLADEUI_API
 gboolean          glade_util_object_is_loading     (GObject *object);
+
+LIBGLADEUI_API
+gboolean          glade_util_url_show              (const gchar *url);
+
+LIBGLADEUI_API
+time_t            glade_util_get_file_mtime        (const gchar *filename, GError **error);
 
 G_END_DECLS
 

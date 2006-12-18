@@ -72,9 +72,8 @@ struct _GladeBaseEditorPrivate
 };
 
 typedef struct _GladeBaseEditorSignal     GladeBaseEditorSignal;
-typedef enum   _GladeBaseEditorSignalType GladeBaseEditorSignalType;
 
-enum _GladeBaseEditorSignalType
+typedef enum _GladeBaseEditorSignalType
 {
 	SIGNAL_CHILD_SELECTED,
 	SIGNAL_CHANGE_TYPE,
@@ -83,7 +82,7 @@ enum _GladeBaseEditorSignalType
 	SIGNAL_DELETE_CHILD,
 	SIGNAL_MOVE_CHILD,
 	LAST_SIGNAL
-};
+} GladeBaseEditorSignalType;
 
 struct _GladeBaseEditorSignal
 {
@@ -1117,7 +1116,7 @@ glade_base_editor_change_type (GladeBaseEditor *editor,
 	{
 		GladeProperty *orig_prop = (GladeProperty *) l->data;
 		GladeProperty *dup_prop = glade_widget_get_property (gchild_new,
-								     orig_prop->class->id);
+								     orig_prop->klass->id);
 		glade_property_set_value (dup_prop, orig_prop->value);
 		l = g_list_next (l);
 	}

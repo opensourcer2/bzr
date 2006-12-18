@@ -45,8 +45,8 @@ enum        <link linkend="GladeCreateReason">GladeCreateReason</link>;
                                              <link linkend="GObject">GObject</link> *child);
 <link linkend="void">void</link>        (<link linkend="GladeReplaceChildFunc">*GladeReplaceChildFunc</link>)        (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                              <link linkend="GObject">GObject</link> *container,
-                                             <link linkend="GObject">GObject</link> *old,
-                                             <link linkend="GObject">GObject</link> *new);
+                                             <link linkend="GObject">GObject</link> *old_obj,
+                                             <link linkend="GObject">GObject</link> *new_obj);
 <link linkend="GObject">GObject</link>*    (<link linkend="GladeGetInternalFunc">*GladeGetInternalFunc</link>)         (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                              <link linkend="GObject">GObject</link> *parent,
                                              const <link linkend="gchar">gchar</link> *name);
@@ -307,8 +307,8 @@ Called to remove <parameter>child</parameter> from <parameter>parent</parameter>
 <title><anchor id="GladeReplaceChildFunc" role="function"/>GladeReplaceChildFunc ()</title>
 <indexterm><primary>GladeReplaceChildFunc</primary></indexterm><programlisting><link linkend="void">void</link>        (*GladeReplaceChildFunc)        (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                              <link linkend="GObject">GObject</link> *container,
-                                             <link linkend="GObject">GObject</link> *old,
-                                             <link linkend="GObject">GObject</link> *new);</programlisting>
+                                             <link linkend="GObject">GObject</link> *old_obj,
+                                             <link linkend="GObject">GObject</link> *new_obj);</programlisting>
 <para>
 Called to swap placeholders with project objects
 in containers.</para>
@@ -321,11 +321,13 @@ in containers.</para>
 <varlistentry><term><parameter>container</parameter>&nbsp;:</term>
 <listitem><simpara> A <link linkend="GObject"><type>GObject</type></link> container
 </simpara></listitem></varlistentry>
-<varlistentry><term><parameter>old</parameter>&nbsp;:</term>
-<listitem><simpara> The old <link linkend="GObject"><type>GObject</type></link> child
+<varlistentry><term><parameter>old_obj</parameter>&nbsp;:</term>
+<listitem><simpara>
 </simpara></listitem></varlistentry>
-<varlistentry><term><parameter>new</parameter>&nbsp;:</term>
-<listitem><simpara> The new <link linkend="GObject"><type>GObject</type></link> child to take its place
+<varlistentry><term><parameter>new_obj</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>

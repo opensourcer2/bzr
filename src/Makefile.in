@@ -49,15 +49,17 @@ bin_PROGRAMS = glade-3$(EXEEXT)
 subdir = src
 DIST_COMMON = $(libgladegtkinclude_HEADERS) \
 	$(libgladeuiinclude_HEADERS) $(srcdir)/Makefile.am \
-	$(srcdir)/Makefile.in $(srcdir)/glade-3.pc.in \
-	$(srcdir)/glade-paths.sh.in $(srcdir)/libgladeui-1.0.pc.in
+	$(srcdir)/Makefile.in $(srcdir)/glade-paths.sh.in \
+	$(srcdir)/libgladeui-1.0.pc.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/configure.in
+am__aclocal_m4_deps = $(top_srcdir)/m4/gnome-doc-utils.m4 \
+	$(top_srcdir)/m4/gtk-doc.m4 $(top_srcdir)/m4/intltool.m4 \
+	$(top_srcdir)/configure.in
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
-CONFIG_CLEAN_FILES = libgladeui-1.0.pc glade-3.pc glade-paths.sh
+CONFIG_CLEAN_FILES = libgladeui-1.0.pc glade-paths.sh
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
     $(srcdir)/*) f=`echo "$$p" | sed "s|^$$srcdirstrip/||"`;; \
@@ -201,7 +203,10 @@ CYGPATH_W = @CYGPATH_W@
 DATADIRNAME = @DATADIRNAME@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
+DISABLE_USER_MANUAL_FALSE = @DISABLE_USER_MANUAL_FALSE@
+DISABLE_USER_MANUAL_TRUE = @DISABLE_USER_MANUAL_TRUE@
 DLLTOOL = @DLLTOOL@
+DOC_USER_FORMATS = @DOC_USER_FORMATS@
 ECHO = @ECHO@
 ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
@@ -209,9 +214,13 @@ ECHO_T = @ECHO_T@
 EGREP = @EGREP@
 ENABLE_GTK_DOC_FALSE = @ENABLE_GTK_DOC_FALSE@
 ENABLE_GTK_DOC_TRUE = @ENABLE_GTK_DOC_TRUE@
+ENABLE_SK_FALSE = @ENABLE_SK_FALSE@
+ENABLE_SK_TRUE = @ENABLE_SK_TRUE@
 EXEEXT = @EXEEXT@
 F77 = @F77@
 FFLAGS = @FFLAGS@
+GDU_MODULE_VERSION_CHECK_CFLAGS = @GDU_MODULE_VERSION_CHECK_CFLAGS@
+GDU_MODULE_VERSION_CHECK_LIBS = @GDU_MODULE_VERSION_CHECK_LIBS@
 GETTEXT_PACKAGE = @GETTEXT_PACKAGE@
 GLADE_AGE = @GLADE_AGE@
 GLADE_CURRENT = @GLADE_CURRENT@
@@ -226,6 +235,7 @@ GTK_CFLAGS = @GTK_CFLAGS@
 GTK_DOC_USE_LIBTOOL_FALSE = @GTK_DOC_USE_LIBTOOL_FALSE@
 GTK_DOC_USE_LIBTOOL_TRUE = @GTK_DOC_USE_LIBTOOL_TRUE@
 GTK_LIBS = @GTK_LIBS@
+HELP_DIR = @HELP_DIR@
 HTML_DIR = @HTML_DIR@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -273,6 +283,7 @@ MKINSTALLDIRS = @MKINSTALLDIRS@
 MSGFMT = @MSGFMT@
 OBJDUMP = @OBJDUMP@
 OBJEXT = @OBJEXT@
+OMF_DIR = @OMF_DIR@
 PACKAGE = @PACKAGE@
 PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
 PACKAGE_NAME = @PACKAGE_NAME@
@@ -293,6 +304,7 @@ PYTHON_LIBS = @PYTHON_LIBS@
 RANLIB = @RANLIB@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
+SK_CONFIG = @SK_CONFIG@
 STRIP = @STRIP@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
@@ -497,7 +509,7 @@ libgladeuiinclude_HEADERS = \
 	atk.xpm
 
 pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = libgladeui-1.0.pc glade-3.pc
+pkgconfig_DATA = libgladeui-1.0.pc
 @BUILD_PYTHON_TRUE@gladepython_LTLIBRARIES = libgladepython.la
 @BUILD_PYTHON_TRUE@gladepythondir = $(glade_bindingsdir)
 @BUILD_PYTHON_TRUE@libgladepython_la_SOURCES = glade-python.c glade-python-gwa.c
@@ -547,8 +559,6 @@ $(top_srcdir)/configure: @MAINTAINER_MODE_TRUE@ $(am__configure_deps)
 $(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 libgladeui-1.0.pc: $(top_builddir)/config.status $(srcdir)/libgladeui-1.0.pc.in
-	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
-glade-3.pc: $(top_builddir)/config.status $(srcdir)/glade-3.pc.in
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
 glade-paths.sh: $(top_builddir)/config.status $(srcdir)/glade-paths.sh.in
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@

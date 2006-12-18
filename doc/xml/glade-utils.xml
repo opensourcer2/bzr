@@ -21,7 +21,8 @@
 
 <link linkend="void">void</link>        <link linkend="glade-util-widget-set-tooltip">glade_util_widget_set_tooltip</link>   (<link linkend="GtkWidget">GtkWidget</link> *widget,
                                              const <link linkend="gchar">gchar</link> *str);
-<link linkend="GType">GType</link>       <link linkend="glade-util-get-type-from-name">glade_util_get_type_from_name</link>   (const <link linkend="gchar">gchar</link> *name);
+<link linkend="GType">GType</link>       <link linkend="glade-util-get-type-from-name">glade_util_get_type_from_name</link>   (const <link linkend="gchar">gchar</link> *name,
+                                             <link linkend="gboolean">gboolean</link> have_func);
 <link linkend="GParamSpec">GParamSpec</link>* <link linkend="glade-utils-get-pspec-from-funcname">glade_utils_get_pspec_from_funcname</link>
                                             (const <link linkend="gchar">gchar</link> *funcname);
 enum        <link linkend="GladeUIMessageType">GladeUIMessageType</link>;
@@ -71,10 +72,10 @@ enum        <link linkend="GladeUIMessageType">GladeUIMessageType</link>;
 <link linkend="gboolean">gboolean</link>    <link linkend="glade-util-basenames-match">glade_util_basenames_match</link>      (const <link linkend="gchar">gchar</link> *path1,
                                              const <link linkend="gchar">gchar</link> *path2);
 <link linkend="GList">GList</link>*      <link linkend="glade-util-purify-list">glade_util_purify_list</link>          (<link linkend="GList">GList</link> *list);
-<link linkend="GList">GList</link>*      <link linkend="glade-util-removed-from-list">glade_util_removed_from_list</link>    (<link linkend="GList">GList</link> *old,
-                                             <link linkend="GList">GList</link> *new);
-<link linkend="GList">GList</link>*      <link linkend="glade-util-added-in-list">glade_util_added_in_list</link>        (<link linkend="GList">GList</link> *old,
-                                             <link linkend="GList">GList</link> *new);
+<link linkend="GList">GList</link>*      <link linkend="glade-util-removed-from-list">glade_util_removed_from_list</link>    (<link linkend="GList">GList</link> *old_list,
+                                             <link linkend="GList">GList</link> *new_list);
+<link linkend="GList">GList</link>*      <link linkend="glade-util-added-in-list">glade_util_added_in_list</link>        (<link linkend="GList">GList</link> *old_list,
+                                             <link linkend="GList">GList</link> *new_list);
 <link linkend="gchar">gchar</link>*      <link linkend="glade-util-canonical-path">glade_util_canonical_path</link>       (const <link linkend="gchar">gchar</link> *path);
 <link linkend="gboolean">gboolean</link>    <link linkend="glade-util-copy-file">glade_util_copy_file</link>            (const <link linkend="gchar">gchar</link> *src_path,
                                              const <link linkend="gchar">gchar</link> *dest_path);
@@ -128,15 +129,20 @@ Creates a new tooltip from <parameter>str</parameter> and sets <parameter>widget
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="glade-util-get-type-from-name" role="function"/>glade_util_get_type_from_name ()</title>
-<indexterm><primary>glade_util_get_type_from_name</primary></indexterm><programlisting><link linkend="GType">GType</link>       glade_util_get_type_from_name   (const <link linkend="gchar">gchar</link> *name);</programlisting>
+<indexterm><primary>glade_util_get_type_from_name</primary></indexterm><programlisting><link linkend="GType">GType</link>       glade_util_get_type_from_name   (const <link linkend="gchar">gchar</link> *name,
+                                             <link linkend="gboolean">gboolean</link> have_func);</programlisting>
 <para>
-Looks up the type registering function from a plugin
-and initializes &amp; returns the type for <parameter>name</parameter>.</para>
+Returns the type using the "get type" function name based on <parameter>name</parameter>.  
+If the <parameter>have_func</parameter> flag is true,<parameter>name</parameter> is used directly, otherwise the get-type 
+function is contrived from <parameter>name</parameter> then used.</para>
 <para>
 
 </para><variablelist role="params">
 <varlistentry><term><parameter>name</parameter>&nbsp;:</term>
-<listitem><simpara> the name of the <link linkend="GType"><type>GType</type></link> - like 'GtkWidget'.
+<listitem><simpara> the name of the <link linkend="GType"><type>GType</type></link> - like 'GtkWidget' or a "get-type" function.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>have_func</parameter>&nbsp;:</term>
+<listitem><simpara> function-name flag -- true if the name is a "get-type" function.
 </simpara></listitem></varlistentry>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the new <link linkend="GType"><type>GType</type></link>
 </simpara></listitem></varlistentry>
@@ -601,18 +607,18 @@ to <parameter>findme</parameter> which should be freed with <link linkend="gtk-t
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="glade-util-removed-from-list" role="function"/>glade_util_removed_from_list ()</title>
-<indexterm><primary>glade_util_removed_from_list</primary></indexterm><programlisting><link linkend="GList">GList</link>*      glade_util_removed_from_list    (<link linkend="GList">GList</link> *old,
-                                             <link linkend="GList">GList</link> *new);</programlisting>
+<indexterm><primary>glade_util_removed_from_list</primary></indexterm><programlisting><link linkend="GList">GList</link>*      glade_util_removed_from_list    (<link linkend="GList">GList</link> *old_list,
+                                             <link linkend="GList">GList</link> *new_list);</programlisting>
 <para>
 </para>
 <para>
 
 </para><variablelist role="params">
-<varlistentry><term><parameter>old</parameter>&nbsp;:</term>
-<listitem><simpara> the old <link linkend="GList"><type>GList</type></link>
+<varlistentry><term><parameter>old_list</parameter>&nbsp;:</term>
+<listitem><simpara>
 </simpara></listitem></varlistentry>
-<varlistentry><term><parameter>new</parameter>&nbsp;:</term>
-<listitem><simpara> the new <link linkend="GList"><type>GList</type></link>
+<varlistentry><term><parameter>new_list</parameter>&nbsp;:</term>
+<listitem><simpara>
 </simpara></listitem></varlistentry>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> A newly allocated <link linkend="GList"><type>GList</type></link> of elements that
          are in <parameter>old</parameter> no longer in <parameter>new</parameter>
@@ -621,18 +627,18 @@ to <parameter>findme</parameter> which should be freed with <link linkend="gtk-t
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="glade-util-added-in-list" role="function"/>glade_util_added_in_list ()</title>
-<indexterm><primary>glade_util_added_in_list</primary></indexterm><programlisting><link linkend="GList">GList</link>*      glade_util_added_in_list        (<link linkend="GList">GList</link> *old,
-                                             <link linkend="GList">GList</link> *new);</programlisting>
+<indexterm><primary>glade_util_added_in_list</primary></indexterm><programlisting><link linkend="GList">GList</link>*      glade_util_added_in_list        (<link linkend="GList">GList</link> *old_list,
+                                             <link linkend="GList">GList</link> *new_list);</programlisting>
 <para>
 </para>
 <para>
 
 </para><variablelist role="params">
-<varlistentry><term><parameter>old</parameter>&nbsp;:</term>
-<listitem><simpara> the old <link linkend="GList"><type>GList</type></link>
+<varlistentry><term><parameter>old_list</parameter>&nbsp;:</term>
+<listitem><simpara>
 </simpara></listitem></varlistentry>
-<varlistentry><term><parameter>new</parameter>&nbsp;:</term>
-<listitem><simpara> the new <link linkend="GList"><type>GList</type></link>
+<varlistentry><term><parameter>new_list</parameter>&nbsp;:</term>
+<listitem><simpara>
 </simpara></listitem></varlistentry>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> A newly allocated <link linkend="GList"><type>GList</type></link> of elements that
          are in <parameter>new</parameter> but not in <parameter>old</parameter>

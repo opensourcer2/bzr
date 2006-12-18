@@ -56,7 +56,7 @@
                                              const <link linkend="GladeSignal">GladeSignal</link> *signal);
 <link linkend="void">void</link>        <link linkend="glade-command-change-signal">glade_command_change_signal</link>     (<link linkend="GladeWidget">GladeWidget</link> *glade_widget,
                                              const <link linkend="GladeSignal">GladeSignal</link> *old,
-                                             const <link linkend="GladeSignal">GladeSignal</link> *new);
+                                             const <link linkend="GladeSignal">GladeSignal</link> *new_signal);
 
 </synopsis>
 </refsynopsisdiv>
@@ -393,7 +393,7 @@ TODO: write me</para>
 <title><anchor id="glade-command-change-signal" role="function"/>glade_command_change_signal ()</title>
 <indexterm><primary>glade_command_change_signal</primary></indexterm><programlisting><link linkend="void">void</link>        glade_command_change_signal     (<link linkend="GladeWidget">GladeWidget</link> *glade_widget,
                                              const <link linkend="GladeSignal">GladeSignal</link> *old,
-                                             const <link linkend="GladeSignal">GladeSignal</link> *new);</programlisting>
+                                             const <link linkend="GladeSignal">GladeSignal</link> *new_signal);</programlisting>
 <para>
 TODO: write me</para>
 <para>
@@ -405,8 +405,10 @@ TODO: write me</para>
 <varlistentry><term><parameter>old</parameter>&nbsp;:</term>
 <listitem><simpara> a <link linkend="GladeSignal"><type>GladeSignal</type></link>
 </simpara></listitem></varlistentry>
-<varlistentry><term><parameter>new</parameter>&nbsp;:</term>
-<listitem><simpara> a <link linkend="GladeSignal"><type>GladeSignal</type></link>
+<varlistentry><term><parameter>new_signal</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 

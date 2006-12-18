@@ -1,4 +1,30 @@
 ===========
+Glade 3.1.3
+===========
+
+New features and fixes
+======================
+    - Added gtk+ 2.10 widget classes: GtkAssistant, GtkLinkButton, GtkPageSetupUnixDialog,
+      GtkPrintUnixDialog, GtkRecentChooserWidget and GtkRecentChooserDialog (Juan Pablo Ugarte)
+    - Added user documentation using gnome-doc-utils (Vincent Geddes)
+    - Fixed assumption "GtkButton" --> "gtk_button_get_type ()" when loading types from
+      the catalog (bug 377435) (Jeff Westerinen)
+    - Now there's only one pkg-config file (the original libgladeui-1.0.pc) (Vincent Geddes)
+    - Escape strings properly when saving to the xml file (bug 360586 Juan Pablo Ugarte)
+      (Merged from stable branch)
+    - Fixed saved "gtk-broken-image" stock being saved in all GtkImages (bug 353126) 
+      (with help from Jeff Westerinen) (Merged from stable branch)
+    - Changed alot of keywords and forward declarations for C++ compilation against glade headers
+      (Oliver Nittka)
+    - Detect file changes on disk before saving (Vincent Geddes)
+    - Fixed a couple of crashers (bug 386563 & 385920).
+
+New and updated translations
+============================
+    - Djihed Afifi (ar)  (Ported in from stable branch)
+    - Ignacio Casal Quinteiro (gl)  (Ported in from stable branch)
+
+===========
 Glade 3.1.2
 ===========
 
@@ -48,6 +74,24 @@ New and updated translations
 ============================
     - Abel Cheung (zh_HK, zh_TW)
     - Francisco Javier F. Serrador (es)
+
+===========
+Glade 3.0.3
+===========
+
+New features and fixes
+======================
+    - Fixed "-" / "_" mangling in translatable string comments (bug 363598) (Jonas Berlin)
+    - Fixed "&amp in a label with markup enable saves as an &" (bug 360586) (Juan Pablo Ugarte)
+    - Fixed saved "gtk-broken-image" stock being saved in all GtkImages (bug 353126) (Jeff Westerinen & myself)
+
+New and updated translations
+============================
+    - Abel Cheung (zh_HK, zh_TW)
+    - Francisco Javier F. Serrador (es)
+    - Ignacio Casal Quinteiro (gl)
+    - Josep Puigdemont i Casamajó (ca)
+    - Djihed Afifi (ar)
 
 ===========
 Glade 3.0.2

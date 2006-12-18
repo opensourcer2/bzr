@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
 <title>Container Objects</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<meta name="generator" content="DocBook XSL Stylesheets V1.68.1">
 <link rel="start" href="index.html" title="Glade UI Builder Reference Manual">
 <link rel="up" href="catalog.html" title="Part&#160;I.&#160;Adding your custom widgets">
 <link rel="prev" href="properties.html" title="Property Class Definitions">
@@ -36,7 +36,7 @@ How to add support for hierarchic widget relationships
 <td valign="top" align="right"></td>
 </tr></table></div>
 <div class="refsect1" lang="en">
-<a name="id2548702"></a><h2>Defining Containers in the Catalog</h2>
+<a name="id2523993"></a><h2>Defining Containers in the Catalog</h2>
 <p>
 GtkContainer objects which parent GtkWidget objects have built-in detection in the
 glade core; but other container relationships may be constructed; if for example you
@@ -76,32 +76,36 @@ exactly the same way as previously described with normal object properties.
     </p>
 </div>
 <div class="refsect2" lang="en">
-<a name="id2549777"></a><h3>Container Relationship Parameter Tag Definitions</h3>
+<a name="id2525090"></a><h3>Container Relationship Parameter Tag Definitions</h3>
 <p>
       </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><span class="term">add-child-function</span></td>
+<td>
+<span class="term">add-child-function</span></td>
 <td><p>
 A <a href="gladeui-GladeWidgetClass.html#GladeAddChildFunc"><span class="type">GladeAddChildFunc</span></a> used to add child objects from parent objects.
             </p></td>
 </tr>
 <tr>
-<td><span class="term">remove-child-function</span></td>
+<td>
+<span class="term">remove-child-function</span></td>
 <td><p>
 A <a href="gladeui-GladeWidgetClass.html#GladeRemoveChildFunc"><span class="type">GladeRemoveChildFunc</span></a> used to remove child objects from parent objects.
             </p></td>
 </tr>
 <tr>
-<td><span class="term">replace-child-function</span></td>
+<td>
+<span class="term">replace-child-function</span></td>
 <td><p>
 A <a href="gladeui-GladeWidgetClass.html#GladeReplaceChildFunc"><span class="type">GladeReplaceChildFunc</span></a> Used to swap placholders with project widgets.
             </p></td>
 </tr>
 <tr>
-<td><span class="term">get-children-function</span></td>
+<td>
+<span class="term">get-children-function</span></td>
 <td><p>
 A <a href="gladeui-GladeWidgetClass.html#GladeGetChildrenFunc"><span class="type">GladeGetChildrenFunc</span></a> to return a list of children for this container. If you
 have any anarchist internal children; they should be listed here along with
@@ -109,19 +113,22 @@ normal children.
             </p></td>
 </tr>
 <tr>
-<td><span class="term">child-set-property-function</span></td>
+<td>
+<span class="term">child-set-property-function</span></td>
 <td><p>
 A <a href="gladeui-GladeWidgetClass.html#GladeChildSetPropertyFunc"><span class="type">GladeChildSetPropertyFunc</span></a> to set a packing property on this child.
             </p></td>
 </tr>
 <tr>
-<td><span class="term">child-get-property-function</span></td>
+<td>
+<span class="term">child-get-property-function</span></td>
 <td><p>
 A <a href="gladeui-GladeWidgetClass.html#GladeChildGetPropertyFunc"><span class="type">GladeChildGetPropertyFunc</span></a> to get a packing property on this child.
             </p></td>
 </tr>
 <tr>
-<td><span class="term">special-child-type</span></td>
+<td>
+<span class="term">special-child-type</span></td>
 <td>
 <p>
 A special type identifier that will indicate whether this is an alternate

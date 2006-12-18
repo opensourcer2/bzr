@@ -1,3 +1,23 @@
+glade-3 (3.1.3-0ubuntu1) feisty; urgency=low
+
+  * New upstream version:
+    New features and fixes:
+    - Added gtk+ 2.10 widget classes: GtkAssistant, GtkLinkButton, 
+      GtkPageSetupUnixDialog, GtkPrintUnixDialog, GtkRecentChooserWidget 
+      and GtkRecentChooserDialog
+    - Added user documentation using gnome-doc-utils
+    - Fixed assumption "GtkButton" --> "gtk_button_get_type ()" when loading 
+      types from the catalog
+    - Now there's only one pkg-config file (the original libgladeui-1.0.pc)
+    - Escape strings properly when saving to the xml file
+    - Fixed saved "gtk-broken-image" stock being saved in all GtkImages
+    - Changed alot of keywords and forward declarations for C++ compilation 
+      against glade headers
+    - Detect file changes on disk before saving
+    - Fixed a couple of crashers (Ubuntu: #76023)
+
+ -- Sebastien Bacher <seb128@canonical.com>  Mon, 18 Dec 2006 16:52:11 +0100
+
 glade-3 (3.1.2-0ubuntu3) feisty; urgency=low
 
   * debian/control.in:

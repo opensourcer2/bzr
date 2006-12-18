@@ -68,6 +68,7 @@ static GHashTable   *allocated_untitled_numbers = NULL;
 /*******************************************************************
                             GObjectClass
  *******************************************************************/
+ 
 static void
 glade_project_list_unref (GList *original_list)
 {
@@ -196,7 +197,6 @@ glade_project_walk_forward (GladeProject *project)
 	else
 		project->prev_redo_item = project->undo_stack;
 }
-
 
 static void
 glade_project_undo_impl (GladeProject *project)
@@ -361,35 +361,36 @@ glade_project_init (GladeProject *project)
 	project->resources = g_hash_table_new_full (g_direct_hash, 
 						    g_direct_equal, 
 						    NULL, g_free);
+
 }
 
 static void
-glade_project_class_init (GladeProjectClass *class)
+glade_project_class_init (GladeProjectClass *klass)
 {
 	GObjectClass *object_class;
 
-	object_class = G_OBJECT_CLASS (class);
+	object_class = G_OBJECT_CLASS (klass);
 
-	parent_class = g_type_class_peek_parent (class);
+	parent_class = g_type_class_peek_parent (klass);
 
 	object_class->get_property = glade_project_get_property;
 	object_class->finalize     = glade_project_finalize;
 	object_class->dispose      = glade_project_dispose;
 	
-	class->add_object          = NULL;
-	class->remove_object       = NULL;
-	class->undo                = glade_project_undo_impl;
-	class->redo                = glade_project_redo_impl;
-	class->next_undo_item      = glade_project_next_undo_item_impl;
-	class->next_redo_item      = glade_project_next_redo_item_impl;
-	class->push_undo           = glade_project_push_undo_impl;
+	klass->add_object          = NULL;
+	klass->remove_object       = NULL;
+	klass->undo                = glade_project_undo_impl;
+	klass->redo                = glade_project_redo_impl;
+	klass->next_undo_item      = glade_project_next_undo_item_impl;
+	klass->next_redo_item      = glade_project_next_redo_item_impl;
+	klass->push_undo           = glade_project_push_undo_impl;
 
-	class->widget_name_changed = NULL;
-	class->selection_changed   = NULL;
-	class->close               = NULL;
-	class->resource_added      = NULL;
-	class->resource_removed    = NULL;
-	class->changed             = glade_project_changed_impl;
+	klass->widget_name_changed = NULL;
+	klass->selection_changed   = NULL;
+	klass->close               = NULL;
+	klass->resource_added      = NULL;
+	klass->resource_removed    = NULL;
+	klass->changed             = glade_project_changed_impl;
 	
 	/**
 	 * GladeProject::add-widget:
@@ -744,7 +745,7 @@ gp_sync_resources (GladeProject *project,
 	for (l = prop_list; l; l = l->next)
 	{
 		property = l->data;
-		if (property->class->resource)
+		if (property->klass->resource)
 		{
 			GValue value = { 0, };
 
@@ -757,7 +758,7 @@ gp_sync_resources (GladeProject *project,
 			glade_property_get_value (property, &value);
 			
 			if ((resource = glade_property_class_make_string_from_gvalue
-			     (property->class, &value)) != NULL)
+			     (property->klass, &value)) != NULL)
 			{
 				full_resource = glade_project_resource_fullpath
 					(prev_project ? prev_project : project, resource);
@@ -1531,7 +1532,7 @@ glade_project_fix_object_props (GladeProject *project)
 		{
 			property = GLADE_PROPERTY (ll->data);
 
-			if (glade_property_class_is_object (property->class) &&
+			if (glade_property_class_is_object (property->klass) &&
 			    (txt = g_object_get_data (G_OBJECT (property), 
 						      "glade-loaded-object")) != NULL)
 			{
@@ -1539,7 +1540,7 @@ glade_project_fix_object_props (GladeProject *project)
 				 * (this magicly works for both objects & object lists)
 				 */
 				value = glade_property_class_make_gvalue_from_string
-					(property->class, txt, project);
+					(property->klass, txt, project);
 				
 				glade_property_set_value (property, value);
 				
@@ -1593,7 +1594,11 @@ glade_project_open (const gchar *path)
 			glade_project_set_readonly (project, TRUE);
 
 		project->changed = FALSE;
+		
+		project->mtime = glade_util_get_file_mtime (project->path, NULL);
 	}
+	
+	
 
 	return project;
 }
@@ -1686,6 +1691,8 @@ glade_project_save (GladeProject *project, const gchar *path, GError **error)
 
 	glade_project_set_readonly (project, 
 				    !glade_util_file_is_writeable (project->path));
+
+	project->mtime = glade_util_get_file_mtime (project->path, NULL);
 
 	if (project->changed)
 	{
@@ -2056,4 +2063,10 @@ glade_project_is_loading (GladeProject *project)
 	g_return_val_if_fail (GLADE_IS_PROJECT (project), FALSE);
 	
 	return project->loading;
+}
+
+time_t
+glade_project_get_file_mtime (GladeProject *project)
+{
+	return project->mtime;
 }
