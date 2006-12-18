@@ -1011,7 +1011,7 @@
       <special-child-type>type</special-child-type>
 
       <properties>
-	<property visible="False" id="label"/>
+	<property id="label" disabled="True"/>
 	<property id="label-widget" disabled="True"/>
 
 	
