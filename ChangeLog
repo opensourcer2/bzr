@@ -1,3 +1,387 @@
+2006-02-13  Tristan Van Berkom <tvb@gnome.org>
+
+	* configure.in, NEWS: Rolling 3.1.5
+
+2007-02-13  Vincent Geddes  <vincent.geddes@gmail.com>
+
+	* src/glade-project-window.c: Changed description in the About
+	  dialog.
+	  
+	* m4/python.m4: New file.
+	
+	* configure.ac, bindings/Makefile.am, bindings/python/Makefile.am,
+	  bindings/python/glade-python.c: Improved configure check for Python.
+
+2007-02-13  Christian Persch  <chpe@svn.gnome.org>
+
+	* Makefile.am:
+	* configure.ac: Call GNOME_DOC_INIT unconditionally. Bug #392411.
+
+2007-02-10  Vincent Geddes <vincent.geddes@gmail.com>
+
+	* src/main.c:
+	  - Add summary of the application's functionality in the '--help'
+	    output (with g_option_context_set_summary()).
+	  - Set translation domain for the main option group.          
+
+        * docs/catalogintro.sgml: pkg-config file is now 'gladeui-1.0'.
+        
+        * data/glade-3.desktop.in.in: Added 'GUIDesigner' to 'Categories'.
+
+        * gladeui/glade.h, gladeui/glade-app.[ch]:
+          - Added a private initialisation function `glade_init_check()' for
+            libgladeui.
+          - Remove the 'bad' public variables that defined various installation
+            paths. These paths can now be obtained from static class methods on
+            GladeApp (static as in the Java and C++ sense).        
+        
+        * src/main.c, src/glade-project-window.c, gladeui/glade-catalog.c,
+          gladeui/glade-binding.c, gladeui/glade-cursor.c,
+          gladeui/glade-palette.c gladeui/glade-widget-adaptor.c, 
+          gladeui/glade-utils.c, bindings/python/glade-python.c: Use the new
+          GladeApp methods for obtaining installation paths.
+          
+        * gladeui/glade-palette-box.[ch]: Use G_DEFINE_TYPE() and
+          g_type_class_add_private().
+
+2007-02-09  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* gladeui/glade-utils.c: fixed bug in glade_util_have_devhelp()
+	  (devhelp 0.13 returns "Devhelp 0.13" the 'h' is not capital anymore)
+
+	* gladeui/glade-binding.[ch], src/glade-project-window.c,
+	  bindings/python/glade-python.c: console striped out.
+
+	* bindings/python/glade-python-gwa.c: regenerated with pygtk-codegen-2.0
+
+2007-02-08  Vincent Geddes <vincent.geddes@gmail.com>
+
+        * gladeui/*.[ch]: Replaced C++ style comments with the more portable ISO C syntax.
+          
+        * gladeui/glade-app.[ch]: Use the G_DEFINE_TYPE() and
+          g_type_class_add_private() idioms for registering the class.
+          
+        * README.cvs: Renamed to 'README.svn'.
+        
+        * README: Corrected some typos and updated GTK+ required to 2.10.0.
+        
+        * plugins/gtk+/icons/16x16/Makefile.am, plugins/gtk+/icons/22x22/Makefile.am:
+          Added some icons.
+          
+        * src/glade-project-window.c: Set the label for the Selector toolbutton.
+
+2007-02-07  Paul <ephraim_owns@hotmail.com>
+
+	* bindings/python/Makefile.am: Removed $(top_srcdir) from CFLAGS.
+
+	* bindings/python/glade-python.c: Fixed use of a variable 'stdout',
+	  called it '__stdout' instead.
+
+	* bindings/python/glade-python-gwa.c, bindings/python/glade-python-gwa.override:
+	  Added #define NO_IMPORT_PYGOBJECT
+
+2007-02-06  Vincent Geddes <vincent.geddes@gmail.com>
+
+	* data/icons/hicolor/: Added new application icon, in sizes 16x16,
+	  22x22, 32x32, 48x48, and scalable.
+
+	* data/icons/glade-3.png: Removed.
+	
+2007-02-06  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/gtk+.xml.in, plugins/gnome/gnome.xml.in, 
+	  plugins/gnome/canvas.xml.in, plugins/gnome/bonobo.xml.in:
+	  Fixed domain 'glade-3' -> 'glade3' (bug 404917)
+
+	* src/glade-project-window.c: Fixed translation of 'comments' and
+	  'liscence' properties of the about dialog (bug 404917).
+	  (also now translate the "Palette Appearence" string)
+
+	* src/glade-project.c: Now translate "Unsaved %d" for unsaved project
+	  names.
+
+2007-02-06  Jeff Westerinen  <jeff.westerinen@palmsource.com>
+
+	* gladeui/glade-editor-property.c: changed glade_eprop_text_show_i18n_dialog()
+	  to call a command to change the i18n metadata on the label property
+	  instead of changing it directly.  This allows the change to be
+	  un-/re-done (bug 352454).
+
+	* gladeui/glade-command.[ch]: added the glade_command_set_i18n command.
+
+2007-02-05  Vincent Geddes <vincent.geddes@gmail.com>
+
+	* src/glade-project-window.c: Add ellipsis to the label of the "Open"
+	  action.
+
+2007-02-05  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* gladeui/glade-property-class.c, plugins/gtk+/gtk+.xml.in:
+	  Fixed typo (bug 404324)
+
+2007-02-02  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* gladeui/glade-base-editor.c: fixed bug present in 64bit archs
+	  changed G_TYPE_UINT with G_TYPE_GTYPE in glade_base_editor_init()
+
+2007-02-01  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-app.[ch]: Changed the hierarchy changed signal
+	  for a "widget-event" signal.
+
+	* gladeui/glade-design-layout.c: Catch the "widget-event" signal
+	  and propagate the event from there, dont raise the event_window anymore.
+
+	* gladeui/glade-widget.c: 
+	  - Removed "enter-notify-event"
+	  - Catch "event" signal on GtkWidget instances and forward
+	    the event to GladeApp
+	  - When handling selection and SHIFT is down, dont stop emmission
+	    (better handling of drag/resize)
+
+	* gladeui/glade-fixed.c: Only drag/resize with shift down
+	
+	* gladeui/glade-marshallers.list: added new marshaller
+
+2007-01-31  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-widget.[ch]: 
+	  o Removed search algorythm for child widgets, removed glade_widget_event_widget (), 
+	    removed popup-menu signal handler, removed call to gtk_window_set_decorated() 
+	    on toplevel project widgets, removed widget->setup_events(), removed hide_on_delete()
+	  o Added glade_widget_event() to feed events directly to widgets from the design layout.
+	  o Call glade_app_hierarchy_changed() upon add/remove/replace operations
+
+	* gladeui/glade-utils.c: Removed glade_utils_deep_fixed_event() and the
+	  hacky widget grab that went with it.
+
+	* gladeui/glade-app.[ch]: Added glade_app_hierarchy_changed() and added
+	  "hierarchy-changed" signal.
+	
+	* gladeui/glade-design-layout.c: 
+	  o Make sure event window is always on top by trapping GladeApp's "hierarchy-changed"
+	    signal
+	  o Feed events directly to the proper GladeWidget, if its not handled then pass it
+	    on to the underlying widgets (using gtk_widget_event() directly).
+
+	* gladeui/glade-cursor.c: Removed the recursive cursor setting routine.
+
+	* gladeui/glade-fixed.c: Simplified immensely by removing redundant code,
+	  now there is only one GladeWidget to deal with, no searching and gropeing
+	  for the appropriate widget to operate on.
+
+2007-01-28  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-command.c: Made 'pasting' an explicit arg of glade_command_add(),
+	  this fixes the broken clipboard selection search (since we now use dupped 
+	  widgets only in pastes), now packing defaults and packing property tranfers
+	  on paste both work.
+
+	* gladeui/glade-widget.c: Removed redundant code.
+
+	* src/glade-project-window.c: Re-Implemented hack for accelerators to
+	  work cooperatively with text entries in the editor. (fixes bug 396447)
+
+	* gladeui/glade-design-layout.[ch]: 
+	  Now works like a pure widget, uses gtk_widget_size_allocate() to resize 
+	  children and gtk_widget_queue_resize() to resize itself (removed default
+	  size control for now).
+
+	* gladeui/glade-xml-utils.[ch], gladeui/glade-widget.[ch], 
+	  gladeui/glade-widget-adaptor.[ch], plugins/gtk/gtk+.xml.in,
+	  plugins/gtk/glade-gtk.c, plugins/gnome/glade-gnome.c: 
+	  - Added glade_xml_get_property_int()
+	  - Added default-width/height to catalog/GWA
+	  - Added toplevel-width/height properties to GladeWidget
+	  - Use default-width/height in catalogs instead of gtk_window_set_default_size()
+	    in plugin code.
+
+2007-01-27  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-command.c: Set project properly in glade_command_remove()
+	  (this fixes undo/redo of add/remove commands in the menueditor... along
+	  with the following fixes).
+
+	* gladeui/glade-widget-adaptor.[ch], gladeui/glade-xml-utils.h: 
+	  Added GWA_USE_PLACEHOLDERS(), a boolean on the GWA that is loaded 
+	  from the catalog.
+
+	* gladeui/glade-utils.[ch]: Removed glade_util_[any_]container_relation.
+
+	* gladeui/glade-widget.[ch]: Added glade_widget_placeholder_relation
+
+	* gladeui/glade-app.c, gladeui/glade-fixed.c: Adjusted callers for new
+	  glade-widget api.
+
+	* gladeui/glade-fixed.[ch]: Removed the "use-placehodlers" property
+	  since it is now redundant with the new GWA_USE_PLACEHOLDERS (this
+	  simplifies things a little).
+
+	* gladeui/glade-binding.c: Fixed obnoxious startup errors (bug 399178),
+	  glade_binding_get_all(), use g_list_prepend()/g_list_reverse() instead
+	  of g_list_append() to build a list.
+
+	* gladeui/glade-base-editor.c: Use the right adaptor for gwa_get_children
+	  in glade_base_editor_change_type () (was using adaptor for the destination
+	  type).
+	
+	* plugins/gtk/glade-gtk.c: Remove use of "use-placeholders" property
+	  on GladeFixed objects.
+
+	* plugins/gtk/gtk+.xml.in: Setup the "use-placeholders" attribute properly
+	  (TRUE on GtkContainer, FALSE on GtkMenuShell, GtkMenuItem, GtkToolBar,
+	  GtkFixed, GtkLayout).
+
+2007-01-25  Christian Persch  <chpe@svn.gnome.org>
+
+	* help/Makefile.am: Correct DOC_LINGUAS.
+
+2007-01-25  Tristan Van Berkom <tvb@gnome.org>
+
+	* Makefile.am, configure.ac, plugins/Makefile.am, bindings/Makefile.am:
+	  fixed conditionally building gnome & python.
+
+2007-01-25  Vincent Geddes <vincent.geddes@gmail.com>
+
+	* set 'svn:ignore' properties for the directory tree. 
+	  Delete all '.cvsignore' files.
+
+	* src/glade-project-window.c: Change window title in line with HIG.
+
+	* data/libgladeui-1.0.pc.in: Renamed to gladeui-1.0.pc.in.
+	  Updated for change in location of header files.
+
+	* gladeui/glade.h, gladeui/glade-xml-utils.c: Cleaned up 'glade.h'.     
+	  - Moved GLADE_TAG_* defines to glade-xml-utils.h.
+	  - Nuked GLADE_GENERIC_BORDER_WIDTH.
+
+	* gladeui/*.h, plugins/gtk+/glade-gtk.[ch],
+	  plugins/gnome/glade-gnome.ch, bindings/python/*.[ch]:
+	  Changed header files location for libgladeui. 	
+
+2007-01-23  Vincent Geddes <vincent.geddes@gmail.com>
+
+	* Reorganised package structure, moved a lot of files
+	  and directories. Modified the Makefile.am in most directories.
+
+	* po/POTFILES.in, po/POTFILES.skip: Update for reorganisation.
+
+	* configure.ac: Add files to AC_CONFIG_FILES. Change AC_CONFIG_SRCDIR.
+
+2007-01-22  Jeff Westerinen  <jeff.westerinen@palmsource.com>
+	Fix for bug 345603:
+
+	* src/glade-command.c, src/glade-command.h:
+	  - Redesigned the implementation of the following commands:
+	    - glade_command_delete
+	    - glade_command_create
+	    - glade_command_cut
+	    - glade_command_copy
+	    - glade_command_paste
+	      These are now command aliases.
+	    - Added a new drag-and-drop command, glade_command_dnd, to replace former
+	      glade_command_cut/glade_command_paste command pairs.
+	    - Added the following set of canonical commands which comprise the implementation
+	      of the command aliases:
+	    - glade_command_add
+	    - glade_command_remove
+	    - glade_command_clipboard_add
+	    - glade_command_clipboard_remove
+
+	* src/glade-gtk.c:
+	  Replaced the cut/paste command pair with the dnd command in 
+	  glade_gtk_menu_shell_move_child().
+	
+	* src/glade-base-editor.c:
+	  Replaced the cut/paste command pair with the dnd command in 
+	  glade_base_editor_change_type() and glade_base_editor_move_child(). 
+
+2007-01-20  Vincent Geddes <vincent.geddes@gmail.com>
+
+	* src/glade-project-window.c: modify translator-credits prop
+	  for About dialog.
+
+2007-01-20  someone <bugs@outerspace.dyndns.org>
+
+	* src/glade-parser.c: use xmlSubstituteEntitiesDefault() when
+	  loading/saving glade files in order to maintain '&' charachters
+	  in labels (fixes bug 396311).
+
+2007-01-17  Tristan Van Berkom <tvb@gnome.org>
+
+	* autogen.sh: renamed configure.in -> configure.ac
+
+2007-01-07  Vincent Geddes <vincent.geddes@gmail.com>
+
+        * configure.in: Quote some macro arguments. Use AS_HELP_STRING
+	  to format the messages for AC_ARG_ENABLE macros. Other cleanups
+	  and updates.
+
+	* src/glade-editor-property.c: Modified some dialogs for HIG
+	  compliance. Mostly about adjusting border widths and spacings,
+	  and setting mnemonics. Title for "Edit Text Property" dialog
+	  is now a simpler "Edit Text". Title for "Select Flags" dialog
+	  is also now a more descriptive "Select Events".
+
+	* src/glade-project-window.c: Set URL for online help to
+	  "http://glade.gnome.org/manual/index.html".
+
+2007-01-17  Christian Persch  <chpe@svn.gnome.org>
+
+	* src/glade-accumulators.c:
+	* src/glade-base-editor.c:
+	* src/glade-binding.c:
+	* src/glade-clipboard.c:
+	* src/glade-cursor.c:
+	* src/glade-debug.c:
+	* src/glade-design-layout.c:
+	* src/glade-design-view.c:
+	* src/glade-gnome.c:
+	* src/glade-id-allocator.c:
+	* src/glade-palette-box.c:
+	* src/glade-palette-expander.c:
+	* src/glade-palette-item.c:
+	* src/glade-parameter.c:
+	* src/glade-placeholder.c:
+	* src/glade-signal.c:
+	* src/glade-xml-utils.c: Include config.h.
+
+        * src/glade-app.c: (glade_app_init): Bind the gettext domain. Bug
+	#397429.
+
+2007-01-17  Tristan Van Berkom <tvb@gnome.org>
+
+	* src/glade-devhelp.[ch]: removed obsolete files.
+
+2007-01-03  Christian Persch  <chpe@svn.gnome.org>
+
+	* configure.in: No need to check for a AC_PROG_CXX.
+
+2007-01-03  Christian Persch  <chpe@svn.gnome.org>
+
+	* Makefile.am:
+	* configure.in:
+	* glade-3.desktop.in.in:
+	* po/POTFILES.in:
+	* po/POTFILES.skip:
+	Add version to bugzilla info in the .desktop file. Bug #392395.
+
+2007-01-03  Christian Persch  <chpe@svn.gnome.org>
+
+	* configure.in:
+	* pixmaps/16x16/Makefile.am:
+	* pixmaps/22x22/Makefile.am:
+	* pixmaps/Makefile.am:
+	* src/Makefile.am:
+	* src/glade-app.c:
+	* src/glade-binding.c:
+	* src/glade-paths.sh.in:
+	* src/glade-project-window.c:
+	* src/libgladeui-1.0.pc.in:
+	* widgets/Makefile.am:
+	Use the correct way to define paths, using _CPPFLAGS in Makefile.am.
+	Fixes build problem with autoconf 2.60 wrt. datarootdir. Bug #392379.
+
 2006-12-18  Tristan Van Berkom <tvb@gnome.org>
 
 	* configure.in, NEWS: Rolling 3.1.4

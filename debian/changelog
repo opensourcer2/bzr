@@ -1,3 +1,47 @@
+glade-3 (3.1.5-0ubuntu1) feisty; urgency=low
+
+  * New upstream version:
+    - Fixed build problem with autoconf 2.60 wrt. datarootdir
+    - Added version to bugzilla info in the .desktop file
+    - Bind the gettext domain (bug 397429)
+    - Setup online manual
+    - use xmlSubstituteEntitiesDefault() when loading/saving glade files
+    - Use standard "translator-credits" property the standard way in the about 
+      dialog
+    - GladeCommand refactoring work, allows for multiple paste commands now
+    - Reorganized package directory structure and adapted makefiles
+    - Renamed some things to fit more with the HIG
+    - Fixed obnoxious startup errors
+    - Implement concept of "use-placeholders" for container adaptors to 
+      distinguish whether they use placehodlers for thier children (the core 
+      handles them differently), note that menuitems,fixed,toolbar etc dont use
+      placeholders for thier children
+    - Fixed packing defaults (a menubar in a HBox is initially expand = False)
+    - Fixed the layout to not touch default-width/default-height implicitly 
+      when resizing the toplevel inside the workspace, this required some 
+      refactoring too
+    - Completely reworked event handling, considerably reduced lines of code 
+      involved and improved stability, also now drag/resize is only available 
+      with the SHIFT modifier active, as a side effect, you can now also 
+      interact with project widgets in the workspace much better.
+    - Implemented undo/redo for i18n property metadata
+    - Fixed translations of strings from the catalog and some strings in the 
+      about dialog
+    - Added the new glade icon
+    - Fixed compilation of python code
+    - Call GNOME_DOC_INIT unconditionally
+    - Improved configure check for python
+  * debian/control.in:
+    - set Maintainer to the Ubuntu Desktop Team
+  * debian/control.in, debian/libgladeui-1-4.install, debian/rules:
+    - updated for soname change
+  * debian/patches/01_launchpad-integration.patch:
+    - updated
+  * debian/patches/90_autoconf.patch:
+    - updated
+
+ -- Sebastien Bacher <seb128@canonical.com>  Wed, 14 Feb 2007 12:07:11 +0100
+
 glade-3 (3.1.4-0ubuntu3) feisty; urgency=low
 
   * debian/control:
