@@ -14,9 +14,6 @@
 
 @SET_MAKE@
 
-
-
-
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
 VPATH = @srcdir@
@@ -42,104 +39,24 @@ host_triplet = @host@
 target_triplet = @target@
 bin_PROGRAMS = glade-3$(EXEEXT)
 @WITH_WIN32_TRUE@am__append_1 = -mwindows
-@WITH_WIN32_TRUE@am__append_2 = -no-undefined
-@WITH_WIN32_TRUE@am__append_3 = -no-undefined
-@BUILD_GNOME_TRUE@@WITH_WIN32_TRUE@am__append_4 = -no-undefined
-@BUILD_PYTHON_TRUE@@WITH_WIN32_TRUE@am__append_5 = -no-undefined
 subdir = src
-DIST_COMMON = $(libgladegtkinclude_HEADERS) \
-	$(libgladeuiinclude_HEADERS) $(srcdir)/Makefile.am \
-	$(srcdir)/Makefile.in $(srcdir)/glade-paths.sh.in \
-	$(srcdir)/libgladeui-1.0.pc.in
+DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/gnome-doc-utils.m4 \
 	$(top_srcdir)/m4/gtk-doc.m4 $(top_srcdir)/m4/intltool.m4 \
-	$(top_srcdir)/configure.in
+	$(top_srcdir)/m4/python.m4 $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
-CONFIG_CLEAN_FILES = libgladeui-1.0.pc glade-paths.sh
-am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
-am__vpath_adj = case $$p in \
-    $(srcdir)/*) f=`echo "$$p" | sed "s|^$$srcdirstrip/||"`;; \
-    *) f=$$p;; \
-  esac;
-am__strip_dir = `echo $$p | sed -e 's|^.*/||'`;
-am__installdirs = "$(DESTDIR)$(gladegnomedir)" \
-	"$(DESTDIR)$(gladegtkdir)" "$(DESTDIR)$(gladepythondir)" \
-	"$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" \
-	"$(DESTDIR)$(pkgconfigdir)" \
-	"$(DESTDIR)$(libgladegtkincludedir)" \
-	"$(DESTDIR)$(libgladeuiincludedir)"
-gladegnomeLTLIBRARIES_INSTALL = $(INSTALL)
-gladegtkLTLIBRARIES_INSTALL = $(INSTALL)
-gladepythonLTLIBRARIES_INSTALL = $(INSTALL)
-libLTLIBRARIES_INSTALL = $(INSTALL)
-LTLIBRARIES = $(gladegnome_LTLIBRARIES) $(gladegtk_LTLIBRARIES) \
-	$(gladepython_LTLIBRARIES) $(lib_LTLIBRARIES)
-@BUILD_GNOME_TRUE@libgladegnome_la_DEPENDENCIES = libgladeui-1.la
-am__libgladegnome_la_SOURCES_DIST = glade-gnome.c
-@BUILD_GNOME_TRUE@am_libgladegnome_la_OBJECTS =  \
-@BUILD_GNOME_TRUE@	libgladegnome_la-glade-gnome.lo
-libgladegnome_la_OBJECTS = $(am_libgladegnome_la_OBJECTS)
-@BUILD_GNOME_TRUE@am_libgladegnome_la_rpath = -rpath $(gladegnomedir)
-am__DEPENDENCIES_1 =
-libgladegtk_la_DEPENDENCIES = libgladeui-1.la $(am__DEPENDENCIES_1)
-am_libgladegtk_la_OBJECTS = libgladegtk_la-glade-gtk.lo
-libgladegtk_la_OBJECTS = $(am_libgladegtk_la_OBJECTS)
-@BUILD_PYTHON_TRUE@libgladepython_la_DEPENDENCIES = libgladeui-1.la \
-@BUILD_PYTHON_TRUE@	$(am__DEPENDENCIES_1)
-am__libgladepython_la_SOURCES_DIST = glade-python.c glade-python-gwa.c
-@BUILD_PYTHON_TRUE@am_libgladepython_la_OBJECTS =  \
-@BUILD_PYTHON_TRUE@	libgladepython_la-glade-python.lo \
-@BUILD_PYTHON_TRUE@	libgladepython_la-glade-python-gwa.lo
-libgladepython_la_OBJECTS = $(am_libgladepython_la_OBJECTS)
-@BUILD_PYTHON_TRUE@am_libgladepython_la_rpath = -rpath \
-@BUILD_PYTHON_TRUE@	$(gladepythondir)
-libgladeui_1_la_DEPENDENCIES = $(am__DEPENDENCIES_1)
-am_libgladeui_1_la_OBJECTS = libgladeui_1_la-glade-widget-adaptor.lo \
-	libgladeui_1_la-glade-debug.lo \
-	libgladeui_1_la-glade-project.lo \
-	libgladeui_1_la-glade-parameter.lo \
-	libgladeui_1_la-glade-placeholder.lo \
-	libgladeui_1_la-glade-custom.lo \
-	libgladeui_1_la-glade-project-view.lo \
-	libgladeui_1_la-glade-xml-utils.lo \
-	libgladeui_1_la-glade-palette.lo \
-	libgladeui_1_la-glade-palette-item.lo \
-	libgladeui_1_la-glade-palette-box.lo \
-	libgladeui_1_la-glade-palette-expander.lo \
-	libgladeui_1_la-glade-design-layout.lo \
-	libgladeui_1_la-glade-design-view.lo \
-	libgladeui_1_la-glade-cursor.lo \
-	libgladeui_1_la-glade-property.lo \
-	libgladeui_1_la-glade-property-class.lo \
-	libgladeui_1_la-glade-popup.lo libgladeui_1_la-glade-widget.lo \
-	libgladeui_1_la-glade-catalog.lo \
-	libgladeui_1_la-glade-editor-property.lo \
-	libgladeui_1_la-glade-editor.lo libgladeui_1_la-glade-utils.lo \
-	libgladeui_1_la-glade-signal.lo \
-	libgladeui_1_la-glade-signal-editor.lo \
-	libgladeui_1_la-glade-clipboard.lo \
-	libgladeui_1_la-glade-clipboard-view.lo \
-	libgladeui_1_la-glade-command.lo \
-	libgladeui_1_la-glade-id-allocator.lo \
-	libgladeui_1_la-glade-marshallers.lo \
-	libgladeui_1_la-glade-accumulators.lo \
-	libgladeui_1_la-glade-parser.lo \
-	libgladeui_1_la-glade-builtins.lo libgladeui_1_la-glade-app.lo \
-	libgladeui_1_la-glade-keysyms.lo \
-	libgladeui_1_la-glade-fixed.lo \
-	libgladeui_1_la-glade-binding.lo \
-	libgladeui_1_la-glade-base-editor.lo
-libgladeui_1_la_OBJECTS = $(am_libgladeui_1_la_OBJECTS)
+CONFIG_CLEAN_FILES =
+am__installdirs = "$(DESTDIR)$(bindir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
 am_glade_3_OBJECTS = glade_3-glade-project-window.$(OBJEXT) \
 	glade_3-main.$(OBJEXT)
 glade_3_OBJECTS = $(am_glade_3_OBJECTS)
-glade_3_DEPENDENCIES = libgladeui-1.la
+glade_3_DEPENDENCIES = $(top_builddir)/gladeui/libgladeui-1.la
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -151,33 +68,20 @@ LTCOMPILE = $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) \
 CCLD = $(CC)
 LINK = $(LIBTOOL) --tag=CC --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(AM_LDFLAGS) $(LDFLAGS) -o $@
-SOURCES = $(libgladegnome_la_SOURCES) $(libgladegtk_la_SOURCES) \
-	$(libgladepython_la_SOURCES) $(libgladeui_1_la_SOURCES) \
-	$(glade_3_SOURCES)
-DIST_SOURCES = $(am__libgladegnome_la_SOURCES_DIST) \
-	$(libgladegtk_la_SOURCES) \
-	$(am__libgladepython_la_SOURCES_DIST) \
-	$(libgladeui_1_la_SOURCES) $(glade_3_SOURCES)
-RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
-	html-recursive info-recursive install-data-recursive \
-	install-exec-recursive install-info-recursive \
-	install-recursive installcheck-recursive installdirs-recursive \
-	pdf-recursive ps-recursive uninstall-info-recursive \
-	uninstall-recursive
-pkgconfigDATA_INSTALL = $(INSTALL_DATA)
-DATA = $(pkgconfig_DATA)
-libgladegtkincludeHEADERS_INSTALL = $(INSTALL_HEADER)
-libgladeuiincludeHEADERS_INSTALL = $(INSTALL_HEADER)
-HEADERS = $(libgladegtkinclude_HEADERS) $(libgladeuiinclude_HEADERS)
+SOURCES = $(glade_3_SOURCES)
+DIST_SOURCES = $(glade_3_SOURCES)
 ETAGS = etags
 CTAGS = ctags
-DIST_SUBDIRS = $(SUBDIRS)
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 ALL_LINGUAS = @ALL_LINGUAS@
 AMDEP_FALSE = @AMDEP_FALSE@
 AMDEP_TRUE = @AMDEP_TRUE@
 AMTAR = @AMTAR@
+AM_CFLAGS = @AM_CFLAGS@
+AM_CPPFLAGS = @AM_CPPFLAGS@
+AM_CXXFLAGS = @AM_CXXFLAGS@
+AM_LDFLAGS = @AM_LDFLAGS@
 AR = @AR@
 AS = @AS@
 AUTOCONF = @AUTOCONF@
@@ -186,8 +90,6 @@ AUTOMAKE = @AUTOMAKE@
 AWK = @AWK@
 BUILD_GNOME_FALSE = @BUILD_GNOME_FALSE@
 BUILD_GNOME_TRUE = @BUILD_GNOME_TRUE@
-BUILD_PYTHON_FALSE = @BUILD_PYTHON_FALSE@
-BUILD_PYTHON_TRUE = @BUILD_PYTHON_TRUE@
 CATALOGS = @CATALOGS@
 CATOBJEXT = @CATOBJEXT@
 CC = @CC@
@@ -203,8 +105,6 @@ CYGPATH_W = @CYGPATH_W@
 DATADIRNAME = @DATADIRNAME@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
-DISABLE_USER_MANUAL_FALSE = @DISABLE_USER_MANUAL_FALSE@
-DISABLE_USER_MANUAL_TRUE = @DISABLE_USER_MANUAL_TRUE@
 DLLTOOL = @DLLTOOL@
 DOC_USER_FORMATS = @DOC_USER_FORMATS@
 ECHO = @ECHO@
@@ -214,13 +114,13 @@ ECHO_T = @ECHO_T@
 EGREP = @EGREP@
 ENABLE_GTK_DOC_FALSE = @ENABLE_GTK_DOC_FALSE@
 ENABLE_GTK_DOC_TRUE = @ENABLE_GTK_DOC_TRUE@
+ENABLE_PYTHON_FALSE = @ENABLE_PYTHON_FALSE@
+ENABLE_PYTHON_TRUE = @ENABLE_PYTHON_TRUE@
 ENABLE_SK_FALSE = @ENABLE_SK_FALSE@
 ENABLE_SK_TRUE = @ENABLE_SK_TRUE@
 EXEEXT = @EXEEXT@
 F77 = @F77@
 FFLAGS = @FFLAGS@
-GDU_MODULE_VERSION_CHECK_CFLAGS = @GDU_MODULE_VERSION_CHECK_CFLAGS@
-GDU_MODULE_VERSION_CHECK_LIBS = @GDU_MODULE_VERSION_CHECK_LIBS@
 GETTEXT_PACKAGE = @GETTEXT_PACKAGE@
 GLADE_AGE = @GLADE_AGE@
 GLADE_CURRENT = @GLADE_CURRENT@
@@ -235,6 +135,8 @@ GTK_CFLAGS = @GTK_CFLAGS@
 GTK_DOC_USE_LIBTOOL_FALSE = @GTK_DOC_USE_LIBTOOL_FALSE@
 GTK_DOC_USE_LIBTOOL_TRUE = @GTK_DOC_USE_LIBTOOL_TRUE@
 GTK_LIBS = @GTK_LIBS@
+HAVE_GNOME_DOC_UTILS_FALSE = @HAVE_GNOME_DOC_UTILS_FALSE@
+HAVE_GNOME_DOC_UTILS_TRUE = @HAVE_GNOME_DOC_UTILS_TRUE@
 HELP_DIR = @HELP_DIR@
 HTML_DIR = @HTML_DIR@
 INSTALL_DATA = @INSTALL_DATA@
@@ -281,6 +183,7 @@ MAINTAINER_MODE_TRUE = @MAINTAINER_MODE_TRUE@
 MAKEINFO = @MAKEINFO@
 MKINSTALLDIRS = @MKINSTALLDIRS@
 MSGFMT = @MSGFMT@
+NO_STRICT_ALIASING_CFLAGS = @NO_STRICT_ALIASING_CFLAGS@
 OBJDUMP = @OBJDUMP@
 OBJEXT = @OBJEXT@
 OMF_DIR = @OMF_DIR@
@@ -297,14 +200,23 @@ POSUB = @POSUB@
 PO_IN_DATADIR_FALSE = @PO_IN_DATADIR_FALSE@
 PO_IN_DATADIR_TRUE = @PO_IN_DATADIR_TRUE@
 PYGTK_CFLAGS = @PYGTK_CFLAGS@
+PYGTK_CODEGEN = @PYGTK_CODEGEN@
+PYGTK_DEFSDIR = @PYGTK_DEFSDIR@
+PYGTK_H2DEF = @PYGTK_H2DEF@
 PYGTK_LIBS = @PYGTK_LIBS@
 PYTHON = @PYTHON@
 PYTHON_CFLAGS = @PYTHON_CFLAGS@
+PYTHON_EXEC_PREFIX = @PYTHON_EXEC_PREFIX@
+PYTHON_EXTRA_LIBS = @PYTHON_EXTRA_LIBS@
+PYTHON_INCLUDES = @PYTHON_INCLUDES@
 PYTHON_LIBS = @PYTHON_LIBS@
+PYTHON_LIB_LOC = @PYTHON_LIB_LOC@
+PYTHON_PLATFORM = @PYTHON_PLATFORM@
+PYTHON_PREFIX = @PYTHON_PREFIX@
+PYTHON_VERSION = @PYTHON_VERSION@
 RANLIB = @RANLIB@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
-SK_CONFIG = @SK_CONFIG@
 STRIP = @STRIP@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
@@ -334,17 +246,6 @@ datarootdir = @datarootdir@
 docdir = @docdir@
 dvidir = @dvidir@
 exec_prefix = @exec_prefix@
-glade_bindingsdir = @glade_bindingsdir@
-glade_catalogsdir = @glade_catalogsdir@
-glade_datadir = @glade_datadir@
-glade_icondir = @glade_icondir@
-glade_libdir = @glade_libdir@
-glade_localedir = @glade_localedir@
-glade_modulesdir = @glade_modulesdir@
-glade_pixmapsdir = @glade_pixmapsdir@
-glade_pluginsdir = @glade_pluginsdir@
-glade_scriptsdir = @glade_scriptsdir@
-glade_version = @glade_version@
 host = @host@
 host_alias = @host_alias@
 host_cpu = @host_cpu@
@@ -362,9 +263,13 @@ mandir = @mandir@
 mkdir_p = @mkdir_p@
 oldincludedir = @oldincludedir@
 pdfdir = @pdfdir@
+pkgpyexecdir = @pkgpyexecdir@
+pkgpythondir = @pkgpythondir@
 prefix = @prefix@
 program_transform_name = @program_transform_name@
 psdir = @psdir@
+pyexecdir = @pyexecdir@
+pythondir = @pythondir@
 sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
@@ -373,159 +278,24 @@ target_alias = @target_alias@
 target_cpu = @target_cpu@
 target_os = @target_os@
 target_vendor = @target_vendor@
-SUBDIRS = 
-lib_LTLIBRARIES = libgladeui-1.la
-BUILT_SOURCES = \
-        glade-marshallers.c \
-        glade-marshallers.h \
-	glade-paths.h
+glade_3_CPPFLAGS = \
+	-I$(top_srcdir)    \
+	-I$(top_builddir)  \
+	-DGLADE_GNOMEHELPDIR="\"$(HELP_DIR)\""
 
-CLEANFILES = $(BUILT_SOURCES)
-EXTRA_DIST = glade-marshallers.list
-
-# The main application code
-#
 glade_3_CFLAGS = \
 	-g -Wall           \
-	-I$(top_srcdir)    \
-	-I$(top_builddir)  \
-	$(GTK_CFLAGS)
+	$(GTK_CFLAGS)      \
+	$(AM_CFLAGS)
 
-glade_3_LDADD = libgladeui-1.la
+glade_3_LDFLAGS = $(AM_LDFLAGS) $(am__append_1)
+glade_3_LDADD = $(top_builddir)/gladeui/libgladeui-1.la
 glade_3_SOURCES = \
-	glade-project-window.c glade-project-window.h \
+	glade-project-window.c \
+	glade-project-window.h \
 	main.c
 
-glade_3_LDFLAGS = $(am__append_1)
-
-# The GTK catalog backend
-gladegtk_LTLIBRARIES = libgladegtk.la
-gladegtkdir = $(glade_modulesdir)
-libgladegtk_la_CFLAGS = \
-	-g -Wall           \
-	-I$(top_srcdir)    \
-	-I$(top_builddir)  \
-	$(GTK_CFLAGS)
-
-libgladegtk_la_SOURCES = glade-gtk.c
-libgladegtk_la_LDFLAGS = -module -avoid-version $(am__append_2)
-libgladegtk_la_LIBADD = libgladeui-1.la $(GTK_LIBS)
-libgladegtkincludedir = $(includedir)/libgladeui-1.0/libgladeui
-libgladegtkinclude_HEADERS = glade-gtk.h
-
-# The glade-3 core library
-libgladeui_1_la_SOURCES = \
-	glade-widget-adaptor.c \
-	glade-debug.c \
-	glade-project.c \
-	glade-parameter.c \
-	glade-placeholder.c \
-	glade-custom.c \
-	glade-project-view.c \
-	glade-xml-utils.c \
-	glade-palette.c \
-	glade-palette-item.c \
-	glade-palette-box.c \
-	glade-palette-expander.c \
-	glade-design-layout.c \
-	glade-design-view.c \
-	glade-cursor.c \
-	glade-property.c \
-	glade-property-class.c \
-	glade-popup.c \
-	glade-widget.c \
-	glade-catalog.c \
-	glade-editor-property.c \
-	glade-editor.c \
-	glade-utils.c \
-	glade-signal.c \
-	glade-signal-editor.c \
-	glade-clipboard.c \
-	glade-clipboard-view.c \
-	glade-command.c \
-	glade-id-allocator.c \
-	glade-marshallers.c \
-	glade-accumulators.c \
-	glade-parser.c \
-	glade-builtins.c \
-	glade-app.c \
-	glade-keysyms.c \
-	glade-fixed.c \
-	glade-binding.c \
-	glade-base-editor.c
-
-libgladeui_1_la_CFLAGS = \
-	-DINSIDE_LIBGLADEUI \
-	-g -Wall            \
-	-I$(top_srcdir)     \
-	-I$(top_builddir)   \
-	$(GTK_CFLAGS)
-
-libgladeui_1_la_LDFLAGS = -version-info \
-	$(GLADE_CURRENT):$(GLADE_REVISION):$(GLADE_AGE) \
-	$(am__append_3)
-libgladeui_1_la_LIBADD = $(GTK_LIBS)
-libgladeuiincludedir = $(includedir)/libgladeui-1.0/libgladeui
-libgladeuiinclude_HEADERS = \
-	glade.h \
-	glade-debug.h \
-	glade-project.h \
-	glade-project-view.h \
-	glade-parameter.h \
-	glade-placeholder.h \
-	glade-custom.h \
-	glade-editor.h \
-	glade-editor-property.h \
-	glade-signal-editor.h \
-	glade-palette.h \
-	glade-palette-item.h \
-	glade-palette-box.h \
-	glade-palette-expander.h \
-	glade-design-layout.h \
-	glade-design-view.h \
-	glade-cursor.h \
-	glade-widget.h \
-	glade-widget-adaptor.h \
-	glade-property.h \
-	glade-property-class.h \
-	glade-popup.h \
-	glade-catalog.h \
-	glade-utils.h \
-	glade-signal.h \
-	glade-xml-utils.h \
-	glade-clipboard.h \
-	glade-clipboard-view.h \
-	glade-command.h \
-	glade-id-allocator.h \
-	glade-marshallers.h \
-	glade-accumulators.h \
-	glade-parser.h \
-	glade-app.h \
-	glade-builtins.h \
-	glade-fixed.h \
-	glade-binding.h \
-	glade-base-editor.h \
-	fixed_bg.xpm \
-	atk.xpm
-
-pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = libgladeui-1.0.pc
-@BUILD_PYTHON_TRUE@gladepython_LTLIBRARIES = libgladepython.la
-@BUILD_PYTHON_TRUE@gladepythondir = $(glade_bindingsdir)
-@BUILD_PYTHON_TRUE@libgladepython_la_SOURCES = glade-python.c glade-python-gwa.c
-@BUILD_PYTHON_TRUE@libgladepython_la_CFLAGS = -g -Wall $(PYTHON_CFLAGS) $(GTK_CFLAGS)
-@BUILD_PYTHON_TRUE@libgladepython_la_LDFLAGS = -module -avoid-version \
-@BUILD_PYTHON_TRUE@	$(PYTHON_LIBS) $(am__append_5)
-@BUILD_PYTHON_TRUE@libgladepython_la_LIBADD = libgladeui-1.la $(PYTHON_LIBS)
-@BUILD_GNOME_TRUE@gladegnome_LTLIBRARIES = libgladegnome.la
-@BUILD_GNOME_TRUE@gladegnomedir = $(glade_modulesdir)
-@BUILD_GNOME_TRUE@libgladegnome_la_SOURCES = glade-gnome.c
-@BUILD_GNOME_TRUE@libgladegnome_la_CFLAGS = -g -Wall $(GNOME_CFLAGS)
-@BUILD_GNOME_TRUE@libgladegnome_la_LDFLAGS = -module -avoid-version \
-@BUILD_GNOME_TRUE@	$(GNOME_LIBS) $(am__append_4)
-@BUILD_GNOME_TRUE@libgladegnome_la_LIBADD = libgladeui-1.la $(GLADE_LIBS)
-all: $(BUILT_SOURCES)
-	$(MAKE) $(AM_MAKEFLAGS) all-recursive
+all: all-am
 
 .SUFFIXES:
 .SUFFIXES: .c .lo .o .obj
@@ -538,9 +308,9 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__confi
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  src/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign  src/Makefile'; \
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu  src/Makefile
+	  $(AUTOMAKE) --foreign  src/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -558,126 +328,6 @@ $(top_srcdir)/configure: @MAINTAINER_MODE_TRUE@ $(am__configure_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
-libgladeui-1.0.pc: $(top_builddir)/config.status $(srcdir)/libgladeui-1.0.pc.in
-	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
-glade-paths.sh: $(top_builddir)/config.status $(srcdir)/glade-paths.sh.in
-	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
-install-gladegnomeLTLIBRARIES: $(gladegnome_LTLIBRARIES)
-	@$(NORMAL_INSTALL)
-	test -z "$(gladegnomedir)" || $(mkdir_p) "$(DESTDIR)$(gladegnomedir)"
-	@list='$(gladegnome_LTLIBRARIES)'; for p in $$list; do \
-	  if test -f $$p; then \
-	    f=$(am__strip_dir) \
-	    echo " $(LIBTOOL) --mode=install $(gladegnomeLTLIBRARIES_INSTALL) $(INSTALL_STRIP_FLAG) '$$p' '$(DESTDIR)$(gladegnomedir)/$$f'"; \
-	    $(LIBTOOL) --mode=install $(gladegnomeLTLIBRARIES_INSTALL) $(INSTALL_STRIP_FLAG) "$$p" "$(DESTDIR)$(gladegnomedir)/$$f"; \
-	  else :; fi; \
-	done
-
-uninstall-gladegnomeLTLIBRARIES:
-	@$(NORMAL_UNINSTALL)
-	@set -x; list='$(gladegnome_LTLIBRARIES)'; for p in $$list; do \
-	  p=$(am__strip_dir) \
-	  echo " $(LIBTOOL) --mode=uninstall rm -f '$(DESTDIR)$(gladegnomedir)/$$p'"; \
-	  $(LIBTOOL) --mode=uninstall rm -f "$(DESTDIR)$(gladegnomedir)/$$p"; \
-	done
-
-clean-gladegnomeLTLIBRARIES:
-	-test -z "$(gladegnome_LTLIBRARIES)" || rm -f $(gladegnome_LTLIBRARIES)
-	@list='$(gladegnome_LTLIBRARIES)'; for p in $$list; do \
-	  dir="`echo $$p | sed -e 's|/[^/]*$$||'`"; \
-	  test "$$dir" != "$$p" || dir=.; \
-	  echo "rm -f \"$${dir}/so_locations\""; \
-	  rm -f "$${dir}/so_locations"; \
-	done
-install-gladegtkLTLIBRARIES: $(gladegtk_LTLIBRARIES)
-	@$(NORMAL_INSTALL)
-	test -z "$(gladegtkdir)" || $(mkdir_p) "$(DESTDIR)$(gladegtkdir)"
-	@list='$(gladegtk_LTLIBRARIES)'; for p in $$list; do \
-	  if test -f $$p; then \
-	    f=$(am__strip_dir) \
-	    echo " $(LIBTOOL) --mode=install $(gladegtkLTLIBRARIES_INSTALL) $(INSTALL_STRIP_FLAG) '$$p' '$(DESTDIR)$(gladegtkdir)/$$f'"; \
-	    $(LIBTOOL) --mode=install $(gladegtkLTLIBRARIES_INSTALL) $(INSTALL_STRIP_FLAG) "$$p" "$(DESTDIR)$(gladegtkdir)/$$f"; \
-	  else :; fi; \
-	done
-
-uninstall-gladegtkLTLIBRARIES:
-	@$(NORMAL_UNINSTALL)
-	@set -x; list='$(gladegtk_LTLIBRARIES)'; for p in $$list; do \
-	  p=$(am__strip_dir) \
-	  echo " $(LIBTOOL) --mode=uninstall rm -f '$(DESTDIR)$(gladegtkdir)/$$p'"; \
-	  $(LIBTOOL) --mode=uninstall rm -f "$(DESTDIR)$(gladegtkdir)/$$p"; \
-	done
-
-clean-gladegtkLTLIBRARIES:
-	-test -z "$(gladegtk_LTLIBRARIES)" || rm -f $(gladegtk_LTLIBRARIES)
-	@list='$(gladegtk_LTLIBRARIES)'; for p in $$list; do \
-	  dir="`echo $$p | sed -e 's|/[^/]*$$||'`"; \
-	  test "$$dir" != "$$p" || dir=.; \
-	  echo "rm -f \"$${dir}/so_locations\""; \
-	  rm -f "$${dir}/so_locations"; \
-	done
-install-gladepythonLTLIBRARIES: $(gladepython_LTLIBRARIES)
-	@$(NORMAL_INSTALL)
-	test -z "$(gladepythondir)" || $(mkdir_p) "$(DESTDIR)$(gladepythondir)"
-	@list='$(gladepython_LTLIBRARIES)'; for p in $$list; do \
-	  if test -f $$p; then \
-	    f=$(am__strip_dir) \
-	    echo " $(LIBTOOL) --mode=install $(gladepythonLTLIBRARIES_INSTALL) $(INSTALL_STRIP_FLAG) '$$p' '$(DESTDIR)$(gladepythondir)/$$f'"; \
-	    $(LIBTOOL) --mode=install $(gladepythonLTLIBRARIES_INSTALL) $(INSTALL_STRIP_FLAG) "$$p" "$(DESTDIR)$(gladepythondir)/$$f"; \
-	  else :; fi; \
-	done
-
-uninstall-gladepythonLTLIBRARIES:
-	@$(NORMAL_UNINSTALL)
-	@set -x; list='$(gladepython_LTLIBRARIES)'; for p in $$list; do \
-	  p=$(am__strip_dir) \
-	  echo " $(LIBTOOL) --mode=uninstall rm -f '$(DESTDIR)$(gladepythondir)/$$p'"; \
-	  $(LIBTOOL) --mode=uninstall rm -f "$(DESTDIR)$(gladepythondir)/$$p"; \
-	done
-
-clean-gladepythonLTLIBRARIES:
-	-test -z "$(gladepython_LTLIBRARIES)" || rm -f $(gladepython_LTLIBRARIES)
-	@list='$(gladepython_LTLIBRARIES)'; for p in $$list; do \
-	  dir="`echo $$p | sed -e 's|/[^/]*$$||'`"; \
-	  test "$$dir" != "$$p" || dir=.; \
-	  echo "rm -f \"$${dir}/so_locations\""; \
-	  rm -f "$${dir}/so_locations"; \
-	done
-install-libLTLIBRARIES: $(lib_LTLIBRARIES)
-	@$(NORMAL_INSTALL)
-	test -z "$(libdir)" || $(mkdir_p) "$(DESTDIR)$(libdir)"
-	@list='$(lib_LTLIBRARIES)'; for p in $$list; do \
-	  if test -f $$p; then \
-	    f=$(am__strip_dir) \
-	    echo " $(LIBTOOL) --mode=install $(libLTLIBRARIES_INSTALL) $(INSTALL_STRIP_FLAG) '$$p' '$(DESTDIR)$(libdir)/$$f'"; \
-	    $(LIBTOOL) --mode=install $(libLTLIBRARIES_INSTALL) $(INSTALL_STRIP_FLAG) "$$p" "$(DESTDIR)$(libdir)/$$f"; \
-	  else :; fi; \
-	done
-
-uninstall-libLTLIBRARIES:
-	@$(NORMAL_UNINSTALL)
-	@set -x; list='$(lib_LTLIBRARIES)'; for p in $$list; do \
-	  p=$(am__strip_dir) \
-	  echo " $(LIBTOOL) --mode=uninstall rm -f '$(DESTDIR)$(libdir)/$$p'"; \
-	  $(LIBTOOL) --mode=uninstall rm -f "$(DESTDIR)$(libdir)/$$p"; \
-	done
-
-clean-libLTLIBRARIES:
-	-test -z "$(lib_LTLIBRARIES)" || rm -f $(lib_LTLIBRARIES)
-	@list='$(lib_LTLIBRARIES)'; for p in $$list; do \
-	  dir="`echo $$p | sed -e 's|/[^/]*$$||'`"; \
-	  test "$$dir" != "$$p" || dir=.; \
-	  echo "rm -f \"$${dir}/so_locations\""; \
-	  rm -f "$${dir}/so_locations"; \
-	done
-libgladegnome.la: $(libgladegnome_la_OBJECTS) $(libgladegnome_la_DEPENDENCIES) 
-	$(LINK) $(am_libgladegnome_la_rpath) $(libgladegnome_la_LDFLAGS) $(libgladegnome_la_OBJECTS) $(libgladegnome_la_LIBADD) $(LIBS)
-libgladegtk.la: $(libgladegtk_la_OBJECTS) $(libgladegtk_la_DEPENDENCIES) 
-	$(LINK) -rpath $(gladegtkdir) $(libgladegtk_la_LDFLAGS) $(libgladegtk_la_OBJECTS) $(libgladegtk_la_LIBADD) $(LIBS)
-libgladepython.la: $(libgladepython_la_OBJECTS) $(libgladepython_la_DEPENDENCIES) 
-	$(LINK) $(am_libgladepython_la_rpath) $(libgladepython_la_LDFLAGS) $(libgladepython_la_OBJECTS) $(libgladepython_la_LIBADD) $(LIBS)
-libgladeui-1.la: $(libgladeui_1_la_OBJECTS) $(libgladeui_1_la_DEPENDENCIES) 
-	$(LINK) -rpath $(libdir) $(libgladeui_1_la_LDFLAGS) $(libgladeui_1_la_OBJECTS) $(libgladeui_1_la_LIBADD) $(LIBS)
 install-binPROGRAMS: $(bin_PROGRAMS)
 	@$(NORMAL_INSTALL)
 	test -z "$(bindir)" || $(mkdir_p) "$(DESTDIR)$(bindir)"
@@ -718,48 +368,6 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/glade_3-glade-project-window.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/glade_3-main.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladegnome_la-glade-gnome.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladegtk_la-glade-gtk.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladepython_la-glade-python-gwa.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladepython_la-glade-python.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-accumulators.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-app.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-base-editor.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-binding.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-builtins.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-catalog.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-clipboard-view.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-clipboard.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-command.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-cursor.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-custom.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-debug.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-design-layout.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-design-view.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-editor-property.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-editor.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-fixed.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-id-allocator.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-keysyms.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-marshallers.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-palette-box.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-palette-expander.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-palette-item.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-palette.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-parameter.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-parser.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-placeholder.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-popup.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-project-view.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-project.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-property-class.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-property.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-signal-editor.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-signal.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-utils.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-widget-adaptor.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-widget.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-xml-utils.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
@@ -782,327 +390,33 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LTCOMPILE) -c -o $@ $<
 
-libgladegnome_la-glade-gnome.lo: glade-gnome.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegnome_la_CFLAGS) $(CFLAGS) -MT libgladegnome_la-glade-gnome.lo -MD -MP -MF "$(DEPDIR)/libgladegnome_la-glade-gnome.Tpo" -c -o libgladegnome_la-glade-gnome.lo `test -f 'glade-gnome.c' || echo '$(srcdir)/'`glade-gnome.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladegnome_la-glade-gnome.Tpo" "$(DEPDIR)/libgladegnome_la-glade-gnome.Plo"; else rm -f "$(DEPDIR)/libgladegnome_la-glade-gnome.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-gnome.c' object='libgladegnome_la-glade-gnome.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegnome_la_CFLAGS) $(CFLAGS) -c -o libgladegnome_la-glade-gnome.lo `test -f 'glade-gnome.c' || echo '$(srcdir)/'`glade-gnome.c
-
-libgladegtk_la-glade-gtk.lo: glade-gtk.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-gtk.lo -MD -MP -MF "$(DEPDIR)/libgladegtk_la-glade-gtk.Tpo" -c -o libgladegtk_la-glade-gtk.lo `test -f 'glade-gtk.c' || echo '$(srcdir)/'`glade-gtk.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladegtk_la-glade-gtk.Tpo" "$(DEPDIR)/libgladegtk_la-glade-gtk.Plo"; else rm -f "$(DEPDIR)/libgladegtk_la-glade-gtk.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-gtk.c' object='libgladegtk_la-glade-gtk.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-gtk.lo `test -f 'glade-gtk.c' || echo '$(srcdir)/'`glade-gtk.c
-
-libgladepython_la-glade-python.lo: glade-python.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladepython_la_CFLAGS) $(CFLAGS) -MT libgladepython_la-glade-python.lo -MD -MP -MF "$(DEPDIR)/libgladepython_la-glade-python.Tpo" -c -o libgladepython_la-glade-python.lo `test -f 'glade-python.c' || echo '$(srcdir)/'`glade-python.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladepython_la-glade-python.Tpo" "$(DEPDIR)/libgladepython_la-glade-python.Plo"; else rm -f "$(DEPDIR)/libgladepython_la-glade-python.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-python.c' object='libgladepython_la-glade-python.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladepython_la_CFLAGS) $(CFLAGS) -c -o libgladepython_la-glade-python.lo `test -f 'glade-python.c' || echo '$(srcdir)/'`glade-python.c
-
-libgladepython_la-glade-python-gwa.lo: glade-python-gwa.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladepython_la_CFLAGS) $(CFLAGS) -MT libgladepython_la-glade-python-gwa.lo -MD -MP -MF "$(DEPDIR)/libgladepython_la-glade-python-gwa.Tpo" -c -o libgladepython_la-glade-python-gwa.lo `test -f 'glade-python-gwa.c' || echo '$(srcdir)/'`glade-python-gwa.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladepython_la-glade-python-gwa.Tpo" "$(DEPDIR)/libgladepython_la-glade-python-gwa.Plo"; else rm -f "$(DEPDIR)/libgladepython_la-glade-python-gwa.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-python-gwa.c' object='libgladepython_la-glade-python-gwa.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladepython_la_CFLAGS) $(CFLAGS) -c -o libgladepython_la-glade-python-gwa.lo `test -f 'glade-python-gwa.c' || echo '$(srcdir)/'`glade-python-gwa.c
-
-libgladeui_1_la-glade-widget-adaptor.lo: glade-widget-adaptor.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-widget-adaptor.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-widget-adaptor.Tpo" -c -o libgladeui_1_la-glade-widget-adaptor.lo `test -f 'glade-widget-adaptor.c' || echo '$(srcdir)/'`glade-widget-adaptor.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-widget-adaptor.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-widget-adaptor.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-widget-adaptor.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-widget-adaptor.c' object='libgladeui_1_la-glade-widget-adaptor.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-widget-adaptor.lo `test -f 'glade-widget-adaptor.c' || echo '$(srcdir)/'`glade-widget-adaptor.c
-
-libgladeui_1_la-glade-debug.lo: glade-debug.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-debug.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-debug.Tpo" -c -o libgladeui_1_la-glade-debug.lo `test -f 'glade-debug.c' || echo '$(srcdir)/'`glade-debug.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-debug.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-debug.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-debug.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-debug.c' object='libgladeui_1_la-glade-debug.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-debug.lo `test -f 'glade-debug.c' || echo '$(srcdir)/'`glade-debug.c
-
-libgladeui_1_la-glade-project.lo: glade-project.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-project.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-project.Tpo" -c -o libgladeui_1_la-glade-project.lo `test -f 'glade-project.c' || echo '$(srcdir)/'`glade-project.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-project.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-project.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-project.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-project.c' object='libgladeui_1_la-glade-project.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-project.lo `test -f 'glade-project.c' || echo '$(srcdir)/'`glade-project.c
-
-libgladeui_1_la-glade-parameter.lo: glade-parameter.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-parameter.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-parameter.Tpo" -c -o libgladeui_1_la-glade-parameter.lo `test -f 'glade-parameter.c' || echo '$(srcdir)/'`glade-parameter.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-parameter.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-parameter.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-parameter.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-parameter.c' object='libgladeui_1_la-glade-parameter.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-parameter.lo `test -f 'glade-parameter.c' || echo '$(srcdir)/'`glade-parameter.c
-
-libgladeui_1_la-glade-placeholder.lo: glade-placeholder.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-placeholder.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-placeholder.Tpo" -c -o libgladeui_1_la-glade-placeholder.lo `test -f 'glade-placeholder.c' || echo '$(srcdir)/'`glade-placeholder.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-placeholder.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-placeholder.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-placeholder.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-placeholder.c' object='libgladeui_1_la-glade-placeholder.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-placeholder.lo `test -f 'glade-placeholder.c' || echo '$(srcdir)/'`glade-placeholder.c
-
-libgladeui_1_la-glade-custom.lo: glade-custom.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-custom.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-custom.Tpo" -c -o libgladeui_1_la-glade-custom.lo `test -f 'glade-custom.c' || echo '$(srcdir)/'`glade-custom.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-custom.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-custom.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-custom.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-custom.c' object='libgladeui_1_la-glade-custom.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-custom.lo `test -f 'glade-custom.c' || echo '$(srcdir)/'`glade-custom.c
-
-libgladeui_1_la-glade-project-view.lo: glade-project-view.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-project-view.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-project-view.Tpo" -c -o libgladeui_1_la-glade-project-view.lo `test -f 'glade-project-view.c' || echo '$(srcdir)/'`glade-project-view.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-project-view.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-project-view.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-project-view.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-project-view.c' object='libgladeui_1_la-glade-project-view.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-project-view.lo `test -f 'glade-project-view.c' || echo '$(srcdir)/'`glade-project-view.c
-
-libgladeui_1_la-glade-xml-utils.lo: glade-xml-utils.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-xml-utils.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-xml-utils.Tpo" -c -o libgladeui_1_la-glade-xml-utils.lo `test -f 'glade-xml-utils.c' || echo '$(srcdir)/'`glade-xml-utils.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-xml-utils.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-xml-utils.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-xml-utils.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-xml-utils.c' object='libgladeui_1_la-glade-xml-utils.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-xml-utils.lo `test -f 'glade-xml-utils.c' || echo '$(srcdir)/'`glade-xml-utils.c
-
-libgladeui_1_la-glade-palette.lo: glade-palette.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-palette.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-palette.Tpo" -c -o libgladeui_1_la-glade-palette.lo `test -f 'glade-palette.c' || echo '$(srcdir)/'`glade-palette.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-palette.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-palette.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-palette.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-palette.c' object='libgladeui_1_la-glade-palette.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-palette.lo `test -f 'glade-palette.c' || echo '$(srcdir)/'`glade-palette.c
-
-libgladeui_1_la-glade-palette-item.lo: glade-palette-item.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-palette-item.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-palette-item.Tpo" -c -o libgladeui_1_la-glade-palette-item.lo `test -f 'glade-palette-item.c' || echo '$(srcdir)/'`glade-palette-item.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-palette-item.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-palette-item.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-palette-item.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-palette-item.c' object='libgladeui_1_la-glade-palette-item.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-palette-item.lo `test -f 'glade-palette-item.c' || echo '$(srcdir)/'`glade-palette-item.c
-
-libgladeui_1_la-glade-palette-box.lo: glade-palette-box.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-palette-box.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-palette-box.Tpo" -c -o libgladeui_1_la-glade-palette-box.lo `test -f 'glade-palette-box.c' || echo '$(srcdir)/'`glade-palette-box.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-palette-box.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-palette-box.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-palette-box.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-palette-box.c' object='libgladeui_1_la-glade-palette-box.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-palette-box.lo `test -f 'glade-palette-box.c' || echo '$(srcdir)/'`glade-palette-box.c
-
-libgladeui_1_la-glade-palette-expander.lo: glade-palette-expander.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-palette-expander.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-palette-expander.Tpo" -c -o libgladeui_1_la-glade-palette-expander.lo `test -f 'glade-palette-expander.c' || echo '$(srcdir)/'`glade-palette-expander.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-palette-expander.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-palette-expander.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-palette-expander.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-palette-expander.c' object='libgladeui_1_la-glade-palette-expander.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-palette-expander.lo `test -f 'glade-palette-expander.c' || echo '$(srcdir)/'`glade-palette-expander.c
-
-libgladeui_1_la-glade-design-layout.lo: glade-design-layout.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-design-layout.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-design-layout.Tpo" -c -o libgladeui_1_la-glade-design-layout.lo `test -f 'glade-design-layout.c' || echo '$(srcdir)/'`glade-design-layout.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-design-layout.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-design-layout.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-design-layout.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-design-layout.c' object='libgladeui_1_la-glade-design-layout.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-design-layout.lo `test -f 'glade-design-layout.c' || echo '$(srcdir)/'`glade-design-layout.c
-
-libgladeui_1_la-glade-design-view.lo: glade-design-view.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-design-view.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-design-view.Tpo" -c -o libgladeui_1_la-glade-design-view.lo `test -f 'glade-design-view.c' || echo '$(srcdir)/'`glade-design-view.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-design-view.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-design-view.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-design-view.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-design-view.c' object='libgladeui_1_la-glade-design-view.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-design-view.lo `test -f 'glade-design-view.c' || echo '$(srcdir)/'`glade-design-view.c
-
-libgladeui_1_la-glade-cursor.lo: glade-cursor.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-cursor.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-cursor.Tpo" -c -o libgladeui_1_la-glade-cursor.lo `test -f 'glade-cursor.c' || echo '$(srcdir)/'`glade-cursor.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-cursor.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-cursor.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-cursor.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-cursor.c' object='libgladeui_1_la-glade-cursor.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-cursor.lo `test -f 'glade-cursor.c' || echo '$(srcdir)/'`glade-cursor.c
-
-libgladeui_1_la-glade-property.lo: glade-property.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-property.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-property.Tpo" -c -o libgladeui_1_la-glade-property.lo `test -f 'glade-property.c' || echo '$(srcdir)/'`glade-property.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-property.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-property.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-property.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-property.c' object='libgladeui_1_la-glade-property.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-property.lo `test -f 'glade-property.c' || echo '$(srcdir)/'`glade-property.c
-
-libgladeui_1_la-glade-property-class.lo: glade-property-class.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-property-class.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-property-class.Tpo" -c -o libgladeui_1_la-glade-property-class.lo `test -f 'glade-property-class.c' || echo '$(srcdir)/'`glade-property-class.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-property-class.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-property-class.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-property-class.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-property-class.c' object='libgladeui_1_la-glade-property-class.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-property-class.lo `test -f 'glade-property-class.c' || echo '$(srcdir)/'`glade-property-class.c
-
-libgladeui_1_la-glade-popup.lo: glade-popup.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-popup.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-popup.Tpo" -c -o libgladeui_1_la-glade-popup.lo `test -f 'glade-popup.c' || echo '$(srcdir)/'`glade-popup.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-popup.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-popup.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-popup.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-popup.c' object='libgladeui_1_la-glade-popup.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-popup.lo `test -f 'glade-popup.c' || echo '$(srcdir)/'`glade-popup.c
-
-libgladeui_1_la-glade-widget.lo: glade-widget.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-widget.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-widget.Tpo" -c -o libgladeui_1_la-glade-widget.lo `test -f 'glade-widget.c' || echo '$(srcdir)/'`glade-widget.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-widget.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-widget.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-widget.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-widget.c' object='libgladeui_1_la-glade-widget.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-widget.lo `test -f 'glade-widget.c' || echo '$(srcdir)/'`glade-widget.c
-
-libgladeui_1_la-glade-catalog.lo: glade-catalog.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-catalog.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-catalog.Tpo" -c -o libgladeui_1_la-glade-catalog.lo `test -f 'glade-catalog.c' || echo '$(srcdir)/'`glade-catalog.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-catalog.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-catalog.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-catalog.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-catalog.c' object='libgladeui_1_la-glade-catalog.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-catalog.lo `test -f 'glade-catalog.c' || echo '$(srcdir)/'`glade-catalog.c
-
-libgladeui_1_la-glade-editor-property.lo: glade-editor-property.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-editor-property.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-editor-property.Tpo" -c -o libgladeui_1_la-glade-editor-property.lo `test -f 'glade-editor-property.c' || echo '$(srcdir)/'`glade-editor-property.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-editor-property.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-editor-property.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-editor-property.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-editor-property.c' object='libgladeui_1_la-glade-editor-property.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-editor-property.lo `test -f 'glade-editor-property.c' || echo '$(srcdir)/'`glade-editor-property.c
-
-libgladeui_1_la-glade-editor.lo: glade-editor.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-editor.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-editor.Tpo" -c -o libgladeui_1_la-glade-editor.lo `test -f 'glade-editor.c' || echo '$(srcdir)/'`glade-editor.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-editor.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-editor.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-editor.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-editor.c' object='libgladeui_1_la-glade-editor.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-editor.lo `test -f 'glade-editor.c' || echo '$(srcdir)/'`glade-editor.c
-
-libgladeui_1_la-glade-utils.lo: glade-utils.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-utils.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-utils.Tpo" -c -o libgladeui_1_la-glade-utils.lo `test -f 'glade-utils.c' || echo '$(srcdir)/'`glade-utils.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-utils.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-utils.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-utils.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-utils.c' object='libgladeui_1_la-glade-utils.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-utils.lo `test -f 'glade-utils.c' || echo '$(srcdir)/'`glade-utils.c
-
-libgladeui_1_la-glade-signal.lo: glade-signal.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-signal.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-signal.Tpo" -c -o libgladeui_1_la-glade-signal.lo `test -f 'glade-signal.c' || echo '$(srcdir)/'`glade-signal.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-signal.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-signal.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-signal.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-signal.c' object='libgladeui_1_la-glade-signal.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-signal.lo `test -f 'glade-signal.c' || echo '$(srcdir)/'`glade-signal.c
-
-libgladeui_1_la-glade-signal-editor.lo: glade-signal-editor.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-signal-editor.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-signal-editor.Tpo" -c -o libgladeui_1_la-glade-signal-editor.lo `test -f 'glade-signal-editor.c' || echo '$(srcdir)/'`glade-signal-editor.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-signal-editor.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-signal-editor.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-signal-editor.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-signal-editor.c' object='libgladeui_1_la-glade-signal-editor.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-signal-editor.lo `test -f 'glade-signal-editor.c' || echo '$(srcdir)/'`glade-signal-editor.c
-
-libgladeui_1_la-glade-clipboard.lo: glade-clipboard.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-clipboard.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-clipboard.Tpo" -c -o libgladeui_1_la-glade-clipboard.lo `test -f 'glade-clipboard.c' || echo '$(srcdir)/'`glade-clipboard.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-clipboard.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-clipboard.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-clipboard.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-clipboard.c' object='libgladeui_1_la-glade-clipboard.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-clipboard.lo `test -f 'glade-clipboard.c' || echo '$(srcdir)/'`glade-clipboard.c
-
-libgladeui_1_la-glade-clipboard-view.lo: glade-clipboard-view.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-clipboard-view.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-clipboard-view.Tpo" -c -o libgladeui_1_la-glade-clipboard-view.lo `test -f 'glade-clipboard-view.c' || echo '$(srcdir)/'`glade-clipboard-view.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-clipboard-view.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-clipboard-view.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-clipboard-view.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-clipboard-view.c' object='libgladeui_1_la-glade-clipboard-view.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-clipboard-view.lo `test -f 'glade-clipboard-view.c' || echo '$(srcdir)/'`glade-clipboard-view.c
-
-libgladeui_1_la-glade-command.lo: glade-command.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-command.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-command.Tpo" -c -o libgladeui_1_la-glade-command.lo `test -f 'glade-command.c' || echo '$(srcdir)/'`glade-command.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-command.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-command.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-command.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-command.c' object='libgladeui_1_la-glade-command.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-command.lo `test -f 'glade-command.c' || echo '$(srcdir)/'`glade-command.c
-
-libgladeui_1_la-glade-id-allocator.lo: glade-id-allocator.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-id-allocator.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-id-allocator.Tpo" -c -o libgladeui_1_la-glade-id-allocator.lo `test -f 'glade-id-allocator.c' || echo '$(srcdir)/'`glade-id-allocator.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-id-allocator.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-id-allocator.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-id-allocator.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-id-allocator.c' object='libgladeui_1_la-glade-id-allocator.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-id-allocator.lo `test -f 'glade-id-allocator.c' || echo '$(srcdir)/'`glade-id-allocator.c
-
-libgladeui_1_la-glade-marshallers.lo: glade-marshallers.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-marshallers.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-marshallers.Tpo" -c -o libgladeui_1_la-glade-marshallers.lo `test -f 'glade-marshallers.c' || echo '$(srcdir)/'`glade-marshallers.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-marshallers.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-marshallers.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-marshallers.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-marshallers.c' object='libgladeui_1_la-glade-marshallers.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-marshallers.lo `test -f 'glade-marshallers.c' || echo '$(srcdir)/'`glade-marshallers.c
-
-libgladeui_1_la-glade-accumulators.lo: glade-accumulators.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-accumulators.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-accumulators.Tpo" -c -o libgladeui_1_la-glade-accumulators.lo `test -f 'glade-accumulators.c' || echo '$(srcdir)/'`glade-accumulators.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-accumulators.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-accumulators.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-accumulators.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-accumulators.c' object='libgladeui_1_la-glade-accumulators.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-accumulators.lo `test -f 'glade-accumulators.c' || echo '$(srcdir)/'`glade-accumulators.c
-
-libgladeui_1_la-glade-parser.lo: glade-parser.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-parser.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-parser.Tpo" -c -o libgladeui_1_la-glade-parser.lo `test -f 'glade-parser.c' || echo '$(srcdir)/'`glade-parser.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-parser.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-parser.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-parser.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-parser.c' object='libgladeui_1_la-glade-parser.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-parser.lo `test -f 'glade-parser.c' || echo '$(srcdir)/'`glade-parser.c
-
-libgladeui_1_la-glade-builtins.lo: glade-builtins.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-builtins.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-builtins.Tpo" -c -o libgladeui_1_la-glade-builtins.lo `test -f 'glade-builtins.c' || echo '$(srcdir)/'`glade-builtins.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-builtins.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-builtins.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-builtins.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-builtins.c' object='libgladeui_1_la-glade-builtins.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-builtins.lo `test -f 'glade-builtins.c' || echo '$(srcdir)/'`glade-builtins.c
-
-libgladeui_1_la-glade-app.lo: glade-app.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-app.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-app.Tpo" -c -o libgladeui_1_la-glade-app.lo `test -f 'glade-app.c' || echo '$(srcdir)/'`glade-app.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-app.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-app.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-app.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-app.c' object='libgladeui_1_la-glade-app.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-app.lo `test -f 'glade-app.c' || echo '$(srcdir)/'`glade-app.c
-
-libgladeui_1_la-glade-keysyms.lo: glade-keysyms.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-keysyms.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-keysyms.Tpo" -c -o libgladeui_1_la-glade-keysyms.lo `test -f 'glade-keysyms.c' || echo '$(srcdir)/'`glade-keysyms.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-keysyms.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-keysyms.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-keysyms.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-keysyms.c' object='libgladeui_1_la-glade-keysyms.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-keysyms.lo `test -f 'glade-keysyms.c' || echo '$(srcdir)/'`glade-keysyms.c
-
-libgladeui_1_la-glade-fixed.lo: glade-fixed.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-fixed.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-fixed.Tpo" -c -o libgladeui_1_la-glade-fixed.lo `test -f 'glade-fixed.c' || echo '$(srcdir)/'`glade-fixed.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-fixed.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-fixed.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-fixed.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-fixed.c' object='libgladeui_1_la-glade-fixed.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-fixed.lo `test -f 'glade-fixed.c' || echo '$(srcdir)/'`glade-fixed.c
-
-libgladeui_1_la-glade-binding.lo: glade-binding.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-binding.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-binding.Tpo" -c -o libgladeui_1_la-glade-binding.lo `test -f 'glade-binding.c' || echo '$(srcdir)/'`glade-binding.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-binding.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-binding.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-binding.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-binding.c' object='libgladeui_1_la-glade-binding.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-binding.lo `test -f 'glade-binding.c' || echo '$(srcdir)/'`glade-binding.c
-
-libgladeui_1_la-glade-base-editor.lo: glade-base-editor.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-base-editor.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-base-editor.Tpo" -c -o libgladeui_1_la-glade-base-editor.lo `test -f 'glade-base-editor.c' || echo '$(srcdir)/'`glade-base-editor.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-base-editor.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-base-editor.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-base-editor.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-base-editor.c' object='libgladeui_1_la-glade-base-editor.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-base-editor.lo `test -f 'glade-base-editor.c' || echo '$(srcdir)/'`glade-base-editor.c
-
 glade_3-glade-project-window.o: glade-project-window.c
-@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(glade_3_CFLAGS) $(CFLAGS) -MT glade_3-glade-project-window.o -MD -MP -MF "$(DEPDIR)/glade_3-glade-project-window.Tpo" -c -o glade_3-glade-project-window.o `test -f 'glade-project-window.c' || echo '$(srcdir)/'`glade-project-window.c; \
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(glade_3_CPPFLAGS) $(CPPFLAGS) $(glade_3_CFLAGS) $(CFLAGS) -MT glade_3-glade-project-window.o -MD -MP -MF "$(DEPDIR)/glade_3-glade-project-window.Tpo" -c -o glade_3-glade-project-window.o `test -f 'glade-project-window.c' || echo '$(srcdir)/'`glade-project-window.c; \
 @am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/glade_3-glade-project-window.Tpo" "$(DEPDIR)/glade_3-glade-project-window.Po"; else rm -f "$(DEPDIR)/glade_3-glade-project-window.Tpo"; exit 1; fi
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-project-window.c' object='glade_3-glade-project-window.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(glade_3_CFLAGS) $(CFLAGS) -c -o glade_3-glade-project-window.o `test -f 'glade-project-window.c' || echo '$(srcdir)/'`glade-project-window.c
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(glade_3_CPPFLAGS) $(CPPFLAGS) $(glade_3_CFLAGS) $(CFLAGS) -c -o glade_3-glade-project-window.o `test -f 'glade-project-window.c' || echo '$(srcdir)/'`glade-project-window.c
 
 glade_3-glade-project-window.obj: glade-project-window.c
-@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(glade_3_CFLAGS) $(CFLAGS) -MT glade_3-glade-project-window.obj -MD -MP -MF "$(DEPDIR)/glade_3-glade-project-window.Tpo" -c -o glade_3-glade-project-window.obj `if test -f 'glade-project-window.c'; then $(CYGPATH_W) 'glade-project-window.c'; else $(CYGPATH_W) '$(srcdir)/glade-project-window.c'; fi`; \
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(glade_3_CPPFLAGS) $(CPPFLAGS) $(glade_3_CFLAGS) $(CFLAGS) -MT glade_3-glade-project-window.obj -MD -MP -MF "$(DEPDIR)/glade_3-glade-project-window.Tpo" -c -o glade_3-glade-project-window.obj `if test -f 'glade-project-window.c'; then $(CYGPATH_W) 'glade-project-window.c'; else $(CYGPATH_W) '$(srcdir)/glade-project-window.c'; fi`; \
 @am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/glade_3-glade-project-window.Tpo" "$(DEPDIR)/glade_3-glade-project-window.Po"; else rm -f "$(DEPDIR)/glade_3-glade-project-window.Tpo"; exit 1; fi
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-project-window.c' object='glade_3-glade-project-window.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(glade_3_CFLAGS) $(CFLAGS) -c -o glade_3-glade-project-window.obj `if test -f 'glade-project-window.c'; then $(CYGPATH_W) 'glade-project-window.c'; else $(CYGPATH_W) '$(srcdir)/glade-project-window.c'; fi`
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(glade_3_CPPFLAGS) $(CPPFLAGS) $(glade_3_CFLAGS) $(CFLAGS) -c -o glade_3-glade-project-window.obj `if test -f 'glade-project-window.c'; then $(CYGPATH_W) 'glade-project-window.c'; else $(CYGPATH_W) '$(srcdir)/glade-project-window.c'; fi`
 
 glade_3-main.o: main.c
-@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(glade_3_CFLAGS) $(CFLAGS) -MT glade_3-main.o -MD -MP -MF "$(DEPDIR)/glade_3-main.Tpo" -c -o glade_3-main.o `test -f 'main.c' || echo '$(srcdir)/'`main.c; \
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(glade_3_CPPFLAGS) $(CPPFLAGS) $(glade_3_CFLAGS) $(CFLAGS) -MT glade_3-main.o -MD -MP -MF "$(DEPDIR)/glade_3-main.Tpo" -c -o glade_3-main.o `test -f 'main.c' || echo '$(srcdir)/'`main.c; \
 @am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/glade_3-main.Tpo" "$(DEPDIR)/glade_3-main.Po"; else rm -f "$(DEPDIR)/glade_3-main.Tpo"; exit 1; fi
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='main.c' object='glade_3-main.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(glade_3_CFLAGS) $(CFLAGS) -c -o glade_3-main.o `test -f 'main.c' || echo '$(srcdir)/'`main.c
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(glade_3_CPPFLAGS) $(CPPFLAGS) $(glade_3_CFLAGS) $(CFLAGS) -c -o glade_3-main.o `test -f 'main.c' || echo '$(srcdir)/'`main.c
 
 glade_3-main.obj: main.c
-@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(glade_3_CFLAGS) $(CFLAGS) -MT glade_3-main.obj -MD -MP -MF "$(DEPDIR)/glade_3-main.Tpo" -c -o glade_3-main.obj `if test -f 'main.c'; then $(CYGPATH_W) 'main.c'; else $(CYGPATH_W) '$(srcdir)/main.c'; fi`; \
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(glade_3_CPPFLAGS) $(CPPFLAGS) $(glade_3_CFLAGS) $(CFLAGS) -MT glade_3-main.obj -MD -MP -MF "$(DEPDIR)/glade_3-main.Tpo" -c -o glade_3-main.obj `if test -f 'main.c'; then $(CYGPATH_W) 'main.c'; else $(CYGPATH_W) '$(srcdir)/main.c'; fi`; \
 @am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/glade_3-main.Tpo" "$(DEPDIR)/glade_3-main.Po"; else rm -f "$(DEPDIR)/glade_3-main.Tpo"; exit 1; fi
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='main.c' object='glade_3-main.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(glade_3_CFLAGS) $(CFLAGS) -c -o glade_3-main.obj `if test -f 'main.c'; then $(CYGPATH_W) 'main.c'; else $(CYGPATH_W) '$(srcdir)/main.c'; fi`
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(glade_3_CPPFLAGS) $(CPPFLAGS) $(glade_3_CFLAGS) $(CFLAGS) -c -o glade_3-main.obj `if test -f 'main.c'; then $(CYGPATH_W) 'main.c'; else $(CYGPATH_W) '$(srcdir)/main.c'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -1113,128 +427,6 @@ clean-libtool:
 distclean-libtool:
 	-rm -f libtool
 uninstall-info-am:
-install-pkgconfigDATA: $(pkgconfig_DATA)
-	@$(NORMAL_INSTALL)
-	test -z "$(pkgconfigdir)" || $(mkdir_p) "$(DESTDIR)$(pkgconfigdir)"
-	@list='$(pkgconfig_DATA)'; for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  f=$(am__strip_dir) \
-	  echo " $(pkgconfigDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(pkgconfigdir)/$$f'"; \
-	  $(pkgconfigDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(pkgconfigdir)/$$f"; \
-	done
-
-uninstall-pkgconfigDATA:
-	@$(NORMAL_UNINSTALL)
-	@list='$(pkgconfig_DATA)'; for p in $$list; do \
-	  f=$(am__strip_dir) \
-	  echo " rm -f '$(DESTDIR)$(pkgconfigdir)/$$f'"; \
-	  rm -f "$(DESTDIR)$(pkgconfigdir)/$$f"; \
-	done
-install-libgladegtkincludeHEADERS: $(libgladegtkinclude_HEADERS)
-	@$(NORMAL_INSTALL)
-	test -z "$(libgladegtkincludedir)" || $(mkdir_p) "$(DESTDIR)$(libgladegtkincludedir)"
-	@list='$(libgladegtkinclude_HEADERS)'; for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  f=$(am__strip_dir) \
-	  echo " $(libgladegtkincludeHEADERS_INSTALL) '$$d$$p' '$(DESTDIR)$(libgladegtkincludedir)/$$f'"; \
-	  $(libgladegtkincludeHEADERS_INSTALL) "$$d$$p" "$(DESTDIR)$(libgladegtkincludedir)/$$f"; \
-	done
-
-uninstall-libgladegtkincludeHEADERS:
-	@$(NORMAL_UNINSTALL)
-	@list='$(libgladegtkinclude_HEADERS)'; for p in $$list; do \
-	  f=$(am__strip_dir) \
-	  echo " rm -f '$(DESTDIR)$(libgladegtkincludedir)/$$f'"; \
-	  rm -f "$(DESTDIR)$(libgladegtkincludedir)/$$f"; \
-	done
-install-libgladeuiincludeHEADERS: $(libgladeuiinclude_HEADERS)
-	@$(NORMAL_INSTALL)
-	test -z "$(libgladeuiincludedir)" || $(mkdir_p) "$(DESTDIR)$(libgladeuiincludedir)"
-	@list='$(libgladeuiinclude_HEADERS)'; for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  f=$(am__strip_dir) \
-	  echo " $(libgladeuiincludeHEADERS_INSTALL) '$$d$$p' '$(DESTDIR)$(libgladeuiincludedir)/$$f'"; \
-	  $(libgladeuiincludeHEADERS_INSTALL) "$$d$$p" "$(DESTDIR)$(libgladeuiincludedir)/$$f"; \
-	done
-
-uninstall-libgladeuiincludeHEADERS:
-	@$(NORMAL_UNINSTALL)
-	@list='$(libgladeuiinclude_HEADERS)'; for p in $$list; do \
-	  f=$(am__strip_dir) \
-	  echo " rm -f '$(DESTDIR)$(libgladeuiincludedir)/$$f'"; \
-	  rm -f "$(DESTDIR)$(libgladeuiincludedir)/$$f"; \
-	done
-
-# This directory's subdirectories are mostly independent; you can cd
-# into them and run `make' without going through this Makefile.
-# To change the values of `make' variables: instead of editing Makefiles,
-# (1) if the variable is set in `config.status', edit `config.status'
-#     (which will cause the Makefiles to be regenerated when you run `make');
-# (2) otherwise, pass the desired values on the `make' command line.
-$(RECURSIVE_TARGETS):
-	@failcom='exit 1'; \
-	for f in x $$MAKEFLAGS; do \
-	  case $$f in \
-	    *=* | --[!k]*);; \
-	    *k*) failcom='fail=yes';; \
-	  esac; \
-	done; \
-	dot_seen=no; \
-	target=`echo $@ | sed s/-recursive//`; \
-	list='$(SUBDIRS)'; for subdir in $$list; do \
-	  echo "Making $$target in $$subdir"; \
-	  if test "$$subdir" = "."; then \
-	    dot_seen=yes; \
-	    local_target="$$target-am"; \
-	  else \
-	    local_target="$$target"; \
-	  fi; \
-	  (cd $$subdir && $(MAKE) $(AM_MAKEFLAGS) $$local_target) \
-	  || eval $$failcom; \
-	done; \
-	if test "$$dot_seen" = "no"; then \
-	  $(MAKE) $(AM_MAKEFLAGS) "$$target-am" || exit 1; \
-	fi; test -z "$$fail"
-
-mostlyclean-recursive clean-recursive distclean-recursive \
-maintainer-clean-recursive:
-	@failcom='exit 1'; \
-	for f in x $$MAKEFLAGS; do \
-	  case $$f in \
-	    *=* | --[!k]*);; \
-	    *k*) failcom='fail=yes';; \
-	  esac; \
-	done; \
-	dot_seen=no; \
-	case "$@" in \
-	  distclean-* | maintainer-clean-*) list='$(DIST_SUBDIRS)' ;; \
-	  *) list='$(SUBDIRS)' ;; \
-	esac; \
-	rev=''; for subdir in $$list; do \
-	  if test "$$subdir" = "."; then :; else \
-	    rev="$$subdir $$rev"; \
-	  fi; \
-	done; \
-	rev="$$rev ."; \
-	target=`echo $@ | sed s/-recursive//`; \
-	for subdir in $$rev; do \
-	  echo "Making $$target in $$subdir"; \
-	  if test "$$subdir" = "."; then \
-	    local_target="$$target-am"; \
-	  else \
-	    local_target="$$target"; \
-	  fi; \
-	  (cd $$subdir && $(MAKE) $(AM_MAKEFLAGS) $$local_target) \
-	  || eval $$failcom; \
-	done && test -z "$$fail"
-tags-recursive:
-	list='$(SUBDIRS)'; for subdir in $$list; do \
-	  test "$$subdir" = . || (cd $$subdir && $(MAKE) $(AM_MAKEFLAGS) tags); \
-	done
-ctags-recursive:
-	list='$(SUBDIRS)'; for subdir in $$list; do \
-	  test "$$subdir" = . || (cd $$subdir && $(MAKE) $(AM_MAKEFLAGS) ctags); \
-	done
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
@@ -1246,23 +438,10 @@ ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	mkid -fID $$unique
 tags: TAGS
 
-TAGS: tags-recursive $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
+TAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
 		$(TAGS_FILES) $(LISP)
 	tags=; \
 	here=`pwd`; \
-	if ($(ETAGS) --etags-include --version) >/dev/null 2>&1; then \
-	  include_option=--etags-include; \
-	  empty_fix=.; \
-	else \
-	  include_option=--include; \
-	  empty_fix=; \
-	fi; \
-	list='$(SUBDIRS)'; for subdir in $$list; do \
-	  if test "$$subdir" = .; then :; else \
-	    test ! -f $$subdir/TAGS || \
-	      tags="$$tags $$include_option=$$here/$$subdir/TAGS"; \
-	  fi; \
-	done; \
 	list='$(SOURCES) $(HEADERS)  $(LISP) $(TAGS_FILES)'; \
 	unique=`for i in $$list; do \
 	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
@@ -1275,7 +454,7 @@ TAGS: tags-recursive $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
 	    $$tags $$unique; \
 	fi
 ctags: CTAGS
-CTAGS: ctags-recursive $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
+CTAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
 		$(TAGS_FILES) $(LISP)
 	tags=; \
 	here=`pwd`; \
@@ -1324,42 +503,22 @@ distdir: $(DISTFILES)
 	    || exit 1; \
 	  fi; \
 	done
-	list='$(DIST_SUBDIRS)'; for subdir in $$list; do \
-	  if test "$$subdir" = .; then :; else \
-	    test -d "$(distdir)/$$subdir" \
-	    || $(mkdir_p) "$(distdir)/$$subdir" \
-	    || exit 1; \
-	    distdir=`$(am__cd) $(distdir) && pwd`; \
-	    top_distdir=`$(am__cd) $(top_distdir) && pwd`; \
-	    (cd $$subdir && \
-	      $(MAKE) $(AM_MAKEFLAGS) \
-	        top_distdir="$$top_distdir" \
-	        distdir="$$distdir/$$subdir" \
-	        distdir) \
-	      || exit 1; \
-	  fi; \
-	done
 check-am: all-am
-check: $(BUILT_SOURCES)
-	$(MAKE) $(AM_MAKEFLAGS) check-recursive
-all-am: Makefile $(LTLIBRARIES) $(PROGRAMS) $(DATA) $(HEADERS)
-install-binPROGRAMS: install-libLTLIBRARIES
-
-installdirs: installdirs-recursive
-installdirs-am:
-	for dir in "$(DESTDIR)$(gladegnomedir)" "$(DESTDIR)$(gladegtkdir)" "$(DESTDIR)$(gladepythondir)" "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(libgladegtkincludedir)" "$(DESTDIR)$(libgladeuiincludedir)"; do \
+check: check-am
+all-am: Makefile $(PROGRAMS)
+installdirs:
+	for dir in "$(DESTDIR)$(bindir)"; do \
 	  test -z "$$dir" || $(mkdir_p) "$$dir"; \
 	done
-install: $(BUILT_SOURCES)
-	$(MAKE) $(AM_MAKEFLAGS) install-recursive
-install-exec: install-exec-recursive
-install-data: install-data-recursive
-uninstall: uninstall-recursive
+install: install-am
+install-exec: install-exec-am
+install-data: install-data-am
+uninstall: uninstall-am
 
 install-am: all-am
 	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
 
-installcheck: installcheck-recursive
+installcheck: installcheck-am
 install-strip:
 	$(MAKE) $(AM_MAKEFLAGS) INSTALL_PROGRAM="$(INSTALL_STRIP_PROGRAM)" \
 	  install_sh_PROGRAM="$(INSTALL_STRIP_PROGRAM)" INSTALL_STRIP_FLAG=-s \
@@ -1368,7 +527,6 @@ install-strip:
 mostlyclean-generic:
 
 clean-generic:
-	-test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
 
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
@@ -1376,113 +534,69 @@ distclean-generic:
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
-	-test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
-clean: clean-recursive
+clean: clean-am
 
-clean-am: clean-binPROGRAMS clean-generic clean-gladegnomeLTLIBRARIES \
-	clean-gladegtkLTLIBRARIES clean-gladepythonLTLIBRARIES \
-	clean-libLTLIBRARIES clean-libtool mostlyclean-am
+clean-am: clean-binPROGRAMS clean-generic clean-libtool mostlyclean-am
 
-distclean: distclean-recursive
+distclean: distclean-am
 	-rm -rf ./$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-libtool distclean-tags
 
-dvi: dvi-recursive
+dvi: dvi-am
 
 dvi-am:
 
-html: html-recursive
+html: html-am
 
-info: info-recursive
+info: info-am
 
 info-am:
 
-install-data-am: install-gladegnomeLTLIBRARIES \
-	install-gladegtkLTLIBRARIES install-gladepythonLTLIBRARIES \
-	install-libgladegtkincludeHEADERS \
-	install-libgladeuiincludeHEADERS install-pkgconfigDATA
+install-data-am:
 
-install-exec-am: install-binPROGRAMS install-libLTLIBRARIES
+install-exec-am: install-binPROGRAMS
 
-install-info: install-info-recursive
+install-info: install-info-am
 
 install-man:
 
 installcheck-am:
 
-maintainer-clean: maintainer-clean-recursive
+maintainer-clean: maintainer-clean-am
 	-rm -rf ./$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
-mostlyclean: mostlyclean-recursive
+mostlyclean: mostlyclean-am
 
 mostlyclean-am: mostlyclean-compile mostlyclean-generic \
 	mostlyclean-libtool
 
-pdf: pdf-recursive
+pdf: pdf-am
 
 pdf-am:
 
-ps: ps-recursive
+ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-binPROGRAMS uninstall-gladegnomeLTLIBRARIES \
-	uninstall-gladegtkLTLIBRARIES uninstall-gladepythonLTLIBRARIES \
-	uninstall-info-am uninstall-libLTLIBRARIES \
-	uninstall-libgladegtkincludeHEADERS \
-	uninstall-libgladeuiincludeHEADERS uninstall-pkgconfigDATA
+uninstall-am: uninstall-binPROGRAMS uninstall-info-am
 
-uninstall-info: uninstall-info-recursive
+.PHONY: CTAGS GTAGS all all-am check check-am clean clean-binPROGRAMS \
+	clean-generic clean-libtool ctags distclean distclean-compile \
+	distclean-generic distclean-libtool distclean-tags distdir dvi \
+	dvi-am html html-am info info-am install install-am \
+	install-binPROGRAMS install-data install-data-am install-exec \
+	install-exec-am install-info install-info-am install-man \
+	install-strip installcheck installcheck-am installdirs \
+	maintainer-clean maintainer-clean-generic mostlyclean \
+	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
+	pdf pdf-am ps ps-am tags uninstall uninstall-am \
+	uninstall-binPROGRAMS uninstall-info-am
 
-.PHONY: $(RECURSIVE_TARGETS) CTAGS GTAGS all all-am check check-am \
-	clean clean-binPROGRAMS clean-generic \
-	clean-gladegnomeLTLIBRARIES clean-gladegtkLTLIBRARIES \
-	clean-gladepythonLTLIBRARIES clean-libLTLIBRARIES \
-	clean-libtool clean-recursive ctags ctags-recursive distclean \
-	distclean-compile distclean-generic distclean-libtool \
-	distclean-recursive distclean-tags distdir dvi dvi-am html \
-	html-am info info-am install install-am install-binPROGRAMS \
-	install-data install-data-am install-exec install-exec-am \
-	install-gladegnomeLTLIBRARIES install-gladegtkLTLIBRARIES \
-	install-gladepythonLTLIBRARIES install-info install-info-am \
-	install-libLTLIBRARIES install-libgladegtkincludeHEADERS \
-	install-libgladeuiincludeHEADERS install-man \
-	install-pkgconfigDATA install-strip installcheck \
-	installcheck-am installdirs installdirs-am maintainer-clean \
-	maintainer-clean-generic maintainer-clean-recursive \
-	mostlyclean mostlyclean-compile mostlyclean-generic \
-	mostlyclean-libtool mostlyclean-recursive pdf pdf-am ps ps-am \
-	tags tags-recursive uninstall uninstall-am \
-	uninstall-binPROGRAMS uninstall-gladegnomeLTLIBRARIES \
-	uninstall-gladegtkLTLIBRARIES uninstall-gladepythonLTLIBRARIES \
-	uninstall-info-am uninstall-libLTLIBRARIES \
-	uninstall-libgladegtkincludeHEADERS \
-	uninstall-libgladeuiincludeHEADERS uninstall-pkgconfigDATA
-
-
-#
-# Marshaller generation
-#
-glade-marshallers.h: glade-marshallers.list $(GLIB_GENMARSHAL)
-	$(GLIB_GENMARSHAL) --prefix=glade_marshal $(srcdir)/glade-marshallers.list --header > glade-marshallers-h.tmp \
-	&& mv glade-marshallers-h.tmp glade-marshallers.h \
-	|| ( rm -f glade-marshallers-h.tmp && exit 1)
-glade-marshallers.c: glade-marshallers.list $(GLIB_GENMARSHAL)
-	$(GLIB_GENMARSHAL) --prefix=glade_marshal $(srcdir)/glade-marshallers.list --body > glade-marshallers-c.tmp     \
-	&& mv glade-marshallers-c.tmp glade-marshallers.c \
-	|| ( rm -f glade-marshallers-c.tmp && exit 1 )
-
-glade-paths.h: glade-paths.sh
-	@sh $< > $@.tmp ;					\
-	if cmp -s $@.tmp $@; then				\
-	    rm $@.tmp;						\
-	else							\
-	    mv $@.tmp $@ ; echo updated glade-paths.h ;	\
-	fi
+	$(AM_CPPFLAGS)
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

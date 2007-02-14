@@ -1,7 +1,10 @@
-/* config.h.in.  Generated from configure.in by autoheader.  */
+/* config.h.in.  Generated from configure.ac by autoheader.  */
 
 /* always defined to indicate that i18n is enabled */
 #undef ENABLE_NLS
+
+/* Define to compile with python support */
+#undef ENABLE_PYTHON
 
 /* Name of the gettext package. */
 #undef GETTEXT_PACKAGE
@@ -29,9 +32,6 @@
 
 /* Define to 1 if you have the <memory.h> header file. */
 #undef HAVE_MEMORY_H
-
-/* Define to 1 if you have the <Python.h> header file. */
-#undef HAVE_PYTHON_H
 
 /* Define to 1 if you have the <stdint.h> header file. */
 #undef HAVE_STDINT_H
@@ -73,13 +73,13 @@
 #undef PACKAGE_VERSION
 
 /* Pygtk mayor version required */
-#undef PYGTK_REQ_MAYOR
+#undef PYGTK_REQUIRED_MAJOR
 
 /* Pygtk micro version required */
-#undef PYGTK_REQ_MICRO
+#undef PYGTK_REQUIRED_MICRO
 
 /* Pygtk minor version required */
-#undef PYGTK_REQ_MINOR
+#undef PYGTK_REQUIRED_MINOR
 
 /* Define to 1 if you have the ANSI C header files. */
 #undef STDC_HEADERS

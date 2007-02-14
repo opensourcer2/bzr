@@ -25,17 +25,17 @@
 #include <config.h>
 #endif
 
+#include "glade-project-window.h"
+
+#include <gladeui/glade.h>
+#include <gladeui/glade-design-view.h>
+#include <gladeui/glade-binding.h>
+
 #include <string.h>
 #include <glib/gstdio.h>
 #include <glib/gi18n.h>
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtkstock.h>
-
-#include "glade.h"
-#include "glade-paths.h"
-#include "glade-design-view.h"
-#include "glade-project-window.h"
-#include "glade-binding.h"
 
 #define GLADE_ACTION_GROUP_STATIC "GladeStatic"
 #define GLADE_ACTION_GROUP_PROJECT "GladeProject"
@@ -43,7 +43,7 @@
 
 #define READONLY_INDICATOR (_("[Read Only]"))
 
-#define GLADE_URL_USER_MANUAL      "http://glade.gnome.org/doc/manual"
+#define GLADE_URL_USER_MANUAL      "http://glade.gnome.org/manual/index.html"
 #define GLADE_URL_DEVELOPER_MANUAL "http://glade.gnome.org/docs/index.html"
 
 #define GLADE_PROJECT_WINDOW_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object),  \
@@ -75,8 +75,6 @@ struct _GladeProjectWindowPrivate
 	
 	GtkRecentManager *recent_manager;
 	GtkWidget *recent_menu;
-
-	GtkWidget *console;
 
 	gchar *default_path; /* the default path for open/save operations */
 	
@@ -201,17 +199,17 @@ gpw_refresh_title (GladeProjectWindow *gpw)
 		name = glade_project_display_name (project, TRUE, FALSE, FALSE);
 		
 		if (project->readonly != FALSE)
-			title = g_strdup_printf ("%s %s - %s", name,
-						 READONLY_INDICATOR, g_get_application_name ());
+			title = g_strdup_printf ("%s %s", name, READONLY_INDICATOR);
 		else
-			title = g_strdup_printf ("%s - %s", name,
-						 g_get_application_name ());
+			title = g_strdup_printf ("%s", name);
 		
 		g_free (name);
 	}
 	else
-		title = g_strdup_printf ("%s", g_get_application_name ());
-
+	{
+		title = g_strdup (_("User Interface Designer"));
+	}
+	
 	gtk_window_set_title (GTK_WINDOW (gpw->priv->window), title);
 
 	g_free (title);
@@ -1173,48 +1171,6 @@ gpw_hide_window_on_delete (GtkWidget *window, gpointer not_used, GtkUIManager *u
 }
 
 static void
-gpw_construct_console (GladeProjectWindow *gpw)
-{
-	GtkWidget *window, *console, *notebook;
-	GList *list, *l;
-	
-	g_return_if_fail (gpw != NULL);
-
-	window = gpw->priv->console = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-
-	gtk_window_set_title (GTK_WINDOW (window), _("Glade's Script Console"));
-	gtk_window_set_resizable (GTK_WINDOW (window), TRUE);
-	gtk_widget_set_size_request (window, 640, 480);
-	
-	notebook = gtk_notebook_new ();
-	gtk_container_add (GTK_CONTAINER (window), notebook);
-	gtk_widget_show (notebook);
-	
-	for (list = l = glade_binding_get_all(); l && l->data; l = g_list_next (l))
-	{
-		GladeBinding *binding = l->data;
-		
-		if ((console = glade_binding_console_new (binding)))
-		{
-			gtk_notebook_append_page (GTK_NOTEBOOK (notebook), console,
-						  gtk_label_new (glade_binding_get_name (binding)));
-			gtk_widget_show (console);
-		}
-	}
-
-	if (list == NULL)
-		gtk_widget_set_sensitive (gtk_ui_manager_get_widget 
-					  (gpw->priv->ui, "/MenuBar/ViewMenu/Console"),
-					  FALSE);
-
-	g_list_free (list);
-	
-	/* Delete event, don't destroy it */
-	g_signal_connect (window, "delete-event",
-			  G_CALLBACK (gpw_hide_window_on_delete), gpw->priv->ui);
-}
-
-static void
 gpw_doc_search_cb (GladeEditor        *editor,
 		   const gchar        *book,
 		   const gchar        *page,
@@ -1278,16 +1234,6 @@ gpw_notebook_switch_page_cb (GtkNotebook *notebook,
 
 	g_free (action_name);
 
-}
-
-static void
-gpw_show_console_cb (GtkAction *action, GladeProjectWindow *gpw)
-{
-	g_return_if_fail (gpw != NULL);
-
-	gtk_widget_show (gpw->priv->console);
-
-	gtk_window_present (GTK_WINDOW (gpw->priv->console));
 }
 
 static void
@@ -1532,33 +1478,6 @@ gpw_about_cb (GtkAction *action, GladeProjectWindow *gpw)
 		  "Vincent Geddes <vincent.geddes@gmail.com>",
 		  NULL };
 
-	static const gchar translators[] =
-		"Fatih Demir <kabalak@gtranslator.org>\n"
-		"Christian Rose <menthos@menthos.com>\n"
-		"Pablo Saratxaga <pablo@mandrakesoft.com>\n"
-		"Duarte Loreto <happyguy_pt@hotmail.com>\n"
-		"Zbigniew Chyla <cyba@gnome.pl>\n"
-		"Hasbullah Bin Pit <sebol@ikhlas.com>\n"
-		"Takeshi AIHANA <aihana@gnome.gr.jp>\n"
-		"Kjartan Maraas <kmaraas@gnome.org>\n"
-		"Carlos Perell Marn <carlos@gnome-db.org>\n"
-		"Valek Filippov <frob@df.ru>\n"
-		"Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>\n"
-		"Christophe Merlet <christophe@merlet.net>\n"
-		"Funda Wang <fundawang@linux.net.cn>\n"
-		"Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
-		"Adam Weinberger <adamw@gnome.org>\n"
-		"Raphael Higino <raphaelh@cvs.gnome.org>\n"
-		"Clytie Siddall <clytie@riverland.net.au>\n"
-		"Jordi Mas <jmas@softcatala.org>\n"
-		"Vincent van Adrighem <adrighem@gnome.org>\n"
-		"Daniel Nylander <po@danielnylander.se>\n";
-
-	static const gchar comments[] =
-		N_("Glade is a user interface designer for GTK+ and GNOME.\n"
-		  "This version is a rewrite of the Glade 2 version, "
-		  "originally created by Damon Chaplin\n");
-
 	static const gchar license[] =
 		N_("This program is free software; you can redistribute it and/or modify\n"
 		  "it under the terms of the GNU General Public License as\n"
@@ -1582,9 +1501,9 @@ gpw_about_cb (GtkAction *action, GladeProjectWindow *gpw)
 			       "name", g_get_application_name (),
 			       "logo-icon-name", "glade-3",
 			       "authors", authors,
-			       "translator-credits", translators,
-			       "comments", comments,
-			       "license", license,
+			       "translator-credits", _("translator-credits"),
+			       "comments", _("A user interface designer for GTK+ and GNOME."),
+			       "license", _(license),
 			       "copyright", copyright,
 			       "version", PACKAGE_VERSION,
 			       "website", "http://glade.gnome.org",
@@ -1616,7 +1535,6 @@ static const gchar *ui_info =
 "    </menu>\n"
 "    <menu action='ViewMenu'>\n"
 "      <menuitem action='Clipboard'/>\n"
-"      <menuitem action='Console'/>\n"
 "      <separator/>\n"
 "      <menu action='PaletteAppearance'>\n"
 "        <menuitem action='IconsAndLabels'/>\n"
@@ -1665,7 +1583,7 @@ static GtkActionEntry static_entries[] = {
 	{ "New", GTK_STOCK_NEW, N_("_New"), "<control>N",
 	  N_("Create a new project"), G_CALLBACK (gpw_new_cb) },
 	
-	{ "Open", GTK_STOCK_OPEN, N_("_Open"),"<control>O",
+	{ "Open", GTK_STOCK_OPEN, N_("_Open\342\200\246"),"<control>O",
 	  N_("Open a project"), G_CALLBACK (gpw_open_cb) },
 
 	{ "OpenRecent", NULL, N_("Open _Recent") },	
@@ -1674,7 +1592,7 @@ static GtkActionEntry static_entries[] = {
 	  N_("Quit the program"), G_CALLBACK (gpw_quit_cb) },
 
 	/* ViewMenu */
-	{ "PaletteAppearance", NULL, "Palette _Appearance" },
+	{ "PaletteAppearance", NULL, N_("Palette _Appearance") },
 	
 	/* HelpMenu */
 	{ "About", GTK_STOCK_ABOUT, N_("_About"), NULL,
@@ -1686,6 +1604,7 @@ static GtkActionEntry static_entries[] = {
 	{ "DeveloperReference", NULL, N_("_Developer Reference"), NULL,
 	  N_("Display the developer reference manual"), G_CALLBACK (gpw_show_developer_manual_cb) }
 };
+
 static guint n_static_entries = G_N_ELEMENTS (static_entries);
 
 static GtkActionEntry project_entries[] = {
@@ -1724,10 +1643,6 @@ static GtkActionEntry project_entries[] = {
 	{ "Clipboard", NULL, N_("_Clipboard"), NULL,
 	  N_("Show the clipboard"),
 	  G_CALLBACK (gpw_show_clipboard_cb) },
-	  
-	{ "Console", NULL, N_("C_onsole"), NULL,
-	  N_("Show Script-do console"),
-	  G_CALLBACK (gpw_show_console_cb) },
 	  
 	/* ProjectsMenu */
 	{ "PreviousProject", NULL, N_("_Previous Project"), "<control>Page_Up",
@@ -1958,7 +1873,7 @@ create_selector_tool_button (GtkToolbar *toolbar)
 	GtkWidget    *image;
 	gchar        *image_path;
 	
-	image_path = g_build_filename (glade_pixmaps_dir, "selector.png", NULL);
+	image_path = g_build_filename (glade_app_get_pixmaps_dir (), "selector.png", NULL);
 	image = gtk_image_new_from_file (image_path);
 	g_free (image_path);
 	
@@ -1966,16 +1881,35 @@ create_selector_tool_button (GtkToolbar *toolbar)
 	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (button), TRUE);
 	
 	gtk_tool_button_set_icon_widget (GTK_TOOL_BUTTON (button), image);
+	gtk_tool_button_set_label (GTK_TOOL_BUTTON (button), _("Select Widgets"));
 	
 	gtk_tool_item_set_tooltip (GTK_TOOL_ITEM (button),
 				   toolbar->tooltips,
-				   _("Select a widget"),
+				   _("Select widgets in the workspace"),
 				   NULL);
 	
 	gtk_widget_show (GTK_WIDGET (button));
 	gtk_widget_show (image);
 	
 	return GTK_WIDGET (button);
+}
+
+static gint
+gpw_hijack_editor_key_press (GtkWidget          *win, 
+			     GdkEventKey        *event, 
+			     GladeProjectWindow *gpw)
+{
+	if (GTK_WINDOW (win)->focus_widget &&
+	    (event->keyval == GDK_Delete || /* Filter Delete from accelerator keys */
+	     ((event->state & GDK_CONTROL_MASK) && /* CNTL keys... */
+	      ((event->keyval == GDK_c || event->keyval == GDK_C) || /* CNTL-C (copy)  */
+	       (event->keyval == GDK_x || event->keyval == GDK_X) || /* CNTL-X (cut)   */
+	       (event->keyval == GDK_v || event->keyval == GDK_V))))) /* CNTL-V (paste) */
+	{
+		return gtk_widget_event (GTK_WINDOW (win)->focus_widget, 
+					 (GdkEvent *)event);
+	}
+	return FALSE;
 }
 
 static void
@@ -2081,9 +2015,6 @@ glade_project_window_create (GladeProjectWindow *gpw)
 
 	gtk_widget_set_sensitive (editor_item, FALSE);
 	
-	/* Console */
-	gpw_construct_console (gpw);
-	
 	/* recent files */	
 	gpw->priv->recent_manager = gtk_recent_manager_get_for_screen (gtk_widget_get_screen (gpw->priv->window));
 
@@ -2148,6 +2079,10 @@ glade_project_window_create (GladeProjectWindow *gpw)
 	g_signal_connect (gpw->priv->window, "window-state-event",
 			  G_CALLBACK (gpw_window_state_event_cb),
 			  gpw);
+
+	g_signal_connect (G_OBJECT (gpw->priv->window), "key-press-event",
+			  G_CALLBACK (gpw_hijack_editor_key_press), gpw);
+
 }
 
 static void
