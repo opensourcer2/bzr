@@ -1,0 +1,377 @@
+<refentry id="gladeui-GladeWidgetClass">
+<refmeta>
+<refentrytitle role="top_of_page">GladeWidgetClass</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>GLADEUI Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>GladeWidgetClass</refname>
+<refpurpose>Object Class-wide metadata</refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+#include &lt;glade.h&gt;
+
+
+            <link linkend="GladeWidgetClass">GladeWidgetClass</link>;
+            <link linkend="GladeSignalClass">GladeSignalClass</link>;
+enum        <link linkend="GladeCreateReason">GladeCreateReason</link>;
+<link linkend="void">void</link>        (<link linkend="GladePostCreateFunc">*GladePostCreateFunc</link>)          (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+                                             <link linkend="GObject">GObject</link> *object,
+                                             <link linkend="GladeCreateReason">GladeCreateReason</link> reason);
+<link linkend="void">void</link>        (<link linkend="GladeChildSetPropertyFunc">*GladeChildSetPropertyFunc</link>)    (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+                                             <link linkend="GObject">GObject</link> *container,
+                                             <link linkend="GObject">GObject</link> *child,
+                                             const <link linkend="gchar">gchar</link> *property_name,
+                                             const <link linkend="GValue">GValue</link> *value);
+<link linkend="void">void</link>        (<link linkend="GladeChildGetPropertyFunc">*GladeChildGetPropertyFunc</link>)    (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+                                             <link linkend="GObject">GObject</link> *container,
+                                             <link linkend="GObject">GObject</link> *child,
+                                             const <link linkend="gchar">gchar</link> *property_name,
+                                             <link linkend="GValue">GValue</link> *value);
+<link linkend="GList">GList</link>*      (<link linkend="GladeGetChildrenFunc">*GladeGetChildrenFunc</link>)         (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+                                             <link linkend="GObject">GObject</link> *container);
+<link linkend="void">void</link>        (<link linkend="GladeAddChildFunc">*GladeAddChildFunc</link>)            (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+                                             <link linkend="GObject">GObject</link> *parent,
+                                             <link linkend="GObject">GObject</link> *child);
+<link linkend="void">void</link>        (<link linkend="GladeRemoveChildFunc">*GladeRemoveChildFunc</link>)         (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+                                             <link linkend="GObject">GObject</link> *parent,
+                                             <link linkend="GObject">GObject</link> *child);
+<link linkend="void">void</link>        (<link linkend="GladeReplaceChildFunc">*GladeReplaceChildFunc</link>)        (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+                                             <link linkend="GObject">GObject</link> *container,
+                                             <link linkend="GObject">GObject</link> *old_obj,
+                                             <link linkend="GObject">GObject</link> *new_obj);
+<link linkend="GObject">GObject</link>*    (<link linkend="GladeGetInternalFunc">*GladeGetInternalFunc</link>)         (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+                                             <link linkend="GObject">GObject</link> *parent,
+                                             const <link linkend="gchar">gchar</link> *name);
+<link linkend="void">void</link>        (<link linkend="GladeEditorLaunchFunc">*GladeEditorLaunchFunc</link>)        (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+                                             <link linkend="GObject">GObject</link> *object);
+
+
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 role="desc">
+<title role="desc.title">Description</title>
+<para>
+<link linkend="GladeWidgetClass"><type>GladeWidgetClass</type></link> is a structure based on a <link linkend="GType"><type>GType</type></link> and parameters
+from the Glade catalog files and is the central metadata for object
+classes; it also provides an abstraction later to container apis.
+</para>
+</refsect1>
+
+<refsect1 role="details">
+<title role="details.title">Details</title>
+<refsect2>
+<title><anchor id="GladeWidgetClass" role="struct"/>GladeWidgetClass</title>
+<indexterm><primary>GladeWidgetClass</primary></indexterm><programlisting>typedef struct {
+	GObjectClass parent_class;
+
+	void         (*add_child)               (GladeWidget *, GladeWidget *, gboolean);
+	void         (*remove_child)            (GladeWidget *, GladeWidget *);
+	void         (*replace_child)           (GladeWidget *, GObject *, GObject *);
+
+	void         (*add_signal_handler)	(GladeWidget *, GladeSignal *);
+	void         (*remove_signal_handler)	(GladeWidget *, GladeSignal *);
+	void         (*change_signal_handler)	(GladeWidget *, GladeSignal *, GladeSignal *);
+	gboolean     (*action_activated)        (GladeWidget *, const gchar *);
+	
+	gint         (*button_press_event)      (GladeWidget *, GdkEvent *);
+	gint         (*button_release_event)    (GladeWidget *, GdkEvent *);
+	gint         (*motion_notify_event)     (GladeWidget *, GdkEvent *);
+
+	gboolean     (*event)                   (GladeWidget *, GdkEvent *);
+} GladeWidgetClass;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="GladeSignalClass" role="struct"/>GladeSignalClass</title>
+<indexterm><primary>GladeSignalClass</primary></indexterm><programlisting>typedef struct {
+	GSignalQuery query;
+
+	const gchar *name;         /* Name of the signal, eg clicked */
+	gchar       *type;         /* Name of the object class that this signal belongs to
+				    * eg GtkButton */
+} GladeSignalClass;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="GladeCreateReason" role="enum"/>enum GladeCreateReason</title>
+<indexterm><primary>GladeCreateReason</primary></indexterm><programlisting>typedef enum _GladeCreateReason
+{
+	GLADE_CREATE_USER = 0,
+	GLADE_CREATE_COPY,
+	GLADE_CREATE_LOAD,
+	GLADE_CREATE_REBUILD,
+	GLADE_CREATE_REASONS
+} GladeCreateReason;
+</programlisting>
+<para>
+These are the reasons your <link linkend="GladePostCreateFunc"><type>GladePostCreateFunc</type></link> can be called.</para>
+<para>
+
+</para><variablelist role="enum">
+<varlistentry>
+<term><anchor id="GLADE-CREATE-USER:CAPS" role="constant"/><literal>GLADE_CREATE_USER</literal></term>
+<listitem><simpara> Was created at the user's request
+                    (this is a good time to set any properties
+                    or add children to the project; like GtkFrame's 
+                    label for example).
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><anchor id="GLADE-CREATE-COPY:CAPS" role="constant"/><literal>GLADE_CREATE_COPY</literal></term>
+<listitem><simpara> Was created as a result of the copy/paste 
+                    mechanism, at this point you can count on glade
+                    to follow up with properties and children on 
+                    its own.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><anchor id="GLADE-CREATE-LOAD:CAPS" role="constant"/><literal>GLADE_CREATE_LOAD</literal></term>
+<listitem><simpara> Was created during the load process.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><anchor id="GLADE-CREATE-REBUILD:CAPS" role="constant"/><literal>GLADE_CREATE_REBUILD</literal></term>
+<listitem><simpara> Was created as a replacement for another project 
+                       object; this only happens when the user is 
+                       changing a property that is marked by the type 
+                       system as G_PARAM_SPEC_CONSTRUCT_ONLY.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><anchor id="GLADE-CREATE-REASONS:CAPS" role="constant"/><literal>GLADE_CREATE_REASONS</literal></term>
+<listitem><simpara> Never used.
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="GladePostCreateFunc" role="function"/>GladePostCreateFunc ()</title>
+<indexterm><primary>GladePostCreateFunc</primary></indexterm><programlisting><link linkend="void">void</link>        (*GladePostCreateFunc)          (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+                                             <link linkend="GObject">GObject</link> *object,
+                                             <link linkend="GladeCreateReason">GladeCreateReason</link> reason);</programlisting>
+<para>
+This function is called exactly once for any project object
+instance and can be for any <link linkend="GladeCreateReason"><type>GladeCreateReason</type></link>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>adaptor</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GObject"><type>GObject</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>reason</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GladeCreateReason"><type>GladeCreateReason</type></link>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="GladeChildSetPropertyFunc" role="function"/>GladeChildSetPropertyFunc ()</title>
+<indexterm><primary>GladeChildSetPropertyFunc</primary></indexterm><programlisting><link linkend="void">void</link>        (*GladeChildSetPropertyFunc)    (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+                                             <link linkend="GObject">GObject</link> *container,
+                                             <link linkend="GObject">GObject</link> *child,
+                                             const <link linkend="gchar">gchar</link> *property_name,
+                                             const <link linkend="GValue">GValue</link> *value);</programlisting>
+<para>
+Called to set the packing property <parameter>property_name</parameter> to <parameter>value</parameter>
+on the <parameter>child</parameter> object of <parameter>container</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>adaptor</parameter>&nbsp;:</term>
+<listitem><simpara> A <link linkend="GladeWidgetAdaptor"><type>GladeWidgetAdaptor</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>container</parameter>&nbsp;:</term>
+<listitem><simpara> The <link linkend="GObject"><type>GObject</type></link> container
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>child</parameter>&nbsp;:</term>
+<listitem><simpara> The <link linkend="GObject"><type>GObject</type></link> child
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>property_name</parameter>&nbsp;:</term>
+<listitem><simpara> The property name
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>value</parameter>&nbsp;:</term>
+<listitem><simpara> The <link linkend="GValue"><type>GValue</type></link>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="GladeChildGetPropertyFunc" role="function"/>GladeChildGetPropertyFunc ()</title>
+<indexterm><primary>GladeChildGetPropertyFunc</primary></indexterm><programlisting><link linkend="void">void</link>        (*GladeChildGetPropertyFunc)    (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+                                             <link linkend="GObject">GObject</link> *container,
+                                             <link linkend="GObject">GObject</link> *child,
+                                             const <link linkend="gchar">gchar</link> *property_name,
+                                             <link linkend="GValue">GValue</link> *value);</programlisting>
+<para>
+Called to get the packing property <parameter>property_name</parameter>
+on the <parameter>child</parameter> object of <parameter>container</parameter> into <parameter>value</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>adaptor</parameter>&nbsp;:</term>
+<listitem><simpara> A <link linkend="GladeWidgetAdaptor"><type>GladeWidgetAdaptor</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>container</parameter>&nbsp;:</term>
+<listitem><simpara> The <link linkend="GObject"><type>GObject</type></link> container
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>child</parameter>&nbsp;:</term>
+<listitem><simpara> The <link linkend="GObject"><type>GObject</type></link> child
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>property_name</parameter>&nbsp;:</term>
+<listitem><simpara> The property name
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>value</parameter>&nbsp;:</term>
+<listitem><simpara> The <link linkend="GValue"><type>GValue</type></link>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="GladeGetChildrenFunc" role="function"/>GladeGetChildrenFunc ()</title>
+<indexterm><primary>GladeGetChildrenFunc</primary></indexterm><programlisting><link linkend="GList">GList</link>*      (*GladeGetChildrenFunc)         (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+                                             <link linkend="GObject">GObject</link> *container);</programlisting>
+<para>
+A function called to get <parameter>containers</parameter> children.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>adaptor</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>container</parameter>&nbsp;:</term>
+<listitem><simpara> A <link linkend="GObject"><type>GObject</type></link> container
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> A <link linkend="GList"><type>GList</type></link> of <link linkend="GObject"><type>GObject</type></link> children.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="GladeAddChildFunc" role="function"/>GladeAddChildFunc ()</title>
+<indexterm><primary>GladeAddChildFunc</primary></indexterm><programlisting><link linkend="void">void</link>        (*GladeAddChildFunc)            (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+                                             <link linkend="GObject">GObject</link> *parent,
+                                             <link linkend="GObject">GObject</link> *child);</programlisting>
+<para>
+Called to add <parameter>child</parameter> to <parameter>parent</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>adaptor</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>parent</parameter>&nbsp;:</term>
+<listitem><simpara> A <link linkend="GObject"><type>GObject</type></link> container
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>child</parameter>&nbsp;:</term>
+<listitem><simpara> A <link linkend="GObject"><type>GObject</type></link> child
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="GladeRemoveChildFunc" role="function"/>GladeRemoveChildFunc ()</title>
+<indexterm><primary>GladeRemoveChildFunc</primary></indexterm><programlisting><link linkend="void">void</link>        (*GladeRemoveChildFunc)         (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+                                             <link linkend="GObject">GObject</link> *parent,
+                                             <link linkend="GObject">GObject</link> *child);</programlisting>
+<para>
+Called to remove <parameter>child</parameter> from <parameter>parent</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>adaptor</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>parent</parameter>&nbsp;:</term>
+<listitem><simpara> A <link linkend="GObject"><type>GObject</type></link> container
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>child</parameter>&nbsp;:</term>
+<listitem><simpara> A <link linkend="GObject"><type>GObject</type></link> child
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="GladeReplaceChildFunc" role="function"/>GladeReplaceChildFunc ()</title>
+<indexterm><primary>GladeReplaceChildFunc</primary></indexterm><programlisting><link linkend="void">void</link>        (*GladeReplaceChildFunc)        (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+                                             <link linkend="GObject">GObject</link> *container,
+                                             <link linkend="GObject">GObject</link> *old_obj,
+                                             <link linkend="GObject">GObject</link> *new_obj);</programlisting>
+<para>
+Called to swap placeholders with project objects
+in containers.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>adaptor</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>container</parameter>&nbsp;:</term>
+<listitem><simpara> A <link linkend="GObject"><type>GObject</type></link> container
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>old_obj</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>new_obj</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="GladeGetInternalFunc" role="function"/>GladeGetInternalFunc ()</title>
+<indexterm><primary>GladeGetInternalFunc</primary></indexterm><programlisting><link linkend="GObject">GObject</link>*    (*GladeGetInternalFunc)         (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+                                             <link linkend="GObject">GObject</link> *parent,
+                                             const <link linkend="gchar">gchar</link> *name);</programlisting>
+<para>
+Called to lookup <parameter>child</parameter> in composite object <parameter>parent</parameter> by <parameter>name</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>adaptor</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>parent</parameter>&nbsp;:</term>
+<listitem><simpara> A <link linkend="GObject"><type>GObject</type></link> composite object
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>name</parameter>&nbsp;:</term>
+<listitem><simpara> A string identifier
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="GladeEditorLaunchFunc" role="function"/>GladeEditorLaunchFunc ()</title>
+<indexterm><primary>GladeEditorLaunchFunc</primary></indexterm><programlisting><link linkend="void">void</link>        (*GladeEditorLaunchFunc)        (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+                                             <link linkend="GObject">GObject</link> *object);</programlisting>
+<para>
+Called to launch a custom editor for <parameter>object</parameter></para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>adaptor</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara> A <link linkend="GObject"><type>GObject</type></link>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

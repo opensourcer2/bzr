@@ -1,3 +1,212 @@
+2007-03-12  David Lodge <dave@cirt.net>
+
+	* en_GB.po: Updated English (British) translation
+
+2007-03-12  Alexander Shopov  <ash@contact.bg>
+
+	* bg.po: Updated Bulgarian translation by
+	Yavor Doganov <yavor@gnu.org>
+
+2007-03-12  Jovan Naumovski  <jovan@lugola.net>
+ 
+ 	 * mk.po: Updated Macedonian translation.
+
+2007-03-12  Nickolay V. Shmyrev  <nshmyrev@yandex.ru>
+
+	* ru.po: Updated Russian translation.
+
+2007-03-12  Takeshi AIHANA <takeshi.aihana@gmail.com>
+
+	* ja.po: Updated Japanese translation.
+
+2007-03-12  Nikos Charonitakis  <nikosx@gmail.com>
+
+	* el.po: fix an error
+
+2007-03-12  Nikos Charonitakis  <nikosx@gmail.com>
+
+	* LINGUAS: Added el (Greek)
+
+2007-03-12  Ani Peter <peter.ani@gmail.com>
+	
+	* ml.po: Added and updated ml translation
+	* LINGUAS: Added ml (malayalam) to the list of languages
+
+2007-03-12  Djihed Afifi <djihed@gmail.com> 
+
+	* ar.po: Updated Arabic Translation by Djihed Afifi.
+
+2007-03-12  Luca Ferretti  <elle.uca@libero.it>
+
+	* it.po: Added Italian translation by Andrea Zagli.
+
+2007-03-12  Maxim Dziumanenko <dziumanenko@gmail.com>
+
+	* uk/uk.po: Updated Ukrainian translation.
+
+2007-03-12  Daniel Nylander <po@danielnylander.se>
+
+	* sv.po: Updated Swedish translation.
+
+2007-03-12  Abel Cheung  <abelcheung@gmail.com>
+
+	* zh_HK.po, zh_TW.po: Updated traditional Chinese translation.
+
+2007-03-12  Simos Xenitellis  <simos@gnome.org>
+
+	* el.po: Added Greek translation by Eleni Maria Stea.
+
+2007-03-12  Ilkka Tuohela  <hile@iki.fi>
+
+	* fi.po: Updated Finnish translation.
+
+2007-03-12  Leonardo Ferreira Fontenelle  <leonardof@svn.gnome.org>
+
+	* pt_BR.po: Brazilian Portuguese translation of last-minute string
+	changes. Initially committed to trunk.
+
+2007-03-11  Gabor Kelemen  <kelemeng@gnome.hu>
+
+	* hu.po: Translation updated.
+
+2007-03-10  Alexander Shopov  <ash@contact.bg>
+
+	* bg.po: Updated Bulgarian translation by
+	Yavor Doganov <yavor@doganov.org>
+	* LINGUAS: Added bg (Bulgarian)
+	
+2007-03-09  Jovan Naumovski  <jovan@lugola.net>
+ 
+ 	 * mk.po: Updated Macedonian translation.
+
+2007-03-09  Žygimantas Beručka  <zygis@gnome.org>
+
+	* lt.po: Updated Lithuanian translation.
+
+2007-03-08  Josep Puigdemont i Casamajó  <josep.puigdemont@gmail.com>
+
+	* ca.po: Updated Catalan translation by
+	Xavier Conde Rueda <xavi.conde@gmail.com>.
+
+2007-03-06  David Lodge <dave@cirt.net>
+
+	* en_GB.po: Updated English (British) translation
+
+2007-03-06  Gintautas Miliauskas  <gintas@akl.lt>
+
+	* lt.po: Added credit for translator.
+
+2007-03-06  Gintautas Miliauskas  <gintas@akl.lt>
+
+	* lt.po: Updated Lithuanian translation.
+
+2007-03-06  Gintautas Miliauskas  <gintas@akl.lt>
+
+	* lt.po: Added Lithuanian translation.
+	* LINGUAS: Added lt.
+
+2007-03-05  Gabor Kelemen  <kelemeng@gnome.hu>
+
+	* hu.po: Translation updated.
+
+2007-02-28  Djihed Afifi <djihed@gmail.com> 
+
+	* ar.po: Updated Arabic Translation by Djihed Afifi.
+
+2007-02-27  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* gl.po: Updated Galician Translation by Rafael Villar.
+
+2007-02-26  Stéphane Raimbault  <stephane.raimbault@gmail.com>
+
+	* fr.po: Fixed French translation.
+
+2007-02-26  Stéphane Raimbault  <stephane.raimbault@gmail.com>
+
+	* fr.po: Updated French translation by Claude Paroz and Stéphane
+	Raimbault.
+
+2007-02-26  Theppitak Karoonboonyanan  <thep@linux.thai.net>
+
+	* th.po: Updated Thai translation.
+
+2007-02-25  Raphael Higino  <raphaelh@svn.gnome.org>
+
+	* pt_BR.po: Updated Brazilian Portuguese translation by Igor Pires Soares <igor@projetofedora.org>.
+
+2007-02-25  Jovan Naumovski  <jovan@lugola.net>
+ 
+	* mk.po: Updated Macedonian translation.
+
+2007-02-25  Hendrik Brandt  <heb@gnome-de.org>
+
+	* de.po: Updated German translation.
+
+2007-02-25  Ole Laursen  <olau@hardworking.dk>
+
+	* da.po: Ported the translation from old Glade, updated a couple
+	of strings while I was at it.
+
+2007-02-25  Duarte Loreto <happyguy_pt@hotmail.com>
+
+	* pt.po: Updated Portuguese translation.
+
+2007-02-25  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* nb.po: Updated Norwegian bokmål translation.
+
+2007-02-23  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* gl.po: Updated Galician Translation.
+
+2007-02-22  Daniel Nylander <po@danielnylander.se>
+
+	* sv.po: Updated Swedish translation.
+
+2007-02-23  Changwoo Ryu  <cwryu@debian.org>
+
+	* ko.po: Updated Korean translation.
+
+2007-02-21  Nickolay V. Shmyrev  <nshmyrev@yandex.ru>
+
+	* ru.po: Updated Russian translation.
+
+2007-02-21  Ilkka Tuohela  <hile@iki.fi>
+
+	* fi.po: Updated Finnish translation.
+
+2007-02-22  Takeshi AIHANA <takeshi.aihana@gmail.com>
+
+	* ja.po: Updated Japanese translation.
+
+2007-02-20  Stéphane Raimbault  <stephane.raimbault@gmail.com>
+
+	* fr.po: Updated French translation by Jonathan Ernst.
+
+2007-02-20  Artur Flinta  <aflinta@cvs.gnome.org>
+
+	* pl.po: Updated Polish translation by GNOME PL Team.
+
+2007-02-19  Nguyễn Thái Ngọc Duy  <pclouds@gmail.com>
+
+	* vi.po: Updated Vietnamese translation.
+
+2007-02-18  Daniel Nylander <po@danielnylander.se>
+
+	* sv.po: Updated Swedish translation.
+
+2007-02-16  David Lodge <dave@cirt.net>
+
+	* en_GB.po: Updated English (British) translation
+
+2007-02-16  Djihed Afifi <djihed@gmail.com> 
+
+	* ar.po: Updated Arabic Translation by Djihed Afifi.
+
+2007-02-15  Duarte Loreto <happyguy_pt@hotmail.com>
+
+	* pt.po: Updated Portuguese translation.
+
 2007-02-11  Jordi Mas <jmas@softcatala.org>
 
 	* ca.po: Updated Catalan translation by

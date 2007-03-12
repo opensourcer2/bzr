@@ -2985,6 +2985,8 @@ glade_gtk_dialog_post_create (GladeWidgetAdaptor *adaptor,
 	if (!widget)
 		return;
 
+	/* Mark properties that are initially modified by the dialog */
+	glade_widget_property_set_save_always (widget, "type-hint", TRUE);
 
 	if (reason == GLADE_CREATE_USER)
 	{
@@ -3622,12 +3624,12 @@ glade_gtk_image_parse_finished (GladeProject *project, GladeWidget *gimage)
 {
 	GladeProperty *property;
 	gint size;
-
-	if (glade_widget_property_default (gimage, "icon-name") == FALSE)
+	
+	if (glade_widget_property_original_default (gimage, "icon-name") == FALSE)
 		glade_widget_property_set (gimage, "glade-type", GLADEGTK_IMAGE_ICONTHEME);
-	else if (glade_widget_property_default (gimage, "stock") == FALSE)
+	else if (glade_widget_property_original_default (gimage, "stock") == FALSE)
 		glade_widget_property_set (gimage, "glade-type", GLADEGTK_IMAGE_STOCK);
-	else if (glade_widget_property_default (gimage, "pixbuf") == FALSE)
+	else if (glade_widget_property_original_default (gimage, "pixbuf") == FALSE)
 		glade_widget_property_set (gimage, "glade-type", GLADEGTK_IMAGE_FILENAME);
 	else 
 		glade_widget_property_reset (gimage, "glade-type");
@@ -3764,7 +3766,7 @@ glade_gtk_image_set_stock (GObject *object, const GValue *value)
 	g_free (str);
 }
 
-static void
+void
 glade_gtk_image_set_glade_stock (GObject *object, const GValue *value)
 {
 	GladeWidget   *gwidget;
@@ -3775,7 +3777,11 @@ glade_gtk_image_set_glade_stock (GObject *object, const GValue *value)
 	g_return_if_fail (GTK_IS_IMAGE (object));
 	gwidget = glade_widget_get_from_gobject (object);
 	g_return_if_fail (GLADE_IS_WIDGET (gwidget));
-
+	
+	/* This is triggered by glade_widget_sync_custom_props () from glade_widget_new_from_widget_info()  
+	    which makes "stock" property to reset */
+	if (glade_util_object_is_loading (object)) return;
+	
 	val    = g_value_get_enum (value);	
 	eclass = g_type_class_ref (G_VALUE_TYPE (value));
 	if ((eval = g_enum_get_value (eclass, val)) != NULL)
@@ -4133,7 +4139,7 @@ glade_gtk_menu_shell_launch_editor (GObject *object, gchar *title)
 
 /* ----------------------------- GtkMenuItem(s) ------------------------------ */
 GList * GLADEGTK_API
-glade_gtk_menu_item_get_submenu (GladeWidgetAdaptor *adaptor,
+glade_gtk_menu_item_get_children (GladeWidgetAdaptor *adaptor,
 				 GObject *object)
 {
 	GList *list = NULL;
@@ -4141,10 +4147,13 @@ glade_gtk_menu_item_get_submenu (GladeWidgetAdaptor *adaptor,
 	
 	g_return_val_if_fail (GTK_IS_MENU_ITEM (object), NULL);
 	
-	child = gtk_menu_item_get_submenu (GTK_MENU_ITEM (object));
+	if ((child = gtk_menu_item_get_submenu (GTK_MENU_ITEM (object))))
+		list = g_list_append (list, child);
 	
-	if (child) list = g_list_append (list, child);
-	
+	if (GTK_IS_IMAGE_MENU_ITEM (object) &&
+	    (child = gtk_image_menu_item_get_image (GTK_IMAGE_MENU_ITEM (object))))
+		list = g_list_append (list, child);
+
 	return list;
 }
 
@@ -4339,7 +4348,7 @@ glade_gtk_menu_item_set_stock_item (GObject *object, const GValue *value)
 	
 	is_image_item = GTK_IS_IMAGE_MENU_ITEM (object);
 	
-	/* If tts a GtkImageMenuItem */
+	/* If its a GtkImageMenuItem */
 	if (is_image_item && eval->value_nick)
 	{
 		glade_widget_property_set (gitem, "use-stock", TRUE);

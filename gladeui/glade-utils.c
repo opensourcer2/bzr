@@ -550,8 +550,6 @@ glade_util_file_dialog_new (const gchar *title, GtkWindow *parent,
 
 	gtk_file_chooser_set_do_overwrite_confirmation (GTK_FILE_CHOOSER (file_dialog), TRUE);
 	gtk_dialog_set_default_response (GTK_DIALOG (file_dialog), GTK_RESPONSE_OK);
-	
-	gtk_window_set_position (GTK_WINDOW (file_dialog), GTK_WIN_POS_CENTER);
 
 	return file_dialog;
 }
@@ -1746,15 +1744,17 @@ glade_util_url_show_unix (const gchar *url)
 		{
 		        gchar *args[128] = { 0, };
 		        guint n = 0;
+		        gchar *string;
+		        gchar fallback_error[64] = "Ok";
+		        gboolean success;
+
 		        args[n++] = (gchar*) browsers[i].prg;
 		        
 		        if (browsers[i].arg1)
 		        	args[n++] = (gchar*) browsers[i].arg1;
 		        
-		        gchar *string = g_strconcat (browsers[i].prefix, url, browsers[i].postfix, NULL);
+		        string = g_strconcat (browsers[i].prefix, url, browsers[i].postfix, NULL);
 		        args[n] = string;
-		        gchar fallback_error[64] = "Ok";
-		        gboolean success;
         
 		        if (!browsers[i].asyncronous) /* start syncronously and check exit code */
 			{

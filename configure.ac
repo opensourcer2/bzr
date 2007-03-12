@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.52)
-AC_INIT([glade3], [3.1.5],
+AC_INIT([glade3], [3.2.0],
 	[http://bugzilla.gnome.org/enter_bug.cgi?product=glade3])
 	
 AC_CONFIG_HEADERS([config.h])
@@ -48,6 +48,21 @@ GETTEXT_PACKAGE=AC_PACKAGE_NAME
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [Name of the gettext package.])
 AM_GLIB_GNU_GETTEXT
+
+dnl ================================================================
+dnl va_copy.
+dnl ================================================================
+AC_MSG_CHECKING([how to copy va_list])
+AC_TRY_LINK([#include <stdarg.h>], [va_list ap1, ap2; va_copy(ap1, ap2);],
+        AC_MSG_RESULT([va_copy]),
+        [ AH_TEMPLATE([va_copy], [define if va_copy is not available])
+        AC_TRY_LINK([#include <stdarg.h>], [va_list ap1, ap2; __va_copy(ap1, ap2);],
+            [ AC_DEFINE([va_copy], [__va_copy])
+            AC_MSG_RESULT([__va_copy])],
+            [ AC_DEFINE([va_copy(dest,src)], [memcpy(&dest,&src,sizeof(va_list))])
+            AC_MSG_RESULT([memcpy])]
+            )
+        ])
 
 dnl ================================================================
 dnl Check for gtk-doc
@@ -207,6 +222,15 @@ case $host_os in
     ;;
 esac
 AM_CONDITIONAL(WITH_WIN32, test x"$win32" = "xyes")
+
+dnl ================================================================
+dnl Only use -Wall if we have gcc
+dnl ================================================================
+if test "x$GCC" = "xyes"; then
+    GCC_WARN_FLAGS="-Wall"
+fi
+
+AC_SUBST(GCC_WARN_FLAGS)
 
 AC_SUBST([AM_CPPFLAGS])
 AC_SUBST([AM_CFLAGS])

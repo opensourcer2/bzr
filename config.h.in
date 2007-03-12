@@ -86,3 +86,6 @@
 
 /* Version number of package */
 #undef VERSION
+
+/* define if va_copy is not available */
+#undef va_copy

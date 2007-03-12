@@ -2,7 +2,7 @@
 <glade-catalog name="gnome" library="gladegnome" domain="glade3" depends="gtk+" book="libgnomeui">
   <init-function>glade_gnomeui_init</init-function>
   <glade-widget-classes>
-    <glade-widget-class title="Gnome App" name="GnomeApp" generic-name="gnomeapp" default-width="440" default-height="250">
+    <glade-widget-class name="GnomeApp" generic-name="gnomeapp" default-width="440" default-height="250" title="Gnome App">
       <post-create-function>glade_gnome_app_post_create</post-create-function>
       <get-internal-child-function>glade_gnome_app_get_internal_child</get-internal-child-function>
       <get-children-function>glade_gnome_app_get_children</get-children-function>
@@ -43,7 +43,7 @@
       </packing-properties>
     </glade-widget-class>
 
-    <glade-widget-class title="Gnome Druid" name="GnomeDruid" generic-name="gnomedruid">
+    <glade-widget-class name="GnomeDruid" generic-name="gnomedruid" title="Gnome Druid">
       <post-create-function>glade_gnome_druid_post_create</post-create-function>
       <add-child-function>glade_gnome_druid_add_child</add-child-function>
       <remove-child-function>glade_gnome_druid_remove_child</remove-child-function>
@@ -57,7 +57,7 @@
       </packing-properties>
     </glade-widget-class>
 
-    <glade-widget-class title="Gnome Druid Page Edge" name="GnomeDruidPageEdge" generic-name="gnomedruidpageedge">
+    <glade-widget-class name="GnomeDruidPageEdge" generic-name="gnomedruidpageedge" title="Gnome Druid Page Edge">
       <set-property-function>glade_gnome_dpe_set_property</set-property-function>
       <properties>
 	<property id="position" name="Position">
@@ -104,7 +104,7 @@
       </properties>
     </glade-widget-class>
     
-    <glade-widget-class title="Gnome Druid Page Standard" name="GnomeDruidPageStandard" generic-name="gnomedruidpagestandard">
+    <glade-widget-class name="GnomeDruidPageStandard" generic-name="gnomedruidpagestandard" title="Gnome Druid Page Standard">
       <post-create-function>glade_gnome_dps_post_create</post-create-function>
       <get-internal-child-function>glade_gnome_dps_get_internal_child</get-internal-child-function>
       <get-children-function>glade_gnome_dps_get_children</get-children-function>
@@ -127,12 +127,12 @@
     </glade-widget-class>
 
 
-    <glade-widget-class title="Gnome Icon Selection" name="GnomeIconSelection" generic-name="gnomeiconselection">
+    <glade-widget-class name="GnomeIconSelection" generic-name="gnomeiconselection" title="Gnome Icon Selection">
       <properties>
         <property visible="False" query="False" ignore="True" id="size"/>
       </properties>
     </glade-widget-class>
-    <glade-widget-class title="Gnome Icon Entry" name="GnomeIconEntry" generic-name="gnomeiconentry">
+    <glade-widget-class name="GnomeIconEntry" generic-name="gnomeiconentry" title="Gnome Icon Entry">
       <set-property-function>glade_gnome_icon_entry_set_property</set-property-function>
       <properties>
         <property id="max-saved" name="Max Saved">
@@ -143,9 +143,9 @@
       </properties>
     </glade-widget-class>
 
-    <glade-widget-class title="Gnome HRef" name="GnomeHRef" generic-name="gnomehref"/>
+    <glade-widget-class name="GnomeHRef" generic-name="gnomehref" title="Gnome HRef"></glade-widget-class>
 
-    <glade-widget-class title="Gnome Date Edit" name="GnomeDateEdit" generic-name="gnomedateedit">
+    <glade-widget-class name="GnomeDateEdit" generic-name="gnomedateedit" title="Gnome Date Edit">
       <post-create-function>glade_gnome_date_edit_post_create</post-create-function>
       <properties>
         <property id="time" disabled="True"/>
@@ -160,7 +160,7 @@
       </properties>
     </glade-widget-class>
 
-    <glade-widget-class title="Gnome App Bar" name="GnomeAppBar" generic-name="gnomeappbar">
+    <glade-widget-class name="GnomeAppBar" generic-name="gnomeappbar" title="Gnome App Bar">
       <post-create-function>glade_gnome_app_bar_post_create</post-create-function>
       <properties>
         <property ignore="True" id="has-progress" default="True"/>
@@ -177,13 +177,13 @@
     </glade-widget-class>
     
     
-    <glade-widget-class title="Gnome Dialog" name="GnomeDialog" generic-name="gnomedialog">
+    <glade-widget-class name="GnomeDialog" generic-name="gnomedialog" title="Gnome Dialog">
       <post-create-function>glade_gnome_dialog_post_create</post-create-function>
       <get-internal-child-function>glade_gnome_dialog_get_internal_child</get-internal-child-function>
       <get-children-function>glade_gnome_dialog_get_children</get-children-function>
     </glade-widget-class>
 
-    <glade-widget-class title="Gnome About" name="GnomeAbout" generic-name="gnomeabout">
+    <glade-widget-class name="GnomeAbout" generic-name="gnomeabout" title="Gnome About">
       <post-create-function>glade_gnome_about_dialog_post_create</post-create-function> 
       <set-property-function>glade_gnome_about_dialog_set_property</set-property-function>
       <properties>
@@ -201,7 +201,7 @@
       </properties>
     </glade-widget-class>
     
-    <glade-widget-class title="Gnome Message Box" name="GnomeMessageBox" generic-name="gnomemessagebox">
+    <glade-widget-class name="GnomeMessageBox" generic-name="gnomemessagebox" title="Gnome Message Box">
       <set-property-function>glade_gnome_message_box_set_property</set-property-function>
       <properties>
         <property id="message-box-type">
@@ -220,7 +220,7 @@
 	</property>
       </properties>
     </glade-widget-class>
-    <glade-widget-class title="Gnome Property Box" name="GnomePropertyBox" generic-name="gnomepropertybox"/>
+    <glade-widget-class name="GnomePropertyBox" generic-name="gnomepropertybox" title="Gnome Property Box"></glade-widget-class>
 
     <glade-widget-class title="Gnome Entry" name="GnomeEntry" generic-name="gnomeentry">
       <post-create-function>glade_gnome_entry_post_create</post-create-function>
@@ -245,7 +245,7 @@
       </packing-properties>
     </glade-widget-class>
     
-    <glade-widget-class title="Gnome File Entry" name="GnomeFileEntry" generic-name="gnomefileentry">
+    <glade-widget-class name="GnomeFileEntry" generic-name="gnomefileentry" title="Gnome File Entry">
       <post-create-function>glade_gnome_entry_post_create</post-create-function>
       <get-internal-child-function>glade_gnome_entry_get_internal_child</get-internal-child-function>
       <get-children-function>glade_gnome_entry_get_children</get-children-function>
@@ -274,7 +274,7 @@
       </packing-properties>
     </glade-widget-class>
 
-    <glade-widget-class title="Gnome Pixmap Entry" name="GnomePixmapEntry" generic-name="gnomepixmapentry">
+    <glade-widget-class name="GnomePixmapEntry" generic-name="gnomepixmapentry" title="Gnome Pixmap Entry">
       <packing-properties>
         <property id="expand" disabled="True"/>
         <property id="fill" disabled="True"/>
@@ -284,7 +284,7 @@
       </packing-properties>
     </glade-widget-class>
     
-    <glade-widget-class title="Gnome Color Picker" name="GnomeColorPicker" generic-name="gnomecolorpicker">
+    <glade-widget-class name="GnomeColorPicker" generic-name="gnomecolorpicker" title="Gnome Color Picker">
       <post-create-function>empty</post-create-function>
         <properties>
 	  <property id="use-underline" disabled="True"/>
@@ -301,7 +301,7 @@
         </properties>
     </glade-widget-class>
 
-    <glade-widget-class title="Gnome Font Picker" name="GnomeFontPicker" generic-name="gnomefontpicker">
+    <glade-widget-class name="GnomeFontPicker" generic-name="gnomefontpicker" title="Gnome Font Picker">
       <post-create-function>empty</post-create-function>
       <get-children-function>glade_gnome_font_picker_get_children</get-children-function>
       <add-child-function>glade_gnome_font_picker_add_child</add-child-function>
@@ -326,7 +326,7 @@
       </properties>
     </glade-widget-class>
 
-    <glade-widget-class title="Gnome Pixmap" name="GnomePixmap" generic-name="gnomepixmap">
+    <glade-widget-class name="GnomePixmap" generic-name="gnomepixmap" title="Gnome Pixmap">
       <post-create-function>empty</post-create-function>
       <set-property-function>glade_gnome_pixmap_set_property</set-property-function>
       <properties>

@@ -566,6 +566,20 @@ glade_widget_remove_property (GladeWidget  *widget,
 			    id_property, widget->name);
 }
 
+static void
+glade_widget_set_catalog_defaults (GList *list)
+{
+	GList *l;
+	for (l = list; l && l->data; l = l->next)
+	{
+		GladeProperty *prop  = l->data;
+		GladePropertyClass *klass = prop->klass;
+		
+		if (glade_property_equals_value (prop, klass->orig_def) &&
+		     g_param_values_cmp (klass->pspec, klass->orig_def, klass->def))
+			glade_property_reset (prop);
+	}
+}
 
 static void
 glade_widget_sync_custom_props (GladeWidget *widget)
@@ -666,11 +680,14 @@ glade_widget_constructor (GType                  type,
 	 * but only when its freshly created (depend on glade file at
 	 * load time and copying properties at dup time).
 	 */
-	if (gwidget->internal != NULL &&
-	    gwidget->construct_reason == GLADE_CREATE_USER)
+	if (gwidget->construct_reason == GLADE_CREATE_USER)
 		for (list = gwidget->properties; list; list = list->next)
 			glade_property_load (GLADE_PROPERTY (list->data));
-
+	
+	/* We only use catalog defaults when the widget was created by the user! */
+	if (gwidget->construct_reason == GLADE_CREATE_USER)
+		glade_widget_set_catalog_defaults (gwidget->properties);
+	
 	/* Only call this once the GladeWidget is completely built
 	 * (but before calling custom handlers...)
 	 */
@@ -685,7 +702,7 @@ glade_widget_constructor (GType                  type,
 
 	if (gwidget->parent && gwidget->packing_properties == NULL)
 		glade_widget_set_packing_properties (gwidget, gwidget->parent);
-
+	
 	if (GTK_IS_WIDGET (gwidget->object) && !GTK_WIDGET_TOPLEVEL (gwidget->object))
 	{
 		gwidget->visible = TRUE;
@@ -1630,7 +1647,7 @@ glade_widget_set_adaptor (GladeWidget *widget, GladeWidgetAdaptor *adaptor)
 		{
 			property_class = GLADE_PROPERTY_CLASS(list->data);
 			if ((property = glade_property_new (property_class, 
-							    widget, NULL, TRUE)) == NULL)
+							    widget, NULL)) == NULL)
 			{
 				g_warning ("Failed to create [%s] property",
 					   property_class->id);
@@ -1708,8 +1725,7 @@ glade_widget_create_packing_properties (GladeWidget *container, GladeWidget *wid
 	     list && list->data; list = list->next)
 	{
 		property_class = list->data;
-		property       = glade_property_new
-			(property_class, widget, NULL, TRUE);
+		property       = glade_property_new (property_class, widget, NULL);
 		packing_props  = g_list_prepend (packing_props, property);
 
 	}
@@ -1890,8 +1906,10 @@ glade_widget_properties_from_widget_info (GladeWidgetAdaptor *klass,
 		/* If there is a value in the XML, initialize property with it,
 		 * otherwise initialize property to default.
 		 */
-		property = glade_property_new (pclass, NULL, NULL, FALSE);
-
+		property = glade_property_new (pclass, NULL, NULL);
+		
+		glade_property_original_reset (property);
+		
 		glade_property_read (property, property->klass, 
 				     loading_project, info, TRUE);
 
@@ -2863,6 +2881,69 @@ glade_widget_pack_property_set_enabled (GladeWidget      *widget,
 }
 
 /**
+ * glade_widget_property_set_save_always:
+ * @widget: a #GladeWidget
+ * @id_property: a string naming a #GladeProperty
+ * @setting: the setting 
+ *
+ * Sets whether @id_property in @widget should be special cased
+ * to always be saved regardless of its default value.
+ * (used for some special cases like properties
+ * that are assigned initial values in composite widgets
+ * or derived widget code).
+ *
+ * Returns: whether @id_property was found or not.
+ */
+gboolean
+glade_widget_property_set_save_always (GladeWidget      *widget,
+				       const gchar      *id_property,
+				       gboolean          setting)
+{
+	GladeProperty *property;
+	
+	g_return_val_if_fail (GLADE_IS_WIDGET (widget), FALSE);
+
+	if ((property = glade_widget_get_property (widget, id_property)) != NULL)
+	{
+		glade_property_set_save_always (property, setting);
+		return TRUE;
+	}
+	return FALSE;
+}
+
+/**
+ * glade_widget_pack_property_set_save_always:
+ * @widget: a #GladeWidget
+ * @id_property: a string naming a #GladeProperty
+ * @setting: the setting 
+ *
+ * Sets whether @id_property in @widget should be special cased
+ * to always be saved regardless of its default value.
+ * (used for some special cases like properties
+ * that are assigned initial values in composite widgets
+ * or derived widget code).
+ *
+ * Returns: whether @id_property was found or not.
+ */
+gboolean
+glade_widget_pack_property_set_save_always (GladeWidget      *widget,
+					    const gchar      *id_property,
+					    gboolean          setting)
+{
+	GladeProperty *property;
+	
+	g_return_val_if_fail (GLADE_IS_WIDGET (widget), FALSE);
+
+	if ((property = glade_widget_get_pack_property (widget, id_property)) != NULL)
+	{
+		glade_property_set_save_always (property, setting);
+		return TRUE;
+	}
+	return FALSE;
+}
+
+
+/**
  * glade_widget_property_reset:
  * @widget: a #GladeWidget
  * @id_property: a string naming a #GladeProperty
@@ -2912,6 +2993,21 @@ glade_widget_pack_property_reset (GladeWidget   *widget,
 	return FALSE;
 }
 
+static gboolean
+glade_widget_property_default_common (GladeWidget *widget,
+			       const gchar *id_property, gboolean original)
+{
+	GladeProperty *property;
+	
+	g_return_val_if_fail (GLADE_IS_WIDGET (widget), FALSE);
+
+	if ((property = glade_widget_get_property (widget, id_property)) != NULL)
+		return (original) ? glade_property_original_default (property) :
+			glade_property_default (property);
+
+	return FALSE;
+}
+
 /**
  * glade_widget_property_default:
  * @widget: a #GladeWidget
@@ -2924,14 +3020,22 @@ gboolean
 glade_widget_property_default (GladeWidget *widget,
 			       const gchar *id_property)
 {
-	GladeProperty *property;
-	
-	g_return_val_if_fail (GLADE_IS_WIDGET (widget), FALSE);
+	return glade_widget_property_default_common (widget, id_property, FALSE);
+}
 
-	if ((property = glade_widget_get_property (widget, id_property)) != NULL)
-		return glade_property_default (property);
-
-	return FALSE;
+/**
+ * glade_widget_property_original_default:
+ * @widget: a #GladeWidget
+ * @id_property: a string naming a #GladeProperty
+ *
+ * Returns: whether whether @id_property was found and is 
+ * currently set to it's original default value.
+ */
+gboolean
+glade_widget_property_original_default (GladeWidget *widget,
+			       const gchar *id_property)
+{
+	return glade_widget_property_default_common (widget, id_property, TRUE);
 }
 
 /**
