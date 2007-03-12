@@ -108,6 +108,7 @@ ENABLE_SK_TRUE = @ENABLE_SK_TRUE@
 EXEEXT = @EXEEXT@
 F77 = @F77@
 FFLAGS = @FFLAGS@
+GCC_WARN_FLAGS = @GCC_WARN_FLAGS@
 GETTEXT_PACKAGE = @GETTEXT_PACKAGE@
 GLADE_AGE = @GLADE_AGE@
 GLADE_CURRENT = @GLADE_CURRENT@
@@ -326,10 +327,12 @@ icons_DATA = \
 	optionmenu.png \
 	progressbar.png \
 	pagesetupdialog.png \
+	printdialog.png \
 	radiobutton.png \
 	radiomenuitem.png \
 	radiotoolbutton.png \
 	recentchooser.png \
+	recentchooserdialog.png \
 	ruler.png \
 	scrolledwindow.png \
 	spinbutton.png \

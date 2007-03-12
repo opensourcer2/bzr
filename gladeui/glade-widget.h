@@ -256,6 +256,9 @@ LIBGLADEUI_API
 gboolean                glade_widget_property_default       (GladeWidget      *widget,
 							     const gchar      *id_property);
 LIBGLADEUI_API 
+gboolean                glade_widget_property_original_default (GladeWidget      *widget,
+							     const gchar      *id_property);
+LIBGLADEUI_API 
 gboolean                glade_widget_pack_property_default  (GladeWidget      *widget,
 							     const gchar      *id_property);
 LIBGLADEUI_API 
@@ -276,6 +279,15 @@ LIBGLADEUI_API
 gboolean                glade_widget_pack_property_set_enabled (GladeWidget      *widget,
 								const gchar      *id_property,
 								gboolean          enabled);
+
+LIBGLADEUI_API 
+gboolean                glade_widget_property_set_save_always (GladeWidget      *widget,
+							       const gchar      *id_property,
+							       gboolean          setting);
+LIBGLADEUI_API 
+gboolean                glade_widget_pack_property_set_save_always (GladeWidget      *widget,
+								    const gchar      *id_property,
+								    gboolean          setting);
 
 /*******************************************************************************
                                   Accessors

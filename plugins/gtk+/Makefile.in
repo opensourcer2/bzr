@@ -139,6 +139,7 @@ ENABLE_SK_TRUE = @ENABLE_SK_TRUE@
 EXEEXT = @EXEEXT@
 F77 = @F77@
 FFLAGS = @FFLAGS@
+GCC_WARN_FLAGS = @GCC_WARN_FLAGS@
 GETTEXT_PACKAGE = @GETTEXT_PACKAGE@
 GLADE_AGE = @GLADE_AGE@
 GLADE_CURRENT = @GLADE_CURRENT@
@@ -308,11 +309,11 @@ libgladegtk_la_CPPLAGS = \
 	$(AM_CPPFLAGS)
 
 libgladegtk_la_CFLAGS = \
-	-g -Wall           \
-	-I$(top_srcdir)    \
-	-I$(top_srcdir)    \
-	-I$(top_builddir)  \
-	$(GTK_CFLAGS)	   \
+	-g @GCC_WARN_FLAGS@ \
+	-I$(top_srcdir)     \
+	-I$(top_srcdir)     \
+	-I$(top_builddir)   \
+	$(GTK_CFLAGS)	    \
 	$(AM_CFLAGS)
 
 libgladegtk_la_SOURCES = glade-gtk.c glade-gtk.h

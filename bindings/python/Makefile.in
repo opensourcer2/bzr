@@ -61,7 +61,8 @@ LTLIBRARIES = $(gladepython_LTLIBRARIES)
 am__DEPENDENCIES_1 = $(top_builddir)/gladeui/libgladeui-1.la
 am__DEPENDENCIES_2 =
 libgladepython_la_DEPENDENCIES = $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_2)
+	$(am__DEPENDENCIES_2) $(am__DEPENDENCIES_2) \
+	$(am__DEPENDENCIES_2) $(am__DEPENDENCIES_2)
 am_libgladepython_la_OBJECTS = libgladepython_la-glade-python.lo \
 	libgladepython_la-glade-python-gwa.lo
 libgladepython_la_OBJECTS = $(am_libgladepython_la_OBJECTS)
@@ -129,6 +130,7 @@ ENABLE_SK_TRUE = @ENABLE_SK_TRUE@
 EXEEXT = @EXEEXT@
 F77 = @F77@
 FFLAGS = @FFLAGS@
+GCC_WARN_FLAGS = @GCC_WARN_FLAGS@
 GETTEXT_PACKAGE = @GETTEXT_PACKAGE@
 GLADE_AGE = @GLADE_AGE@
 GLADE_CURRENT = @GLADE_CURRENT@
@@ -298,18 +300,23 @@ libgladepython_la_CPPFLAGS = \
 	$(AM_CPPFLAGS)
 
 libgladepython_la_CFLAGS = \
-	-g -Wall           \
-	-I$(top_srcdir)    \
-	-I$(top_builddir)  \
-	$(PYTHON_CFLAGS)   \
+	-g @GCC_WARN_FLAGS@ \
+	-I$(top_srcdir)     \
+	-I$(top_builddir)   \
+	$(PYTHON_CFLAGS)    \
 	$(NO_STRICT_ALIASING_CFLAGS) \
-	$(PYGTK_CFLAGS)	   \
-	$(GTK_CFLAGS)      \
+	$(PYGTK_CFLAGS)	    \
+	$(GTK_CFLAGS)       \
 	$(AM_CFLAGS)
 
-libgladepython_la_LDFLAGS = -module -avoid-version $(PYTHON_LIBS) \
-	$(AM_LDFLAGS) $(am__append_1)
-libgladepython_la_LIBADD = $(libgladeui) $(PYTHON_LIBS)
+libgladepython_la_LDFLAGS = -module -avoid-version $(am__append_1)
+libgladepython_la_LIBADD = \
+	$(libgladeui)          \
+	$(PYTHON_LIB_LOC)      \
+	$(PYTHON_LIBS)		   \
+	$(PYTHON_EXTRA_LIBS)   \
+	$(PYGTK_LIBS)
+
 all: all-am
 
 .SUFFIXES:

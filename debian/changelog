@@ -1,3 +1,21 @@
+glade-3 (3.2.0-0ubuntu1) feisty; urgency=low
+
+  * New upstream version:
+    - Fixed sources to build with gcc 2.95
+    - Fixed the imfamous: "Not able to set label and stock separately 
+      in GtkImageMenuItems"
+    - Added remaining missing icons
+    - Use locale independent integer and float parsing routines
+    - Save some properties unconditionally, fixes
+    - Revived accelerator & atk relationset properties
+    - other bug fixes
+    - user manual html files shipped with the tarball and installed 
+      (Ubuntu: #89051)
+  * debian/patches/90_autoconf.patch:
+    - updated
+
+ -- Sebastien Bacher <seb128@canonical.com>  Mon, 12 Mar 2007 23:38:02 +0100
+
 glade-3 (3.1.5-0ubuntu1) feisty; urgency=low
 
   * New upstream version:

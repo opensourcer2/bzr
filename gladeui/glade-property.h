@@ -47,6 +47,13 @@ struct _GladeProperty
 					* widget.
 					*/
 
+	gboolean            save_always; /* Used to make a special case exception and always
+					  * save this property regardless of what the default
+					  * value is (used for some special cases like properties
+					  * that are assigned initial values in composite widgets
+					  * or derived widget code).
+					  */
+
 	/* Used only for translatable strings. */
 	gboolean  i18n_translatable;
 	gboolean  i18n_has_context;
@@ -63,8 +70,6 @@ struct _GladePropertyKlass
 
 	/* Class methods */
 	GladeProperty *         (* dup)                   (GladeProperty *, GladeWidget *);
-	void                    (* reset)                 (GladeProperty *);
-	gboolean                (* def)                   (GladeProperty *);
 	gboolean                (* equals_value)          (GladeProperty *, const GValue *);
 	void                    (* set_value)             (GladeProperty *, const GValue *);
 	void                    (* get_value)             (GladeProperty *, GValue *);
@@ -84,15 +89,18 @@ GType                   glade_property_get_type              (void) G_GNUC_CONST
 LIBGLADEUI_API
 GladeProperty          *glade_property_new                   (GladePropertyClass *klass,
 							      GladeWidget        *widget,
-							      GValue             *value,
-							      gboolean            catalog_default);
+							      GValue             *value);
 LIBGLADEUI_API
 GladeProperty          *glade_property_dup                   (GladeProperty      *template_prop,
 							      GladeWidget        *widget);
 LIBGLADEUI_API
 void                    glade_property_reset                 (GladeProperty      *property);
 LIBGLADEUI_API
+void                    glade_property_original_reset    (GladeProperty      *property);
+LIBGLADEUI_API
 gboolean                glade_property_default               (GladeProperty      *property);
+LIBGLADEUI_API
+gboolean                glade_property_original_default  (GladeProperty      *property);
 LIBGLADEUI_API
 gboolean                glade_property_equals_value          (GladeProperty      *property, 
 							      const GValue       *value);
@@ -148,6 +156,13 @@ void                    glade_property_set_sensitive         (GladeProperty     
 							      const gchar        *reason);
 LIBGLADEUI_API
 gboolean                glade_property_get_sensitive         (GladeProperty      *property);
+
+LIBGLADEUI_API
+void                    glade_property_set_save_always       (GladeProperty      *property,
+							      gboolean            setting);
+LIBGLADEUI_API
+gboolean                glade_property_get_save_always       (GladeProperty      *property);
+
 LIBGLADEUI_API
 void                    glade_property_set_enabled           (GladeProperty      *property,
 							      gboolean            enabled);

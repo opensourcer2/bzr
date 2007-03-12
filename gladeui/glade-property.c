@@ -93,20 +93,6 @@ glade_property_dup_impl (GladeProperty *template_prop, GladeWidget *widget)
 	return property;
 }
 
-void
-glade_property_reset_impl (GladeProperty *property)
-{
-	GLADE_PROPERTY_GET_KLASS (property)->set_value
-		(property, property->klass->def);
-}
-
-gboolean
-glade_property_default_impl (GladeProperty *property)
-{
-	return GLADE_PROPERTY_GET_KLASS (property)->equals_value
-		(property, property->klass->def);
-}
-
 gboolean
 glade_property_equals_value_impl (GladeProperty *property,
 				  const GValue  *value)
@@ -351,10 +337,11 @@ glade_property_write_impl (GladeProperty  *property,
 	g_assert (property->klass->orig_def);
 	g_assert (property->klass->def);
 
-	/* Skip properties that are default
-	 * (by original pspec default) 
+	/* Skip properties that are default by original pspec default
+	 * (excepting those that specified otherwise).
 	 */
-	if (glade_property_equals_value (property, property->klass->orig_def))
+	if (!property->save_always &&
+	    glade_property_equals_value (property, property->klass->orig_def))
 		return FALSE;
 
 	/* we should change each '-' by '_' on the name of the property 
@@ -567,8 +554,6 @@ glade_property_klass_init (GladePropertyKlass *prop_class)
 
 	/* Class methods */
 	prop_class->dup                   = glade_property_dup_impl;
-	prop_class->reset                 = glade_property_reset_impl;
-	prop_class->def                   = glade_property_default_impl;
 	prop_class->equals_value          = glade_property_equals_value_impl;
 	prop_class->set_value             = glade_property_set_value_impl;
 	prop_class->get_value             = glade_property_get_value_impl;
@@ -977,30 +962,19 @@ glade_property_read_accel_prop (GladeProperty      *property,
  * @widget: The #GladeWidget this property is created for
  * @value: The initial #GValue of the property or %NULL
  *         (the #GladeProperty will assume ownership of @value)
- * @catalog_default: if specified; use any default value supplied
- *                   by the catalog; otherwise use the introspected default.
- *
  *
  * Creates a #GladeProperty of type @klass for @widget with @value; if
  * @value is %NULL, then the introspected default value for that property
- * will be used; unless otherwise specified by @catalog_default.
- *
- * Note that we want to use catalog defaults when creating properties for
- * any newly created #GladeWidget; but we want to stay with the introspected
- * defaults at load time (since the absence of the property who's default
- * has been overridden; is interpreted as explicitly set to the default
- * by the user).
+ * will be used.
  *
  * Returns: The newly created #GladeProperty
  */
 GladeProperty *
 glade_property_new (GladePropertyClass *klass, 
 		    GladeWidget        *widget, 
-		    GValue             *value,
-		    gboolean            catalog_default)
+		    GValue             *value)
 {
 	GladeProperty *property;
-	GValue        *def;
 	
 	g_return_val_if_fail (GLADE_IS_PROPERTY_CLASS (klass), NULL);
 
@@ -1015,12 +989,11 @@ glade_property_new (GladePropertyClass *klass,
 	
 	if (property->value == NULL)
 	{
-		def = catalog_default ? klass->def : klass->orig_def;
-		g_assert (def);
+		g_assert (klass->orig_def);
 		
 		property->value = g_new0 (GValue, 1);
-		g_value_init (property->value, def->g_type);
-		g_value_copy (def, property->value);
+		g_value_init (property->value, klass->orig_def->g_type);
+		g_value_copy (klass->orig_def, property->value);
 	}
 	return property;
 }
@@ -1039,6 +1012,15 @@ glade_property_dup (GladeProperty *template_prop, GladeWidget *widget)
 	return GLADE_PROPERTY_GET_KLASS (template_prop)->dup (template_prop, widget);
 }
 
+static void
+glade_property_reset_common (GladeProperty *property, gboolean original)
+{
+	g_return_if_fail (GLADE_IS_PROPERTY (property));
+
+	GLADE_PROPERTY_GET_KLASS (property)->set_value
+		(property, (original) ? property->klass->orig_def : property->klass->def);
+}
+
 /**
  * glade_property_reset:
  * @property: A #GladeProperty
@@ -1048,8 +1030,27 @@ glade_property_dup (GladeProperty *template_prop, GladeWidget *widget)
 void
 glade_property_reset (GladeProperty *property)
 {
-	g_return_if_fail (GLADE_IS_PROPERTY (property));
-	GLADE_PROPERTY_GET_KLASS (property)->reset (property);
+	glade_property_reset_common (property, FALSE);
+}
+
+/**
+ * glade_property_original_reset:
+ * @property: A #GladeProperty
+ *
+ * Resets this property to its original default value
+ */
+void
+glade_property_original_reset (GladeProperty *property)
+{
+	glade_property_reset_common (property, TRUE);
+}
+
+static gboolean
+glade_property_default_common (GladeProperty *property, gboolean orig)
+{
+	g_return_val_if_fail (GLADE_IS_PROPERTY (property), FALSE);
+	return GLADE_PROPERTY_GET_KLASS (property)->equals_value
+		(property, (orig)  ? property->klass->orig_def : property->klass->def);
 }
 
 /**
@@ -1061,8 +1062,19 @@ glade_property_reset (GladeProperty *property)
 gboolean
 glade_property_default (GladeProperty *property)
 {
-	g_return_val_if_fail (GLADE_IS_PROPERTY (property), FALSE);
-	return GLADE_PROPERTY_GET_KLASS (property)->def (property);
+	return glade_property_default_common (property, FALSE);
+}
+
+/**
+ * glade_property_original_default:
+ * @property: A #GladeProperty
+ *
+ * Returns: Whether this property is at its original default value
+ */
+gboolean
+glade_property_original_default (GladeProperty *property)
+{
+	return glade_property_default_common (property, TRUE);
 }
 
 /**
@@ -1545,6 +1557,41 @@ glade_property_get_sensitive (GladeProperty *property)
 {
 	g_return_val_if_fail (GLADE_IS_PROPERTY (property), FALSE);
 	return property->sensitive;
+}
+
+/**
+ * glade_property_set_save_always:
+ * @property: A #GladeProperty
+ * @setting: the value to set
+ *
+ * Sets whether this property should be special cased
+ * to always be saved regardless of its default value.
+ * (used for some special cases like properties
+ * that are assigned initial values in composite widgets
+ * or derived widget code).
+ */
+void
+glade_property_set_save_always (GladeProperty      *property,
+				gboolean            setting)
+{
+	g_return_if_fail (GLADE_IS_PROPERTY (property));
+
+	property->save_always = setting;
+}
+
+/**
+ * glade_property_get_save_always:
+ * @property: A #GladeProperty
+ *
+ * Returns whether this property is special cased
+ * to always be saved regardless of its default value.
+ */
+gboolean
+glade_property_get_save_always (GladeProperty      *property)
+{
+	g_return_val_if_fail (GLADE_IS_PROPERTY (property), FALSE);
+
+	return property->save_always;
 }
 
 void
