@@ -1,35 +1,34 @@
-# Translation of glade3 to the Greek language
-# Copyright (C) 2004, 2005, 2006, 2007 Free Software Foundation
-# This file is distributed under the same license as the glade3 package.
+# Përkthimi i glade3.HEAD në shqip.
+# Përkthimi i mesazheve të glade në shqip
+# This file is distributed under the same license as the Glade package.
+# Copyright (C) 2004, 2007 Free Software Foundation, Inc.
 #
-# Eleni Maria Stea <ufuntu@gmail.com>, 2007.
-# Simos Xenitellis <simos@gnome.org>, 2007.
-#
+# Laurent Dhima <laurenti@alblinux.net>, 2004, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: glade3.gnome-2-18\n"
+"Project-Id-Version: glade3.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-12 03:46+0000\n"
-"PO-Revision-Date: 2007-03-13 12:39+0800\n"
-"Last-Translator: Eleni Maria Stea <ufuntu@gmail.com>\n"
-"Language-Team: Greek <team@gnome.gr>\n"
+"POT-Creation-Date: 2007-03-14 09:45+0100\n"
+"PO-Revision-Date: 2007-03-13 19:16+0100\n"
+"Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
+"Language-Team: albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../data/glade-3.desktop.in.in.h:1
 msgid "Create or open user interface designs for GTK+ applications"
-msgstr "Δημιουργία ή άνοιγμα σχεδίων για τη διασύνδεση χρηστών με GTK+ εφαρμογές"
+msgstr "Krijon ose hap vizatime interfaqesh përdorimi për aplikativë GTK+"
 
 #: ../data/glade-3.desktop.in.in.h:2
 msgid "Glade Interface Designer"
-msgstr "Εργαλείο σχεδίασης διασυνδέσεων του Glade"
+msgstr "Glade - Vizatuesi i Interfaqeve"
 
 #: ../data/glade-3.desktop.in.in.h:3 ../src/glade-project-window.c:210
 msgid "User Interface Designer"
-msgstr "Εργαλείο Σχεδίασης Διασυνδέσεων"
+msgstr "Vizatuesi i Interfaqeve të përdorimit"
 
 #: ../src/main.c:38
 msgid "Glade"
@@ -37,105 +36,106 @@ msgstr "Glade"
 
 #: ../src/main.c:48
 msgid "Output version information and exit"
-msgstr "Εμφάνιση πληροφοριών έκδοσης και έξοδος"
+msgstr "Printon informacione mbi versionin dhe del"
 
 #: ../src/main.c:51
 msgid "Disable Devhelp integration"
-msgstr "Απενεργοποίηση της ενσωμάτωσης με Devhelp"
+msgstr "Çaktivo integrimin e Devhelp"
 
 #: ../src/main.c:54
 msgid "[FILE...]"
-msgstr "[ΑΡΧΕΙΟ...]"
+msgstr "[FILE...]"
 
 #: ../src/main.c:86
 msgid "Create or edit user interface designs for GTK+ or GNOME applications."
-msgstr "Δημιουργία ή άνοιγμα σχεδίων για τη διασύνδεση χρηστή με εφαρμογές GTK+ή GNOME."
+msgstr "Krijo ose ndrysho vizatime interfaqesh për aplikativë GTK+ apo GNOME."
 
 #: ../src/main.c:89 ../src/main.c:90
 msgid "Glade options"
-msgstr "Επιλογές του Glade"
+msgstr "Opsionet e Glade"
 
 #: ../src/main.c:140
-msgid "gmodule support not found. gmodule support is required for glade to work"
+msgid ""
+"gmodule support not found. gmodule support is required for glade to work"
 msgstr ""
-"Δε βρέθηκε υποστήριξη για το gmodule. Η υποστήριξη gmodule είναι απαραίτητη "
-"για να λειτουργήσει το glade"
+"Suporti për gmodule nuk u gjet. Suporti për gmodule është i domosdoshëm që "
+"glade të funksionojë"
 
 #: ../src/main.c:167
 #, c-format
 msgid "Unable to open '%s', the file does not exist.\n"
-msgstr "Αδύνατο το άνοιγμα του '%s', το αρχείο δεν υπάρχει.\n"
+msgstr "E pamundur hapja e '%s', file nuk ekziston.\n"
 
 #: ../src/glade-project-window.c:44
 msgid "[Read Only]"
-msgstr "[Μόνο για ανάγνωση]"
+msgstr "[Vetëm në lexim]"
 
 #: ../src/glade-project-window.c:108
 #, c-format
 msgid "Could not display the URL '%s'"
-msgstr "Δεν είναι δυνατή η εμφάνιση της σελίδας '%s'"
+msgstr "E pamundur shfaqja e URL '%s'"
 
 #: ../src/glade-project-window.c:112
 msgid "No suitable web browser executable could be found."
-msgstr "Δεν είναι δυνατή η εύρεση εκτελέσιμου περιηγητή ιστού"
+msgstr ""
+"E pamundur gjetja e të ekzekutueshmes së një shfletuesi web të përshtatshëm."
 
 #: ../src/glade-project-window.c:332
 #, c-format
 msgid "%s [%s] - Properties"
-msgstr "%s [%s] - Ιδιότητες"
+msgstr "%s [%s] - Pronësitë"
 
 #: ../src/glade-project-window.c:342 ../src/glade-project-window.c:1999
 #: ../gladeui/glade-widget.c:992
 msgid "Properties"
-msgstr "Ιδιότητες"
+msgstr "Pronësitë"
 
 #: ../src/glade-project-window.c:609
 #, c-format
 msgid "Activate %s"
-msgstr "Ενεργοποίηση %s"
+msgstr "Aktivo %s"
 
 #: ../src/glade-project-window.c:727
 msgid "Open…"
-msgstr "Άνοιγμα…"
+msgstr "Hap..."
 
 #: ../src/glade-project-window.c:769
 #, c-format
 msgid "The file %s has been modified since reading it"
-msgstr "Το αρχείο %s έχει τροποποιηθεί πριν την ανάγνωσή του"
+msgstr "File %s është ndryshuar që nga leximi i tij"
 
 #: ../src/glade-project-window.c:773
 msgid "If you save it, all the external changes could be lost. Save it anyway?"
 msgstr ""
-"Αν επιλέξετε αποθήκευση όλες οι αλλαγές που κάνατε μπορεί να χαθούν. "
-"Αποθήκευση ούτως ή άλλως;"
+"Nëse e ruani, të gjitha ndryshimet e jashtme do të humbasin. Ruan sidoqoftë?"
 
 #: ../src/glade-project-window.c:777
 msgid "_Save Anyway"
-msgstr "_Αποθήκευση ούτως ή άλλως"
+msgstr "_Ruaj sidoqoftë"
 
 #: ../src/glade-project-window.c:784
 msgid "_Don't Save"
-msgstr "_Ακύρωση Αποθήκευσης"
+msgstr "_Mos ruaj"
 
 #: ../src/glade-project-window.c:807
 #, c-format
 msgid "Failed to save %s: %s"
-msgstr "Αποτυχία αποθήκευσης %s: %s"
+msgstr "Ruajtja e %s dështoi: %s"
 
 #: ../src/glade-project-window.c:828
 #, c-format
 msgid "Project '%s' saved"
-msgstr "Το έργο '%s' έχει αποθηκευτεί"
+msgstr "Projekti '%s' u ruajt"
 
 #. Just in case the menu-item is not insensitive
 #. Just in case the menu-item or button is not insensitive
 #: ../src/glade-project-window.c:847 ../src/glade-project-window.c:930
 msgid "No open projects to save"
-msgstr "Δεν υπάρχουν ανοιχτά προγράμματα για αποθήκευση"
+msgstr "Asnjë projekt i hapur për t'u ruajtur"
 
 #: ../src/glade-project-window.c:851
 msgid "Save As…"
-msgstr "Αποθήκευση Ως…"
+msgstr "Ruaj si..."
 
 #: ../src/glade-project-window.c:893
 #, c-format
@@ -143,15 +143,15 @@ msgid ""
 "Could not save the file %s. You do not have the permissions necessary to "
 "save the file."
 msgstr ""
-"Αδυναμία αποθήκευσης του αρχείου %s Δεν έχετε τα απαραίτητα δικαιώματα για "
-"να αποθηκεύσετε το αρχείο."
+"E pamundur ruajtja e file %s. Nuk keni të drejta të mjaftueshme për t'a "
+"ruajtur."
 
 #: ../src/glade-project-window.c:906
 #, c-format
 msgid "Could not save file %s. Another project with that path is open."
 msgstr ""
-"Αδύνατη η αποθήκευση του αρχείου %s Κάποιο άλλο έργο χρησιμοποιεί αυτή τη "
-"διαδρομή."
+"E pamundur ruajtja e file %s. Një tjetër projekt me atë pozicion është akoma "
+"i hapur."
 
 #: ../src/glade-project-window.c:958
 #, c-format
@@ -161,27 +161,27 @@ msgid ""
 "\n"
 "Your changes will be lost if you don't save them.\n"
 msgstr ""
-"<span weight=\"bold\" size=\"larger\">Αποθήκευση αλλαγών στο έργο \"%s\" "
-"πριν το κλείσιμο;</span>\n"
+"<span weight=\"bold\" size=\"larger\">Ruani ndryshimet tek projekti \"%s\" "
+"përpara se ta mbyllni?</span>\n"
 "\n"
-"Οι αλλαγές που κάνατε μπορεί να χαθούν αν δεν τις αποθηκεύσετε.\n"
+"Ndryshimet do të humbasin nëse nuk i ruani.\n"
 
 #: ../src/glade-project-window.c:972
 msgid "_Close without Saving"
-msgstr "_Κλείσιμο χωρίς αποθήκευση"
+msgstr "_Mbyll pa ruajtur"
 
 #: ../src/glade-project-window.c:993
 #, c-format
 msgid "Failed to save %s to %s: %s"
-msgstr "Αδυναμία αποθήκευσης %s στο %s: %s"
+msgstr "Dështoi ruajtja e %s tek %s: %s"
 
 #: ../src/glade-project-window.c:1005
 msgid "Save…"
-msgstr "Αποθήκευση…"
+msgstr "Ruaj..."
 
 #: ../src/glade-project-window.c:1411
 msgid "Could not display the online user manual"
-msgstr "Δεν είναι δυνατό να εμφανιστούν οι οδηγίες χρήστη στο Internet"
+msgstr "E pamundur shfaqja e manualit në linjë të përdorimit"
 
 #: ../src/glade-project-window.c:1414 ../src/glade-project-window.c:1452
 #, c-format
@@ -189,12 +189,12 @@ msgid ""
 "No suitable web browser executable could be found to be executed and to "
 "display the URL: %s"
 msgstr ""
-"Δε βρέθηκε εγκατεστημένος περιηγητής ιστού που να μπορεί να εμφανίσει τη "
-"διεύθυνση: %s"
+"E pamundur gjetja e të ekzekutueshmes së një shfletuesi web të përshtatshëm "
+"për tu ekzekutuar dhe për të shfaqur URL: %s"
 
 #: ../src/glade-project-window.c:1449
 msgid "Could not display the online developer reference manual"
-msgstr "Δεν είναι δυνατό να εμφανιστεί το εγχειρίδιο αναφορών για ανάπτυξη του έργου"
+msgstr "E pamundur shfaqja e manualit në linjë të zhvilluesit"
 
 #: ../src/glade-project-window.c:1482
 msgid ""
@@ -213,265 +213,264 @@ msgid ""
 "Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, "
 "USA."
 msgstr ""
-"Αυτό το πρόγραμμα είναι ελεύθερο λογισμικό. Μπορείτε να το αναδιανείμετε ή/"
-"και να το τροποποιήσετε\n"
-"κάτω από τους όρους της άδειας GNU (General Public Licence) όπως έχουν "
-"δημοσιοποιηθεί από τη Free Software Foundation, είτε για την έκδοση 2 είτε "
-"(προαιρετικά) για οποιαδήποτε νεότερη έκδοση της άδειας.\n"
+"Ky program është software i lirë; mund të shpërndahet dhe/apo ndryshohet\n"
+"sipas kushteve të liçencës GNU General Public License, sikurse\n"
+"publikuar nga Free Software Foundation; versioni 2 i liçencës,\n"
+"ose (sipas dëshirës) një version më të ri.\n"
 "\n"
-"Αυτό το πρόγραμμα διανέμεται με την πρόθεση να φανεί χρήσιμο\n"
-"αλλά ΧΩΡΙΣ ΚΑΜΙΑ ΕΓΓΥΗΣΗ, χωρίς καν την αναμενόμενη εγγύηση ΕΜΠΟΡΕΥΣΙΜΟΤΗΤΑΣ "
-"ή ΚΑΤΑΛΛΗΛΟΤΗΤΑΣ για περιστασιακή χρήση.  Δείτε την\n"
-"GNU (GENERAL PUBLIC LICENSE) για περισσότερες λεπτομέρειες.\n"
+"Ky program shpërndahet me shpresën që mund të rezultojë i dobishëm,\n"
+"por PA ASNJË LLOJ GARANCIE, pa as garancinë e shprehur të\n"
+"TREGTIMIT apo APLIKIMIT PËR NJË QËLLIM TË CAKTUAR.  Shiko, për\n"
+"informacione të mëtejshme, liçencën GNU General Public License.\n"
 "\n"
-"Πρέπει να έχετε λάβει ένα αντίγραφο της GNU (GENERAL PUBLIC LICENSE) μαζί με "
-"αυτό το πρόγραμμα, αν όχι, μπορείτε να γράψετε στην Free Software\n"
-"Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, "
-"USA."
+"Një kopje e GNU General Public License duhet t'ju ketë arritur së bashku\n"
+"me këtë program. Nëse jo, shkruani tek:\n"
+"Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, \n"
+"Boston, MA 02110-1301, USA."
 
 #: ../src/glade-project-window.c:1504
 msgid "translator-credits"
-msgstr "Ελένη Μαρία Στέα <ufuntu@gmail.com>"
+msgstr "Laurent Dhima <laurenti@alblinux.net>"
 
 #: ../src/glade-project-window.c:1505
 msgid "A user interface designer for GTK+ and GNOME."
-msgstr "Σχεδιαστής διασυνδέσεων χρήστη για GTK+ και GNOME."
+msgstr "Një vizatues interfaqesh përdorimi për GTK+ dhe GNOME."
 
 #. File
 #: ../src/glade-project-window.c:1576 ../plugins/gtk+/glade-gtk.c:4406
 #: ../plugins/gtk+/glade-gtk.c:4704
 msgid "_File"
-msgstr "_Αρχείο"
+msgstr "_File"
 
 #. Edit
 #: ../src/glade-project-window.c:1577 ../plugins/gtk+/glade-gtk.c:4409
 #: ../plugins/gtk+/glade-gtk.c:4714
 msgid "_Edit"
-msgstr "_Επεξεργασία"
+msgstr "_Ndrysho"
 
 #. View
 #: ../src/glade-project-window.c:1578 ../plugins/gtk+/glade-gtk.c:4412
 #: ../plugins/gtk+/glade-gtk.c:4722
 msgid "_View"
-msgstr "_Προβολή"
+msgstr "_Shfaq"
 
 #: ../src/glade-project-window.c:1579
 msgid "_Projects"
-msgstr "_Έργα"
+msgstr "_Projekte"
 
 #. Help
 #: ../src/glade-project-window.c:1580 ../plugins/gtk+/glade-gtk.c:4424
 #: ../plugins/gtk+/glade-gtk.c:4725
 msgid "_Help"
-msgstr "_Βοήθεια"
+msgstr "_Ndihmë"
 
 #: ../src/glade-project-window.c:1584
 msgid "Create a new project"
-msgstr "Δημιουργία νέου έργου"
+msgstr "Krijo një projekt të ri"
 
 #: ../src/glade-project-window.c:1586
 msgid "_Open…"
-msgstr "Άνοιγ_μα…"
+msgstr "_Hap..."
 
 #: ../src/glade-project-window.c:1587
 msgid "Open a project"
-msgstr "Άνοιγμα έργου"
+msgstr "Hap një projekt"
 
 #: ../src/glade-project-window.c:1589
 msgid "Open _Recent"
-msgstr "Άνοιγμα_Πρόσφατου"
+msgstr "Hap të _fundit"
 
 #: ../src/glade-project-window.c:1592
 msgid "Quit the program"
-msgstr "Έξοδος από το πρόγραμμα"
+msgstr "Del nga programi"
 
 #. ViewMenu
 #: ../src/glade-project-window.c:1595
 msgid "Palette _Appearance"
-msgstr "Εμφάνιση _Παλέτας"
+msgstr "P_araqitja e paletës"
 
 #: ../src/glade-project-window.c:1599
 msgid "About this application"
-msgstr "Περί της εφαρμογής"
+msgstr "Informacione në lidhje me këtë aplikativ"
 
 #: ../src/glade-project-window.c:1602
 msgid "Display the user manual"
-msgstr "Προβολή του εγχειριδίου χρήστη"
+msgstr "Shfaq manualin e përdorimit"
 
 #: ../src/glade-project-window.c:1604
 msgid "_Developer Reference"
-msgstr "_Παραπομπές για τους προγραμματιστές"
+msgstr "_Orientuesi i zhvilluesit"
 
 #: ../src/glade-project-window.c:1605
 msgid "Display the developer reference manual"
-msgstr "Εμφάνιση αναφορών στη βοήθεια για ανάπτυξη προγραμμάτων"
+msgstr "Shfaq manualin orientues të zhvilluesit"
 
 #: ../src/glade-project-window.c:1614
 msgid "Save the current project"
-msgstr "Αποθήκευση αυτού του προγράμματος"
+msgstr "Ruaj projektin aktual"
 
 #: ../src/glade-project-window.c:1616
 msgid "Save _As…"
-msgstr "Αποθήκευση _ως…"
+msgstr "Ru_aj si..."
 
 #: ../src/glade-project-window.c:1617
 msgid "Save the current project with a different name"
-msgstr "Αποθήκευση αυτού του προγράμματος με άλλο όνομα"
+msgstr "Ruaj projektin aktual me një emër tjetër"
 
 #: ../src/glade-project-window.c:1620
 msgid "Close the current project"
-msgstr "Κλείσιμο αυτού του προγράμματος"
+msgstr "Mbyll projektin aktual"
 
 #: ../src/glade-project-window.c:1624
 msgid "Undo the last action"
-msgstr "Αναίρεση της τελευταίας ενέργειας"
+msgstr "Anullo veprimin e fundit"
 
 #: ../src/glade-project-window.c:1627
 msgid "Redo the last action"
-msgstr "Επανάληψη της τελευταίας ενέργειας"
+msgstr "Përsërit veprimin e fundit"
 
 #: ../src/glade-project-window.c:1630
 msgid "Cut the selection"
-msgstr "Αποκοπή επιλεγμένων"
+msgstr "Preje zgjedhjen"
 
 #: ../src/glade-project-window.c:1633
 msgid "Copy the selection"
-msgstr "Αντιγραφή των επιλεγμένων"
+msgstr "Kopjo zgjedhjen"
 
 #: ../src/glade-project-window.c:1636
 msgid "Paste the clipboard"
-msgstr "Επικόλληση των περιεχομένων του προχείρου (clipboard)"
+msgstr "Ngjit nga shënimet"
 
 #: ../src/glade-project-window.c:1639
 msgid "Delete the selection"
-msgstr "Διαγραφή της επιλογής"
+msgstr "Elemino zgjedhjen"
 
 #. ViewMenu
 #: ../src/glade-project-window.c:1643
 msgid "_Clipboard"
-msgstr "_Πρόχειρο (clipboard)"
+msgstr "_Shënime"
 
 #: ../src/glade-project-window.c:1644
 msgid "Show the clipboard"
-msgstr "Εμφάνιση του προχείρου (clipboard)"
+msgstr "Shfaq shënimet"
 
 #. ProjectsMenu
 #: ../src/glade-project-window.c:1648
 msgid "_Previous Project"
-msgstr "_Προηγούμενο έργο"
+msgstr "_Projekti paraardhës"
 
 #: ../src/glade-project-window.c:1649
 msgid "Activate previous project"
-msgstr "Ενεργοποίηση προηγούμενου έργου"
+msgstr "Aktivo projektin paraardhës"
 
 #: ../src/glade-project-window.c:1651
 msgid "_Next Project"
-msgstr "_Επόμενο Έργο"
+msgstr "Projekti _Në vijim"
 
 #: ../src/glade-project-window.c:1652
 msgid "Activate next project"
-msgstr "Ενεργοποίηση επόμενου έργου"
+msgstr "Aktivo projektin në vijim"
 
 #: ../src/glade-project-window.c:1660
 msgid "_Use Small Icons"
-msgstr "_Χρήση μικρών εικονιδίων"
+msgstr "_Përdor ikona të vogla"
 
 #: ../src/glade-project-window.c:1661
 msgid "Show items using small icons"
-msgstr "Εμφάνιση στοιχείων χρησιμοποιώντας μικρά εικονίδια"
+msgstr "Shfaq elementët duke përdorur ikona të vogla"
 
 #: ../src/glade-project-window.c:1664
 msgid "Context _Help"
-msgstr "Βοήθεια _Εννοιών"
+msgstr "Ndi_hmë sipas kontekstit"
 
 #: ../src/glade-project-window.c:1665
 msgid "Show or hide contextual help buttons in the editor"
-msgstr "Εμφάνιση ή απόκρυψη σχετικών κουμπιών βοήθειας στον επεξεργαστή κειμένου"
+msgstr "Shfaq ose fsheh pulsantët e ndihmës sipas kontekstit në editor"
 
 #: ../src/glade-project-window.c:1672
 msgid "Text beside icons"
-msgstr "Κείμενο μαζί με εικονίδια"
+msgstr "Tekst anash ikonave"
 
 #: ../src/glade-project-window.c:1673
 msgid "Display items as text beside icons"
-msgstr "Προβολή στοιχείων ως κείμενο και εικονίδια μαζί"
+msgstr "Shfaq elementët si tekst anash ikonave"
 
 #: ../src/glade-project-window.c:1675
 msgid "_Icons only"
-msgstr "_Μόνο εικονίδια"
+msgstr "Vetëm _Ikona"
 
 #: ../src/glade-project-window.c:1676
 msgid "Display items as icons only"
-msgstr "Προβολή στοιχείων μόνο σαν εικονίδια"
+msgstr "Shfaq elementët vetëm si ikona"
 
 #: ../src/glade-project-window.c:1678
 msgid "_Text only"
-msgstr "_Μόνο κείμενο"
+msgstr "Vetëm _Tekst"
 
 #: ../src/glade-project-window.c:1679
 msgid "Display items as text only"
-msgstr "Προβολή στοιχείων μόνο σε μορφή κειμένου"
+msgstr "Shfaq elementët vetëm si tekste"
 
 #: ../src/glade-project-window.c:1884
 msgid "Select Widgets"
-msgstr "Επιλογή γραφικού συστατικού"
+msgstr "Zgjidh \"widgets\""
 
 #: ../src/glade-project-window.c:1888
 msgid "Select widgets in the workspace"
-msgstr "Επιλογή γραφικού συστατικού στο χώρο εργασίας"
+msgstr "Zgjidh widgets në hapësirën e punës"
 
 #: ../src/glade-project-window.c:1977
 msgid "Palette"
-msgstr "Παλέτα"
+msgstr "Paleta"
 
 #: ../src/glade-project-window.c:1993
 msgid "Inspector"
-msgstr "Επόπτης"
+msgstr "Inspektori"
 
 #: ../src/glade-project-window.c:2115
 msgid "Could not create a new project."
-msgstr "Αδυναμία δημιουργίας νέου έργου"
+msgstr "I pamundur krijimi i një projekti të ri."
 
 #: ../src/glade-project-window.c:2134
 #, c-format
 msgid "%s is already open"
-msgstr "%s είναι ήδη ανοιχτό"
+msgstr "%s është rregullisht i hapur"
 
 #: ../src/glade-project-window.c:2199
 msgid "_Undo"
-msgstr "_Αναίρεση"
+msgstr "_Anullo"
 
 #. Change tooltips
 #: ../src/glade-project-window.c:2201 ../gladeui/glade-app.c:242
 #, c-format
 msgid "Undo: %s"
-msgstr "Αναίρεση: %s"
+msgstr "Anullo: %s"
 
 #: ../src/glade-project-window.c:2201 ../src/glade-project-window.c:2212
 #: ../gladeui/glade-app.c:243
 msgid "the last action"
-msgstr "η τελευταία ενέργεια"
+msgstr "veprimin e fundit"
 
 #: ../src/glade-project-window.c:2210
 msgid "_Redo"
-msgstr "_Επανάληψη"
+msgstr "_Përsërit"
 
 #: ../src/glade-project-window.c:2212 ../gladeui/glade-app.c:242
 #, c-format
 msgid "Redo: %s"
-msgstr "Επανάληψη: %s"
+msgstr "Përsërit: %s"
 
 #: ../gladeui/glade-app.c:453
 msgid "Clipboard"
-msgstr "Πρόχειρο (Clipboard)"
+msgstr "Shënime"
 
 #: ../gladeui/glade-app.c:525
 msgid "Active Project"
-msgstr "Ενεργό Έργο"
+msgstr "Projekti aktiv"
 
 #: ../gladeui/glade-app.c:526
 msgid "The active project"
-msgstr "Το τρέχον έργο"
+msgstr "Projekti aktiv"
 
 #: ../gladeui/glade-app.c:604
 #, c-format
@@ -479,9 +478,9 @@ msgid ""
 "Trying to save private data to %s directory but it is a regular file.\n"
 "No private data will be saved in this session"
 msgstr ""
-"Γίνεται προσπάθεια να αποθηκευτούν ιδιωτικά δεδομένα στον κατάλογο %s αλλά "
-"πρόκειται για ένα συνηθισμένο αρχείο.\n"
-"Δε θα αποθηκευτούν ιδιωτικά δεδομένα σε αυτή τη συνεδρία"
+"Përpjekje për të ruajtur të dhnat tek directory %s por është një file i "
+"rregullt.\n"
+"Asnjë e dhënë private do të ruhet në këtë seancë"
 
 #: ../gladeui/glade-app.c:617
 #, c-format
@@ -489,8 +488,8 @@ msgid ""
 "Failed to create directory %s to save private data.\n"
 "No private data will be saved in this session"
 msgstr ""
-"Αδύνατη η δημιουργία καταλόγου %s για την αποθήκευση ιδιωτικών δεδομένων.\n"
-"Δε θα αποθηκευτούν ιδιωτικά δεδομένα σε αυτή τη συνεδρία"
+"Krijimi i directory %s për të ruajtur të dhënat private dështoi.\n"
+"Asnjë e dhënë private do të ruhet në këtë seancë"
 
 #: ../gladeui/glade-app.c:645
 #, c-format
@@ -498,8 +497,8 @@ msgid ""
 "Error writing private data to %s (%s).\n"
 "No private data will be saved in this session"
 msgstr ""
-"Λάθος κατά την εγγραφή ιδιωτικών δεδομένων στο %s (%s).\n"
-"Δε θα αποθηκευτούν ιδιωτικά δεδομένα σε αυτή τη συνεδρία"
+"Gabim gjatë shkrimit të të dhënave private tek %s (%s).\n"
+"Asnjë e dhënë private do të ruhet në këtë seancë"
 
 #: ../gladeui/glade-app.c:657
 #, c-format
@@ -507,8 +506,8 @@ msgid ""
 "Error serializing configuration data to save (%s).\n"
 "No private data will be saved in this session"
 msgstr ""
-"Λάθος στην ακολουθία των τροποποιημένων προς αποθήκευση δεδομένων (%s).\n"
-"Δε θα αποθηκευτούν ιδιωτικά δεδομένα σε αυτή τη συνεδρία"
+"Gabim në serializimin e të dhënave të konfigurimit për ruajtje (%s).\n"
+"Asnjë e dhënë private do të ruhet në këtë seancë"
 
 #: ../gladeui/glade-app.c:670
 #, c-format
@@ -516,85 +515,76 @@ msgid ""
 "Error opening %s to write private data (%s).\n"
 "No private data will be saved in this session"
 msgstr ""
-"Λάθος κατά το άνοιγμα του %s για εγγραφή ιδιωτικών δεδομένων (%s). Δε θα "
-"αποθηκευτούν ιδιωτικά δεδομένα σε αυτή τη συνεδρία"
+"Gabim gjatë hapjes së %s për të shkruar të dhënat private (%s).\n"
+"Asnjë e dhënë private do të ruhet në këtë seancë"
 
 #: ../gladeui/glade-app.c:1109
 msgid "You cannot copy a widget internal to a composite widget."
-msgstr ""
-"Δεν μπορείτε να αντιγράψετε ένα γραφικό συστατικό στο εσωτερικό ενός "
-"σύνθετου γραφικού συστατικού."
+msgstr "Nuk mund të kopjosh një widget në brendësi të një widget të kompozuar."
 
 #: ../gladeui/glade-app.c:1124 ../gladeui/glade-app.c:1177
 #: ../gladeui/glade-app.c:1352
 msgid "No widget selected."
-msgstr "Δεν έχει επιλεγεί συστατικό."
+msgstr "Nuk është zgjedhur asnjë widget."
 
 #: ../gladeui/glade-app.c:1162
 msgid "You cannot cut a widget internal to a composite widget."
-msgstr ""
-"Δεν μπορείτε να κάνετε αποκοπή ενός γραφικού συστατικού που περιλαμβάνεται "
-"σε κάποιο σύνθετο γραφικό συστατικό"
+msgstr "Nuk mund të presësh një widget në brendësi të një widget të kompozuar."
 
 #: ../gladeui/glade-app.c:1221
 msgid "Unable to paste to the selected parent"
-msgstr "Αδυναμία επικόλλησης στον επιλεγμένο γονέα"
+msgstr "E pamundur ngjitja tek prindi i zgjedhur"
 
 #: ../gladeui/glade-app.c:1232
 msgid "Unable to paste to multiple widgets"
-msgstr "Αδυναμία επικόλλησης σε πολλά συστατικά."
+msgstr "E pamundur ngjitja tek widgets shumëfish"
 
 #: ../gladeui/glade-app.c:1242 ../gladeui/glade-app.c:1374
 msgid "No widget selected on the clipboard"
-msgstr "Δεν έχει επιλεγεί συστατικό στο πρόχειρο (clipboard)"
+msgstr "Nuk është zgjedhur asnjë widget në shënime"
 
 #: ../gladeui/glade-app.c:1268
 #, c-format
 msgid "Unable to paste widget %s without a parent"
-msgstr "Αδυναμία επικόλλησης γραφικού συστατικού %s ενώ δεν έχει γονέα"
+msgstr "E pamundur ngjitja e widget %s pa një prind"
 
 #: ../gladeui/glade-app.c:1285
 msgid "Only one widget can be pasted at a time to this container"
-msgstr ""
-"Σε αυτό το πλαίσιο (container) μπορείτε να κάνετε επικόλληση ενός μόνο "
-"γραφικού συστατικού κάθε φορά"
+msgstr "Në këtë përmbajtës mund të ngjitet vetëm një widget njëkohësisht"
 
 #: ../gladeui/glade-app.c:1297
 msgid "Insufficient amount of placeholders in target container"
-msgstr ""
-"Ανεπαρκής αριθμός διαχωριστών (placeholders) στο πλαίσιο προορισμού (target "
-"container)"
+msgstr "Numër i pamjaftueshëm vendshënuesish në përmbajtësin objektiv"
 
 #: ../gladeui/glade-app.c:1337 ../gladeui/glade-app.c:1384
 msgid "You cannot delete a widget internal to a composite widget."
 msgstr ""
-"Δεν μπορείτε να διαγράψετε ένα γραφικό συστατικό που περιλαμβάνεται σε "
-"κάποιο σύνθετο γραφικό συστατικό"
+"Nuk mund të eleminosh një widget në brendësi të një widget të kompozuar."
 
 #: ../gladeui/glade-builtins.c:183 ../plugins/gtk+/glade-gtk.c:187
 #: ../plugins/gtk+/glade-gtk.c:207
 msgid "Stock"
-msgstr "Έτοιμα αντικείμενα"
+msgstr "Stock"
 
 #: ../gladeui/glade-builtins.c:184
 msgid "A builtin stock item"
-msgstr "Εμβόλιμο έτοιμο αντικείμενο"
+msgstr "Një element stock i integruar"
 
 #: ../gladeui/glade-builtins.c:192 ../plugins/gtk+/gtk+.xml.in.h:264
 msgid "Stock Image"
-msgstr "Έτοιμη εικόνα"
+msgstr "Figurë stock"
 
 #: ../gladeui/glade-builtins.c:193 ../plugins/gtk+/gtk+.xml.in.h:1
 msgid "A builtin stock image"
-msgstr "Εμβόλιμη έτοιμη εικόνα"
+msgstr "Një figurë stock e integruar"
 
 #: ../gladeui/glade-builtins.c:523
 msgid "Objects"
-msgstr "Αντικείμενα"
+msgstr "Objekte"
 
 #: ../gladeui/glade-builtins.c:524
 msgid "A list of objects"
-msgstr "Λίστα αντικειμένων"
+msgstr "Një listë objektesh"
 
 #: ../gladeui/glade-builtins.c:533
 msgid "Pixbuf"
@@ -602,49 +592,49 @@ msgstr "Pixbuf"
 
 #: ../gladeui/glade-builtins.c:534
 msgid "A pixbuf value"
-msgstr "Μια τιμή pixbuf (για εικόνες στη μνήμη)"
+msgstr "Një vlerë pixbuf"
 
 #: ../gladeui/glade-builtins.c:542
 msgid "GdkColor"
-msgstr "Χρώμα Gdk"
+msgstr "GdkColor"
 
 #: ../gladeui/glade-builtins.c:543
 msgid "A gdk color value"
-msgstr "Μια gdk τιμή για το χρώμα"
+msgstr "Një vlerë ngjyre gdk"
 
 #. Accelerators
 #: ../gladeui/glade-builtins.c:551 ../gladeui/glade-property-class.c:1187
 #: ../plugins/gtk+/gtk+.xml.in.h:11
 msgid "Accelerators"
-msgstr "Γρήγορα Πλήκτρα (Accelerators)"
+msgstr "Përshpejtues"
 
 #: ../gladeui/glade-builtins.c:552 ../gladeui/glade-property-class.c:1188
 msgid "A list of accelerator keys"
-msgstr "Μια λίστα από γρήγορα πλήκτρα (accelerator keys)"
+msgstr "Një listë pulsantësh përshpejtues"
 
 #: ../gladeui/glade-builtins.c:563
 msgid "Integer"
-msgstr "Ακέραιος"
+msgstr "I plotë"
 
 #: ../gladeui/glade-builtins.c:564
 msgid "An integer value"
-msgstr "Μια ακέραια τιμή"
+msgstr "Një vlerë e plotë"
 
 #: ../gladeui/glade-builtins.c:572
 msgid "Unsigned Integer"
-msgstr "Ακέραιος χωρίς πρόσημο"
+msgstr "I plotë pa shenjë"
 
 #: ../gladeui/glade-builtins.c:573
 msgid "An unsigned integer value"
-msgstr "Μη προσημασμένη ακέραια τιμή"
+msgstr "Një vlerë e plotë pa shenjë"
 
 #: ../gladeui/glade-builtins.c:580
 msgid "String"
-msgstr "Συμβολοσειρά"
+msgstr "String"
 
 #: ../gladeui/glade-builtins.c:581
 msgid "An entry"
-msgstr "Μια είσοδος"
+msgstr "Një zë"
 
 #: ../gladeui/glade-builtins.c:588
 msgid "Strv"
@@ -652,91 +642,91 @@ msgstr "Strv"
 
 #: ../gladeui/glade-builtins.c:589
 msgid "String array"
-msgstr "Πίνακας συμβολοσειρών (String array)"
+msgstr "Vektor stringe"
 
 #: ../gladeui/glade-builtins.c:597
 msgid "Float"
-msgstr "Πραγματικός"
+msgstr "Presje e lëvizëshme"
 
 #: ../gladeui/glade-builtins.c:598
 msgid "A floating point entry"
-msgstr "Εγγραφή ενός αριθμού κινητής υποδιαστολής"
+msgstr "Një zë me presje të lëvizëshme"
 
 #: ../gladeui/glade-builtins.c:606
 msgid "Boolean"
-msgstr "Λογικός (Boolean)"
+msgstr "Booleane"
 
 #: ../gladeui/glade-builtins.c:607
 msgid "A boolean value"
-msgstr "Μια λογική τιμή"
+msgstr "Një vlerë booleane"
 
 #: ../gladeui/glade-base-editor.c:470
 #, c-format
 msgid "Setting object type on %s to %s"
-msgstr "Ρυθμίζεται ο τύπος αντικειμένων στο %s σε %s"
+msgstr "Përcaktimi i llojit të objektit nga %s në %s"
 
 #: ../gladeui/glade-base-editor.c:635
 #, c-format
 msgid "Add a %s to %s"
-msgstr "Προσθέτει ένα %s στο %s"
+msgstr "Shto një %s tek %s"
 
 #: ../gladeui/glade-base-editor.c:712
 #, c-format
 msgid "Delete %s child from %s"
-msgstr "Διαγράφει το παιδί %s από το %s"
+msgstr "Elemino birin %s nga %s"
 
 #: ../gladeui/glade-base-editor.c:835
 #, c-format
 msgid "Reorder %s's children"
-msgstr "Αναδιάταξη των παιδιών του %s"
+msgstr "Riorganizimi i bijve të %s"
 
 #: ../gladeui/glade-base-editor.c:1412 ../plugins/gtk+/glade-gtk.c:206
 #: ../plugins/gtk+/gtk+.xml.in.h:159
 msgid "Label"
-msgstr "Ετικέτα"
+msgstr "Etiketa"
 
 #: ../gladeui/glade-base-editor.c:1425 ../gladeui/glade-widget-adaptor.c:924
 msgid "Type"
-msgstr "Τύπος"
+msgstr "Lloji"
 
 #. Name
 #: ../gladeui/glade-base-editor.c:1598
 msgid "Name :"
-msgstr "Όνομα :"
+msgstr "Emri :"
 
 #. Type
 #: ../gladeui/glade-base-editor.c:1608
 msgid "Type :"
-msgstr "Τύπος :"
+msgstr "Lloji :"
 
 #: ../gladeui/glade-clipboard-view.c:205 ../gladeui/glade-project-view.c:721
 #: ../plugins/gtk+/gtk+.xml.in.h:314
 msgid "Widget"
-msgstr "Γραφικό Συστατικό"
+msgstr "\"Widget\""
 
 #: ../gladeui/glade-command.c:541
 msgid "Setting multiple properties"
-msgstr "Καθορισμός πολλαπλών ιδιοτήτων"
+msgstr "Caktimi i pronësive shumëfishe"
 
 #: ../gladeui/glade-command.c:549
 #, c-format
 msgid "Setting %s of %s"
-msgstr "Καθορίζεται το %s από το %s"
+msgstr "Caktimi në %s i %s"
 
 #: ../gladeui/glade-command.c:553
 #, c-format
 msgid "Setting %s of %s to %s"
-msgstr "Καθορίζεται το %s από το %s στο %s"
+msgstr "Caktimi në %s i %s në %s"
 
 #: ../gladeui/glade-command.c:771 ../gladeui/glade-command.c:798
 #, c-format
 msgid "Renaming %s to %s"
-msgstr "Μετονομασία του %s σε %s"
+msgstr "Riemërtimi i %s në %s"
 
 #: ../gladeui/glade-command.c:903
 #, c-format
 msgid "Add %s"
-msgstr "Πρόσθεση του %s"
+msgstr "Shto %s"
 
 #: ../gladeui/glade-command.c:904 ../gladeui/glade-command.c:1371
 #: ../gladeui/glade-command.c:1374 ../gladeui/glade-command.c:1537
@@ -744,552 +734,579 @@ msgstr "Πρόσθεση του %s"
 #: ../gladeui/glade-command.c:1611 ../gladeui/glade-command.c:1644
 #: ../gladeui/glade-command.c:1672
 msgid "multiple"
-msgstr "πολλαπλό"
+msgstr "shumëfish"
 
 #: ../gladeui/glade-command.c:1017
 msgid "You cannot remove a widget internal to a composite widget."
-msgstr ""
-"Δεν μπορείτε να αφαιρέσετε ένα γραφικό συστατικό που περιλαμβάνεται σε "
-"κάποιο σύνθετο συστατικό."
+msgstr "Nuk mund të heqësh një widget në brendësi të një widget të kompozuar."
 
 #: ../gladeui/glade-command.c:1063
 #, c-format
 msgid "Remove %s"
-msgstr "Αφαίρεση του %s"
+msgstr "Hiq %s"
 
 #: ../gladeui/glade-command.c:1067
 msgid "Remove multiple"
-msgstr "Αφαίρεση πολλαπλών"
+msgstr "Heqje e shumëfishtë"
 
 #: ../gladeui/glade-command.c:1371
 #, c-format
 msgid "Clipboard add %s"
-msgstr "Πρόχειρο: προσθήκη %s"
+msgstr "Shtoi shënimeve %s"
 
 #: ../gladeui/glade-command.c:1374
 #, c-format
 msgid "Clipboard remove %s"
-msgstr "Πρόχειρο: αφαίρεση %s"
+msgstr "Hiqi shënimeve %s"
 
 #: ../gladeui/glade-command.c:1537
 #, c-format
 msgid "Create %s"
-msgstr "Δημιουργία: %s"
+msgstr "Krijo %s"
 
 #: ../gladeui/glade-command.c:1563
 #, c-format
 msgid "Delete %s"
-msgstr "Διαγραφή: %s"
+msgstr "Elemino %s"
 
 #: ../gladeui/glade-command.c:1584
 #, c-format
 msgid "Cut %s"
-msgstr "Αποκοπή: %s"
+msgstr "Preje %s"
 
 #: ../gladeui/glade-command.c:1611
 #, c-format
 msgid "Copy %s"
-msgstr "Αντιγραφή: %s"
+msgstr "Kopjo %s"
 
 #: ../gladeui/glade-command.c:1644
 #, c-format
 msgid "Paste %s"
-msgstr "Επικόλληση: %s"
+msgstr "Ngjit %s"
 
 #: ../gladeui/glade-command.c:1672
 #, c-format
 msgid "Drag-n-Drop from %s to %s"
-msgstr "Drag-n-Drop από το %s στο %s"
+msgstr "Tërhiq dhe lësho nga %s tek %s"
 
 #: ../gladeui/glade-command.c:1794
 #, c-format
 msgid "Add signal handler %s"
-msgstr "Προσθήκη χειριστή σήματος (signal handler) %s"
+msgstr "Shto trajtues sinjali %s"
 
 #: ../gladeui/glade-command.c:1795
 #, c-format
 msgid "Remove signal handler %s"
-msgstr "Αφαίρεση χειριστή σήματος (signal handler) %s"
+msgstr "Hiq trajtues sinjali %s"
 
 #: ../gladeui/glade-command.c:1796
 #, c-format
 msgid "Change signal handler %s"
-msgstr "Αλλαγή χειριστή σήματος (signal handler) %s"
+msgstr "Ndrysho trajtues sinjali %s"
 
 #: ../gladeui/glade-command.c:2000
 msgid "Setting i18n metadata"
-msgstr "Καθορισμός μεταδεδομένων i18n"
+msgstr "Rregullimi i metadata-ve i18n"
 
 #: ../gladeui/glade-cursor.c:186
 #, c-format
 msgid "Unable to load image (%s)"
-msgstr "Αδυναμία φόρτωσης εικόνας (%s)"
+msgstr "I pamundur ngarkimi i figurës (%s)"
 
 #: ../gladeui/glade-editor-property.c:274
 msgid "View GTK+ documentation for this property"
-msgstr "Δείτε την τεκμηρίωση GTK+ για αυτή την ιδιότητα"
+msgstr "Shfaq dokumentimin GTK+ për këtë pronësi"
 
 #: ../gladeui/glade-editor-property.c:576
 msgid "Property Class"
-msgstr "Κλάση Ιδιοτήτων"
+msgstr "Pronësitë e klasës"
 
 #: ../gladeui/glade-editor-property.c:577
 msgid "The GladePropertyClass this GladeEditorProperty was created for"
-msgstr ""
-"Η κλάση ιδιοτήτων GladePropertyClass: αυτή η ιδιότητα του GladeEditor "
-"δημιουργήθηκε για"
+msgstr "GladePropertyClass për të cilën është krijuar kjo GladeEditorProperty"
 
 #: ../gladeui/glade-editor-property.c:583
 msgid "Use Command"
-msgstr "Χρήση Εντολής"
+msgstr "Përdor komandën"
 
 #: ../gladeui/glade-editor-property.c:584
+#, fuzzy
 msgid "Whether we should use the command API for the undo/redo stack"
-msgstr ""
-"Αν επιτρέπεται η χρήση της εντολής API για τη στοίβα με τις αναιρέσεις/"
-"επαναλήψεις"
+msgstr "për anullo përsërit"
 
 #: ../gladeui/glade-editor-property.c:590
 msgid "Show Info"
-msgstr "Εμφάνιση Πληροφοριών"
+msgstr "Shfaq informacionet"
 
 #: ../gladeui/glade-editor-property.c:591
 msgid "Whether we should show an informational button"
-msgstr "Αν πρέπει να είναι ορατό ένα κουμπί πληροφόρησης"
+msgstr "Tregon nëse duhet shfaqur një pulsant informues"
 
 #: ../gladeui/glade-editor-property.c:1117
 msgid "Select Fields"
-msgstr "Επιλογή πεδίων"
+msgstr "Zgjidh fushat"
 
 #: ../gladeui/glade-editor-property.c:1139
 msgid "_Select individual fields:"
-msgstr "_Επιλογή ανεξάρτητων πεδίων:"
+msgstr "_Zgjidh fushat e veçanta:"
 
 #: ../gladeui/glade-editor-property.c:1466
 msgid "Edit Text"
-msgstr "Επεξεργασία Κειμένου"
+msgstr "Ndrysho tekstin"
 
 #. Text
 #: ../gladeui/glade-editor-property.c:1494
 msgid "_Text:"
-msgstr "_Κείμενο:"
+msgstr "_Teksti:"
 
 #: ../gladeui/glade-editor-property.c:1530
 msgid "T_ranslatable"
-msgstr "Μ_εταφράσιμο"
+msgstr "I pë_rkthyeshëm"
 
 #: ../gladeui/glade-editor-property.c:1543
 msgid "_Has context prefix"
-msgstr "_Έχει σχετικό πρόθεμα"
+msgstr "_Ka prefiks sipas kontekstit"
 
 #. Comments.
 #: ../gladeui/glade-editor-property.c:1561
 msgid "Co_mments for translators:"
-msgstr "Σχ_όλια για τους μεταφραστές:"
+msgstr "Ko_mente për përkthyesit:"
 
 #: ../gladeui/glade-editor-property.c:1731
 #: ../gladeui/glade-editor-property.c:1747
 msgid "Yes"
-msgstr "Ναι"
+msgstr "Po"
 
 #: ../gladeui/glade-editor-property.c:1731
 #: ../gladeui/glade-editor-property.c:1747
 #: ../gladeui/glade-editor-property.c:1762
 msgid "No"
-msgstr "Όχι"
+msgstr "Jo"
 
 #: ../gladeui/glade-editor-property.c:2352 ../gladeui/glade-widget.c:944
 #: ../gladeui/glade-widget-adaptor.c:916
 msgid "Name"
-msgstr "Όνομα"
+msgstr "Emri"
 
 #: ../gladeui/glade-editor-property.c:2364
 msgid "Class"
-msgstr "Κλάση"
+msgstr "Klasa"
 
 #: ../gladeui/glade-editor-property.c:2378
 #, c-format
 msgid "Choose %s implementors"
-msgstr "Επιλέξτε υλοποίηση (implementors) για %s"
+msgstr "Zgjidh plotësuesit e %s"
 
 #: ../gladeui/glade-editor-property.c:2378
 #, c-format
 msgid "Choose a %s in this project"
-msgstr "Επιλογή %s σε αυτό το έργο"
+msgstr "Zgjidh një %s në këtë projekt"
 
 #. Checklist
 #: ../gladeui/glade-editor-property.c:2442
 msgid "O_bjects:"
-msgstr "Α_ντικείμενα:"
+msgstr "O_bjekte:"
 
 #. Checklist
 #: ../gladeui/glade-editor-property.c:2651
 msgid "Objects:"
-msgstr "Αντικείμενα:"
+msgstr "Objekte:"
 
 #: ../gladeui/glade-editor-property.c:2966
 msgid "Value:"
-msgstr "Τιμή:"
+msgstr "Vlera:"
 
 #: ../gladeui/glade-editor-property.c:2967
 msgid "The current value"
-msgstr "Η τρέχουσα τιμή"
+msgstr "Vlera aktuale"
 
 #: ../gladeui/glade-editor-property.c:2969
 msgid "Lower:"
-msgstr "Κατώτερο:"
+msgstr "E poshtme:"
 
 #: ../gladeui/glade-editor-property.c:2970
 msgid "The minimum value"
-msgstr "Η μικρότερη τιμή"
+msgstr "Vlera më e ulët"
 
 #: ../gladeui/glade-editor-property.c:2972
 msgid "Upper:"
-msgstr "Ανώτερο:"
+msgstr "E sipërme:"
 
 #: ../gladeui/glade-editor-property.c:2973
 msgid "The maximum value"
-msgstr "Η μεγαλύτερη τιμή"
+msgstr "Vlera më e lartë"
 
 #: ../gladeui/glade-editor-property.c:2975
+#, fuzzy
 msgid "Step inc:"
-msgstr "Βήμα προσαύξησης:"
+msgstr "H:"
 
 #: ../gladeui/glade-editor-property.c:2976
 msgid "The increment to use to make minor changes to the value"
-msgstr "Το βήμα της αύξησης για μικρές αλλαγές τιμής"
+msgstr ""
 
 #: ../gladeui/glade-editor-property.c:2978
+#, fuzzy
 msgid "Page inc:"
-msgstr "Σελίδα προσαύξησης:"
+msgstr "Faqja:"
 
 #: ../gladeui/glade-editor-property.c:2979
 msgid "The increment to use to make major changes to the value"
-msgstr "Το βήμα της αύξησης για μεγάλες αλλαγές τιμής"
+msgstr ""
 
 #: ../gladeui/glade-editor-property.c:2981
 msgid "Page size:"
-msgstr "Μέγεθος σελίδας:"
+msgstr "Madhësia e faqes:"
 
 #: ../gladeui/glade-editor-property.c:2982
+#, fuzzy
 msgid ""
 "The page size (in a GtkScrollbar this is the size of the area which is "
 "currently visible)"
-msgstr ""
-"Το μέγεθος της σελίδας (Για μια GTK σελίδα με γραμμή κύλισης αυτό είναι το "
-"μέγεθος της τρέχουσας εμφανιζόμενης περιοχής)"
+msgstr "faqe në a është nga është i dukshëm"
 
 #: ../gladeui/glade-editor-property.c:3059
 msgid "Alphanumerical"
-msgstr "Αλφαριθμητικό"
+msgstr ""
 
 #: ../gladeui/glade-editor-property.c:3064
 msgid "Extra"
-msgstr "Πρόσθετο"
+msgstr ""
 
 #: ../gladeui/glade-editor-property.c:3069
+#, fuzzy
 msgid "Keypad"
-msgstr "Υποπληκτρολόγιο (keypad)"
+msgstr "Kyçi"
 
 #: ../gladeui/glade-editor-property.c:3074
+#, fuzzy
 msgid "Functions"
-msgstr "Συναρτήσεις"
+msgstr "Fraksioni:"
 
 #: ../gladeui/glade-editor-property.c:3079 ../plugins/gtk+/gtk+.xml.in.h:199
 #: ../plugins/gnome/gnome.xml.in.h:43
+#, fuzzy
 msgid "Other"
-msgstr "Άλλο"
+msgstr "Tjetër"
 
 #: ../gladeui/glade-editor-property.c:3250
 #: ../gladeui/glade-editor-property.c:3284
 #: ../gladeui/glade-editor-property.c:3329
 msgid "<choose a key>"
-msgstr "<επιλέξτε ένα κλειδί>"
+msgstr ""
 
 #: ../gladeui/glade-editor-property.c:3283 ../plugins/gtk+/gtk+.xml.in.h:184
 #: ../plugins/gnome/bonobo.xml.in.h:13
 msgid "None"
-msgstr "Κανένα"
+msgstr "Asnjë"
 
 #: ../gladeui/glade-editor-property.c:3409
 #: ../gladeui/glade-signal-editor.c:684
 msgid "Signal"
-msgstr "Σήμα"
+msgstr "Sinjali"
 
 #: ../gladeui/glade-editor-property.c:3436
 msgid "Key"
-msgstr "Πλήκτρο"
+msgstr "Kyçi"
 
 #: ../gladeui/glade-editor-property.c:3450
 msgid "Shift"
 msgstr "Shift"
 
 #: ../gladeui/glade-editor-property.c:3466
+#, fuzzy
 msgid "Control"
-msgstr "Control"
+msgstr "Ctrl"
 
 #: ../gladeui/glade-editor-property.c:3482
 msgid "Alt"
 msgstr "Alt"
 
 #: ../gladeui/glade-editor-property.c:3548
+#, fuzzy
 msgid "Choose accelerator keys..."
-msgstr "Επιλέξτε γρήγορα πλήκτρα..."
+msgstr "Ti"
 
 #: ../gladeui/glade-editor.c:146
+#, fuzzy
 msgid "Show info"
-msgstr "Εμφάνιση πληροφοριών"
+msgstr "Shfaq:"
 
 #: ../gladeui/glade-editor.c:147
+#, fuzzy
 msgid "Whether to show an informational button for the loaded widget"
-msgstr ""
-"Αν επιτρέπεται η εμφάνιση ενός κουμπιού με πληροφορίες για το φορτωμένο "
-"συστατικό"
+msgstr "është fëmi (sekondar, i dytë)"
 
 #: ../gladeui/glade-editor.c:154
+#, fuzzy
 msgid "Show context info"
-msgstr "Εμφάνιση πληροφοριών για το περιεχόμενο"
+msgstr "Shfaq"
 
 #: ../gladeui/glade-editor.c:155
+#, fuzzy
 msgid ""
 "Whether to show an informational button for each property and signal in the "
 "editor"
-msgstr ""
-"Αν πρέπει να εμφανίζεται ένα κουμπί με πληροφορίες για κάθε ιδιότητα και "
-"σήμα στον επεξεργαστή κειμένου"
+msgstr "për dhe në"
 
 #. construct tab label widget
 #: ../gladeui/glade-editor.c:196 ../gladeui/glade-editor.c:322
 #: ../gladeui/glade-editor.c:1178
+#, fuzzy
 msgid "Accessibility"
-msgstr "Προσβασιμότητα"
+msgstr "Dukshmëria:"
 
 #. configure page container
 #: ../gladeui/glade-editor.c:212 ../gladeui/glade-editor.c:321
+#, fuzzy
 msgid "_Signals"
-msgstr "_Σήματα"
+msgstr "Sinjali"
 
 #: ../gladeui/glade-editor.c:283
+#, fuzzy
 msgid "View documentation for the selected widget"
-msgstr "Εμφάνιση τεκμηρίωσης για το επιλεγμένο γραφικό συστατικό"
+msgstr "Elemino"
 
 #: ../gladeui/glade-editor.c:303
+#, fuzzy
 msgid "Reset widget properties to their defaults"
-msgstr "Επαναφορά των ιδιοτήτων αυτού του γραφικού συστατικού στις προεπιλεγμένες"
+msgstr "Nga fillimi pronësitë"
 
 #: ../gladeui/glade-editor.c:318
+#, fuzzy
 msgid "_General"
-msgstr "_Γενικά"
+msgstr "Të përgjithshme"
 
 #: ../gladeui/glade-editor.c:319
+#, fuzzy
 msgid "_Packing"
-msgstr "_Packing"
+msgstr "Hapësira:"
 
 #: ../gladeui/glade-editor.c:320
+#, fuzzy
 msgid "_Common"
-msgstr "_Κοινά"
+msgstr "Të përbashkët"
 
 #: ../gladeui/glade-editor.c:337
+#, fuzzy
 msgid "_Edit..."
-msgstr "_Επεξεργασία…"
+msgstr "Ndrysho..."
 
 #. Name
 #: ../gladeui/glade-editor.c:483
 msgid "Name:"
-msgstr "Όνομα:"
+msgstr "Emri:"
 
 #. Class
 #: ../gladeui/glade-editor.c:511
+#, fuzzy
 msgid "Class:"
-msgstr "Κλάση:"
+msgstr "Klasa:"
 
 #: ../gladeui/glade-editor.c:991
-#, c-format
+#, fuzzy, c-format
 msgid "Create a %s"
-msgstr "Δημιουργία ενός %s"
+msgstr "Krijo a i ri"
 
 #: ../gladeui/glade-editor.c:1109
+#, fuzzy
 msgid "Reset"
-msgstr "Επαναφορά"
+msgstr "Ripërmaso:"
 
 #: ../gladeui/glade-editor.c:1123
+#, fuzzy
 msgid "Property"
-msgstr "Ιδιότητα"
+msgstr "Pronësitë"
 
 #: ../gladeui/glade-editor.c:1158
 msgid "General"
-msgstr "Γενικά"
+msgstr "Të përgjithshme"
 
 #: ../gladeui/glade-editor.c:1168
 msgid "Common"
-msgstr "Κοινά"
+msgstr "Të përbashkët"
 
 #: ../gladeui/glade-editor.c:1213
+#, fuzzy
 msgid "(default)"
-msgstr "(προεπιλογή)"
+msgstr "prezgjedhur"
 
 #: ../gladeui/glade-editor.c:1228
+#, fuzzy
 msgid "Select the properties that you want to reset to their default values"
-msgstr ""
-"Επιλέξτε τις ιδιότητες που θέλετε να επαναφέρετε στις προεπιλεγμένες τιμές "
-"τους"
+msgstr "Zgjidh pronësitë rivendos prezgjedhur"
 
 #: ../gladeui/glade-editor.c:1360
+#, fuzzy
 msgid "Reset Widget Properties"
-msgstr "Επαναφορά Ιδιοτήτων Γραφικού Συστατικού"
+msgstr "\"Widget\""
 
 #. Checklist
 #: ../gladeui/glade-editor.c:1377
+#, fuzzy
 msgid "_Properties:"
-msgstr "_Ιδιότητες:"
+msgstr "Pronësitë "
 
 #: ../gladeui/glade-editor.c:1406
+#, fuzzy
 msgid "_Select All"
-msgstr "_Επιλογή Όλων"
+msgstr "Zgjidh file"
 
 #: ../gladeui/glade-editor.c:1413
+#, fuzzy
 msgid "_Unselect All"
-msgstr "_Από-επιλογή Όλων"
+msgstr "Gjithçka"
 
 #. Description
 #: ../gladeui/glade-editor.c:1422
+#, fuzzy
 msgid "Property _Description:"
-msgstr "Περιγραφή_Ιδιοτήτων:"
+msgstr "Përshkrimi:"
 
 #: ../gladeui/glade-fixed.c:462 ../plugins/gtk+/glade-gtk.c:1407
 #, c-format
 msgid "Placing %s inside %s"
-msgstr "Τοποθέτηση του %s μέσα στο %s"
+msgstr ""
 
 #: ../gladeui/glade-fixed.c:940
+#, fuzzy
 msgid "X position property"
-msgstr "Ιδιότητα θέσης Χ"
+msgstr "X"
 
 #: ../gladeui/glade-fixed.c:941
+#, fuzzy
 msgid "The property used to set the X position of a child object"
-msgstr ""
-"Η ιδιότητα χρησιμοποιείται για να καθοριστεί η θέση Χ ενός αντικειμένου-"
-"παιδιού"
+msgstr "X nga a bir"
 
 #: ../gladeui/glade-fixed.c:947
+#, fuzzy
 msgid "Y position property"
-msgstr "Ιδιότητα θέσης Υ"
+msgstr "Y"
 
 #: ../gladeui/glade-fixed.c:948
+#, fuzzy
 msgid "The property used to set the Y position of a child object"
-msgstr ""
-"Η ιδιότητα χρησιμοποιείται για να καθοριστεί η θέση Y ενός αντικειμένου-"
-"παιδιού"
+msgstr "Y nga a bir"
 
 #: ../gladeui/glade-fixed.c:954
+#, fuzzy
 msgid "Width property"
-msgstr "Ιδιότητα πλάτους"
+msgstr "Gjerësia"
 
 #: ../gladeui/glade-fixed.c:955
+#, fuzzy
 msgid "The property used to set the width of a child object"
-msgstr ""
-"Η ιδιότητα χρησιμοποιείται για να καθοριστεί το πλάτος ενός αντικειμένου-"
-"παιδιού"
+msgstr "gjerësia nga a bir"
 
 #: ../gladeui/glade-fixed.c:961
+#, fuzzy
 msgid "Height property"
-msgstr "Ιδιότητα ύψους"
+msgstr "Lartësia"
 
 #: ../gladeui/glade-fixed.c:962
+#, fuzzy
 msgid "The property used to set the height of a child object"
-msgstr ""
-"Η ιδιότητα χρησιμοποιείται για να καθοριστεί το ύψος ενός αντικειμένου-"
-"παιδιού"
+msgstr "Hapësira djathtas nga fëmi (sekondar, i dytë)"
 
 #: ../gladeui/glade-fixed.c:968
 msgid "Can resize"
-msgstr "Μπορεί να αλλάξει μέγεθος"
+msgstr ""
 
 #: ../gladeui/glade-fixed.c:969
+#, fuzzy
 msgid "Whether this container supports resizes of child widgets"
-msgstr ""
-"Αν αυτό το πλαίσιο (container) υποστηρίζει την αλλαγή μεγέθους των γραφικών "
-"συστατικών που περιέχει (child widgets)"
+msgstr "është fëmi (sekondar, i dytë)"
 
 #: ../gladeui/glade-palette.c:617
+#, fuzzy
 msgid "Widget selector"
-msgstr "Επιλογέας γραφικών συστατικών"
+msgstr "\"Widget\" Degëzimi"
 
 #: ../gladeui/glade-parser.c:1192
-#, c-format
+#, fuzzy, c-format
 msgid "Could not find glade file %s"
-msgstr "Δεν μπορεί να βρεθεί το glade αρχείο %s"
+msgstr ""
+"\n"
+" j"
 
 #: ../gladeui/glade-parser.c:1211 ../gladeui/glade-parser.c:1219
-#, c-format
+#, fuzzy, c-format
 msgid "Errors parsing glade file %s"
-msgstr "Λάθος κατά την ανάλυση του αρχείου glade %s"
+msgstr ""
+"Gabim\n"
+" j"
 
 #: ../gladeui/glade-parser.c:1657
+#, fuzzy
 msgid "Could not allocate memory for interface"
-msgstr "Δεν είναι δυνατή η δέσμευση μνήμης για τη διασύνδεση"
+msgstr "nuk për"
 
 #: ../gladeui/glade-popup.c:254
+#, fuzzy
 msgid "_Select"
-msgstr "_Επιλογή"
+msgstr "Zgjidh"
 
 #: ../gladeui/glade-project.c:562
 msgid "Has Unsaved Changes"
-msgstr "Έχει Μη Αποθηκευμένες Αλλαγές"
+msgstr ""
 
 #: ../gladeui/glade-project.c:563
 msgid "Whether project has unsaved changes"
-msgstr "Αν το έργο έχει μη αποθηκευμένες αλλαγές"
+msgstr ""
 
 #: ../gladeui/glade-project.c:570
+#, fuzzy
 msgid "Has Selection"
-msgstr "Έχει Επιλογή"
+msgstr "Zgjedhja e ngjyrës"
 
 #: ../gladeui/glade-project.c:571
+#, fuzzy
 msgid "Whether project has a selection"
-msgstr "Αν το έργο έχει μια επιλογή"
+msgstr "a"
 
 #: ../gladeui/glade-project.c:578
+#, fuzzy
 msgid "Read Only"
-msgstr "Μόνο για Ανάγνωση"
+msgstr "Lokale Vetëm:"
 
 #: ../gladeui/glade-project.c:579
+#, fuzzy
 msgid "Whether project is read only or not"
-msgstr "Αν το έργο είναι μόνο για ανάγνωση ή όχι"
+msgstr "është ose nuk"
 
 #: ../gladeui/glade-project.c:687
 #, c-format
 msgid "Unsaved %d"
-msgstr "Μη αποθηκευμένο %d"
+msgstr ""
 
 #: ../gladeui/glade-project.c:1460
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Failed to load %s.\n"
 "The following required catalogs are unavailable: %s"
-msgstr ""
-"Αδυναμία κατα τη φόρτωση του %s.\n"
-"Οι επόμενοι απαραίτητοι κατάλογοι δεν είναι διαθέσιμοι: %s"
+msgstr "Dështoi vijues kërkohet jo në dispozicion"
 
 #. Atk click property
 #: ../gladeui/glade-property-class.c:56 ../plugins/gtk+/gtk+.xml.in.h:49
 msgid "Click"
-msgstr "Κλικ"
+msgstr ""
 
 #. Atk click property
 #: ../gladeui/glade-property-class.c:57 ../plugins/gtk+/gtk+.xml.in.h:244
+#, fuzzy
 msgid "Set the description of the Click atk action"
-msgstr "Καθορισμός της περιγραφής της ενέργειας ATK Κλικ (Click)"
+msgstr "Shto përshkrimi nga akcion"
 
 #. Atk press property
 #: ../gladeui/glade-property-class.c:58 ../plugins/gtk+/gtk+.xml.in.h:212
 msgid "Press"
-msgstr "Πάτημα (Press)"
+msgstr "Shtypi"
 
 #. Atk press property
 #: ../gladeui/glade-property-class.c:59 ../plugins/gtk+/gtk+.xml.in.h:246
+#, fuzzy
 msgid "Set the description of the Press atk action"
-msgstr "Καθορισμός της περιγραφής της ενέργειας ATK Πίεση (Press)"
+msgstr "Shto përshkrimi nga akcion"
 
 #. Atk release property
 #: ../gladeui/glade-property-class.c:60 ../plugins/gtk+/gtk+.xml.in.h:228
@@ -1298,661 +1315,725 @@ msgstr "Release"
 
 #. Atk release property
 #: ../gladeui/glade-property-class.c:61 ../plugins/gtk+/gtk+.xml.in.h:248
+#, fuzzy
 msgid "Set the description of the Release atk action"
-msgstr "Καθορισμός της περιγραφής της ενέργειας ATK Release"
+msgstr "përshkrimi nga Release"
 
 #. Atk activate property
 #: ../gladeui/glade-property-class.c:62 ../plugins/gtk+/gtk+.xml.in.h:16
+#, fuzzy
 msgid "Activate"
-msgstr "Ενεργοποίηση"
+msgstr "Aktiv"
 
 #. Atk activate property
 #: ../gladeui/glade-property-class.c:63 ../plugins/gtk+/gtk+.xml.in.h:242
+#, fuzzy
 msgid "Set the description of the Activate atk action"
-msgstr "Καθορισμός της περιγραφής της ενέργειας ATK Ενεργοποίηση (Activate)"
+msgstr "Shto përshkrimi nga akcion"
 
 #. Atk relationset properties
 #: ../gladeui/glade-property-class.c:67 ../plugins/gtk+/gtk+.xml.in.h:65
 msgid "Controlled By"
-msgstr "Ελέγχεται Από"
+msgstr ""
 
 #. Atk relationset properties
 #: ../gladeui/glade-property-class.c:68 ../plugins/gtk+/gtk+.xml.in.h:139
+#, fuzzy
 msgid "Indicates an object controlled by one or more target objects"
-msgstr ""
-"Δείχνει ότι ένα αντικείμενο έχει ως ελεγκτές ένα ή περισσότερα συνδεδεμένα "
-"αντικείμενα"
+msgstr "nga ose tjetër"
 
 #: ../gladeui/glade-property-class.c:70 ../plugins/gtk+/gtk+.xml.in.h:66
 msgid "Controller For"
-msgstr "Ελεγκτής Για"
+msgstr ""
 
 #: ../gladeui/glade-property-class.c:71 ../plugins/gtk+/gtk+.xml.in.h:141
+#, fuzzy
 msgid "Indicates an object is a controller for one or more target objects"
-msgstr ""
-"Προσδιορίζει ένα αντικείμενο ως ελεγκτή για ένα ή περισσότερα αντικείμενα-"
-"προορισμούς"
+msgstr "është a për ose tjetër"
 
 #: ../gladeui/glade-property-class.c:73 ../plugins/gtk+/gtk+.xml.in.h:161
 msgid "Labelled By"
-msgstr "Προσδιορίζεται με Ετικέτα Από"
+msgstr ""
 
 #: ../gladeui/glade-property-class.c:74 ../plugins/gtk+/gtk+.xml.in.h:144
+#, fuzzy
 msgid "Indicates an object is labelled by one or more target objects"
-msgstr ""
-"Δηλώνει ότι ένα αντικείμενο προσδιορίζεται από ένα ή περισσότερα σχετικά "
-"αντικείμενα με ετικέτα"
+msgstr "është nga ose tjetër"
 
 #: ../gladeui/glade-property-class.c:76 ../plugins/gtk+/gtk+.xml.in.h:160
+#, fuzzy
 msgid "Label For"
-msgstr "Ετικέτα Για"
+msgstr "Etiketa"
 
 #: ../gladeui/glade-property-class.c:77 ../plugins/gtk+/gtk+.xml.in.h:142
+#, fuzzy
 msgid "Indicates an object is a label for one or more target objects"
-msgstr ""
-"Προσδιορίζει ένα αντικείμενο σαν ετικέττα για ένα ή περισσότερα αντικείμενα-"
-"προορισμούς"
+msgstr "është a etiketa për ose tjetër"
 
 #: ../gladeui/glade-property-class.c:79 ../plugins/gtk+/gtk+.xml.in.h:172
+#, fuzzy
 msgid "Member Of"
-msgstr "Μέλος Του"
+msgstr "Anëtar"
 
 #: ../gladeui/glade-property-class.c:80 ../plugins/gtk+/gtk+.xml.in.h:143
-msgid "Indicates an object is a member of a group of one or more target objects"
-msgstr ""
-"Προσδιορίζει ένα αντικείμενο σαν μέλος ενός συνόλου από ένα ή περισσότερα "
-"αντικείμενα-προορισμούς"
+#, fuzzy
+msgid ""
+"Indicates an object is a member of a group of one or more target objects"
+msgstr "është a nga a nga ose tjetër"
 
 #: ../gladeui/glade-property-class.c:82
+#, fuzzy
 msgid "Child Node Of"
-msgstr "Κόμβος Παιδί Του"
+msgstr "Bir"
 
 #: ../gladeui/glade-property-class.c:83 ../plugins/gtk+/gtk+.xml.in.h:140
+#, fuzzy
 msgid ""
 "Indicates an object is a cell in a treetable which is displayed because a "
 "cell in the same column is expanded and identifies that cell"
-msgstr ""
-"Δηλώνει ότι ένα αντικείμενο είναι κελί σε μια δομή δέντρου-πίνακα και "
-"εμφανίζεται επειδή ένα άλλο κελί στην ίδια στήλη επεκτείνεται "
-"προσδιορίζοντας εκείνο το κελί"
+msgstr "është a në a është a në është e shtrirë dhe"
 
 #: ../gladeui/glade-property-class.c:86 ../plugins/gtk+/gtk+.xml.in.h:108
+#, fuzzy
 msgid "Flows To"
-msgstr "Ρέει Προς"
+msgstr "Për"
 
 #: ../gladeui/glade-property-class.c:87 ../plugins/gtk+/gtk+.xml.in.h:150
+#, fuzzy
 msgid ""
 "Indicates that the object has content that flows logically to another "
 "AtkObject in a sequential way, (for instance text-flow)"
-msgstr ""
-"Δηλώνει ότι το περιεχόμενο του αντικειμένου αυτού καταλήγει λογικά σε κάποιο "
-"άλλο αντικείμενο Atk (AtkObject) με ακολουθιακό τρόπο, (όπως συμβαίνει με τη "
-"ροή κειμένου text-flow)"
+msgstr "përmbajtja në a për tekst"
 
 #: ../gladeui/glade-property-class.c:90 ../plugins/gtk+/gtk+.xml.in.h:107
+#, fuzzy
 msgid "Flows From"
-msgstr "Απορρέει Από"
+msgstr "Nga"
 
 #: ../gladeui/glade-property-class.c:91 ../plugins/gtk+/gtk+.xml.in.h:149
+#, fuzzy
 msgid ""
 "Indicates that the object has content that flows logically from another "
 "AtkObject in a sequential way, (for instance text-flow)"
-msgstr ""
-"Δηλώνει ότι το περιεχόμενο του αντικειμένου προέρχεται λογικά από κάποιο "
-"άλλο αντικείμενο Atk (AtkObject) με διαδοχικό τρόπο, (όπως συμβαίνει με τη "
-"ροή κειμένου text-flow)"
+msgstr "përmbajtja në a për tekst"
 
 #: ../gladeui/glade-property-class.c:94 ../plugins/gtk+/gtk+.xml.in.h:268
 msgid "Subwindow Of"
-msgstr "Υποπαράθυρο (Subwindow) Του"
+msgstr ""
 
 #: ../gladeui/glade-property-class.c:95
+#, fuzzy
 msgid ""
 "Indicates a subwindow attached to a component but otherwise has no "
 "connection in  the UI hierarchy to that component"
-msgstr ""
-"Δηλώνει τη σύνδεση του παραθύρου αυτού (subwindow) με ένα τμήμα του "
-"προγράμματος (component) ή αντίθετα δηλώνει ότι το παράθυρο θα είναι "
-"ανεξάρτητο από την ιεραρχία των γραφικών (UI hierarchy) για το συγκεκριμένο "
-"τμήμα του προγράμματος (component)"
+msgstr "a a jo në"
 
 #: ../gladeui/glade-property-class.c:98 ../plugins/gtk+/gtk+.xml.in.h:91
 msgid "Embeds"
-msgstr "Περιέχει"
+msgstr ""
 
 #: ../gladeui/glade-property-class.c:99 ../plugins/gtk+/gtk+.xml.in.h:151
+#, fuzzy
 msgid ""
 "Indicates that the object visually embeds another object's content, i.e. "
 "this object's content flows around another's content"
-msgstr ""
-"Δηλώνει ότι το αντικείμενο ενσωματώνει το περιεχόμενο κάποιου άλλου "
-"αντικειμένου, π.χ. το περιεχόμενο ενός αντικειμένου περικλείει το "
-"περιεχόμενο κάποιου άλλου"
+msgstr "përmbajtja e përmbajtja përmbajtja"
 
 #: ../gladeui/glade-property-class.c:102 ../plugins/gtk+/gtk+.xml.in.h:90
+#, fuzzy
 msgid "Embedded By"
-msgstr "Περιέχεται"
+msgstr "Trupëzuar"
 
 #: ../gladeui/glade-property-class.c:103 ../plugins/gtk+/gtk+.xml.in.h:155
+#, fuzzy
 msgid ""
 "Inverse of 'Embeds', indicates that this object's content is visualy "
 "embedded in another object"
-msgstr ""
-"Αντίστροφο του \"Περιέχει\", δηλώνει ότι το περιεχόμενο αυτού του "
-"αντικειμένου παριστάνεται ως ενσωματωμένο σε κάποιο άλλο αντικείμενο"
+msgstr "nga përmbajtja është në"
 
 #: ../gladeui/glade-property-class.c:106 ../plugins/gtk+/gtk+.xml.in.h:208
+#, fuzzy
 msgid "Popup For"
-msgstr "Αναδυόμενο Για (Popup For)"
+msgstr "Menu"
 
 #: ../gladeui/glade-property-class.c:107 ../plugins/gtk+/gtk+.xml.in.h:146
+#, fuzzy
 msgid "Indicates that an object is a popup for another object"
-msgstr "Δηλώνει ότι ένα αντικείμενο αναδύεται σε ένα άλλο αντικείμενο"
+msgstr "është a popup për"
 
 #: ../gladeui/glade-property-class.c:109 ../plugins/gtk+/gtk+.xml.in.h:204
+#, fuzzy
 msgid "Parent Window Of"
-msgstr "Γονικό Παράθυρο Του"
+msgstr "Prindi Dritarja"
 
 #: ../gladeui/glade-property-class.c:110 ../plugins/gtk+/gtk+.xml.in.h:145
+#, fuzzy
 msgid "Indicates that an object is a parent window of another object"
-msgstr "Δείχνει ότι ένα αντικείμενο είναι παράθυρο - γονέας σε ένα άλλο αντικείμενο"
+msgstr "është a prind dritare nga"
 
 #: ../gladeui/glade-property.c:572
+#, fuzzy
 msgid "Enabled"
-msgstr "Ενεργοποιημένο"
+msgstr "Tabela"
 
 #: ../gladeui/glade-property.c:573
+#, fuzzy
 msgid "If the property is optional, this is its enabled state"
-msgstr "Αν η ιδιότητα είναι προαιρετική, αυτή είναι η ενεργοποιημένη της κατάσταση"
+msgstr "është është aktivuar"
 
 #: ../gladeui/glade-property.c:579
+#, fuzzy
 msgid "Sensitive"
-msgstr "Sensitive"
+msgstr "I ndjeshëm:"
 
 #: ../gladeui/glade-property.c:580
+#, fuzzy
 msgid "This gives backends control to set property sensitivity"
-msgstr ""
-"Δίνει τον έλεγχο της ιδιότητας sensivity σε στάδια της τελικής επεξεργασίας "
-"(backends)"
+msgstr "kontrolli"
 
 #: ../gladeui/glade-property.c:586
+#, fuzzy
 msgid "Comment"
-msgstr "Σχόλιο"
+msgstr "Komente:"
 
 #: ../gladeui/glade-property.c:587
+#, fuzzy
 msgid "Comment for translators"
-msgstr "Σχόλιο για τους μεταφραστές"
+msgstr "Komenti për"
 
 #: ../gladeui/glade-property.c:593
+#, fuzzy
 msgid "Translatable"
-msgstr "Μεταφράσιμο"
+msgstr "Përkthyes:"
 
 #: ../gladeui/glade-property.c:594
+#, fuzzy
 msgid "Whether this property is translatable or not"
-msgstr "Αν αυτή η ιδιότητα μπορεί να μεταφραστεί ή όχι"
+msgstr "është ose nuk"
 
 #: ../gladeui/glade-property.c:600
+#, fuzzy
 msgid "Has Context"
-msgstr "Έχει Περιεχόμενο"
+msgstr "Konteksti"
 
 #: ../gladeui/glade-property.c:601
+#, fuzzy
 msgid "Whether or not the translatable string has a context prefix"
-msgstr ""
-"Αν η συμβολοσειρά που θα μεταφραστεί έχει ένα πρόθεμα με βάση το περιβάλλον "
-"της (context prefix)"
+msgstr "Ti File"
 
 #: ../gladeui/glade-signal-editor.c:57
+#, fuzzy
 msgid "<Type the signal's handler here>"
-msgstr "<Γράψτε εδώ το χειριστή σήματος (signal handler)>"
+msgstr "shto a për"
 
 #: ../gladeui/glade-signal-editor.c:58
 msgid "<Type the object's name here>"
-msgstr "<Γράψτε εδώ το όνομα του αντικειμένου>"
+msgstr ""
 
 #: ../gladeui/glade-signal-editor.c:704
 msgid "Handler"
-msgstr "Χειριστής (Handler)"
+msgstr ""
 
 #: ../gladeui/glade-signal-editor.c:726
+#, fuzzy
 msgid "User data"
-msgstr "Δεδομένα Χρήστη"
+msgstr "Përdoruesi"
 
 #: ../gladeui/glade-signal-editor.c:740
+#, fuzzy
 msgid "Lookup"
-msgstr "Αναζήτηση"
+msgstr "Mbikqyr"
 
 #: ../gladeui/glade-signal-editor.c:751
 msgid "After"
-msgstr "Μετά (After)"
+msgstr ""
 
 #: ../gladeui/glade-utils.c:169 ../gladeui/glade-utils.c:200
-#, c-format
+#, fuzzy, c-format
 msgid "We could not find the symbol \"%s\""
-msgstr "Δεν είναι δυνατή η εύρεση του συμβόλου \"%s\""
+msgstr "Më nuk gjej"
 
 #: ../gladeui/glade-utils.c:176
-#, c-format
+#, fuzzy, c-format
 msgid "Could not get the type from \"%s\""
-msgstr "Δεν είναι δυνατή η λήψη του κατάλληλου τύπου από το \"%s\""
+msgstr "nuk lloji"
 
 #: ../gladeui/glade-utils.c:541
+#, fuzzy
 msgid "All Files"
-msgstr "Όλα τα Αρχεία"
+msgstr "Zgjidh file"
 
 #: ../gladeui/glade-utils.c:546
+#, fuzzy
 msgid "Glade Files"
-msgstr "Glade Αρχεία"
+msgstr "Ruaj File"
 
 #: ../gladeui/glade-utils.c:1294
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "%s exists.\n"
 "Do you want to replace it?"
-msgstr ""
-"Το %s υπάρχει ήδη.\n"
-"Θέλετε να αντικατασταθεί;"
+msgstr "ekziston?"
 
 #: ../gladeui/glade-utils.c:1322
-#, c-format
+#, fuzzy, c-format
 msgid "Error writing to %s: %s"
-msgstr "Λάθος κατά την εγγραφή στο %s: %s"
+msgstr ""
+"Gabim\n"
+" j"
 
 #: ../gladeui/glade-utils.c:1336
-#, c-format
+#, fuzzy, c-format
 msgid "Error reading %s: %s"
-msgstr "Λάθος κατά την ανάγνωση από το %s: %s"
+msgstr "Gabim"
 
 #: ../gladeui/glade-utils.c:1351
-#, c-format
+#, fuzzy, c-format
 msgid "Error shutting down I/O channel %s: %s"
-msgstr "Λάθος κατά το κλείσιμο του καναλιού I/O %s: %s"
+msgstr "Gabim poshtë I O"
 
 #: ../gladeui/glade-utils.c:1361
-#, c-format
+#, fuzzy, c-format
 msgid "Failed to open %s for writing: %s"
-msgstr "Αδυναμία ανοίγματος του %s για εγγραφή: %s"
+msgstr "Dështoi hap për"
 
 #: ../gladeui/glade-utils.c:1372
-#, c-format
+#, fuzzy, c-format
 msgid "Error shutting down io channel %s: %s"
-msgstr "Λάθος κατά το κλείσιμο του καναλιού I/O %s: %s"
+msgstr "Gabim poshtë"
 
 #: ../gladeui/glade-utils.c:1381
-#, c-format
+#, fuzzy, c-format
 msgid "Failed to open %s for reading: %s"
-msgstr "Αδυναμία ανοίγματος %s για ανάγνωση: %s"
+msgstr "Dështoi hap për"
 
 #: ../gladeui/glade-utils.c:1439
-#, c-format
+#, fuzzy, c-format
 msgid "Unable to open the module %s (%s)."
-msgstr "Αδυναμία να ανοιχθεί το στοιχείο %s (%s)"
+msgstr "hap moduli."
 
 #: ../gladeui/glade-widget.c:945
 msgid "The name of the widget"
-msgstr "Το όνομα του γραφικού συστατικού"
+msgstr "Emri i widget"
 
 #: ../gladeui/glade-widget.c:952
 msgid "Internal name"
-msgstr "Εσωτερικό όνομα"
+msgstr ""
 
 #: ../gladeui/glade-widget.c:953
+#, fuzzy
 msgid "The internal name of the widget"
-msgstr "Το εσωτερικό όνομα ενός γραφικού συστατικού"
+msgstr "Emri i widget"
 
 #: ../gladeui/glade-widget.c:959
 msgid "Anarchist"
-msgstr "Anarchist"
+msgstr ""
 
 #: ../gladeui/glade-widget.c:960
-msgid "Whether this composite child is an ancestral child or an anarchist child"
-msgstr "Αν αυτό το σύνθετο παιδί έχει ένα άλλο παιδί για πρόγονο ή ένα "
+#, fuzzy
+msgid ""
+"Whether this composite child is an ancestral child or an anarchist child"
+msgstr "bir është bir ose bir"
 
 #: ../gladeui/glade-widget.c:967
+#, fuzzy
 msgid "Object"
-msgstr "Αντικείμενο"
+msgstr "Objekti"
 
 #: ../gladeui/glade-widget.c:968
+#, fuzzy
 msgid "The object associated"
-msgstr "Το αντίστοιχο αντικείμενο"
+msgstr "E re."
 
 #: ../gladeui/glade-widget.c:975
 msgid "Adaptor"
-msgstr "Προσαρμογέας"
+msgstr ""
 
 #: ../gladeui/glade-widget.c:976
+#, fuzzy
 msgid "The class adaptor for the associated widget"
-msgstr "Η κλάση προσαρμογέα για το αντίστοιχο γραφικό  συστατικό"
+msgstr "nga"
 
 #: ../gladeui/glade-widget.c:983
+#, fuzzy
 msgid "Project"
-msgstr "Πρόγραμμα"
+msgstr "Projekti"
 
 #: ../gladeui/glade-widget.c:984
+#, fuzzy
 msgid "The glade project that this widget belongs to"
-msgstr "Το έργο glade στο οποίο ανήκει το γραφικό συστατικό"
+msgstr "X"
 
 #: ../gladeui/glade-widget.c:993
+#, fuzzy
 msgid "A list of GladeProperties"
-msgstr "Μια λίστα των Glade Ιδιοτήτων"
+msgstr "A lista nga"
 
 #: ../gladeui/glade-widget.c:999 ../plugins/gtk+/gtk+.xml.in.h:203
+#, fuzzy
 msgid "Parent"
-msgstr "Γονέας"
+msgstr "Prindi"
 
 #: ../gladeui/glade-widget.c:1000
+#, fuzzy
 msgid "A pointer to the parenting GladeWidget"
-msgstr "Ένας δείκτης στο Glade Γραφικό Συστατικό - γονέα"
+msgstr "A"
 
 #: ../gladeui/glade-widget.c:1007
+#, fuzzy
 msgid "Internal Name"
-msgstr "Εσωτερικό Όνομα"
+msgstr "Emri"
 
 #: ../gladeui/glade-widget.c:1008
+#, fuzzy
 msgid "A generic name prefix for internal widgets"
-msgstr "Ένα γενικό πρόθεμα για τα ονόματα των γραφικών συστατικών"
+msgstr "A për"
 
 #: ../gladeui/glade-widget.c:1013
+#, fuzzy
 msgid "Template"
-msgstr "Πρότυπο (Template)"
+msgstr "Shabllon"
 
 #: ../gladeui/glade-widget.c:1014
+#, fuzzy
 msgid "A GladeWidget template to base a new widget on"
-msgstr ""
-"Ένα πρότυπο γραφικών συστατικών του Glade για να φτιάξετε νέα γραφικά "
-"συστατικά"
+msgstr "A a i ri në"
 
 #: ../gladeui/glade-widget.c:1020 ../plugins/gtk+/gtk+.xml.in.h:152
 msgid "Info"
-msgstr "Πληροφορίες"
+msgstr ""
 
 #: ../gladeui/glade-widget.c:1021
+#, fuzzy
 msgid "A GladeWidgetInfo struct to base a new widget on"
-msgstr ""
-"Μια δομή πληροφοριών για τα γραφικά συστατικά Glade στην οποία μπορείτε να "
-"βασίσετε νέα γραφικά συστατικά"
+msgstr "A a i ri në"
 
 #: ../gladeui/glade-widget.c:1026
+#, fuzzy
 msgid "Reason"
-msgstr "Αιτία"
+msgstr "Release"
 
 #: ../gladeui/glade-widget.c:1027
+#, fuzzy
 msgid "A GladeCreateReason for this creation"
-msgstr "Ο σκοπός δημιουργίας αυτού του έργου με το Glade"
+msgstr "A për"
 
 #: ../gladeui/glade-widget.c:1035
+#, fuzzy
 msgid "Toplevel Width"
-msgstr "Πλάτος υψηλότερου επιπέδου"
+msgstr "Gjerësia"
 
 #: ../gladeui/glade-widget.c:1036
+#, fuzzy
 msgid "The width of the widget when toplevel in the GladeDesignLayout"
-msgstr "Το πλάτος του γραφικού συστατικού όταν έχει το υψηλότερο επίπεδο στο GladeDesignLayout"
+msgstr "X nga në"
 
 #: ../gladeui/glade-widget.c:1045
+#, fuzzy
 msgid "Toplevel Height"
-msgstr "Ύψος υψηλότερου επιπέδου"
+msgstr "Shkallëzuar:"
 
 #: ../gladeui/glade-widget.c:1046
+#, fuzzy
 msgid "The height of the widget when toplevel in the GladeDesignLayout"
-msgstr "Το ύψος του γραφικού συστατικού όταν έχει το υψηλότερο επίπεδο στο GladeDesignLayout"
+msgstr "X nga në"
 
 #: ../gladeui/glade-widget-adaptor.c:184 ../gladeui/glade-widget-adaptor.c:224
-#, c-format
+#, fuzzy, c-format
 msgid "Unable to load icon for %s (%s)"
-msgstr "Αδυναμία φόρτωσης εικονιδίου για το %s (%s)"
+msgstr "ikonë për"
 
 #: ../gladeui/glade-widget-adaptor.c:199 ../gladeui/glade-widget-adaptor.c:239
-#, c-format
+#, fuzzy, c-format
 msgid "Unable to load stock icon (%s)"
-msgstr "Αδυναμία φόρτωσης έτοιμου (stock) εικονιδίου (%s)"
+msgstr "ikonë"
 
 #: ../gladeui/glade-widget-adaptor.c:333
-#, c-format
+#, fuzzy, c-format
 msgid "A derived adaptor (%s) of %s already exist!"
-msgstr "Ένας προσαρμογέας (%s) έχει ήδη προσαρμοστεί από το %s!"
+msgstr "A nga!"
 
 #: ../gladeui/glade-widget-adaptor.c:917
+#, fuzzy
 msgid "Name of the class"
-msgstr "Όνομα της κλάσης"
+msgstr "Numri nga elementët:"
 
 #: ../gladeui/glade-widget-adaptor.c:925
+#, fuzzy
 msgid "GType of the class"
-msgstr "Τύπος GType της κλάσης"
+msgstr "lloji nga"
 
 #: ../gladeui/glade-widget-adaptor.c:932 ../plugins/gnome/gnome.xml.in.h:64
+#, fuzzy
 msgid "Title"
-msgstr "Τίτλος"
+msgstr "Titulli:"
 
 #: ../gladeui/glade-widget-adaptor.c:933
+#, fuzzy
 msgid "Translated title for the class used in the glade UI"
-msgstr "Μεταφρασμένος τίτλος για την κλάση που θα χρησιμοποιηθεί στο UI του glade"
+msgstr "Përkthyer titulli për në"
 
 #: ../gladeui/glade-widget-adaptor.c:940
+#, fuzzy
 msgid "Generic Name"
-msgstr "Γενικό Όνομα"
+msgstr "Të përgjithshme"
 
 #: ../gladeui/glade-widget-adaptor.c:941
+#, fuzzy
 msgid "Used to generate names of new widgets"
-msgstr "Χρησιμοποιείται για να παράγει ονόματα από νέα γραφικά συστατικά"
+msgstr "Emri i widget"
 
 #: ../gladeui/glade-widget-adaptor.c:948
+#, fuzzy
 msgid "Catalog"
-msgstr "Κατάλογος"
+msgstr "Dialogu"
 
 #: ../gladeui/glade-widget-adaptor.c:949
+#, fuzzy
 msgid "The name of the widget catalog this class was declared by"
-msgstr ""
-"Το όνομα του νέου καταλόγου γραφικών συστατικών αυτή η κλάση δημιουργήθηκε "
-"από"
+msgstr "emri nga"
 
 #: ../gladeui/glade-widget-adaptor.c:956
+#, fuzzy
 msgid "Book"
-msgstr "Σενάριο (Book)"
+msgstr "Poshtë"
 
 #: ../gladeui/glade-widget-adaptor.c:957
+#, fuzzy
 msgid "DevHelp search namespace for this widget class"
-msgstr "Αναζήτηση DevHelp για το namespace για αυτή την κλάση γραφικών συστατικών"
+msgstr "kërko namespace për"
 
 #: ../gladeui/glade-widget-adaptor.c:964
+#, fuzzy
 msgid "Special Child Type"
-msgstr "Ειδικός Τύπος Παιδιού (Child Type)"
+msgstr "Speciale Bir Lloji"
 
 #: ../gladeui/glade-widget-adaptor.c:965
+#, fuzzy
 msgid ""
 "Holds the name of the packing property to depict special children for this "
 "container class"
-msgstr ""
-"Κρατά το όνομα της ιδιότητας packing για να περιγράφονται ξεχωριστά \"παιδιά"
-"\" (children) της κλάσης του πλαισίου (container)"
+msgstr "nga për"
 
 #: ../gladeui/glade-widget-adaptor.c:973
+#, fuzzy
 msgid "Large Icon"
-msgstr "Μεγάλο Εικονίδιο"
+msgstr "Ikona:"
 
 #: ../gladeui/glade-widget-adaptor.c:974
+#, fuzzy
 msgid "The 22x22 icon for this widget class"
-msgstr "Το 22x22 εικονίδιο για την κλάση αυτού του γραφικού συστατικού"
+msgstr "ikonë për dritare"
 
 #: ../gladeui/glade-widget-adaptor.c:981
+#, fuzzy
 msgid "Small Icon"
-msgstr "Μικρό Εικονίδιο"
+msgstr "I vogël Ikona"
 
 #: ../gladeui/glade-widget-adaptor.c:982
+#, fuzzy
 msgid "The 16x16 icon for this widget class"
-msgstr "Το 16x16 εικονίδιο για αυτή την κατηγορία γραφικών συστατικών (widget class)"
+msgstr "ikonë për dritare"
 
 #: ../gladeui/glade-widget-adaptor.c:989 ../plugins/gtk+/gtk+.xml.in.h:68
 msgid "Cursor"
-msgstr "Δείκτης Ποντικιού"
+msgstr ""
 
 #: ../gladeui/glade-widget-adaptor.c:990
+#, fuzzy
 msgid "A cursor for inserting widgets in the UI"
-msgstr "Ένας δρομέας για την εισαγωγή γραφικών συστατικών στη διασύνδεση (UI)"
+msgstr "A për në"
 
 #: ../gladeui/glade-project-view.c:646
 #, c-format
 msgid "(internal %s)"
-msgstr "(εσωτερικό %s)"
+msgstr ""
 
 #: ../gladeui/glade-project-view.c:650
-#, c-format
+#, fuzzy, c-format
 msgid "(%s child)"
-msgstr "(παιδί του: %s)"
+msgstr "bir"
 
 #: ../gladeui/glade-custom.c:217
+#, fuzzy
 msgid "Creation Function"
-msgstr "Συνάρτηση Κατασκευής"
+msgstr "Funksioni:"
 
 #: ../gladeui/glade-custom.c:218
+#, fuzzy
 msgid "The function which creates this widget"
-msgstr "Η συνάρτηση που δημιουργεί αυτό το γραφικό συστατικό"
+msgstr "gërmë për çdo tekst në"
 
 #: ../gladeui/glade-custom.c:224
+#, fuzzy
 msgid "String 1"
-msgstr "Συμβολοσειρά 1"
+msgstr "String2:"
 
 #: ../gladeui/glade-custom.c:225
+#, fuzzy
 msgid "The first string argument to pass to the function"
-msgstr "Η πρώτη συμβολοσειρά που θα περάσει ως όρισμα στη συνάρτηση"
+msgstr "i pari"
 
 #: ../gladeui/glade-custom.c:231
+#, fuzzy
 msgid "String 2"
-msgstr "Συμβολοσειρά 2"
+msgstr "String2:"
 
 #: ../gladeui/glade-custom.c:232
+#, fuzzy
 msgid "The second string argument to pass to the function"
-msgstr "Η δεύτερη συμβολοσειρά που θα περάσει ως όρισμα στη συνάρτηση"
+msgstr "sekondë"
 
 #: ../gladeui/glade-custom.c:238
+#, fuzzy
 msgid "Integer 1"
-msgstr "Ακέραιος 1"
+msgstr "Integrues 1"
 
 #: ../gladeui/glade-custom.c:239
+#, fuzzy
 msgid "The first integer argument to pass to the function"
-msgstr "Το πρώτο ακέραιο όρισμα που θα δεχτεί η συνάρτηση"
+msgstr "i pari"
 
 #: ../gladeui/glade-custom.c:245
+#, fuzzy
 msgid "Integer 2"
-msgstr "Ακέραιος 2"
+msgstr "Integrues 2"
 
 #: ../gladeui/glade-custom.c:246
+#, fuzzy
 msgid "The second integer argument to pass to the function"
-msgstr "Το δεύτερο ακέραιο όρισμα που θα δεχτεί η συνάρτηση"
+msgstr "sekondë"
 
 #: ../plugins/gtk+/glade-gtk.c:169
 msgid "GnomeUIInfo"
-msgstr "Πληροφορίες για το GnomeUI"
+msgstr ""
 
 #: ../plugins/gtk+/glade-gtk.c:170
+#, fuzzy
 msgid "Choose the GnomeUIInfo stock item"
-msgstr "Επιλογή έτοιμου (stock) στοιχείου για το GnomeUI"
+msgstr "element"
 
 #: ../plugins/gtk+/glade-gtk.c:186
+#, fuzzy
 msgid "Filename"
-msgstr "Όνομα Αρχείου"
+msgstr "Riemërto"
 
 #: ../plugins/gtk+/glade-gtk.c:188
+#, fuzzy
 msgid "Icon Theme"
-msgstr "Θέμα Εικονιδίων"
+msgstr "Madhësia:"
 
 #: ../plugins/gtk+/glade-gtk.c:208 ../plugins/gtk+/gtk+.xml.in.h:59
+#, fuzzy
 msgid "Container"
-msgstr "Πλαίσιο (Container)"
+msgstr "Në qendër"
 
 #: ../plugins/gtk+/glade-gtk.c:218 ../plugins/gtk+/glade-gtk.c:227
 msgid "Method"
-msgstr "Μέθοδος"
+msgstr ""
 
 #: ../plugins/gtk+/glade-gtk.c:219
+#, fuzzy
 msgid "The method to use to edit this image"
-msgstr "Η μέθοδος που θα χρησιμοποιηθεί για την επεξεργασία αυτής της εικόνας"
+msgstr "gërmë për çdo tekst në"
 
 #: ../plugins/gtk+/glade-gtk.c:228
+#, fuzzy
 msgid "The method to use to edit this button"
-msgstr "Η μέθοδος που θα χρησιμοποιηθεί για την επεξεργασία αυτού του κουμπιού"
+msgstr "tekst në"
 
 #: ../plugins/gtk+/glade-gtk.c:585
-#, c-format
+#, fuzzy, c-format
 msgid "Ordering children of %s"
-msgstr "Διάταξη των παιδιών του %s"
+msgstr "nga"
 
 #: ../plugins/gtk+/glade-gtk.c:3264 ../plugins/gtk+/glade-gtk.c:3268
 #: ../plugins/gtk+/glade-gtk.c:3443 ../plugins/gtk+/glade-gtk.c:3447
+#, fuzzy
 msgid "This only applies with label type buttons"
-msgstr "Αυτό εφαρμόζεται μόνο στα κουμπιά που λειτουργούν ως ετικέτες"
+msgstr "me etiketa lloji"
 
 #: ../plugins/gtk+/glade-gtk.c:3279 ../plugins/gtk+/glade-gtk.c:3283
 #: ../plugins/gtk+/glade-gtk.c:3435 ../plugins/gtk+/glade-gtk.c:3439
+#, fuzzy
 msgid "This only applies with stock type buttons"
-msgstr "Αυτό εφαρμόζεται μόνο στα έτοιμα κουμπιά (stock type)"
+msgstr "me lloji"
 
 #: ../plugins/gtk+/glade-gtk.c:3543 ../plugins/gtk+/glade-gtk.c:3565
+#, fuzzy
 msgid "You must remove any children before you can set the type"
-msgstr "Πρέπει να αφαιρέσετε τυχόν παιδιά προτού επιλέξετε αυτό τον τύπο"
+msgstr "Ti hiq përpara lloji"
 
 #: ../plugins/gtk+/glade-gtk.c:3589 ../plugins/gtk+/glade-gtk.c:4954
+#, fuzzy
 msgid "This only applies with file type images"
-msgstr "Αυτό εφαρμόζεται μόνο σε αρχείου τύπου εικόνες (file type images)"
+msgstr "me file lloji"
 
 #: ../plugins/gtk+/glade-gtk.c:3597 ../plugins/gtk+/glade-gtk.c:4958
+#, fuzzy
 msgid "This only applies to Icon Theme type images"
-msgstr "Αυτό εφαρμόζεται μόνο σε εικόνες ίδιου τύπου με το Θέμα Εικονιδίων"
+msgstr "Ikona Tema lloji"
 
 #: ../plugins/gtk+/glade-gtk.c:3606 ../plugins/gtk+/glade-gtk.c:4956
+#, fuzzy
 msgid "This only applies with stock type images"
-msgstr "Αυτό εφαρμόζεται μόνο σε εικόνες έτοιμου τύπου (stock type)"
+msgstr "me lloji"
 
 #: ../plugins/gtk+/glade-gtk.c:3618
+#, fuzzy
 msgid ""
 "Pixel Size takes precedence over Icon Size; if you want to use Icon Size, "
 "set Pixel size to -1"
-msgstr ""
-"Το Μέγεθος σε Εικονοστοιχεία (Pixel Size) προηγείται σε σχέση με το Μέγεθος "
-"Εικονιδίου, για να χρησιμοποιήσετε το Μέγεθος Εικονιδίου, θέστε -1 στο Pixel "
-"Size"
+msgstr "Pixel Madhësia Ikona Madhësia Ikona Madhësia Pixel 1"
 
 #: ../plugins/gtk+/glade-gtk.c:3644
+#, fuzzy
 msgid "Pixel Size takes precedence over Icon size"
-msgstr ""
-"Το Μέγεθος σε Εικονοστοιχεία (Pixel Size) προηγείται σε σχέση με το Μέγεθος "
-"Εικονιδίου"
+msgstr "Pixel Madhësia Ikona"
 
 #: ../plugins/gtk+/glade-gtk.c:3935 ../plugins/gtk+/glade-gtk.c:4845
+#, fuzzy
 msgid "<separator>"
-msgstr "<διαχωριστής>"
+msgstr "veçues"
 
 #: ../plugins/gtk+/glade-gtk.c:4109 ../plugins/gtk+/gtk+.xml.in.h:185
 msgid "Normal"
-msgstr "Κανονικό"
+msgstr "Normal"
 
 #: ../plugins/gtk+/glade-gtk.c:4110 ../plugins/gtk+/gtk+.xml.in.h:132
 msgid "Image"
-msgstr "Εικόνα"
+msgstr "Figura"
 
 #: ../plugins/gtk+/glade-gtk.c:4111
 msgid "Check"
-msgstr "Τικ (Check)"
+msgstr "Kontrolli"
 
 #: ../plugins/gtk+/glade-gtk.c:4112 ../plugins/gtk+/glade-gtk.c:4904
 msgid "Radio"
-msgstr "Κουκκίδα (Radio)"
+msgstr "Radio"
 
 #: ../plugins/gtk+/glade-gtk.c:4113 ../plugins/gtk+/glade-gtk.c:4907
+#, fuzzy
 msgid "Separator"
-msgstr "Διαχωριστής (Separator)"
+msgstr "veçues"
 
 #: ../plugins/gtk+/glade-gtk.c:4117
+#, fuzzy
 msgid "Add Item"
-msgstr "Προσθήκη Στοιχείου"
+msgstr "Shto Zë (Item)"
 
 #: ../plugins/gtk+/glade-gtk.c:4118
+#, fuzzy
 msgid "Add Child Item"
-msgstr "Προσθήκη Περιεχόμενου Στοιχείου (Παιδιού)"
+msgstr "Shto Bir"
 
 #: ../plugins/gtk+/glade-gtk.c:4119 ../plugins/gtk+/glade-gtk.c:4916
+#, fuzzy
 msgid "Add Separator"
-msgstr "Προσθήκη Διαχωριστή"
+msgstr "Shto Ndarës"
 
 #: ../plugins/gtk+/glade-gtk.c:4132
+#, fuzzy
 msgid ""
 "<big><b>Tips:</b></big>\n"
 "  * Right click over the treeview to add items.\n"
@@ -1960,1627 +2041,1941 @@ msgid ""
 "  * Drag &amp; Drop to reorder.\n"
 "  * Type column is editable."
 msgstr ""
-"<big><b>Συμβουλές:</b></big>\n"
-"  * Δεξί κλικ πάνω στην προβολή δέντρου για να προσθέσετε στοιχεία.\n"
-"  * Πιέστε Delete για να αφαιρέσετε το επιλεγμένο στοιχείο.\n"
-"  * Drag &amp; Drop για αναδιάταξη των στοιχείων.\n"
-"  * Μπορείτε να τροποποιήσετε το περιεχόμενο της στήλης."
+"<big><b></b></big>\n"
+" Djathtas kliko shto elementët\n"
+" Shtypi Elemino hiq zgjedhur element\n"
+"&amp; Hidh\n"
+" Lloji është."
 
 #: ../plugins/gtk+/glade-gtk.c:4364
+#, fuzzy
 msgid "Print S_etup"
-msgstr "Εγκατάσταση Ε_κτυπωτή"
+msgstr "Printo Rr_egullimi"
 
 #: ../plugins/gtk+/glade-gtk.c:4368
+#, fuzzy
 msgid "Find Ne_xt"
-msgstr "Εύρεση Επ_όμενου"
+msgstr "Gjej në va_zhdim"
 
 #: ../plugins/gtk+/glade-gtk.c:4372
+#, fuzzy
 msgid "_Undo Move"
-msgstr "_Αναίρεση Κίνησης"
+msgstr "_Zhbëj Lëvizjen"
 
 #: ../plugins/gtk+/glade-gtk.c:4376
+#, fuzzy
 msgid "_Redo Move"
-msgstr "_Επανάληψη Κίνησης"
+msgstr "_Ribëj Lëvizjen"
 
 #: ../plugins/gtk+/glade-gtk.c:4379
+#, fuzzy
 msgid "Select _All"
-msgstr "Επιλογή _Όλων"
+msgstr "Zgjidh file"
 
 #: ../plugins/gtk+/glade-gtk.c:4382
+#, fuzzy
 msgid "_New Game"
-msgstr "_Νέο Παιχνίδι"
+msgstr "E re tabelë"
 
 #: ../plugins/gtk+/glade-gtk.c:4385
+#, fuzzy
 msgid "_Pause game"
-msgstr "_Παύση παιχνιδιού"
+msgstr "_Pezullo"
 
 #: ../plugins/gtk+/glade-gtk.c:4388
+#, fuzzy
 msgid "_Restart Game"
-msgstr "_Επανεκκίνηση Παιχνιδιού"
+msgstr "_Rifillo lojën"
 
 #: ../plugins/gtk+/glade-gtk.c:4391
+#, fuzzy
 msgid "_Hint"
-msgstr "_Υπόδειξη"
+msgstr "_Ndrysho"
 
 #: ../plugins/gtk+/glade-gtk.c:4394
+#, fuzzy
 msgid "_Scores..."
-msgstr "_Αποτελέσματα..."
+msgstr "_Pikë..."
 
 #: ../plugins/gtk+/glade-gtk.c:4397
+#, fuzzy
 msgid "_End Game"
-msgstr "_Τέλος Παιχνιδιού"
+msgstr "_Mbaro Lojën"
 
 #: ../plugins/gtk+/glade-gtk.c:4400
+#, fuzzy
 msgid "Create New _Window"
-msgstr "Δημιουργία Νέου _Παραθύρου"
+msgstr "Krijo a i ri"
 
 #: ../plugins/gtk+/glade-gtk.c:4403
+#, fuzzy
 msgid "_Close This Window"
-msgstr "_Κλείσιμο Παραθύρου"
+msgstr "_Mbylle këtë dritare"
 
 #: ../plugins/gtk+/glade-gtk.c:4415
+#, fuzzy
 msgid "_Settings"
-msgstr "_Ρυθμίσεις"
+msgstr "_Rregullime"
 
 #: ../plugins/gtk+/glade-gtk.c:4418
+#, fuzzy
 msgid "Fi_les"
-msgstr "Αρ_χεία"
+msgstr "_File"
 
 #: ../plugins/gtk+/glade-gtk.c:4421
+#, fuzzy
 msgid "_Windows"
-msgstr "_Παράθυρα"
+msgstr "Dritarja"
 
 #: ../plugins/gtk+/glade-gtk.c:4427
+#, fuzzy
 msgid "_Game"
-msgstr "_Παιχνίδι"
+msgstr "Emri"
 
 #: ../plugins/gtk+/glade-gtk.c:4523
+#, fuzzy
 msgid "This does not apply with stock items"
-msgstr "Αυτό δεν μπορεί να εφαρμοστεί σε έτοιμα (stock) στοιχεία"
+msgstr "nuk apliko me elementët"
 
 #: ../plugins/gtk+/glade-gtk.c:4733
+#, fuzzy
 msgid "Menu Bar Editor"
-msgstr "Επεξεργαστής Γραμμής Μενού"
+msgstr "Editori i Menuve"
 
 #: ../plugins/gtk+/glade-gtk.c:4740
 msgid "Menu Editor"
-msgstr "Επεξεργαστής Μενού"
+msgstr "Editori i Menuve"
 
 #: ../plugins/gtk+/glade-gtk.c:4854
 msgid "<custom>"
-msgstr "<προσαρμοσμένο>"
+msgstr ""
 
 #: ../plugins/gtk+/glade-gtk.c:4902 ../plugins/gtk+/gtk+.xml.in.h:33
 msgid "Button"
-msgstr "Κουμπί"
+msgstr "Butoni"
 
 #: ../plugins/gtk+/glade-gtk.c:4903
+#, fuzzy
 msgid "Toggle"
-msgstr "Toggle"
+msgstr "Kavo Butoni"
 
 #: ../plugins/gtk+/glade-gtk.c:4905 ../plugins/gtk+/gtk+.xml.in.h:173
+#, fuzzy
 msgid "Menu"
-msgstr "Μενού"
+msgstr "Paneli i Menusë"
 
 #: ../plugins/gtk+/glade-gtk.c:4906
+#, fuzzy
 msgid "Item"
-msgstr "Στοιχείο"
+msgstr "Elementë:"
 
 #: ../plugins/gtk+/glade-gtk.c:4911
+#, fuzzy
 msgid "Add Tool Button"
-msgstr "Προσθήκη Κουμπιού Εργαλείων (Tool Button)"
+msgstr "Paneli i instrumentëve Butoni"
 
 #: ../plugins/gtk+/glade-gtk.c:4912
+#, fuzzy
 msgid "Add Toggle Button"
-msgstr "Προσθήκη Κουμπιού Toggle Button"
+msgstr "Kavo Butoni"
 
 #: ../plugins/gtk+/glade-gtk.c:4913
+#, fuzzy
 msgid "Add Radio Button"
-msgstr "Προσθήκη Κουμπιού Radio Button"
+msgstr "Radio Butoni"
 
 #: ../plugins/gtk+/glade-gtk.c:4914
+#, fuzzy
 msgid "Add Menu Button"
-msgstr "Προσθήκη Κουμπιού στο Μενού"
+msgstr "Shto Ndodhi Kuti"
 
 #: ../plugins/gtk+/glade-gtk.c:4915
+#, fuzzy
 msgid "Add Tool Item"
-msgstr "Προσθήκη Στοιχείου Εργαλείου"
+msgstr "Paneli i instrumentëve"
 
 #: ../plugins/gtk+/glade-gtk.c:4924
+#, fuzzy
 msgid "Tool Bar Editor"
-msgstr "Επεξεργαστής Γραμμής Εργαλείων"
+msgstr "Tabela Editori "
 
 #: ../plugins/gtk+/glade-gtk.c:5677
+#, fuzzy
 msgid "Introduction page"
-msgstr "Εισαγωγική Σελίδα"
+msgstr "faqe"
 
 #: ../plugins/gtk+/glade-gtk.c:5681
+#, fuzzy
 msgid "Content page"
-msgstr "Σελίδα Περιεχομένου"
+msgstr "Përmbajtja faqe"
 
 #: ../plugins/gtk+/glade-gtk.c:5685
+#, fuzzy
 msgid "Confirm page"
-msgstr "Επιβεβαίωση Σελίδας"
+msgstr "Konfirmo faqe"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:2
+#, fuzzy
 msgid "A stock item, select None to choose a custom image and label"
-msgstr ""
-"Έτοιμο (stock) στοιχείο, επιλέξτε Κανένα (None) για να διαλέξετε δική σας "
-"εικόνα κι ετικέτα"
+msgstr "A element zgjidh Asnjë a e personalizuar figurë dhe etiketa"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:3
+#, fuzzy
 msgid "A tooltip text for this widget"
-msgstr "Ένα αναδυόμενο βοηθητικό κείμενο για αυτό το γραφικό συστατικό"
+msgstr "A tekst për"
 
 #. NOT AVAILABLES ON WIN32
 #. <glade-widget-class name="GtkPlug" generic-name="plug" _title="Plug"/>
 #. <glade-widget-class name="GtkSocket" generic-name="socket" _title="Socket"/>
 #.
 #: ../plugins/gtk+/gtk+.xml.in.h:8
+#, fuzzy
 msgid "About Dialog"
-msgstr "Διάλογος Πληροφοριών (About)"
+msgstr "Informacione Dialogu"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:9
+#, fuzzy
 msgid "Accel Label"
-msgstr "Γρήγορη Ετικέτα"
+msgstr "Menu Etiketa:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:12
+#, fuzzy
 msgid "Accessible Description"
-msgstr "Περιγραφή Πρόσβασης"
+msgstr "Përshkrimi"
 
 #. Atk name and description properties
 #: ../plugins/gtk+/gtk+.xml.in.h:14
+#, fuzzy
 msgid "Accessible Name"
-msgstr "Όνομα Πρόσβασης"
+msgstr "Emër i thjeshtuar"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:17
 msgid "Alignment"
-msgstr "Τακτοποίηση (Alignement)"
+msgstr "Drejtimi"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:18
+#, fuzzy
 msgid "All"
-msgstr "Όλα"
+msgstr "Alt"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:19
+#, fuzzy
 msgid "All Events"
-msgstr "Όλα τα γεγονότα (Events)"
+msgstr "Ndodhitë:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:20 ../plugins/gnome/gnome.xml.in.h:2
+#, fuzzy
 msgid "Always"
-msgstr "Πάντα"
+msgstr "Gjithmonë:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:21
+#, fuzzy
 msgid "Always Center"
-msgstr "Πάντα στο Κέντρο"
+msgstr "Në qendër"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:22
 msgid "Arrow"
-msgstr "Βέλος"
+msgstr "Shigjeta"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:23
+#, fuzzy
 msgid "Aspect Frame"
-msgstr "Aspect Frame"
+msgstr "Korniza"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:24
+#, fuzzy
 msgid "Assistant"
-msgstr "Βοηθός (assistant)"
+msgstr "Asistenti"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:25
+#, fuzzy
 msgid "Automatic"
-msgstr "Αυτόματο"
+msgstr "Automatike"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:26
+#, fuzzy
 msgid "Both"
-msgstr "Όλα"
+msgstr "Poshtë"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:27
+#, fuzzy
 msgid "Both Horizontal"
-msgstr "Όλα Οριζόντια"
+msgstr "Shfaq:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:28 ../plugins/gnome/bonobo.xml.in.h:1
 msgid "Bottom"
-msgstr "Κάτω"
+msgstr "Poshtë"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:29
+#, fuzzy
 msgid "Bottom Left"
-msgstr "Κάτω Αριστερά"
+msgstr "Poshtë"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:30
+#, fuzzy
 msgid "Bottom Right"
-msgstr "Κάτω δεξιά"
+msgstr "Poshtë"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:31
+#, fuzzy
 msgid "Bottom to Top"
-msgstr "Από κάτω προς τα πάνω"
+msgstr "Poshtë"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:32
+#, fuzzy
 msgid "Box"
-msgstr "Κουτί (Box)"
+msgstr "Kuti"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:34
+#, fuzzy
 msgid "Button 1 Motion"
-msgstr "Κουμπί 1 Κίνηση"
+msgstr "Butoni Lëvizja"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:35
+#, fuzzy
 msgid "Button 2 Motion"
-msgstr "Κουμπί 2 Κίνηση"
+msgstr "Butoni Lëvizja"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:36
+#, fuzzy
 msgid "Button 3 Motion"
-msgstr "Κουμπί 3 Κίνηση"
+msgstr "Butoni Lëvizja"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:37
+#, fuzzy
 msgid "Button Box"
-msgstr "Κουτί με κουμπιά (Button Box)"
+msgstr "Butoni"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:38
+#, fuzzy
 msgid "Button Motion"
-msgstr "Κίνηση Κουμπιού (Button Motion)"
+msgstr "Butoni"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:39
+#, fuzzy
 msgid "Button Press"
-msgstr "Πίεση Κουμπιού (Button Press)"
+msgstr "Butoni"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:40
+#, fuzzy
 msgid "Button Release"
-msgstr "Button Release"
+msgstr "Butoni:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:41
 msgid "Calendar"
-msgstr "Ημερολόγιο"
+msgstr "Kalendari"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:42
 msgid "Cancel"
-msgstr "Ακύρωση"
+msgstr "Anullo"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:43
+#, fuzzy
 msgid "Center"
-msgstr "Κέντρο"
+msgstr "Në qendër"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:44
+#, fuzzy
 msgid "Center on Parent"
-msgstr "Στο κέντρο του Γονέα"
+msgstr "Në qendër në Prindi"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:45
 msgid "Character"
-msgstr "Χαρακτήρας"
+msgstr "Simboli"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:46
+#, fuzzy
 msgid "Check Button"
-msgstr "Κουμπί Επιλογής με Τικ (Check Button)"
+msgstr "Kontrolli Butoni"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:47
+#, fuzzy
 msgid "Check Menu Item"
-msgstr "Check Στοιχείο Μενού"
+msgstr "Kontrolli Menu"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:50
 msgid "Close"
-msgstr "Κλείσιμο"
+msgstr "Mbyll"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:51
+#, fuzzy
 msgid "Color Button"
-msgstr "Κουμπί Χρωμάτων"
+msgstr "Paneli i instrumentëve Butoni"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:52
 msgid "Color Selection"
-msgstr "Επιλογή Χρωμάτων"
+msgstr "Zgjedhja e ngjyrës"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:53
+#, fuzzy
 msgid "Color Selection Dialog"
-msgstr "Διάλογος Επιλογής Χρωμάτων"
+msgstr "Ngjyra Zgjedhja Dialogu"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:54
+#, fuzzy
 msgid "Columned List"
-msgstr "Λίστα Στηλών"
+msgstr "Lista"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:55
+#, fuzzy
 msgid "Combo"
-msgstr "Combo"
+msgstr "Të përbashkët"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:56
+#, fuzzy
 msgid "Combo Box"
-msgstr "Κουτί Combo (Combo Box)"
+msgstr "Kuti"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:57
+#, fuzzy
 msgid "Combo Box Entry"
-msgstr "Εγγραφή σε Combo Box"
+msgstr "Kuti"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:58
+#, fuzzy
 msgid "Confirm"
-msgstr "Επιβεβαίωση"
+msgstr "Konfirmo"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:60
+#, fuzzy
 msgid "Containers"
-msgstr "Πλαίσια (Containers)"
+msgstr "Në qendër"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:61
+#, fuzzy
 msgid "Content"
-msgstr "Περιεχόμενο (Content)"
+msgstr "Komente:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:62
 msgid "Continuous"
-msgstr "Συνεχόμενο"
+msgstr ""
 
 #: ../plugins/gtk+/gtk+.xml.in.h:63
+#, fuzzy
 msgid "Control and Display"
-msgstr "Έλεγχος και Εμφάνιση"
+msgstr "ikonë"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:67 ../plugins/gnome/gnome.xml.in.h:5
+#, fuzzy
 msgid "Create Folder"
-msgstr "Δημιουργία Φακέλου"
+msgstr "Krijo a i ri"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:69
 msgid "Curve"
-msgstr "Καμπύλη"
+msgstr "Hark"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:70
+#, fuzzy
 msgid "Custom"
-msgstr "Προσαρμοσμένο"
+msgstr "Preje"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:71
+#, fuzzy
 msgid "Custom widget"
-msgstr "Προσαρμοσμένο γραφικό συστατικό"
+msgstr "E personalizuar \"Widget\""
 
 #: ../plugins/gtk+/gtk+.xml.in.h:72
+#, fuzzy
 msgid "Default"
-msgstr "Προεπιλογή"
+msgstr "E prezgjedhur:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:73
+#, fuzzy
 msgid "Delayed"
-msgstr "Ανεσταλμένο"
+msgstr "Elemino"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:74
 msgid "Described By"
-msgstr "Περιγράφεται από"
+msgstr ""
 
 #: ../plugins/gtk+/gtk+.xml.in.h:75
+#, fuzzy
 msgid "Description For"
-msgstr "Περιγραφή για"
+msgstr "Përshkrimi"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:76
+#, fuzzy
 msgid "Description of an object, formatted for assistive technology access"
-msgstr ""
-"Περιγραφή ενός αντικειμένου που έχει διαμορφωθεί από προσπέλαση σε βοηθητική "
-"τεχνολογία"
+msgstr "përshkrimi nga"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:77
+#, fuzzy
 msgid "Desktop"
-msgstr "Επιφάνεια Εργασίας"
+msgstr "Hapësira e Punës"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:78
 msgid "Dialog"
-msgstr "Διάλογος"
+msgstr "Dialogu"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:79
+#, fuzzy
 msgid "Dialog Box"
-msgstr "Κουτί Διαλόγου (Dialog Box)"
+msgstr "Dialogu Kuti"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:80
 msgid "Discontinuous"
-msgstr "Ασυνεχής"
+msgstr ""
 
 #: ../plugins/gtk+/gtk+.xml.in.h:81
 msgid "Discrete"
-msgstr "Διακριτός"
+msgstr ""
 
 #: ../plugins/gtk+/gtk+.xml.in.h:82
+#, fuzzy
 msgid "Dock"
-msgstr "Προσάρτηση"
+msgstr "Qelia"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:83
+#, fuzzy
 msgid "Down"
-msgstr "Κάτω"
+msgstr "Poshtë"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:84
+#, fuzzy
 msgid "Drag and Drop"
-msgstr "Drag n Drop"
+msgstr "dhe Hidh"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:85
 msgid "Drawing Area"
-msgstr "Περιοχή Σχεδίασης"
+msgstr "Zona e vizatimit"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:86
+#, fuzzy
 msgid "Drop Down Menu"
-msgstr "Μενού που Αναδιπλώνεται προς τα Κάτω (Drop Down)"
+msgstr "Menu"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:87
+#, fuzzy
 msgid "East"
-msgstr "Ανατολικά"
+msgstr "Ngjite"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:88
+#, fuzzy
 msgid "Edge"
-msgstr "Ακμή"
+msgstr "\"Widget\""
 
 #: ../plugins/gtk+/gtk+.xml.in.h:89
+#, fuzzy
 msgid "Edit Type"
-msgstr "Επεξεργασία Τύπου"
+msgstr "Lloji:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:92 ../plugins/gnome/gnome.xml.in.h:7
+#, fuzzy
 msgid "End"
-msgstr "Τέλος"
+msgstr "Shpalos:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:93
+#, fuzzy
 msgid "Enter Notify"
-msgstr "Εισαγωγή Ειδοποίησης"
+msgstr "Shto"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:94 ../plugins/gnome/gnome.xml.in.h:8
 msgid "Error"
-msgstr "Σφάλμα"
+msgstr "Gabim"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:95 ../plugins/gnome/bonobo.xml.in.h:2
+#, fuzzy
 msgid "Etched In"
-msgstr "Χάραξη προς τα μέσα"
+msgstr "Zmadho"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:96 ../plugins/gnome/bonobo.xml.in.h:3
+#, fuzzy
 msgid "Etched Out"
-msgstr "Χάραξη προς τα έξω"
+msgstr "Zvogëlo"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:97
+#, fuzzy
 msgid "Event Box"
-msgstr "Πλαίσιο Γεγονότων (Event Box)"
+msgstr "Ndodhi Kuti"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:98 ../plugins/gnome/gnome.xml.in.h:9
+#, fuzzy
 msgid "Expand"
-msgstr "Επέκταση"
+msgstr "Shpalos:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:99
 msgid "Expander"
-msgstr "Εργαλείο Επέκτασης"
+msgstr ""
 
 #: ../plugins/gtk+/gtk+.xml.in.h:100
 msgid "Exposure"
-msgstr "Προσανατολισμός"
+msgstr ""
 
 #: ../plugins/gtk+/gtk+.xml.in.h:101
+#, fuzzy
 msgid "File Chooser Button"
-msgstr "Κουμπί Επιλογής Αρχείου"
+msgstr "Gërmat Butoni"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:102
+#, fuzzy
 msgid "File Chooser Dialog"
-msgstr "Διάλογος Επιλογής Αρχείου"
+msgstr "File Dialogu"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:103
+#, fuzzy
 msgid "File Name"
-msgstr "Όνομα Αρχείου"
+msgstr "Emri"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:104
+#, fuzzy
 msgid "File Selection"
-msgstr "Επιλογή Αρχείου"
+msgstr "File Zgjedhja Dialogu"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:105 ../plugins/gnome/gnome.xml.in.h:11
 msgid "Fill"
-msgstr "Γέμισμα"
+msgstr "Mbush (përshtat)"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:106
+#, fuzzy
 msgid "Fixed"
-msgstr "Σταθερό (Fixed)"
+msgstr "_File"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:109
+#, fuzzy
 msgid "Focus Change"
-msgstr "Αλλαγή όταν γίνεται εστίαση (Focus Change)"
+msgstr "Fokus Objektivi:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:110
+#, fuzzy
 msgid "Font Button"
-msgstr "Κουμπί Γραμματοσειράς"
+msgstr "Gërmat Butoni"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:111
 msgid "Font Selection"
-msgstr "Επιλογή Γραμματοσειράς"
+msgstr "Zgjedhja e gërmave"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:112
+#, fuzzy
 msgid "Font Selection Dialog"
-msgstr "Διάλογος Επιλογής Γραμματοσειράς"
+msgstr "Gërmat Zgjedhja Dialogu"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:113
 msgid "Frame"
-msgstr "Παράθυρο (Frame)"
+msgstr "Korniza"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:114
+#, fuzzy
 msgid "Free"
-msgstr "Ελεύθερο"
+msgstr "Korniza"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:115
+#, fuzzy
 msgid "Gamma Curve"
-msgstr "Καμπύλη Γάμμα"
+msgstr "Gamma Hark"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:116
 msgid "Gtk+ Obsolete"
-msgstr "Παλαιότερα GTK+"
+msgstr ""
 
 #: ../plugins/gtk+/gtk+.xml.in.h:117
 msgid "Half"
-msgstr "Μισό"
+msgstr ""
 
 #: ../plugins/gtk+/gtk+.xml.in.h:118
+#, fuzzy
 msgid "Handle Box"
-msgstr "Κουτί Διαχείρισης (Handle)"
+msgstr "Kuti"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:119 ../plugins/gnome/bonobo.xml.in.h:6
+#, fuzzy
 msgid "Horizontal"
-msgstr "Οριζόντιο"
+msgstr "Kuti"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:120
+#, fuzzy
 msgid "Horizontal Box"
-msgstr "Οριζόντιο Κουτί (Box)"
+msgstr "Kuti"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:121
+#, fuzzy
 msgid "Horizontal Button Box"
-msgstr "Οριζόντιο Button Box"
+msgstr "Butoni Kuti"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:122
+#, fuzzy
 msgid "Horizontal Panes"
-msgstr "Οριζόντια Panes"
+msgstr "Horizontal"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:123
+#, fuzzy
 msgid "Horizontal Ruler"
-msgstr "Οριζόντιος Χάρακας"
+msgstr "Horizontal"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:124
+#, fuzzy
 msgid "Horizontal Scale"
-msgstr "Οριζόντια Κλίμακα"
+msgstr "Shkalla"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:125
+#, fuzzy
 msgid "Horizontal Scrollbar"
-msgstr "Οριζόντια Γραμμή Κύλισης (Scrollbar)"
+msgstr "Horizontal"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:126
+#, fuzzy
 msgid "Horizontal Separator"
-msgstr "Οριζόντιο Διαχωριστικό"
+msgstr "Ndarës"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:127
+#, fuzzy
 msgid "Horizontal and Vertical"
-msgstr "Οριζόντια και Κατακόρυφα"
+msgstr "Horizontal"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:128
+#, fuzzy
 msgid "Icon Name"
-msgstr "Όνομα Εικονιδίου"
+msgstr "Madhësia:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:129
+#, fuzzy
 msgid "Icon View"
-msgstr "Προβολή Εικονιδίων"
+msgstr "Madhësia:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:130
+#, fuzzy
 msgid "Icons"
-msgstr "Εικονίδια"
+msgstr "Ikona"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:131
 msgid "If Valid"
-msgstr "Εάν είναι έγκυρο"
+msgstr ""
 
 #: ../plugins/gtk+/gtk+.xml.in.h:133
+#, fuzzy
 msgid "Image Menu Item"
-msgstr "Στοιχείο Μενού με Εικόνα"
+msgstr "Menu"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:134
+#, fuzzy
 msgid "Image Type"
-msgstr "Τύπος Eικόνας"
+msgstr "Lloji:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:135
 msgid "Immediate"
-msgstr "Άμεσο"
+msgstr ""
 
 #: ../plugins/gtk+/gtk+.xml.in.h:136 ../plugins/gnome/bonobo.xml.in.h:7
+#, fuzzy
 msgid "In"
-msgstr "Μέσα (In)"
+msgstr "Ikona"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:137
+#, fuzzy
 msgid ""
 "Indicates a subwindow attached to a component but otherwise has no "
 "connection in the UI hierarchy to that component"
-msgstr ""
-"Δηλώνει τη σύνδεση του παραθύρου αυτού (subwindow) με ένα τμήμα του "
-"προγράμματος (component) ενώ είναι ανεξάρτητο από την ιεραρχία των "
-"γραφικών (UI hierarchy) για το συγκεκριμένο τμήμα του προγράμματος "
-"(component)"
+msgstr "a a jo në"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:147
+#, fuzzy
 msgid ""
 "Indicates that an object provides descriptive information about another "
 "object; more verbose than 'Label For'"
-msgstr ""
-"Δηλώνει ότι ένα αντικείμενο παρέχει περιγραφικές πληροφορίες για άλλο "
-"αντικείμενο· πιο περιγραφικό από 'Ετικέτα για'"
+msgstr "informacione tjetër Etiketa"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:148
+#, fuzzy
 msgid ""
 "Indicates that another object provides descriptive information about this "
 "object; more verbose than 'Labelled By'"
-msgstr ""
-"Δηλώνει ότι ένα άλλο αντικείμενο παρέχει περιγραφικές πληροφορίες για αυτό το "
-"αντικείμενο· πιο περιγραφικό από 'Προσδιορίζεται με Ετικέτα Από'"
+msgstr "informacione tjetër"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:153
+#, fuzzy
 msgid "Input Dialog"
-msgstr "Διάλογος Εισόδου"
+msgstr "Input Dialogu"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:154
 msgid "Intro"
-msgstr "Εισαγωγή"
+msgstr ""
 
 #: ../plugins/gtk+/gtk+.xml.in.h:156
+#, fuzzy
 msgid "Items"
-msgstr "Στοιχεία"
+msgstr "Elementë:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:157
+#, fuzzy
 msgid "Key Press"
-msgstr "Πάτημα Πλήκτρου"
+msgstr "Shtypi"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:158
+#, fuzzy
 msgid "Key Release"
-msgstr "Key Release"
+msgstr "Release"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:162
 msgid "Layout"
-msgstr "Διαστρωμάτωση (Layout)"
+msgstr "Planimetria"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:163
+#, fuzzy
 msgid "Least Recently Used first"
-msgstr "Το Μικρότερο από τα Πρόσφατα Χρησιμοποιούμενα Πρώτο"
+msgstr "Në përdorim i pari"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:164
 msgid "Leave Notify"
-msgstr "Να Ανακοινώνεται"
+msgstr ""
 
 #: ../plugins/gtk+/gtk+.xml.in.h:165 ../plugins/gnome/bonobo.xml.in.h:8
 msgid "Left"
-msgstr "Αριστερά"
+msgstr "Majtas"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:166
+#, fuzzy
 msgid "Left to Right"
-msgstr "Αριστερά προς Δεξιά"
+msgstr "Nga e majta në të djathtë"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:167
+#, fuzzy
 msgid "Linear"
-msgstr "Γραμμικό"
+msgstr "Rreshta"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:168
+#, fuzzy
 msgid "Link Button"
-msgstr "Συνδετικό Κουμπί (Link)"
+msgstr "Butoni"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:169
 msgid "List"
-msgstr "Λίστα"
+msgstr "Lista"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:170
+#, fuzzy
 msgid "List Item"
-msgstr "Στοιχείο Λίστας"
+msgstr "Lista"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:171
+#, fuzzy
 msgid "Maximun Width"
-msgstr "Μέγιστο Πλάτος"
+msgstr "Gjerësia"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:174
 msgid "Menu Bar"
-msgstr "Γραμμή Μενού"
+msgstr "Paneli i Menusë"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:175
+#, fuzzy
 msgid "Menu Item"
-msgstr "Στοιχείο Μενού"
+msgstr "Menu"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:176
+#, fuzzy
 msgid "Menu Shell"
-msgstr "Menu Shell"
+msgstr "Menu Etiketa:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:177
+#, fuzzy
 msgid "Menu Tool Button"
-msgstr "Κουμπί Εργαλείου Μενού"
+msgstr "Paneli i instrumentëve Butoni"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:178
+#, fuzzy
 msgid "Message Dialog"
-msgstr "Διάλογος Μηνύματος"
+msgstr "Mesazhi:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:179
+#, fuzzy
 msgid "Middle"
-msgstr "Μέση"
+msgstr "Qendror"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:180
+#, fuzzy
 msgid "Most Recently Used first"
-msgstr "Το Πιο Πρόσφατα Χρησιμοποιημένο πρώτο"
+msgstr "Në përdorim i pari"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:181
+#, fuzzy
 msgid "Mouse"
-msgstr "Ποντίκι"
+msgstr "Mbyll"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:182 ../plugins/gnome/gnome.xml.in.h:41
+#, fuzzy
 msgid "Never"
-msgstr "Ποτέ"
+msgstr "Asnjëherë"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:183
+#, fuzzy
 msgid "Node Child Of"
-msgstr "Κόμβος Παιδί Του"
+msgstr "Bir"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:186
+#, fuzzy
 msgid "North"
-msgstr "Νότια"
+msgstr "Veri"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:187
+#, fuzzy
 msgid "North East"
-msgstr "Νοτιοανατολικά"
+msgstr "Veri Lindje"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:188
+#, fuzzy
 msgid "North West"
-msgstr "Νοτιοδυτικά"
+msgstr "Veri Perëndim"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:189
 msgid "Notebook"
-msgstr "Σημειωματάριο"
+msgstr ""
 
 #: ../plugins/gtk+/gtk+.xml.in.h:190
+#, fuzzy
 msgid "Notification"
-msgstr "Ειδοποίηση"
+msgstr "Orientimi:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:191
+#, fuzzy
 msgid "Number of items"
-msgstr "Αριθμός στοιχείων"
+msgstr "Numri nga elementët:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:192
+#, fuzzy
 msgid "Number of pages"
-msgstr "Αριθμός σελίδων"
+msgstr "Numri nga faqe:"
 
 #. Atk name and description properties
 #: ../plugins/gtk+/gtk+.xml.in.h:194
+#, fuzzy
 msgid "Object instance's name formatted for assistive technology access"
-msgstr "Το όνομα από τα στιγμιότυπα (instances) ενός αντικειμένου διαμορφώνονται από "
+msgstr ""
+"emri i instancës së objektit i formatuar për të qenë i pranueshëm nga "
+"teknollogjitë asistuese"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:195
 msgid "Ok"
-msgstr "ΟΚ"
+msgstr ""
 
 #: ../plugins/gtk+/gtk+.xml.in.h:196
+#, fuzzy
 msgid "Ok, Cancel"
-msgstr "ΟΚ, Ακύρωση"
+msgstr "Anullo"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:197 ../plugins/gnome/gnome.xml.in.h:42
 msgid "Open"
-msgstr "Άνοιγμα"
+msgstr "Hap"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:198
+#, fuzzy
 msgid "Option Menu"
-msgstr "Μενού Επιλογών"
+msgstr "Menu"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:200 ../plugins/gnome/bonobo.xml.in.h:14
+#, fuzzy
 msgid "Out"
-msgstr "Έξω (Out)"
+msgstr "Preje"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:201
+#, fuzzy
 msgid "Page Setup Dialog"
-msgstr "Προετοιμασία Διαλόγου Σελίδας"
+msgstr "File Zgjedhja Dialogu"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:202
+#, fuzzy
 msgid "Paned"
-msgstr "Μέσα σε Pane"
+msgstr "Ngjite"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:205
+#, fuzzy
 msgid "Pointer Motion"
-msgstr "Κίνηση του Δείκτη"
+msgstr "Pozicioni:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:206
+#, fuzzy
 msgid "Pointer Motion Hint"
-msgstr "Υπόδειξη Κίνησης του Δείκτη"
+msgstr "Kursori Lëvizja"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:207
+#, fuzzy
 msgid "Popup"
-msgstr "Αναδυόμενο (Popup)"
+msgstr "Menu"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:209
+#, fuzzy
 msgid "Popup Menu"
-msgstr "Αναδυόμενο Μενού"
+msgstr "Menu"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:210 ../plugins/gnome/glade-gnome.c:655
 #: ../plugins/gnome/gnome.xml.in.h:46
+#, fuzzy
 msgid "Position"
-msgstr "Θέση"
+msgstr "Pozicioni:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:213
+#, fuzzy
 msgid "Print Dialog"
-msgstr "Διάλογος Εκτύπωσης"
+msgstr "Input Dialogu"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:214
+#, fuzzy
 msgid "Progress"
-msgstr "Πρόοδος"
+msgstr "Progresi:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:215
+#, fuzzy
 msgid "Progress Bar"
-msgstr "Γραμμή Προόδου"
+msgstr "Progresi Bar"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:216
+#, fuzzy
 msgid "Property Change"
-msgstr "Αλλαγή Ιδιότητας"
+msgstr "Pronësia Dialogu Kuti"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:217
+#, fuzzy
 msgid "Proximity  Out"
-msgstr "Απόκλιση"
+msgstr "Zvogëlo"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:218
+#, fuzzy
 msgid "Proximity In"
-msgstr "Προσέγγιση"
+msgstr "Zmadho"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:219 ../plugins/gnome/gnome.xml.in.h:49
+#, fuzzy
 msgid "Question"
-msgstr "Ερώτηση"
+msgstr "Përshkrimi"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:220
 msgid "Queue"
-msgstr "Ουρά"
+msgstr ""
 
 #: ../plugins/gtk+/gtk+.xml.in.h:221
+#, fuzzy
 msgid "Radio Button"
-msgstr "Κουμπί Επιλογής με Κουκκίδα (Radio Button)"
+msgstr "Radio Butoni"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:222
+#, fuzzy
 msgid "Radio Menu Item"
-msgstr "Radio Στοιχείο Μενού"
+msgstr "Radio Menu"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:223
+#, fuzzy
 msgid "Radio Tool Button"
-msgstr "Κουμπί Radio Εργαλείου"
+msgstr "Radio Butoni"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:224
+#, fuzzy
 msgid "Range"
-msgstr "Σειρά (Range)"
+msgstr "Figura"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:225
+#, fuzzy
 msgid "Recent Chooser"
-msgstr "Επιλογή προσφάτων"
+msgstr "File"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:226
+#, fuzzy
 msgid "Recent Chooser Dialog"
-msgstr "Διάλογος Επιλογής Προσφάτων"
+msgstr "File Dialogu"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:229
+#, fuzzy
 msgid "Response ID"
-msgstr "ID Απόκρισης"
+msgstr "ID:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:230 ../plugins/gnome/bonobo.xml.in.h:15
 msgid "Right"
-msgstr "Δεξιά"
+msgstr "Djathtas"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:231
+#, fuzzy
 msgid "Right to Left"
-msgstr "Από Δεξιά προς Αριστερά"
+msgstr "Nga e djathta në të majtë"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:232
+#, fuzzy
 msgid "Ruler"
-msgstr "Χάρακας"
+msgstr "Roli:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:233 ../plugins/gnome/gnome.xml.in.h:50
 msgid "Save"
-msgstr "Αποθήκευση"
+msgstr "Ruaj"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:234
+#, fuzzy
 msgid "Scale"
-msgstr "Κλίμακα"
+msgstr "Shkallëzuar:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:235
+#, fuzzy
 msgid "Scroll"
-msgstr "Κύλιση"
+msgstr "I përshkueshëm:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:236
+#, fuzzy
 msgid "Scrolled Window"
-msgstr "Κυλιόμενο Παράθυρο"
+msgstr "Dritarja"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:237 ../plugins/gnome/gnome.xml.in.h:53
+#, fuzzy
 msgid "Select Folder"
-msgstr "Επιλογή Φακέλου"
+msgstr "Zgjidh file"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:238
+#, fuzzy
 msgid "Separator Menu Item"
-msgstr "Διαχωριστικό Στοιχείο Μενού"
+msgstr "Ndarës për Menutë"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:239
+#, fuzzy
 msgid "Separator Tool Item"
-msgstr "Στοιχείο Διαχωριστικού Εργαλείου"
+msgstr "Ndarës për Menutë"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:240
+#, fuzzy
 msgid "Set the current page (strictly for editing purposes)"
-msgstr "Ανοίγει την τρέχουσα σελίδα (μόνο για την περίπτωση επεξεργασίας)"
+msgstr "faqe për"
 
 #. Text of the textview
 #: ../plugins/gtk+/gtk+.xml.in.h:250
+#, fuzzy
 msgid "Set the text in the view's text buffer"
-msgstr "Τοποθετεί το κείμενο στο buffer κειμένου που προβάλλεται"
+msgstr "tekst në shfaq tekst"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:251
+#, fuzzy
 msgid "Shrink"
-msgstr "Κεντραρισμένο Ταίριασμα (Shrink)"
+msgstr "Tkurr:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:252
+#, fuzzy
 msgid "Size"
-msgstr "Μέγεθος"
+msgstr "Madhësia:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:253
+#, fuzzy
 msgid "South"
-msgstr "Νότια"
+msgstr "Jug"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:254
+#, fuzzy
 msgid "South East"
-msgstr "Νοτιοανατολικά"
+msgstr "Jug Lindje"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:255
+#, fuzzy
 msgid "South West"
-msgstr "Νοτιοδυτικά"
+msgstr "Jug Perëndim"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:256
+#, fuzzy
 msgid "Spin Button"
-msgstr "Κουμπί Περιστροφής (Spin)"
+msgstr "Butoni"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:257
+#, fuzzy
 msgid "Splash Screen"
-msgstr "Οθόνη Προστασίας"
+msgstr "Ekrani"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:258
 msgid "Spline"
-msgstr "Spline"
+msgstr ""
 
 #: ../plugins/gtk+/gtk+.xml.in.h:259
 msgid "Spread"
-msgstr "Διάδοση (Spread)"
+msgstr ""
 
 #: ../plugins/gtk+/gtk+.xml.in.h:260 ../plugins/gnome/gnome.xml.in.h:55
+#, fuzzy
 msgid "Start"
-msgstr "Έναρξη"
+msgstr "Gjëndja:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:261
+#, fuzzy
 msgid "Static"
-msgstr "Στατικό"
+msgstr "Teksti:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:262
 msgid "Status Bar"
-msgstr "Γραμμή Κατάστασης"
+msgstr "Paneli i gjendjes"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:263
+#, fuzzy
 msgid "Stock Button"
-msgstr "Έτοιμο Κουμπί (Stock)"
+msgstr "Butoni:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:265
+#, fuzzy
 msgid "Stock Item"
-msgstr "Έτοιμο Στοιχείο (Stock)"
+msgstr "Qelia"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:266
 msgid "Structure"
-msgstr "Δομή"
+msgstr ""
 
 #: ../plugins/gtk+/gtk+.xml.in.h:267
 msgid "Substructure"
-msgstr "Υποδομή (Substructure)"
+msgstr ""
 
 #: ../plugins/gtk+/gtk+.xml.in.h:269
+#, fuzzy
 msgid "Summary"
-msgstr "Σύνοψη"
+msgstr "Përmbledhja"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:270
 msgid "Table"
-msgstr "Πίνακας"
+msgstr "Tabela"
 
 #. Text of the textview
 #: ../plugins/gtk+/gtk+.xml.in.h:272 ../plugins/gnome/gnome.xml.in.h:58
+#, fuzzy
 msgid "Text"
-msgstr "Κείμενο"
+msgstr "Teksti:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:273
+#, fuzzy
 msgid "Text Entry"
-msgstr "Είσοδος Κειμένου"
+msgstr "Teksti"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:274
 msgid "Text View"
-msgstr "Προβολή Κειμένου"
+msgstr "Paraqitja si tekst"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:275
+#, fuzzy
 msgid "The items in this combo box"
-msgstr "Τα στοιχεία σε αυτό το combo box"
+msgstr "elementët në lista"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:276
+#, fuzzy
 msgid "The number of items in the box"
-msgstr "Το πλήθος των στοιχείων στο κουτί (box)"
+msgstr "nga në"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:277
+#, fuzzy
 msgid "The number of pages in the notebook"
-msgstr "Το πλήθος των σελίδων στο σημειωματάριο"
+msgstr "nga në"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:278
+#, fuzzy
 msgid "The page position in the Assistant"
-msgstr "Η θέση της σελίδας του Βοηθού (Assistant)"
+msgstr "faqe në lista nga faqe"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:279
+#, fuzzy
 msgid "The position of the menu item in the menu shell"
-msgstr "Η θέση του στοιχείου του μενού στο menu shell"
+msgstr "nga"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:280
+#, fuzzy
 msgid "The position of the tool item in the toolbar"
-msgstr "Η θέση του στοιχείου στη γραμμή εργαλείων"
+msgstr "nga elementët në"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:281
+#, fuzzy
 msgid ""
 "The response ID of this button in a dialog (it's NOT useful if this button "
 "is not in a GtkDialog)"
-msgstr ""
-"Το ID της απόκρισης αυτού του κουμπιού σε ένα διάλογο (ΔΕ χρειάζεται αν το "
-"κουμπί δεν ανήκει σε GTK διάλογο)"
+msgstr "ID nga në a dritare dialogu është nuk në a"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:282
+#, fuzzy
 msgid "The stock item for this button"
-msgstr "Το έτοιμο stock στοιχείο για αυτό το κουμπί"
+msgstr "element."
 
 #: ../plugins/gtk+/gtk+.xml.in.h:283
+#, fuzzy
 msgid "The stock item for this image"
-msgstr "Το έτοιμο stock στοιχείο για αυτή την εικόνα"
+msgstr "element."
 
 #: ../plugins/gtk+/gtk+.xml.in.h:284
+#, fuzzy
 msgid "The text of the menu item"
-msgstr "Το κείμενο του στοιχείου στο μενού"
+msgstr "lloji nga"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:285
+#, fuzzy
 msgid "The text to display"
-msgstr "Το κείμενο που θα εμφανίζεται"
+msgstr "tekst"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:286
+#, fuzzy
 msgid "Toggle Button"
-msgstr "Κουμπί Toogle"
+msgstr "Kavo Butoni"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:287
+#, fuzzy
 msgid "Toggle Tool Button"
-msgstr "Κουμπί για εργαλείο Toogle"
+msgstr "Kavo Butoni"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:288
+#, fuzzy
 msgid "Tool Bar"
-msgstr "Γραμμή Εργαλείων"
+msgstr "Paneli i instrumentëve"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:289
+#, fuzzy
 msgid "Tool Button"
-msgstr "Κουμπί Εργαλείου"
+msgstr "Paneli i instrumentëve Butoni"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:290
 msgid "Toolbar"
-msgstr "Γραμμή Εργαλείων"
+msgstr "Paneli i instrumentëve"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:291
+#, fuzzy
 msgid "Tooltip"
-msgstr "Αναδυόμενη Συμβουλή (Tooltip)"
+msgstr "Tregues:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:292 ../plugins/gnome/bonobo.xml.in.h:16
 msgid "Top"
-msgstr "Άνω"
+msgstr "Sipër"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:293
+#, fuzzy
 msgid "Top Left"
-msgstr "Άνω Αριστερά"
+msgstr "Majtas"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:294
+#, fuzzy
 msgid "Top Level"
-msgstr "Υψηλότερο Επίπεδο"
+msgstr "Sipër"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:295
+#, fuzzy
 msgid "Top Right"
-msgstr "Άνω Δεξιά"
+msgstr "Djathtas"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:296
+#, fuzzy
 msgid "Top to Bottom"
-msgstr "Άνω προς Κάτω"
+msgstr "Poshtë"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:297
 msgid "Toplevels"
-msgstr "Υψηλότερα επίπεδα (Toplevels)"
+msgstr ""
 
 #: ../plugins/gtk+/gtk+.xml.in.h:298
+#, fuzzy
 msgid "Tree View"
-msgstr "Προβολή Δέντρου"
+msgstr "Paraqitja si tekst"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:299
+#, fuzzy
 msgid "Up"
-msgstr "Επάνω"
+msgstr "Sipër"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:300
+#, fuzzy
 msgid "Use Underline"
-msgstr "Χρήση Υπογράμμισης"
+msgstr "Nënvizuar:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:301
 msgid "Utility"
-msgstr "Βοήθημα"
+msgstr ""
 
 #: ../plugins/gtk+/gtk+.xml.in.h:302 ../plugins/gnome/bonobo.xml.in.h:17
+#, fuzzy
 msgid "Vertical"
-msgstr "Κατακόρυφο"
+msgstr "Vertikal Kuti"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:303
+#, fuzzy
 msgid "Vertical Box"
-msgstr "Κατακόρυφο Κουτί (Box)"
+msgstr "Vertikal Kuti"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:304
+#, fuzzy
 msgid "Vertical Button Box"
-msgstr "Κατακόρυφο Button Box"
+msgstr "Vertikal Butoni Kuti"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:305
+#, fuzzy
 msgid "Vertical Panes"
-msgstr "Κατακόρυφα Panes"
+msgstr "Vertikal"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:306
+#, fuzzy
 msgid "Vertical Ruler"
-msgstr "Κατακόρυφος Χάρακας"
+msgstr "Vertikal"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:307
+#, fuzzy
 msgid "Vertical Scale"
-msgstr "Κατακόρυφη Κλίμακα"
+msgstr "Vertikal Shkalla"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:308
+#, fuzzy
 msgid "Vertical Scrollbar"
-msgstr "Κατακόρυφη Γραμμή Κύλισης (Scrollbar)"
+msgstr "Vertikal"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:309
+#, fuzzy
 msgid "Vertical Separator"
-msgstr "Κατακόρυφο Διαχωριστικό"
+msgstr "Vertikal Ndarës"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:310
 msgid "Viewport"
-msgstr "Εμφάνιση Γραμμών Κειμένου (Viewport)"
+msgstr "Viewport"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:311
+#, fuzzy
 msgid "Visibility Notify"
-msgstr "Δήλωση Εμφάνισης (Visibility)"
+msgstr "Dukshmëria:"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:312 ../plugins/gnome/gnome.xml.in.h:72
+#, fuzzy
 msgid "Warning"
-msgstr "Προειδοποίηση"
+msgstr "Kujdes"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:313
+#, fuzzy
 msgid "West"
-msgstr "Δύση"
+msgstr "\"Widget\""
 
 #: ../plugins/gtk+/gtk+.xml.in.h:315
 msgid "Window"
-msgstr "Παράθυρο"
+msgstr "Dritarja"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:316
 msgid "Word"
-msgstr "Λέξη (Word)"
+msgstr "Fjala"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:317
+#, fuzzy
 msgid "Word Character"
-msgstr "Χαρακτήρας Λέξης (Word Character)"
+msgstr "Simboli"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:318
+#, fuzzy
 msgid "Yes, No"
-msgstr "Ναι, Όχι"
+msgstr "Po"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:319
+#, fuzzy
 msgid ""
 "You can mark this as translatable and set one name/address if you want to "
 "show a translation specific translator, otherwise you should list all "
 "translators and unmark this string for translation"
-msgstr "Ελένη-Μαρία Στέα <ufuntu@gmail.com>"
+msgstr "Ti dhe a lista gjithçka dhe string për"
 
 #: ../plugins/gnome/glade-gnome.c:298
+#, fuzzy
 msgid "Status Message."
-msgstr "Μήνυμα Κατάστασης.(Status)"
+msgstr "Gjendja Mesazh."
 
 #: ../plugins/gnome/glade-gnome.c:656
+#, fuzzy
 msgid "The position in the druid"
-msgstr "Η θέση στο druid"
+msgstr "nga"
 
 #: ../plugins/gnome/glade-gnome.c:1008
+#, fuzzy
 msgid "Message box type"
-msgstr "Τύπος του παραθύρου μηνύματος (message box)"
+msgstr "Mesazh Lloji:"
 
 #: ../plugins/gnome/glade-gnome.c:1009
+#, fuzzy
 msgid "The type of the message box"
-msgstr "Ο τύπος του παράθυρου μηνύματος (message box)"
+msgstr "lloji nga mesazh"
 
 #: ../plugins/gnome/glade-gnome.c:1225
+#, fuzzy
 msgid "This property is valid only in font information mode"
-msgstr ""
-"Αυτή η ιδιότητα είναι έγκυρη μόνο σε κατάσταση που υπάρχουν πληροφορίες για "
-"τις γραμματοσειρές"
+msgstr "është në modaliteti"
 
 #. This is deprecated
 #: ../plugins/gnome/glade-gnome.c:1313 ../plugins/gnome/canvas.xml.in.h:23
+#, fuzzy
 msgid "Selection Mode"
-msgstr "Κατάσταση Επιλογής"
+msgstr "Zgjidh Modaliteti:"
 
 #: ../plugins/gnome/glade-gnome.c:1314
+#, fuzzy
 msgid "Choose the Selection Mode"
-msgstr "Διαλέξτε την κατάσταση επιλογής"
+msgstr "modaliteti"
 
 #: ../plugins/gnome/glade-gnome.c:1464
+#, fuzzy
 msgid "Placement"
-msgstr "Τοποθέτηση"
+msgstr "Vendosja"
 
 #: ../plugins/gnome/glade-gnome.c:1465
+#, fuzzy
 msgid "Choose the BonoboDockPlacement type"
-msgstr "Επιλέξτε τον τύπο τοποθέτησης BonoboDock"
+msgstr "lloji"
 
 #: ../plugins/gnome/glade-gnome.c:1493
+#, fuzzy
 msgid "Behavior"
-msgstr "Συμπεριφορά"
+msgstr "Sjellja"
 
 #: ../plugins/gnome/glade-gnome.c:1494
+#, fuzzy
 msgid "Choose the BonoboDockItemBehavior type"
-msgstr "Επιλέξτε τον τύπο συμπεριφοράς BonoboDockItem"
+msgstr "lloji"
 
 #: ../plugins/gnome/glade-gnome.c:1503
+#, fuzzy
 msgid "Pack Type"
-msgstr "Τύπος Pack"
+msgstr "Lloji"
 
 #: ../plugins/gnome/glade-gnome.c:1504
+#, fuzzy
 msgid "Choose the Pack Type"
-msgstr "Επιλέξτε τον τύπο πακέτου (Pack)"
+msgstr "Lloji"
 
 #: ../plugins/gnome/gnome.xml.in.h:1
+#, fuzzy
 msgid "24-Hour Format"
-msgstr "24-ωρη Διάταξη"
+msgstr "Formati:"
 
 #: ../plugins/gnome/gnome.xml.in.h:3
+#, fuzzy
 msgid "Background Color"
-msgstr "Χρώμα Φόντου"
+msgstr "Ngjyra e sfondit"
 
 #: ../plugins/gnome/gnome.xml.in.h:4
+#, fuzzy
 msgid "Contents Background Color"
-msgstr "Χρώμα Φόντου Περιεχομένων (Contents)"
+msgstr "Përmbajtja Mbrapa Ngjyra:"
 
 #: ../plugins/gnome/gnome.xml.in.h:6
 msgid "Dither"
-msgstr "Κυματισμός"
+msgstr ""
 
 #: ../plugins/gnome/gnome.xml.in.h:10
+#, fuzzy
 msgid "File"
-msgstr "Αρχείο"
+msgstr "_File"
 
 #: ../plugins/gnome/gnome.xml.in.h:12
+#, fuzzy
 msgid "Font Information"
-msgstr "Πληροφορίες Γραμματοσειρών"
+msgstr "Zgjedhja e gërmave"
 
 #: ../plugins/gnome/gnome.xml.in.h:13
+#, fuzzy
 msgid "GNOME UI Obsolete"
-msgstr "Παλιό UI του GNOME"
+msgstr "GNOME"
 
 #: ../plugins/gnome/gnome.xml.in.h:14
+#, fuzzy
 msgid "GNOME User Interface"
-msgstr "Διασύνδεση Χρήστη GNOME"
+msgstr "Vizaton interfaqet e përdoruesit"
 
 #: ../plugins/gnome/gnome.xml.in.h:15
+#, fuzzy
 msgid "Generic"
-msgstr "Γενικά"
+msgstr "Të përgjithshme"
 
 #: ../plugins/gnome/gnome.xml.in.h:16
+#, fuzzy
 msgid "Gnome About"
-msgstr "Gnome Περί"
+msgstr "Informacione Dialogu"
 
 #: ../plugins/gnome/gnome.xml.in.h:17
+#, fuzzy
 msgid "Gnome App"
-msgstr "Gnome Εφαρμογή"
+msgstr "Pixmap"
 
 #: ../plugins/gnome/gnome.xml.in.h:18
+#, fuzzy
 msgid "Gnome App Bar"
-msgstr "Gnome Μπάρα Εφαρμογής"
+msgstr "Program Bar"
 
 #: ../plugins/gnome/gnome.xml.in.h:19
+#, fuzzy
 msgid "Gnome Color Picker"
-msgstr "Gnome Επιλογέας Χρώματος"
+msgstr "Ngjyra"
 
 #: ../plugins/gnome/gnome.xml.in.h:20
+#, fuzzy
 msgid "Gnome Date Edit"
-msgstr "Gnome Επεξεργασία Ημ/νίας"
+msgstr "File"
 
 #. Deprecated Widget Classes :)
 #: ../plugins/gnome/gnome.xml.in.h:22
+#, fuzzy
 msgid "Gnome Dialog"
-msgstr "Gnome Διάλογος"
+msgstr "Dialogu Kuti"
 
 #: ../plugins/gnome/gnome.xml.in.h:23
+#, fuzzy
 msgid "Gnome Druid"
-msgstr "Gnome Δρυίδης"
+msgstr "E re Robot"
 
 #: ../plugins/gnome/gnome.xml.in.h:24
+#, fuzzy
 msgid "Gnome Druid Page Edge"
-msgstr "Gnome Σελίδα Δρυίδη Edge"
+msgstr "E re Robot"
 
 #: ../plugins/gnome/gnome.xml.in.h:25
+#, fuzzy
 msgid "Gnome Druid Page Standard"
-msgstr "Gnome Σελίδα Δρυίδη Τυπική"
+msgstr "Robot Standart Faqja"
 
 #: ../plugins/gnome/gnome.xml.in.h:26
+#, fuzzy
 msgid "Gnome File Entry"
-msgstr "Gnome Εισαγωγή αρχείου"
+msgstr "File"
 
 #: ../plugins/gnome/gnome.xml.in.h:27
+#, fuzzy
 msgid "Gnome Font Picker"
-msgstr "Gnome Επιλογέας Γραμματοσειράς"
+msgstr "Gërmat"
 
 #: ../plugins/gnome/gnome.xml.in.h:28
+#, fuzzy
 msgid "Gnome HRef"
-msgstr "Gnome HRef"
+msgstr "Lidhje Butoni"
 
 #: ../plugins/gnome/gnome.xml.in.h:29
+#, fuzzy
 msgid "Gnome Icon Entry"
-msgstr "Gnome Εισαγωγή Εικονιδίου"
+msgstr "Ikona"
 
 #: ../plugins/gnome/gnome.xml.in.h:30
+#, fuzzy
 msgid "Gnome Icon Selection"
-msgstr "Gnome Επιλογή Εικονιδίου"
+msgstr "Zgjedhja"
 
 #: ../plugins/gnome/gnome.xml.in.h:31
+#, fuzzy
 msgid "Gnome Message Box"
-msgstr "Gnome Παράθυρο μηνύματος (message box)"
+msgstr "Mesazh Kuti"
 
 #: ../plugins/gnome/gnome.xml.in.h:32
+#, fuzzy
 msgid "Gnome Pixmap"
-msgstr "Gnome Pixmap"
+msgstr "Pixmap"
 
 #: ../plugins/gnome/gnome.xml.in.h:33
+#, fuzzy
 msgid "Gnome Pixmap Entry"
-msgstr "Gnome Εισαγωγή Pixmap"
+msgstr "Pixmap"
 
 #: ../plugins/gnome/gnome.xml.in.h:34
+#, fuzzy
 msgid "Gnome Property Box"
-msgstr "Gnome Παράθυρο ιδιοτήτων"
+msgstr "E re"
 
 #: ../plugins/gnome/gnome.xml.in.h:35
+#, fuzzy
 msgid "Information"
-msgstr "Πληροφορίες"
+msgstr "Fraksioni:"
 
 #: ../plugins/gnome/gnome.xml.in.h:36
+#, fuzzy
 msgid "Logo"
-msgstr "Λογότυπο"
+msgstr "Stema:"
 
 #: ../plugins/gnome/gnome.xml.in.h:37
+#, fuzzy
 msgid "Logo Background Color"
-msgstr "Χρώμα Φόντου για το Λογότυπο"
+msgstr "Ngjyra e sfondit"
 
 #: ../plugins/gnome/gnome.xml.in.h:38
+#, fuzzy
 msgid "Max Saved"
-msgstr "Μέγιστος αριθμός αποθηκευμένων"
+msgstr "Ruaj"
 
 #: ../plugins/gnome/gnome.xml.in.h:39
+#, fuzzy
 msgid "Message"
-msgstr "Μήνυμα"
+msgstr "Mesazhi:"
 
 #: ../plugins/gnome/gnome.xml.in.h:40
+#, fuzzy
 msgid "Monday First"
-msgstr "Πρώτη η Δευτέρα"
+msgstr "E hënë E Para:"
 
 #: ../plugins/gnome/gnome.xml.in.h:44
+#, fuzzy
 msgid "Padding"
-msgstr "Γέμισμα"
+msgstr "Zbutje:"
 
 #: ../plugins/gnome/gnome.xml.in.h:45
+#, fuzzy
 msgid "Pixmap"
-msgstr "Pixmap (Διαχείριση εικόνας στη μνήμη)"
+msgstr "Pixmap"
 
 #: ../plugins/gnome/gnome.xml.in.h:47
+#, fuzzy
 msgid "Program Name"
-msgstr "Όνομα Προγράμματος"
+msgstr "Programi Emri:"
 
 #: ../plugins/gnome/gnome.xml.in.h:48
+#, fuzzy
 msgid "Program Version"
-msgstr "Έκδοση Προγράμματος"
+msgstr "Programi Emri:"
 
 #: ../plugins/gnome/gnome.xml.in.h:51
+#, fuzzy
 msgid "Scaled Height"
-msgstr "Ύψος σε κλίμακα"
+msgstr "Shkallëzuar:"
 
 #: ../plugins/gnome/gnome.xml.in.h:52
+#, fuzzy
 msgid "Scaled Width"
-msgstr "Πλάτος σε κλίμακα"
+msgstr "Shkallëzuar Gjerësia:"
 
 #: ../plugins/gnome/gnome.xml.in.h:54
+#, fuzzy
 msgid "Show Time"
-msgstr "Εμφάνιση Ώρας"
+msgstr "Shfaq Ora:"
 
 #: ../plugins/gnome/gnome.xml.in.h:56
+#, fuzzy
 msgid "StatusBar"
-msgstr "ΓραμμήΚατάστασης"
+msgstr "Paneli i gjendjes"
 
 #: ../plugins/gnome/gnome.xml.in.h:57
+#, fuzzy
 msgid "Store Config"
-msgstr "Διαμόρφωση Μνήμης"
+msgstr "Konfigurim:"
 
 #: ../plugins/gnome/gnome.xml.in.h:59
+#, fuzzy
 msgid "Text Foreground Color"
-msgstr "Χρώμα Γραμματοσειράς Κειμένου"
+msgstr "Ngjyra ballore"
 
 #: ../plugins/gnome/gnome.xml.in.h:60
+#, fuzzy
 msgid "The height to scale the pixmap to"
-msgstr "Ύψος για κλιμάκωση εικόνας pixmap"
+msgstr "lartësia"
 
 #: ../plugins/gnome/gnome.xml.in.h:61
+#, fuzzy
 msgid "The maximum number of history entries saved"
-msgstr "Το μέγιστο πλήθος αποθηκευμένων εγγραφών ιστορικού"
+msgstr "maksimum nga"
 
 #: ../plugins/gnome/gnome.xml.in.h:62
+#, fuzzy
 msgid "The pixmap file"
-msgstr "Το αρχείο pixmap (για διαχείριση εικόνας)"
+msgstr "është"
 
 #: ../plugins/gnome/gnome.xml.in.h:63
+#, fuzzy
 msgid "The width to scale the pixmap to"
-msgstr "Πλάτος για κλιμάκωση εικόνας pixmap"
+msgstr "gjerësia"
 
 #: ../plugins/gnome/gnome.xml.in.h:65
+#, fuzzy
 msgid "Title Foreground Color"
-msgstr "Τίτλος Χρώματος Γραμματοσειράς"
+msgstr "Ngjyra ballore"
 
 #: ../plugins/gnome/gnome.xml.in.h:66
+#, fuzzy
 msgid "Top Watermark"
-msgstr "Υδατογράφημα Top Watermark"
+msgstr "Sipër:"
 
 #: ../plugins/gnome/gnome.xml.in.h:67
+#, fuzzy
 msgid "Unknown"
-msgstr "Άγνωστο"
+msgstr "Klasa nuk njihet"
 
 #: ../plugins/gnome/gnome.xml.in.h:68
+#, fuzzy
 msgid "Use Alpha"
-msgstr "Χρήση του Alpha"
+msgstr "Alfa:"
 
 #: ../plugins/gnome/gnome.xml.in.h:69
+#, fuzzy
 msgid ""
 "Used to pass around information about the position of a GnomeDruidPage "
 "within the overall GnomeDruid. This enables the correct \"surrounding\" "
 "content for the page to be drawn"
-msgstr ""
-"Χρησιμοποιείται για τη μεταφορά πληροφοριών σχετικά με τη θέση μιας Σελίδας "
-"του Μάγου Gnome (GnomeDruidPage)μέσα στο συνολικό Μάγο GnomeDruid. Έτσι η "
-"σελίδα που θα σχεδιαστεί \"περιστοιχίζεται\" από το κατάλληλο περιεχόμενο"
+msgstr "Në përdorim informacione nga a përmbajtja për faqe"
 
 #: ../plugins/gnome/gnome.xml.in.h:70
+#, fuzzy
 msgid "User"
-msgstr "Χρήστης"
+msgstr "Përdoruesi"
 
 #: ../plugins/gnome/gnome.xml.in.h:71
+#, fuzzy
 msgid "User Widget"
-msgstr "Γραφικό Συστατικό Χρήστη"
+msgstr "\"Widget\""
 
 #: ../plugins/gnome/gnome.xml.in.h:73
+#, fuzzy
 msgid "Watermark"
-msgstr "Υδατογράφημα"
+msgstr "Sipër:"
 
 #: ../plugins/gnome/bonobo.xml.in.h:4
 msgid "Exclusive"
-msgstr "Μοναδικό"
+msgstr ""
 
 #: ../plugins/gnome/bonobo.xml.in.h:5
+#, fuzzy
 msgid "Floating"
-msgstr "Με δυνατότητα μετακίνησης"
+msgstr "Lejo:"
 
 #: ../plugins/gnome/bonobo.xml.in.h:9
+#, fuzzy
 msgid "Locked"
-msgstr "Κλειδωμένο"
+msgstr "E bllokuar:"
 
 #: ../plugins/gnome/bonobo.xml.in.h:10
+#, fuzzy
 msgid "Never Floating"
-msgstr "Χωρίς Δυνατότητα Μετακίνησης"
+msgstr "Asnjëherë:"
 
 #: ../plugins/gnome/bonobo.xml.in.h:11
+#, fuzzy
 msgid "Never Horizontal"
-msgstr "Ποτέ Οριζόντιο"
+msgstr "Asnjëherë:"
 
 #: ../plugins/gnome/bonobo.xml.in.h:12
+#, fuzzy
 msgid "Never Vertical"
-msgstr "Ποτέ Κατακόρυφο"
+msgstr "Asnjëherë Vertikal:"
 
 #. This is deprecated
 #: ../plugins/gnome/canvas.xml.in.h:2
+#, fuzzy
 msgid "Browse"
-msgstr "Περιήγηση"
+msgstr "Shfleto..."
 
 #. This is deprecated
 #: ../plugins/gnome/canvas.xml.in.h:4
+#, fuzzy
 msgid "Column Spacing"
-msgstr "Απόσταση στηλών"
+msgstr "Hapësira e ndërmjetme:"
 
 #: ../plugins/gnome/canvas.xml.in.h:5
+#, fuzzy
 msgid "GNOME Canvas"
-msgstr "Καμβάς του GNOME"
+msgstr "GNOME Tela (vizatimi)"
 
 #: ../plugins/gnome/canvas.xml.in.h:6
+#, fuzzy
 msgid "Gnome Canvas"
-msgstr "Gnome Καμβάς"
+msgstr "Tela (vizatimi)"
 
 #. This is deprecated
 #: ../plugins/gnome/canvas.xml.in.h:8
+#, fuzzy
 msgid "Gnome Icon List"
-msgstr "Gnome Λίστα εικονιδίων"
+msgstr "Ikona"
 
 #. This is deprecated
 #: ../plugins/gnome/canvas.xml.in.h:10
+#, fuzzy
 msgid "Icon Width"
-msgstr "Πλάτος εικόνας"
+msgstr "Gjerësia:"
 
 #: ../plugins/gnome/canvas.xml.in.h:11
+#, fuzzy
 msgid "If the icon text can be edited by the user"
-msgstr "Αν το κείμενο της εικόνας μπορεί να τροποποιηθεί από το χρήστη"
+msgstr "ikonë tekst nga përdorues"
 
 #: ../plugins/gnome/canvas.xml.in.h:12
+#, fuzzy
 msgid ""
 "If the icon text is static, in which case it will not be copied by the "
 "GnomeIconList"
-msgstr ""
-"Αν το κείμενο της εικόνας είναι στατικό, σε αυτή την περίπτωση δεν μπορεί να "
-"αντιγραφεί από τη GnomeIconList"
+msgstr "ikonë tekst është në nuk nga"
 
 #: ../plugins/gnome/canvas.xml.in.h:13
+#, fuzzy
 msgid "Max X"
-msgstr "Μέγιστο X"
+msgstr "X"
 
 #: ../plugins/gnome/canvas.xml.in.h:14
+#, fuzzy
 msgid "Max Y"
-msgstr "Μέγιστο Y"
+msgstr "Y"
 
 #: ../plugins/gnome/canvas.xml.in.h:15
+#, fuzzy
 msgid "Min X"
-msgstr "Ελάχιστο X"
+msgstr "X"
 
 #: ../plugins/gnome/canvas.xml.in.h:16
+#, fuzzy
 msgid "Min Y"
-msgstr "Ελάχιστο Υ"
+msgstr "Y"
 
 #. This is deprecated
 #: ../plugins/gnome/canvas.xml.in.h:18
+#, fuzzy
 msgid "Multiple"
-msgstr "Πολλαπλό"
+msgstr "Zgjidh Shumëfishe:"
 
 #: ../plugins/gnome/canvas.xml.in.h:19
+#, fuzzy
 msgid "Pixels per unit"
-msgstr "Pixels ανά στοιχείο"
+msgstr "Pixels Njësia:"
 
 #. This is deprecated
 #: ../plugins/gnome/canvas.xml.in.h:21
+#, fuzzy
 msgid "Row Spacing"
-msgstr "Απόσταση Γραμμών"
+msgstr "Rresht Hapësira e ndërmjetme:"
 
 #. This is deprecated
 #: ../plugins/gnome/canvas.xml.in.h:25
+#, fuzzy
 msgid "Single"
-msgstr "Μονό"
+msgstr "Sinjali"
 
 #. This is deprecated
 #: ../plugins/gnome/canvas.xml.in.h:27
+#, fuzzy
 msgid "Text Editable"
-msgstr "Τροποποιήσιμο κείμενο"
+msgstr "Teksti Pjesë e ndryshueshme:"
 
 #. This is deprecated
 #: ../plugins/gnome/canvas.xml.in.h:29
+#, fuzzy
 msgid "Text Spacing"
-msgstr "Απόσταση Κειμένου"
+msgstr "Teksti Hapësira e ndërmjetme:"
 
 #. This is deprecated
 #: ../plugins/gnome/canvas.xml.in.h:31
+#, fuzzy
 msgid "Text Static"
-msgstr "Στατικό Κείμενο"
+msgstr "Teksti:"
 
 #: ../plugins/gnome/canvas.xml.in.h:32
+#, fuzzy
 msgid "The maximum x coordinate"
-msgstr "Μέγιστο μήκος x συνιστώσας"
+msgstr "maksimum x"
 
 #: ../plugins/gnome/canvas.xml.in.h:33
+#, fuzzy
 msgid "The maximum y coordinate"
-msgstr "Μέγιστο μήκος y συνιστώσας"
+msgstr "maksimum p"
 
 #: ../plugins/gnome/canvas.xml.in.h:34
+#, fuzzy
 msgid "The minimum x coordinate"
-msgstr "Ελάχιστο μήκος x συνιστώσας"
+msgstr "minimum x"
 
 #: ../plugins/gnome/canvas.xml.in.h:35
+#, fuzzy
 msgid "The minimum y coordinate"
-msgstr "Ελάχιστο μήκος y συνιστώσας"
+msgstr "minimum p"
 
 #: ../plugins/gnome/canvas.xml.in.h:36
+#, fuzzy
 msgid "The number of pixels between columns of icons"
-msgstr "Ο αριθμός των pixels ανάμεσα στις στήλες εικονιδίων"
+msgstr "nga pixels kollonat nga"
 
 #: ../plugins/gnome/canvas.xml.in.h:37
+#, fuzzy
 msgid "The number of pixels between rows of icons"
-msgstr "Ο αριθμός των pixels ανάμεσα στις σειρές εικονιδίων"
+msgstr "nga pixels rreshta nga"
 
 #: ../plugins/gnome/canvas.xml.in.h:38
+#, fuzzy
 msgid "The number of pixels between the text and the icon"
-msgstr "Ο αριθμός pixel ανάμεσα στο κείμενο και τα εικονίδια"
+msgstr "nga pixels tekst dhe ikonë"
 
 #: ../plugins/gnome/canvas.xml.in.h:39
+#, fuzzy
 msgid "The number of pixels corresponding to one unit"
-msgstr "Ο αριθμός των pixels που αντιστοιχούν σε μια μονάδα"
+msgstr "nga pixels"
 
 #: ../plugins/gnome/canvas.xml.in.h:40
+#, fuzzy
 msgid "The selection mode"
-msgstr "Η κατάσταση επιλογής"
+msgstr "modaliteti"
 
 #: ../plugins/gnome/canvas.xml.in.h:41
+#, fuzzy
 msgid "The width of each icon"
-msgstr "Το πλάτος της κάθε εικόνας"
-
+msgstr "gjerësia nga ikonë"

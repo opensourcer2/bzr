@@ -167,6 +167,7 @@ glade_property_class_new (gpointer handle)
 	property_class->is_modified = FALSE;
 	property_class->visible = TRUE;
 	property_class->save = TRUE;
+	property_class->save_always = FALSE;
 	property_class->ignore = FALSE;
 	property_class->resource = FALSE;
 	property_class->translatable = FALSE;
@@ -775,8 +776,15 @@ glade_property_class_make_object_from_string (GladePropertyClass *property_class
 	if (property_class->pspec->value_type == GTK_TYPE_ADJUSTMENT)
 	{
 		gdouble value, lower, upper, step_increment, page_increment, page_size;
-		
-		sscanf (string, "%lf %lf %lf %lf %lf %lf", &value, &lower, &upper, &step_increment, &page_increment, &page_size);
+                gchar *pstring = (gchar*) string;
+
+                value = g_ascii_strtod (pstring, &pstring);
+                lower = g_ascii_strtod (pstring, &pstring);
+                upper = g_ascii_strtod (pstring, &pstring);
+                step_increment = g_ascii_strtod (pstring, &pstring);
+                page_increment = g_ascii_strtod (pstring, &pstring);
+                page_size = g_ascii_strtod (pstring, &pstring);
+
 		object = G_OBJECT (gtk_adjustment_new (value, lower, upper, step_increment, page_increment, page_size));
 	}
 	else
@@ -881,15 +889,15 @@ glade_property_class_make_gvalue_from_string (GladePropertyClass *property_class
 		}
 	}
 	else if (G_IS_PARAM_SPEC_INT(property_class->pspec))
-		g_value_set_int (value, g_ascii_strtoll (string, NULL, 10));
+		g_value_set_int (value, glade_util_ascii_strtoll (string, NULL, 10));
 	else if (G_IS_PARAM_SPEC_UINT(property_class->pspec))
 		g_value_set_uint (value, g_ascii_strtoull (string, NULL, 10));
 	else if (G_IS_PARAM_SPEC_LONG(property_class->pspec))
-		g_value_set_long (value, g_ascii_strtoll (string, NULL, 10));
+		g_value_set_long (value, glade_util_ascii_strtoll (string, NULL, 10));
 	else if (G_IS_PARAM_SPEC_ULONG(property_class->pspec))
 		g_value_set_ulong (value, g_ascii_strtoull (string, NULL, 10));
 	else if (G_IS_PARAM_SPEC_INT64(property_class->pspec))
-		g_value_set_int64 (value, g_ascii_strtoll (string, NULL, 10));
+		g_value_set_int64 (value, glade_util_ascii_strtoll (string, NULL, 10));
 	else if (G_IS_PARAM_SPEC_UINT64(property_class->pspec))
 		g_value_set_uint64 (value, g_ascii_strtoull (string, NULL, 10));
 	else if (G_IS_PARAM_SPEC_FLOAT(property_class->pspec))
@@ -1669,7 +1677,8 @@ glade_property_class_update_from_node (GladeXmlNode        *node,
 	klass->resource = glade_xml_get_property_boolean (node, GLADE_TAG_RESOURCE, klass->resource);
 	klass->weight   = glade_xml_get_property_double  (node, GLADE_TAG_WEIGHT,   klass->weight);
 	klass->transfer_on_paste = glade_xml_get_property_boolean (node, GLADE_TAG_TRANSFER_ON_PASTE, klass->transfer_on_paste);
-
+	klass->save_always = glade_xml_get_property_boolean (node, GLADE_TAG_SAVE_ALWAYS, klass->save_always);
+	
 	/* A sprinkle of hard-code to get atk properties working right
 	 */
 	if (glade_xml_get_property_boolean (node, GLADE_TAG_ATK_ACTION, FALSE))

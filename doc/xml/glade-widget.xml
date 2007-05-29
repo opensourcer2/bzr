@@ -102,7 +102,8 @@ const <link linkend="gchar">gchar</link>* <link linkend="glade-widget-get-intern
                                              <link linkend="GObject">GObject</link> *old_object,
                                              <link linkend="GObject">GObject</link> *new_object);
 <link linkend="void">void</link>        <link linkend="glade-widget-rebuild">glade_widget_rebuild</link>            (<link linkend="GladeWidget">GladeWidget</link> *glade_widget);
-<link linkend="GladeWidget">GladeWidget</link>* <link linkend="glade-widget-dup">glade_widget_dup</link>               (<link linkend="GladeWidget">GladeWidget</link> *template_widget);
+<link linkend="GladeWidget">GladeWidget</link>* <link linkend="glade-widget-dup">glade_widget_dup</link>               (<link linkend="GladeWidget">GladeWidget</link> *template_widget,
+                                             <link linkend="gboolean">gboolean</link> exact);
 <link linkend="void">void</link>        <link linkend="glade-widget-add-signal-handler">glade_widget_add_signal_handler</link> (<link linkend="GladeWidget">GladeWidget</link> *widget,
                                              <link linkend="GladeSignal">GladeSignal</link> *signal_handler);
 <link linkend="void">void</link>        <link linkend="glade-widget-remove-signal-handler">glade_widget_remove_signal_handler</link>
@@ -880,14 +881,21 @@ takes care of reparenting.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="glade-widget-dup" role="function"/>glade_widget_dup ()</title>
-<indexterm><primary>glade_widget_dup</primary></indexterm><programlisting><link linkend="GladeWidget">GladeWidget</link>* glade_widget_dup               (<link linkend="GladeWidget">GladeWidget</link> *template_widget);</programlisting>
+<indexterm><primary>glade_widget_dup</primary></indexterm><programlisting><link linkend="GladeWidget">GladeWidget</link>* glade_widget_dup               (<link linkend="GladeWidget">GladeWidget</link> *template_widget,
+                                             <link linkend="gboolean">gboolean</link> exact);</programlisting>
 <para>
-Creates a deep copy of <link linkend="GladeWidget"><type>GladeWidget</type></link>.</para>
+Creates a deep copy of <link linkend="GladeWidget"><type>GladeWidget</type></link>. if <parameter>exact</parameter> is specified,
+the widget name is preserved and signals are carried over
+(this is used to maintain names &amp; signals in Cut/Paste context
+as opposed to Copy/Paste contexts).</para>
 <para>
 
 </para><variablelist role="params">
 <varlistentry><term><parameter>template_widget</parameter>&nbsp;:</term>
 <listitem><simpara> a <link linkend="GladeWidget"><type>GladeWidget</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>exact</parameter>&nbsp;:</term>
+<listitem><simpara> whether or not to creat an exact duplicate
 </simpara></listitem></varlistentry>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> The newly created <link linkend="GladeWidget"><type>GladeWidget</type></link>
 </simpara></listitem></varlistentry>
