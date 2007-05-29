@@ -438,6 +438,7 @@
 	<property save="False" id="glade-stock" name="Stock Image">
 	  <spec>glade_standard_stock_image_spec</spec>
 	</property>
+        <property translatable="True" id="label"/>
 	<property id="icon" name="File Name">
 	  <spec>glade_standard_pixbuf_spec</spec>
 	</property>
@@ -591,7 +592,7 @@
 	  <spec>glade_gtk_button_type_spec</spec>
 	</property>
 
-	<property ignore="True" id="response-id" default="0" common="False" name="Response ID">
+	<property save-always="True" ignore="True" id="response-id" default="0" common="False" name="Response ID">
 	  <spec>glade_standard_int_spec</spec>
 	  <tooltip>The response ID of this button in a dialog (it's NOT useful if this button is not in a GtkDialog)</tooltip>
 	</property>
@@ -713,6 +714,7 @@
       <post-create-function>glade_gtk_combo_box_post_create</post-create-function>
       <set-property-function>glade_gtk_combo_box_set_property</set-property-function>
       <properties>
+        <property id="model" disabled="True"/>
         <property ignore="True" id="active"/>
         <property ignore="True" id="column-span-column"/>
         <property ignore="True" id="row-span-column"/>
@@ -817,6 +819,7 @@
 	<property optional-default="False" optional="True" id="default-width" default="0"/>
 	<property optional-default="False" optional="True" id="default-height" default="0"/>
 	<property id="has-separator" default="False"/>
+	<property save-always="True" id="type-hint"/>
       </properties>
 
     </glade-widget-class>
@@ -866,8 +869,8 @@
       <child-set-property-function>glade_gtk_paned_set_child_property</child-set-property-function>
       <child-get-property-function>glade_gtk_paned_get_child_property</child-get-property-function>
       <packing-properties>
-        <property transfer-on-paste="True" id="resize"/>
-        <property transfer-on-paste="True" id="shrink"/>
+        <property transfer-on-paste="True" save-always="True" id="resize"/>
+        <property transfer-on-paste="True" save-always="True" id="shrink"/>
         
         <property visible="False" save="False" id="first">
           <spec>glade_standard_boolean_spec</spec>
@@ -1121,8 +1124,9 @@
     
     <glade-widget-class name="GtkScrolledWindow" generic-name="scrolledwindow" title="Scrolled Window">
       <properties>
+        <property save-always="True" id="can-focus"/>
         <property id="hadjustment" disabled="True"/>
-	<property id="vadjustment" disabled="True"/>
+        <property id="vadjustment" disabled="True"/>
         <property ignore="True" id="window-placement-set"/>
       	<property id="shadow-type">
   	  <displayable-values>
@@ -1183,8 +1187,12 @@
       </properties>
    </glade-widget-class>
 
-   <glade-widget-class name="GtkColorSelectionDialog" generic-name="colorselectiondialog" title="Color Selection Dialog"></glade-widget-class>
-    
+    <glade-widget-class name="GtkColorSelectionDialog" generic-name="colorselectiondialog" title="Color Selection Dialog">
+      <properties>
+        <property id="has-separator" disabled="True"/>
+      </properties>
+    </glade-widget-class>
+
     <glade-widget-class name="GtkFileChooserDialog" generic-name="filechooserdialog" title="File Chooser Dialog">
       <properties>
 	<property id="action">
@@ -1201,9 +1209,17 @@
       </properties>
     </glade-widget-class>
     
-    <glade-widget-class name="GtkFontSelectionDialog" generic-name="fontselectiondialog" title="Font Selection Dialog"></glade-widget-class>
-   
-    <glade-widget-class name="GtkInputDialog" generic-name="inputdialog" title="Input Dialog"></glade-widget-class>
+    <glade-widget-class name="GtkFontSelectionDialog" generic-name="fontselectiondialog" title="Font Selection Dialog">
+      <properties>
+        <property id="has-separator" disabled="True"/>
+      </properties>
+    </glade-widget-class>
+
+    <glade-widget-class name="GtkInputDialog" generic-name="inputdialog" title="Input Dialog">
+      <properties>
+        <property id="has-separator" disabled="True"/>
+      </properties>
+    </glade-widget-class>
     
     <glade-widget-class name="GtkMessageDialog" generic-name="messagedialog" default-width="400" default-height="115" title="Message Dialog">
       <properties>

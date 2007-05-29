@@ -447,6 +447,7 @@ embedded in another object</_tooltip>
 	<property id="glade-stock" _name="Stock Image" save="False">
 	  <spec>glade_standard_stock_image_spec</spec>
 	</property>
+        <property id="label" translatable="True"/>
 	<property id="icon" _name="File Name">
 	  <spec>glade_standard_pixbuf_spec</spec>
 	</property>
@@ -600,7 +601,7 @@ embedded in another object</_tooltip>
 	  <spec>glade_gtk_button_type_spec</spec>
 	</property>
 
-	<property id="response-id" _name="Response ID" default="0" common="False" ignore="True">
+	<property id="response-id" _name="Response ID" default="0" common="False" ignore="True" save-always="True">
 	  <spec>glade_standard_int_spec</spec>
 	  <_tooltip>The response ID of this button in a dialog (it's NOT useful if this button is not in a GtkDialog)</_tooltip>
 	</property>
@@ -722,6 +723,7 @@ embedded in another object</_tooltip>
       <post-create-function>glade_gtk_combo_box_post_create</post-create-function>
       <set-property-function>glade_gtk_combo_box_set_property</set-property-function>
       <properties>
+        <property id="model" disabled="True"/>
         <property id="active" ignore="True"/>
         <property id="column-span-column" ignore="True"/>
         <property id="row-span-column" ignore="True"/>
@@ -826,6 +828,7 @@ embedded in another object</_tooltip>
 	<property id="default-width"  default="0" optional="True" optional-default="False"/>
 	<property id="default-height" default="0" optional="True" optional-default="False"/>
 	<property id="has-separator"  default="False"/>
+	<property id="type-hint"  save-always="True"/>
       </properties>
 
     </glade-widget-class>
@@ -875,8 +878,8 @@ embedded in another object</_tooltip>
       <child-set-property-function>glade_gtk_paned_set_child_property</child-set-property-function>
       <child-get-property-function>glade_gtk_paned_get_child_property</child-get-property-function>
       <packing-properties>
-        <property id="resize" transfer-on-paste="True"/>
-        <property id="shrink" transfer-on-paste="True"/>
+        <property id="resize" transfer-on-paste="True" save-always="True"/>
+        <property id="shrink" transfer-on-paste="True" save-always="True"/>
         <!--
 	Whether to add the child to the top/left or bottom/right pane.
 	This virtual property is used to remember child position in undo/redo.
@@ -1133,8 +1136,9 @@ embedded in another object</_tooltip>
     
     <glade-widget-class name="GtkScrolledWindow" generic-name="scrolledwindow" _title="Scrolled Window">
       <properties>
+        <property id="can-focus" save-always="True"/>
         <property id="hadjustment" disabled="True"/>
-	<property id="vadjustment" disabled="True"/>
+        <property id="vadjustment" disabled="True"/>
         <property id="window-placement-set" ignore="True"/>
       	<property id="shadow-type">
   	  <displayable-values>
@@ -1198,8 +1202,12 @@ embedded in another object</_tooltip>
       </properties>
    </glade-widget-class>
 
-   <glade-widget-class name="GtkColorSelectionDialog" generic-name="colorselectiondialog" _title="Color Selection Dialog"/>
-    
+    <glade-widget-class name="GtkColorSelectionDialog" generic-name="colorselectiondialog" _title="Color Selection Dialog">
+      <properties>
+        <property id="has-separator"  disabled="True"/>
+      </properties>
+    </glade-widget-class>
+
     <glade-widget-class name="GtkFileChooserDialog" generic-name="filechooserdialog" _title="File Chooser Dialog">
       <properties>
 	<property id="action">
@@ -1216,9 +1224,17 @@ embedded in another object</_tooltip>
       </properties>
     </glade-widget-class>
     
-    <glade-widget-class name="GtkFontSelectionDialog" generic-name="fontselectiondialog" _title="Font Selection Dialog"/>
-   
-    <glade-widget-class name="GtkInputDialog" generic-name="inputdialog" _title="Input Dialog"/>
+    <glade-widget-class name="GtkFontSelectionDialog" generic-name="fontselectiondialog" _title="Font Selection Dialog">
+      <properties>
+        <property id="has-separator"  disabled="True"/>
+      </properties>
+    </glade-widget-class>
+
+    <glade-widget-class name="GtkInputDialog" generic-name="inputdialog" _title="Input Dialog">
+      <properties>
+        <property id="has-separator"  disabled="True"/>
+      </properties>
+    </glade-widget-class>
     
     <glade-widget-class name="GtkMessageDialog" generic-name="messagedialog" _title="Message Dialog" default-width="400" default-height="115">
       <properties>

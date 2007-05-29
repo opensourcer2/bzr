@@ -1,3 +1,130 @@
+2006-05-28  Tristan Van Berkom <tvb@gnome.org>
+
+	* configure.ac, NEWS: Rolling 3.2.2
+
+2007-05-18  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-widget-adaptor.[ch]: Added glade_widget_adaptor_from_pspec()
+	  and made glade_widget_adaptor_from_pclass() always return the owning
+	  adaptor and not the adaptor for the class which the property was originally
+	  created for.
+
+	* gladeui/glade-editor-property.c: Use glade_widget_adaptor_from_pspec()
+	  where appropriate (Fixing bug 423425)
+
+2007-05-16  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/gtk+.xml.in: Set "response-id" property to be "save-always" fixing
+	  bug 410272.
+
+2007-05-09  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/gtk+.xml.in: Set "resize" and "shrink" properties to be "save-always"
+	  since gtkpaned.c does some hardcoded stuff when adding widgets. Fixes bug 364215.
+
+2007-05-08  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* gladeui/glade-property-class.c, gladeui/glade-property-class.h:
+	  added save_always member in GladePropertyClass.
+
+	* gladeui/glade-property.c: always save if class or property save_always is true.
+
+	* gladeui/glade-xml-utils.h: added GLADE_TAG_SAVE_ALWAYS tag.
+
+	* plugins/gtk+/glade-gtk.c: removed, now unnecesary, call to 
+	  glade_widget_property_set_save_always() in glade_gtk_dialog_post_create()
+
+	* plugins/gtk+/gtk+.xml.in: set save-always true in GtkDialog's "type-hint" and 
+	  GtkScrolledWindow's "can-focus" properties..
+
+2006-05-02  Tristan Van Berkom <tvb@gnome.org>
+
+	* configure.ac, NEWS: Rolling 3.2.1
+
+2007-05-02  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* plugins/gtk+/gtk+.xml.in:
+	  - diabled "has-separator" property in GtkColorSelectionDialog,
+	    GtkFontSelectionDialog and GtkInputDialog to avoid a gtk warning.
+
+	  - GtkComboBox "model" property disabled.
+
+	* plugins/gtk+/glade-gtk.c:
+	    - Make every GtkInputDialog's internal GtkOptionMenu insensitive.
+	      This is a workaround for bug #433975
+
+	    - Warning fixed in glade_gtk_paned_set_child_property() and
+	       glade_gtk_text_view_post_create()
+
+2007-05-02  Jeff Westerinen  <jeff.westerinen@palmsource.com>
+
+	* gladeui/glade-utils.[ch]: Added glade_util_ascii_strtoll()
+
+	* gladeui/glade-xml-utils.c, gladeui/glade-property-class.c: use a local
+	  workaround for a bug in g_ascii_strtoll for the time being (fixes bug 434207)
+
+2007-05-01  Vincent Geddes <vincent.geddes@gmail.com>
+ 
+        * gladeui/glade-project-view.c: Expand and scroll to selection. Fixes #392225.
+
+2007-05-01  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-widget.[ch]: Added 'exact' argument to glade_widget_dup() and
+	  added glade_widget_copy_signals()
+
+	* gladeui/glade-command.c: dup the widget "exactly" when pasting widgets that
+	  were cut (not copied), fixing bug 432519
+
+2007-04-25  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* gladeui/glade-editor-property.c: fixed a bug in GladeEPropUnichar
+
+2007-04-24  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* gladeui/glade-widget.c, gladeui/glade-project.c: make glade core not hold
+	  a reference to internals objects.
+
+2007-04-16  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* plugins/gtk+/glade-gtk.c: stop GtkFileChooserDefault "hierarchy-changed" and 
+	  "screen-changed" default handlers (fixes bug #415021)
+
+2007-04-08  Christian Persch  <chpe@gnome.org>
+
+	* gladeui/glade-property-class.c:
+	(glade_property_class_make_object_from_string):
+	* gladeui/glade-xml-utils.c: (glade_xml_get_value_int):
+	- Don't use sscanf. Bug #424547, patch by Ivan Baldo and myself.
+
+2006-04-04  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/gtk+.xml.in: Make "label" property of GtkToolButton translatable
+
+2007-03-21  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* gladeui/glade-editor.c: use g_type_is_a() to compare types
+	  in glade_editor_property_class_comp() (fixes bug #396436).
+	  based on Christian Persch's patch
+			    
+2007-03-20  Bruno Boaventura  <brunobol@gnome.org>
+
+	* data/glade3.desktop.in.in: Remove incorrect "Application" category
+	  from Categories. Add "GNOME" to Categories. Fixes #417618.
+
+2007-03-20  Vincent Geddes  <vincent.geddes@gmail.com>
+
+	* COPYING: Update licensing information. After we reorganised
+	  the package structure, the LGPL-licensed pixmaps were put into
+	  different directories.
+
+2006-03-13  Olivier Delhomme <olivierdelhomme@gmail.com>
+
+	* gladeui/glade-utils.c: Fixed broken statement in
+	  glade_util_url_show_win32().
+
+	* gladeui/glade-app.c: Fixed names of global vars in
+	  win32 code.
+
 2006-03-11  Tristan Van Berkom <tvb@gnome.org>
 
 	* configure.ac, NEWS: Rolling 3.2.0
@@ -78,13 +205,13 @@
 
 2007-02-20  Vincent Geddes  <vincent.geddes@gmail.com>
 
-        * src/glade-utils.c: Remove redundant call to `gtk_window_set_position()'
-          in `glade_util_file_dialog_new()'. Fixes #408879.
+	* src/glade-utils.c: Remove redundant call to `gtk_window_set_position()'
+	  in `glade_util_file_dialog_new()'. Fixes #408879.
 
 2007-02-17  Vincent Geddes  <vincent.geddes@gmail.com>
 
-        * src/glade-project-window.c: Remove duplicate labels for stock
-          items (patch by Nickolay V. Shmyrev, fixes #408874).
+	* src/glade-project-window.c: Remove duplicate labels for stock
+	  items (patch by Nickolay V. Shmyrev, fixes #408874).
 
 2007-02-17  Christian Persch  <chpe@svn.gnome.org>
 

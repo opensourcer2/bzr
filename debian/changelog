@@ -1,3 +1,18 @@
+glade-3 (3.2.2-0ubuntu1) gutsy; urgency=low
+
+  * New upstream version:
+    - Allow properties to be marked "save-always" in the catalog
+    - Set "save-always" on these properties:
+      o GtkDialog's "type-hint"
+      o GtkScrolledWindow's "can-focus"
+      o GtkPaned's "resize" and "shrink"
+      o GtkButton's "response-id"
+    - Now list all activatable signals in the Accelerator key dialog.
+  * debian/patches/90_autoconf.patch:
+    - updated
+
+ -- Sebastien Bacher <seb128@canonical.com>  Tue, 29 May 2007 13:04:00 +0200
+
 glade-3 (3.2.0-0ubuntu1) feisty; urgency=low
 
   * New upstream version:
