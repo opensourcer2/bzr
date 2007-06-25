@@ -1,6 +1,222 @@
-2006-05-28  Tristan Van Berkom <tvb@gnome.org>
+2006-06-18  Tristan Van Berkom <tvb@gnome.org>
 
-	* configure.ac, NEWS: Rolling 3.2.2
+	* gladeui/plugins/gtk+/glade-gtk.c: Corrected undo item for
+	"remove page" action to say "Removed page from notebook1".
+
+2006-06-17  Vincent Geddes <vincent.geddes@gmail.com>
+
+	* gladeui/glade-editor-property.c: Ensure parameter list passed to
+	  gtk_dialog_set_alternative_button_order() is terminated (#424509).
+	  
+	* gladeui/glade-command.c: Make strings more translatable (#419979).
+	
+	* gladeui/glade-property-class.c, plugins/gtk+/gtk+.xml.in,
+	  plugins/gtk+/glade-gtk.c: Fix spelling typos, and clear up a
+	  translation ambiguity (#429736).
+	  
+	* plugins/gtk+/gtk+.xml.in: More descriptive displayable values for the 
+	  "toolbar-style" property. We now have "Icons only", "Text only",
+	   "Text below icons, "Text beside icons".
+	
+2007-06-13  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* plugins/gtk+/glade-gtk.c:  glade_gtk_image_set_stock() property make reference
+	  to GLADE_TYPE_STOCK_IMAGE not GLADE_TYPE_STOCK! fixes bug #444959
+	  (yes I live in UTC -3 you insensitive... heh)
+
+2006-06-14  Vincent Geddes <vincent.geddes@gmail.com>
+
+	* gladeui/glade-app.c: Change GtkMessageType of _warning_ dialogs from
+	  GTK_MESSAGE_INFO to GTK_MESSAGE_WARNING. 
+
+	* gladeui/glade-utils.c, src/glade-project-window.c: Fix and improve URL
+	  launching on win32.
+
+2007-06-13  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* gladeui/glade-widget-adaptor.c: added some extra checks in 
+	  glade_widget_adaptor_action_add_real()
+
+	* plugins/gtk+/glade-gtk.c: added new actions support code
+	  - glade_gtk_box_notebook_child_insert_action() renamed to
+	    glade_gtk_box_notebook_child_insert_remove_action()
+
+	  - glade_gtk_table_child_insert_action() renamed to 
+	    glade_gtk_table_child_insert_remove_action()
+
+	* plugins/gtk+/gtk+.xml.in: added new actions
+
+	  - GtkTable remove_row and remove_column
+
+	  - GtkNotebook remove_page
+
+2006-06-13  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-command.c: 
+	  - Fixed cut/paste inside notebooks (widgets wanted to stay on the same page they 
+	    were cut from)
+	  - Fixed special-child-type handling, dont stomp on the special child type for a
+	    delete/undo combination (a tab widget deleted and brought back was showing up
+	    in the page).
+
+2006-06-13  Vincent Geddes <vincent.geddes@gmail.com>
+
+	* plugins/gtk+/gtk+.xml.in: HIG: Use "Edit.." instead of "Edit Menu", and so on.
+
+	* configure.ac: Calculate libtool CURRENT-minus-AGE value.
+	
+	* gladeui/gladeui.rc.in: Set the DLL name correctly.
+
+2006-06-10  Vincent Geddes <vincent.geddes@gmail.com>
+
+	* gladeui/glade-binding.c: Remove invalid warning. It is not
+	  required that the 'bindings' directory exists.
+
+	* Makefile.am: Remove 'm4' from EXTRA_DIST. m4 files are included
+	  automatically (#445028).
+	
+2007-06-06  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* gladeui/glade-builtins.c: in list_stock_items() "gtk-" prefix must be prepended just once.
+	  otherwise gtk items gets listed twice!
+
+	* gladeui/glade-placeholder.[ch]: added packing action list to GladePlaceholder
+
+	* gladeui/glade-popup.c: added packing actions to placeholder popup
+
+	* gladeui/glade-widget-adaptor.[ch]: added glade_widget_adaptor_pack_actions_new ()
+
+	* gladeui/glade-widget.c: use new function glade_widget_adaptor_pack_actions_new () in
+	  glade_widget_set_packing_actions()
+
+	* plugins/gtk+/glade-gtk.c: take into acount placeholders get paking actions
+	  glade_gtk_box_notebook_child_insert_action() and glade_gtk_table_child_insert_action() fixed.
+
+	* gladeui/glade-app.[ch], gladeui/Makefile.am: removed every reference to 
+	  binding script directory. (bug #444605)
+
+2006-06-06  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-id-allocator.c: Fixed C89 compile (bug 444045, fix by Jens Granseuer)
+
+2007-06-05  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* plugins/gtk+/gtk+.xml.in: Added GtkNotebook child packing actions (finally fixes #438881)
+
+	* plugins/gtk+/glade-gtk.c: added glade_gtk_notebook_child_action_activate ()
+
+2006-06-04  Tristan Van Berkom <tvb@gnome.org>
+
+	* configure.ac, NEWS: Rolling 3.3.0
+
+2007-05-31  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* gladeui/glade-popup.c: added packing actions to glade_popup_action_populate_menu()
+
+	* gladeui/glade-widget-action.c: fixed a couple of typos in glade_widget_action_constructor()
+
+	* gladeui/glade-widget-adaptor.[ch]:
+
+	  - Added packing actions, just like properties the action tag should be inside an actions or
+	    packing-actions tag, also you can put an action tag inside other action tag :p
+
+	  - added GladeChildActionActivatedFunc child_action_activate to GladeWidgetAdaptorClass
+
+	  - added packing_actions list to GladeWidgetAdaptor
+
+	  - added new functions:
+	    glade_widget_adaptor_pack_action_add(), glade_widget_adaptor_pack_action_remove()
+	    and glade_widget_adaptor_child_action_activate()
+
+	* gladeui/glade-widget.[ch]:
+
+	  - added packing_actions list to GladeWidget
+
+	  - set packing actions in glade_widget_set_parent()
+
+	  - added glade_widget_get_pack_action() and glade_widget_remove_pack_action()
+
+	* gladeui/glade-xml-utils.h:
+
+	  - new tags GLADE_TAG_CHILD_ACTION_ACTIVATE_FUNCTION, GLADE_TAG_ACTIONS 
+	    and GLADE_TAG_PACKING_ACTIONS.
+
+	  - removed unused tag GLADE_TAG_ACTION_GROUP
+
+	* plugins/gtk+/gtk+.xml.in: Added a couple of child packing actions (fixes #438881)
+
+	  - GtkBox:  insert_before and insert_after
+
+	  - GtkTable: insert_row/after, insert_row/before, insert_column/after and insert_column/before
+
+	* plugins/gtk+/glade-gtk.c: added child-action-activate-function functions
+	  glade_gtk_box_child_action_activate () and glade_gtk_table_child_action_activate()
+
+2007-05-24  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* gladeui/glade-widget-action.[ch]:
+
+	  - memory leak fixed in glade_widget_action_class_clone()
+
+	  - glade_widget_action_set_sensitive() declared and used in 
+	    gobject set_property() method.
+
+	  - GladeWidgetAction "klass" property renamed to "class"
+
+	* gladeui/glade-widget.c:
+	  - fixed check in glade_widget_get_action()
+
+	  - adapted to reflect GladeWidgetAction property rename.
+
+2007-05-23  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* gladeui/Makefile.am: added gladeui/glade-widget-action.[ch]
+
+	* gladeui/glade-popup.[ch]:
+	  - added glade_popup_action_populate_menu()
+
+	  - adapted popup code to reflect action changes.
+
+	* gladeui/glade-widget-action.[ch]: GladeWidgetAction GObject sources.
+
+	* gladeui/glade-widget-adaptor.[ch]:
+
+	  - action-activated signal removed
+
+	  - added GladeActionActivateFunc
+
+	  - added glade_widget_adaptor_action_add() and glade_widget_adaptor_action_remove()
+
+	  - glade_widget_adaptor_action_activate() reworked. 
+
+	  - load symbol and other catalog stuff in gwa_derived_class_init()
+
+	  - added the posibility to override GObject constructor from the catalog.
+	    This is a good place to add/remove actions, use GWA_GET_OCLASS() to chain up.
+
+	* gladeui/glade-widget.[ch]:
+	  - removed action-activated signal
+
+	  - added glade_widget_get_action (), glade_widget_remove_action() and
+	    glade_widget_create_action_menu()
+
+	* gladeui/glade-xml-utils.h: added GLADE_TAG_ACTION_ACTIVATE_FUNCTION and 
+	  GLADE_TAG_CONSTRUCTOR_FUNCTION tags
+
+	* plugins/gtk+/glade-gtk.c:
+	  - added glade_gtk_menu_shell_action_activate() glade_gtk_menu_item_action_activate()
+	    and glade_gtk_toolbar_action_activate()
+
+	  - removed glade_gtk_menu_post_create() and glade_gtk_menu_launch_editor_action()
+
+	* plugins/gtk+/gtk+.xml.in:
+	  - glade_gtk_menu_post_create() removed
+
+	  - added action-activate-function for MenuShell MenuItem and Toolbar.
+
+2007-05-18  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* Patch reaplied with the missing '}' :S (bug 435912)
 
 2007-05-18  Tristan Van Berkom <tvb@gnome.org>
 
@@ -9,8 +225,23 @@
 	  adaptor and not the adaptor for the class which the property was originally
 	  created for.
 
+	* gladeui/glade-editor.[ch]: Removed some deadcode
+
 	* gladeui/glade-editor-property.c: Use glade_widget_adaptor_from_pspec()
 	  where appropriate (Fixing bug 423425)
+	
+2007-05-18  Tristan Van Berkom <tvb@gnome.org>
+
+	* Reverting Juan's last fix for bug 435912 since it broke the build.
+
+2007-05-16  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* gladeui/glade-widget-adaptor.[ch]: fixed bogus type punned warnings adding a 
+	  local variable in gwa_extend_with_node_load_sym() as pointed by galtgendo@o2.pl
+	  (bug 435912)
+
+	* gladeui/glade-xml-utils.[ch]: glade_xml_load_sym_from_node() now returns
+	   wheater or not the symbol was found.
 
 2007-05-16  Tristan Van Berkom <tvb@gnome.org>
 
@@ -22,7 +253,19 @@
 	* plugins/gtk+/gtk+.xml.in: Set "resize" and "shrink" properties to be "save-always"
 	  since gtkpaned.c does some hardcoded stuff when adding widgets. Fixes bug 364215.
 
+2007-05-09  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-widget-adaptor.[ch], gladeui/glade-widget.[ch], gladeui/glade-editor.c,
+	  gladeui/glade-xml-utils.h:
+	  Removed notion of custom widget editors.
+
+	* plugins/gtk+/gtk+.xml.in, plugins/gtk+/glade-gtk.c: removed custom editor hooks,
+	  implemented menu editor via actions only (toolbar editor temporarily disabled).
+
 2007-05-08  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* bindings/python/glade-python.c, gladeui/glade-binding.c, 
+	  gladeui/glade-binding.h: Removed GladeBindingScript.
 
 	* gladeui/glade-property-class.c, gladeui/glade-property-class.h:
 	  added save_always member in GladePropertyClass.
@@ -37,9 +280,12 @@
 	* plugins/gtk+/gtk+.xml.in: set save-always true in GtkDialog's "type-hint" and 
 	  GtkScrolledWindow's "can-focus" properties..
 
-2006-05-02  Tristan Van Berkom <tvb@gnome.org>
+2007-05-04  Vincent Geddes <vincent.geddes@gmail.com>
 
-	* configure.ac, NEWS: Rolling 3.2.1
+        * doc/tmpl/glade-project.sgml, doc/tmpl/glade-app.sgml,
+          doc/tmpl/glade-widget.sgml, doc/tmpl/glade-property.sgml,
+	  doc/tmpl/glade-widget-class.sgml, doc/tmpl/glade-fixed.sgml
+	  doc/tmpl/glade-utils.sgml: Update documentation templates.
 
 2007-05-02  Juan Pablo Ugarte <juanpablougarte@gmail.com>
 
@@ -56,16 +302,18 @@
 	    - Warning fixed in glade_gtk_paned_set_child_property() and
 	       glade_gtk_text_view_post_create()
 
-2007-05-02  Jeff Westerinen  <jeff.westerinen@palmsource.com>
+2007-05-02  Tristan Van Berkom <tvb@gnome.org>
 
-	* gladeui/glade-utils.[ch]: Added glade_util_ascii_strtoll()
+	* gladeui/glade-popup.[ch], gladeui/glade-widget.c, gladeui/glade-project-view.c: 
+	  Removed submenus for the ancestry since Vincent did that magic to the project view, 
+	  all is cleaner now.
 
-	* gladeui/glade-xml-utils.c, gladeui/glade-property-class.c: use a local
-	  workaround for a bug in g_ascii_strtoll for the time being (fixes bug 434207)
+	* gladeui/glade-widget-adaptor.c: Removed #include "glade-binding.h" and
+	  all the scripting crap that went with it.
 
 2007-05-01  Vincent Geddes <vincent.geddes@gmail.com>
- 
-        * gladeui/glade-project-view.c: Expand and scroll to selection. Fixes #392225.
+
+	* gladeui/glade-project-view.c: Expand and scroll to selection. Fixes #392225.
 
 2007-05-01  Tristan Van Berkom <tvb@gnome.org>
 
@@ -74,6 +322,52 @@
 
 	* gladeui/glade-command.c: dup the widget "exactly" when pasting widgets that
 	  were cut (not copied), fixing bug 432519
+
+2007-04-26  Jeff Westerinen <jeff.westerinen@access-company.com>
+
+	* plugins/gtk+/glade-gtk.c:
+	    - added a general launch_editor action signal handler.
+	    - hooked the launch_editor action signal in the GtkMenuItem post_create function.
+	    - hooked the launch_editor action signal in the GtkMenuBar post_create function.
+	    - created a GtkMenu post_create function containing a hook for the launch_editor
+	      action signal.
+	  (bug 433055)
+
+	* plugins/gtk+/gtk+.xml.in: 
+	    - Added "launch_editor" action to GtkMenuItem.
+	    - Added "launch_editor" action to GtkMenuBar.
+	    - Added "launch_editor" action and post_create function to GtkMenu.
+	  (bug 433055)
+
+2007-04-29  Vincent Geddes <vincent.geddes@gmail.com>
+
+	* gladeui/glade-palette.c: Override GtkWidget::show_all to ensure
+	  hidden selector button is not accidentally made visible.
+	  
+	* gladeui/atk.xpm, gladeui/Makefile.am, data/icons/atk.png,
+	  data/icons/Makefile.am: Moved gladeui/atk.xpm to data/icons/atk.png
+	  
+	* gladeui/glade-editor.c: Update to use atk.png instead of atk.xpm. 
+	
+2007-04-26  Vincent Geddes <vincent.geddes@gmail.com>
+
+	* gladeui/glade-project.h, gladeui/glade-project.c:
+	  - Hide private implementation details (Added GladeProjectPrivate).
+          - Added private field accessors glade_project_get_path, glade_project_get_name,
+            glade_project_get_objects, and glade_project_get_has_unsaved_changes.
+          - Removed project->name field.
+          - Removed glade_project_display_name method.
+          
+        * gladeui/glade-editor-property.c, gladeui/glade-project-view.c,
+	  gladeui/glade-cursor.c, gladeui/glade-signal-editor.c, gladeui/glade-app.c
+	  gladeui/glade-property-class.c: Update for change in GladeProject.
+   
+        * src/glade-project-window.c: Update for change in GladeProject. Added
+          methods for formatting paths and names. Fix display of tooltips for
+          items in the project list menu.
+          
+        * gladeui/glade-palette-item.c, gladeui/glade-palette.c: Update to use 
+          g_object_ref_sink().        
 
 2007-04-25  Juan Pablo Ugarte <juanpablougarte@gmail.com>
 
@@ -84,10 +378,82 @@
 	* gladeui/glade-widget.c, gladeui/glade-project.c: make glade core not hold
 	  a reference to internals objects.
 
+2007-04-21  Vincent Geddes <vincent.geddes@gmail.com>
+
+	* plugins/gtk+/gtk+.xml.in: Fixed spelling error "Maximun" -> "Maximum".
+	
+	* gladeui/glade-widget.c: Clean up toplevel embedding code, remove
+	  unused embedding implementation. Fix embedding warning.
+	  
+	* glade-id-allocator.c, glade-id-allocator.h: Performed house cleaning.
+          - Use g_slice_new where appropriate.
+          - Hide private implementation details.
+          - Added g_return_if_fail guards.
+          
+        * gladeui/glade-project.c, gladeui/glade-project.h:
+          - Move to using GladeIDAllocator for allocating unsaved numbers.
+          - Rename some variables since projects are now considered "unsaved"
+            instead of "untitled" (#400357, Wouter Bolsterlee).
+
+2007-04-20  Vincent Geddes <vincent.geddes@gmail.com>
+
+	* README, configure.ac, plugins/gnome/gnome.xml.in,
+	  plugins/gnome/glade-gnome.c, plugins/gnome/canvas.xml.in:
+	  Rename user visible "Gnome" strings
+	  to "GNOME". (#412309, Duarte "HappyGuy" Loreto).
+
+2007-04-16  Vincent Geddes <vincent.geddes@gmail.com>
+
+	* configure.ac: Check for windres on win32. Define version using
+	  separate numbered components (major, minor, micro).
+	  
+	* data/icons/glade-3.ico: New application icon in win32 ICO format.
+	
+	* gladeui/gladeui.rc.in, gladeui/Makefile.am, src/glade-3.rc.in,
+	  src/Makefile.am: Added win32 resources for the libgladeui dll
+	  and the application executable.
+	  
+	* src/Makefile.am: Removed "-mwindows" linker flag.
+	
+	* gladeui/glade-widget-adaptor.h: Remove undefined functions.
+	  
 2007-04-16  Juan Pablo Ugarte <juanpablougarte@gmail.com>
 
-	* plugins/gtk+/glade-gtk.c: stop GtkFileChooserDefault "hierarchy-changed" and 
-	  "screen-changed" default handlers (fixes bug #415021)
+	* plugins/gtk+/glade-gtk.c: stop GtkFileChooserDefault "hierarchy-changed"
+	  and "screen-changed" default handlers (fixes bug #415021)
+
+	* plugins/gtk+/glade-gtk.c: added GtkFileChooserWidget post-create function
+
+	* plugins/gtk+/gtk+.xml.in: added GtkFileChooserWidget
+
+	* plugins/gtk+/icons/22x22/widget-gtk-filechooserwidget.png,
+	  plugins/gtk+/icons/16x16/widget-gtk-filechooserwidget.png: new icons,
+	  they are the same as GtkFileChooserDialog but without the borders :)
+
+2007-04-12  Vincent Geddes <vincent.geddes@gmail.com>
+
+	* gladeui/Makefile.am: Auto-generate `gladeui.def' for DLL symbol
+	  exports. Remove -DINSIDE_LIBGLADEUI from libgladeui_1_la_CPPFLAGS.
+
+	* gladeui/glade-accumulators.h, gladeui/glade-app.h,
+	  gladeui/glade-base-editor.h, gladeui/glade-binding.h,
+	  gladeui/glade-builtins.h, gladeui/glade-catalog.h,
+	  gladeui/glade-clipboard-view.h, gladeui/glade-clipboard.h,
+	  gladeui/glade-command.h, gladeui/glade-custom.h,
+	  gladeui/glade-debug.h, gladeui/glade-design-view.h,
+	  gladeui/glade-editor-property.h, gladeui/glade-editor.h,
+	  gladeui/glade-fixed.h, gladeui/glade-palette.h,
+	  gladeui/glade-parameter.h, gladeui/glade-placeholder.h,
+	  gladeui/glade-project-view.h, gladeui/glade-project.h,
+	  gladeui/glade-property-class.h, gladeui/glade-property.h,
+	  gladeui/glade-signal-editor.h, gladeui/glade-utils.h,
+	  gladeui/glade-widget-adaptor.h, gladeui/glade-widget.h,
+	  gladeui/glade.h:
+	  Remove LIBGLADEUI_API function attributes.
+
+	* plugins/gnome/glade-gnome.c, plugins/gtk+/glade-gtk.c,
+	  plugins/gtk+/glade-gtk.h:
+	  Remove GLADEGTK_API and GLADEGNOME_API function attributes.
 
 2007-04-08  Christian Persch  <chpe@gnome.org>
 
@@ -100,24 +466,87 @@
 
 	* plugins/gtk+/gtk+.xml.in: Make "label" property of GtkToolButton translatable
 
-2007-03-21  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+2007-04-02  Vincent Geddes  <vincent.geddes@gmail.com>
 
-	* gladeui/glade-editor.c: use g_type_is_a() to compare types
-	  in glade_editor_property_class_comp() (fixes bug #396436).
-	  based on Christian Persch's patch
-			    
+	* src/glade-project-window.c:
+	  - Remove hard-coded newlines from license text. Enable "wrap-license"
+	    property on GtkAboutDialog. Fixes #409120.
+	  - s/this program/Glade/ in license text.
+
+2007-04-02  Jeff Westerinen  <jeff.westerinen@palmsource.com>
+
+	* plugins/gtk+/gtk+.xml.in: removed the GtkPageSetupUnixDialog and 
+	  GtkPrintUnixDialog widgets from the gtk+ catalog. Fixes #392340.
+
+	* plugins/gtk+/gtkunixprint.xml.in: added new, separate catalog for
+	  the unix print widgets.
+
+	* plugins/gtk+/Makefile.am: modified the make file to include the new
+	  unix print catalog if found by configure.
+
+	* configure.ac: modified configure to check for the existence of
+	  the unix print widgets.
+
+	* po/POTFILES.in: added the new unix print catalog to the list of 
+	  translatable files.
+
+2007-04-01  Vincent Geddes  <vincent.geddes@gmail.com>
+
+	* plugins/gtk+/icons/*, plugins/gnome/icons/*: Renamed all icons.
+
+	* gladeui/glade-project-view.c, gladeui/glade-widget-adaptor.[ch],
+	  gladeui/glade-palette-item.c, gladeui/glade-clipboard-view.c:
+	  Use GtkIconTheme for loading and managing widget icons.
+	  New "icon-name" property on GladeWidgetAdaptor.
+
+	* gladeui/glade-catalog: Added catalog property "icon-prefix". The
+	  default value of this property is set to the catalog name.
+
+	* gladeui/glade-app.c: Add GtkIconTheme search path for widget icons.
+
+	* plugins/gtk+/icons/16x16/Makefile.am,
+	  plugins/gtk+/icons/22x22/Makefile.am,
+	  plugins/gnome/icons/16x16/Makefile.am,
+	  plugins/gnome/icons/22x22/Makefile.am: Renamed icon files.
+
+	* gladeui/glade-widget-adaptor.c: Use g_type_class_add_private().
+
+	* doc/widgetclasses.sgml, doc/catalogintro.sgml: Update documentation.
+
+2007-03-30  Vincent Geddes  <vincent.geddes@gmail.com>
+
+	* src/main.c: Fix warnings when building on win32.
+
+2007-03-30  Christian Persch  <chpe@gnome.org>
+
+	* gladeui/glade-parameter.c: (glade_parameter_get_integer),
+	(glade_parameter_get_float):
+	* gladeui/glade-xml-utils.c: (glade_xml_get_property_int): Don't use
+	atoi/atof. Bug #414358.
+
+2007-03-22  John Millikin  <jmillikin@gmail.com>
+
+	* src/glade-project-window.c: Use Shift+Ctrl+Z as the accelerator for Redo,
+	  as specified by the HIG.
+
+2007-03-22  Vincent Geddes  <vincent.geddes@gmail.com>
+
+	* gladeui/glade-palette-expander.[ch]: Rewrote expander widget implementation.
+	
+	* gladeui/glade-palette.c: Update for change in expander widget.
+
 2007-03-20  Bruno Boaventura  <brunobol@gnome.org>
 
 	* data/glade3.desktop.in.in: Remove incorrect "Application" category
 	  from Categories. Add "GNOME" to Categories. Fixes #417618.
 
-2007-03-20  Vincent Geddes  <vincent.geddes@gmail.com>
+2007-03-15  Vincent Geddes  <vincent.geddes@gmail.com>
 
 	* COPYING: Update licensing information. After we reorganised
 	  the package structure, the LGPL-licensed pixmaps were put into
 	  different directories.
 
-2006-03-13  Olivier Delhomme <olivierdelhomme@gmail.com>
+2007-03-13  Olivier Delhomme <olivierdelhomme@gmail.com>
 
 	* gladeui/glade-utils.c: Fixed broken statement in
 	  glade_util_url_show_win32().
@@ -125,11 +554,7 @@
 	* gladeui/glade-app.c: Fixed names of global vars in
 	  win32 code.
 
-2006-03-11  Tristan Van Berkom <tvb@gnome.org>
-
-	* configure.ac, NEWS: Rolling 3.2.0
-
-2006-03-11  Tristan Van Berkom <tvb@gnome.org>
+2007-03-11  Tristan Van Berkom <tvb@gnome.org>
 
 	* gladeui/glade-property-class.c: Fix handling of atk
 	properties specified by the plugin.
@@ -139,7 +564,12 @@
 	for GtkWidgetClass (fixes bug 383121).
 
 	* TODO: Updated 
-	
+
+2007-03-06  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* gladeui/glade-editor.c: use g_type_is_a() to compare types
+	  in glade_editor_property_class_comp() (fixes bug #396436).
+
 2006-03-05  Halton Huo <halton.huo@sun.com>
 
 	* Define GCC_WARN_FLAGS in configure.ac, if use gcc, put -Wall into CFLAGS,
@@ -230,11 +660,11 @@
 
 	* plugins/gtk+/gtk+.xml.in: added generic-name to GtkMenuShell.
 
-2007-02-15  Jens Granseuer <jensgr@gmx.net>
+2006-02-15  Jens Granseuer <jensgr@gmx.net>
 
 	* Fixed sources to build with gcc 2.95 (bug 406504)
 
-2007-02-13  Tristan Van Berkom <tvb@gnome.org>
+2006-02-13  Tristan Van Berkom <tvb@gnome.org>
 
 	* configure.in, NEWS: Rolling 3.1.5
 

@@ -39,6 +39,8 @@
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtkstock.h>
 
+#define GLADE_CONFIG_FILENAME "glade-3.conf"
+
 #define GLADE_APP_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GLADE_TYPE_APP, GladeAppPrivate))
 
 enum
@@ -81,7 +83,6 @@ struct _GladeAppPrivate
 static guint glade_app_signals[LAST_SIGNAL] = { 0 };
 
 /* installation paths */
-static gchar *scripts_dir  = NULL;
 static gchar *catalogs_dir = NULL;
 static gchar *modules_dir  = NULL;
 static gchar *bindings_dir = NULL;
@@ -100,9 +101,9 @@ G_DEFINE_TYPE (GladeApp, glade_app, G_TYPE_OBJECT);
  *                    GObjectClass                               *
  *****************************************************************/
 static GObject *
-glade_app_constructor (GType                  type,
-                       guint                  n_construct_properties,
-                       GObjectConstructParam *construct_properties)
+glade_app_constructor (GType                   type,
+                       guint                   n_construct_properties,
+                       GObjectConstructParam  *construct_properties)
 {
 	GObject *object;
 	
@@ -159,14 +160,12 @@ static void
 glade_app_finalize (GObject *app)
 {
 
-#ifdef G_OS_WIN32 
-	g_free (scripts_dir);
+#ifdef G_OS_WIN32
 	g_free (catalogs_dir);
 	g_free (modules_dir);
 	g_free (bindings_dir);
 	g_free (pixmaps_dir);	
 	g_free (locale_dir);
-
 #endif
 	
 	glade_binding_unload_all ();
@@ -310,14 +309,6 @@ glade_app_config_load (GladeApp *app)
 }
 
 const gchar *
-glade_app_get_scripts_dir (void)
-{
-	glade_init_check ();
-
-	return scripts_dir;
-}
-
-const gchar *
 glade_app_get_catalogs_dir (void)
 {
 	glade_init_check ();
@@ -374,7 +365,6 @@ build_package_paths (void)
 	gchar *prefix;
 	
 	prefix = g_win32_get_package_installation_directory (NULL, NULL);
-	scripts_dir  = g_build_filename (prefix, "share", PACKAGE, GLADE_BINDING_SCRIPT_DIR, NULL);
 	pixmaps_dir  = g_build_filename (prefix, "share", PACKAGE, "pixmaps", NULL);
 	catalogs_dir = g_build_filename (prefix, "share", PACKAGE, "catalogs", NULL);
 	modules_dir  = g_build_filename (prefix, "lib", PACKAGE, "modules", NULL);
@@ -382,7 +372,6 @@ build_package_paths (void)
 	locale_dir   = g_build_filename (prefix, "share", "locale", NULL);
 	g_free (prefix);
 #else
-	scripts_dir  = g_strdup (GLADE_SCRIPTSDIR);
 	catalogs_dir = g_strdup (GLADE_CATALOGSDIR);
 	modules_dir  = g_strdup (GLADE_MODULESDIR);
 	bindings_dir = g_strdup (GLADE_BINDINGSDIR);
@@ -420,6 +409,9 @@ glade_app_init (GladeApp *app)
 	
 	if (!initialized)
 	{
+		gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
+						   GLADE_DATADIR G_DIR_SEPARATOR_S "pixmaps");	
+	
 		glade_cursor_init ();
 		
 		glade_binding_load_all ();
@@ -434,17 +426,15 @@ glade_app_init (GladeApp *app)
 	
 	/* Create palette */
 	app->priv->palette = (GladePalette *) glade_palette_new (app->priv->catalogs);
-	g_object_ref (app->priv->palette);
-	gtk_object_sink (GTK_OBJECT (app->priv->palette));
-	gtk_widget_show_all (GTK_WIDGET (app->priv->palette));
+	g_object_ref_sink (app->priv->palette);
+	
 	g_signal_connect (G_OBJECT (app->priv->palette), "toggled",
 			  G_CALLBACK (on_palette_button_clicked), app);
 
 	/* Create Editor */
 	app->priv->editor = GLADE_EDITOR (glade_editor_new ());
-	g_object_ref (app->priv->editor);
-	gtk_object_sink (GTK_OBJECT (app->priv->editor));
-	gtk_widget_show (GTK_WIDGET (app->priv->editor));
+	g_object_ref_sink (GTK_OBJECT (app->priv->editor));
+	
 	glade_editor_refresh (app->priv->editor);
 	
 	/* Create clipboard */
@@ -697,7 +687,7 @@ glade_app_set_transient_parent (GtkWindow *parent)
 	 */
 	for (projects = glade_app_get_projects (); /* projects */
 	     projects; projects = projects->next) 
-		for (objects = GLADE_PROJECT (projects->data)->objects;  /* widgets */
+		for (objects = (GList *) glade_project_get_objects (GLADE_PROJECT (projects->data));  /* widgets */
 		     objects; objects = objects->next)
 			if (GTK_IS_WINDOW (objects->data))
 				gtk_window_set_transient_for
@@ -848,7 +838,8 @@ glade_app_is_project_loaded (const gchar *project_path)
 	GList    *list;
 	gboolean  loaded = FALSE;
 
-	if (project_path == NULL) return FALSE;
+	if (project_path == NULL)
+		return FALSE;
 
 	app = glade_app_get ();
 
@@ -856,8 +847,8 @@ glade_app_is_project_loaded (const gchar *project_path)
 	{
 		GladeProject *cur_project = GLADE_PROJECT (list->data);
 
-		if ((loaded = cur_project->path && 
-		     (strcmp (cur_project->path, project_path) == 0)))
+		if ((loaded = glade_project_get_path (cur_project) && 
+		     (strcmp (glade_project_get_path (cur_project), project_path) == 0)))
 			break;
 	}
 
@@ -879,7 +870,8 @@ glade_app_get_project_by_path (const gchar *project_path)
 	GList    *l;
 	gchar *canonical_path;
 
-	if (project_path == NULL) return NULL;
+	if (project_path == NULL)
+		return NULL;
 
 	app = glade_app_get ();
 
@@ -889,7 +881,7 @@ glade_app_get_project_by_path (const gchar *project_path)
 	{
 		GladeProject *project = (GladeProject *) l->data;
 
-		if (project->path && strcmp (canonical_path, project->path) == 0) {
+		if (glade_project_get_path (project) && strcmp (canonical_path, glade_project_get_path (project)) == 0) {
 			g_free (canonical_path);
 			return project;
 		}
@@ -927,37 +919,44 @@ void
 glade_app_update_instance_count (GladeProject *project)
 {
 	GladeApp  *app;
-	GladeProject *prj;
 	GList *l;
 	gint temp, max = 0, i = 0, uncounted_projects = 0;
+	gchar *project_name;
 
 	g_return_if_fail (GLADE_IS_PROJECT (project));
 		
-	if (project->instance > 0) return;
+	if (glade_project_get_instance_count (project) > 0)
+		return;
+
+	project_name = glade_project_get_name (project);
 
 	app = glade_app_get ();
 
 	for (l = app->priv->projects; l; l = l->next)
 	{
-		prj = l->data;
+		GladeProject *prj = GLADE_PROJECT (l->data);
+		gchar *name = glade_project_get_name (project);
 
-		if (prj != project &&
-		    prj->name && !strcmp (prj->name, project->name))
+		if (prj != project && !g_utf8_collate (name, project_name))
 		{
 			i++;
-			temp = MAX (prj->instance + 1, i);
+			temp = MAX (glade_project_get_instance_count (prj) + 1, i);
 			max  = MAX (temp, max);
 
-			if (prj->instance < 1)
+			if (glade_project_get_instance_count (prj) < 1)
 				uncounted_projects++;
 		}
+		
+		g_free (name);
 	}
+	
+	g_free (project_name);
 
 	/* Dont reset the initially opened project */
-	if (uncounted_projects > 1 || 
-	    g_list_find (app->priv->projects, project) == NULL)
-		project->instance = MAX (max, i);
-
+	if (uncounted_projects > 1 || g_list_find (app->priv->projects, project) == NULL)
+	{
+		glade_project_set_instance_count (project, MAX (max, i));
+	}
 }
 
 void
@@ -967,7 +966,7 @@ glade_app_add_project (GladeProject *project)
  	g_return_if_fail (GLADE_IS_PROJECT (project));
 
 	/* If the project was previously loaded, don't re-load */
-	if (glade_app_is_project_loaded (project->path))
+	if (glade_app_is_project_loaded (glade_project_get_path (project)))
 	{
 		glade_app_set_project (project);
 		return;
@@ -1105,7 +1104,7 @@ glade_app_command_copy (void)
 		{
 			glade_util_ui_message
 				(glade_app_get_window(),
-				 GLADE_UI_INFO,
+				 GLADE_UI_WARN,
 				 _("You cannot copy a widget "
 				   "internal to a composite widget."));
 			failed = TRUE;
@@ -1158,7 +1157,7 @@ glade_app_command_cut (void)
 		{
 			glade_util_ui_message
 				(glade_app_get_window(),
-				 GLADE_UI_INFO,
+				 GLADE_UI_WARN,
 				 _("You cannot cut a widget "
 				   "internal to a composite widget."));
 			failed = TRUE;
@@ -1333,7 +1332,7 @@ glade_app_command_delete (void)
 		{
 			glade_util_ui_message
 				(glade_app_get_window(),
-				 GLADE_UI_INFO,
+				 GLADE_UI_WARN,
 				 _("You cannot delete a widget "
 				   "internal to a composite widget."));
 			failed = TRUE;
@@ -1380,7 +1379,7 @@ glade_app_command_delete_clipboard (void)
 		{
 			glade_util_ui_message
 				(glade_app_get_window(),
-				 GLADE_UI_INFO,
+				 GLADE_UI_WARN,
 				 _("You cannot delete a widget "
 				   "internal to a composite widget."));
 			return;

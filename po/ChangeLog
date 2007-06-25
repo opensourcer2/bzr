@@ -1,61 +1,89 @@
+2007-06-15  Jorge Gonzalez <jorgegonz@svn.gnome.org>
+
+        * es.po: Updated Spanish translation
+
+2007-06-09  Takeshi AIHANA <takeshi.aihana@gmail.com>
+
+	* ja.po: Updated Japanese translation.
+
+2007-06-08  Jorge Gonzalez <jorgegonz@svn.gnome.org>
+
+        * es.po: Updated Spanish translation
+
+2007-06-06  Jorge Gonzalez <jorgegonz@svn.gnome.org>
+
+        * es.po: Updated Spanish translation
+
+2007-06-02  Jorge Gonzalez <jorgegonz@svn.gnome.org>
+
+        * es.po: Updated Spanish translation
+
+2007-06-02  Theppitak Karoonboonyanan  <thep@linux.thai.net>
+
+	* th.po: Updated Thai translation.
+
+2007-05-15  David Lodge <dave@cirt.net>
+
+	* en_GB.po: Updated British English translation
+
+2007-05-14  Subhransu Behera  <arya_subhransu@yahoo.co.in>
+
+	* LINGUAS: Added Oriya (or) to the list.
+	* or.po: Added and Updated Oriya Translation.
+
 2007-05-13  Theppitak Karoonboonyanan  <thep@linux.thai.net>
 
 	* th.po: Updated Thai translation.
 
-2007-05-01  Daniel Nylander <po@danielnylander.se>
+2007-05-03  Jorge Gonzalez <jorgegonz@svn.gnome.org>
 
-	* sv.po: Updated Swedish translation.
+	* es.po: Updated Spanish translation
+
+2007-04-30  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* gl.po: Updated Galician Translation.
+
+2007-04-27  David Lodge <dave@cirt.net>
+
+	* en_GB.po: Updated British English translation
+
+2007-04-23  Luca Ferretti  <elle.uca@libero.it>
+
+	* it.po: Added Italian translation by Andrea Zagli.
+	* LINGUAS: ditto.
 
 2007-04-23  Jorge Gonzalez <jorgegonz@svn.gnome.org>
 
 	* es.po: Updated Spanish translation.
 
-2007-04-23  Luca Ferretti  <elle.uca@libero.it>
+2007-04-22  David Lodge <dave@cirt.net>
 
-	* it.po: Updated Italian translation by Andrea Zagli.
+	* en_GB.po: Updated British English translation
 
-2007-04-17  Peter Bach  <bach.peter@gmail.com>
+2007-04-19  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
-	* da.po: Updated Danish translation.
+	* gl.po: Updated Galician Translation.
 
-2007-04-05  Kjartan Maraas  <kmaraas@gnome.org>
+2007-04-14  Djihed Afifi <djihed@gmail.com> 
 
-	* nb.po: Updated Norwegian bokmål translation from
-	Espen Stefansen.
+	* ar.po: Updated Arabic Translation by Djihed Afifi.
 
-2007-03-29  Claudio Saavedra  <csaavedra@alumnos.utalca.cl>
+2007-04-08  Ignacio Casal Quinteiro  <icq@cvs.gnome.org>
 
-	* es.po: Updated Spanish translation.
+	* gl.po: Updated Galician Translation.
 
-2007-03-22  Pema Geyleg <pema.geyleg@gmail.com>
+2007-03-21  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
-	* LINGUAS: Added 'dz' to ALL_LINGUAS
-	* dz.po: Added dzongkha translation
+	* gl.po: Updated Galician Translation.
 
-2007-03-14  Laurent Dhima  <laurenti@alblinux.net>
+2007-03-13  Laurent Dhima  <laurenti@alblinux.net>
 
-	* LINGUAS: Added sq (Albanian).
-	* sq.po: Added Albanian translation.
-
-2007-03-13  Stéphane Raimbault  <stephane.raimbault@gmail.com>
-
-	* fr.po: Updated French translation.
-
-2007-03-13  Simos Xenitellis  <simos@gnome.org>
-
-	* el.po: Updated Greek translation.
+	* LINGUAS: Added sq (Albanian)
+	* sq.po: Added Albanian Translation.
 
 2007-03-13  Gintautas Miliauskas  <gintas@akl.lt>
 
 	* lt.po: Updated Lithuanian translation.
-
-2007-03-12  Duarte Loreto <happyguy_pt@hotmail.com>
-
-	* pt.po: Updated Portuguese translation.
-
-2007-03-12  Gabor Kelemen  <kelemeng@gnome.hu>
-
-	* hu.po: Translation updated.
 
 2007-03-12  David Lodge <dave@cirt.net>
 
@@ -66,18 +94,6 @@
 	* bg.po: Updated Bulgarian translation by
 	Yavor Doganov <yavor@gnu.org>
 
-2007-03-12  Jovan Naumovski  <jovan@lugola.net>
- 
- 	 * mk.po: Updated Macedonian translation.
-
-2007-03-12  Nickolay V. Shmyrev  <nshmyrev@yandex.ru>
-
-	* ru.po: Updated Russian translation.
-
-2007-03-12  Takeshi AIHANA <takeshi.aihana@gmail.com>
-
-	* ja.po: Updated Japanese translation.
-
 2007-03-12  Nikos Charonitakis  <nikosx@gmail.com>
 
 	* el.po: fix an error
@@ -86,34 +102,21 @@
 
 	* LINGUAS: Added el (Greek)
 
-2007-03-12  Ani Peter <peter.ani@gmail.com>
-	
-	* ml.po: Added and updated ml translation
-	* LINGUAS: Added ml (malayalam) to the list of languages
+2007-03-12  I Felix  <ifelix25@gmail.com>
 
-2007-03-12  Djihed Afifi <djihed@gmail.com> 
-
-	* ar.po: Updated Arabic Translation by Djihed Afifi.
-
-2007-03-12  Luca Ferretti  <elle.uca@libero.it>
-
-	* it.po: Added Italian translation by Andrea Zagli.
+	* ta.po: Updated Tamil Translation.
 
 2007-03-12  Maxim Dziumanenko <dziumanenko@gmail.com>
 
-	* uk/uk.po: Updated Ukrainian translation.
+	* uk.po: Updated Ukrainian translation.
 
-2007-03-12  Daniel Nylander <po@danielnylander.se>
+2007-03-12  Simos Xenitellis  <simos@gnome.org>
 
-	* sv.po: Updated Swedish translation.
+	* el.po: Added Greek translation.
 
 2007-03-12  Abel Cheung  <abelcheung@gmail.com>
 
 	* zh_HK.po, zh_TW.po: Updated traditional Chinese translation.
-
-2007-03-12  Simos Xenitellis  <simos@gnome.org>
-
-	* el.po: Added Greek translation by Eleni Maria Stea.
 
 2007-03-12  Ilkka Tuohela  <hile@iki.fi>
 
@@ -122,11 +125,20 @@
 2007-03-12  Leonardo Ferreira Fontenelle  <leonardof@svn.gnome.org>
 
 	* pt_BR.po: Brazilian Portuguese translation of last-minute string
-	changes. Initially committed to trunk.
+	changes.
 
 2007-03-11  Gabor Kelemen  <kelemeng@gnome.hu>
 
 	* hu.po: Translation updated.
+
+2007-03-10  Ilkka Tuohela  <hile@iki.fi>
+
+	* fi.po: Updated Finnish translation.
+
+2007-03-10  Alexander Shopov  <ash@contact.bg>
+
+	* bg.po: I forgot to svn add it in last
+	commit.
 
 2007-03-10  Alexander Shopov  <ash@contact.bg>
 
@@ -134,18 +146,22 @@
 	Yavor Doganov <yavor@doganov.org>
 	* LINGUAS: Added bg (Bulgarian)
 	
-2007-03-09  Jovan Naumovski  <jovan@lugola.net>
- 
- 	 * mk.po: Updated Macedonian translation.
-
 2007-03-09  Žygimantas Beručka  <zygis@gnome.org>
 
 	* lt.po: Updated Lithuanian translation.
+
+2007-03-08  Johan Dahlin  <johan@gnome.org>
+
+	* sv.po: Updated Swedish translation.
 
 2007-03-08  Josep Puigdemont i Casamajó  <josep.puigdemont@gmail.com>
 
 	* ca.po: Updated Catalan translation by
 	Xavier Conde Rueda <xavi.conde@gmail.com>.
+
+2007-03-07  Ani Peter <peter.ani@gmail.com>
+	* ml.po: Added Malayalam Translation
+	* LINGUAS: Added ml (Malayalam Translation)
 
 2007-03-06  David Lodge <dave@cirt.net>
 

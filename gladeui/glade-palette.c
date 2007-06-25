@@ -39,6 +39,7 @@
 #include "glade-project.h"
 #include "glade-widget.h"
 #include "glade-widget-adaptor.h"
+
 #include <glib/gi18n-lib.h>
 #include <gdk/gdk.h>
 
@@ -48,27 +49,27 @@
 
 struct _GladePalettePrivate
 {
-	const GList *catalogs;        /* List of widget catalogs */
+	const GList  *catalogs;        /* List of widget catalogs */
 
-	GtkWidget *selector_hbox;	
-	GtkWidget *selector_button;
+	GtkWidget    *selector_hbox;	
+	GtkWidget    *selector_button;
 
-	GtkWidget *tray;	/* Where all the item groups are contained */
+	GtkWidget    *tray;	         /* Where all the item groups are contained */
 
-	GladePaletteItem *current_item; /* The currently selected item */
+	GladePaletteItem *current_item;  /* The currently selected item */
 
-	GSList *sections;   	         /* List of GladePaletteExpanders */ 
+	GSList       *sections;          /* List of GladePaletteExpanders */ 
 
-	GtkTooltips *tooltips;           /* Tooltips for the item buttons */
-	GtkTooltips *static_tooltips;    /* These tooltips never get disabled */
+	GtkTooltips  *tooltips;          /* Tooltips for the item buttons */
+	GtkTooltips  *static_tooltips;   /* These tooltips never get disabled */
 
 	GtkSizeGroup *size_group;        /* All items have the same dimensions */
 
 	GladeItemAppearance item_appearance;
 
-	gboolean use_small_item_icons;
+	gboolean      use_small_item_icons;
 	
-	gboolean sticky_selection_mode; /* whether sticky_selection mode has been enabled */
+	gboolean      sticky_selection_mode; /* whether sticky_selection mode has been enabled */
 };
 
 enum
@@ -93,10 +94,8 @@ static void glade_palette_append_item_group (GladePalette *palette, GladeWidgetG
 
 static void glade_palette_update_appearance (GladePalette *palette);
 
-static GtkVBoxClass *parent_class = NULL;
-
-
 G_DEFINE_TYPE(GladePalette, glade_palette, GTK_TYPE_VBOX)
+
 
 void
 selector_button_toggled_cb (GtkToggleButton *button, GladePalette *palette)
@@ -217,6 +216,15 @@ glade_palette_set_show_selector_button (GladePalette *palette, gboolean show_sel
 
 }
 
+/* override GtkWidget::show_all since we have internal widgets we wish to keep
+ * hidden unless we decide otherwise, like the hidden selector button.
+ */
+static void
+glade_palette_show_all (GtkWidget *widget)
+{
+	gtk_widget_show (widget);
+}
+
 static void 
 glade_palette_set_property (GObject *object,
 		            guint prop_id,
@@ -280,44 +288,51 @@ glade_palette_get_property (GObject    *object,
 static void
 glade_palette_dispose (GObject *object)
 {
-	GladePalette        *palette;
 	GladePalettePrivate *priv;
   
-	g_return_if_fail (GLADE_IS_PALETTE (object));
-	palette = GLADE_PALETTE (object);
-	priv = GLADE_PALETTE_GET_PRIVATE (palette);
+	priv = GLADE_PALETTE_GET_PRIVATE (object);
 
 	priv->catalogs = NULL;
 
-	g_object_unref (priv->tooltips);
-	g_object_unref (priv->static_tooltips);
-
-	G_OBJECT_CLASS (parent_class)->dispose (object);
-
+	if (priv->tray)
+	{
+		g_object_unref (priv->tray);
+		priv->tray = NULL;
+	}
+	if (priv->tooltips)
+	{
+		g_object_unref (priv->tooltips);
+		priv->tooltips = NULL;	
+	}
+	if (priv->static_tooltips)
+	{
+		g_object_unref (priv->static_tooltips);
+		priv->static_tooltips = NULL;
+	}
+	
+	G_OBJECT_CLASS (glade_palette_parent_class)->dispose (object);
 }
 
 static void
 glade_palette_finalize (GObject *object)
 {
-	GladePalette        *palette;
 	GladePalettePrivate *priv;
   
-	g_return_if_fail (GLADE_IS_PALETTE (object));
-	palette = GLADE_PALETTE (object);
-	priv = GLADE_PALETTE_GET_PRIVATE (palette);
+	priv = GLADE_PALETTE_GET_PRIVATE (object);
 
 	g_slist_free (priv->sections);
 
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (glade_palette_parent_class)->finalize (object);
 }
 
 static void
 glade_palette_class_init (GladePaletteClass *klass)
 {
-	GObjectClass *object_class;
+	GObjectClass   *object_class;
+	GtkWidgetClass *widget_class;
 
 	object_class = G_OBJECT_CLASS (klass);
-	parent_class = g_type_class_peek_parent (klass);
+	widget_class = GTK_WIDGET_CLASS (klass);
 
 	klass->toggled = NULL;
 	
@@ -325,6 +340,8 @@ glade_palette_class_init (GladePaletteClass *klass)
 	object_class->set_property = glade_palette_set_property;
 	object_class->dispose = glade_palette_dispose;
 	object_class->finalize = glade_palette_finalize;
+	
+	widget_class->show_all = glade_palette_show_all;
 
 	glade_palette_signals[TOGGLED] =
 		g_signal_new ("toggled",
@@ -471,13 +488,13 @@ glade_palette_new_item_group (GladePalette *palette, GladeWidgetGroup *group)
 
 	}
 
-	title = g_strdup_printf ("<b>%s</b>", glade_widget_group_get_title (group));
+	title = g_strdup_printf ("%s", glade_widget_group_get_title (group));
 
 	/* Put items box in a expander */
 	expander = glade_palette_expander_new (title);
 	glade_palette_expander_set_spacing (GLADE_PALETTE_EXPANDER (expander), 2);
 	glade_palette_expander_set_use_markup (GLADE_PALETTE_EXPANDER (expander), TRUE);
-	gtk_container_set_border_width (GTK_CONTAINER (expander), 1);
+	gtk_container_set_border_width (GTK_CONTAINER (expander), 0);
 
 	/* set default expanded state */
 	glade_palette_expander_set_expanded (GLADE_PALETTE_EXPANDER (expander), 
@@ -530,7 +547,7 @@ glade_palette_update_appearance (GladePalette *palette)
 		}
 		g_list_free (items);
 	}
-		
+
 	/* FIXME: Removing and then adding the tray again to the Viewport
          *        is the only way I can get the Viewport to 
          *        respect the new width of the tray.
@@ -539,12 +556,8 @@ glade_palette_update_appearance (GladePalette *palette)
 	viewport = gtk_widget_get_parent (priv->tray);
 	if (viewport != NULL)
 	{
-		g_object_ref (priv->tray);
-
 		gtk_container_remove (GTK_CONTAINER (viewport), priv->tray);
 		gtk_container_add (GTK_CONTAINER (viewport), priv->tray);
-
-		g_object_unref (priv->tray);
 	}
 
 	if (priv->item_appearance == GLADE_ITEM_ICON_ONLY)
@@ -608,11 +621,9 @@ glade_palette_init (GladePalette *palette)
 
 	/* create tooltips */
 	priv->tooltips = gtk_tooltips_new ();
-	g_object_ref (priv->tooltips);
-	gtk_object_sink (GTK_OBJECT (priv->tooltips));
+	g_object_ref_sink (GTK_OBJECT (priv->tooltips));
 	priv->static_tooltips = gtk_tooltips_new ();
-	g_object_ref (priv->static_tooltips);
-	gtk_object_sink (GTK_OBJECT (priv->static_tooltips));
+	g_object_ref_sink (GTK_OBJECT (priv->static_tooltips));
 
 	gtk_tooltips_set_tip (priv->static_tooltips, priv->selector_button, _("Widget selector"), NULL);
 
@@ -622,8 +633,7 @@ glade_palette_init (GladePalette *palette)
 
 	/* add items tray (via a scrolled window) */
 	priv->tray = gtk_vbox_new (FALSE, 0);
-	g_object_ref (G_OBJECT (priv->tray));
-	gtk_object_sink (GTK_OBJECT (priv->tray));
+	g_object_ref_sink (G_OBJECT (priv->tray));
 	gtk_container_set_border_width (GTK_CONTAINER (priv->tray), 1);
 	
 	sw = gtk_scrolled_window_new (NULL, NULL);
@@ -635,7 +645,6 @@ glade_palette_init (GladePalette *palette)
 					     GTK_SHADOW_NONE);
 
 	gtk_box_pack_start (GTK_BOX (palette), sw, TRUE, TRUE, 0);
-
 
 	gtk_widget_show (sw);
 	gtk_widget_show (priv->tray);
@@ -760,3 +769,4 @@ glade_palette_get_show_selector_button (GladePalette *palette)
 
 	return GTK_WIDGET_VISIBLE (palette->priv->selector_hbox);
 }
+

@@ -45,6 +45,7 @@
 #include "glade-editor.h"
 #include "glade-app.h"
 #include "glade-design-view.h"
+#include "glade-widget-action.h"
 
 
 
@@ -65,7 +66,6 @@ static GladeWidget *glade_widget_new_from_widget_info  (GladeWidgetInfo       *i
 
 static gboolean     glade_window_is_embedded           (GtkWindow *window);
 static void         glade_widget_embed                 (GladeWidget *widget);
-static void         glade_widget_embed_using_signals   (GladeWidget *widget);
 
 enum
 {
@@ -75,7 +75,6 @@ enum
 	BUTTON_PRESS_EVENT,
 	BUTTON_RELEASE_EVENT,
 	MOTION_NOTIFY_EVENT,
-	ACTION_ACTIVATED,
 	LAST_SIGNAL
 };
 
@@ -111,6 +110,20 @@ static GQuark        glade_widget_name_quark = 0;
                            GladeWidget class methods
  *******************************************************************************/
 static void
+glade_widget_set_packing_actions (GladeWidget *widget, GladeWidget *parent)
+{
+	if (widget->packing_actions)
+	{
+		g_list_foreach (widget->packing_actions, (GFunc)g_object_unref, NULL);
+		g_list_free (widget->packing_actions);
+		widget->packing_actions = NULL;
+	}
+	
+	if (parent->adaptor->packing_actions)
+		widget->packing_actions = glade_widget_adaptor_pack_actions_new (parent->adaptor);
+}
+
+static void
 glade_widget_add_child_impl (GladeWidget  *widget,
 			     GladeWidget  *child,
 			     gboolean      at_mouse)
@@ -125,6 +138,7 @@ glade_widget_add_child_impl (GladeWidget  *widget,
 		(widget->adaptor, widget->object, child->object);
 
 	glade_widget_set_packing_properties (child, widget);
+	glade_widget_set_packing_actions (child, widget);
 }
 
 static void
@@ -154,8 +168,11 @@ glade_widget_replace_child_impl (GladeWidget *widget,
 	/* Setup packing properties here so we can introspect the new
 	 * values from the backend.
 	 */
-	if (gnew_widget) 
+	if (gnew_widget)
+	{
 		glade_widget_set_packing_properties (gnew_widget, widget);
+		glade_widget_set_packing_actions (gnew_widget, widget);
+	}
 }
 
 static void
@@ -300,7 +317,7 @@ glade_widget_button_press_event_impl (GladeWidget    *gwidget,
 	}
 	else if (event->button == 3)
 	{
-		glade_popup_widget_pop (gwidget, event, TRUE);
+		glade_popup_widget_pop (gwidget, event);
 		handled = TRUE;
 	}
 
@@ -755,7 +772,19 @@ glade_widget_dispose (GObject *object)
 		g_list_foreach (widget->packing_properties, (GFunc)g_object_unref, NULL);
 		g_list_free (widget->packing_properties);
 	}
-
+	
+	if (widget->actions)
+	{
+		g_list_foreach (widget->actions, (GFunc)g_object_unref, NULL);
+		g_list_free (widget->actions);
+	}
+	
+	if (widget->packing_actions)
+	{
+		g_list_foreach (widget->packing_actions, (GFunc)g_object_unref, NULL);
+		g_list_free (widget->packing_actions);
+	}
+	
  	if (G_OBJECT_CLASS(parent_class)->dispose)
 		G_OBJECT_CLASS(parent_class)->dispose(object);
 }
@@ -1150,27 +1179,6 @@ glade_widget_class_init (GladeWidgetClass *klass)
 			      glade_marshal_BOOLEAN__BOXED,
 			      G_TYPE_BOOLEAN, 1,
 			      GDK_TYPE_EVENT | G_SIGNAL_TYPE_STATIC_SCOPE);
-
-
-	/**
-	 * GladeWidget::action-activated:
-	 * @widget: the #GladeWidget which received the signal.
-	 * @action_id: the action id (signal detail) or NULL.
-	 *
-	 * Use this to catch up actions. This signal is proxied from 
-	 * GladeWidgetAdaptor's "action-emited" signal default handler.
-	 *
-	 * Returns TRUE to stop others handlers being invoked.
-	 *
-	 */
-	glade_widget_signals [ACTION_ACTIVATED] =
-		g_signal_new ("action-activated",
-			      G_TYPE_FROM_CLASS (object_class),
-			      G_SIGNAL_RUN_LAST | G_SIGNAL_DETAILED,
-			      G_STRUCT_OFFSET (GladeWidgetClass, action_activated),
-			      glade_boolean_handled_accumulator, NULL,
-			      glade_marshal_BOOLEAN__STRING,
-			      G_TYPE_BOOLEAN, 1, G_TYPE_STRING);
 }
 
 GType
@@ -1643,6 +1651,23 @@ glade_widget_set_properties (GladeWidget *widget, GList *properties)
 }
 
 static void
+glade_widget_set_actions (GladeWidget *widget, GladeWidgetAdaptor *adaptor)
+{
+	GList *l;
+	
+	for (l = adaptor->actions; l; l = g_list_next (l))
+	{
+		GWActionClass *action = l->data;
+		GObject *obj = g_object_new (GLADE_TYPE_WIDGET_ACTION,
+					     "class", action, NULL);
+		
+		widget->actions = g_list_prepend (widget->actions,
+						  GLADE_WIDGET_ACTION (obj));
+	}
+	widget->actions = g_list_reverse (widget->actions);
+}
+
+static void
 glade_widget_set_adaptor (GladeWidget *widget, GladeWidgetAdaptor *adaptor)
 {
 	GladePropertyClass *property_class;
@@ -1675,6 +1700,9 @@ glade_widget_set_adaptor (GladeWidget *widget, GladeWidgetAdaptor *adaptor)
 		}
 		widget->properties = g_list_reverse (widget->properties);
 	}
+	
+	/* Create actions from adaptor */
+	glade_widget_set_actions (widget, adaptor);
 }
 
 /* Connects a signal handler to the 'event' signal for a widget and
@@ -2124,7 +2152,7 @@ glade_widget_show (GladeWidget *widget)
 	if (GTK_IS_WINDOW (widget->object))
 	{
 		if (!glade_window_is_embedded (GTK_WINDOW (widget->object)))
-			glade_widget_embed_using_signals (widget);
+			glade_widget_embed (widget);
 			
 		view = glade_design_view_get_from_project (glade_widget_get_project (widget));
 		layout = GTK_WIDGET (glade_design_view_get_layout (view));
@@ -3339,6 +3367,8 @@ glade_widget_set_parent (GladeWidget *widget,
 		else
 			glade_widget_sync_packing_props (widget);
 	}
+	
+	if (parent) glade_widget_set_packing_actions (widget, parent);
 
 	g_object_notify (G_OBJECT (widget), "parent");
 }
@@ -3732,59 +3762,6 @@ glade_widget_read (GladeProject *project, GladeWidgetInfo *info)
 	return widget;
 }
 
-/**
- * glade_widget_get_launcher:
- * @widget: a #GladeWidget
- *
- * Returns: whether there is a #GladeEditorLaunchFunc provided by
- *          the backend for @widget (or any of its parents)
- */
-gboolean
-glade_widget_has_launcher (GladeWidget *widget)
-{
-	GladeWidget *parent;
-
-	g_return_val_if_fail (GLADE_IS_WIDGET (widget), FALSE);
-	parent = widget;
-	do
-	{
-		GladeWidgetAdaptorClass *adaptor_class =
-			GLADE_WIDGET_ADAPTOR_GET_CLASS (parent->adaptor);
-
-		if (adaptor_class->launch_editor != NULL)
-			return TRUE;
-	} while ((parent = parent->parent) != NULL);
-	return FALSE;
-}
-
-/**
- * glade_widget_launch_editor:
- * @widget: a #GladeWidget
- *
- * Launches a custom editor from the backend for thie widget.
- */
-void
-glade_widget_launch_editor (GladeWidget *widget)
-{
-	GladeWidget *parent;
-
-	g_return_if_fail (GLADE_IS_WIDGET (widget));
-	parent = widget;
-	do
-	{
-		GladeWidgetAdaptorClass *adaptor_class =
-			GLADE_WIDGET_ADAPTOR_GET_CLASS (parent->adaptor);
-
-		if (adaptor_class->launch_editor != NULL)
-		{
-			glade_widget_adaptor_launch_editor (parent->adaptor,
-							    parent->object);
-			break;
-		}
-	} while ((parent = parent->parent) != NULL);
-}
-
-
 static gint glade_widget_su_stack = 0;
 
 /**
@@ -3837,397 +3814,188 @@ glade_widget_pop_superuser (void)
 }
 
 
+/**
+ * glade_widget_placeholder_relation:
+ * @parent: A #GladeWidget
+ * @widget: The child #GladeWidget
+ *
+ * Returns whether placeholders should be used
+ * in operations concerning this parent & child.
+ *
+ * Currently that criteria is whether @parent is a
+ * GtkContainer, @widget is a GtkWidget and the parent
+ * adaptor has been marked to use placeholders.
+ *
+ * Returns: whether to use placeholders for this relationship.
+ */
+gboolean
+glade_widget_placeholder_relation (GladeWidget *parent, 
+				   GladeWidget *widget)
+{
+	g_return_val_if_fail (GLADE_IS_WIDGET (parent), FALSE);
+	g_return_val_if_fail (GLADE_IS_WIDGET (widget), FALSE);
+
+	return (GTK_IS_CONTAINER (parent->object) &&
+		GTK_IS_WIDGET (widget->object) &&
+		GWA_USE_PLACEHOLDERS (parent->adaptor));
+}
+
+static GladeWidgetAction *
+glade_widget_action_lookup (GList **actions, const gchar *path, gboolean remove)
+{
+	GList *l;
+	
+	for (l = *actions; l; l = g_list_next (l))
+	{
+		GladeWidgetAction *action = l->data;
+		
+		if (strcmp (action->klass->path, path) == 0)
+		{
+			if (remove)
+			{
+				*actions = g_list_remove (*actions, action);
+				g_object_unref (action);
+				return NULL;
+			}
+			return action;
+		}
+		
+		if (action->actions &&
+		    g_str_has_prefix (path, action->klass->path) &&
+		    (action = glade_widget_action_lookup (&action->actions, path, remove)))
+			return action;
+	}
+	
+	return NULL;
+}
+
+/**
+ * glade_widget_get_action:
+ * @widget: a #GladeWidget
+ * @action_path: a full action path including groups
+ *
+ * Returns a #GladeWidgetAction object indentified by @action_path.
+ *
+ * Returns: the action or NULL if not found.
+ */
+GladeWidgetAction *
+glade_widget_get_action (GladeWidget *widget, const gchar *action_path)
+{
+	g_return_val_if_fail (GLADE_IS_WIDGET (widget), NULL);
+	g_return_val_if_fail (action_path != NULL, NULL);
+	
+	return glade_widget_action_lookup (&widget->actions, action_path, FALSE);
+}
+
+/**
+ * glade_widget_get_pack_action:
+ * @widget: a #GladeWidget
+ * @action_path: a full action path including groups
+ *
+ * Returns a #GladeWidgetAction object indentified by @action_path.
+ *
+ * Returns: the action or NULL if not found.
+ */
+GladeWidgetAction *
+glade_widget_get_pack_action (GladeWidget *widget, const gchar *action_path)
+{
+	g_return_val_if_fail (GLADE_IS_WIDGET (widget), NULL);
+	g_return_val_if_fail (action_path != NULL, NULL);
+	
+	return glade_widget_action_lookup (&widget->packing_actions, action_path, FALSE);
+}
+
+/**
+ * glade_widget_remove_action:
+ * @widget: a #GladeWidget
+ * @action_path: a full action path including groups
+ *
+ * Remove an action.
+ */
+void
+glade_widget_remove_action (GladeWidget *widget, const gchar *action_path)
+{
+	g_return_if_fail (GLADE_IS_WIDGET (widget));
+	g_return_if_fail (action_path != NULL);
+	
+	glade_widget_action_lookup (&widget->actions, action_path, TRUE);
+}
+
+/**
+ * glade_widget_remove_pack_action:
+ * @widget: a #GladeWidget
+ * @action_path: a full action path including groups
+ *
+ * Remove a packing action.
+ */
+void
+glade_widget_remove_pack_action (GladeWidget *widget, const gchar *action_path)
+{
+	g_return_if_fail (GLADE_IS_WIDGET (widget));
+	g_return_if_fail (action_path != NULL);
+	
+	glade_widget_action_lookup (&widget->packing_actions, action_path, TRUE);
+}
+
+/**
+ * glade_widget_create_action_menu:
+ * @widget: a #GladeWidget
+ * @action_path: an action path or NULL to include every @widget action.
+ *
+ * Create a new GtkMenu with every action in it. 
+ *
+ */
+GtkWidget *
+glade_widget_create_action_menu (GladeWidget *widget, const gchar *action_path)
+{
+	GladeWidgetAction *action = NULL;
+	GtkWidget *menu;
+
+	g_return_val_if_fail (GLADE_IS_WIDGET (widget), NULL);
+
+	if (action_path)
+	{
+		action = glade_widget_action_lookup (&widget->actions, action_path, FALSE);
+		if (action == NULL)
+			action = glade_widget_action_lookup (&widget->packing_actions, action_path, FALSE);
+	}
+	
+	menu = gtk_menu_new ();
+	if (glade_popup_action_populate_menu (menu, widget, action))
+		return menu;
+	
+	g_object_unref (G_OBJECT (menu));
+	
+	return NULL;
+}
+
 /*******************************************************************************
-                           Toplevel GladeWidget Embedding 
- *******************************************************************************
+ *                           Toplevel GladeWidget Embedding                    *
+ ******************************************************************************
  *
- * This code has two implemententations, one that stores original class handlers in
- * a hashtable, and another that uses signal connection to emulate vfuncs.
- * 
- * Signal Connection:  glade_widget_embed_using_signals ()
+ * Overrides realize() and size_allocate() by signal connection on GtkWindows.
  *
- * Hashtable:  glade_widget_embed ()
+ * This is high crack code and should be replaced by a more robust implementation
+ * in GTK+ proper. 
  *
  */
 
+static GQuark
+embedded_window_get_quark ()
+{
+	static GQuark embedded_window_quark = 0;
 
-typedef struct
-{	
-	/* pointers to the original class handlers */ 
-	void     (* realize)       (GtkWidget *widget);
-	void     (* map)           (GtkWidget *widget);
-	void     (* unmap)         (GtkWidget *widget);
-	void     (* show)          (GtkWidget *widget);
-	void     (* hide)          (GtkWidget *widget);
-	void     (* size_allocate) (GtkWidget *widget, GtkAllocation *allocation);
-
-} GladeOriginalHandlers;
-
-static GHashTable *original_handlers_table = NULL;
-
-static GQuark glade_embedded_window_quark = 0;
-
+	if (embedded_window_quark == 0)
+		embedded_window_quark = g_quark_from_string ("GladeEmbedWindow");
+	
+	return embedded_window_quark;
+}
 
 static gboolean
 glade_window_is_embedded (GtkWindow *window)
 {
-	return GPOINTER_TO_INT (g_object_get_qdata ((GObject *) window, glade_embedded_window_quark));	 
+	return GPOINTER_TO_INT (g_object_get_qdata ((GObject *) window, embedded_window_get_quark ()));	 
 }
-
-static GtkBinClass*
-get_bin_class_ancestor (gpointer descendant_class)
-{
-	gpointer parent_class;
-	gpointer klass;
-
-	klass = descendant_class;
-
-	if (!GTK_IS_BIN_CLASS (klass))
-		return NULL;
-
-	while (GTK_IS_BIN_CLASS (parent_class = g_type_class_peek_parent (klass)))
-	{
-		klass = parent_class;
-		parent_class = g_type_class_peek_parent (klass);
-
-	}
-
-	return GTK_BIN_CLASS (klass);
-}
-
-static GladeOriginalHandlers*
-obtain_handlers (GType instance_type)
-{
-	GladeOriginalHandlers *handlers = NULL;
-	GType type = instance_type;
-
-	while (!handlers && type != 0)
-	{
-		handlers = (GladeOriginalHandlers *) g_hash_table_lookup (original_handlers_table, &type);
-
-		type = g_type_parent (type);
-	}
-
-	return handlers;
-}
-
-static void
-embedded_window_map (GtkWidget *widget)
-{
-	GtkBinClass *bin_class;
-
-	bin_class = get_bin_class_ancestor (GTK_WIDGET_GET_CLASS (widget));
-
-	GTK_WIDGET_CLASS (bin_class)->map (widget);
-}
-
-static void
-embedded_window_unmap (GtkWidget *widget)
-{
-	GtkBinClass *bin_class;
-
-	bin_class = get_bin_class_ancestor (GTK_WIDGET_GET_CLASS (widget));
-
-	GTK_WIDGET_CLASS (bin_class)->unmap (widget);
-}
-
-static void
-embedded_window_show (GtkWidget *widget)
-{
-	GtkBinClass *bin_class;
-
-	bin_class = get_bin_class_ancestor (GTK_WIDGET_GET_CLASS (widget));
-
-	GTK_WIDGET_CLASS (bin_class)->show (widget);
-}
-
-static void
-embedded_window_hide (GtkWidget *widget)
-{
-	GtkBinClass *bin_class;
-
-	bin_class = get_bin_class_ancestor (GTK_WIDGET_GET_CLASS (widget));
-
-	GTK_WIDGET_CLASS (bin_class)->hide (widget);
-}
-
-static void
-embedded_window_realize (GtkWidget *widget)
-{
-	GtkWindow *window;
-	GdkWindowAttr attributes;
-	gint attributes_mask;
-
-	window = GTK_WINDOW (widget);
-
-	GTK_WIDGET_SET_FLAGS (widget, GTK_REALIZED);
-
-	attributes.window_type = GDK_WINDOW_CHILD;
-	attributes.wclass = GDK_INPUT_OUTPUT;
-	attributes.visual = gtk_widget_get_visual (widget);
-	attributes.colormap = gtk_widget_get_colormap (widget);
-
-	attributes.x = widget->allocation.x;
-	attributes.y = widget->allocation.y;
-	attributes.width = widget->allocation.width;
-	attributes.height = widget->allocation.height;
-
-	attributes.event_mask = gtk_widget_get_events (widget) |
-				GDK_EXPOSURE_MASK              |
-                                GDK_FOCUS_CHANGE_MASK          |
-			        GDK_KEY_PRESS_MASK             |
-			        GDK_KEY_RELEASE_MASK           |
-			        GDK_ENTER_NOTIFY_MASK          |
-			        GDK_LEAVE_NOTIFY_MASK          |
-				GDK_STRUCTURE_MASK;
-
-	attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
-
-	widget->window = gdk_window_new (gtk_widget_get_parent_window (widget),
-					 &attributes, attributes_mask);
-
-	gdk_window_enable_synchronized_configure (widget->window);
-
-	gdk_window_set_user_data (widget->window, widget);
-
-	widget->style = gtk_style_attach (widget->style, widget->window);
-	gtk_style_set_background (widget->style, widget->window, GTK_STATE_NORMAL);
-}
-
-static void
-embedded_window_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
-{
-	GtkWindow *window;
-	GtkAllocation child_allocation;
-
-	window = GTK_WINDOW (widget);
-	widget->allocation = *allocation;
-
-	if (GTK_WIDGET_REALIZED (widget))
-		gdk_window_move_resize (widget->window, allocation->x, 
-							allocation->y,
-		                                        allocation->width, 
-		                                        allocation->height);
-
-	if (window->bin.child && GTK_WIDGET_VISIBLE (window->bin.child))
-	{
-		child_allocation.x = GTK_CONTAINER (widget)->border_width;
-		child_allocation.y = GTK_CONTAINER (widget)->border_width;
-		child_allocation.width = MAX (1, allocation->width - GTK_CONTAINER (widget)->border_width * 2);
-		child_allocation.height = MAX (1, allocation->height - GTK_CONTAINER (widget)->border_width * 2);
-
-		gtk_widget_size_allocate (window->bin.child, &child_allocation);
-	}
-}
-
-static void
-embedded_window_realize_proxy (GtkWidget *widget)
-{
-	GladeOriginalHandlers *original_handlers;
-
-	if (!glade_window_is_embedded ((GtkWindow *) widget))
-	{
-		original_handlers = obtain_handlers (G_OBJECT_TYPE (widget));
-
-		g_assert (original_handlers != NULL);
-
-		original_handlers->realize (widget);
-	}
-	else
-	{
-		embedded_window_realize (widget);
-	}
-}
-
-static void
-embedded_window_size_allocate_proxy (GtkWidget *widget, GtkAllocation *allocation)
-{
-	GladeOriginalHandlers *original_handlers;
-
-	if (!glade_window_is_embedded ((GtkWindow *) widget))
-	{
-		original_handlers = obtain_handlers (G_OBJECT_TYPE (widget));
-
-		g_assert (original_handlers != NULL);
-
-		original_handlers->size_allocate (widget, allocation);
-	}
-	else
-	{
-		embedded_window_size_allocate (widget, allocation);
-	}
-}
-
-static void
-embedded_window_map_proxy (GtkWidget *widget)
-{
-	GladeOriginalHandlers *original_handlers;
-
-	if (!glade_window_is_embedded ((GtkWindow *) widget))
-	{
-		original_handlers = obtain_handlers (G_OBJECT_TYPE (widget));
-
-		g_assert (original_handlers != NULL);
-
-		original_handlers->map (widget);
-	}
-	else
-	{
-		embedded_window_map (widget);
-	}
-}
-
-static void
-embedded_window_unmap_proxy (GtkWidget *widget)
-{
-	GladeOriginalHandlers *original_handlers;
-
-	if (!glade_window_is_embedded ((GtkWindow *) widget))
-	{
-		original_handlers = obtain_handlers (G_OBJECT_TYPE (widget));
-
-		g_assert (original_handlers != NULL);
-
-		original_handlers->unmap (widget);
-	}
-	else
-	{
-		embedded_window_unmap (widget);
-	}
-}
-
-
-static void
-embedded_window_show_proxy (GtkWidget *widget)
-{
-	GladeOriginalHandlers *original_handlers;
-
-	if (!glade_window_is_embedded ((GtkWindow *) widget))
-	{
-		original_handlers = obtain_handlers (G_OBJECT_TYPE (widget));
-
-		g_assert (original_handlers != NULL);
-
-		original_handlers->show (widget);
-	}
-	else
-	{
-		embedded_window_show (widget);
-	}
-}
-
-static void
-embedded_window_hide_proxy (GtkWidget *widget)
-{
-	GladeOriginalHandlers *original_handlers;
-
-	if (!glade_window_is_embedded ((GtkWindow *) widget))
-	{
-		original_handlers = obtain_handlers (G_OBJECT_TYPE (widget));
-
-		g_assert (original_handlers != NULL);
-
-		original_handlers->hide (widget);
-	}
-	else
-	{
-		embedded_window_hide (widget);
-	}
-}
-
-static guint
-glade_gtype_hash (const GType *v)
-{
-	return *v % G_MAXUINT;
-}
-
-static gboolean
-glade_gtype_equal (const GType *v1, const GType *v2)
-{
-	return *v1 == *v2;
-}
-
-static void
-embedded_data_ensure (void)
-{
-
-	if (original_handlers_table == NULL)
-	{
-		original_handlers_table = g_hash_table_new_full ((GHashFunc)      glade_gtype_hash, 
-								 (GEqualFunc)     glade_gtype_equal, 
-							         (GDestroyNotify) g_free, 
-							         (GDestroyNotify) g_free);
-	}
-	
-	if (glade_embedded_window_quark == 0)
-		glade_embedded_window_quark = g_quark_from_string ("GladeEmbedWindow");
-}
-
-/**
- * glade_widget_window:
- * @window: a #GtkWindow
- *
- * Embeds a window by overriding class-wide methods
- */
-static void
-glade_widget_embed (GladeWidget *widget)
-{
-	GladeOriginalHandlers *original_handlers;
-	GtkWindow *window;
-	GType *key;
-
-	g_return_if_fail (GLADE_IS_WIDGET (widget));
-	g_return_if_fail (GTK_IS_WINDOW (widget->object));
-	
-	window = GTK_WINDOW (widget->object);
-
-	/* do some validity checks */
-	if (glade_window_is_embedded (window) || GTK_WIDGET_REALIZED (GTK_WIDGET (window))) {
-		g_critical ("Cannot embed a window that is already realized or embedded");
-		return;
-	}
-
-	embedded_data_ensure ();
-
-	GTK_WIDGET_UNSET_FLAGS (GTK_WIDGET (window), GTK_TOPLEVEL);
-	gtk_container_set_resize_mode (GTK_CONTAINER (window), GTK_RESIZE_PARENT);
-
-	/* create key (GType) for the hashtable */
-	key = (GType *) g_malloc (sizeof (GType));
-	*key = G_OBJECT_TYPE (window);
-
-	/* see if the class handlers are already in the hashtable */
-	original_handlers = (GladeOriginalHandlers *) g_hash_table_lookup (original_handlers_table, key);
-
-	if (original_handlers == NULL)
-	{
-		/* now we override the class handlers, and store the overridden handlers in the hashtable */ 
-		original_handlers = g_new0 (GladeOriginalHandlers, 1);
-
-		original_handlers->realize       = GTK_WIDGET_GET_CLASS (window)->realize;
-		original_handlers->map           = GTK_WIDGET_GET_CLASS (window)->map;
-		original_handlers->unmap         = GTK_WIDGET_GET_CLASS (window)->unmap;
-		original_handlers->show          = GTK_WIDGET_GET_CLASS (window)->show;
-		original_handlers->hide          = GTK_WIDGET_GET_CLASS (window)->hide;
-		original_handlers->size_allocate = GTK_WIDGET_GET_CLASS (window)->size_allocate;
-
-		GTK_WIDGET_GET_CLASS (window)->realize       = embedded_window_realize_proxy;
-		GTK_WIDGET_GET_CLASS (window)->map           = embedded_window_map_proxy;
-		GTK_WIDGET_GET_CLASS (window)->unmap         = embedded_window_unmap_proxy;
-		GTK_WIDGET_GET_CLASS (window)->show          = embedded_window_show_proxy;
-		GTK_WIDGET_GET_CLASS (window)->hide          = embedded_window_hide_proxy;
-		GTK_WIDGET_GET_CLASS (window)->size_allocate = embedded_window_size_allocate_proxy;
-
-		g_hash_table_insert (original_handlers_table, key, original_handlers);
-	} 
-
-	/* mark window as embedded */
-	g_object_set_qdata (G_OBJECT (window), 
-			   glade_embedded_window_quark, GINT_TO_POINTER (TRUE));
-}
-
-
-/* signal connection method */
 
 static void
 embedded_window_realize_handler (GtkWidget *widget)
@@ -4293,13 +4061,13 @@ embedded_window_size_allocate_handler (GtkWidget *widget)
 }
 
 /**
- * glade_widget_embed_using_signals:
+ * glade_widget_embed:
  * @window: a #GtkWindow
  *
- * Embeds a window by using signal connection method
+ * Embeds a window by signal connection method
  */
 static void
-glade_widget_embed_using_signals (GladeWidget *widget)
+glade_widget_embed (GladeWidget *widget)
 {
 	GtkWindow *window;
 	
@@ -4322,35 +4090,7 @@ glade_widget_embed_using_signals (GladeWidget *widget)
 			  G_CALLBACK (embedded_window_size_allocate_handler), NULL);
 
 	/* mark window as embedded */
-	if (glade_embedded_window_quark == 0)
-		glade_embedded_window_quark = g_quark_from_string ("GladeEmbedWindow");
-
-	g_object_set_qdata (G_OBJECT (widget), 
-			   glade_embedded_window_quark, GINT_TO_POINTER (TRUE));
+	g_object_set_qdata (G_OBJECT (window), 
+			    embedded_window_get_quark (), GINT_TO_POINTER (TRUE));
 }
 
-/**
- * glade_widget_placeholder_relation:
- * @parent: A #GladeWidget
- * @widget: The child #GladeWidget
- *
- * Returns whether placeholders should be used
- * in operations concerning this parent & child.
- *
- * Currently that criteria is whether @parent is a
- * GtkContainer, @widget is a GtkWidget and the parent
- * adaptor has been marked to use placeholders.
- *
- * Returns: whether to use placeholders for this relationship.
- */
-gboolean
-glade_widget_placeholder_relation (GladeWidget *parent, 
-				   GladeWidget *widget)
-{
-	g_return_val_if_fail (GLADE_IS_WIDGET (parent), FALSE);
-	g_return_val_if_fail (GLADE_IS_WIDGET (widget), FALSE);
-
-	return (GTK_IS_CONTAINER (parent->object) &&
-		GTK_IS_WIDGET (widget->object) &&
-		GWA_USE_PLACEHOLDERS (parent->adaptor));
-}

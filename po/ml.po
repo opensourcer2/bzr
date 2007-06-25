@@ -1,14 +1,14 @@
-# translation of ml.po to Malayalam
+# translation of glade3.HEAD.po to Malayalam
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Ani Peter <apeter@redhat.com>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: ml\n"
+"Project-Id-Version: glade3.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-03-01 03:34+0000\n"
-"PO-Revision-Date: 2007-03-12 16:13+0530\n"
+"PO-Revision-Date: 2007-03-05 00:05+0530\n"
 "Last-Translator: Ani Peter <apeter@redhat.com>\n"
 "Language-Team: Malayalam <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -74,7 +74,7 @@ msgstr "URL '%s' ലഭ്യമാക്കുവാന്‍ സാധ്യ�
 
 #: ../src/glade-project-window.c:112
 msgid "No suitable web browser executable could be found."
-msgstr "ഉചിതമായ വെബ് ബ്റൌസറ്‍ ലഭ്യമായില്ല."
+msgstr ""
 
 #: ../src/glade-project-window.c:332
 #, c-format
@@ -186,8 +186,6 @@ msgid ""
 "No suitable web browser executable could be found to be executed and to "
 "display the URL: %s"
 msgstr ""
-"പ്റവറ്‍ത്തിപ്പിക്കുന്നതിനും URL കാണിക്കുന്നതിനും ഉചിതമായ വെബ് ബ്റൌസറ്‍ "
-"ലഭ്യമായില്ല:%s"
 
 #: ../src/glade-project-window.c:1449
 msgid "Could not display the online developer reference manual"
@@ -505,20 +503,20 @@ msgstr ""
 
 #: ../gladeui/glade-app.c:1221
 msgid "Unable to paste to the selected parent"
-msgstr "തിരഞ്ഞെടുത്ത പേരന്‍റിലേക്ക് ഒട്ടിക്കുവാന്‍ സാധ്യമാകുന്നില്ല"
+msgstr ""
 
 #: ../gladeui/glade-app.c:1232
 msgid "Unable to paste to multiple widgets"
-msgstr "അനവധി വിഡ്ജറ്റുകളിലേക്ക് ഒട്ടിക്കുവാന്‍ സാധ്യമാകുന്നില്ല"
+msgstr ""
 
 #: ../gladeui/glade-app.c:1242 ../gladeui/glade-app.c:1374
 msgid "No widget selected on the clipboard"
-msgstr "ക്ളിപ്പ്ബോറ്‍ഡില്‍ ഒരു വിഡ്ജറ്റും തിരഞ്ഞെടുത്തിട്ടില്ല"
+msgstr ""
 
 #: ../gladeui/glade-app.c:1268
 #, c-format
 msgid "Unable to paste widget %s without a parent"
-msgstr "ഒരു പേരന്‍റില്ലാതെ %s വിഡ്ജറ്റിലേക്ക് ഒട്ടിക്കുവാന്‍ സാധ്യമല്ല"
+msgstr ""
 
 #: ../gladeui/glade-app.c:1285
 msgid "Only one widget can be pasted at a time to this container"
@@ -539,15 +537,15 @@ msgstr "സ്റ്റോക്ക്"
 
 #: ../gladeui/glade-builtins.c:184
 msgid "A builtin stock item"
-msgstr "ഒരു ബിള്‍ട്ടിന്‍ സ്റ്റോക്ക് വസ്തു"
+msgstr ""
 
 #: ../gladeui/glade-builtins.c:192 ../plugins/gtk+/gtk+.xml.in.h:230
 msgid "Stock Image"
-msgstr "സ്റ്റോക്ക് ഇമേജ്"
+msgstr ""
 
 #: ../gladeui/glade-builtins.c:193 ../plugins/gtk+/gtk+.xml.in.h:1
 msgid "A builtin stock image"
-msgstr "ഒരു ബിള്‍ട്ടിന്‍ സ്റ്റോക്ക് ഇമേജ്"
+msgstr ""
 
 #: ../gladeui/glade-builtins.c:523
 msgid "Objects"
@@ -555,7 +553,7 @@ msgstr "വസ്തുക്കള്‍"
 
 #: ../gladeui/glade-builtins.c:524
 msgid "A list of objects"
-msgstr "ഒബ്ജക്ടുകളുടെ ലിസ്റ്റ്"
+msgstr ""
 
 #: ../gladeui/glade-builtins.c:533
 msgid "Pixbuf"
@@ -563,7 +561,7 @@ msgstr "Pixbuf"
 
 #: ../gladeui/glade-builtins.c:534
 msgid "A pixbuf value"
-msgstr "ഒരു pixbuf മൂല്ല്യം"
+msgstr ""
 
 #: ../gladeui/glade-builtins.c:542
 msgid "GdkColor"
@@ -571,11 +569,11 @@ msgstr "GdkColor"
 
 #: ../gladeui/glade-builtins.c:543
 msgid "A gdk color value"
-msgstr "ഒരു gdk നിറത്തിന്‍റ മൂല്ല്യം"
+msgstr ""
 
 #: ../gladeui/glade-builtins.c:551 ../gladeui/glade-property-class.c:1187
 msgid "Accelerators"
-msgstr "ആക്സിലറേറ്ററുകള്‍"
+msgstr ""
 
 #: ../gladeui/glade-builtins.c:552 ../gladeui/glade-property-class.c:1188
 msgid "A list of accelerator keys"
@@ -591,11 +589,11 @@ msgstr "ഒരു ഇന്‍റിജറ്‍ മൂല്ല്യം"
 
 #: ../gladeui/glade-builtins.c:572
 msgid "Unsigned Integer"
-msgstr "അണ്‍സൈന്‍ഡ് ഇന്‍റിജറ്‍"
+msgstr ""
 
 #: ../gladeui/glade-builtins.c:573
 msgid "An unsigned integer value"
-msgstr "ഒരു അണ്‍സൈന്‍ഡ് ഇന്‍റിജറ്‍ മൂല്ല്യം"
+msgstr ""
 
 #: ../gladeui/glade-builtins.c:580
 msgid "String"
@@ -619,7 +617,7 @@ msgstr "Float"
 
 #: ../gladeui/glade-builtins.c:598
 msgid "A floating point entry"
-msgstr "ഒരു ഫ്ളോട്ടിങ് പോയിന്‍റ് എന്‍ട്രി"
+msgstr ""
 
 #: ../gladeui/glade-builtins.c:606
 msgid "Boolean"
@@ -627,12 +625,12 @@ msgstr "Boolean"
 
 #: ../gladeui/glade-builtins.c:607
 msgid "A boolean value"
-msgstr "ഒരു ബൂളിയന്‍ മൂല്ല്യം"
+msgstr ""
 
 #: ../gladeui/glade-base-editor.c:470
 #, c-format
 msgid "Setting object type on %s to %s"
-msgstr "%s-ലുളള തരത്തിലുളള ഒബ്ജക്ട് %s-ലേക്ക് ക്റമികരിക്കുന്നു"
+msgstr ""
 
 #: ../gladeui/glade-base-editor.c:635
 #, c-format
@@ -675,7 +673,7 @@ msgstr "വിഡ്ജറ്റ്"
 
 #: ../gladeui/glade-command.c:541
 msgid "Setting multiple properties"
-msgstr "അനവധി വിശേഷതകള്‍ ക്റമികരിക്കുന്നു"
+msgstr ""
 
 #: ../gladeui/glade-command.c:549
 #, c-format
@@ -756,22 +754,22 @@ msgstr "%s ഒട്ടിക്കുക"
 #: ../gladeui/glade-command.c:1672
 #, c-format
 msgid "Drag-n-Drop from %s to %s"
-msgstr "%s-ല്‍ നിന്നും %s-ലേക്ക് വലിച്ചിടുക"
+msgstr ""
 
 #: ../gladeui/glade-command.c:1794
 #, c-format
 msgid "Add signal handler %s"
-msgstr "സിഗ്നല്‍ ഹാന്‍ഡിലറ്‍ %s ചേറ്‍ക്കുക"
+msgstr ""
 
 #: ../gladeui/glade-command.c:1795
 #, c-format
 msgid "Remove signal handler %s"
-msgstr "സിഗ്നല്‍ ഹാന്‍ഡിലറ്‍ %s നീക്കം ചെയ്യുക"
+msgstr ""
 
 #: ../gladeui/glade-command.c:1796
 #, c-format
 msgid "Change signal handler %s"
-msgstr "സിഗ്നല്‍ ഹാന്‍ഡിലറ്‍ %s മാറ്റുക"
+msgstr ""
 
 #: ../gladeui/glade-command.c:2000
 msgid "Setting i18n metadata"
@@ -1080,7 +1078,7 @@ msgstr ""
 
 #: ../gladeui/glade-editor.c:1360
 msgid "Reset Widget Properties"
-msgstr "വിഡ്ജറ്റിന്‍റെ ഗുണഗണങ്ങള്‍ വീണ്ടും ക്റമികരിക്കുന്നു"
+msgstr ""
 
 #. Checklist
 #: ../gladeui/glade-editor.c:1377
@@ -1098,7 +1096,7 @@ msgstr "തിരഞ്ഞെടുത്തവ എല്ലാം വേണ്�
 #. Description
 #: ../gladeui/glade-editor.c:1422
 msgid "Property _Description:"
-msgstr "വിശേഷതയുടെ വിവരണം (_D):"
+msgstr ""
 
 #: ../gladeui/glade-fixed.c:462 ../plugins/gtk+/glade-gtk.c:1407
 #, c-format
@@ -1107,7 +1105,7 @@ msgstr "%s-നുളളില്‍ %s സ്ഥാപിക്കുന്ന�
 
 #: ../gladeui/glade-fixed.c:940
 msgid "X position property"
-msgstr "X സ്ഥാനത്തിലുളള വിശേഷത"
+msgstr ""
 
 #: ../gladeui/glade-fixed.c:941
 msgid "The property used to set the X position of a child object"
@@ -1115,7 +1113,7 @@ msgstr ""
 
 #: ../gladeui/glade-fixed.c:947
 msgid "Y position property"
-msgstr "Y സ്ഥാനത്തിലുളള വിശേഷത"
+msgstr ""
 
 #: ../gladeui/glade-fixed.c:948
 msgid "The property used to set the Y position of a child object"
@@ -1226,7 +1224,7 @@ msgstr ""
 #. Atk release property
 #: ../gladeui/glade-property-class.c:60 ../plugins/gtk+/gtk+.xml.in.h:194
 msgid "Release"
-msgstr "റിലീസ്"
+msgstr ""
 
 #. Atk release property
 #: ../gladeui/glade-property-class.c:61 ../plugins/gtk+/gtk+.xml.in.h:214
@@ -1361,7 +1359,7 @@ msgstr ""
 
 #: ../gladeui/glade-property.c:571
 msgid "Enabled"
-msgstr "സജ്ജമാക്കിയിരിക്കുന്നു"
+msgstr ""
 
 #: ../gladeui/glade-property.c:572
 msgid "If the property is optional, this is its enabled state"
@@ -1507,7 +1505,7 @@ msgstr ""
 
 #: ../gladeui/glade-widget.c:968
 msgid "Object"
-msgstr "ഒബ്ജക്ട്"
+msgstr ""
 
 #: ../gladeui/glade-widget.c:969
 msgid "The object associated"
@@ -1592,12 +1590,12 @@ msgstr ""
 #: ../gladeui/glade-widget-adaptor.c:184 ../gladeui/glade-widget-adaptor.c:224
 #, c-format
 msgid "Unable to load icon for %s (%s)"
-msgstr "%s-നുളള ഐക്കണ്‍ ലഭ്യമാക്കുവാന്‍ സാധ്യമായില്ല (%s)"
+msgstr ""
 
 #: ../gladeui/glade-widget-adaptor.c:199 ../gladeui/glade-widget-adaptor.c:239
 #, c-format
 msgid "Unable to load stock icon (%s)"
-msgstr "ഐക്കണ്‍ സ്റ്റോക്ക് ചെയ്യുവാന്‍ സാധ്യമായില്ല (%s)"
+msgstr ""
 
 #: ../gladeui/glade-widget-adaptor.c:333
 #, c-format
@@ -1660,7 +1658,7 @@ msgstr "വലിയ ഐക്കണ്‍"
 
 #: ../gladeui/glade-widget-adaptor.c:974
 msgid "The 22x22 icon for this widget class"
-msgstr "ഈ വിഡ്ജറ്റ് ക്ളാസ്സിനുളള 22x22 ഐക്കണ്‍"
+msgstr ""
 
 #: ../gladeui/glade-widget-adaptor.c:981
 msgid "Small Icon"
@@ -1668,7 +1666,7 @@ msgstr "ചെറിയ ഐക്കണ്‍"
 
 #: ../gladeui/glade-widget-adaptor.c:982
 msgid "The 16x16 icon for this widget class"
-msgstr "ഈ വിഡ്ജറ്റ് ക്ളാസ്സിനുളള 16x16 ഐക്കണ്‍"
+msgstr ""
 
 #: ../gladeui/glade-widget-adaptor.c:989 ../plugins/gtk+/gtk+.xml.in.h:63
 msgid "Cursor"
@@ -2939,15 +2937,15 @@ msgstr ""
 
 #: ../plugins/gtk+/gtk+.xml.in.h:273
 msgid "Vertical Scrollbar"
-msgstr "വെറ്‍ട്ടിക്കല്‍ സ്ക്രോള്‍ബാറ്‍"
+msgstr ""
 
 #: ../plugins/gtk+/gtk+.xml.in.h:274
 msgid "Vertical Separator"
-msgstr "വെറ്‍ട്ടിക്കല്‍ സെപ്പറേറ്ററ്‍"
+msgstr ""
 
 #: ../plugins/gtk+/gtk+.xml.in.h:275
 msgid "Viewport"
-msgstr "വ്യൂപോറ്‍ട്ട്"
+msgstr ""
 
 #: ../plugins/gtk+/gtk+.xml.in.h:276
 msgid "Visibility Notify"
@@ -2986,19 +2984,19 @@ msgstr ""
 
 #: ../plugins/gnome/glade-gnome.c:298
 msgid "Status Message."
-msgstr "നിലവാരം വ്യക്തമാക്കുന്ന സന്ദേശം"
+msgstr ""
 
 #: ../plugins/gnome/glade-gnome.c:656
 msgid "The position in the druid"
-msgstr "druid-ലുളള സ്ഥാനം"
+msgstr ""
 
 #: ../plugins/gnome/glade-gnome.c:1008
 msgid "Message box type"
-msgstr "ഏത് തരം സന്ദേശപ്പെട്ടി"
+msgstr ""
 
 #: ../plugins/gnome/glade-gnome.c:1009
 msgid "The type of the message box"
-msgstr "ഏത് തരം സന്ദേശപ്പെട്ടി"
+msgstr ""
 
 #: ../plugins/gnome/glade-gnome.c:1225
 msgid "This property is valid only in font information mode"
@@ -3007,11 +3005,11 @@ msgstr ""
 #. This is deprecated
 #: ../plugins/gnome/glade-gnome.c:1313 ../plugins/gnome/canvas.xml.in.h:23
 msgid "Selection Mode"
-msgstr "സെലക്ഷന്‍ മോഡ്"
+msgstr ""
 
 #: ../plugins/gnome/glade-gnome.c:1314
 msgid "Choose the Selection Mode"
-msgstr "സെലക്ഷന്‍ മോഡ് തിരഞ്ഞെടുക്കുക"
+msgstr ""
 
 #: ../plugins/gnome/glade-gnome.c:1464
 msgid "Placement"
@@ -3019,7 +3017,7 @@ msgstr ""
 
 #: ../plugins/gnome/glade-gnome.c:1465
 msgid "Choose the BonoboDockPlacement type"
-msgstr "ഏത് തരം BonoboDockPlacement എന്ന് തിരഞ്ഞെടുക്കുക"
+msgstr ""
 
 #: ../plugins/gnome/glade-gnome.c:1493
 msgid "Behavior"
@@ -3027,15 +3025,15 @@ msgstr ""
 
 #: ../plugins/gnome/glade-gnome.c:1494
 msgid "Choose the BonoboDockItemBehavior type"
-msgstr "ഏത് തരം BonoboDockItemBehavior എന്ന് തിരഞ്ഞെടുക്കുക"
+msgstr ""
 
 #: ../plugins/gnome/glade-gnome.c:1503
 msgid "Pack Type"
-msgstr "ഏത് തരം പാക്ക്"
+msgstr ""
 
 #: ../plugins/gnome/glade-gnome.c:1504
 msgid "Choose the Pack Type"
-msgstr "ഏത് തരം പാക്ക് എന്ന് തിരഞ്ഞെടുക്കുക"
+msgstr ""
 
 #: ../plugins/gnome/gnome.xml.in.h:1
 msgid "24-Hour Format"
@@ -3047,11 +3045,11 @@ msgstr "പശ്ചാത്തലത്തിലുളള നിറം"
 
 #: ../plugins/gnome/gnome.xml.in.h:4
 msgid "Contents Background Color"
-msgstr "ഉളളടക്കത്തിന്‍റെ പശ്ചാത്തല നിറം"
+msgstr ""
 
 #: ../plugins/gnome/gnome.xml.in.h:6
 msgid "Dither"
-msgstr "Dither"
+msgstr ""
 
 #: ../plugins/gnome/gnome.xml.in.h:10
 msgid "File"
@@ -3075,7 +3073,7 @@ msgstr "സാധാരണ"
 
 #: ../plugins/gnome/gnome.xml.in.h:16
 msgid "Gnome About"
-msgstr "Gnome സംബന്ധിച്ച്"
+msgstr ""
 
 #: ../plugins/gnome/gnome.xml.in.h:17
 msgid "Gnome App"
@@ -3083,20 +3081,20 @@ msgstr "Gnome App"
 
 #: ../plugins/gnome/gnome.xml.in.h:18
 msgid "Gnome App Bar"
-msgstr "Gnome App Bar"
+msgstr "Gnome App ബാറ്‍"
 
 #: ../plugins/gnome/gnome.xml.in.h:19
 msgid "Gnome Color Picker"
-msgstr "Gnome Color Picker"
+msgstr ""
 
 #: ../plugins/gnome/gnome.xml.in.h:20
 msgid "Gnome Date Edit"
-msgstr "Gnome Date Edit"
+msgstr ""
 
 #. Deprecated Widget Classes :)
 #: ../plugins/gnome/gnome.xml.in.h:22
 msgid "Gnome Dialog"
-msgstr "Gnome Dialog"
+msgstr "Gnome ഡയലോഗ്"
 
 #: ../plugins/gnome/gnome.xml.in.h:23
 msgid "Gnome Druid"
@@ -3112,11 +3110,11 @@ msgstr "Gnome Druid Page Standard"
 
 #: ../plugins/gnome/gnome.xml.in.h:26
 msgid "Gnome File Entry"
-msgstr "Gnome File Entry"
+msgstr "Gnome ഫയല്‍ എന്‍ട്രി"
 
 #: ../plugins/gnome/gnome.xml.in.h:27
 msgid "Gnome Font Picker"
-msgstr "Gnome Font Picker"
+msgstr ""
 
 #: ../plugins/gnome/gnome.xml.in.h:28
 msgid "Gnome HRef"
@@ -3124,15 +3122,15 @@ msgstr "Gnome HRef"
 
 #: ../plugins/gnome/gnome.xml.in.h:29
 msgid "Gnome Icon Entry"
-msgstr "Gnome Icon Entry"
+msgstr ""
 
 #: ../plugins/gnome/gnome.xml.in.h:30
 msgid "Gnome Icon Selection"
-msgstr "Gnome Icon Selection"
+msgstr ""
 
 #: ../plugins/gnome/gnome.xml.in.h:31
 msgid "Gnome Message Box"
-msgstr "Gnome Message Box"
+msgstr ""
 
 #: ../plugins/gnome/gnome.xml.in.h:32
 msgid "Gnome Pixmap"
@@ -3140,11 +3138,11 @@ msgstr "Gnome Pixmap"
 
 #: ../plugins/gnome/gnome.xml.in.h:33
 msgid "Gnome Pixmap Entry"
-msgstr "Gnome Pixmap Entry"
+msgstr ""
 
 #: ../plugins/gnome/gnome.xml.in.h:34
 msgid "Gnome Property Box"
-msgstr "Gnome Property Box"
+msgstr ""
 
 #: ../plugins/gnome/gnome.xml.in.h:35
 msgid "Information"
@@ -3156,7 +3154,7 @@ msgstr "ലോഗോ"
 
 #: ../plugins/gnome/gnome.xml.in.h:37
 msgid "Logo Background Color"
-msgstr "ലോഗോയുടെ പശ്ചാത്തലിത്തിലുളള നിറം"
+msgstr ""
 
 #: ../plugins/gnome/gnome.xml.in.h:38
 msgid "Max Saved"
@@ -3172,7 +3170,7 @@ msgstr "തിങ്കളാഴ്ച ആദ്യം"
 
 #: ../plugins/gnome/gnome.xml.in.h:44
 msgid "Padding"
-msgstr "പാഡിങ്"
+msgstr ""
 
 #: ../plugins/gnome/gnome.xml.in.h:45
 msgid "Pixmap"
@@ -3204,11 +3202,11 @@ msgstr "സ്റ്റേറ്റസ് ബാറ്‍"
 
 #: ../plugins/gnome/gnome.xml.in.h:57
 msgid "Store Config"
-msgstr "കോണ്‍ഫിഗ് സൂക്ഷിക്കുക"
+msgstr ""
 
 #: ../plugins/gnome/gnome.xml.in.h:59
 msgid "Text Foreground Color"
-msgstr "ടെക്സ്റ്റിന്‍റെ മുന്‍വശത്തുളള നിറം"
+msgstr ""
 
 #: ../plugins/gnome/gnome.xml.in.h:60
 msgid "The height to scale the pixmap to"
@@ -3216,7 +3214,7 @@ msgstr ""
 
 #: ../plugins/gnome/gnome.xml.in.h:61
 msgid "The maximum number of history entries saved"
-msgstr "കംപ്യൂട്ടറില്‍ സൂക്ഷിച്ചിരിക്കുന്ന ഹിസ്റ്ററി എന്‍ട്രികളുടെ ഏറ്റവും കൂടുതല്‍ എണ്ണം"
+msgstr ""
 
 #: ../plugins/gnome/gnome.xml.in.h:62
 msgid "The pixmap file"
@@ -3228,7 +3226,7 @@ msgstr ""
 
 #: ../plugins/gnome/gnome.xml.in.h:65
 msgid "Title Foreground Color"
-msgstr "തലക്കെട്ടിന്‍റെ മുന്‍വശത്തുളള നിറം"
+msgstr ""
 
 #: ../plugins/gnome/gnome.xml.in.h:66
 msgid "Top Watermark"
@@ -3271,7 +3269,7 @@ msgstr ""
 
 #: ../plugins/gnome/bonobo.xml.in.h:9
 msgid "Locked"
-msgstr "പൂട്ടിയിരിക്കുന്നു"
+msgstr ""
 
 #: ../plugins/gnome/bonobo.xml.in.h:10
 msgid "Never Floating"
@@ -3293,7 +3291,7 @@ msgstr "തിരയുക"
 #. This is deprecated
 #: ../plugins/gnome/canvas.xml.in.h:4
 msgid "Column Spacing"
-msgstr "കോളം സ്പെയിസിങ്"
+msgstr ""
 
 #: ../plugins/gnome/canvas.xml.in.h:5
 msgid "GNOME Canvas"
@@ -3306,12 +3304,12 @@ msgstr "Gnome Canvas"
 #. This is deprecated
 #: ../plugins/gnome/canvas.xml.in.h:8
 msgid "Gnome Icon List"
-msgstr "Gnome ഐക്കണുകളുടെ പട്ടിക"
+msgstr ""
 
 #. This is deprecated
 #: ../plugins/gnome/canvas.xml.in.h:10
 msgid "Icon Width"
-msgstr "ഐക്കണ്‍ന്‍റെ വീതി"
+msgstr ""
 
 #: ../plugins/gnome/canvas.xml.in.h:11
 msgid "If the icon text can be edited by the user"
@@ -3342,16 +3340,16 @@ msgstr "Min Y"
 #. This is deprecated
 #: ../plugins/gnome/canvas.xml.in.h:18
 msgid "Multiple"
-msgstr "അനവധി"
+msgstr ""
 
 #: ../plugins/gnome/canvas.xml.in.h:19
 msgid "Pixels per unit"
-msgstr "ഒരു യൂണിറ്റില്‍ എത്റ പിക്സലുകള്‍"
+msgstr ""
 
 #. This is deprecated
 #: ../plugins/gnome/canvas.xml.in.h:21
 msgid "Row Spacing"
-msgstr "റോ സ്പെയിസിങ്"
+msgstr ""
 
 #. This is deprecated
 #: ../plugins/gnome/canvas.xml.in.h:25
@@ -3361,55 +3359,55 @@ msgstr "സിംഗിള്‍"
 #. This is deprecated
 #: ../plugins/gnome/canvas.xml.in.h:27
 msgid "Text Editable"
-msgstr "ടെക്സ്റ്റ് എഡിറ്റബിള്‍"
+msgstr ""
 
 #. This is deprecated
 #: ../plugins/gnome/canvas.xml.in.h:29
 msgid "Text Spacing"
-msgstr "ടെക്സ്റ്റ് സ്പെയിസിങ്"
+msgstr ""
 
 #. This is deprecated
 #: ../plugins/gnome/canvas.xml.in.h:31
 msgid "Text Static"
-msgstr "ടെക്സ്റ്റ് സ്റ്റാറ്റിക്"
+msgstr ""
 
 #: ../plugins/gnome/canvas.xml.in.h:32
 msgid "The maximum x coordinate"
-msgstr "ഏറ്റവും കൂടിയ x കോറ്‍ഡിനേറ്റ്"
+msgstr ""
 
 #: ../plugins/gnome/canvas.xml.in.h:33
 msgid "The maximum y coordinate"
-msgstr "ഏറ്റവും കൂടിയ y കോറ്‍ഡിനേറ്റ്"
+msgstr ""
 
 #: ../plugins/gnome/canvas.xml.in.h:34
 msgid "The minimum x coordinate"
-msgstr "ഏറ്റവും കുറഞ്ഞ y കോറ്‍ഡിനേറ്റ്"
+msgstr ""
 
 #: ../plugins/gnome/canvas.xml.in.h:35
 msgid "The minimum y coordinate"
-msgstr "ഏറ്റവും കുറഞ്ഞ y കോറ്‍ഡിനേറ്റ്"
+msgstr ""
 
 #: ../plugins/gnome/canvas.xml.in.h:36
 msgid "The number of pixels between columns of icons"
-msgstr "ഐക്കണുകളുടെ നിരകളുടെ ഇടയിലുളള പിക്സലുകളുടെ എണ്ണം"
+msgstr ""
 
 #: ../plugins/gnome/canvas.xml.in.h:37
 msgid "The number of pixels between rows of icons"
-msgstr "ഐക്കണുകളുടെ വരിയുടെ ഇടയിലുളള പിക്സലുകളുടെ എണ്ണം"
+msgstr ""
 
 #: ../plugins/gnome/canvas.xml.in.h:38
 msgid "The number of pixels between the text and the icon"
-msgstr "ഐക്കണിനും ടെക്സ്റ്റിനും ഇടയ്ക്കുളള പിക്സലുകളുടെ എണ്ണം"
+msgstr ""
 
 #: ../plugins/gnome/canvas.xml.in.h:39
 msgid "The number of pixels corresponding to one unit"
-msgstr "ഒരു യൂണിറ്റ് സൂചിപ്പിക്കുന്നതിനുളള പിക്സലുകളുടെ എണ്ണം"
+msgstr ""
 
 #: ../plugins/gnome/canvas.xml.in.h:40
 msgid "The selection mode"
-msgstr "സിലക്ഷന്‍ മോഡ്"
+msgstr ""
 
 #: ../plugins/gnome/canvas.xml.in.h:41
 msgid "The width of each icon"
-msgstr "ഓരോ ഐക്കണിന്‍റേയും വീതി"
+msgstr ""
 

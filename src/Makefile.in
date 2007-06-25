@@ -38,9 +38,10 @@ build_triplet = @build@
 host_triplet = @host@
 target_triplet = @target@
 bin_PROGRAMS = glade-3$(EXEEXT)
-@WITH_WIN32_TRUE@am__append_1 = -mwindows
+@PLATFORM_WIN32_TRUE@am__append_1 = glade-win32-res.o
 subdir = src
-DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
+DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
+	$(srcdir)/glade-3.rc.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/gnome-doc-utils.m4 \
 	$(top_srcdir)/m4/gtk-doc.m4 $(top_srcdir)/m4/intltool.m4 \
@@ -49,14 +50,16 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
-CONFIG_CLEAN_FILES =
+CONFIG_CLEAN_FILES = glade-3.rc
 am__installdirs = "$(DESTDIR)$(bindir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
 am_glade_3_OBJECTS = glade_3-glade-project-window.$(OBJEXT) \
 	glade_3-main.$(OBJEXT)
 glade_3_OBJECTS = $(am_glade_3_OBJECTS)
-glade_3_DEPENDENCIES = $(top_builddir)/gladeui/libgladeui-1.la
+@PLATFORM_WIN32_TRUE@am__DEPENDENCIES_1 = glade-win32-res.o
+glade_3_DEPENDENCIES = $(top_builddir)/gladeui/libgladeui-1.la \
+	$(am__DEPENDENCIES_1)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -125,6 +128,10 @@ GCC_WARN_FLAGS = @GCC_WARN_FLAGS@
 GETTEXT_PACKAGE = @GETTEXT_PACKAGE@
 GLADE_AGE = @GLADE_AGE@
 GLADE_CURRENT = @GLADE_CURRENT@
+GLADE_CURRENT_MINUS_AGE = @GLADE_CURRENT_MINUS_AGE@
+GLADE_MAJOR_VERSION = @GLADE_MAJOR_VERSION@
+GLADE_MICRO_VERSION = @GLADE_MICRO_VERSION@
+GLADE_MINOR_VERSION = @GLADE_MINOR_VERSION@
 GLADE_REVISION = @GLADE_REVISION@
 GLIB_GENMARSHAL = @GLIB_GENMARSHAL@
 GMOFILES = @GMOFILES@
@@ -138,6 +145,8 @@ GTK_DOC_USE_LIBTOOL_TRUE = @GTK_DOC_USE_LIBTOOL_TRUE@
 GTK_LIBS = @GTK_LIBS@
 HAVE_GNOME_DOC_UTILS_FALSE = @HAVE_GNOME_DOC_UTILS_FALSE@
 HAVE_GNOME_DOC_UTILS_TRUE = @HAVE_GNOME_DOC_UTILS_TRUE@
+HAVE_GTK_UNIX_PRINT_FALSE = @HAVE_GTK_UNIX_PRINT_FALSE@
+HAVE_GTK_UNIX_PRINT_TRUE = @HAVE_GTK_UNIX_PRINT_TRUE@
 HELP_DIR = @HELP_DIR@
 HTML_DIR = @HTML_DIR@
 INSTALL_DATA = @INSTALL_DATA@
@@ -196,6 +205,8 @@ PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
 PKG_CONFIG = @PKG_CONFIG@
+PLATFORM_WIN32_FALSE = @PLATFORM_WIN32_FALSE@
+PLATFORM_WIN32_TRUE = @PLATFORM_WIN32_TRUE@
 POFILES = @POFILES@
 POSUB = @POSUB@
 PO_IN_DATADIR_FALSE = @PO_IN_DATADIR_FALSE@
@@ -221,8 +232,7 @@ SHELL = @SHELL@
 STRIP = @STRIP@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
-WITH_WIN32_FALSE = @WITH_WIN32_FALSE@
-WITH_WIN32_TRUE = @WITH_WIN32_TRUE@
+WINDRES = @WINDRES@
 XGETTEXT = @XGETTEXT@
 ac_ct_CC = @ac_ct_CC@
 ac_ct_CXX = @ac_ct_CXX@
@@ -289,13 +299,15 @@ glade_3_CFLAGS = \
 	$(GTK_CFLAGS)       \
 	$(AM_CFLAGS)
 
-glade_3_LDFLAGS = $(AM_LDFLAGS) $(am__append_1)
-glade_3_LDADD = $(top_builddir)/gladeui/libgladeui-1.la
+glade_3_LDFLAGS = $(AM_LDFLAGS)
+glade_3_LDADD = $(top_builddir)/gladeui/libgladeui-1.la \
+	$(am__append_1)
 glade_3_SOURCES = \
 	glade-project-window.c \
 	glade-project-window.h \
 	main.c
 
+EXTRA_DIST = glade-3.rc.in
 all: all-am
 
 .SUFFIXES:
@@ -329,6 +341,8 @@ $(top_srcdir)/configure: @MAINTAINER_MODE_TRUE@ $(am__configure_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
+glade-3.rc: $(top_builddir)/config.status $(srcdir)/glade-3.rc.in
+	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
 install-binPROGRAMS: $(bin_PROGRAMS)
 	@$(NORMAL_INSTALL)
 	test -z "$(bindir)" || $(mkdir_p) "$(DESTDIR)$(bindir)"
@@ -598,6 +612,9 @@ uninstall-am: uninstall-binPROGRAMS uninstall-info-am
 	uninstall-binPROGRAMS uninstall-info-am
 
 	$(AM_CPPFLAGS)
+
+glade-win32-res.o: glade-3.rc
+	$(WINDRES) $< $@
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

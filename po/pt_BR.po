@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glade3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-12 02:19-0300\n"
+"POT-Creation-Date: 2007-03-12 01:55-0300\n"
 "PO-Revision-Date: 2007-03-12 02:00-0300\n"
 "Last-Translator: Leonardo Ferreira Fontenelle <leo.fontenelle@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-l10n-br@listas.cipsga.org.br>\n"
@@ -1049,7 +1049,7 @@ msgstr ""
 
 #. construct tab label widget
 #: ../gladeui/glade-editor.c:196 ../gladeui/glade-editor.c:322
-#: ../gladeui/glade-editor.c:1178
+#: ../gladeui/glade-editor.c:1181
 msgid "Accessibility"
 msgstr "Acessibilidade"
 
@@ -1092,56 +1092,56 @@ msgstr "Nome:"
 msgid "Class:"
 msgstr "Classe:"
 
-#: ../gladeui/glade-editor.c:991
+#: ../gladeui/glade-editor.c:994
 #, c-format
 msgid "Create a %s"
 msgstr "Criar um %s"
 
-#: ../gladeui/glade-editor.c:1109
+#: ../gladeui/glade-editor.c:1112
 msgid "Reset"
 msgstr "Restaurar"
 
-#: ../gladeui/glade-editor.c:1123
+#: ../gladeui/glade-editor.c:1126
 msgid "Property"
 msgstr "Propriedade"
 
-#: ../gladeui/glade-editor.c:1158
+#: ../gladeui/glade-editor.c:1161
 msgid "General"
 msgstr "Geral"
 
-#: ../gladeui/glade-editor.c:1168
+#: ../gladeui/glade-editor.c:1171
 msgid "Common"
 msgstr "Comum"
 
-#: ../gladeui/glade-editor.c:1213
+#: ../gladeui/glade-editor.c:1216
 msgid "(default)"
 msgstr "(padrão)"
 
-#: ../gladeui/glade-editor.c:1228
+#: ../gladeui/glade-editor.c:1231
 msgid "Select the properties that you want to reset to their default values"
 msgstr ""
 "Selecione quais propriedades você quer que sejam restauradas para os seus "
 "valores padrão"
 
-#: ../gladeui/glade-editor.c:1360
+#: ../gladeui/glade-editor.c:1363
 msgid "Reset Widget Properties"
 msgstr "Restaurar Propriedades do Widget"
 
 #. Checklist
-#: ../gladeui/glade-editor.c:1377
+#: ../gladeui/glade-editor.c:1380
 msgid "_Properties:"
 msgstr "_Propriedades:"
 
-#: ../gladeui/glade-editor.c:1406
+#: ../gladeui/glade-editor.c:1409
 msgid "_Select All"
 msgstr "_Selecionar tudo"
 
-#: ../gladeui/glade-editor.c:1413
+#: ../gladeui/glade-editor.c:1416
 msgid "_Unselect All"
 msgstr "Selecionar _nenhum"
 
 #. Description
-#: ../gladeui/glade-editor.c:1422
+#: ../gladeui/glade-editor.c:1425
 msgid "Property _Description:"
 msgstr "_Descrição da Propriedade:"
 
@@ -2529,9 +2529,8 @@ msgstr ""
 msgid ""
 "Indicates that an object provides descriptive information about another "
 "object; more verbose than 'Label For'"
-msgstr ""
-"Indica que um objeto fornece informação descrevendo outro objeto; mais "
-"detalhado que \"Label For\" (Etiqueta Para)"
+msgstr "Indica que um objeto fornece informação descrevendo outro objeto; "
+"mais detalhado que \"Label For\" (Etiqueta Para)"
 
 #: ../plugins/gtk+/gtk+.xml.in.h:148
 msgid ""

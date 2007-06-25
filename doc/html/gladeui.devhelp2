@@ -36,10 +36,8 @@
     <sub name="Index" link="ix01.html"/>
   </chapters>
   <functions>
-    <keyword type="" name="Toplevel catalog properties and tags" link="catalogintro.html#id2479322"/>
-    <keyword type="" name="Widget Class Parameters" link="widgetclasses.html#id2523391"/>
-    <keyword type="" name="Displayable Values, Packing defaults and such" link="properties.html#id2524404"/>
-    <keyword type="" name="Container Relationship Parameter Tag Definitions" link="children.html#id2525089"/>
+    <keyword type="" name="Displayable Values, Packing defaults and such" link="properties.html#id2524550"/>
+    <keyword type="" name="Container Relationship Parameter Tag Definitions" link="children.html#id2525235"/>
     <keyword type="struct" name="GladeApp" link="GladeApp.html#GladeApp-struct"/>
     <keyword type="function" name="glade_app_get ()" link="GladeApp.html#glade-app-get"/>
     <keyword type="function" name="glade_app_update_ui ()" link="GladeApp.html#glade-app-update-ui"/>
@@ -86,7 +84,6 @@
     <keyword type="" name="The &quot;widget-event&quot; signal" link="GladeApp.html#GladeApp-widget-event"/>
     <keyword type="struct" name="struct GladeProject" link="GladeProject.html#GladeProject-struct"/>
     <keyword type="function" name="glade_project_new ()" link="GladeProject.html#glade-project-new"/>
-    <keyword type="function" name="glade_project_open ()" link="GladeProject.html#glade-project-open"/>
     <keyword type="function" name="glade_project_save ()" link="GladeProject.html#glade-project-save"/>
     <keyword type="function" name="glade_project_push_undo ()" link="GladeProject.html#glade-project-push-undo"/>
     <keyword type="function" name="glade_project_redo ()" link="GladeProject.html#glade-project-redo"/>
@@ -112,12 +109,12 @@
     <keyword type="function" name="glade_project_set_resource ()" link="GladeProject.html#glade-project-set-resource"/>
     <keyword type="function" name="glade_project_list_resources ()" link="GladeProject.html#glade-project-list-resources"/>
     <keyword type="function" name="glade_project_resource_fullpath ()" link="GladeProject.html#glade-project-resource-fullpath"/>
-    <keyword type="function" name="glade_project_display_name ()" link="GladeProject.html#glade-project-display-name"/>
     <keyword type="function" name="glade_project_is_loading ()" link="GladeProject.html#glade-project-is-loading"/>
     <keyword type="function" name="glade_project_get_has_selection ()" link="GladeProject.html#glade-project-get-has-selection"/>
     <keyword type="function" name="glade_project_get_readonly ()" link="GladeProject.html#glade-project-get-readonly"/>
     <keyword type="" name="The &quot;has-selection&quot; property" link="GladeProject.html#GladeProject--has-selection"/>
     <keyword type="" name="The &quot;has-unsaved-changes&quot; property" link="GladeProject.html#GladeProject--has-unsaved-changes"/>
+    <keyword type="" name="The &quot;path&quot; property" link="GladeProject.html#GladeProject--path"/>
     <keyword type="" name="The &quot;read-only&quot; property" link="GladeProject.html#GladeProject--read-only"/>
     <keyword type="" name="The &quot;add-widget&quot; signal" link="GladeProject.html#GladeProject-add-widget"/>
     <keyword type="" name="The &quot;changed&quot; signal" link="GladeProject.html#GladeProject-changed"/>
@@ -171,8 +168,6 @@
     <keyword type="function" name="glade_widget_list_signal_handlers ()" link="GladeWidget.html#glade-widget-list-signal-handlers"/>
     <keyword type="function" name="glade_widget_write ()" link="GladeWidget.html#glade-widget-write"/>
     <keyword type="function" name="glade_widget_read ()" link="GladeWidget.html#glade-widget-read"/>
-    <keyword type="function" name="glade_widget_has_launcher ()" link="GladeWidget.html#glade-widget-has-launcher"/>
-    <keyword type="function" name="glade_widget_launch_editor ()" link="GladeWidget.html#glade-widget-launch-editor"/>
     <keyword type="function" name="glade_widget_get_parent ()" link="GladeWidget.html#glade-widget-get-parent"/>
     <keyword type="function" name="glade_widget_set_parent ()" link="GladeWidget.html#glade-widget-set-parent"/>
     <keyword type="function" name="glade_widget_superuser ()" link="GladeWidget.html#glade-widget-superuser"/>
@@ -192,7 +187,6 @@
     <keyword type="" name="The &quot;template&quot; property" link="GladeWidget.html#GladeWidget--template"/>
     <keyword type="" name="The &quot;toplevel-height&quot; property" link="GladeWidget.html#GladeWidget--toplevel-height"/>
     <keyword type="" name="The &quot;toplevel-width&quot; property" link="GladeWidget.html#GladeWidget--toplevel-width"/>
-    <keyword type="" name="The &quot;action-activated&quot; signal" link="GladeWidget.html#GladeWidget-action-activated"/>
     <keyword type="" name="The &quot;add-signal-handler&quot; signal" link="GladeWidget.html#GladeWidget-add-signal-handler"/>
     <keyword type="" name="The &quot;button-press-event&quot; signal" link="GladeWidget.html#GladeWidget-button-press-event"/>
     <keyword type="" name="The &quot;button-release-event&quot; signal" link="GladeWidget.html#GladeWidget-button-release-event"/>
@@ -264,7 +258,6 @@
     <keyword type="function" name="GladeRemoveChildFunc ()" link="gladeui-GladeWidgetClass.html#GladeRemoveChildFunc"/>
     <keyword type="function" name="GladeReplaceChildFunc ()" link="gladeui-GladeWidgetClass.html#GladeReplaceChildFunc"/>
     <keyword type="function" name="GladeGetInternalFunc ()" link="gladeui-GladeWidgetClass.html#GladeGetInternalFunc"/>
-    <keyword type="function" name="GladeEditorLaunchFunc ()" link="gladeui-GladeWidgetClass.html#GladeEditorLaunchFunc"/>
     <keyword type="struct" name="GladePropertyClass" link="gladeui-GladePropertyClass.html#GladePropertyClass"/>
     <keyword type="enum" name="enum GPCType" link="gladeui-GladePropertyClass.html#GPCType"/>
     <keyword type="function" name="GladeVerifyPropertyFunc ()" link="gladeui-GladePropertyClass.html#GladeVerifyPropertyFunc"/>
@@ -410,7 +403,6 @@
     <keyword type="function" name="glade_util_clear_selection ()" link="gladeui-glade-utils.html#glade-util-clear-selection"/>
     <keyword type="function" name="glade_util_get_selection ()" link="gladeui-glade-utils.html#glade-util-get-selection"/>
     <keyword type="function" name="glade_util_queue_draw_nodes ()" link="gladeui-glade-utils.html#glade-util-queue-draw-nodes"/>
-    <keyword type="function" name="glade_util_get_parent ()" link="gladeui-glade-utils.html#glade-util-get-parent"/>
     <keyword type="function" name="glade_util_container_get_all_children ()" link="gladeui-glade-utils.html#glade-util-container-get-all-children"/>
     <keyword type="function" name="glade_util_count_placeholders ()" link="gladeui-glade-utils.html#glade-util-count-placeholders"/>
     <keyword type="function" name="glade_util_find_iter_by_widget ()" link="gladeui-glade-utils.html#glade-util-find-iter-by-widget"/>
@@ -425,6 +417,5 @@
     <keyword type="function" name="glade_util_class_implements_interface ()" link="gladeui-glade-utils.html#glade-util-class-implements-interface"/>
     <keyword type="function" name="glade_util_have_devhelp ()" link="gladeui-glade-utils.html#glade-util-have-devhelp"/>
     <keyword type="function" name="glade_util_search_devhelp ()" link="gladeui-glade-utils.html#glade-util-search-devhelp"/>
-    <keyword type="function" name="glade_util_deep_fixed_event ()" link="gladeui-glade-utils.html#glade-util-deep-fixed-event"/>
   </functions>
 </book>

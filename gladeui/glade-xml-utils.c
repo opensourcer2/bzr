@@ -14,15 +14,12 @@
 #include <glib.h>
 #include <errno.h>
 
-#include "glade.h"
 #include "glade-xml-utils.h"
 
 #include <libxml/tree.h>
 #include <libxml/parser.h>
 #include <libxml/parserInternals.h>
 #include <libxml/xmlmemory.h>
-
-#include "glade-utils.h"
 
 struct _GladeXmlNode
 {
@@ -205,7 +202,7 @@ glade_xml_get_value_int (GladeXmlNode *node_in, const gchar *name, gint *val)
                 return FALSE;
 
         errno = 0;
-        i = glade_util_ascii_strtoll (value, &endptr, 10);
+        i = g_ascii_strtoll (value, &endptr, 10);
         if (errno != 0 || (i == 0 && endptr == value)) {
                 g_free (value);
                 return FALSE;
@@ -390,7 +387,7 @@ glade_xml_get_property_int (GladeXmlNode *node_in,
 	if ((value = glade_xml_get_property (node, name)) == NULL)
 		return _default;
 
-	retval = atoi (value);
+	retval = g_ascii_strtoll (value, NULL, 10);
 	
 	g_free (value);
 
@@ -780,14 +777,14 @@ glade_xml_alloc_propname(GladeInterface *interface, const gchar *string)
     return glade_xml_alloc_string(interface, norm_str->str);
 }
 
-
-void
+gboolean
 glade_xml_load_sym_from_node (GladeXmlNode     *node_in,
 			      GModule          *module,
 			      gchar            *tagname,
 			      gpointer         *sym_location)
 {
 	static GModule *self = NULL;
+	gboolean retval = FALSE;
 	gchar *buff;
 
 	if (!self) 
@@ -801,7 +798,7 @@ glade_xml_load_sym_from_node (GladeXmlNode     *node_in,
 				   "no module available to load it from !", 
 				   buff, tagname);
 			g_free (buff);
-			return;
+			return FALSE;
 		}
 
 		/* I use here a g_warning to signal these errors instead of a dialog 
@@ -816,10 +813,14 @@ glade_xml_load_sym_from_node (GladeXmlNode     *node_in,
 		 *
 		 * XXX http://bugzilla.gnome.org/show_bug.cgi?id=331797
 		 */
-		if (!g_module_symbol (module, buff, sym_location))
-			if (!g_module_symbol (self, buff, sym_location))
-				g_warning ("Could not find %s in %s or in global namespace\n",
-					   buff, g_module_name (module));
+		if (g_module_symbol (module, buff, sym_location) ||
+		    g_module_symbol (self, buff, sym_location))
+			retval = TRUE;
+		else
+			g_warning ("Could not find %s in %s or in global namespace\n",
+				   buff, g_module_name (module));
+
 		g_free (buff);
 	}
+	return retval;
 }

@@ -29,7 +29,6 @@
 #include "glade-signal.h"
 #include "glade-marshallers.h"
 #include "glade-accumulators.h"
-#include "glade-binding.h"
 
 /* For g_file_exists */
 #include <sys/types.h>
@@ -40,12 +39,12 @@
 #include <gmodule.h>
 #include <ctype.h>
 
-#define LARGE_ICON_SUBDIR "22x22"
-#define LARGE_ICON_SIZE 22
-#define SMALL_ICON_SUBDIR "16x16"
-#define SMALL_ICON_SIZE 16
+#define DEFAULT_ICON_NAME "widget-gtk-frame"
 
-struct _GladeWidgetAdaptorPriv {
+#define GLADE_WIDGET_ADAPTOR_GET_PRIVATE(o)  \
+        (G_TYPE_INSTANCE_GET_PRIVATE ((o), GLADE_TYPE_WIDGET_ADAPTOR, GladeWidgetAdaptorPrivate))
+
+struct _GladeWidgetAdaptorPrivate {
 
 	gchar       *catalog;      /* The name of the widget catalog this class
 				    * was declared by.
@@ -53,9 +52,6 @@ struct _GladeWidgetAdaptorPriv {
 
 	gchar       *book;         /* DevHelp search namespace for this widget class
 				    */
-
-	GdkPixbuf   *large_icon;   /* The 22x22 icon for the widget */
-	GdkPixbuf   *small_icon;   /* The 16x16 icon for the widget */
 
 	GdkCursor   *cursor;       /* a cursor for inserting widgets */
 
@@ -76,23 +72,14 @@ enum {
 	PROP_TYPE,
 	PROP_TITLE,
 	PROP_GENERIC_NAME,
+	PROP_ICON_NAME,
 	PROP_CATALOG,
 	PROP_BOOK,
 	PROP_SPECIAL_TYPE,
-	PROP_SMALL_ICON,
-	PROP_LARGE_ICON,
 	PROP_CURSOR
 };
 
-enum
-{
-	SIGNAL_ACTION_ACTIVATED,
-	LAST_SIGNAL
-};
-
 typedef struct _GladeChildPacking GladeChildPacking;
-
-static guint gwa_signals [LAST_SIGNAL] = {0,};
 
 static GObjectClass *parent_class = NULL;
 static GHashTable   *adaptor_hash = NULL;
@@ -155,105 +142,12 @@ gwa_properties_set_weight (GList **properties, GType parent)
 }
 
 static void
-gwa_load_icons (GladeWidgetAdaptor *adaptor)
-{
-	GError    *error = NULL;
-	gchar     *icon_path;
-
-	/* only certain widget classes need to have icons */
-	if (G_TYPE_IS_INSTANTIATABLE (adaptor->type) == FALSE ||
-            G_TYPE_IS_ABSTRACT (adaptor->type) != FALSE ||
-            adaptor->generic_name == NULL)
-		return;
-
-	/* load large 22x22 icon */
-	icon_path = g_strdup_printf ("%s" G_DIR_SEPARATOR_S
-				     LARGE_ICON_SUBDIR
-				     G_DIR_SEPARATOR_S "%s.png", 
-				     glade_app_get_pixmaps_dir (), 
-				     adaptor->generic_name);
-
-	adaptor->priv->large_icon = 
-		gdk_pixbuf_new_from_file_at_size (icon_path, 
-						  LARGE_ICON_SIZE, 
-						  LARGE_ICON_SIZE, 
-						  &error);
-	
-	if (adaptor->priv->large_icon == NULL)
-	{
-		g_warning (_("Unable to load icon for %s (%s)"), 
-			   adaptor->name, error->message);
-
-		g_error_free (error);
-		error = NULL;
-
-		/* use stock missing icon */
-		adaptor->priv->large_icon = 
-			gtk_icon_theme_load_icon (gtk_icon_theme_get_default (), 
-						  GTK_STOCK_MISSING_IMAGE, 
-						  LARGE_ICON_SIZE, 
-						  GTK_ICON_LOOKUP_USE_BUILTIN, 
-						  &error);
-		if (adaptor->priv->large_icon == NULL)
-		{
-			g_critical (_("Unable to load stock icon (%s)"),
-				    error->message);
-
-			g_error_free (error);
-			error = NULL;
-		}
-	}
-	g_free (icon_path);
-
-
-	/* load small 16x16 icon */
-	icon_path = g_strdup_printf ("%s" G_DIR_SEPARATOR_S 
-				     SMALL_ICON_SUBDIR
-				     G_DIR_SEPARATOR_S "%s.png", 
-				     glade_app_get_pixmaps_dir (), 
-				     adaptor->generic_name);
-
-	adaptor->priv->small_icon = 
-		gdk_pixbuf_new_from_file_at_size (icon_path, 
-						  SMALL_ICON_SIZE, 
-						  SMALL_ICON_SIZE, 
-						  &error);
-	
-	if (adaptor->priv->small_icon == NULL)
-	{
-		g_warning (_("Unable to load icon for %s (%s)"), 
-			   adaptor->name, error->message);
-
-		g_error_free (error);
-		error = NULL;
-
-		/* use stock missing icon */
-		adaptor->priv->small_icon = 
-			gtk_icon_theme_load_icon (gtk_icon_theme_get_default (), 
-						  GTK_STOCK_MISSING_IMAGE, 
-						  SMALL_ICON_SIZE, 
-						  GTK_ICON_LOOKUP_USE_BUILTIN, 
-						  &error);
-		if (adaptor->priv->small_icon == NULL)
-		{
-			g_critical (_("Unable to load stock icon (%s)"),
-				    error->message);
-
-			g_error_free (error);
-			error = NULL;
-		}
-	}
-
-	g_free (icon_path);
-
-}
-
-static void
 gwa_create_cursor (GladeWidgetAdaptor *adaptor)
 {
-	GdkPixbuf *tmp_pixbuf;
+	GdkPixbuf *tmp_pixbuf, *widget_pixbuf;
 	const GdkPixbuf *add_pixbuf;
 	GdkDisplay *display;
+	GError *error = NULL;
 
 	/* only certain widget classes need to have cursors */
 	if (G_TYPE_IS_INSTANTIATABLE (adaptor->type) == FALSE ||
@@ -271,9 +165,28 @@ gwa_create_cursor (GladeWidgetAdaptor *adaptor)
 	tmp_pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, 32, 32);
 	gdk_pixbuf_fill (tmp_pixbuf, 0x00000000);
 
+	if (gtk_icon_theme_has_icon (gtk_icon_theme_get_default (), adaptor->icon_name))
+	{
+		widget_pixbuf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
+							  adaptor->icon_name,
+							  22,
+							  0,
+							  &error);
+		
+		if (error) {
+			g_warning ("Could not load image data for named icon '%s': %s", 
+				   adaptor->icon_name,
+				   error->message);
+			g_error_free (error);
+			return;
+		}
+	
+	} else {
+		return;
+	}
 
 	/* composite pixbufs */
-	gdk_pixbuf_composite (adaptor->priv->large_icon, tmp_pixbuf,
+	gdk_pixbuf_composite (widget_pixbuf, tmp_pixbuf,
 			      8, 8, 22, 22,
 			      8, 8, 1, 1,
                               GDK_INTERP_NEAREST, 255);
@@ -286,7 +199,8 @@ gwa_create_cursor (GladeWidgetAdaptor *adaptor)
 
 	adaptor->priv->cursor = gdk_cursor_new_from_pixbuf (display, tmp_pixbuf, 6, 6);
 
-	g_object_unref(tmp_pixbuf);
+	g_object_unref (tmp_pixbuf);
+	g_object_unref (widget_pixbuf);
 }
 
 
@@ -559,40 +473,6 @@ gwa_inherit_child_packing (GladeWidgetAdaptor *adaptor)
 	return child_packings;
 }
 
-static GList *
-gwa_action_copy (GList *src)
-{
-	GList *l, *list = NULL;
-	
-	for (l = src; l; l = g_list_next (l))
-	{
-		GWAAction *action = l->data, *copy = g_new0 (GWAAction, 1);
-	
-		copy->id = g_strdup (action->id);
-		copy->label = g_strdup (action->label);
-		copy->stock = g_strdup (action->stock);
-		copy->is_a_group = action->is_a_group;
-		
-		list = g_list_append (list, l->data);
-		
-		if (action->actions)
-			copy->actions = gwa_action_copy (action->actions);
-	}
-	
-	return list;
-}
-
-static void
-gwa_action_setup (GladeWidgetAdaptor *adaptor)
-{
-	GladeWidgetAdaptor *parent = gwa_get_parent_adaptor (adaptor);
-	
-	if (parent && parent->actions)
-		adaptor->actions = gwa_action_copy (parent->actions);
-	else
-		adaptor->actions = NULL;
-}
-
 static GObject *
 glade_widget_adaptor_constructor (GType                  type,
 				  guint                  n_construct_properties,
@@ -616,7 +496,9 @@ glade_widget_adaptor_constructor (GType                  type,
 		g_warning ("Adaptor created without a name");
 
 	/* Build decorations */
-	gwa_load_icons (adaptor);
+	if (!adaptor->icon_name) {		
+		adaptor->icon_name = g_strdup ("gtk-missing-image");
+	}
 	gwa_create_cursor (adaptor);
 
 	/* Let it leek */
@@ -640,7 +522,31 @@ glade_widget_adaptor_constructor (GType                  type,
 			parent_adaptor->priv->special_child_type ?
 			g_strdup (parent_adaptor->priv->special_child_type) : NULL;
 	
-	gwa_action_setup (adaptor);
+	/* Copy parent actions */
+	if (parent_adaptor)
+	{
+		GList *l;
+		
+		if (parent_adaptor->actions)
+		{
+			for (l = parent_adaptor->actions; l; l = g_list_next (l))
+			{
+				GWActionClass *child = glade_widget_action_class_clone (l->data);
+				adaptor->actions = g_list_prepend (adaptor->actions, child);
+			}
+			adaptor->actions = g_list_reverse (adaptor->actions);
+		}
+		
+		if (parent_adaptor->packing_actions)
+		{
+			for (l = parent_adaptor->packing_actions; l; l = g_list_next (l))
+			{
+				GWActionClass *child = glade_widget_action_class_clone (l->data);
+				adaptor->packing_actions = g_list_prepend (adaptor->packing_actions, child);
+			}
+			adaptor->packing_actions = g_list_reverse (adaptor->packing_actions);
+		}
+	}
 	
 	return ret_obj;
 }
@@ -660,25 +566,6 @@ gwa_child_packing_free (GladeChildPacking *packing)
         g_list_foreach (packing->packing_defaults,
                         (GFunc) gwa_packing_default_free, NULL);
         g_list_free (packing->packing_defaults);
-}
-
-static  void
-gwa_actions_free (GList *actions)
-{
-	GList *l;
-	
-	for (l = actions; l; l = g_list_next (l))
-	{
-		GWAAction *action = l->data;
-
-		if (action->actions) gwa_actions_free (action->actions);
-		
-		g_free (action->id);
-		g_free (action->label);
-		g_free (action->stock);
-		g_free (action);		
-	}
-	g_list_free (actions);
 }
 
 static void
@@ -711,17 +598,26 @@ glade_widget_adaptor_finalize (GObject *object)
 	if (adaptor->priv->cursor != NULL)
 		gdk_cursor_unref (adaptor->priv->cursor);
 
-	if (adaptor->priv->large_icon != NULL)
-		g_object_unref (G_OBJECT (adaptor->priv->large_icon));
-
-	if (adaptor->priv->small_icon != NULL)
-		g_object_unref (G_OBJECT (adaptor->priv->small_icon));
-
 	if (adaptor->name)         g_free (adaptor->name);
 	if (adaptor->generic_name) g_free (adaptor->generic_name);
 	if (adaptor->title)        g_free (adaptor->title);
+	if (adaptor->icon_name)    g_free (adaptor->icon_name);
 
-	if (adaptor->actions)      gwa_actions_free (adaptor->actions);
+	if (adaptor->actions)
+	{
+		g_list_foreach (adaptor->actions,
+				(GFunc) glade_widget_action_class_free,
+				NULL);
+		g_list_free (adaptor->actions);
+	}
+	
+	if (adaptor->packing_actions)
+	{
+		g_list_foreach (adaptor->packing_actions,
+				(GFunc) glade_widget_action_class_free,
+				NULL);
+		g_list_free (adaptor->packing_actions);
+	}
 	
 	g_free (adaptor->priv);
 
@@ -743,6 +639,10 @@ glade_widget_adaptor_real_set_property (GObject         *object,
 	case PROP_NAME:
 		/* assume once (construct-only) */
 		adaptor->name = g_value_dup_string (value);
+		break;
+	case PROP_ICON_NAME:
+		/* assume once (construct-only) */
+		adaptor->icon_name = g_value_dup_string (value);
 		break;
 	case PROP_TYPE:
 		adaptor->type = g_value_get_gtype (value);
@@ -786,17 +686,16 @@ glade_widget_adaptor_real_get_property (GObject         *object,
 
 	switch (prop_id)
 	{
-	case PROP_NAME:         g_value_set_string (value, adaptor->name);          break;
-	case PROP_TYPE:	        g_value_set_gtype  (value, adaptor->type);          break;
-	case PROP_TITLE:        g_value_set_string (value, adaptor->title);         break;
-	case PROP_GENERIC_NAME: g_value_set_string (value, adaptor->generic_name);  break;
-	case PROP_CATALOG:      g_value_set_string (value, adaptor->priv->catalog); break;
-	case PROP_BOOK:         g_value_set_string (value, adaptor->priv->book);    break;
+	case PROP_NAME:         g_value_set_string (value, adaptor->name);             break;
+	case PROP_TYPE:	        g_value_set_gtype  (value, adaptor->type);             break;
+	case PROP_TITLE:        g_value_set_string (value, adaptor->title);            break;
+	case PROP_GENERIC_NAME: g_value_set_string (value, adaptor->generic_name);     break;
+	case PROP_ICON_NAME:    g_value_set_string (value, adaptor->icon_name);        break;
+	case PROP_CATALOG:      g_value_set_string (value, adaptor->priv->catalog);    break;
+	case PROP_BOOK:         g_value_set_string (value, adaptor->priv->book);       break;
 	case PROP_SPECIAL_TYPE: 
 		g_value_set_string (value, adaptor->priv->special_child_type); 
 		break;
-	case PROP_SMALL_ICON: g_value_set_object  (value, adaptor->priv->small_icon); break;
-	case PROP_LARGE_ICON: g_value_set_object  (value, adaptor->priv->large_icon); break;
 	case PROP_CURSOR:     g_value_set_pointer (value, adaptor->priv->cursor);     break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -825,6 +724,24 @@ glade_widget_adaptor_object_get_property (GladeWidgetAdaptor *adaptor,
 	g_object_get_property (object, property_name, value);
 }
 
+static void
+glade_widget_adaptor_object_action_activate (GladeWidgetAdaptor *adaptor,
+					     GObject *object,
+					     const gchar *action_id)
+{
+	g_message ("No action_activate() support in adaptor %s for action '%s'",
+		   adaptor->name, action_id);
+}
+
+static void
+glade_widget_adaptor_object_child_action_activate (GladeWidgetAdaptor *adaptor,
+						   GObject *container,
+						   GObject *object,
+						   const gchar *action_id)
+{
+	g_message ("No child_action_activate() support in adaptor %s for action '%s'",
+		   adaptor->name, action_id);
+}
 
 /*******************************************************************************
             GladeWidgetAdaptor type registration and class initializer
@@ -832,24 +749,7 @@ glade_widget_adaptor_object_get_property (GladeWidgetAdaptor *adaptor,
 static void
 glade_widget_adaptor_init (GladeWidgetAdaptor *adaptor)
 {
-	adaptor->priv = g_new0 (GladeWidgetAdaptorPriv, 1);
-}
-
-static gboolean
-gwa_action_activated_impl (GladeWidgetAdaptor *adaptor,
-			   GladeWidget *widget,
-			   const gchar *action_id)
-{
-	static guint signal = 0;
-	gboolean retval;
-	
-	if (signal == 0)
-		signal = g_signal_lookup ("action-activated", GLADE_TYPE_WIDGET);
-	
-	g_signal_emit (widget, signal, g_quark_from_string (action_id),
-		       action_id, &retval);
-
-	return retval;
+	adaptor->priv = GLADE_WIDGET_ADAPTOR_GET_PRIVATE (adaptor);
 }
 
 static void
@@ -869,7 +769,6 @@ glade_widget_adaptor_class_init (GladeWidgetAdaptorClass *adaptor_class)
 
 	/* Class methods */
 	adaptor_class->post_create          = NULL;
-	adaptor_class->launch_editor        = NULL;
 	adaptor_class->get_internal_child   = NULL;
 	adaptor_class->verify_property      = NULL;
 	adaptor_class->set_property         = glade_widget_adaptor_object_set_property;
@@ -880,8 +779,8 @@ glade_widget_adaptor_class_init (GladeWidgetAdaptorClass *adaptor_class)
 	adaptor_class->get_children         = NULL;
 	adaptor_class->child_set_property   = NULL;
 	adaptor_class->child_get_property   = NULL;
-
-	adaptor_class->action_activated     = gwa_action_activated_impl;
+	adaptor_class->action_activate      = glade_widget_adaptor_object_action_activate;
+	adaptor_class->child_action_activate= glade_widget_adaptor_object_child_action_activate;
 
 	/* Base defaults here */
 	adaptor_class->fixed                = FALSE;
@@ -889,26 +788,6 @@ glade_widget_adaptor_class_init (GladeWidgetAdaptorClass *adaptor_class)
 	adaptor_class->use_placeholders     = FALSE;
 	adaptor_class->default_width        = -1;
 	adaptor_class->default_height       = -1;
-
-	/**
-	 * GladeWidgetAdaptor::action-activated:
-	 * @adaptor: the GladeWidgetAdaptor which received the signal.
-	 * @widget: the action's GladeWidget or NULL.
-	 * @action_id: the action id (signal detail) or NULL.
-	 *
-	 * Use this to catch up actions.
-	 *
-	 * Returns TRUE to stop others handlers being invoked.
-	 *
-	 */
-	gwa_signals [SIGNAL_ACTION_ACTIVATED] =
-		g_signal_new ("action-activated",
-			      G_TYPE_FROM_CLASS (object_class),
-			      G_SIGNAL_RUN_LAST | G_SIGNAL_DETAILED,
-			      G_STRUCT_OFFSET (GladeWidgetAdaptorClass, action_activated),
-			      glade_boolean_handled_accumulator, NULL,
-			      glade_marshal_BOOLEAN__OBJECT_STRING,
-			      G_TYPE_BOOLEAN, 2, GLADE_TYPE_WIDGET, G_TYPE_STRING);	
 
 	/* Properties */
 	g_object_class_install_property 
@@ -942,6 +821,14 @@ glade_widget_adaptor_class_init (GladeWidgetAdaptorClass *adaptor_class)
 		  _("Used to generate names of new widgets"),
 		  NULL, 
 		  G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+		  
+	g_object_class_install_property 
+		(object_class, PROP_ICON_NAME,
+		 g_param_spec_string 
+		 ("icon-name", _("Icon Name"), 
+		  _("The icon name"),
+		  DEFAULT_ICON_NAME, 
+		  G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
 	g_object_class_install_property 
 		(object_class, PROP_CATALOG,
@@ -969,27 +856,13 @@ glade_widget_adaptor_class_init (GladeWidgetAdaptorClass *adaptor_class)
 		  G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
 	g_object_class_install_property 
-		(object_class, PROP_LARGE_ICON,
-		 g_param_spec_object 
-		 ("large-icon", _("Large Icon"), 
-		  _("The 22x22 icon for this widget class"),
-		  GDK_TYPE_PIXBUF, 
-		  G_PARAM_READABLE));
-
-	g_object_class_install_property 
-		(object_class, PROP_SMALL_ICON,
-		 g_param_spec_object 
-		 ("small-icon", _("Small Icon"), 
-		  _("The 16x16 icon for this widget class"),
-		  GDK_TYPE_PIXBUF, 
-		  G_PARAM_READABLE));
-
-	g_object_class_install_property 
 		(object_class, PROP_CURSOR,
 		 g_param_spec_pointer 
 		 ("cursor", _("Cursor"), 
 		  _("A cursor for inserting widgets in the UI"),
 		  G_PARAM_READABLE));
+	
+	g_type_class_add_private (adaptor_class, sizeof (GladeWidgetAdaptorPrivate));
 }
 
 GType
@@ -1044,26 +917,161 @@ glade_create_reason_get_type (void)
 /*******************************************************************************
                         Synthetic Object Derivation
  *******************************************************************************/
+typedef struct
+{
+	GladeXmlNode *node;
+	GModule      *module;
+} GWADerivedClassData;
+
 static void
-gwa_derived_init (GladeWidgetAdaptor *adaptor)
+gwa_derived_init (GladeWidgetAdaptor *adaptor, gpointer g_class)
 {
 
 }
 
 static void
-gwa_derived_class_init (GladeWidgetAdaptorClass *adaptor_class)
+gwa_extend_with_node_load_sym (GladeWidgetAdaptorClass *klass,
+			       GladeXmlNode            *node,
+			       GModule                 *module)
 {
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	gpointer symbol;
+	
+	/*
+	 * We use a temporary variable to avoid a bogus gcc warning.
+	 * the thing it that g_module_symbol() should use a function pointer
+	 * instead of a gpointer!
+	 */
 
+	if (glade_xml_load_sym_from_node (node, module,
+					  GLADE_TAG_CONSTRUCTOR_FUNCTION,
+					  &symbol))
+		object_class->constructor = symbol;
+	
+	if (glade_xml_load_sym_from_node (node, module,
+					  GLADE_TAG_POST_CREATE_FUNCTION,
+					  &symbol))
+		klass->post_create = symbol;
+	
+	if (glade_xml_load_sym_from_node (node, module,
+					  GLADE_TAG_GET_INTERNAL_CHILD_FUNCTION,
+					  &symbol))
+		klass->get_internal_child = symbol;
+	
+	if (glade_xml_load_sym_from_node (node, module,
+					  GLADE_TAG_SET_FUNCTION,
+					  &symbol))
+		klass->set_property = symbol;
+	
+	if (glade_xml_load_sym_from_node (node, module,
+					  GLADE_TAG_GET_FUNCTION,
+					  &symbol))
+		klass->get_property = symbol;
+
+	if (glade_xml_load_sym_from_node (node, module,
+					  GLADE_TAG_VERIFY_FUNCTION,
+					  &symbol))
+		klass->verify_property = symbol;
+	
+	if (glade_xml_load_sym_from_node (node, module,
+					  GLADE_TAG_ADD_CHILD_FUNCTION,
+					  &symbol))
+		klass->add = symbol;
+
+	if (glade_xml_load_sym_from_node (node, module,
+					  GLADE_TAG_REMOVE_CHILD_FUNCTION,
+					  &symbol))
+		klass->remove = symbol;
+	
+	if (glade_xml_load_sym_from_node (node, module,
+					  GLADE_TAG_GET_CHILDREN_FUNCTION,
+					  &symbol))
+		klass->get_children = symbol;
+
+	if (glade_xml_load_sym_from_node (node, module,
+					  GLADE_TAG_CHILD_SET_PROP_FUNCTION,
+					  &symbol))
+		klass->child_set_property = symbol;
+
+	if (glade_xml_load_sym_from_node (node, module,
+				      GLADE_TAG_CHILD_GET_PROP_FUNCTION,
+				      &symbol))
+		klass->child_get_property = symbol;
+
+	if (glade_xml_load_sym_from_node (node, module,
+					  GLADE_TAG_CHILD_VERIFY_FUNCTION,
+					  &symbol))
+		klass->child_verify_property = symbol;
+
+	if (glade_xml_load_sym_from_node (node, module,
+					  GLADE_TAG_REPLACE_CHILD_FUNCTION,
+					  &symbol))
+		klass->replace_child = symbol;
+
+	if (glade_xml_load_sym_from_node (node, module,
+					  GLADE_TAG_ACTION_ACTIVATE_FUNCTION,
+					  &symbol))
+		klass->action_activate = symbol;
+	
+	if (glade_xml_load_sym_from_node (node, module,
+					  GLADE_TAG_CHILD_ACTION_ACTIVATE_FUNCTION,
+					  &symbol))
+		klass->child_action_activate = symbol;
+}
+
+static void
+gwa_derived_class_init (GladeWidgetAdaptorClass *adaptor_class,
+			GWADerivedClassData *data)
+{
+	GladeXmlNode *node = data->node;
+	GModule      *module = data->module;
+	
+	/* Load catalog symbols from module */
+	if (module) gwa_extend_with_node_load_sym (adaptor_class, node, module);
+	
+	adaptor_class->fixed = 
+		glade_xml_get_property_boolean
+		(node, GLADE_TAG_FIXED, adaptor_class->fixed);
+
+	/* Check if this class is toplevel */
+	adaptor_class->toplevel =
+		glade_xml_get_property_boolean
+		(node, GLADE_TAG_TOPLEVEL, adaptor_class->toplevel);
+
+	/* Check if this class uses placeholders for child widgets */
+	adaptor_class->use_placeholders =
+		glade_xml_get_property_boolean
+		(node, GLADE_TAG_USE_PLACEHOLDERS, adaptor_class->use_placeholders);
+
+	/* Check default size when used as a toplevel in the GladeDesignView */
+	adaptor_class->default_width =
+		glade_xml_get_property_int
+		(node, GLADE_TAG_DEFAULT_WIDTH, adaptor_class->default_width);
+	adaptor_class->default_height =
+		glade_xml_get_property_int
+		(node, GLADE_TAG_DEFAULT_HEIGHT, adaptor_class->default_height);
 }
 
 static GType
-gwa_derive_adaptor_for_type (GType object_type)
+gwa_derive_adaptor_for_type (GType object_type, GWADerivedClassData *data)
 {
 	GladeWidgetAdaptor *adaptor;
 	GType               iter_type, derived_type;
 	GType               parent_type = GLADE_TYPE_WIDGET_ADAPTOR;
 	gchar              *type_name;
-
+	GTypeInfo adaptor_info = 
+	{
+		sizeof (GladeWidgetAdaptorClass),
+		(GBaseInitFunc) NULL,
+		(GBaseFinalizeFunc) NULL,
+		(GClassInitFunc) gwa_derived_class_init,
+		(GClassFinalizeFunc) NULL,
+		data,           /* class_data */
+		sizeof (GladeWidgetAdaptor),
+		0,              /* n_preallocs */
+		(GInstanceInitFunc) gwa_derived_init,
+	};
+	
 	for (iter_type = g_type_parent (object_type); 
 	     iter_type > 0; 
 	     iter_type = g_type_parent (iter_type))
@@ -1080,12 +1088,9 @@ gwa_derive_adaptor_for_type (GType object_type)
 	 * to the type system 
 	 */
 	type_name    = g_strdup_printf ("Glade%sAdaptor", g_type_name (object_type));
-	derived_type = 
-		g_type_register_static_simple (parent_type, type_name,
-					       sizeof (GladeWidgetAdaptorClass),
-					       (GClassInitFunc)gwa_derived_class_init,
-					       sizeof (GladeWidgetAdaptor),
-					       (GInstanceInitFunc)gwa_derived_init, 0);
+	derived_type = g_type_register_static (parent_type, type_name,
+					       &adaptor_info, 0);
+			
 	return derived_type;
 }
 
@@ -1311,90 +1316,20 @@ gwa_update_properties_from_node (GladeWidgetAdaptor  *adaptor,
 	}
 }
 
-static GList **
-gwa_action_lookup (GList **actions, const gchar *id, gboolean only_group)
-{
-	GList **group = actions, *l;
-	
-	for (l = *actions; l; l = g_list_next (l))
-	{
-		GWAAction *action = l->data;
-		
-		if (only_group && action->is_a_group == FALSE) continue;
-		
-		if (strcmp (action->id, id) == 0)
-			return (only_group) ? &action->actions : group;
-			
-		if (action->is_a_group && action->actions &&
-		    (group = gwa_action_lookup (&action->actions, id, only_group)))
-			return group;
-	}
-	
-	return NULL;
-}
-
-/*
- * gwa_action_append:
- *
- * @adaptor: the GladeWidgetAdaptor.
- * @group_id: the group id weater to append this action or NULL.
- * @id: the id of the action.
- * @label: the label of the action or NULL.
- * @stock: the stock id of the action or NULL (ie: "gtk-delete").
- * @is_a_group: if this is an action group.
- *
- * Append a new GWAAction to @adaptor.
- *
- * Returns weater or not the action wass appended
- *
- */
-static gboolean
-gwa_action_append (GladeWidgetAdaptor *adaptor,
-		   const gchar *group_id,
-		   const gchar *id,
-		   const gchar *label,
-		   const gchar *stock,
-		   gboolean is_a_group)
-{
-	GList **group;
-	GWAAction *action;
-
-	g_return_val_if_fail (id != NULL, FALSE);
-
-	if (group_id)
-	{
-		group = gwa_action_lookup (&adaptor->actions, group_id, TRUE);
-		if (group == NULL) return FALSE;
-	}
-	else group = &adaptor->actions;
-		
-	if (gwa_action_lookup (&adaptor->actions, id, FALSE)) return FALSE;
-			
-	action = g_new0 (GWAAction, 1);
-	action->id = g_strdup (id);
-	action->label = (label) ? g_strdup (label) : NULL;
-	action->stock = (stock) ? g_strdup (stock) : NULL;
-	action->is_a_group = is_a_group;	
-	
-	*group = g_list_prepend (*group, action);
-	
-	return TRUE;
-}
-
 static void
-gwa_update_actions (GladeWidgetAdaptor *adaptor,
-		    GladeXmlNode *node,
-		    gchar *group_id)
+gwa_action_update_from_node (GladeWidgetAdaptor *adaptor,
+			     gboolean is_packing,
+			     GladeXmlNode *node,
+			     gchar *group_path)
 {
 	GladeXmlNode *child;
-	gchar *id, *label, *stock;
+	gchar *id, *label, *stock, *action_path;
 	gboolean group;
 	
 	for (child = glade_xml_node_get_children (node);
 	     child; child = glade_xml_node_next (child))
 	{
-		if ((group = glade_xml_node_verify_silent (child, GLADE_TAG_ACTION_GROUP)) == FALSE &&
-		    glade_xml_node_verify_silent (child, GLADE_TAG_ACTION) == FALSE)
+		if ((group = glade_xml_node_verify_silent (child, GLADE_TAG_ACTION)) == FALSE)
 			continue;
 
 		id = glade_xml_get_property_string_required
@@ -1402,17 +1337,25 @@ gwa_update_actions (GladeWidgetAdaptor *adaptor,
 		if (id == NULL)
 			continue;
 
+		if (group_path)
+			action_path = g_strdup_printf ("%s/%s", group_path, id);
+		else
+			action_path = id;
+		
 		label = glade_xml_get_property_string (child, GLADE_TAG_NAME);
 		stock = glade_xml_get_property_string (child, GLADE_TAG_STOCK);
 
-		gwa_action_append (adaptor, group_id, id,
-				   (label == NULL && stock == NULL) ? id : label,
-				   stock, group);
-		if (group) gwa_update_actions (adaptor, child, id);
-			
+		if (is_packing)
+			glade_widget_adaptor_pack_action_add (adaptor, action_path, label, stock);
+		else
+			glade_widget_adaptor_action_add (adaptor, action_path, label, stock);
+		
+		if (group) gwa_action_update_from_node (adaptor, is_packing, child, action_path);
+		
 		g_free (id);
 		g_free (label);
 		g_free (stock);
+		if (group_path) g_free (action_path);
 	}
 }
 
@@ -1422,87 +1365,8 @@ gwa_extend_with_node (GladeWidgetAdaptor *adaptor,
 		      GModule            *module,
 		      const gchar        *domain)
 {
-	GladeWidgetAdaptorClass *adaptor_class = 
-		GLADE_WIDGET_ADAPTOR_GET_CLASS (adaptor);
 	GladeXmlNode *child;
 	gchar        *child_type;
-	
-	if (module)
-	{
-		glade_xml_load_sym_from_node (node, module,
-					      GLADE_TAG_POST_CREATE_FUNCTION,
-					      (gpointer *)&adaptor_class->post_create);
-
-		glade_xml_load_sym_from_node (node, module,
-					      GLADE_TAG_GET_INTERNAL_CHILD_FUNCTION,
-					      (gpointer *)&adaptor_class->get_internal_child);
-
-		glade_xml_load_sym_from_node (node, module,
-					      GLADE_TAG_LAUNCH_EDITOR_FUNCTION,
-					      (gpointer *)&adaptor_class->launch_editor);
-
-		glade_xml_load_sym_from_node (node, module, 
-					      GLADE_TAG_SET_FUNCTION, 
-					      (gpointer *)&adaptor_class->set_property);
-
-		glade_xml_load_sym_from_node (node, module, 
-					      GLADE_TAG_GET_FUNCTION, 
-					      (gpointer *)&adaptor_class->get_property);
-
-		glade_xml_load_sym_from_node (node, module, 
-					      GLADE_TAG_VERIFY_FUNCTION, 
-					      (gpointer *)&adaptor_class->verify_property);
-
-		glade_xml_load_sym_from_node (node, module,
-					      GLADE_TAG_ADD_CHILD_FUNCTION,
-					      (gpointer *)&adaptor_class->add);
-
-		glade_xml_load_sym_from_node (node, module,
-					      GLADE_TAG_REMOVE_CHILD_FUNCTION,
-					      (gpointer *)&adaptor_class->remove);
-
-		glade_xml_load_sym_from_node (node, module,
-					      GLADE_TAG_GET_CHILDREN_FUNCTION,
-					      (gpointer *)&adaptor_class->get_children);
-
-		glade_xml_load_sym_from_node (node, module,
-					      GLADE_TAG_CHILD_SET_PROP_FUNCTION,
-					      (gpointer *)&adaptor_class->child_set_property);
-
-		glade_xml_load_sym_from_node (node, module,
-					      GLADE_TAG_CHILD_GET_PROP_FUNCTION,
-					      (gpointer *)&adaptor_class->child_get_property);
-
-		glade_xml_load_sym_from_node (node, module,
-					      GLADE_TAG_CHILD_VERIFY_FUNCTION,
-					      (gpointer *)&adaptor_class->child_verify_property);
-
-		glade_xml_load_sym_from_node (node, module,
-					      GLADE_TAG_REPLACE_CHILD_FUNCTION,
-					      (gpointer *)&adaptor_class->replace_child);
-
-	}
-	adaptor_class->fixed = 
-		glade_xml_get_property_boolean
-		(node, GLADE_TAG_FIXED, adaptor_class->fixed);
-
-	/* Check if this class is toplevel */
-	adaptor_class->toplevel =
-		glade_xml_get_property_boolean
-		(node, GLADE_TAG_TOPLEVEL, adaptor_class->toplevel);
-
-	/* Check if this class uses placeholders for child widgets */
-	adaptor_class->use_placeholders =
-		glade_xml_get_property_boolean
-		(node, GLADE_TAG_USE_PLACEHOLDERS, adaptor_class->use_placeholders);
-
-	/* Check default size when used as a toplevel in the GladeDesignView */
-	adaptor_class->default_width =
-		glade_xml_get_property_int
-		(node, GLADE_TAG_DEFAULT_WIDTH, adaptor_class->default_width);
-	adaptor_class->default_height =
-		glade_xml_get_property_int
-		(node, GLADE_TAG_DEFAULT_HEIGHT, adaptor_class->default_height);
 
 	/* Override the special-child-type here */
 	if ((child_type =
@@ -1526,61 +1390,64 @@ gwa_extend_with_node (GladeWidgetAdaptor *adaptor,
 	if ((child = 
 	     glade_xml_search_child (node, GLADE_TAG_PACKING_DEFAULTS)) != NULL)
 		gwa_set_packing_defaults_from_node (adaptor, child);
+
+	/* Update actions from child node */
+	if ((child = 
+	     glade_xml_search_child (node, GLADE_TAG_ACTIONS)) != NULL)
+		gwa_action_update_from_node (adaptor, FALSE, child, NULL);
 	
-	/* Search for actions */
-	gwa_update_actions (adaptor, node, NULL);
+	/* Update packing actions from child node */
+	if ((child = 
+	     glade_xml_search_child (node, GLADE_TAG_PACKING_ACTIONS)) != NULL)
+		gwa_action_update_from_node (adaptor, TRUE, child, NULL);
 	
 	return TRUE;
 }
 
-static gboolean
-gwa_script_item_activate_cb (GladeWidgetAdaptor *adaptor,
-			     GladeWidget *widget,
-			     const gchar *action_id,
-			     GladeBindingScript *script)
+/** 
+ * create_icon_name_for_adaptor:
+ * @adaptor_name: The name of the widget class
+ * @adaptor_type: The #GType of the adaptor class
+ * @icon_name:    The icon name as set from the catalog
+ * @icon_prefix:  The icon prefix as set from the catalog
+ * @generic_name: The generic name for the widget class
+ *
+ * Creates a suitable icon name for an adaptor, based on several parameters.
+ *
+ * Returns: An icon name, or NULL if the adaptor does not require one.
+ */
+static gchar *
+create_icon_name_for_adaptor (const gchar *adaptor_name,
+			      GType        adaptor_type,
+			      const gchar *icon_name,
+			      const gchar *icon_prefix,
+			      const gchar *generic_name)
 {
-	gchar *argv[2] = {widget->name, NULL};
-	
-	glade_binding_run_script (script->binding, script->path, argv);
-	return TRUE;
-}
+	gchar *name;
 
-static void
-gwa_setup_binding_scripts (GladeWidgetAdaptor *adaptor)
-{
-	GList *l, *bindings;
-
-	if ((bindings = glade_binding_get_all ()) == NULL) return;
-	
-	gwa_action_append (adaptor, NULL, "scripts", "Scripts", NULL, TRUE);
-	
-	for (l = bindings; l; l = g_list_next (l))
+	/* only certain widget adaptors need to have icons */
+	if (G_TYPE_IS_INSTANTIATABLE (adaptor_type) == FALSE ||
+            G_TYPE_IS_ABSTRACT (adaptor_type) != FALSE ||
+            generic_name == NULL)
 	{
-		GladeBinding *binding = l->data;
-		GList *list;
-	
-		for (list = g_hash_table_lookup (binding->context_scripts, adaptor->name);
-		     list; list = g_list_next (list))
-		{
-			GladeBindingScript *script = list->data;
-			gchar *detailed_signal, *name = g_strdup (script->name);
-			
-			detailed_signal = g_strdup_printf ("action-activated::%s", script->name);
-			glade_util_replace (name, '_', ' ');
-
-			gwa_action_append (adaptor, "scripts", script->name,
-					   name, NULL, FALSE);
-
-			g_signal_connect (adaptor, detailed_signal,
-					  G_CALLBACK (gwa_script_item_activate_cb),
-					  script);
-
-			g_free (name);
-			g_free (detailed_signal);
-		}
+		return NULL;
 	}
 	
-	g_list_free (bindings);
+	/* if no icon name has been specified, we then fallback to a default icon name */
+	if (!icon_name)
+		name = g_strdup_printf ("widget-%s-%s", icon_prefix, generic_name);
+	else
+		name = g_strdup (icon_name);
+		
+	/* check if icon is available */
+	if (!gtk_icon_theme_has_icon (gtk_icon_theme_get_default (), name))
+	{
+		g_warning ("No icon named '%s' was found for widget class '%s'.", name, adaptor_name);
+		g_free (name);
+		name = g_strdup (DEFAULT_ICON_NAME);
+	}
+	
+	return name;
 }
 
 /**
@@ -1599,14 +1466,16 @@ gwa_setup_binding_scripts (GladeWidgetAdaptor *adaptor)
 GladeWidgetAdaptor *
 glade_widget_adaptor_from_catalog (GladeXmlNode     *class_node,
 				   const gchar      *catname,
+				   const gchar      *icon_prefix,
 				   GModule          *module,
 				   const gchar      *domain,
 				   const gchar      *book)
 {
 	GladeWidgetAdaptor *adaptor = NULL;
-	gchar              *name, *generic_name, *adaptor_name, *func_name;
+	gchar              *name, *generic_name, *icon_name, *adaptor_icon_name, *adaptor_name, *func_name;
 	GType               object_type, adaptor_type, parent_type;
-
+	GWADerivedClassData data;
+	
 	if (!glade_xml_node_verify (class_node, GLADE_TAG_GLADE_WIDGET_CLASS))
 	{
 		g_warning ("Widget class node is not '%s'", 
@@ -1642,7 +1511,16 @@ glade_widget_adaptor_from_catalog (GladeXmlNode     *class_node,
 	if ((adaptor_name = glade_xml_get_property_string (class_node, GLADE_TAG_ADAPTOR)))
 		adaptor_type = g_type_from_name (adaptor_name);
 	else
-		adaptor_type = gwa_derive_adaptor_for_type (object_type);
+	{
+		/*
+		 * We use this struct pointer to pass data to 
+		 * gwa_derived_class_init() because we must override constructor()
+		 * from the catalog before calling g_object_new() :P
+		 */
+		data.node = class_node;
+		data.module = module;
+		adaptor_type = gwa_derive_adaptor_for_type (object_type, &data);
+	}
 	
 	if (adaptor_type == 0)
 	{
@@ -1654,13 +1532,25 @@ glade_widget_adaptor_from_catalog (GladeXmlNode     *class_node,
 	}
 	
 	generic_name = glade_xml_get_property_string (class_node, GLADE_TAG_GENERIC_NAME);
-	adaptor      = g_object_new (adaptor_type, 
-				     "type", object_type,
-				     "name", name,
-				     "generic-name", generic_name,
-				     NULL);
-	if (generic_name)
-		g_free (generic_name);
+	icon_name    = glade_xml_get_property_string (class_node, GLADE_TAG_ICON_NAME);
+	
+	/* get a suitable icon name for adaptor */
+	adaptor_icon_name = create_icon_name_for_adaptor (name,
+							  adaptor_type,
+							  icon_name,
+							  icon_prefix,
+							  generic_name);
+
+	adaptor = g_object_new (adaptor_type, 
+				"type", object_type,
+				"name", name,
+				"generic-name", generic_name,
+				"icon-name", adaptor_icon_name,
+				NULL);
+				
+	g_free (generic_name);
+	g_free (icon_name);
+	g_free (adaptor_icon_name);
 	
 	if ((adaptor->title = glade_xml_get_property_string_required
 	     (class_node, GLADE_TAG_TITLE,
@@ -1707,8 +1597,6 @@ glade_widget_adaptor_from_catalog (GladeXmlNode     *class_node,
 		gwa_properties_set_weight (&adaptor->properties, parent_type);
 		gwa_properties_set_weight (&adaptor->packing_props, parent_type);
 	}
-
-	gwa_setup_binding_scripts (adaptor);
 	
 	glade_widget_adaptor_register (adaptor);
 
@@ -2074,28 +1962,6 @@ glade_widget_adaptor_get_internal_child (GladeWidgetAdaptor *adaptor,
 		g_critical ("No get_internal_child() support in adaptor %s", adaptor->name);
 
 	return NULL;
-}
-
-/**
- * glade_widget_adaptor_launch_editor:
- * @adaptor:       A #GladeWidgetAdaptor
- * @object:        The #GObject
- *
- * Launches a custom object editor for @object.
- */
-void
-glade_widget_adaptor_launch_editor (GladeWidgetAdaptor *adaptor,
-				    GObject            *object)
-{
-	g_return_if_fail (GLADE_IS_WIDGET_ADAPTOR (adaptor));
-	g_return_if_fail (G_IS_OBJECT (object));
-	g_return_if_fail (g_type_is_a (G_OBJECT_TYPE (object), adaptor->type));
-
-	if (GLADE_WIDGET_ADAPTOR_GET_CLASS (adaptor)->launch_editor)
-		GLADE_WIDGET_ADAPTOR_GET_CLASS
-			(adaptor)->launch_editor (adaptor, object);
-	else
-		g_critical ("No launch_editor() support in adaptor %s", adaptor->name);
 }
 
 /**
@@ -2489,42 +2355,6 @@ glade_widget_adaptor_get_packing_default (GladeWidgetAdaptor *child_adaptor,
 	return NULL;
 }
 
-/*
- * glade_widget_adaptor_action_activate:
- *
- * @widget: the GladeWidget.
- * @action_id: The action id (detail of GladeWidgetAdaptor's action-activated signal).
- *
- * Emit @widget's adaptor action-activated::@action_id signal.
- * GladeWidget's action-activated proxy signal is also emited.
- *
- */
-void
-glade_widget_adaptor_action_activate (GladeWidget *widget, const gchar *action_id)
-{
-	GladeWidgetAdaptor *adaptor;
-	GQuark detail;
-	guint signal;
-	gboolean retval;
-	
-	g_return_if_fail (GLADE_IS_WIDGET (widget) && action_id);
-
-	signal = gwa_signals [SIGNAL_ACTION_ACTIVATED];	
-	detail = g_quark_from_string (action_id);
-	
-	for (adaptor = widget->adaptor;
-	     adaptor;
-	     adaptor = gwa_get_parent_adaptor (adaptor))
-	{
-		if (gwa_action_lookup (&adaptor->actions, action_id, FALSE))
-			g_signal_emit (adaptor, signal, detail, widget,
-				       action_id, &retval);
-		else
-			return;
-	}
-}
-
-
 /**
  * glade_widget_adaptor_is_container:
  * @adaptor: A #GladeWidgetAdaptor
@@ -2545,4 +2375,283 @@ glade_widget_adaptor_is_container (GladeWidgetAdaptor *adaptor)
 	return 	(GLADE_WIDGET_ADAPTOR_GET_CLASS (adaptor)->add &&
 		 GLADE_WIDGET_ADAPTOR_GET_CLASS (adaptor)->remove &&
 		 GLADE_WIDGET_ADAPTOR_GET_CLASS (adaptor)->get_children);
+}
+
+static const gchar *
+gwa_action_path_get_id (const gchar *action_path)
+{
+	const gchar *id;
+	
+	if ((id = g_strrstr (action_path, "/")) && id[1] != '\0')
+		return &id[1];
+	else
+		return action_path;
+}
+
+static GWActionClass *
+gwa_action_lookup (GList *actions, const gchar *action_id)
+{
+	GList *l;
+	
+	for (l = actions; l; l = g_list_next (l))
+	{
+		GWActionClass *action = l->data;
+		if (strcmp (action->id, action_id) == 0)
+			return action;
+	}
+	
+	return NULL;
+}
+
+static GWActionClass *
+gwa_action_get_last_group (GList *actions, const gchar *action_path)
+{
+	gchar **tokens = g_strsplit (action_path, "/", 0);
+	GWActionClass *group = NULL;
+	gint i;
+	
+	for (i = 0; tokens[i] && tokens[i+1]; i++)
+	{
+		if ((group = gwa_action_lookup (actions, tokens[i])) == NULL)
+		{
+			g_strfreev (tokens);
+			return NULL;
+		}
+		actions = group->actions;
+	}
+	
+	g_strfreev (tokens);
+	return group;
+}
+
+static gboolean
+glade_widget_adaptor_action_add_real (GList **list,
+				      const gchar *action_path,
+				      const gchar *label,
+				      const gchar *stock)
+{
+	GWActionClass *action, *group;
+	const gchar *id;
+	
+	id = gwa_action_path_get_id (action_path);
+	
+	if ((group = gwa_action_get_last_group (*list, action_path)))
+		list = &group->actions;
+
+	if ((action = gwa_action_lookup (*list, id)))
+	{
+		/* Update parent's label/stock */
+		if (label && action->label)
+		{
+			g_free (action->label);
+			if (strcmp (label, "") == 0) label = NULL;
+			action->label = (label) ? g_strdup (label) : NULL;
+		}
+		if (stock && action->stock)
+		{
+			g_free (action->stock);
+			if (strcmp (stock, "") == 0) stock = NULL;
+			action->stock = (stock) ? g_strdup (stock) : NULL;
+		}
+	}
+	else
+	{
+		/* New Action */
+		action = g_new0 (GWActionClass, 1);
+		action->path = g_strdup (action_path);
+		action->id = (gchar*) gwa_action_path_get_id (action->path);
+	
+		if (label && strcmp (label, "") == 0) label = NULL;
+		if (stock && strcmp (stock, "") == 0) stock = NULL;
+		
+		action->label = (label) ? g_strdup (label) : NULL;
+		action->stock = (stock) ? g_strdup (stock) : NULL;
+	}
+	
+	*list = g_list_append (*list, action);
+	
+	return TRUE;
+}
+
+/**
+ * glade_widget_adaptor_action_add:
+ * @adaptor: A #GladeWidgetAdaptor
+ * @action_path: The identifier of this action in the action tree
+ * @label: A translated label to show in the UI for this action
+ * @stock: If set, this stock item will be shown in the UI along side the label.
+ *
+ * Add an action to @adaptor.
+ * If the action is present then it overrides label and stock
+ *
+ * Returns: whether or not the action was added/updated.
+ */
+gboolean
+glade_widget_adaptor_action_add (GladeWidgetAdaptor *adaptor,
+				 const gchar *action_path,
+				 const gchar *label,
+				 const gchar *stock)
+{
+	g_return_val_if_fail (GLADE_IS_WIDGET_ADAPTOR (adaptor), FALSE);
+	g_return_val_if_fail (action_path != NULL, FALSE);
+	
+	return glade_widget_adaptor_action_add_real (&adaptor->actions,
+						     action_path,
+						     label,
+						     stock);
+}
+
+/**
+ * glade_widget_adaptor_pack_action_add:
+ * @adaptor: A #GladeWidgetAdaptor
+ * @action_path: The identifier of this action in the action tree
+ * @label: A translated label to show in the UI for this action
+ * @stock: If set, this stock item will be shown in the UI along side the label.
+ *
+ * Add a packing action to @adaptor.
+ * If the action is present then it overrides label and stock
+ *
+ * Returns: whether or not the action was added/updated.
+ */
+gboolean
+glade_widget_adaptor_pack_action_add (GladeWidgetAdaptor *adaptor,
+				      const gchar *action_path,
+				      const gchar *label,
+				      const gchar *stock)
+{
+	g_return_val_if_fail (GLADE_IS_WIDGET_ADAPTOR (adaptor), FALSE);
+	g_return_val_if_fail (action_path != NULL, FALSE);
+	
+	return glade_widget_adaptor_action_add_real (&adaptor->packing_actions,
+						     action_path,
+						     label,
+						     stock);
+}
+
+static gboolean
+glade_widget_adaptor_action_remove_real (GList **list, const gchar *action_path)
+{
+	GWActionClass *action, *group;
+	const gchar *id;
+	
+	id = gwa_action_path_get_id (action_path);
+	
+	if ((group = gwa_action_get_last_group (*list, action_path)))
+		list = &group->actions;
+
+	if ((action = gwa_action_lookup (*list, id)) == NULL) return FALSE;
+	
+	*list = g_list_remove (*list, action);
+	
+	glade_widget_action_class_free (action);
+	
+	return TRUE;
+}
+
+/**
+ * glade_widget_adaptor_action_remove:
+ * @adaptor: A #GladeWidgetAdaptor
+ * @action_path: The identifier of this action in the action tree
+ *
+ * Remove an @adaptor's action.
+ *
+ * Returns: whether or not the action was removed.
+ */
+gboolean
+glade_widget_adaptor_action_remove (GladeWidgetAdaptor *adaptor,
+				    const gchar *action_path)
+{
+	g_return_val_if_fail (GLADE_IS_WIDGET_ADAPTOR (adaptor), FALSE);
+	g_return_val_if_fail (action_path != NULL, FALSE);
+	
+	return glade_widget_adaptor_action_remove_real (&adaptor->actions, 
+							action_path);
+}
+
+/**
+ * glade_widget_adaptor_pack_action_remove:
+ * @adaptor: A #GladeWidgetAdaptor
+ * @action_path: The identifier of this action in the action tree
+ *
+ * Remove an @adaptor's packing action.
+ *
+ * Returns: whether or not the action was removed.
+ */
+gboolean
+glade_widget_adaptor_pack_action_remove (GladeWidgetAdaptor *adaptor,
+					 const gchar *action_path)
+{
+	g_return_val_if_fail (GLADE_IS_WIDGET_ADAPTOR (adaptor), FALSE);
+	g_return_val_if_fail (action_path != NULL, FALSE);
+	
+	return glade_widget_adaptor_action_remove_real (&adaptor->packing_actions, 
+							action_path);
+}
+
+
+/**
+ * glade_widget_adaptor_pack_actions_new:
+ * @adaptor: A #GladeWidgetAdaptor
+ *
+ * Create a list of packing actions.
+ *
+ * Returns: a new list of GladeWidgetAction.
+ */
+GList *
+glade_widget_adaptor_pack_actions_new (GladeWidgetAdaptor *adaptor)
+{
+	GList *l, *list = NULL;
+	
+	g_return_val_if_fail (GLADE_IS_WIDGET_ADAPTOR (adaptor), NULL);
+	
+	for (l = adaptor->packing_actions; l; l = g_list_next (l))
+	{
+		GWActionClass *action = l->data;
+		GObject *obj = g_object_new (GLADE_TYPE_WIDGET_ACTION,
+					     "class", action, NULL);
+		
+		list = g_list_prepend (list, GLADE_WIDGET_ACTION (obj));
+	}
+	return g_list_reverse (list);
+}
+
+/**
+ * glade_widget_adaptor_action_activate:
+ * @adaptor:   A #GladeWidgetAdaptor
+ * @object:    The #GObject
+ * @action_path: The action identifier in the action tree
+ *
+ * An adaptor function to be called on widget actions.
+ */
+void
+glade_widget_adaptor_action_activate (GladeWidgetAdaptor *adaptor,
+				      GObject            *object,
+				      const gchar        *action_path)
+{
+	g_return_if_fail (GLADE_IS_WIDGET_ADAPTOR (adaptor));
+	g_return_if_fail (G_IS_OBJECT (object));
+	g_return_if_fail (g_type_is_a (G_OBJECT_TYPE (object), adaptor->type));
+
+	GLADE_WIDGET_ADAPTOR_GET_CLASS (adaptor)->action_activate (adaptor, object, action_path);
+}
+
+/**
+ * glade_widget_adaptor_child_action_activate:
+ * @adaptor:   A #GladeWidgetAdaptor
+ * @object:    The #GObject
+ * @action_path: The action identifier in the action tree
+ *
+ * An adaptor function to be called on widget actions.
+ */
+void
+glade_widget_adaptor_child_action_activate (GladeWidgetAdaptor *adaptor,
+					    GObject            *container,
+					    GObject            *object,
+					    const gchar        *action_path)
+{
+	g_return_if_fail (GLADE_IS_WIDGET_ADAPTOR (adaptor));
+	g_return_if_fail (G_IS_OBJECT (container));
+	g_return_if_fail (G_IS_OBJECT (object));
+	g_return_if_fail (g_type_is_a (G_OBJECT_TYPE (container), adaptor->type));
+
+	GLADE_WIDGET_ADAPTOR_GET_CLASS (adaptor)->child_action_activate (adaptor, container, object, action_path);
 }

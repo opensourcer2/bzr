@@ -1,0 +1,32 @@
+<!-- ##### USER_FUNCTION GladeEditorLaunchFunc ##### -->
+<para>
+
+</para>
+
+@adaptor: 
+@object: 
+
+<!-- ##### SIGNAL GladeWidget::action-activated ##### -->
+<para>
+
+</para>
+
+@gladewidget: the object which received the signal.
+@arg1: 
+@Returns: 
+
+<!-- ##### FUNCTION glade_widget_has_launcher ##### -->
+<para>
+
+</para>
+
+@widget: 
+@Returns: 
+
+<!-- ##### FUNCTION glade_widget_launch_editor ##### -->
+<para>
+
+</para>
+
+@widget: 
+

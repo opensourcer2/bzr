@@ -50,7 +50,6 @@
 <ANCHOR id="GladeProject" href="gladeui/GladeProject.html">
 <ANCHOR id="GladeProject-struct" href="gladeui/GladeProject.html#GladeProject-struct">
 <ANCHOR id="glade-project-new" href="gladeui/GladeProject.html#glade-project-new">
-<ANCHOR id="glade-project-open" href="gladeui/GladeProject.html#glade-project-open">
 <ANCHOR id="glade-project-save" href="gladeui/GladeProject.html#glade-project-save">
 <ANCHOR id="glade-project-push-undo" href="gladeui/GladeProject.html#glade-project-push-undo">
 <ANCHOR id="glade-project-redo" href="gladeui/GladeProject.html#glade-project-redo">
@@ -76,12 +75,12 @@
 <ANCHOR id="glade-project-set-resource" href="gladeui/GladeProject.html#glade-project-set-resource">
 <ANCHOR id="glade-project-list-resources" href="gladeui/GladeProject.html#glade-project-list-resources">
 <ANCHOR id="glade-project-resource-fullpath" href="gladeui/GladeProject.html#glade-project-resource-fullpath">
-<ANCHOR id="glade-project-display-name" href="gladeui/GladeProject.html#glade-project-display-name">
 <ANCHOR id="glade-project-is-loading" href="gladeui/GladeProject.html#glade-project-is-loading">
 <ANCHOR id="glade-project-get-has-selection" href="gladeui/GladeProject.html#glade-project-get-has-selection">
 <ANCHOR id="glade-project-get-readonly" href="gladeui/GladeProject.html#glade-project-get-readonly">
 <ANCHOR id="GladeProject--has-selection" href="gladeui/GladeProject.html#GladeProject--has-selection">
 <ANCHOR id="GladeProject--has-unsaved-changes" href="gladeui/GladeProject.html#GladeProject--has-unsaved-changes">
+<ANCHOR id="GladeProject--path" href="gladeui/GladeProject.html#GladeProject--path">
 <ANCHOR id="GladeProject--read-only" href="gladeui/GladeProject.html#GladeProject--read-only">
 <ANCHOR id="GladeProject-add-widget" href="gladeui/GladeProject.html#GladeProject-add-widget">
 <ANCHOR id="GladeProject-changed" href="gladeui/GladeProject.html#GladeProject-changed">
@@ -136,8 +135,6 @@
 <ANCHOR id="glade-widget-list-signal-handlers" href="gladeui/GladeWidget.html#glade-widget-list-signal-handlers">
 <ANCHOR id="glade-widget-write" href="gladeui/GladeWidget.html#glade-widget-write">
 <ANCHOR id="glade-widget-read" href="gladeui/GladeWidget.html#glade-widget-read">
-<ANCHOR id="glade-widget-has-launcher" href="gladeui/GladeWidget.html#glade-widget-has-launcher">
-<ANCHOR id="glade-widget-launch-editor" href="gladeui/GladeWidget.html#glade-widget-launch-editor">
 <ANCHOR id="glade-widget-get-parent" href="gladeui/GladeWidget.html#glade-widget-get-parent">
 <ANCHOR id="glade-widget-set-parent" href="gladeui/GladeWidget.html#glade-widget-set-parent">
 <ANCHOR id="glade-widget-superuser" href="gladeui/GladeWidget.html#glade-widget-superuser">
@@ -157,7 +154,6 @@
 <ANCHOR id="GladeWidget--template" href="gladeui/GladeWidget.html#GladeWidget--template">
 <ANCHOR id="GladeWidget--toplevel-height" href="gladeui/GladeWidget.html#GladeWidget--toplevel-height">
 <ANCHOR id="GladeWidget--toplevel-width" href="gladeui/GladeWidget.html#GladeWidget--toplevel-width">
-<ANCHOR id="GladeWidget-action-activated" href="gladeui/GladeWidget.html#GladeWidget-action-activated">
 <ANCHOR id="GladeWidget-add-signal-handler" href="gladeui/GladeWidget.html#GladeWidget-add-signal-handler">
 <ANCHOR id="GladeWidget-button-press-event" href="gladeui/GladeWidget.html#GladeWidget-button-press-event">
 <ANCHOR id="GladeWidget-button-release-event" href="gladeui/GladeWidget.html#GladeWidget-button-release-event">
@@ -237,7 +233,6 @@
 <ANCHOR id="GladeRemoveChildFunc" href="gladeui/gladeui-GladeWidgetClass.html#GladeRemoveChildFunc">
 <ANCHOR id="GladeReplaceChildFunc" href="gladeui/gladeui-GladeWidgetClass.html#GladeReplaceChildFunc">
 <ANCHOR id="GladeGetInternalFunc" href="gladeui/gladeui-GladeWidgetClass.html#GladeGetInternalFunc">
-<ANCHOR id="GladeEditorLaunchFunc" href="gladeui/gladeui-GladeWidgetClass.html#GladeEditorLaunchFunc">
 <ANCHOR id="gladeui-GladePropertyClass" href="gladeui/gladeui-GladePropertyClass.html">
 <ANCHOR id="GladePropertyClass" href="gladeui/gladeui-GladePropertyClass.html#GladePropertyClass">
 <ANCHOR id="GPCType" href="gladeui/gladeui-GladePropertyClass.html#GPCType">
@@ -401,7 +396,6 @@
 <ANCHOR id="glade-util-clear-selection" href="gladeui/gladeui-glade-utils.html#glade-util-clear-selection">
 <ANCHOR id="glade-util-get-selection" href="gladeui/gladeui-glade-utils.html#glade-util-get-selection">
 <ANCHOR id="glade-util-queue-draw-nodes" href="gladeui/gladeui-glade-utils.html#glade-util-queue-draw-nodes">
-<ANCHOR id="glade-util-get-parent" href="gladeui/gladeui-glade-utils.html#glade-util-get-parent">
 <ANCHOR id="glade-util-container-get-all-children" href="gladeui/gladeui-glade-utils.html#glade-util-container-get-all-children">
 <ANCHOR id="glade-util-count-placeholders" href="gladeui/gladeui-glade-utils.html#glade-util-count-placeholders">
 <ANCHOR id="glade-util-find-iter-by-widget" href="gladeui/gladeui-glade-utils.html#glade-util-find-iter-by-widget">
@@ -416,4 +410,3 @@
 <ANCHOR id="glade-util-class-implements-interface" href="gladeui/gladeui-glade-utils.html#glade-util-class-implements-interface">
 <ANCHOR id="glade-util-have-devhelp" href="gladeui/gladeui-glade-utils.html#glade-util-have-devhelp">
 <ANCHOR id="glade-util-search-devhelp" href="gladeui/gladeui-glade-utils.html#glade-util-search-devhelp">
-<ANCHOR id="glade-util-deep-fixed-event" href="gladeui/gladeui-glade-utils.html#glade-util-deep-fixed-event">

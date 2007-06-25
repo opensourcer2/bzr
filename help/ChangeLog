@@ -1,21 +1,31 @@
+2007-04-23  Jorge Gonzalez <jorgegonz@svn.gnome.org>
+
+	* es/es.po: Updated Spanish translation
+
+2007-04-22  David Lodge <dave@cirt.net>
+
+	* en_GB/en_GB.po: Updated British English translation
+
 2007-04-21  Jorge Gonzalez <jorgegonz@svn.gnome.org>
 
-	* Makefile.am: Added es to DOC_LINGUAS.
+	* Makefile.am: Added spanish translation.
 	* es/es.po: Added spanish translation.
-	* es/figures/main-window.png: Added screenshot.
+	* es/figures/main.window.png: Added screenshot.
 
-2007-03-23  Claude Paroz  <claude@2xlibre.net>
+2007-03-22  Vincent Geddes <vincent.geddes@gmail.com>
 
-	* Makefile.am: Added fr to DOC_LINGUAS.
-	* fr/fr.po: Added French translation.
+	* Makefile.am: Added french translation (fr).
+	
+2007-03-22  Vincent Geddes <vincent.geddes@gmail.com>
+
+	* C/figures/main-window.png: Updated screenshot.
 
 2007-03-10  Alexander Shopov  <ash@contact.bg>
 
-	* bg/bg.po: Added Bulgarian translation by
-	Yavor Doganov <yavor@gnu.org>
+	* bg/bg.po: Added Bulgarian translation by Yavor Doganov (yavor@gnu.org)
 	* bg/figures/main-window.png: Added screenshot.
 	* Makefile.am: added bg (Bulgarian) to DOC_LINGUAS.
-
+	
 2007-03-06  David Lodge <dave@cirt.net>
 
 	* en_GB/en_GB.po: Updated English (British) translation

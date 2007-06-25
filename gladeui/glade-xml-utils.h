@@ -49,16 +49,21 @@ typedef struct _GladeXmlDoc     GladeXmlDoc;
 #define GLADE_TAG_REPLACE_CHILD_FUNCTION          "replace-child-function"
 #define GLADE_TAG_POST_CREATE_FUNCTION            "post-create-function"
 #define GLADE_TAG_GET_INTERNAL_CHILD_FUNCTION     "get-internal-child-function"
-#define GLADE_TAG_LAUNCH_EDITOR_FUNCTION          "launch-editor-function"
 #define GLADE_TAG_ADD_CHILD_FUNCTION              "add-child-function"
 #define GLADE_TAG_REMOVE_CHILD_FUNCTION           "remove-child-function"
 #define GLADE_TAG_GET_CHILDREN_FUNCTION           "get-children-function"
 #define GLADE_TAG_CHILD_SET_PROP_FUNCTION         "child-set-property-function"
 #define GLADE_TAG_CHILD_GET_PROP_FUNCTION         "child-get-property-function"
 #define GLADE_TAG_CHILD_VERIFY_FUNCTION           "child-verify-function"
+#define GLADE_TAG_CONSTRUCTOR_FUNCTION            "constructor-function"
+#define GLADE_TAG_ACTION_ACTIVATE_FUNCTION        "action-activate-function"
+#define GLADE_TAG_CHILD_ACTION_ACTIVATE_FUNCTION  "child-action-activate-function"
 #define GLADE_TAG_PROPERTIES                      "properties"
 #define GLADE_TAG_PACKING_PROPERTIES              "packing-properties"
 #define GLADE_TAG_PROPERTY                        "property"
+#define GLADE_TAG_ACTIONS                         "actions"
+#define GLADE_TAG_PACKING_ACTIONS                 "packing-actions"
+#define GLADE_TAG_ACTION                          "action"
 #define GLADE_TAG_TYPE                            "type"
 #define GLADE_TAG_SPEC                            "spec"
 #define GLADE_TAG_TOOLTIP                         "tooltip"
@@ -98,8 +103,6 @@ typedef struct _GladeXmlDoc     GladeXmlDoc;
 #define GLADE_TAG_FIXED                           "fixed"
 #define GLADE_TAG_TRANSFER_ON_PASTE               "transfer-on-paste"
 #define GLADE_TAG_WEIGHT                          "weight"
-#define GLADE_TAG_ACTION_GROUP                    "action-group"
-#define GLADE_TAG_ACTION                          "action"
 #define GLADE_TAG_STOCK                           "stock"
 #define GLADE_TAG_GET_TYPE_FUNCTION               "get-type-function"
 #define GLADE_TAG_TOPLEVEL                        "toplevel"
@@ -111,6 +114,8 @@ typedef struct _GladeXmlDoc     GladeXmlDoc;
 #define GLADE_TAG_TRUE                            "True"
 #define GLADE_TAG_YES                             "Yes"
 #define GLADE_TAG_NO                              "No"
+#define GLADE_TAG_ICON_PREFIX                     "icon-prefix"
+#define GLADE_TAG_ICON_NAME                       "icon-name"
 #define GLADE_ENUM_DATA_TAG                       "GladeEnumDataTag"
 
 
@@ -174,7 +179,7 @@ GladeXmlDoc *     glade_xml_context_get_doc (GladeXmlContext *context);
 gchar *		glade_xml_alloc_string   (GladeInterface *interface, const gchar *string);
 gchar *		glade_xml_alloc_propname (GladeInterface *interface, const gchar *string);
 
-void            glade_xml_load_sym_from_node (GladeXmlNode     *node_in,
+gboolean        glade_xml_load_sym_from_node (GladeXmlNode     *node_in,
 					      GModule          *module,
 					      gchar            *tagname,
 					      gpointer         *sym_location);

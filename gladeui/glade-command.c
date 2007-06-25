@@ -1117,25 +1117,33 @@ glade_command_add_execute (GladeCommandAddRemove *me)
 			if (cdata->parent != NULL)
 			{
 				/* Prepare special-child-type for the paste. */
-				if (cdata->props_recorded == FALSE)
+				if (me->from_clipboard)
 				{
-					/* Clear it the first time */
-					g_object_set_data (cdata->widget->object,
-							   "special-child-type", NULL);
+					if (cdata->props_recorded == FALSE)
+					{
+						/* Clear it the first time */
+						g_object_set_data (cdata->widget->object,
+								   "special-child-type", NULL);
+					}
+					else
+					{
+						g_object_set_data_full (cdata->widget->object, 
+									"special-child-type",
+									g_strdup (cdata->special_type), 
+									g_free);
+					}
 				}
-				else
-				{
-					g_object_set_data_full (cdata->widget->object, 
-								"special-child-type",
-								g_strdup (cdata->special_type), 
-								g_free);
-				}
-
+				
 				/* Only transfer properties when they are from the clipboard,
 				 * otherwise prioritize packing defaults. 
 				 */
 				if (me->from_clipboard)
-					saved_props = glade_widget_dup_properties (cdata->widget->packing_properties, FALSE);
+				{
+					saved_props =
+						glade_widget_dup_properties (cdata->widget->packing_properties, FALSE);
+					
+					glade_widget_set_packing_properties (cdata->widget, cdata->parent);
+				}
 
 				/* glade_command_paste ganauntees that if 
 				 * there we are pasting to a placeholder, 
@@ -1367,11 +1375,21 @@ glade_command_clipboard_add_remove_common (GList *widgets, gboolean add)
 	}
 	me->add = add;
 	if (add)
-		GLADE_COMMAND(me)->description = 
-			g_strdup_printf (_("Clipboard add %s"), g_list_length (widgets) == 1 ? widget->name : _("multiple"));
+	{
+		if (g_list_length (widgets) == 1)
+			GLADE_COMMAND(me)->description = g_strdup_printf (_("Clipboard add %s"),
+									  widget->name);
+		else
+			GLADE_COMMAND(me)->description =  g_strdup (_("Clipboard add multiple"));
+	}
 	else
-		GLADE_COMMAND(me)->description = 
-			g_strdup_printf (_("Clipboard remove %s"), g_list_length (widgets) == 1 ? widget->name : _("multiple"));
+	{
+		if (g_list_length (widgets) == 1)
+			GLADE_COMMAND(me)->description = g_strdup_printf (_("Clipboard remove %s"),
+									  widget->name);
+		else
+			GLADE_COMMAND(me)->description =  g_strdup (_("Clipboard remove multiple"));
+	}	
 	
 	glade_command_check_group(GLADE_COMMAND(me));
 	
