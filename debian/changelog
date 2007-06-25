@@ -1,3 +1,33 @@
+glade-3 (3.3.1-0ubuntu1) gutsy; urgency=low
+
+  * New upstream version (3.3.1):
+    - Insert before/after & Remove page context menu actions for GtkNotebook
+        (bug 438881)
+    - Remove row/column context menu actions for GtkTable
+    - Fix C89 compilation (bug 444045)
+    - Fixed win32 build (bug 444605)
+    - Allow child contextual actions to work on placeholders
+    - Remove 'm4' from EXTRA_DIST (bug 445028)
+    - Some misc. win32 build fixes
+    - Fixed cut/paste glitches inside notebooks
+    - Fixed incorrectly loaded stock icons (bug 444959)
+    - Spelling/Translation fixes (bug 419979, 429736)
+    - Fixed console warnings (bug 424509)
+  * New upstream version (3.3.0):
+    - Allow plugin authors to add context menu items for thier widgets
+      (one entry point to act upon a widget, and another to operate on
+      a widget's child).
+    - Insert before/after context menu actions for GtkBox & GtkTable 
+        (bug 438881)
+  * debian/patches/20_python_bindings.patch
+    - applying patch from trunk to fix python bindings (bug 448717)
+  * debian/patches/90_autoconf.patch:
+    - updated
+  * debian/control.in, debian/rules, debian/libgladeui-1-6.install:
+    - updated to reflect soname change
+
+ -- Aron Sisak <aron@ubuntu.hu>  Mon, 25 Jun 2007 13:54:16 +0200
+
 glade-3 (3.2.2-0ubuntu1) gutsy; urgency=low
 
   * New upstream version:

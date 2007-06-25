@@ -112,6 +112,10 @@ GCC_WARN_FLAGS = @GCC_WARN_FLAGS@
 GETTEXT_PACKAGE = @GETTEXT_PACKAGE@
 GLADE_AGE = @GLADE_AGE@
 GLADE_CURRENT = @GLADE_CURRENT@
+GLADE_CURRENT_MINUS_AGE = @GLADE_CURRENT_MINUS_AGE@
+GLADE_MAJOR_VERSION = @GLADE_MAJOR_VERSION@
+GLADE_MICRO_VERSION = @GLADE_MICRO_VERSION@
+GLADE_MINOR_VERSION = @GLADE_MINOR_VERSION@
 GLADE_REVISION = @GLADE_REVISION@
 GLIB_GENMARSHAL = @GLIB_GENMARSHAL@
 GMOFILES = @GMOFILES@
@@ -125,6 +129,8 @@ GTK_DOC_USE_LIBTOOL_TRUE = @GTK_DOC_USE_LIBTOOL_TRUE@
 GTK_LIBS = @GTK_LIBS@
 HAVE_GNOME_DOC_UTILS_FALSE = @HAVE_GNOME_DOC_UTILS_FALSE@
 HAVE_GNOME_DOC_UTILS_TRUE = @HAVE_GNOME_DOC_UTILS_TRUE@
+HAVE_GTK_UNIX_PRINT_FALSE = @HAVE_GTK_UNIX_PRINT_FALSE@
+HAVE_GTK_UNIX_PRINT_TRUE = @HAVE_GTK_UNIX_PRINT_TRUE@
 HELP_DIR = @HELP_DIR@
 HTML_DIR = @HTML_DIR@
 INSTALL_DATA = @INSTALL_DATA@
@@ -183,6 +189,8 @@ PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
 PKG_CONFIG = @PKG_CONFIG@
+PLATFORM_WIN32_FALSE = @PLATFORM_WIN32_FALSE@
+PLATFORM_WIN32_TRUE = @PLATFORM_WIN32_TRUE@
 POFILES = @POFILES@
 POSUB = @POSUB@
 PO_IN_DATADIR_FALSE = @PO_IN_DATADIR_FALSE@
@@ -208,8 +216,7 @@ SHELL = @SHELL@
 STRIP = @STRIP@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
-WITH_WIN32_FALSE = @WITH_WIN32_FALSE@
-WITH_WIN32_TRUE = @WITH_WIN32_TRUE@
+WINDRES = @WINDRES@
 XGETTEXT = @XGETTEXT@
 ac_ct_CC = @ac_ct_CC@
 ac_ct_CXX = @ac_ct_CXX@
@@ -266,32 +273,31 @@ target_alias = @target_alias@
 target_cpu = @target_cpu@
 target_os = @target_os@
 target_vendor = @target_vendor@
-iconsdir = $(pkgdatadir)/pixmaps/16x16
+iconsdir = $(pkgdatadir)/pixmaps/hicolor/16x16/actions
 icons_DATA = \
-        bonobodock.png \
-	bonobodockitem.png \
-	gnomehref.png \
-	gnomeapp.png \
-	gnomeappbar.png \
-	gnomecanvas.png \
-	gnomedateedit.png \
-	gnomeiconentry.png \
-	gnomeiconselection.png \
-	gnomedruid.png \
-	gnomedruidpageedge.png \
-	gnomedruidpagestandard.png \
-	gnomepixmap.png \
-	gnomepropertybox.png \
-	gnomecolorpicker.png \
-	gnomepixmapentry.png \
-	gnomeabout.png \
-	gnomeentry.png \
-	gnomeappbar.png \
-	gnomedialog.png \
-	gnomefileentry.png \
-	gnomefontpicker.png \
-	gnomeiconlist.png \
-	gnomemessagebox.png
+        widget-gnome-about.png \
+        widget-gnome-app.png \
+        widget-gnome-appbar.png \
+        widget-bonobo-dock.png \
+        widget-bonobo-dockitem.png \
+        widget-gnome-canvas.png \
+        widget-gnome-colorpicker.png \
+        widget-gnome-dateedit.png \
+        widget-gnome-dialog.png \
+        widget-gnome-druid.png \
+        widget-gnome-druidpageedge.png \
+        widget-gnome-druidpagestandard.png \
+        widget-gnome-entry.png \
+        widget-gnome-fileentry.png \
+        widget-gnome-fontpicker.png \
+        widget-gnome-href.png \
+        widget-gnome-iconentry.png \
+        widget-gnome-iconlist.png \
+        widget-gnome-iconselection.png \
+        widget-gnome-messagebox.png \
+        widget-gnome-pixmap.png \
+        widget-gnome-pixmapentry.png \
+        widget-gnome-propertybox.png
 
 EXTRA_DIST = $(icons_DATA)
 all: all-am

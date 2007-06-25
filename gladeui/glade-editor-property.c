@@ -1475,7 +1475,8 @@ glade_eprop_text_show_i18n_dialog (GtkWidget           *entry,
 
 	gtk_dialog_set_alternative_button_order (GTK_DIALOG (dialog),
 						 GTK_RESPONSE_OK,
-						 GTK_RESPONSE_CANCEL);
+						 GTK_RESPONSE_CANCEL,
+						 -1);
 
 	/* HIG spacings */
 	gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
@@ -2214,7 +2215,7 @@ glade_eprop_object_populate_view (GladeEditorProperty *eprop,
 	GList         *list, *toplevels = NULL;
 
 	/* Make a list of only the toplevel widgets */
-	for (list = project->objects; list; list = list->next)
+	for (list = (GList *) glade_project_get_objects (project); list; list = list->next)
 	{
 		GObject *object = G_OBJECT (list->data);
 		GladeWidget *gwidget = glade_widget_get_from_gobject (object);
@@ -2419,7 +2420,8 @@ glade_eprop_object_show_dialog (GtkWidget           *dialog_button,
 	gtk_dialog_set_alternative_button_order (GTK_DIALOG (dialog),
 						 GTK_RESPONSE_OK,
 						 GTK_RESPONSE_CANCEL,
-						 GLADE_RESPONSE_CLEAR);
+						 GLADE_RESPONSE_CLEAR,
+						 -1);
 	
 	gtk_dialog_set_has_separator (GTK_DIALOG (dialog), FALSE);
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);

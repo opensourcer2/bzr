@@ -50,8 +50,6 @@ enum        <link linkend="GladeCreateReason">GladeCreateReason</link>;
 <link linkend="GObject">GObject</link>*    (<link linkend="GladeGetInternalFunc">*GladeGetInternalFunc</link>)         (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                              <link linkend="GObject">GObject</link> *parent,
                                              const <link linkend="gchar">gchar</link> *name);
-<link linkend="void">void</link>        (<link linkend="GladeEditorLaunchFunc">*GladeEditorLaunchFunc</link>)        (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
-                                             <link linkend="GObject">GObject</link> *object);
 
 
 </synopsis>
@@ -88,7 +86,6 @@ classes; it also provides an abstraction later to container apis.
 	void         (*add_signal_handler)	(GladeWidget *, GladeSignal *);
 	void         (*remove_signal_handler)	(GladeWidget *, GladeSignal *);
 	void         (*change_signal_handler)	(GladeWidget *, GladeSignal *, GladeSignal *);
-	gboolean     (*action_activated)        (GladeWidget *, const gchar *);
 	
 	gint         (*button_press_event)      (GladeWidget *, GdkEvent *);
 	gint         (*button_release_event)    (GladeWidget *, GdkEvent *);
@@ -350,22 +347,6 @@ Called to lookup <parameter>child</parameter> in composite object <parameter>par
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
 
 
-</simpara></listitem></varlistentry>
-</variablelist></refsect2>
-<refsect2>
-<title><anchor id="GladeEditorLaunchFunc" role="function"/>GladeEditorLaunchFunc ()</title>
-<indexterm><primary>GladeEditorLaunchFunc</primary></indexterm><programlisting><link linkend="void">void</link>        (*GladeEditorLaunchFunc)        (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
-                                             <link linkend="GObject">GObject</link> *object);</programlisting>
-<para>
-Called to launch a custom editor for <parameter>object</parameter></para>
-<para>
-
-</para><variablelist role="params">
-<varlistentry><term><parameter>adaptor</parameter>&nbsp;:</term>
-<listitem><simpara>
-</simpara></listitem></varlistentry>
-<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
-<listitem><simpara> A <link linkend="GObject"><type>GObject</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 

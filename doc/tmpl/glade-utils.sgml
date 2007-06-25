@@ -202,15 +202,6 @@ This is where all of that really usefull miscalanious stuff lands up.
 @window: 
 
 
-<!-- ##### FUNCTION glade_util_get_parent ##### -->
-<para>
-
-</para>
-
-@w: 
-@Returns: 
-
-
 <!-- ##### FUNCTION glade_util_container_get_all_children ##### -->
 <para>
 
@@ -342,16 +333,5 @@ This is where all of that really usefull miscalanious stuff lands up.
 @book: 
 @page: 
 @search: 
-
-
-<!-- ##### FUNCTION glade_util_deep_fixed_event ##### -->
-<para>
-
-</para>
-
-@widget: 
-@event: 
-@gwidget: 
-@Returns: 
 
 

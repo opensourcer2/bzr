@@ -25,22 +25,22 @@
 <th width="100%" align="center">Glade UI Builder Reference Manual</th>
 <td><a accesskey="n" href="GladeFixed.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr>
-<tr><td colspan="5" class="shortcuts"><nobr><a href="#id2544720" class="shortcut">Top</a>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#id2544258" class="shortcut">Top</a>
                   &#160;|&#160;
-                  <a href="#id2546795" class="shortcut">Description</a>
+                  <a href="#id2546246" class="shortcut">Description</a>
                   &#160;|&#160;
-                  <a href="#id2546195" class="shortcut">Object Hierarchy</a>
+                  <a href="#id2545687" class="shortcut">Object Hierarchy</a>
                   &#160;|&#160;
-                  <a href="#id2546226" class="shortcut">Properties</a>
+                  <a href="#id2545719" class="shortcut">Properties</a>
                   &#160;|&#160;
-                  <a href="#id2546485" class="shortcut">Signals</a></nobr></td></tr>
+                  <a href="#id2545976" class="shortcut">Signals</a></nobr></td></tr>
 </table>
 <div class="refentry" lang="en">
 <a name="GladeWidget"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
 <h2>
-<a name="id2544720"></a><span class="refentrytitle">GladeWidget</span>
+<a name="id2544258"></a><span class="refentrytitle">GladeWidget</span>
 </h2>
 <p>GladeWidget &#8212; An object wrapper for the Glade runtime environment.</p>
 </td>
@@ -135,7 +135,7 @@ gboolean    <a href="GladeWidget.html#glade-widget-has-decendant">glade_widget_h
 void        <a href="GladeWidget.html#glade-widget-replace">glade_widget_replace</a>            (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
                                              GObject *old_object,
                                              GObject *new_object);
-void        <a href="GladeWidget.html#glade-widget-rebuild">glade_widget_rebuild</a>            (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *glade_widget);
+void        <a href="GladeWidget.html#glade-widget-rebuild">glade_widget_rebuild</a>            (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gwidget);
 <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a>* <a href="GladeWidget.html#glade-widget-dup">glade_widget_dup</a>               (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *template_widget,
                                              gboolean exact);
 void        <a href="GladeWidget.html#glade-widget-add-signal-handler">glade_widget_add_signal_handler</a> (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
@@ -160,8 +160,6 @@ href="../libglade/libglade-Libglade-SAX-Parser.html#GladeInterface"
                                              <a
 href="../libglade/libglade-Libglade-SAX-Parser.html#GladeWidgetInfo"
 >GladeWidgetInfo</a> *info);
-gboolean    <a href="GladeWidget.html#glade-widget-has-launcher">glade_widget_has_launcher</a>       (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);
-void        <a href="GladeWidget.html#glade-widget-launch-editor">glade_widget_launch_editor</a>      (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);
 <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a>* <a href="GladeWidget.html#glade-widget-get-parent">glade_widget_get_parent</a>        (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);
 void        <a href="GladeWidget.html#glade-widget-set-parent">glade_widget_set_parent</a>         (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                              <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent);
@@ -172,7 +170,7 @@ void        <a href="GladeWidget.html#glade-widget-pop-superuser">glade_widget_p
 </pre>
 </div>
 <div class="refsect1" lang="en">
-<a name="id2546195"></a><h2>Object Hierarchy</h2>
+<a name="id2545687"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
 
   GObject
@@ -181,7 +179,7 @@ void        <a href="GladeWidget.html#glade-widget-pop-superuser">glade_widget_p
 </pre>
 </div>
 <div class="refsect1" lang="en">
-<a name="id2546226"></a><h2>Properties</h2>
+<a name="id2545719"></a><h2>Properties</h2>
 <pre class="synopsis">
 
   "<a href="GladeWidget.html#GladeWidget--adaptor">adaptor</a>"              GladeGObjectAdaptor   : Read / Write / Construct Only
@@ -201,13 +199,9 @@ void        <a href="GladeWidget.html#glade-widget-pop-superuser">glade_widget_p
 </pre>
 </div>
 <div class="refsect1" lang="en">
-<a name="id2546485"></a><h2>Signals</h2>
+<a name="id2545976"></a><h2>Signals</h2>
 <pre class="synopsis">
 
-"<a href="GladeWidget.html#GladeWidget-action-activated">action-activated</a>"
-            gboolean    user_function      (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                            gchar       *action_id,
-                                            gpointer     user_data)      : Run last / Has details
 "<a href="GladeWidget.html#GladeWidget-add-signal-handler">add-signal-handler</a>"
             void        user_function      (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gladewidget,
                                             gpointer     arg1,
@@ -236,7 +230,7 @@ void        <a href="GladeWidget.html#glade-widget-pop-superuser">glade_widget_p
 </pre>
 </div>
 <div class="refsect1" lang="en">
-<a name="id2546795"></a><h2>Description</h2>
+<a name="id2546246"></a><h2>Description</h2>
 <p>
 <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> is the proxy between the instantiated runtime object and
 the Glade core metadata. This api will be mostly usefull for its
@@ -244,20 +238,20 @@ convenience api for getting and setting properties (mostly from the plugin).
 </p>
 </div>
 <div class="refsect1" lang="en">
-<a name="id2546821"></a><h2>Details</h2>
+<a name="id2546271"></a><h2>Details</h2>
 <div class="refsect2" lang="en">
-<a name="id2546831"></a><h3>
+<a name="id2546281"></a><h3>
 <a name="GladeWidget-struct"></a>struct GladeWidget</h3>
-<a class="indexterm" name="id2546844"></a><pre class="programlisting">struct GladeWidget;</pre>
+<a class="indexterm" name="id2546294"></a><pre class="programlisting">struct GladeWidget;</pre>
 <p>
 
 </p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2546858"></a><h3>
+<a name="id2546309"></a><h3>
 <a name="glade-widget-get-from-gobject"></a>glade_widget_get_from_gobject ()</h3>
-<a class="indexterm" name="id2546872"></a><pre class="programlisting"><a href="GladeWidget.html" title="GladeWidget">GladeWidget</a>* glade_widget_get_from_gobject  (gpointer object);</pre>
+<a class="indexterm" name="id2546322"></a><pre class="programlisting"><a href="GladeWidget.html" title="GladeWidget">GladeWidget</a>* glade_widget_get_from_gobject  (gpointer object);</pre>
 <p>
 
 </p>
@@ -283,9 +277,9 @@ convenience api for getting and setting properties (mostly from the plugin).
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2546928"></a><h3>
+<a name="id2546378"></a><h3>
 <a name="glade-widget-add-child"></a>glade_widget_add_child ()</h3>
-<a class="indexterm" name="id2546941"></a><pre class="programlisting">void        glade_widget_add_child          (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
+<a class="indexterm" name="id2546391"></a><pre class="programlisting">void        glade_widget_add_child          (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
                                              <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *child,
                                              gboolean at_mouse);</pre>
 <p>
@@ -320,9 +314,9 @@ Adds <em class="parameter"><code>child</code></em> to <em class="parameter"><cod
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2547070"></a><h3>
+<a name="id2546520"></a><h3>
 <a name="glade-widget-remove-child"></a>glade_widget_remove_child ()</h3>
-<a class="indexterm" name="id2547084"></a><pre class="programlisting">void        glade_widget_remove_child       (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
+<a class="indexterm" name="id2546534"></a><pre class="programlisting">void        glade_widget_remove_child       (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
                                              <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *child);</pre>
 <p>
 Removes <em class="parameter"><code>child</code></em> from <em class="parameter"><code>parent</code></em> in a generic way for this <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> parent.</p>
@@ -349,9 +343,9 @@ Removes <em class="parameter"><code>child</code></em> from <em class="parameter"
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2547190"></a><h3>
+<a name="id2546640"></a><h3>
 <a name="glade-widget-set-name"></a>glade_widget_set_name ()</h3>
-<a class="indexterm" name="id2547203"></a><pre class="programlisting">void        glade_widget_set_name           (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+<a class="indexterm" name="id2546654"></a><pre class="programlisting">void        glade_widget_set_name           (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                              const gchar *name);</pre>
 <p>
 Sets <em class="parameter"><code>widget</code></em>'s name to <em class="parameter"><code>name</code></em>.</p>
@@ -378,9 +372,9 @@ Sets <em class="parameter"><code>widget</code></em>'s name to <em class="paramet
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2547294"></a><h3>
+<a name="id2546744"></a><h3>
 <a name="glade-widget-set-internal"></a>glade_widget_set_internal ()</h3>
-<a class="indexterm" name="id2547307"></a><pre class="programlisting">void        glade_widget_set_internal       (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+<a class="indexterm" name="id2546758"></a><pre class="programlisting">void        glade_widget_set_internal       (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                              const gchar *internal);</pre>
 <p>
 Sets the internal name of <em class="parameter"><code>widget</code></em> to <em class="parameter"><code>internal</code></em></p>
@@ -407,9 +401,9 @@ Sets the internal name of <em class="parameter"><code>widget</code></em> to <em 
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2547397"></a><h3>
+<a name="id2546847"></a><h3>
 <a name="glade-widget-set-object"></a>glade_widget_set_object ()</h3>
-<a class="indexterm" name="id2547410"></a><pre class="programlisting">void        glade_widget_set_object         (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gwidget,
+<a class="indexterm" name="id2546860"></a><pre class="programlisting">void        glade_widget_set_object         (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gwidget,
                                              GObject *new_object);</pre>
 <p>
 Set the runtime object for this GladeWidget wrapper
@@ -438,9 +432,9 @@ to use elsewhere).</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2547504"></a><h3>
+<a name="id2546954"></a><h3>
 <a name="glade-widget-set-project"></a>glade_widget_set_project ()</h3>
-<a class="indexterm" name="id2547517"></a><pre class="programlisting">void        glade_widget_set_project        (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+<a class="indexterm" name="id2546967"></a><pre class="programlisting">void        glade_widget_set_project        (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                              <a href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
 <p>
 Makes <em class="parameter"><code>widget</code></em> belong to <em class="parameter"><code>project</code></em>.</p>
@@ -467,9 +461,9 @@ Makes <em class="parameter"><code>widget</code></em> belong to <em class="parame
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2547616"></a><h3>
+<a name="id2547066"></a><h3>
 <a name="glade-widget-get-name"></a>glade_widget_get_name ()</h3>
-<a class="indexterm" name="id2547628"></a><pre class="programlisting">const gchar* glade_widget_get_name          (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
+<a class="indexterm" name="id2547079"></a><pre class="programlisting">const gchar* glade_widget_get_name          (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
 <p>
 </p>
 <p>
@@ -495,9 +489,9 @@ Makes <em class="parameter"><code>widget</code></em> belong to <em class="parame
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2547703"></a><h3>
+<a name="id2547153"></a><h3>
 <a name="glade-widget-get-internal"></a>glade_widget_get_internal ()</h3>
-<a class="indexterm" name="id2547717"></a><pre class="programlisting">const gchar* glade_widget_get_internal      (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
+<a class="indexterm" name="id2547167"></a><pre class="programlisting">const gchar* glade_widget_get_internal      (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
 <p>
 </p>
 <p>
@@ -523,9 +517,9 @@ Makes <em class="parameter"><code>widget</code></em> belong to <em class="parame
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2547791"></a><h3>
+<a name="id2547241"></a><h3>
 <a name="glade-widget-get-project"></a>glade_widget_get_project ()</h3>
-<a class="indexterm" name="id2547804"></a><pre class="programlisting"><a href="GladeProject.html" title="GladeProject">GladeProject</a>* glade_widget_get_project      (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
+<a class="indexterm" name="id2547254"></a><pre class="programlisting"><a href="GladeProject.html" title="GladeProject">GladeProject</a>* glade_widget_get_project      (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
 <p>
 </p>
 <p>
@@ -551,9 +545,9 @@ Makes <em class="parameter"><code>widget</code></em> belong to <em class="parame
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2547886"></a><h3>
+<a name="id2547336"></a><h3>
 <a name="glade-widget-get-object"></a>glade_widget_get_object ()</h3>
-<a class="indexterm" name="id2547899"></a><pre class="programlisting">GObject*    glade_widget_get_object         (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
+<a class="indexterm" name="id2547350"></a><pre class="programlisting">GObject*    glade_widget_get_object         (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
 <p>
 </p>
 <p>
@@ -579,9 +573,9 @@ Makes <em class="parameter"><code>widget</code></em> belong to <em class="parame
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2547981"></a><h3>
+<a name="id2547431"></a><h3>
 <a name="glade-widget-project-notify"></a>glade_widget_project_notify ()</h3>
-<a class="indexterm" name="id2547994"></a><pre class="programlisting">void        glade_widget_project_notify     (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+<a class="indexterm" name="id2547444"></a><pre class="programlisting">void        glade_widget_project_notify     (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                              <a href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
 <p>
 Notifies <em class="parameter"><code>widget</code></em> that it is now in <em class="parameter"><code>project</code></em>.
@@ -613,9 +607,9 @@ for internal reasons even when the widget is on the clipboard.
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2548109"></a><h3>
+<a name="id2547560"></a><h3>
 <a name="glade-widget-show"></a>glade_widget_show ()</h3>
-<a class="indexterm" name="id2548122"></a><pre class="programlisting">void        glade_widget_show               (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
+<a class="indexterm" name="id2547573"></a><pre class="programlisting">void        glade_widget_show               (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
 <p>
 Display <em class="parameter"><code>widget</code></em> in it's project's GladeDesignView</p>
 <p>
@@ -633,9 +627,9 @@ Display <em class="parameter"><code>widget</code></em> in it's project's GladeDe
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2548185"></a><h3>
+<a name="id2547636"></a><h3>
 <a name="glade-widget-hide"></a>glade_widget_hide ()</h3>
-<a class="indexterm" name="id2548198"></a><pre class="programlisting">void        glade_widget_hide               (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
+<a class="indexterm" name="id2547649"></a><pre class="programlisting">void        glade_widget_hide               (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
 <p>
 Hide <em class="parameter"><code>widget</code></em></p>
 <p>
@@ -653,9 +647,9 @@ Hide <em class="parameter"><code>widget</code></em></p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2548260"></a><h3>
+<a name="id2547710"></a><h3>
 <a name="glade-widget-copy-properties"></a>glade_widget_copy_properties ()</h3>
-<a class="indexterm" name="id2548274"></a><pre class="programlisting">void        glade_widget_copy_properties    (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+<a class="indexterm" name="id2547724"></a><pre class="programlisting">void        glade_widget_copy_properties    (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                              <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *template_widget);</pre>
 <p>
 Sets properties in <em class="parameter"><code>widget</code></em> based on the values of
@@ -683,9 +677,9 @@ matching properties in <em class="parameter"><code>template_widget</code></em></
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2548372"></a><h3>
+<a name="id2547823"></a><h3>
 <a name="glade-widget-set-packing-properties"></a>glade_widget_set_packing_properties ()</h3>
-<a class="indexterm" name="id2548386"></a><pre class="programlisting">void        glade_widget_set_packing_properties
+<a class="indexterm" name="id2547837"></a><pre class="programlisting">void        glade_widget_set_packing_properties
                                             (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                              <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *container);</pre>
 <p>
@@ -716,9 +710,9 @@ has changed, the current list is freed and replaced.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2548477"></a><h3>
+<a name="id2547928"></a><h3>
 <a name="glade-widget-add-prop-ref"></a>glade_widget_add_prop_ref ()</h3>
-<a class="indexterm" name="id2548491"></a><pre class="programlisting">void        glade_widget_add_prop_ref       (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+<a class="indexterm" name="id2547942"></a><pre class="programlisting">void        glade_widget_add_prop_ref       (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                              <a href="GladeProperty.html" title="GladeProperty">GladeProperty</a> *property);</pre>
 <p>
 Adds <em class="parameter"><code>property</code></em> to <em class="parameter"><code>widget</code></em> 's list of referenced properties.
@@ -749,9 +743,9 @@ Note: this is used to track object reference properties that
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2548595"></a><h3>
+<a name="id2548046"></a><h3>
 <a name="glade-widget-remove-prop-ref"></a>glade_widget_remove_prop_ref ()</h3>
-<a class="indexterm" name="id2548608"></a><pre class="programlisting">void        glade_widget_remove_prop_ref    (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+<a class="indexterm" name="id2548059"></a><pre class="programlisting">void        glade_widget_remove_prop_ref    (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                              <a href="GladeProperty.html" title="GladeProperty">GladeProperty</a> *property);</pre>
 <p>
 Removes <em class="parameter"><code>property</code></em> from <em class="parameter"><code>widget</code></em> 's list of referenced properties.
@@ -782,9 +776,9 @@ Note: this is used to track object reference properties that
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2548713"></a><h3>
+<a name="id2548164"></a><h3>
 <a name="glade-widget-get-property"></a>glade_widget_get_property ()</h3>
-<a class="indexterm" name="id2548727"></a><pre class="programlisting"><a href="GladeProperty.html" title="GladeProperty">GladeProperty</a>* glade_widget_get_property    (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+<a class="indexterm" name="id2548178"></a><pre class="programlisting"><a href="GladeProperty.html" title="GladeProperty">GladeProperty</a>* glade_widget_get_property    (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                              const gchar *id_property);</pre>
 <p>
 </p>
@@ -817,9 +811,9 @@ Note: this is used to track object reference properties that
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2548844"></a><h3>
+<a name="id2548295"></a><h3>
 <a name="glade-widget-get-pack-property"></a>glade_widget_get_pack_property ()</h3>
-<a class="indexterm" name="id2548857"></a><pre class="programlisting"><a href="GladeProperty.html" title="GladeProperty">GladeProperty</a>* glade_widget_get_pack_property
+<a class="indexterm" name="id2548308"></a><pre class="programlisting"><a href="GladeProperty.html" title="GladeProperty">GladeProperty</a>* glade_widget_get_pack_property
                                             (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                              const gchar *id_property);</pre>
 <p>
@@ -853,9 +847,9 @@ Note: this is used to track object reference properties that
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2548976"></a><h3>
+<a name="id2548427"></a><h3>
 <a name="glade-widget-property-get"></a>glade_widget_property_get ()</h3>
-<a class="indexterm" name="id2548990"></a><pre class="programlisting">gboolean    glade_widget_property_get       (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+<a class="indexterm" name="id2548440"></a><pre class="programlisting">gboolean    glade_widget_property_get       (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                              const gchar *id_property,
                                              ...);</pre>
 <p>
@@ -895,9 +889,9 @@ Gets the value of <em class="parameter"><code>id_property</code></em> in <em cla
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2549127"></a><h3>
+<a name="id2548577"></a><h3>
 <a name="glade-widget-property-set"></a>glade_widget_property_set ()</h3>
-<a class="indexterm" name="id2549140"></a><pre class="programlisting">gboolean    glade_widget_property_set       (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+<a class="indexterm" name="id2548591"></a><pre class="programlisting">gboolean    glade_widget_property_set       (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                              const gchar *id_property,
                                              ...);</pre>
 <p>
@@ -937,9 +931,9 @@ Sets the value of <em class="parameter"><code>id_property</code></em> in <em cla
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2549277"></a><h3>
+<a name="id2548728"></a><h3>
 <a name="glade-widget-pack-property-get"></a>glade_widget_pack_property_get ()</h3>
-<a class="indexterm" name="id2549290"></a><pre class="programlisting">gboolean    glade_widget_pack_property_get  (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+<a class="indexterm" name="id2548741"></a><pre class="programlisting">gboolean    glade_widget_pack_property_get  (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                              const gchar *id_property,
                                              ...);</pre>
 <p>
@@ -979,9 +973,9 @@ Gets the value of <em class="parameter"><code>id_property</code></em> in <em cla
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2549429"></a><h3>
+<a name="id2548880"></a><h3>
 <a name="glade-widget-pack-property-set"></a>glade_widget_pack_property_set ()</h3>
-<a class="indexterm" name="id2549443"></a><pre class="programlisting">gboolean    glade_widget_pack_property_set  (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+<a class="indexterm" name="id2548894"></a><pre class="programlisting">gboolean    glade_widget_pack_property_set  (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                              const gchar *id_property,
                                              ...);</pre>
 <p>
@@ -1021,9 +1015,9 @@ Sets the value of <em class="parameter"><code>id_property</code></em> in <em cla
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2549582"></a><h3>
+<a name="id2549033"></a><h3>
 <a name="glade-widget-property-reset"></a>glade_widget_property_reset ()</h3>
-<a class="indexterm" name="id2549596"></a><pre class="programlisting">gboolean    glade_widget_property_reset     (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+<a class="indexterm" name="id2549046"></a><pre class="programlisting">gboolean    glade_widget_property_reset     (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                              const gchar *id_property);</pre>
 <p>
 Resets <em class="parameter"><code>id_property</code></em> in <em class="parameter"><code>widget</code></em> to it's default value</p>
@@ -1056,9 +1050,9 @@ Resets <em class="parameter"><code>id_property</code></em> in <em class="paramet
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2549711"></a><h3>
+<a name="id2549162"></a><h3>
 <a name="glade-widget-pack-property-reset"></a>glade_widget_pack_property_reset ()</h3>
-<a class="indexterm" name="id2549724"></a><pre class="programlisting">gboolean    glade_widget_pack_property_reset
+<a class="indexterm" name="id2549175"></a><pre class="programlisting">gboolean    glade_widget_pack_property_reset
                                             (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                              const gchar *id_property);</pre>
 <p>
@@ -1092,9 +1086,9 @@ Resets <em class="parameter"><code>id_property</code></em> in <em class="paramet
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2549842"></a><h3>
+<a name="id2549292"></a><h3>
 <a name="glade-widget-property-default"></a>glade_widget_property_default ()</h3>
-<a class="indexterm" name="id2549855"></a><pre class="programlisting">gboolean    glade_widget_property_default   (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+<a class="indexterm" name="id2549305"></a><pre class="programlisting">gboolean    glade_widget_property_default   (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                              const gchar *id_property);</pre>
 <p>
 </p>
@@ -1128,9 +1122,9 @@ currently set to it's default value.
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2549959"></a><h3>
+<a name="id2549410"></a><h3>
 <a name="glade-widget-pack-property-default"></a>glade_widget_pack_property_default ()</h3>
-<a class="indexterm" name="id2549973"></a><pre class="programlisting">gboolean    glade_widget_pack_property_default
+<a class="indexterm" name="id2549424"></a><pre class="programlisting">gboolean    glade_widget_pack_property_default
                                             (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                              const gchar *id_property);</pre>
 <p>
@@ -1165,9 +1159,9 @@ currently set to it's default value.
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2550078"></a><h3>
+<a name="id2549528"></a><h3>
 <a name="glade-widget-property-set-sensitive"></a>glade_widget_property_set_sensitive ()</h3>
-<a class="indexterm" name="id2550092"></a><pre class="programlisting">gboolean    glade_widget_property_set_sensitive
+<a class="indexterm" name="id2549542"></a><pre class="programlisting">gboolean    glade_widget_property_set_sensitive
                                             (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                              const gchar *id_property,
                                              gboolean sensitive,
@@ -1216,9 +1210,9 @@ Sets the sensitivity of <em class="parameter"><code>id_property</code></em> in <
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2550252"></a><h3>
+<a name="id2549702"></a><h3>
 <a name="glade-widget-pack-property-set-sensitive"></a>glade_widget_pack_property_set_sensitive ()</h3>
-<a class="indexterm" name="id2550265"></a><pre class="programlisting">gboolean    glade_widget_pack_property_set_sensitive
+<a class="indexterm" name="id2549716"></a><pre class="programlisting">gboolean    glade_widget_pack_property_set_sensitive
                                             (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                              const gchar *id_property,
                                              gboolean sensitive,
@@ -1267,9 +1261,9 @@ Sets the sensitivity of <em class="parameter"><code>id_property</code></em> in <
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2550427"></a><h3>
+<a name="id2549878"></a><h3>
 <a name="glade-widget-property-set-enabled"></a>glade_widget_property_set_enabled ()</h3>
-<a class="indexterm" name="id2550441"></a><pre class="programlisting">gboolean    glade_widget_property_set_enabled
+<a class="indexterm" name="id2549892"></a><pre class="programlisting">gboolean    glade_widget_property_set_enabled
                                             (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                              const gchar *id_property,
                                              gboolean enabled);</pre>
@@ -1311,9 +1305,9 @@ used for optional properties.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2550580"></a><h3>
+<a name="id2550031"></a><h3>
 <a name="glade-widget-pack-property-set-enabled"></a>glade_widget_pack_property_set_enabled ()</h3>
-<a class="indexterm" name="id2550594"></a><pre class="programlisting">gboolean    glade_widget_pack_property_set_enabled
+<a class="indexterm" name="id2550044"></a><pre class="programlisting">gboolean    glade_widget_pack_property_set_enabled
                                             (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                              const gchar *id_property,
                                              gboolean enabled);</pre>
@@ -1355,9 +1349,9 @@ properties; this is used for optional properties.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2550733"></a><h3>
+<a name="id2550184"></a><h3>
 <a name="glade-widget-has-decendant"></a>glade_widget_has_decendant ()</h3>
-<a class="indexterm" name="id2550747"></a><pre class="programlisting">gboolean    glade_widget_has_decendant      (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+<a class="indexterm" name="id2550198"></a><pre class="programlisting">gboolean    glade_widget_has_decendant      (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                              GType type);</pre>
 <p>
 </p>
@@ -1391,9 +1385,9 @@ properties; this is used for optional properties.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2550856"></a><h3>
+<a name="id2550307"></a><h3>
 <a name="glade-widget-replace"></a>glade_widget_replace ()</h3>
-<a class="indexterm" name="id2550869"></a><pre class="programlisting">void        glade_widget_replace            (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
+<a class="indexterm" name="id2550320"></a><pre class="programlisting">void        glade_widget_replace            (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
                                              GObject *old_object,
                                              GObject *new_object);</pre>
 <p>
@@ -1431,9 +1425,9 @@ Note that both GObjects must be owned by a GladeWidget.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2550982"></a><h3>
+<a name="id2550433"></a><h3>
 <a name="glade-widget-rebuild"></a>glade_widget_rebuild ()</h3>
-<a class="indexterm" name="id2550995"></a><pre class="programlisting">void        glade_widget_rebuild            (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *glade_widget);</pre>
+<a class="indexterm" name="id2550446"></a><pre class="programlisting">void        glade_widget_rebuild            (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gwidget);</pre>
 <p>
 Replaces the current widget instance with
 a new one while preserving all properties children and
@@ -1445,17 +1439,19 @@ takes care of reparenting.</p>
 <col align="left" valign="top">
 <tbody><tr>
 <td>
-<span class="term"><em class="parameter"><code>glade_widget</code></em>&#160;:</span></td>
-<td> a <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>
+<span class="term"><em class="parameter"><code>gwidget</code></em>&#160;:</span></td>
+<td>
+
+
 </td>
 </tr></tbody>
 </table></div>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2551054"></a><h3>
+<a name="id2550497"></a><h3>
 <a name="glade-widget-dup"></a>glade_widget_dup ()</h3>
-<a class="indexterm" name="id2551067"></a><pre class="programlisting"><a href="GladeWidget.html" title="GladeWidget">GladeWidget</a>* glade_widget_dup               (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *template_widget,
+<a class="indexterm" name="id2550510"></a><pre class="programlisting"><a href="GladeWidget.html" title="GladeWidget">GladeWidget</a>* glade_widget_dup               (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *template_widget,
                                              gboolean exact);</pre>
 <p>
 Creates a deep copy of <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>. if <em class="parameter"><code>exact</code></em> is specified,
@@ -1491,9 +1487,9 @@ as opposed to Copy/Paste contexts).</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2551182"></a><h3>
+<a name="id2550625"></a><h3>
 <a name="glade-widget-add-signal-handler"></a>glade_widget_add_signal_handler ()</h3>
-<a class="indexterm" name="id2551196"></a><pre class="programlisting">void        glade_widget_add_signal_handler (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+<a class="indexterm" name="id2550639"></a><pre class="programlisting">void        glade_widget_add_signal_handler (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                              GladeSignal *signal_handler);</pre>
 <p>
 Adds a signal handler for <em class="parameter"><code>widget</code></em></p>
@@ -1520,9 +1516,9 @@ Adds a signal handler for <em class="parameter"><code>widget</code></em></p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2551288"></a><h3>
+<a name="id2550730"></a><h3>
 <a name="glade-widget-remove-signal-handler"></a>glade_widget_remove_signal_handler ()</h3>
-<a class="indexterm" name="id2551302"></a><pre class="programlisting">void        glade_widget_remove_signal_handler
+<a class="indexterm" name="id2550744"></a><pre class="programlisting">void        glade_widget_remove_signal_handler
                                             (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                              GladeSignal *signal_handler);</pre>
 <p>
@@ -1550,9 +1546,9 @@ Removes a signal handler from <em class="parameter"><code>widget</code></em></p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2551394"></a><h3>
+<a name="id2550836"></a><h3>
 <a name="glade-widget-change-signal-handler"></a>glade_widget_change_signal_handler ()</h3>
-<a class="indexterm" name="id2551408"></a><pre class="programlisting">void        glade_widget_change_signal_handler
+<a class="indexterm" name="id2550850"></a><pre class="programlisting">void        glade_widget_change_signal_handler
                                             (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                              GladeSignal *old_signal_handler,
                                              GladeSignal *new_signal_handler);</pre>
@@ -1587,9 +1583,9 @@ Changes a <span class="type">GladeSignal</span> on <em class="parameter"><code>w
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2551537"></a><h3>
+<a name="id2550980"></a><h3>
 <a name="glade-widget-list-signal-handlers"></a>glade_widget_list_signal_handlers ()</h3>
-<a class="indexterm" name="id2551551"></a><pre class="programlisting">GPtrArray*  glade_widget_list_signal_handlers
+<a class="indexterm" name="id2550994"></a><pre class="programlisting">GPtrArray*  glade_widget_list_signal_handlers
                                             (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                              const gchar *signal_name);</pre>
 <p>
@@ -1623,9 +1619,9 @@ Changes a <span class="type">GladeSignal</span> on <em class="parameter"><code>w
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2551662"></a><h3>
+<a name="id2551105"></a><h3>
 <a name="glade-widget-write"></a>glade_widget_write ()</h3>
-<a class="indexterm" name="id2551676"></a><pre class="programlisting"><a
+<a class="indexterm" name="id2551118"></a><pre class="programlisting"><a
 href="../libglade/libglade-Libglade-SAX-Parser.html#GladeWidgetInfo"
 >GladeWidgetInfo</a>* glade_widget_write         (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                              <a
@@ -1664,9 +1660,9 @@ href="../libglade/libglade-Libglade-SAX-Parser.html#GladeInterface"
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2551773"></a><h3>
+<a name="id2551216"></a><h3>
 <a name="glade-widget-read"></a>glade_widget_read ()</h3>
-<a class="indexterm" name="id2551786"></a><pre class="programlisting"><a href="GladeWidget.html" title="GladeWidget">GladeWidget</a>* glade_widget_read              (<a href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
+<a class="indexterm" name="id2551229"></a><pre class="programlisting"><a href="GladeWidget.html" title="GladeWidget">GladeWidget</a>* glade_widget_read              (<a href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
                                              <a
 href="../libglade/libglade-Libglade-SAX-Parser.html#GladeWidgetInfo"
 >GladeWidgetInfo</a> *info);</pre>
@@ -1703,57 +1699,9 @@ href="../libglade/libglade-Libglade-SAX-Parser.html#GladeWidgetInfo"
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2551903"></a><h3>
-<a name="glade-widget-has-launcher"></a>glade_widget_has_launcher ()</h3>
-<a class="indexterm" name="id2551917"></a><pre class="programlisting">gboolean    glade_widget_has_launcher       (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
-<p>
-
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td>
-<span class="term"><em class="parameter"><code>widget</code></em>&#160;:</span></td>
-<td>
-</td>
-</tr>
-<tr>
-<td>
-<span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
-<td>
-
-
-</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2" lang="en">
-<a name="id2551972"></a><h3>
-<a name="glade-widget-launch-editor"></a>glade_widget_launch_editor ()</h3>
-<a class="indexterm" name="id2551986"></a><pre class="programlisting">void        glade_widget_launch_editor      (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
-<p>
-Launches a custom editor from the backend for thie widget.</p>
-<p>
-
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody><tr>
-<td>
-<span class="term"><em class="parameter"><code>widget</code></em>&#160;:</span></td>
-<td> a <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>
-</td>
-</tr></tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2" lang="en">
-<a name="id2552044"></a><h3>
+<a name="id2551346"></a><h3>
 <a name="glade-widget-get-parent"></a>glade_widget_get_parent ()</h3>
-<a class="indexterm" name="id2552057"></a><pre class="programlisting"><a href="GladeWidget.html" title="GladeWidget">GladeWidget</a>* glade_widget_get_parent        (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
+<a class="indexterm" name="id2551359"></a><pre class="programlisting"><a href="GladeWidget.html" title="GladeWidget">GladeWidget</a>* glade_widget_get_parent        (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
 <p>
 </p>
 <p>
@@ -1779,9 +1727,9 @@ Launches a custom editor from the backend for thie widget.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2552132"></a><h3>
+<a name="id2551434"></a><h3>
 <a name="glade-widget-set-parent"></a>glade_widget_set_parent ()</h3>
-<a class="indexterm" name="id2552144"></a><pre class="programlisting">void        glade_widget_set_parent         (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+<a class="indexterm" name="id2551447"></a><pre class="programlisting">void        glade_widget_set_parent         (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                              <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent);</pre>
 <p>
 sets the parenting <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a></p>
@@ -1808,9 +1756,9 @@ sets the parenting <a href="GladeWidget.html" title="GladeWidget"><span class="t
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2552248"></a><h3>
+<a name="id2551550"></a><h3>
 <a name="glade-widget-superuser"></a>glade_widget_superuser ()</h3>
-<a class="indexterm" name="id2552262"></a><pre class="programlisting">gboolean    glade_widget_superuser          (void);</pre>
+<a class="indexterm" name="id2551564"></a><pre class="programlisting">gboolean    glade_widget_superuser          (void);</pre>
 <p>
 Checks if we are in superuser mode.
 </p>
@@ -1842,9 +1790,9 @@ size when widgets are added/removed.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2552314"></a><h3>
+<a name="id2551616"></a><h3>
 <a name="glade-widget-push-superuser"></a>glade_widget_push_superuser ()</h3>
-<a class="indexterm" name="id2552328"></a><pre class="programlisting">void        glade_widget_push_superuser     (void);</pre>
+<a class="indexterm" name="id2551630"></a><pre class="programlisting">void        glade_widget_push_superuser     (void);</pre>
 <p>
 Sets superuser mode</p>
 <p>
@@ -1853,9 +1801,9 @@ Sets superuser mode</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2552353"></a><h3>
+<a name="id2551655"></a><h3>
 <a name="glade-widget-pop-superuser"></a>glade_widget_pop_superuser ()</h3>
-<a class="indexterm" name="id2552367"></a><pre class="programlisting">void        glade_widget_pop_superuser      (void);</pre>
+<a class="indexterm" name="id2551669"></a><pre class="programlisting">void        glade_widget_pop_superuser      (void);</pre>
 <p>
 Unsets superuser mode</p>
 <p>
@@ -1864,164 +1812,121 @@ Unsets superuser mode</p>
 </div>
 </div>
 <div class="refsect1" lang="en">
-<a name="id2552392"></a><h2>Property Details</h2>
+<a name="id2551695"></a><h2>Property Details</h2>
 <div class="refsect2" lang="en">
-<a name="id2552403"></a><h3>
+<a name="id2551705"></a><h3>
 <a name="GladeWidget--adaptor"></a>The "<code class="literal">adaptor</code>" property</h3>
-<a class="indexterm" name="id2552419"></a><pre class="programlisting">  "adaptor"              GladeGObjectAdaptor   : Read / Write / Construct Only</pre>
+<a class="indexterm" name="id2551721"></a><pre class="programlisting">  "adaptor"              GladeGObjectAdaptor   : Read / Write / Construct Only</pre>
 <p>The class adaptor for the associated widget.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2552443"></a><h3>
+<a name="id2551745"></a><h3>
 <a name="GladeWidget--anarchist"></a>The "<code class="literal">anarchist</code>" property</h3>
-<a class="indexterm" name="id2552459"></a><pre class="programlisting">  "anarchist"            gboolean              : Read / Write / Construct Only</pre>
+<a class="indexterm" name="id2551761"></a><pre class="programlisting">  "anarchist"            gboolean              : Read / Write / Construct Only</pre>
 <p>Whether this composite child is an ancestral child or an anarchist child.</p>
 <p>Default value: FALSE</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2552487"></a><h3>
+<a name="id2551789"></a><h3>
 <a name="GladeWidget--info"></a>The "<code class="literal">info</code>" property</h3>
-<a class="indexterm" name="id2552502"></a><pre class="programlisting">  "info"                 gpointer              : Write / Construct Only</pre>
+<a class="indexterm" name="id2551804"></a><pre class="programlisting">  "info"                 gpointer              : Write / Construct Only</pre>
 <p>A GladeWidgetInfo struct to base a new widget on.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2552526"></a><h3>
+<a name="id2551828"></a><h3>
 <a name="GladeWidget--internal"></a>The "<code class="literal">internal</code>" property</h3>
-<a class="indexterm" name="id2552542"></a><pre class="programlisting">  "internal"             gchararray            : Read / Write / Construct</pre>
+<a class="indexterm" name="id2551844"></a><pre class="programlisting">  "internal"             gchararray            : Read / Write / Construct</pre>
 <p>The internal name of the widget.</p>
 <p>Default value: NULL</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2552569"></a><h3>
+<a name="id2551871"></a><h3>
 <a name="GladeWidget--internal-name"></a>The "<code class="literal">internal-name</code>" property</h3>
-<a class="indexterm" name="id2552585"></a><pre class="programlisting">  "internal-name"        gchararray            : Write / Construct Only</pre>
+<a class="indexterm" name="id2551887"></a><pre class="programlisting">  "internal-name"        gchararray            : Write / Construct Only</pre>
 <p>A generic name prefix for internal widgets.</p>
 <p>Default value: NULL</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2552612"></a><h3>
+<a name="id2551914"></a><h3>
 <a name="GladeWidget--name"></a>The "<code class="literal">name</code>" property</h3>
-<a class="indexterm" name="id2552628"></a><pre class="programlisting">  "name"                 gchararray            : Read / Write / Construct</pre>
+<a class="indexterm" name="id2551930"></a><pre class="programlisting">  "name"                 gchararray            : Read / Write / Construct</pre>
 <p>The name of the widget.</p>
 <p>Default value: NULL</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2552655"></a><h3>
+<a name="id2551957"></a><h3>
 <a name="GladeWidget--object"></a>The "<code class="literal">object</code>" property</h3>
-<a class="indexterm" name="id2552671"></a><pre class="programlisting">  "object"               GObject               : Read / Write / Construct</pre>
+<a class="indexterm" name="id2551973"></a><pre class="programlisting">  "object"               GObject               : Read / Write / Construct</pre>
 <p>The object associated.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2552694"></a><h3>
+<a name="id2551996"></a><h3>
 <a name="GladeWidget--parent"></a>The "<code class="literal">parent</code>" property</h3>
-<a class="indexterm" name="id2552709"></a><pre class="programlisting">  "parent"               <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a>           : Read / Write / Construct</pre>
+<a class="indexterm" name="id2552012"></a><pre class="programlisting">  "parent"               <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a>           : Read / Write / Construct</pre>
 <p>A pointer to the parenting GladeWidget.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2552732"></a><h3>
+<a name="id2552035"></a><h3>
 <a name="GladeWidget--project"></a>The "<code class="literal">project</code>" property</h3>
-<a class="indexterm" name="id2552749"></a><pre class="programlisting">  "project"              <a href="GladeProject.html" title="GladeProject">GladeProject</a>          : Read / Write / Construct</pre>
+<a class="indexterm" name="id2552051"></a><pre class="programlisting">  "project"              <a href="GladeProject.html" title="GladeProject">GladeProject</a>          : Read / Write / Construct</pre>
 <p>The glade project that this widget belongs to.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2552773"></a><h3>
+<a name="id2552075"></a><h3>
 <a name="GladeWidget--properties"></a>The "<code class="literal">properties</code>" property</h3>
-<a class="indexterm" name="id2552789"></a><pre class="programlisting">  "properties"           gpointer              : Read / Write / Construct Only</pre>
+<a class="indexterm" name="id2552091"></a><pre class="programlisting">  "properties"           gpointer              : Read / Write / Construct Only</pre>
 <p>A list of GladeProperties.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2552812"></a><h3>
+<a name="id2552114"></a><h3>
 <a name="GladeWidget--reason"></a>The "<code class="literal">reason</code>" property</h3>
-<a class="indexterm" name="id2552827"></a><pre class="programlisting">  "reason"               gint                  : Write / Construct Only</pre>
+<a class="indexterm" name="id2552129"></a><pre class="programlisting">  "reason"               gint                  : Write / Construct Only</pre>
 <p>A GladeCreateReason for this creation.</p>
 <p>Allowed values: [0,3]</p>
 <p>Default value: 0</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2552858"></a><h3>
+<a name="id2552160"></a><h3>
 <a name="GladeWidget--template"></a>The "<code class="literal">template</code>" property</h3>
-<a class="indexterm" name="id2552874"></a><pre class="programlisting">  "template"             <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a>           : Write / Construct Only</pre>
+<a class="indexterm" name="id2552176"></a><pre class="programlisting">  "template"             <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a>           : Write / Construct Only</pre>
 <p>A GladeWidget template to base a new widget on.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2552897"></a><h3>
+<a name="id2552199"></a><h3>
 <a name="GladeWidget--toplevel-height"></a>The "<code class="literal">toplevel-height</code>" property</h3>
-<a class="indexterm" name="id2552913"></a><pre class="programlisting">  "toplevel-height"      gint                  : Read / Write</pre>
+<a class="indexterm" name="id2552216"></a><pre class="programlisting">  "toplevel-height"      gint                  : Read / Write</pre>
 <p>The height of the widget when toplevel in the GladeDesignLayout.</p>
 <p>Allowed values: &gt;= -1</p>
 <p>Default value: -1</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2552944"></a><h3>
+<a name="id2552247"></a><h3>
 <a name="GladeWidget--toplevel-width"></a>The "<code class="literal">toplevel-width</code>" property</h3>
-<a class="indexterm" name="id2552961"></a><pre class="programlisting">  "toplevel-width"       gint                  : Read / Write</pre>
+<a class="indexterm" name="id2552263"></a><pre class="programlisting">  "toplevel-width"       gint                  : Read / Write</pre>
 <p>The width of the widget when toplevel in the GladeDesignLayout.</p>
 <p>Allowed values: &gt;= -1</p>
 <p>Default value: -1</p>
 </div>
 </div>
 <div class="refsect1" lang="en">
-<a name="id2552993"></a><h2>Signal Details</h2>
+<a name="id2552295"></a><h2>Signal Details</h2>
 <div class="refsect2" lang="en">
-<a name="id2553003"></a><h3>
-<a name="GladeWidget-action-activated"></a>The "action-activated" signal</h3>
-<a class="indexterm" name="id2553015"></a><pre class="programlisting">gboolean    user_function                  (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                            gchar       *action_id,
-                                            gpointer     user_data)      : Run last / Has details</pre>
-<p>
-Use this to catch up actions. This signal is proxied from 
-GladeWidgetAdaptor's "action-emited" signal default handler.</p>
-<p>
-
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td>
-<span class="term"><em class="parameter"><code>widget</code></em>&#160;:</span></td>
-<td> the <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> which received the signal.
-</td>
-</tr>
-<tr>
-<td>
-<span class="term"><em class="parameter"><code>action_id</code></em>&#160;:</span></td>
-<td> the action id (signal detail) or NULL.
-</td>
-</tr>
-<tr>
-<td>
-<span class="term"><em class="parameter"><code>user_data</code></em>&#160;:</span></td>
-<td>user data set when the signal handler was connected.</td>
-</tr>
-<tr>
-<td>
-<span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
-<td>TRUE to stop others handlers being invoked.
-
-</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2" lang="en">
-<a name="id2553129"></a><h3>
+<a name="id2552305"></a><h3>
 <a name="GladeWidget-add-signal-handler"></a>The "add-signal-handler" signal</h3>
-<a class="indexterm" name="id2553141"></a><pre class="programlisting">void        user_function                  (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gladewidget,
+<a class="indexterm" name="id2552317"></a><pre class="programlisting">void        user_function                  (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gladewidget,
                                             gpointer     arg1,
                                             gpointer     user_data)        : Run last</pre>
 <p>
@@ -2054,9 +1959,9 @@ GladeWidgetAdaptor's "action-emited" signal default handler.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2553255"></a><h3>
+<a name="id2552431"></a><h3>
 <a name="GladeWidget-button-press-event"></a>The "button-press-event" signal</h3>
-<a class="indexterm" name="id2553266"></a><pre class="programlisting">gboolean    user_function                  (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a>    *gladewidget,
+<a class="indexterm" name="id2552442"></a><pre class="programlisting">gboolean    user_function                  (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a>    *gladewidget,
                                             GdkEventButton *arg1,
                                             gpointer        user_data)        : Run last</pre>
 <p>
@@ -2089,9 +1994,9 @@ GladeWidgetAdaptor's "action-emited" signal default handler.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2553375"></a><h3>
+<a name="id2552551"></a><h3>
 <a name="GladeWidget-button-release-event"></a>The "button-release-event" signal</h3>
-<a class="indexterm" name="id2553386"></a><pre class="programlisting">gboolean    user_function                  (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a>    *gladewidget,
+<a class="indexterm" name="id2552562"></a><pre class="programlisting">gboolean    user_function                  (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a>    *gladewidget,
                                             GdkEventButton *event,
                                             gpointer        user_data)        : Run last</pre>
 <p>
@@ -2129,9 +2034,9 @@ GladeWidgetAdaptor's "action-emited" signal default handler.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2553486"></a><h3>
+<a name="id2552662"></a><h3>
 <a name="GladeWidget-change-signal-handler"></a>The "change-signal-handler" signal</h3>
-<a class="indexterm" name="id2553497"></a><pre class="programlisting">void        user_function                  (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gladewidget,
+<a class="indexterm" name="id2552673"></a><pre class="programlisting">void        user_function                  (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gladewidget,
                                             gpointer     arg1,
                                             gpointer     arg2,
                                             gpointer     user_data)        : Run last</pre>
@@ -2171,9 +2076,9 @@ GladeWidgetAdaptor's "action-emited" signal default handler.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2553634"></a><h3>
+<a name="id2552811"></a><h3>
 <a name="GladeWidget-motion-notify-event"></a>The "motion-notify-event" signal</h3>
-<a class="indexterm" name="id2553646"></a><pre class="programlisting">gboolean    user_function                  (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a>    *gladewidget,
+<a class="indexterm" name="id2552822"></a><pre class="programlisting">gboolean    user_function                  (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a>    *gladewidget,
                                             GdkEventMotion *arg1,
                                             gpointer        user_data)        : Run last</pre>
 <p>
@@ -2206,9 +2111,9 @@ GladeWidgetAdaptor's "action-emited" signal default handler.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2553754"></a><h3>
+<a name="id2552930"></a><h3>
 <a name="GladeWidget-remove-signal-handler"></a>The "remove-signal-handler" signal</h3>
-<a class="indexterm" name="id2553765"></a><pre class="programlisting">void        user_function                  (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gladewidget,
+<a class="indexterm" name="id2552942"></a><pre class="programlisting">void        user_function                  (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gladewidget,
                                             gpointer     arg1,
                                             gpointer     user_data)        : Run last</pre>
 <p>

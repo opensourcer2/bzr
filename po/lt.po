@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-13 03:55+0200\n"
+"POT-Creation-Date: 2007-03-13 03:56+0200\n"
 "PO-Revision-Date: 2007-03-13 03:54+0200\n"
 "Last-Translator: Žygimantas Beručka <zygis@gnome.org>\n"
 "Language-Team: Lithuanian <gnome-lt@lists.akl.lt>\n"
@@ -1047,7 +1047,7 @@ msgstr ""
 
 #. construct tab label widget
 #: ../gladeui/glade-editor.c:196 ../gladeui/glade-editor.c:322
-#: ../gladeui/glade-editor.c:1178
+#: ../gladeui/glade-editor.c:1181
 msgid "Accessibility"
 msgstr "Pritaikymas neįgaliesiems"
 
@@ -1090,54 +1090,54 @@ msgstr "Vardas:"
 msgid "Class:"
 msgstr "Klasė:"
 
-#: ../gladeui/glade-editor.c:991
+#: ../gladeui/glade-editor.c:994
 #, c-format
 msgid "Create a %s"
 msgstr "Sukurti %s"
 
-#: ../gladeui/glade-editor.c:1109
+#: ../gladeui/glade-editor.c:1112
 msgid "Reset"
 msgstr "Perkrauti"
 
-#: ../gladeui/glade-editor.c:1123
+#: ../gladeui/glade-editor.c:1126
 msgid "Property"
 msgstr "Savybė"
 
-#: ../gladeui/glade-editor.c:1158
+#: ../gladeui/glade-editor.c:1161
 msgid "General"
 msgstr "Bendras"
 
-#: ../gladeui/glade-editor.c:1168
+#: ../gladeui/glade-editor.c:1171
 msgid "Common"
 msgstr "Įprastas"
 
-#: ../gladeui/glade-editor.c:1213
+#: ../gladeui/glade-editor.c:1216
 msgid "(default)"
 msgstr "(standartinis)"
 
-#: ../gladeui/glade-editor.c:1228
+#: ../gladeui/glade-editor.c:1231
 msgid "Select the properties that you want to reset to their default values"
 msgstr "Išsirinkite savybes, kurioms norite suteikti standartines reikšmes"
 
-#: ../gladeui/glade-editor.c:1360
+#: ../gladeui/glade-editor.c:1363
 msgid "Reset Widget Properties"
 msgstr "Atstatyti valdymo elemento savybes"
 
 #. Checklist
-#: ../gladeui/glade-editor.c:1377
+#: ../gladeui/glade-editor.c:1380
 msgid "_Properties:"
 msgstr "_Savybės:"
 
-#: ../gladeui/glade-editor.c:1406
+#: ../gladeui/glade-editor.c:1409
 msgid "_Select All"
 msgstr "_Pasirinkti visus:"
 
-#: ../gladeui/glade-editor.c:1413
+#: ../gladeui/glade-editor.c:1416
 msgid "_Unselect All"
 msgstr "_Nepasirinkti nieko"
 
 #. Description
-#: ../gladeui/glade-editor.c:1422
+#: ../gladeui/glade-editor.c:1425
 msgid "Property _Description:"
 msgstr "Savybės aprašas"
 

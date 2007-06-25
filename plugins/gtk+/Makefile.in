@@ -38,7 +38,8 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 target_triplet = @target@
-@WITH_WIN32_TRUE@am__append_1 = -no-undefined
+@PLATFORM_WIN32_TRUE@am__append_1 = -no-undefined
+@HAVE_GTK_UNIX_PRINT_TRUE@am__append_2 = gtkunixprint.xml gtkunixprint.xml.in
 subdir = plugins/gtk+
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -143,6 +144,10 @@ GCC_WARN_FLAGS = @GCC_WARN_FLAGS@
 GETTEXT_PACKAGE = @GETTEXT_PACKAGE@
 GLADE_AGE = @GLADE_AGE@
 GLADE_CURRENT = @GLADE_CURRENT@
+GLADE_CURRENT_MINUS_AGE = @GLADE_CURRENT_MINUS_AGE@
+GLADE_MAJOR_VERSION = @GLADE_MAJOR_VERSION@
+GLADE_MICRO_VERSION = @GLADE_MICRO_VERSION@
+GLADE_MINOR_VERSION = @GLADE_MINOR_VERSION@
 GLADE_REVISION = @GLADE_REVISION@
 GLIB_GENMARSHAL = @GLIB_GENMARSHAL@
 GMOFILES = @GMOFILES@
@@ -156,6 +161,8 @@ GTK_DOC_USE_LIBTOOL_TRUE = @GTK_DOC_USE_LIBTOOL_TRUE@
 GTK_LIBS = @GTK_LIBS@
 HAVE_GNOME_DOC_UTILS_FALSE = @HAVE_GNOME_DOC_UTILS_FALSE@
 HAVE_GNOME_DOC_UTILS_TRUE = @HAVE_GNOME_DOC_UTILS_TRUE@
+HAVE_GTK_UNIX_PRINT_FALSE = @HAVE_GTK_UNIX_PRINT_FALSE@
+HAVE_GTK_UNIX_PRINT_TRUE = @HAVE_GTK_UNIX_PRINT_TRUE@
 HELP_DIR = @HELP_DIR@
 HTML_DIR = @HTML_DIR@
 INSTALL_DATA = @INSTALL_DATA@
@@ -214,6 +221,8 @@ PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
 PKG_CONFIG = @PKG_CONFIG@
+PLATFORM_WIN32_FALSE = @PLATFORM_WIN32_FALSE@
+PLATFORM_WIN32_TRUE = @PLATFORM_WIN32_TRUE@
 POFILES = @POFILES@
 POSUB = @POSUB@
 PO_IN_DATADIR_FALSE = @PO_IN_DATADIR_FALSE@
@@ -239,8 +248,7 @@ SHELL = @SHELL@
 STRIP = @STRIP@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
-WITH_WIN32_FALSE = @WITH_WIN32_FALSE@
-WITH_WIN32_TRUE = @WITH_WIN32_TRUE@
+WINDRES = @WINDRES@
 XGETTEXT = @XGETTEXT@
 ac_ct_CC = @ac_ct_CC@
 ac_ct_CXX = @ac_ct_CXX@
@@ -323,9 +331,9 @@ libgladegtk_la_LIBADD = $(libgladeui) $(GTK_LIBS)
 
 # catalog data
 catalogsdir = $(pkgdatadir)/catalogs
-catalogs_DATA = gtk+.xml gtk+.xml.in
-CLEANFILES = gtk+.xml
-EXTRA_DIST = $(catalogs_DATA)
+catalogs_DATA = gtk+.xml gtk+.xml.in $(am__append_2)
+CLEANFILES = gtk+.xml gtkunixprint.xml
+EXTRA_DIST = gtk+.xml gtk+.xml.in gtkunixprint.xml gtkunixprint.xml.in
 all: all-recursive
 
 .SUFFIXES:
@@ -729,6 +737,7 @@ uninstall-info: uninstall-info-recursive
 	tags tags-recursive uninstall uninstall-am \
 	uninstall-catalogsDATA uninstall-gladegtkLTLIBRARIES \
 	uninstall-info-am
+
 
 @INTLTOOL_XML_NOMERGE_RULE@
 # Tell versions [3.59,3.63) of GNU make to not export all variables.

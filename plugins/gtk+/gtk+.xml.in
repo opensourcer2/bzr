@@ -1,4 +1,8 @@
-<glade-catalog name="gtk+" library="gladegtk" domain="glade3" book="gtk">
+<glade-catalog name="gtk+"
+               icon-prefix="gtk"
+               library="gladegtk"
+               domain="glade3"
+               book="gtk">
   <glade-widget-classes>
 
     <glade-widget-class name="GtkWidget" _title="Widget" default-width="100" default-height="60">
@@ -122,7 +126,7 @@ AtkObject in a sequential way, (for instance text-flow)</_tooltip>
 
 	<property id="subwindow-of" _name="Subwindow Of" ignore="True" atk-property="True">
 	  <_tooltip>Indicates a subwindow attached to a component but otherwise has no 
-connection in  the UI hierarchy to that component</_tooltip>
+connection in the UI hierarchy to that component</_tooltip>
 	  <spec>glade_standard_objects_spec</spec>
 	</property>
 
@@ -133,7 +137,7 @@ this object's content flows around another's content</_tooltip>
 	</property>
 
 	<property id="embedded-by" _name="Embedded By" ignore="True" atk-property="True">
-	  <_tooltip>Inverse of 'Embeds', indicates that this object's content is visualy 
+	  <_tooltip>Inverse of 'Embeds', indicates that this object's content is visually 
 embedded in another object</_tooltip>
 	  <spec>glade_standard_objects_spec</spec>
 	</property>
@@ -192,6 +196,12 @@ embedded in another object</_tooltip>
       <add-child-function>glade_gtk_box_add_child</add-child-function>
       <remove-child-function>glade_gtk_box_remove_child</remove-child-function>
       <child-set-property-function>glade_gtk_box_set_child_property</child-set-property-function>
+      <child-action-activate-function>glade_gtk_box_child_action_activate</child-action-activate-function>
+
+      <packing-actions>
+        <action id="insert_before" _name="Insert Before" stock="gtk-add"/>
+        <action id="insert_after" _name="Insert After" stock="gtk-add"/>
+      </packing-actions>
 
       <properties>
 	<property id="size" _name="Number of items" query="True" default="3" save="False">
@@ -288,6 +298,7 @@ embedded in another object</_tooltip>
       <remove-child-function>glade_gtk_menu_shell_remove_item</remove-child-function>
       <child-set-property-function>glade_gtk_menu_shell_set_child_property</child-set-property-function>
       <child-get-property-function>glade_gtk_menu_shell_get_child_property</child-get-property-function>
+      <action-activate-function>glade_gtk_menu_shell_action_activate</action-activate-function>
       <packing-properties>
         <property id="position" _name="Position" default="-1" save="False">
           <spec>glade_standard_int_spec</spec>
@@ -302,6 +313,10 @@ embedded in another object</_tooltip>
       <set-property-function>glade_gtk_menu_item_set_property</set-property-function>
       <add-child-function>glade_gtk_menu_item_add_submenu</add-child-function>
       <remove-child-function>glade_gtk_menu_item_remove_submenu</remove-child-function>
+      <action-activate-function>glade_gtk_menu_item_action_activate</action-activate-function>
+      <actions>
+        <action id="launch_editor" _name="Edit&#8230;" stock="gtk-edit"/>
+      </actions>
       <properties>
         <property id="label" _name="Label" translatable="True">
 	  <_tooltip>The text of the menu item</_tooltip>
@@ -361,8 +376,10 @@ embedded in another object</_tooltip>
 
     <glade-widget-class name="GtkMenuBar" generic-name="menubar" _title="Menu Bar">
       <post-create-function>glade_gtk_menu_bar_post_create</post-create-function>
-      <launch-editor-function>glade_gtk_menu_bar_launch_editor</launch-editor-function>
       <!-- menubar is a container you can't add placeholders to it -->
+      <actions>
+        <action id="launch_editor" _name="Edit&#8230;" stock="gtk-edit"/>
+      </actions>
       <properties>
         <property id="child-pack-direction">
           <displayable-values>
@@ -390,11 +407,11 @@ embedded in another object</_tooltip>
       
     <glade-widget-class name="GtkToolbar" generic-name="toolbar" _title="Tool Bar" use-placeholders="False">
       <post-create-function>empty</post-create-function>
-      <launch-editor-function>glade_gtk_toolbar_launch_editor</launch-editor-function>
       <add-child-function>glade_gtk_toolbar_add_child</add-child-function>
       <remove-child-function>glade_gtk_toolbar_remove_child</remove-child-function>
       <child-set-property-function>glade_gtk_toolbar_set_child_property</child-set-property-function>
       <child-get-property-function>glade_gtk_toolbar_get_child_property</child-get-property-function>
+      <action-activate-function>glade_gtk_toolbar_action_activate</action-activate-function>
 
       <properties>
 	<property id="orientation">
@@ -405,10 +422,10 @@ embedded in another object</_tooltip>
 	</property>
       	<property id="toolbar-style">
   	  <displayable-values>
-	    <value id="GTK_TOOLBAR_ICONS" _name="Icons"/>
-	    <value id="GTK_TOOLBAR_TEXT" _name="Text"/>
-	    <value id="GTK_TOOLBAR_BOTH" _name="Both"/>
-	    <value id="GTK_TOOLBAR_BOTH_HORIZ" _name="Both Horizontal"/>
+	    <value id="GTK_TOOLBAR_ICONS" _name="Icons only"/>
+	    <value id="GTK_TOOLBAR_TEXT" _name="Text only"/>
+	    <value id="GTK_TOOLBAR_BOTH" _name="Text below icons"/>
+	    <value id="GTK_TOOLBAR_BOTH_HORIZ" _name="Text beside icons"/>
 	  </displayable-values>
 	</property>
       </properties>
@@ -497,7 +514,7 @@ embedded in another object</_tooltip>
       <properties>
         <property id="selectable" ignore="True"/>
 	<property id="pattern" default=""/>
-	<property id="max-width-chars" _name="Maximun Width"/>
+	<property id="max-width-chars" _name="Maximum Width"/>
       	<property id="label" default="label" translatable="True">
             <visible-lines>2</visible-lines>
         </property>
@@ -694,6 +711,24 @@ embedded in another object</_tooltip>
       </properties>
     </glade-widget-class>
 
+    <glade-widget-class name="GtkFileChooserWidget" generic-name="filechooserwidget" _title="File Chooser Widget">
+      <post-create-function>glade_gtk_file_chooser_widget_post_create</post-create-function>
+      <properties>
+        <property id="size" default="1"  query="False" />
+        <property id="action">
+  	  <displayable-values>
+	    <value id="GTK_FILE_CHOOSER_ACTION_SAVE" _name="Save"/>
+	    <value id="GTK_FILE_CHOOSER_ACTION_OPEN" _name="Open"/>
+	    <value id="GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER" _name="Select Folder"/>
+	    <value id="GTK_FILE_CHOOSER_ACTION_CREATE_FOLDER" _name="Create Folder"/>
+	  </displayable-values>
+        </property>
+	<property id="extra-widget" disabled="True" />
+	<property id="preview-widget" disabled="True" />
+	<property id="filter" disabled="True" />
+      </properties>
+    </glade-widget-class>
+
     <glade-widget-class name="GtkColorButton" generic-name="colorbutton" _title="Color Button">
       <properties>
 	<property id="title" translatable="True"/>
@@ -845,6 +880,20 @@ embedded in another object</_tooltip>
       <replace-child-function>glade_gtk_table_replace_child</replace-child-function>
       <set-property-function>glade_gtk_table_set_property</set-property-function>
       <verify-property-function>glade_gtk_table_verify_property</verify-property-function>
+      <child-action-activate-function>glade_gtk_table_child_action_activate</child-action-activate-function>
+
+      <packing-actions>
+        <action id="insert_row" _name="Insert Row" stock="gtk-add">
+          <action id="before" _name="Before"/>
+          <action id="after" _name="After"/>
+        </action>
+        <action id="insert_column" _name="Insert Column" stock="gtk-add">
+          <action id="before" _name="Before"/>
+          <action id="after" _name="After"/>
+        </action>
+        <action id="remove_row" _name="Remove Row" stock="gtk-remove"/>
+        <action id="remove_column" _name="Remove Column" stock="gtk-remove"/>
+      </packing-actions>
 
       <properties>
 	<property id="n-rows" default="3" query="True"/>
@@ -905,6 +954,13 @@ embedded in another object</_tooltip>
       <special-child-type>type</special-child-type>
       <set-property-function>glade_gtk_notebook_set_property</set-property-function>
       <verify-property-function>glade_gtk_notebook_verify_property</verify-property-function>
+      <child-action-activate-function>glade_gtk_notebook_child_action_activate</child-action-activate-function>
+
+      <packing-actions>
+        <action id="insert_page_before" _name="Insert Page Before" stock="gtk-add"/>
+        <action id="insert_page_after" _name="Insert Page After" stock="gtk-add"/>
+        <action id="remove_page" _name="Remove Page"  stock="gtk-remove"/>
+      </packing-actions>
 
       <properties>
 	<property id="page" save="False">
@@ -992,6 +1048,7 @@ embedded in another object</_tooltip>
 	</property>
       </properties>
     </glade-widget-class>
+    
     <glade-widget-class name="GtkHScale" generic-name="hscale" _title="Horizontal Scale"/>
     
     <glade-widget-class name="GtkVScale" generic-name="vscale" _title="Vertical Scale"/>
@@ -1001,7 +1058,9 @@ embedded in another object</_tooltip>
     <glade-widget-class name="GtkMenu" generic-name="menu" _title="Popup Menu" toplevel="True">
       <!-- We do not want glade_gtk_container_post_create be executed -->
       <post-create-function>empty</post-create-function>
-      <launch-editor-function>glade_gtk_menu_launch_editor</launch-editor-function>
+      <actions>
+        <action id="launch_editor" _name="Edit&#8230;" stock="gtk-edit"/>
+      </actions>
    </glade-widget-class>
     
     <glade-widget-class name="GtkHScrollbar" generic-name="hscrollbar" _title="Horizontal Scrollbar"/>
@@ -1390,9 +1449,6 @@ embedded in another object</_tooltip>
     
     <glade-widget-class name="GtkLinkButton" generic-name="linkbutton" _title="Link Button"/>
     
-    <glade-widget-class name="GtkPageSetupUnixDialog" generic-name="pagesetupdialog" _title="Page Setup Dialog"/>
-    <glade-widget-class name="GtkPrintUnixDialog" generic-name="printdialog" _title="Print Dialog"/>
-
     <glade-widget-class name="GtkRecentChooserWidget" generic-name="recentchooser" _title="Recent Chooser">
       <properties>
 	<property id="size" disabled="True"/>
@@ -1430,8 +1486,6 @@ embedded in another object</_tooltip>
     <glade-widget-class-ref name="GtkFontSelectionDialog"/>
     <glade-widget-class-ref name="GtkInputDialog"/>
     <glade-widget-class-ref name="GtkMessageDialog"/>
-    <glade-widget-class-ref name="GtkPageSetupUnixDialog"/>
-    <glade-widget-class-ref name="GtkPrintUnixDialog"/>
     <glade-widget-class-ref name="GtkRecentChooserDialog"/>
     <glade-widget-class-ref name="GtkAssistant"/>
   </glade-widget-group>
@@ -1499,6 +1553,7 @@ embedded in another object</_tooltip>
     <glade-widget-class-ref name="GtkDrawingArea"/>
     
     <glade-widget-class-ref name="GtkRecentChooserWidget"/>
+    <glade-widget-class-ref name="GtkFileChooserWidget"/>
   </glade-widget-group>
 
   <glade-widget-group name="gtk-obsolete" _title="Gtk+ Obsolete">

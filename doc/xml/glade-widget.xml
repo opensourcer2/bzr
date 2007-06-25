@@ -101,7 +101,7 @@ const <link linkend="gchar">gchar</link>* <link linkend="glade-widget-get-intern
 <link linkend="void">void</link>        <link linkend="glade-widget-replace">glade_widget_replace</link>            (<link linkend="GladeWidget">GladeWidget</link> *parent,
                                              <link linkend="GObject">GObject</link> *old_object,
                                              <link linkend="GObject">GObject</link> *new_object);
-<link linkend="void">void</link>        <link linkend="glade-widget-rebuild">glade_widget_rebuild</link>            (<link linkend="GladeWidget">GladeWidget</link> *glade_widget);
+<link linkend="void">void</link>        <link linkend="glade-widget-rebuild">glade_widget_rebuild</link>            (<link linkend="GladeWidget">GladeWidget</link> *gwidget);
 <link linkend="GladeWidget">GladeWidget</link>* <link linkend="glade-widget-dup">glade_widget_dup</link>               (<link linkend="GladeWidget">GladeWidget</link> *template_widget,
                                              <link linkend="gboolean">gboolean</link> exact);
 <link linkend="void">void</link>        <link linkend="glade-widget-add-signal-handler">glade_widget_add_signal_handler</link> (<link linkend="GladeWidget">GladeWidget</link> *widget,
@@ -120,8 +120,6 @@ const <link linkend="gchar">gchar</link>* <link linkend="glade-widget-get-intern
                                              <link linkend="GladeInterface">GladeInterface</link> *interface);
 <link linkend="GladeWidget">GladeWidget</link>* <link linkend="glade-widget-read">glade_widget_read</link>              (<link linkend="GladeProject">GladeProject</link> *project,
                                              <link linkend="GladeWidgetInfo">GladeWidgetInfo</link> *info);
-<link linkend="gboolean">gboolean</link>    <link linkend="glade-widget-has-launcher">glade_widget_has_launcher</link>       (<link linkend="GladeWidget">GladeWidget</link> *widget);
-<link linkend="void">void</link>        <link linkend="glade-widget-launch-editor">glade_widget_launch_editor</link>      (<link linkend="GladeWidget">GladeWidget</link> *widget);
 <link linkend="GladeWidget">GladeWidget</link>* <link linkend="glade-widget-get-parent">glade_widget_get_parent</link>        (<link linkend="GladeWidget">GladeWidget</link> *widget);
 <link linkend="void">void</link>        <link linkend="glade-widget-set-parent">glade_widget_set_parent</link>         (<link linkend="GladeWidget">GladeWidget</link> *widget,
                                              <link linkend="GladeWidget">GladeWidget</link> *parent);
@@ -172,10 +170,6 @@ const <link linkend="gchar">gchar</link>* <link linkend="glade-widget-get-intern
 <title role="signal_proto.title">Signals</title>
 <synopsis>
 
-&quot;<link linkend="GladeWidget-action-activated">action-activated</link>&quot;
-            <link linkend="gboolean">gboolean</link>    user_function      (<link linkend="GladeWidget">GladeWidget</link> *widget,
-                                            <link linkend="gchar">gchar</link>       *action_id,
-                                            <link linkend="gpointer">gpointer</link>     user_data)      : Run last / Has details
 &quot;<link linkend="GladeWidget-add-signal-handler">add-signal-handler</link>&quot;
             <link linkend="void">void</link>        user_function      (<link linkend="GladeWidget">GladeWidget</link> *gladewidget,
                                             <link linkend="gpointer">gpointer</link>     arg1,
@@ -867,7 +861,7 @@ Note that both GObjects must be owned by a GladeWidget.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="glade-widget-rebuild" role="function"/>glade_widget_rebuild ()</title>
-<indexterm><primary>glade_widget_rebuild</primary></indexterm><programlisting><link linkend="void">void</link>        glade_widget_rebuild            (<link linkend="GladeWidget">GladeWidget</link> *glade_widget);</programlisting>
+<indexterm><primary>glade_widget_rebuild</primary></indexterm><programlisting><link linkend="void">void</link>        glade_widget_rebuild            (<link linkend="GladeWidget">GladeWidget</link> *gwidget);</programlisting>
 <para>
 Replaces the current widget instance with
 a new one while preserving all properties children and
@@ -875,8 +869,10 @@ takes care of reparenting.</para>
 <para>
 
 </para><variablelist role="params">
-<varlistentry><term><parameter>glade_widget</parameter>&nbsp;:</term>
-<listitem><simpara> a <link linkend="GladeWidget"><type>GladeWidget</type></link>
+<varlistentry><term><parameter>gwidget</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
@@ -1007,32 +1003,6 @@ TODO: write me</para>
 <listitem><simpara> a <link linkend="GladeWidgetInfo"><type>GladeWidgetInfo</type></link>
 </simpara></listitem></varlistentry>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a new <link linkend="GladeWidget"><type>GladeWidget</type></link> for <parameter>project</parameter>, based on <parameter>info</parameter>
-</simpara></listitem></varlistentry>
-</variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-has-launcher" role="function"/>glade_widget_has_launcher ()</title>
-<indexterm><primary>glade_widget_has_launcher</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    glade_widget_has_launcher       (<link linkend="GladeWidget">GladeWidget</link> *widget);</programlisting>
-<para>
-
-</para><variablelist role="params">
-<varlistentry><term><parameter>widget</parameter>&nbsp;:</term>
-<listitem><simpara>
-</simpara></listitem></varlistentry>
-<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
-
-
-</simpara></listitem></varlistentry>
-</variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-launch-editor" role="function"/>glade_widget_launch_editor ()</title>
-<indexterm><primary>glade_widget_launch_editor</primary></indexterm><programlisting><link linkend="void">void</link>        glade_widget_launch_editor      (<link linkend="GladeWidget">GladeWidget</link> *widget);</programlisting>
-<para>
-Launches a custom editor from the backend for thie widget.</para>
-<para>
-
-</para><variablelist role="params">
-<varlistentry><term><parameter>widget</parameter>&nbsp;:</term>
-<listitem><simpara> a <link linkend="GladeWidget"><type>GladeWidget</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
@@ -1167,28 +1137,7 @@ Unsets superuser mode</para>
 
 <refsect1 role="signals">
 <title role="signals.title">Signal Details</title>
-<refsect2><title><anchor id="GladeWidget-action-activated"/>The &quot;action-activated&quot; signal</title>
-<indexterm><primary>GladeWidget::action-activated</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    user_function                  (<link linkend="GladeWidget">GladeWidget</link> *widget,
-                                            <link linkend="gchar">gchar</link>       *action_id,
-                                            <link linkend="gpointer">gpointer</link>     user_data)      : Run last / Has details</programlisting>
-<para>
-Use this to catch up actions. This signal is proxied from 
-GladeWidgetAdaptor's "action-emited" signal default handler.</para>
-<para>
-
-</para><variablelist role="params">
-<varlistentry><term><parameter>widget</parameter>&nbsp;:</term>
-<listitem><simpara> the <link linkend="GladeWidget"><type>GladeWidget</type></link> which received the signal.
-</simpara></listitem></varlistentry>
-<varlistentry><term><parameter>action_id</parameter>&nbsp;:</term>
-<listitem><simpara> the action id (signal detail) or NULL.
-</simpara></listitem></varlistentry>
-<varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
-<listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
-<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>TRUE to stop others handlers being invoked.
-
-</simpara></listitem></varlistentry>
-</variablelist></refsect2><refsect2><title><anchor id="GladeWidget-add-signal-handler"/>The &quot;add-signal-handler&quot; signal</title>
+<refsect2><title><anchor id="GladeWidget-add-signal-handler"/>The &quot;add-signal-handler&quot; signal</title>
 <indexterm><primary>GladeWidget::add-signal-handler</primary></indexterm><programlisting><link linkend="void">void</link>        user_function                  (<link linkend="GladeWidget">GladeWidget</link> *gladewidget,
                                             <link linkend="gpointer">gpointer</link>     arg1,
                                             <link linkend="gpointer">gpointer</link>     user_data)        : Run last</programlisting>

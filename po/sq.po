@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glade3.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-14 09:45+0100\n"
+"POT-Creation-Date: 2007-03-13 19:17+0100\n"
 "PO-Revision-Date: 2007-03-13 19:16+0100\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
@@ -1051,7 +1051,7 @@ msgstr "për dhe në"
 
 #. construct tab label widget
 #: ../gladeui/glade-editor.c:196 ../gladeui/glade-editor.c:322
-#: ../gladeui/glade-editor.c:1178
+#: ../gladeui/glade-editor.c:1181
 #, fuzzy
 msgid "Accessibility"
 msgstr "Dukshmëria:"
@@ -1103,62 +1103,62 @@ msgstr "Emri:"
 msgid "Class:"
 msgstr "Klasa:"
 
-#: ../gladeui/glade-editor.c:991
+#: ../gladeui/glade-editor.c:994
 #, fuzzy, c-format
 msgid "Create a %s"
 msgstr "Krijo a i ri"
 
-#: ../gladeui/glade-editor.c:1109
+#: ../gladeui/glade-editor.c:1112
 #, fuzzy
 msgid "Reset"
 msgstr "Ripërmaso:"
 
-#: ../gladeui/glade-editor.c:1123
+#: ../gladeui/glade-editor.c:1126
 #, fuzzy
 msgid "Property"
 msgstr "Pronësitë"
 
-#: ../gladeui/glade-editor.c:1158
+#: ../gladeui/glade-editor.c:1161
 msgid "General"
 msgstr "Të përgjithshme"
 
-#: ../gladeui/glade-editor.c:1168
+#: ../gladeui/glade-editor.c:1171
 msgid "Common"
 msgstr "Të përbashkët"
 
-#: ../gladeui/glade-editor.c:1213
+#: ../gladeui/glade-editor.c:1216
 #, fuzzy
 msgid "(default)"
 msgstr "prezgjedhur"
 
-#: ../gladeui/glade-editor.c:1228
+#: ../gladeui/glade-editor.c:1231
 #, fuzzy
 msgid "Select the properties that you want to reset to their default values"
 msgstr "Zgjidh pronësitë rivendos prezgjedhur"
 
-#: ../gladeui/glade-editor.c:1360
+#: ../gladeui/glade-editor.c:1363
 #, fuzzy
 msgid "Reset Widget Properties"
 msgstr "\"Widget\""
 
 #. Checklist
-#: ../gladeui/glade-editor.c:1377
+#: ../gladeui/glade-editor.c:1380
 #, fuzzy
 msgid "_Properties:"
 msgstr "Pronësitë "
 
-#: ../gladeui/glade-editor.c:1406
+#: ../gladeui/glade-editor.c:1409
 #, fuzzy
 msgid "_Select All"
 msgstr "Zgjidh file"
 
-#: ../gladeui/glade-editor.c:1413
+#: ../gladeui/glade-editor.c:1416
 #, fuzzy
 msgid "_Unselect All"
 msgstr "Gjithçka"
 
 #. Description
-#: ../gladeui/glade-editor.c:1422
+#: ../gladeui/glade-editor.c:1425
 #, fuzzy
 msgid "Property _Description:"
 msgstr "Përshkrimi:"

@@ -20,8 +20,7 @@
 
 
 struct      <link linkend="GladeProject-struct">GladeProject</link>;
-<link linkend="GladeProject">GladeProject</link>* <link linkend="glade-project-new">glade_project_new</link>             (<link linkend="gboolean">gboolean</link> untitled);
-<link linkend="GladeProject">GladeProject</link>* <link linkend="glade-project-open">glade_project_open</link>            (const <link linkend="gchar">gchar</link> *path);
+<link linkend="GladeProject">GladeProject</link>* <link linkend="glade-project-new">glade_project_new</link>             (void);
 <link linkend="gboolean">gboolean</link>    <link linkend="glade-project-save">glade_project_save</link>              (<link linkend="GladeProject">GladeProject</link> *project,
                                              const <link linkend="gchar">gchar</link> *path,
                                              <link linkend="GError">GError</link> **error);
@@ -72,10 +71,6 @@ struct      <link linkend="GladeProject-struct">GladeProject</link>;
 <link linkend="GList">GList</link>*      <link linkend="glade-project-list-resources">glade_project_list_resources</link>    (<link linkend="GladeProject">GladeProject</link> *project);
 <link linkend="gchar">gchar</link>*      <link linkend="glade-project-resource-fullpath">glade_project_resource_fullpath</link> (<link linkend="GladeProject">GladeProject</link> *project,
                                              const <link linkend="gchar">gchar</link> *resource);
-<link linkend="gchar">gchar</link>*      <link linkend="glade-project-display-name">glade_project_display_name</link>      (<link linkend="GladeProject">GladeProject</link> *project,
-                                             <link linkend="gboolean">gboolean</link> unsaved_changes,
-                                             <link linkend="gboolean">gboolean</link> tab_aligned,
-                                             <link linkend="gboolean">gboolean</link> mnemonic);
 <link linkend="gboolean">gboolean</link>    <link linkend="glade-project-is-loading">glade_project_is_loading</link>        (<link linkend="GladeProject">GladeProject</link> *project);
 <link linkend="gboolean">gboolean</link>    <link linkend="glade-project-get-has-selection">glade_project_get_has_selection</link> (<link linkend="GladeProject">GladeProject</link> *project);
 <link linkend="gboolean">gboolean</link>    <link linkend="glade-project-get-readonly">glade_project_get_readonly</link>      (<link linkend="GladeProject">GladeProject</link> *project);
@@ -103,6 +98,7 @@ struct      <link linkend="GladeProject-struct">GladeProject</link>;
 
   &quot;<link linkend="GladeProject--has-selection">has-selection</link>&quot;        <link linkend="gboolean">gboolean</link>              : Read
   &quot;<link linkend="GladeProject--has-unsaved-changes">has-unsaved-changes</link>&quot;  <link linkend="gboolean">gboolean</link>              : Read
+  &quot;<link linkend="GladeProject--path">path</link>&quot;                 <link linkend="gchararray">gchararray</link>            : Read
   &quot;<link linkend="GladeProject--read-only">read-only</link>&quot;            <link linkend="gboolean">gboolean</link>              : Read
 </synopsis>
 </refsect1>
@@ -166,33 +162,13 @@ object and its signals.
 </para></refsect2>
 <refsect2>
 <title><anchor id="glade-project-new" role="function"/>glade_project_new ()</title>
-<indexterm><primary>glade_project_new</primary></indexterm><programlisting><link linkend="GladeProject">GladeProject</link>* glade_project_new             (<link linkend="gboolean">gboolean</link> untitled);</programlisting>
+<indexterm><primary>glade_project_new</primary></indexterm><programlisting><link linkend="GladeProject">GladeProject</link>* glade_project_new             (void);</programlisting>
 <para>
-Creates a new <link linkend="GladeProject"><type>GladeProject</type></link>. If <parameter>untitled</parameter> is <link linkend="TRUE:CAPS"><literal>TRUE</literal></link>, sets the project's
-name to "Untitled 1" or some such, giving a unique number each time
-called.</para>
+Creates a new <link linkend="GladeProject"><type>GladeProject</type></link>.</para>
 <para>
 
 </para><variablelist role="params">
-<varlistentry><term><parameter>untitled</parameter>&nbsp;:</term>
-<listitem><simpara> Whether or not this project is untitled
-</simpara></listitem></varlistentry>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a new <link linkend="GladeProject"><type>GladeProject</type></link>
-</simpara></listitem></varlistentry>
-</variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-project-open" role="function"/>glade_project_open ()</title>
-<indexterm><primary>glade_project_open</primary></indexterm><programlisting><link linkend="GladeProject">GladeProject</link>* glade_project_open            (const <link linkend="gchar">gchar</link> *path);</programlisting>
-<para>
-Opens a project at the given path.</para>
-<para>
-
-</para><variablelist role="params">
-<varlistentry><term><parameter>path</parameter>&nbsp;:</term>
-<listitem><simpara>
-</simpara></listitem></varlistentry>
-<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a new <link linkend="GladeProject"><type>GladeProject</type></link> for the opened project on success, <link linkend="NULL:CAPS"><literal>NULL</literal></link> on 
-         failure
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
@@ -644,37 +620,6 @@ and will be copied into the project's directory when selected.</para>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="glade-project-display-name" role="function"/>glade_project_display_name ()</title>
-<indexterm><primary>glade_project_display_name</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*      glade_project_display_name      (<link linkend="GladeProject">GladeProject</link> *project,
-                                             <link linkend="gboolean">gboolean</link> unsaved_changes,
-                                             <link linkend="gboolean">gboolean</link> tab_aligned,
-                                             <link linkend="gboolean">gboolean</link> mnemonic);</programlisting>
-<para>
-</para>
-<para>
-
-</para><variablelist role="params">
-<varlistentry><term><parameter>project</parameter>&nbsp;:</term>
-<listitem><simpara> A <link linkend="GladeProject"><type>GladeProject</type></link>
-</simpara></listitem></varlistentry>
-<varlistentry><term><parameter>unsaved_changes</parameter>&nbsp;:</term>
-<listitem><simpara> whether to prepend a '*' to names 
-                  of projects with unsaved changes
-</simpara></listitem></varlistentry>
-<varlistentry><term><parameter>tab_aligned</parameter>&nbsp;:</term>
-<listitem><simpara> whether to prepend a tab and align unsaved
-              names using the tab (for the project menu)
-</simpara></listitem></varlistentry>
-<varlistentry><term><parameter>mnemonic</parameter>&nbsp;:</term>
-<listitem><simpara> Pass <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> here if you are going to use this in
-           a mnemonic label... this will escape the underscores nicely.
-</simpara></listitem></varlistentry>
-<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> A newly allocated string to uniquely 
-         describe this open project.
-      
-</simpara></listitem></varlistentry>
-</variablelist></refsect2>
-<refsect2>
 <title><anchor id="glade-project-is-loading" role="function"/>glade_project_is_loading ()</title>
 <indexterm><primary>glade_project_is_loading</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    glade_project_is_loading        (<link linkend="GladeProject">GladeProject</link> *project);</programlisting>
 <para>
@@ -728,6 +673,10 @@ Gets whether the project is read only or not</para>
 <refsect2><title><anchor id="GladeProject--has-unsaved-changes"/>The &quot;<literal>has-unsaved-changes</literal>&quot; property</title>
 <indexterm><primary>GladeProject:has-unsaved-changes</primary></indexterm><programlisting>  &quot;has-unsaved-changes&quot;  <link linkend="gboolean">gboolean</link>              : Read</programlisting>
 <para>Whether project has unsaved changes.</para><para>Default value: FALSE</para>
+</refsect2>
+<refsect2><title><anchor id="GladeProject--path"/>The &quot;<literal>path</literal>&quot; property</title>
+<indexterm><primary>GladeProject:path</primary></indexterm><programlisting>  &quot;path&quot;                 <link linkend="gchararray">gchararray</link>            : Read</programlisting>
+<para>The filesystem path of the project.</para><para>Default value: NULL</para>
 </refsect2>
 <refsect2><title><anchor id="GladeProject--read-only"/>The &quot;<literal>read-only</literal>&quot; property</title>
 <indexterm><primary>GladeProject:read-only</primary></indexterm><programlisting>  &quot;read-only&quot;            <link linkend="gboolean">gboolean</link>              : Read</programlisting>

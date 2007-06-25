@@ -25,16 +25,16 @@
 <th width="100%" align="center">Glade UI Builder Reference Manual</th>
 <td><a accesskey="n" href="gladeui-GladePropertyClass.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr>
-<tr><td colspan="5" class="shortcuts"><nobr><a href="#id2575009" class="shortcut">Top</a>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#id2573846" class="shortcut">Top</a>
                   &#160;|&#160;
-                  <a href="#id2575408" class="shortcut">Description</a></nobr></td></tr>
+                  <a href="#id2574215" class="shortcut">Description</a></nobr></td></tr>
 </table>
 <div class="refentry" lang="en">
 <a name="gladeui-GladeWidgetClass"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
 <h2>
-<a name="id2575009"></a><span class="refentrytitle">GladeWidgetClass</span>
+<a name="id2573846"></a><span class="refentrytitle">GladeWidgetClass</span>
 </h2>
 <p>GladeWidgetClass &#8212; Object Class-wide metadata</p>
 </td>
@@ -78,14 +78,12 @@ void        (<a href="gladeui-GladeWidgetClass.html#GladeReplaceChildFunc">*Glad
 GObject*    (<a href="gladeui-GladeWidgetClass.html#GladeGetInternalFunc">*GladeGetInternalFunc</a>)         (GladeWidgetAdaptor *adaptor,
                                              GObject *parent,
                                              const gchar *name);
-void        (<a href="gladeui-GladeWidgetClass.html#GladeEditorLaunchFunc">*GladeEditorLaunchFunc</a>)        (GladeWidgetAdaptor *adaptor,
-                                             GObject *object);
 
 
 </pre>
 </div>
 <div class="refsect1" lang="en">
-<a name="id2575408"></a><h2>Description</h2>
+<a name="id2574215"></a><h2>Description</h2>
 <p>
 <a href="gladeui-GladeWidgetClass.html#GladeWidgetClass"><span class="type">GladeWidgetClass</span></a> is a structure based on a <span class="type">GType</span> and parameters
 from the Glade catalog files and is the central metadata for object
@@ -93,11 +91,11 @@ classes; it also provides an abstraction later to container apis.
 </p>
 </div>
 <div class="refsect1" lang="en">
-<a name="id2575441"></a><h2>Details</h2>
+<a name="id2574248"></a><h2>Details</h2>
 <div class="refsect2" lang="en">
-<a name="id2575451"></a><h3>
+<a name="id2574258"></a><h3>
 <a name="GladeWidgetClass"></a>GladeWidgetClass</h3>
-<a class="indexterm" name="id2575464"></a><pre class="programlisting">typedef struct {
+<a class="indexterm" name="id2574271"></a><pre class="programlisting">typedef struct {
 	GObjectClass parent_class;
 
 	void         (*add_child)               (GladeWidget *, GladeWidget *, gboolean);
@@ -107,7 +105,6 @@ classes; it also provides an abstraction later to container apis.
 	void         (*add_signal_handler)	(GladeWidget *, GladeSignal *);
 	void         (*remove_signal_handler)	(GladeWidget *, GladeSignal *);
 	void         (*change_signal_handler)	(GladeWidget *, GladeSignal *, GladeSignal *);
-	gboolean     (*action_activated)        (GladeWidget *, const gchar *);
 	
 	gint         (*button_press_event)      (GladeWidget *, GdkEvent *);
 	gint         (*button_release_event)    (GladeWidget *, GdkEvent *);
@@ -122,9 +119,9 @@ classes; it also provides an abstraction later to container apis.
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2575494"></a><h3>
+<a name="id2574300"></a><h3>
 <a name="GladeSignalClass"></a>GladeSignalClass</h3>
-<a class="indexterm" name="id2575507"></a><pre class="programlisting">typedef struct {
+<a class="indexterm" name="id2574312"></a><pre class="programlisting">typedef struct {
 	GSignalQuery query;
 
 	const gchar *name;         /* Name of the signal, eg clicked */
@@ -138,9 +135,9 @@ classes; it also provides an abstraction later to container apis.
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2575525"></a><h3>
+<a name="id2574331"></a><h3>
 <a name="GladeCreateReason"></a>enum GladeCreateReason</h3>
-<a class="indexterm" name="id2575538"></a><pre class="programlisting">typedef enum _GladeCreateReason
+<a class="indexterm" name="id2574344"></a><pre class="programlisting">typedef enum _GladeCreateReason
 {
 	GLADE_CREATE_USER = 0,
 	GLADE_CREATE_COPY,
@@ -201,9 +198,9 @@ These are the reasons your <a href="gladeui-GladeWidgetClass.html#GladePostCreat
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2575694"></a><h3>
+<a name="id2574500"></a><h3>
 <a name="GladePostCreateFunc"></a>GladePostCreateFunc ()</h3>
-<a class="indexterm" name="id2575708"></a><pre class="programlisting">void        (*GladePostCreateFunc)          (GladeWidgetAdaptor *adaptor,
+<a class="indexterm" name="id2574513"></a><pre class="programlisting">void        (*GladePostCreateFunc)          (GladeWidgetAdaptor *adaptor,
                                              GObject *object,
                                              <a href="gladeui-GladeWidgetClass.html#GladeCreateReason">GladeCreateReason</a> reason);</pre>
 <p>
@@ -238,9 +235,9 @@ instance and can be for any <a href="gladeui-GladeWidgetClass.html#GladeCreateRe
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2575825"></a><h3>
+<a name="id2574631"></a><h3>
 <a name="GladeChildSetPropertyFunc"></a>GladeChildSetPropertyFunc ()</h3>
-<a class="indexterm" name="id2575839"></a><pre class="programlisting">void        (*GladeChildSetPropertyFunc)    (GladeWidgetAdaptor *adaptor,
+<a class="indexterm" name="id2574645"></a><pre class="programlisting">void        (*GladeChildSetPropertyFunc)    (GladeWidgetAdaptor *adaptor,
                                              GObject *container,
                                              GObject *child,
                                              const gchar *property_name,
@@ -289,9 +286,9 @@ on the <em class="parameter"><code>child</code></em> object of <em class="parame
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2576031"></a><h3>
+<a name="id2574837"></a><h3>
 <a name="GladeChildGetPropertyFunc"></a>GladeChildGetPropertyFunc ()</h3>
-<a class="indexterm" name="id2576045"></a><pre class="programlisting">void        (*GladeChildGetPropertyFunc)    (GladeWidgetAdaptor *adaptor,
+<a class="indexterm" name="id2574851"></a><pre class="programlisting">void        (*GladeChildGetPropertyFunc)    (GladeWidgetAdaptor *adaptor,
                                              GObject *container,
                                              GObject *child,
                                              const gchar *property_name,
@@ -340,9 +337,9 @@ on the <em class="parameter"><code>child</code></em> object of <em class="parame
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2576237"></a><h3>
+<a name="id2575043"></a><h3>
 <a name="GladeGetChildrenFunc"></a>GladeGetChildrenFunc ()</h3>
-<a class="indexterm" name="id2576250"></a><pre class="programlisting">GList*      (*GladeGetChildrenFunc)         (GladeWidgetAdaptor *adaptor,
+<a class="indexterm" name="id2575056"></a><pre class="programlisting">GList*      (*GladeGetChildrenFunc)         (GladeWidgetAdaptor *adaptor,
                                              GObject *container);</pre>
 <p>
 A function called to get <em class="parameter"><code>containers</code></em> children.</p>
@@ -375,9 +372,9 @@ A function called to get <em class="parameter"><code>containers</code></em> chil
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2576362"></a><h3>
+<a name="id2575167"></a><h3>
 <a name="GladeAddChildFunc"></a>GladeAddChildFunc ()</h3>
-<a class="indexterm" name="id2576374"></a><pre class="programlisting">void        (*GladeAddChildFunc)            (GladeWidgetAdaptor *adaptor,
+<a class="indexterm" name="id2575180"></a><pre class="programlisting">void        (*GladeAddChildFunc)            (GladeWidgetAdaptor *adaptor,
                                              GObject *parent,
                                              GObject *child);</pre>
 <p>
@@ -411,9 +408,9 @@ Called to add <em class="parameter"><code>child</code></em> to <em class="parame
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2576494"></a><h3>
+<a name="id2575300"></a><h3>
 <a name="GladeRemoveChildFunc"></a>GladeRemoveChildFunc ()</h3>
-<a class="indexterm" name="id2576507"></a><pre class="programlisting">void        (*GladeRemoveChildFunc)         (GladeWidgetAdaptor *adaptor,
+<a class="indexterm" name="id2575313"></a><pre class="programlisting">void        (*GladeRemoveChildFunc)         (GladeWidgetAdaptor *adaptor,
                                              GObject *parent,
                                              GObject *child);</pre>
 <p>
@@ -447,9 +444,9 @@ Called to remove <em class="parameter"><code>child</code></em> from <em class="p
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2576627"></a><h3>
+<a name="id2575433"></a><h3>
 <a name="GladeReplaceChildFunc"></a>GladeReplaceChildFunc ()</h3>
-<a class="indexterm" name="id2576640"></a><pre class="programlisting">void        (*GladeReplaceChildFunc)        (GladeWidgetAdaptor *adaptor,
+<a class="indexterm" name="id2575446"></a><pre class="programlisting">void        (*GladeReplaceChildFunc)        (GladeWidgetAdaptor *adaptor,
                                              GObject *container,
                                              GObject *old_obj,
                                              GObject *new_obj);</pre>
@@ -493,9 +490,9 @@ in containers.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2576762"></a><h3>
+<a name="id2575568"></a><h3>
 <a name="GladeGetInternalFunc"></a>GladeGetInternalFunc ()</h3>
-<a class="indexterm" name="id2576775"></a><pre class="programlisting">GObject*    (*GladeGetInternalFunc)         (GladeWidgetAdaptor *adaptor,
+<a class="indexterm" name="id2575581"></a><pre class="programlisting">GObject*    (*GladeGetInternalFunc)         (GladeWidgetAdaptor *adaptor,
                                              GObject *parent,
                                              const gchar *name);</pre>
 <p>
@@ -530,35 +527,6 @@ Called to lookup <em class="parameter"><code>child</code></em> in composite obje
 <td>
 
 
-</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2" lang="en">
-<a name="id2576904"></a><h3>
-<a name="GladeEditorLaunchFunc"></a>GladeEditorLaunchFunc ()</h3>
-<a class="indexterm" name="id2576917"></a><pre class="programlisting">void        (*GladeEditorLaunchFunc)        (GladeWidgetAdaptor *adaptor,
-                                             GObject *object);</pre>
-<p>
-Called to launch a custom editor for <em class="parameter"><code>object</code></em></p>
-<p>
-
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td>
-<span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
-<td>
-</td>
-</tr>
-<tr>
-<td>
-<span class="term"><em class="parameter"><code>object</code></em>&#160;:</span></td>
-<td> A <span class="type">GObject</span>
 </td>
 </tr>
 </tbody>

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glade3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-12 09:56+0200\n"
+"POT-Creation-Date: 2007-03-12 09:40+0200\n"
 "PO-Revision-Date: 2007-03-10 23:14+0300\n"
 "Last-Translator: Maxim V. Dziumanenko <dziumanenko@softprom.kiev.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -1035,7 +1035,7 @@ msgstr ""
 
 #. construct tab label widget
 #: ../gladeui/glade-editor.c:196 ../gladeui/glade-editor.c:322
-#: ../gladeui/glade-editor.c:1178
+#: ../gladeui/glade-editor.c:1181
 msgid "Accessibility"
 msgstr "Допоміжні можливості"
 
@@ -1078,54 +1078,54 @@ msgstr "Назва:"
 msgid "Class:"
 msgstr "Клас:"
 
-#: ../gladeui/glade-editor.c:991
+#: ../gladeui/glade-editor.c:994
 #, c-format
 msgid "Create a %s"
 msgstr "Створити %s"
 
-#: ../gladeui/glade-editor.c:1109
+#: ../gladeui/glade-editor.c:1112
 msgid "Reset"
 msgstr "Скинути"
 
-#: ../gladeui/glade-editor.c:1123
+#: ../gladeui/glade-editor.c:1126
 msgid "Property"
 msgstr "Властивість"
 
-#: ../gladeui/glade-editor.c:1158
+#: ../gladeui/glade-editor.c:1161
 msgid "General"
 msgstr "Загальне"
 
-#: ../gladeui/glade-editor.c:1168
+#: ../gladeui/glade-editor.c:1171
 msgid "Common"
 msgstr "Спільні"
 
-#: ../gladeui/glade-editor.c:1213
+#: ../gladeui/glade-editor.c:1216
 msgid "(default)"
 msgstr "(типово)"
 
-#: ../gladeui/glade-editor.c:1228
+#: ../gladeui/glade-editor.c:1231
 msgid "Select the properties that you want to reset to their default values"
 msgstr "Виберіть властивості, які треба скинути у типові значення"
 
-#: ../gladeui/glade-editor.c:1360
+#: ../gladeui/glade-editor.c:1363
 msgid "Reset Widget Properties"
 msgstr "Скинути властивості віджету"
 
 #. Checklist
-#: ../gladeui/glade-editor.c:1377
+#: ../gladeui/glade-editor.c:1380
 msgid "_Properties:"
 msgstr "В_ластивості:"
 
-#: ../gladeui/glade-editor.c:1406
+#: ../gladeui/glade-editor.c:1409
 msgid "_Select All"
 msgstr "Виді_лити все"
 
-#: ../gladeui/glade-editor.c:1413
+#: ../gladeui/glade-editor.c:1416
 msgid "_Unselect All"
 msgstr "Зн_яти виділення"
 
 #. Description
-#: ../gladeui/glade-editor.c:1422
+#: ../gladeui/glade-editor.c:1425
 msgid "Property _Description:"
 msgstr "Опис _властивості:"
 

@@ -54,7 +54,6 @@ enum        <link linkend="GladeUIMessageType">GladeUIMessageType</link>;
 <link linkend="void">void</link>        <link linkend="glade-util-clear-selection">glade_util_clear_selection</link>      (void);
 <link linkend="GList">GList</link>*      <link linkend="glade-util-get-selection">glade_util_get_selection</link>        (void);
 <link linkend="void">void</link>        <link linkend="glade-util-queue-draw-nodes">glade_util_queue_draw_nodes</link>     (<link linkend="GdkWindow">GdkWindow</link> *window);
-<link linkend="GladeWidget">GladeWidget</link>* <link linkend="glade-util-get-parent">glade_util_get_parent</link>          (<link linkend="GtkWidget">GtkWidget</link> *w);
 <link linkend="GList">GList</link>*      <link linkend="glade-util-container-get-all-children">glade_util_container_get_all_children</link>
                                             (<link linkend="GtkContainer">GtkContainer</link> *container);
 <link linkend="gint">gint</link>        <link linkend="glade-util-count-placeholders">glade_util_count_placeholders</link>   (<link linkend="GladeWidget">GladeWidget</link> *parent);
@@ -80,9 +79,6 @@ enum        <link linkend="GladeUIMessageType">GladeUIMessageType</link>;
 <link linkend="void">void</link>        <link linkend="glade-util-search-devhelp">glade_util_search_devhelp</link>       (const <link linkend="gchar">gchar</link> *book,
                                              const <link linkend="gchar">gchar</link> *page,
                                              const <link linkend="gchar">gchar</link> *search);
-<link linkend="gboolean">gboolean</link>    <link linkend="glade-util-deep-fixed-event">glade_util_deep_fixed_event</link>     (<link linkend="GtkWidget">GtkWidget</link> *widget,
-                                             <link linkend="GdkEvent">GdkEvent</link> *event,
-                                             <link linkend="GladeWidget">GladeWidget</link> *gwidget);
 </synopsis>
 </refsynopsisdiv>
 
@@ -433,20 +429,6 @@ nodes that intersect the the exposed window.</para>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="glade-util-get-parent" role="function"/>glade_util_get_parent ()</title>
-<indexterm><primary>glade_util_get_parent</primary></indexterm><programlisting><link linkend="GladeWidget">GladeWidget</link>* glade_util_get_parent          (<link linkend="GtkWidget">GtkWidget</link> *w);</programlisting>
-<para>
-
-</para><variablelist role="params">
-<varlistentry><term><parameter>w</parameter>&nbsp;:</term>
-<listitem><simpara>
-</simpara></listitem></varlistentry>
-<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
-
-
-</simpara></listitem></varlistentry>
-</variablelist></refsect2>
-<refsect2>
 <title><anchor id="glade-util-container-get-all-children" role="function"/>glade_util_container_get_all_children ()</title>
 <indexterm><primary>glade_util_container_get_all_children</primary></indexterm><programlisting><link linkend="GList">GList</link>*      glade_util_container_get_all_children
                                             (<link linkend="GtkContainer">GtkContainer</link> *container);</programlisting>
@@ -699,28 +681,6 @@ those are automatically added, if needed, by <link linkend="g-module-build-path"
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>search</parameter>&nbsp;:</term>
 <listitem><simpara>
-
-
-</simpara></listitem></varlistentry>
-</variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-deep-fixed-event" role="function"/>glade_util_deep_fixed_event ()</title>
-<indexterm><primary>glade_util_deep_fixed_event</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    glade_util_deep_fixed_event     (<link linkend="GtkWidget">GtkWidget</link> *widget,
-                                             <link linkend="GdkEvent">GdkEvent</link> *event,
-                                             <link linkend="GladeWidget">GladeWidget</link> *gwidget);</programlisting>
-<para>
-
-</para><variablelist role="params">
-<varlistentry><term><parameter>widget</parameter>&nbsp;:</term>
-<listitem><simpara>
-</simpara></listitem></varlistentry>
-<varlistentry><term><parameter>event</parameter>&nbsp;:</term>
-<listitem><simpara>
-</simpara></listitem></varlistentry>
-<varlistentry><term><parameter>gwidget</parameter>&nbsp;:</term>
-<listitem><simpara>
-</simpara></listitem></varlistentry>
-<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
 
 
 </simpara></listitem></varlistentry>

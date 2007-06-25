@@ -1,7 +1,7 @@
-diff -Nur glade-3-3.1.5/configure.ac glade-3-3.1.5.new/configure.ac
---- glade-3-3.1.5/configure.ac	2007-02-13 23:03:07.000000000 +0100
-+++ glade-3-3.1.5.new/configure.ac	2007-02-14 12:13:25.000000000 +0100
-@@ -57,7 +57,7 @@
+diff -Nur glade3-3.3.1/configure.ac glade3-3.3.1.new/configure.ac
+--- glade3-3.3.1/configure.ac	2007-06-18 17:12:38.000000000 +0200
++++ glade3-3.3.1.new/configure.ac	2007-06-19 11:17:41.000000000 +0200
+@@ -87,7 +87,7 @@
  dnl ================================================================
  dnl Check for gtk+
  dnl ================================================================
@@ -10,9 +10,9 @@ diff -Nur glade-3-3.1.5/configure.ac glade-3-3.1.5.new/configure.ac
  AC_SUBST(GTK_LIBS)
  AC_SUBST(GTK_CFLAGS)
  
-diff -Nur glade-3-3.1.5/src/glade-project-window.c glade-3-3.1.5.new/src/glade-project-window.c
---- glade-3-3.1.5/src/glade-project-window.c	2007-02-13 20:52:23.000000000 +0100
-+++ glade-3-3.1.5.new/src/glade-project-window.c	2007-02-14 12:12:59.000000000 +0100
+diff -Nur glade3-3.3.1/src/glade-project-window.c glade3-3.3.1.new/src/glade-project-window.c
+--- glade3-3.3.1/src/glade-project-window.c	2007-06-18 15:34:43.000000000 +0200
++++ glade3-3.3.1.new/src/glade-project-window.c	2007-06-19 11:17:41.000000000 +0200
 @@ -36,6 +36,7 @@
  #include <glib/gi18n.h>
  #include <gdk/gdkkeysyms.h>
@@ -21,7 +21,7 @@ diff -Nur glade-3-3.1.5/src/glade-project-window.c glade-3-3.1.5.new/src/glade-p
  
  #define GLADE_ACTION_GROUP_STATIC "GladeStatic"
  #define GLADE_ACTION_GROUP_PROJECT "GladeProject"
-@@ -1555,6 +1556,8 @@
+@@ -1779,6 +1780,8 @@
  "      <menuitem action='HelpContents'/>\n"
  "      <menuitem action='DeveloperReference'/>\n"
  "      <separator/>\n"
@@ -30,7 +30,7 @@ diff -Nur glade-3-3.1.5/src/glade-project-window.c glade-3-3.1.5.new/src/glade-p
  "      <menuitem action='About'/>\n"
  "    </menu>\n"
  "  </menubar>\n"
-@@ -1740,6 +1743,7 @@
+@@ -1964,6 +1967,7 @@
  gpw_construct_menu (GladeProjectWindow *gpw)
  {
  	GError *error = NULL;
@@ -38,7 +38,7 @@ diff -Nur glade-3-3.1.5/src/glade-project-window.c glade-3-3.1.5.new/src/glade-p
  	
  	gpw->priv->static_actions = gtk_action_group_new (GLADE_ACTION_GROUP_STATIC);
  	gtk_action_group_set_translation_domain (gpw->priv->static_actions, GETTEXT_PACKAGE);
-@@ -1780,6 +1784,10 @@
+@@ -2004,6 +2008,10 @@
  	gtk_ui_manager_insert_action_group (gpw->priv->ui, gpw->priv->project_actions, 1);
  	gtk_ui_manager_insert_action_group (gpw->priv->ui, gpw->priv->projects_list_menu_actions, 3);
  	
@@ -49,7 +49,7 @@ diff -Nur glade-3-3.1.5/src/glade-project-window.c glade-3-3.1.5.new/src/glade-p
  	gtk_window_add_accel_group (GTK_WINDOW (gpw->priv->window), 
  				  gtk_ui_manager_get_accel_group (gpw->priv->ui));
  
-@@ -1789,6 +1797,8 @@
+@@ -2013,6 +2021,8 @@
  		g_error_free (error);
  	}
  	
@@ -58,7 +58,7 @@ diff -Nur glade-3-3.1.5/src/glade-project-window.c glade-3-3.1.5.new/src/glade-p
  	return gtk_ui_manager_get_widget (gpw->priv->ui, "/MenuBar");
  }
  
-@@ -2265,6 +2275,8 @@
+@@ -2489,6 +2499,8 @@
  	gpw->priv->label = NULL;
  	gpw->priv->default_path = NULL;
  	

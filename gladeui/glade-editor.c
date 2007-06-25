@@ -43,7 +43,6 @@
 #include "glade-project.h"
 #include "glade-utils.h"
 #include "glade-editor-property.h"
-#include "atk.xpm"
 
 enum
 {
@@ -185,7 +184,7 @@ glade_editor_notebook_page (GladeEditor *editor, const gchar *name)
 	GtkWidget     *sw;
 	GtkWidget     *label_widget;
 	GtkWidget     *image;
-	GdkPixbuf     *pixbuf;
+	static gchar  *path;
 	static gint page = 0;
 
 	/* alignment is needed to ensure property labels have some padding on the left */
@@ -195,19 +194,20 @@ glade_editor_notebook_page (GladeEditor *editor, const gchar *name)
 	/* construct tab label widget */
 	if (g_utf8_collate (name, _("Accessibility")) == 0)
 	{
-		pixbuf = gdk_pixbuf_new_from_xpm_data ((const char**) glade_atk_xpm);
+		path = g_build_filename (glade_app_get_pixmaps_dir (), "atk.png", NULL);
+		image = gtk_image_new_from_file (path);
 		label_widget = gtk_event_box_new ();
-		image = gtk_image_new_from_pixbuf (pixbuf);
 		gtk_container_add (GTK_CONTAINER (label_widget), image);
-		g_object_unref (G_OBJECT (pixbuf));
-		gtk_widget_show (image);
 		gtk_widget_show (label_widget);
+		gtk_widget_show (image);
 
 		glade_util_widget_set_tooltip (label_widget, name);
 	}
 	else
+	{
 		label_widget = gtk_label_new_with_mnemonic (name);
-
+	}
+	
 	/* configure page container */
 	if (g_utf8_collate (name, _("_Signals")) == 0)
 	{
@@ -241,13 +241,6 @@ glade_editor_on_reset_click (GtkButton *button,
 			     GladeEditor *editor)
 {
 	glade_editor_reset_dialog (editor);
-}
-
-static void
-glade_editor_on_launch_click (GtkButton *button,
-			     GladeEditor *editor)
-{
-	glade_widget_launch_editor (editor->loaded_widget);
 }
 
 static void
@@ -312,7 +305,6 @@ glade_editor_init (GladeEditor *editor)
 {
 	GtkSizeGroup *size_group;
 	GtkWidget *hbox;
-	GtkWidget *label;
 
 	editor->notebook     = gtk_notebook_new ();
 	editor->page_widget  = glade_editor_notebook_page (editor, _("_General"));
@@ -331,15 +323,6 @@ glade_editor_init (GladeEditor *editor)
 	hbox = gtk_hbox_new (FALSE, 6);
 	gtk_container_set_border_width (GTK_CONTAINER (hbox), 0);
 	gtk_box_pack_start (GTK_BOX (editor), hbox, FALSE, FALSE, 0);
-
-	/* Custom editor button */
-	editor->launch_button = gtk_button_new ();
-	label = gtk_label_new_with_mnemonic (_("_Edit..."));
-	gtk_misc_set_padding (GTK_MISC (label), 12, 0);
-	gtk_container_add (GTK_CONTAINER (editor->launch_button), label);
-	gtk_box_pack_start (GTK_BOX (hbox), editor->launch_button, FALSE, FALSE, 0);
-	g_signal_connect (G_OBJECT (editor->launch_button), "clicked",
-			  G_CALLBACK (glade_editor_on_launch_click), editor);
 
 	size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
 
@@ -908,13 +891,6 @@ glade_editor_load_widget_real (GladeEditor *editor, GladeWidget *widget)
 
 	glade_editor_load_packing_page (editor, widget);
 	glade_signal_editor_load_widget (editor->signal_editor, widget);
-
-
-	if (widget && glade_widget_has_launcher (widget))
-		gtk_widget_show (editor->launch_button);
-	else
-		gtk_widget_hide (editor->launch_button);
-
 
 	/* we are just clearing, we are done */
 	if (widget == NULL)

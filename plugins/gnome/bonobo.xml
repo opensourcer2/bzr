@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <glade-catalog name="bonobo" library="gladegnome" domain="glade3" depends="gnome">
   <glade-widget-classes>
-    <glade-widget-class title="Bonobo Dock" name="BonoboDock" generic-name="bonobodock">
+    <glade-widget-class title="Bonobo Dock" name="BonoboDock" generic-name="dock">
       <set-property-function>glade_gnome_bonobodock_set_property</set-property-function>
       <add-child-function>glade_gnome_bonobodock_add_child</add-child-function>
       <remove-child-function>glade_gnome_bonobodock_remove_child</remove-child-function>
@@ -48,7 +48,7 @@
 	</property>
       </packing-properties>
     </glade-widget-class>
-    <glade-widget-class title="Bonobo Dock Item" name="BonoboDockItem" generic-name="bonobodockitem">
+    <glade-widget-class title="Bonobo Dock Item" name="BonoboDockItem" generic-name="dockitem">
       <properties>
       	<property id="shadow">
   	  <displayable-values>

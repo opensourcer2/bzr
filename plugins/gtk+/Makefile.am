@@ -27,7 +27,7 @@ libgladegtk_la_SOURCES     = glade-gtk.c glade-gtk.h
 libgladegtk_la_LDFLAGS     = -module -avoid-version $(AM_LDFLAGS)
 libgladegtk_la_LIBADD      = $(libgladeui) $(GTK_LIBS)
 
-if WITH_WIN32
+if PLATFORM_WIN32
   libgladegtk_la_LDFLAGS += -no-undefined
 endif
 
@@ -35,10 +35,16 @@ endif
 # catalog data
 
 catalogsdir = $(pkgdatadir)/catalogs
+
 catalogs_DATA = gtk+.xml gtk+.xml.in
+
+if HAVE_GTK_UNIX_PRINT
+catalogs_DATA += gtkunixprint.xml gtkunixprint.xml.in
+endif
+
 @INTLTOOL_XML_NOMERGE_RULE@
 
 
-CLEANFILES = gtk+.xml
+CLEANFILES = gtk+.xml gtkunixprint.xml
 
-EXTRA_DIST = $(catalogs_DATA)
+EXTRA_DIST = gtk+.xml gtk+.xml.in gtkunixprint.xml gtkunixprint.xml.in

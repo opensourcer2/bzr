@@ -1,12 +1,25 @@
 dnl Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.52)
-AC_INIT([glade3], [3.2.2],
+
+m4_define(glade_major_version, 3)
+m4_define(glade_minor_version, 3)
+m4_define(glade_micro_version, 1)
+m4_define(glade_version, glade_major_version.glade_minor_version.glade_micro_version)
+
+AC_INIT([glade3], [glade_version],
 	[http://bugzilla.gnome.org/enter_bug.cgi?product=glade3])
 	
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_SRCDIR([gladeui/glade.h])
 AC_CONFIG_MACRO_DIR([m4])
+
+AC_DEFINE(GLADE_MAJOR_VERSION, glade_major_version, [Glade major version])
+AC_SUBST(GLADE_MAJOR_VERSION, glade_major_version)
+AC_DEFINE(GLADE_MINOR_VERSION, glade_minor_version, [Glade minor version])
+AC_SUBST(GLADE_MINOR_VERSION, glade_minor_version)
+AC_DEFINE(GLADE_MICRO_VERSION, glade_micro_version, [Glade micro version])
+AC_SUBST(GLADE_MICRO_VERSION, glade_micro_version)
 
 AC_CANONICAL_SYSTEM
 
@@ -34,12 +47,14 @@ AM_PROG_LIBTOOL
 # If any interfaces have been added since the last public release, then increment GLADE_AGE.
 # If any interfaces have been removed since the last public release, then set GLADE_AGE to 0.
 # Reference: http://www.gnu.org/software/libtool/manual.html#Versioning
-GLADE_REVISION=2
-GLADE_CURRENT=5
+GLADE_REVISION=1
+GLADE_CURRENT=6
 GLADE_AGE=0
+GLADE_CURRENT_MINUS_AGE=`expr $GLADE_CURRENT - $GLADE_AGE`
 AC_SUBST(GLADE_REVISION)
 AC_SUBST(GLADE_CURRENT)
 AC_SUBST(GLADE_AGE)
+AC_SUBST(GLADE_CURRENT_MINUS_AGE)
 
 dnl ================================================================
 dnl Gettext stuff.
@@ -77,6 +92,13 @@ AC_SUBST(GTK_LIBS)
 AC_SUBST(GTK_CFLAGS)
 
 dnl ================================================================
+dnl Check for the unix print widgets in gtk+
+dnl ================================================================
+LIBS=$GTK_LIBS
+AC_CHECK_FUNCS(gtk_print_unix_dialog_new,[have_unix_print=yes]; break,[have_unix_print=no])
+AM_CONDITIONAL(HAVE_GTK_UNIX_PRINT, test x"$have_unix_print" = "xyes")
+
+dnl ================================================================
 dnl Check for optional gnome libs
 dnl ================================================================
 AC_ARG_ENABLE(gnome,
@@ -109,7 +131,7 @@ AC_MSG_CHECKING([whether Python support is requested])
 AC_ARG_ENABLE([python],
 	AS_HELP_STRING([--enable-python],[Enable python support]),
 	[enable_python=$enableval have_python=$enableval],
-	[enable_python=autodetect have_python=yes])
+	[enable_python=autodetect have_python=no])
 AC_MSG_RESULT([$enable_python])
 
 if test "x$have_python" != "xno"; then
@@ -215,13 +237,20 @@ dnl Check for windows
 dnl ================================================================
 case $host_os in
   *mingw* | pw32* | cygwin*)
-    win32=yes
+    platform_win32=yes
     ;;
   *)
-    win32=no
+    platform_win32=no
     ;;
 esac
-AM_CONDITIONAL(WITH_WIN32, test x"$win32" = "xyes")
+AM_CONDITIONAL(PLATFORM_WIN32, test x"$platform_win32" = "xyes")
+
+if test "$platform_win32" = "yes"; then
+  AC_CHECK_TOOL(WINDRES, windres, no)
+  if test "$WINDRES" = no; then
+    AC_MSG_ERROR([*** Could not find an implementation of windres in your PATH.])
+  fi
+fi
 
 dnl ================================================================
 dnl Only use -Wall if we have gcc
@@ -257,7 +286,9 @@ data/icons/hicolor/48x48/apps/Makefile
 data/icons/hicolor/scalable/Makefile
 data/icons/hicolor/scalable/apps/Makefile
 gladeui/Makefile
+gladeui/gladeui.rc
 src/Makefile
+src/glade-3.rc
 plugins/Makefile
 plugins/gtk+/Makefile
 plugins/gtk+/icons/Makefile
@@ -281,9 +312,9 @@ echo "
 
 Configuration:
 
-	Source code location:	${srcdir}
-	Compiler:		${CC}
-	GnomeUI Catalog:	${have_gnome}
-	Python Binding:		${have_python}
-	Glade User Manual:	${gdu_cv_have_gdu}
+	Source code location:	 ${srcdir}
+	Compiler:		 ${CC}
+	GTK+ UNIX Print Widgets: ${have_unix_print}
+	GNOME UI Widgets:	 ${have_gnome}
+	Python Binding:		 ${have_python}
 "

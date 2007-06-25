@@ -26,6 +26,8 @@ struct _GladePlaceholder
 	GtkWidget widget;
 
 	GdkPixmap *placeholder_pixmap;
+	
+	GList *packing_actions;
 };
 
 struct _GladePlaceholderClass
@@ -33,11 +35,11 @@ struct _GladePlaceholderClass
 	GtkWidgetClass parent_class;
 };
 
-LIBGLADEUI_API
+
 GType        glade_placeholder_get_type   (void) G_GNUC_CONST;
-LIBGLADEUI_API 
+
 GtkWidget   *glade_placeholder_new        (void);
-LIBGLADEUI_API
+
 GladeWidget *glade_placeholder_get_parent (GladePlaceholder *placeholder);
 
 G_END_DECLS
