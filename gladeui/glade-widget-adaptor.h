@@ -11,21 +11,15 @@
 G_BEGIN_DECLS
 
 #define GLADE_TYPE_WIDGET_ADAPTOR            (glade_widget_adaptor_get_type())
-#define GLADE_WIDGET_ADAPTOR(obj)            \
-        (G_TYPE_CHECK_INSTANCE_CAST ((obj), GLADE_TYPE_WIDGET_ADAPTOR, GladeWidgetAdaptor))
-#define GLADE_WIDGET_ADAPTOR_CLASS(klass)    \
-        (G_TYPE_CHECK_CLASS_CAST ((klass), GLADE_TYPE_WIDGET_ADAPTOR, GladeWidgetAdaptorClass))
-#define GLADE_IS_WIDGET_ADAPTOR(obj)         \
-        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GLADE_TYPE_WIDGET_ADAPTOR))
-#define GLADE_IS_WIDGET_ADAPTOR_CLASS(klass) \
-        (G_TYPE_CHECK_CLASS_TYPE ((klass), GLADE_TYPE_WIDGET_ADAPTOR))
-#define GLADE_WIDGET_ADAPTOR_GET_CLASS(o)    \
-        (G_TYPE_INSTANCE_GET_CLASS ((o), GLADE_WIDGET_ADAPTOR, GladeWidgetAdaptorClass))
+#define GLADE_WIDGET_ADAPTOR(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GLADE_TYPE_WIDGET_ADAPTOR, GladeWidgetAdaptor))
+#define GLADE_WIDGET_ADAPTOR_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GLADE_TYPE_WIDGET_ADAPTOR, GladeWidgetAdaptorClass))
+#define GLADE_IS_WIDGET_ADAPTOR(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GLADE_TYPE_WIDGET_ADAPTOR))
+#define GLADE_IS_WIDGET_ADAPTOR_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GLADE_TYPE_WIDGET_ADAPTOR))
+#define GLADE_WIDGET_ADAPTOR_GET_CLASS(o)    (G_TYPE_INSTANCE_GET_CLASS ((o), GLADE_WIDGET_ADAPTOR, GladeWidgetAdaptorClass))
 
 typedef struct _GladeWidgetAdaptor        GladeWidgetAdaptor;
 typedef struct _GladeWidgetAdaptorPrivate GladeWidgetAdaptorPrivate;
 typedef struct _GladeWidgetAdaptorClass   GladeWidgetAdaptorClass;
-typedef struct _GladeSignalClass          GladeSignalClass;
 
 /**
  * GWA_IS_FIXED:
@@ -121,7 +115,7 @@ typedef struct _GladeSignalClass          GladeSignalClass;
  *
  * These are the reasons your #GladePostCreateFunc can be called.
  */
-typedef enum _GladeCreateReason
+typedef enum
 {
 	GLADE_CREATE_USER = 0,
 	GLADE_CREATE_COPY,
@@ -130,7 +124,7 @@ typedef enum _GladeCreateReason
 	GLADE_CREATE_REASONS
 } GladeCreateReason;
 
-#define GLADE_CREATE_REASON (glade_create_reason_get_type())
+#define GLADE_TYPE_CREATE_REASON (glade_create_reason_get_type())
 
 /**
  * GladeSetPropertyFunc:
@@ -237,7 +231,7 @@ typedef gboolean (* GladeChildVerifyPropertyFunc) (GladeWidgetAdaptor *adaptor,
 						   GObject            *container,
 						   GObject            *child,
 						   const gchar        *property_name,
-						   GValue             *value);
+						   const GValue       *value);
 
 
 /**
@@ -340,6 +334,7 @@ typedef void     (* GladeChildActionActivateFunc) (GladeWidgetAdaptor *adaptor,
 /* GladeSignalClass contains all the info we need for a given signal, such as
  * the signal name, and maybe more in the future 
  */
+typedef struct _GladeSignalClass GladeSignalClass; 
 struct _GladeSignalClass
 {
 	GSignalQuery query;
@@ -416,9 +411,17 @@ struct _GladeWidgetAdaptorClass
 	gint                       default_width;  /* Default width in GladeDesignLayout */
 	gint                       default_height; /* Default height in GladeDesignLayout */
 
+	GladePostCreateFunc        deep_post_create;   /* Executed after widget creation: 
+							* plugins use this to setup various
+							* support codes (adaptors must always
+							* chain up in this stage of instantiation).
+							*/
+
 	GladePostCreateFunc        post_create;   /* Executed after widget creation: 
 						   * plugins use this to setup various
-						   * support codes.
+						   * support codes (adaptors are free here
+						   * to chain up or not in this stage of
+						   * instantiation).
 						   */
 
 	GladeGetInternalFunc       get_internal_child; /* Retrieves the the internal child
@@ -576,7 +579,7 @@ gboolean             glade_widget_adaptor_child_verify_property (GladeWidgetAdap
 								 GObject            *container,
 								 GObject            *child,
 								 const gchar        *property_name,
-								 GValue             *value);
+								 const GValue       *value);
 
 void                 glade_widget_adaptor_replace_child      (GladeWidgetAdaptor *adaptor,
 							      GObject            *container,
@@ -595,12 +598,14 @@ gboolean             glade_widget_adaptor_is_container       (GladeWidgetAdaptor
 gboolean             glade_widget_adaptor_action_add         (GladeWidgetAdaptor *adaptor,
 							      const gchar *action_path,
 							      const gchar *label,
-							      const gchar *stock);
+							      const gchar *stock,
+							      gboolean important);
 
 gboolean             glade_widget_adaptor_pack_action_add    (GladeWidgetAdaptor *adaptor,
 							      const gchar *action_path,
 							      const gchar *label,
-							      const gchar *stock);
+							      const gchar *stock,
+							      gboolean important);
 
 gboolean             glade_widget_adaptor_action_remove      (GladeWidgetAdaptor *adaptor,
 							      const gchar *action_path);

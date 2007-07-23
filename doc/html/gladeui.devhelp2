@@ -26,7 +26,7 @@
       <sub name="GladeEditorProperty" link="GladeEditorProperty.html"/>
       <sub name="GladePalette" link="GladePalette.html"/>
       <sub name="GladeClipboardView" link="GladeClipboardView.html"/>
-      <sub name="GladeProjectView" link="GladeProjectView.html"/>
+      <sub name="GladeInspector" link="GladeInspector.html"/>
       <sub name="Glade Signal Editor" link="gladeui-glade-signal-editor.html"/>
     </sub>
     <sub name="Miscellaneous utilities" link="misc.html">
@@ -57,7 +57,6 @@
     <keyword type="function" name="glade_app_is_project_loaded ()" link="GladeApp.html#glade-app-is-project-loaded"/>
     <keyword type="function" name="glade_app_show_properties ()" link="GladeApp.html#glade-app-show-properties"/>
     <keyword type="function" name="glade_app_hide_properties ()" link="GladeApp.html#glade-app-hide-properties"/>
-    <keyword type="function" name="glade_app_add_project_view ()" link="GladeApp.html#glade-app-add-project-view"/>
     <keyword type="function" name="glade_app_command_undo ()" link="GladeApp.html#glade-app-command-undo"/>
     <keyword type="function" name="glade_app_command_redo ()" link="GladeApp.html#glade-app-command-redo"/>
     <keyword type="function" name="glade_app_command_copy ()" link="GladeApp.html#glade-app-command-copy"/>
@@ -80,8 +79,8 @@
     <keyword type="function" name="glade_app_selection_set ()" link="GladeApp.html#glade-app-selection-set"/>
     <keyword type="function" name="glade_app_is_selected ()" link="GladeApp.html#glade-app-is-selected"/>
     <keyword type="" name="The &quot;active-project&quot; property" link="GladeApp.html#GladeApp--active-project"/>
+    <keyword type="" name="The &quot;pointer-mode&quot; property" link="GladeApp.html#GladeApp--pointer-mode"/>
     <keyword type="" name="The &quot;update-ui&quot; signal" link="GladeApp.html#GladeApp-update-ui"/>
-    <keyword type="" name="The &quot;widget-event&quot; signal" link="GladeApp.html#GladeApp-widget-event"/>
     <keyword type="struct" name="struct GladeProject" link="GladeProject.html#GladeProject-struct"/>
     <keyword type="function" name="glade_project_new ()" link="GladeProject.html#glade-project-new"/>
     <keyword type="function" name="glade_project_save ()" link="GladeProject.html#glade-project-save"/>
@@ -113,7 +112,7 @@
     <keyword type="function" name="glade_project_get_has_selection ()" link="GladeProject.html#glade-project-get-has-selection"/>
     <keyword type="function" name="glade_project_get_readonly ()" link="GladeProject.html#glade-project-get-readonly"/>
     <keyword type="" name="The &quot;has-selection&quot; property" link="GladeProject.html#GladeProject--has-selection"/>
-    <keyword type="" name="The &quot;has-unsaved-changes&quot; property" link="GladeProject.html#GladeProject--has-unsaved-changes"/>
+    <keyword type="" name="The &quot;modified&quot; property" link="GladeProject.html#GladeProject--modified"/>
     <keyword type="" name="The &quot;path&quot; property" link="GladeProject.html#GladeProject--path"/>
     <keyword type="" name="The &quot;read-only&quot; property" link="GladeProject.html#GladeProject--read-only"/>
     <keyword type="" name="The &quot;add-widget&quot; signal" link="GladeProject.html#GladeProject-add-widget"/>
@@ -365,11 +364,15 @@
     <keyword type="function" name="glade_clipboard_view_add ()" link="GladeClipboardView.html#glade-clipboard-view-add"/>
     <keyword type="function" name="glade_clipboard_view_remove ()" link="GladeClipboardView.html#glade-clipboard-view-remove"/>
     <keyword type="function" name="glade_clipboard_view_refresh_sel ()" link="GladeClipboardView.html#glade-clipboard-view-refresh-sel"/>
-    <keyword type="struct" name="GladeProjectView" link="GladeProjectView.html#GladeProjectView-struct"/>
-    <keyword type="function" name="glade_project_view_new ()" link="GladeProjectView.html#glade-project-view-new"/>
-    <keyword type="function" name="glade_project_view_get_project ()" link="GladeProjectView.html#glade-project-view-get-project"/>
-    <keyword type="function" name="glade_project_view_set_project ()" link="GladeProjectView.html#glade-project-view-set-project"/>
-    <keyword type="" name="The &quot;item-activated&quot; signal" link="GladeProjectView.html#GladeProjectView-item-activated"/>
+    <keyword type="struct" name="GladeInspector" link="GladeInspector.html#GladeInspector-struct"/>
+    <keyword type="function" name="glade_inspector_new ()" link="GladeInspector.html#glade-inspector-new"/>
+    <keyword type="function" name="glade_inspector_new_with_project ()" link="GladeInspector.html#glade-inspector-new-with-project"/>
+    <keyword type="function" name="glade_inspector_get_project ()" link="GladeInspector.html#glade-inspector-get-project"/>
+    <keyword type="function" name="glade_inspector_set_project ()" link="GladeInspector.html#glade-inspector-set-project"/>
+    <keyword type="function" name="glade_inspector_get_selected_items ()" link="GladeInspector.html#glade-inspector-get-selected-items"/>
+    <keyword type="" name="The &quot;project&quot; property" link="GladeInspector.html#GladeInspector--project"/>
+    <keyword type="" name="The &quot;item-activated&quot; signal" link="GladeInspector.html#GladeInspector-item-activated"/>
+    <keyword type="" name="The &quot;selection-changed&quot; signal" link="GladeInspector.html#GladeInspector-selection-changed"/>
     <keyword type="struct" name="GladeSignalEditor" link="gladeui-glade-signal-editor.html#GladeSignalEditor"/>
     <keyword type="function" name="glade_signal_editor_get_widget ()" link="gladeui-glade-signal-editor.html#glade-signal-editor-get-widget"/>
     <keyword type="function" name="glade_signal_editor_new ()" link="gladeui-glade-signal-editor.html#glade-signal-editor-new"/>

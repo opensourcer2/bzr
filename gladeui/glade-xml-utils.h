@@ -36,7 +36,6 @@ typedef struct _GladeXmlDoc     GladeXmlDoc;
 #define GLADE_TAG_GLADE_WIDGET_CLASS              "glade-widget-class"
 #define GLADE_TAG_GLADE_WIDGET_GROUP              "glade-widget-group"
 #define GLADE_TAG_GLADE_WIDGET_CLASS_REF          "glade-widget-class-ref"
-#define GLADE_TAG_LANGUAGE                        "language"
 #define GLADE_TAG_ADAPTOR                         "adaptor"
 #define GLADE_TAG_LIBRARY                         "library"
 #define GLADE_TAG_DEPENDS                         "depends"
@@ -47,6 +46,7 @@ typedef struct _GladeXmlDoc     GladeXmlDoc;
 #define GLADE_TAG_DISABLED                        "disabled"
 #define GLADE_TAG_DEFAULT_PALETTE_STATE           "default-palette-state"
 #define GLADE_TAG_REPLACE_CHILD_FUNCTION          "replace-child-function"
+#define GLADE_TAG_DEEP_POST_CREATE_FUNCTION       "deep-post-create-function"
 #define GLADE_TAG_POST_CREATE_FUNCTION            "post-create-function"
 #define GLADE_TAG_GET_INTERNAL_CHILD_FUNCTION     "get-internal-child-function"
 #define GLADE_TAG_ADD_CHILD_FUNCTION              "add-child-function"
@@ -116,6 +116,7 @@ typedef struct _GladeXmlDoc     GladeXmlDoc;
 #define GLADE_TAG_NO                              "No"
 #define GLADE_TAG_ICON_PREFIX                     "icon-prefix"
 #define GLADE_TAG_ICON_NAME                       "icon-name"
+#define GLADE_TAG_IMPORTANT                       "important"
 #define GLADE_ENUM_DATA_TAG                       "GladeEnumDataTag"
 
 

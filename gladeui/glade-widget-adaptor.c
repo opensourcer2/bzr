@@ -768,6 +768,7 @@ glade_widget_adaptor_class_init (GladeWidgetAdaptorClass *adaptor_class)
 	object_class->get_property          = glade_widget_adaptor_real_get_property;
 
 	/* Class methods */
+	adaptor_class->deep_post_create     = NULL;
 	adaptor_class->post_create          = NULL;
 	adaptor_class->get_internal_child   = NULL;
 	adaptor_class->verify_property      = NULL;
@@ -947,7 +948,12 @@ gwa_extend_with_node_load_sym (GladeWidgetAdaptorClass *klass,
 					  GLADE_TAG_CONSTRUCTOR_FUNCTION,
 					  &symbol))
 		object_class->constructor = symbol;
-	
+
+	if (glade_xml_load_sym_from_node (node, module,
+					  GLADE_TAG_DEEP_POST_CREATE_FUNCTION,
+					  &symbol))
+		klass->deep_post_create = symbol;
+
 	if (glade_xml_load_sym_from_node (node, module,
 					  GLADE_TAG_POST_CREATE_FUNCTION,
 					  &symbol))
@@ -1320,11 +1326,12 @@ static void
 gwa_action_update_from_node (GladeWidgetAdaptor *adaptor,
 			     gboolean is_packing,
 			     GladeXmlNode *node,
+			     const gchar *domain,
 			     gchar *group_path)
 {
 	GladeXmlNode *child;
 	gchar *id, *label, *stock, *action_path;
-	gboolean group;
+	gboolean group, important;
 	
 	for (child = glade_xml_node_get_children (node);
 	     child; child = glade_xml_node_next (child))
@@ -1344,13 +1351,24 @@ gwa_action_update_from_node (GladeWidgetAdaptor *adaptor,
 		
 		label = glade_xml_get_property_string (child, GLADE_TAG_NAME);
 		stock = glade_xml_get_property_string (child, GLADE_TAG_STOCK);
-
-		if (is_packing)
-			glade_widget_adaptor_pack_action_add (adaptor, action_path, label, stock);
-		else
-			glade_widget_adaptor_action_add (adaptor, action_path, label, stock);
+		important = glade_xml_get_property_boolean (child, GLADE_TAG_IMPORTANT, FALSE);
 		
-		if (group) gwa_action_update_from_node (adaptor, is_packing, child, action_path);
+		if (label) 
+		{
+			gchar *translated = dgettext (domain, label);
+			if (label != translated)
+			{
+				g_free (label);
+				label = g_strdup (translated);
+			}
+		}
+		
+		if (is_packing)
+			glade_widget_adaptor_pack_action_add (adaptor, action_path, label, stock, important);
+		else
+			glade_widget_adaptor_action_add (adaptor, action_path, label, stock, important);
+		
+		if (group) gwa_action_update_from_node (adaptor, is_packing, child, domain, action_path);
 		
 		g_free (id);
 		g_free (label);
@@ -1394,12 +1412,12 @@ gwa_extend_with_node (GladeWidgetAdaptor *adaptor,
 	/* Update actions from child node */
 	if ((child = 
 	     glade_xml_search_child (node, GLADE_TAG_ACTIONS)) != NULL)
-		gwa_action_update_from_node (adaptor, FALSE, child, NULL);
+		gwa_action_update_from_node (adaptor, FALSE, child, domain, NULL);
 	
 	/* Update packing actions from child node */
 	if ((child = 
 	     glade_xml_search_child (node, GLADE_TAG_PACKING_ACTIONS)) != NULL)
-		gwa_action_update_from_node (adaptor, TRUE, child, NULL);
+		gwa_action_update_from_node (adaptor, TRUE, child, domain, NULL);
 	
 	return TRUE;
 }
@@ -1450,11 +1468,35 @@ create_icon_name_for_adaptor (const gchar *adaptor_name,
 	return name;
 }
 
+static void
+gwa_displayable_values_check (GladeWidgetAdaptor *adaptor, gboolean packing)
+{
+	GList *l, *p = (packing) ? adaptor->packing_props : adaptor->properties;
+	
+	for (l = p; l; l = g_list_next (l))
+	{
+		GladePropertyClass *klass = l->data;
+		
+		if (adaptor->type == klass->pspec->owner_type &&
+		    (G_IS_PARAM_SPEC_ENUM (klass->pspec) || G_IS_PARAM_SPEC_FLAGS (klass->pspec)) &&
+		    !klass->displayable_values && klass->visible &&
+		    klass->pspec->value_type != GLADE_TYPE_STOCK &&
+		    klass->pspec->value_type != GLADE_TYPE_STOCK_IMAGE)
+		{
+			/* We do not need displayable values if the property is not visible */
+			g_message ("No displayable values for %sproperty %s::%s", 
+				   (packing) ? "child " : "",
+				   adaptor->name, klass->id);
+		}
+	}
+}
+
 /**
  * glade_widget_adaptor_from_catalog:
  * @class_node: A #GladeXmlNode
  * @catname: the name of the owning catalog
- * @library: the name of the library used to load class methods from
+ * @icon_prefix:
+ * @module: the plugin GModule.
  * @domain: the domain to translate strings from this plugin from
  * @book: the devhelp search domain for the owning catalog.
  *
@@ -1473,6 +1515,7 @@ glade_widget_adaptor_from_catalog (GladeXmlNode     *class_node,
 {
 	GladeWidgetAdaptor *adaptor = NULL;
 	gchar              *name, *generic_name, *icon_name, *adaptor_icon_name, *adaptor_name, *func_name;
+	gchar              *title, *translated_title;
 	GType               object_type, adaptor_type, parent_type;
 	GWADerivedClassData data;
 	
@@ -1551,21 +1594,32 @@ glade_widget_adaptor_from_catalog (GladeXmlNode     *class_node,
 	g_free (generic_name);
 	g_free (icon_name);
 	g_free (adaptor_icon_name);
-	
-	if ((adaptor->title = glade_xml_get_property_string_required
-	     (class_node, GLADE_TAG_TITLE,
-	      "This value is needed to display object class names in the UI")) == NULL)
+
+
+	title = glade_xml_get_property_string_required (class_node,
+							GLADE_TAG_TITLE,
+	      						"This value is needed to "
+	      						"display object class names "
+	      						"in the UI");
+	if (title == NULL)
 	{
-		g_warning ("Class '%s' built without a '%s'", name, GLADE_TAG_TITLE);
+		g_warning ("Class '%s' declared without a '%s' attribute", name, GLADE_TAG_TITLE);
 		adaptor->title = g_strdup (name);
 	}
-	
-	/* Translate title */
-	if (adaptor->title != dgettext (domain, adaptor->title))
+	else
 	{
-		gchar *ptr   = dgettext (domain, adaptor->title);
-		g_free (adaptor->title);
-		adaptor->title = ptr;
+		/* translate */
+		translated_title = dgettext (domain, title);
+		if (translated_title != title)
+		{
+			/* gettext owns translated_title */
+			adaptor->title = g_strdup (translated_title);
+			g_free (title);
+		}
+		else
+		{
+			adaptor->title = title;
+		}
 	}
 
 	if (G_TYPE_IS_INSTANTIATABLE (adaptor->type)    &&
@@ -1597,6 +1651,9 @@ glade_widget_adaptor_from_catalog (GladeXmlNode     *class_node,
 		gwa_properties_set_weight (&adaptor->properties, parent_type);
 		gwa_properties_set_weight (&adaptor->packing_props, parent_type);
 	}
+	
+	gwa_displayable_values_check (adaptor, FALSE);
+	gwa_displayable_values_check (adaptor, TRUE);
 	
 	glade_widget_adaptor_register (adaptor);
 
@@ -1930,6 +1987,13 @@ glade_widget_adaptor_post_create (GladeWidgetAdaptor *adaptor,
 	g_return_if_fail (G_IS_OBJECT (object));
 	g_return_if_fail (g_type_is_a (G_OBJECT_TYPE (object), adaptor->type));
 
+	/* Run post_create in 2 stages, one that chains up and all class adaptors
+	 * in the hierarchy get a peek, another that is used to setup placeholders
+	 * and things that differ from the child/parent implementations
+	 */
+	if (GLADE_WIDGET_ADAPTOR_GET_CLASS (adaptor)->deep_post_create)
+		GLADE_WIDGET_ADAPTOR_GET_CLASS (adaptor)->deep_post_create (adaptor, object, reason);
+	
 	if (GLADE_WIDGET_ADAPTOR_GET_CLASS (adaptor)->post_create)
 		GLADE_WIDGET_ADAPTOR_GET_CLASS (adaptor)->post_create (adaptor, object, reason);
 	/* XXX Dont complain here if no implementation is found */
@@ -2103,7 +2167,7 @@ glade_widget_adaptor_remove (GladeWidgetAdaptor *adaptor,
 }
 
 /**
- * glade_widget_adaptor_remove:
+ * glade_widget_adaptor_get_children:
  * @adaptor:   A #GladeWidgetAdaptor
  * @container: The #GObject container
  *
@@ -2244,7 +2308,7 @@ glade_widget_adaptor_child_verify_property (GladeWidgetAdaptor *adaptor,
 					    GObject            *container,
 					    GObject            *child,
 					    const gchar        *property_name,
-					    GValue             *value)
+					    const GValue       *value)
 {
 	g_return_val_if_fail (GLADE_IS_WIDGET_ADAPTOR (adaptor), FALSE);
 	g_return_val_if_fail (G_IS_OBJECT (container), FALSE);
@@ -2264,13 +2328,13 @@ glade_widget_adaptor_child_verify_property (GladeWidgetAdaptor *adaptor,
 
 /**
  * glade_widget_adaptor_replace_child:
- * @adaptor:       A #GladeWidgetAdaptor
- * @container:     The #GObject container
- * @old:           The old #GObject child
- * @new:           The new #GObject child
+ * @adaptor: A #GladeWidgetAdaptor
+ * @container: The #GObject container
+ * @old_obj: The old #GObject child
+ * @new_obj: The new #GObject child
  *
- * Replaces @old with @new in @container while positioning
- * @new where @old was and assigning it appropriate packing 
+ * Replaces @old_obj with @new_obj in @container while positioning
+ * @new_obj where @old_obj was and assigning it appropriate packing 
  * property values.
  */
 void
@@ -2321,8 +2385,8 @@ glade_widget_adaptor_query (GladeWidgetAdaptor *adaptor)
 /**
  * glade_widget_adaptor_get_packing_default:
  * @child_adaptor:  A #GladeWidgetAdaptor
- * @parent_adaptor: The #GladeWidgetAdaptor for the parent object
- * @property_id:    The string property identifier
+ * @container_adaptor: The #GladeWidgetAdaptor for the parent object
+ * @id:    The string property identifier
  *
  * Gets the default value for @property_id on a widget governed by
  * @child_adaptor when parented in a widget governed by @parent_adaptor
@@ -2428,7 +2492,8 @@ static gboolean
 glade_widget_adaptor_action_add_real (GList **list,
 				      const gchar *action_path,
 				      const gchar *label,
-				      const gchar *stock)
+				      const gchar *stock,
+				      gboolean important)
 {
 	GWActionClass *action, *group;
 	const gchar *id;
@@ -2468,6 +2533,8 @@ glade_widget_adaptor_action_add_real (GList **list,
 		action->stock = (stock) ? g_strdup (stock) : NULL;
 	}
 	
+	action->important = important;
+	
 	*list = g_list_append (*list, action);
 	
 	return TRUE;
@@ -2479,6 +2546,7 @@ glade_widget_adaptor_action_add_real (GList **list,
  * @action_path: The identifier of this action in the action tree
  * @label: A translated label to show in the UI for this action
  * @stock: If set, this stock item will be shown in the UI along side the label.
+ * @important: if this action is important.
  *
  * Add an action to @adaptor.
  * If the action is present then it overrides label and stock
@@ -2489,7 +2557,8 @@ gboolean
 glade_widget_adaptor_action_add (GladeWidgetAdaptor *adaptor,
 				 const gchar *action_path,
 				 const gchar *label,
-				 const gchar *stock)
+				 const gchar *stock,
+				 gboolean important)
 {
 	g_return_val_if_fail (GLADE_IS_WIDGET_ADAPTOR (adaptor), FALSE);
 	g_return_val_if_fail (action_path != NULL, FALSE);
@@ -2497,7 +2566,8 @@ glade_widget_adaptor_action_add (GladeWidgetAdaptor *adaptor,
 	return glade_widget_adaptor_action_add_real (&adaptor->actions,
 						     action_path,
 						     label,
-						     stock);
+						     stock,
+						     important);
 }
 
 /**
@@ -2506,6 +2576,7 @@ glade_widget_adaptor_action_add (GladeWidgetAdaptor *adaptor,
  * @action_path: The identifier of this action in the action tree
  * @label: A translated label to show in the UI for this action
  * @stock: If set, this stock item will be shown in the UI along side the label.
+ * @important: if this action is important.
  *
  * Add a packing action to @adaptor.
  * If the action is present then it overrides label and stock
@@ -2516,7 +2587,8 @@ gboolean
 glade_widget_adaptor_pack_action_add (GladeWidgetAdaptor *adaptor,
 				      const gchar *action_path,
 				      const gchar *label,
-				      const gchar *stock)
+				      const gchar *stock,
+				      gboolean important)
 {
 	g_return_val_if_fail (GLADE_IS_WIDGET_ADAPTOR (adaptor), FALSE);
 	g_return_val_if_fail (action_path != NULL, FALSE);
@@ -2524,7 +2596,8 @@ glade_widget_adaptor_pack_action_add (GladeWidgetAdaptor *adaptor,
 	return glade_widget_adaptor_action_add_real (&adaptor->packing_actions,
 						     action_path,
 						     label,
-						     stock);
+						     stock,
+						     important);
 }
 
 static gboolean

@@ -27,13 +27,13 @@
 </tr>
 <tr><td colspan="5" class="shortcuts"><nobr><a href="#id2525096" class="shortcut">Top</a>
                   &#160;|&#160;
-                  <a href="#id2526703" class="shortcut">Description</a>
+                  <a href="#id2526649" class="shortcut">Description</a>
                   &#160;|&#160;
-                  <a href="#id2526548" class="shortcut">Object Hierarchy</a>
+                  <a href="#id2526525" class="shortcut">Object Hierarchy</a>
                   &#160;|&#160;
-                  <a href="#id2526573" class="shortcut">Properties</a>
+                  <a href="#id2526550" class="shortcut">Properties</a>
                   &#160;|&#160;
-                  <a href="#id2526606" class="shortcut">Signals</a></nobr></td></tr>
+                  <a href="#id2526601" class="shortcut">Signals</a></nobr></td></tr>
 </table>
 <div class="refentry" lang="en">
 <a name="GladeApp"></a><div class="titlepage"></div>
@@ -50,7 +50,7 @@
 <h2>Synopsis</h2>
 <pre class="synopsis">
 
-#include &lt;glade.h&gt;
+#include &lt;gladeui/glade.h&gt;
 
 
             <a href="GladeApp.html#GladeApp-struct">GladeApp</a>;
@@ -72,7 +72,6 @@ GKeyFile*   <a href="GladeApp.html#glade-app-get-config">glade_app_get_config</a
 gboolean    <a href="GladeApp.html#glade-app-is-project-loaded">glade_app_is_project_loaded</a>     (const gchar *project_path);
 void        <a href="GladeApp.html#glade-app-show-properties">glade_app_show_properties</a>       (gboolean raise);
 void        <a href="GladeApp.html#glade-app-hide-properties">glade_app_hide_properties</a>       (void);
-void        <a href="GladeApp.html#glade-app-add-project-view">glade_app_add_project_view</a>      (<a href="GladeProjectView.html" title="GladeProjectView">GladeProjectView</a> *view);
 void        <a href="GladeApp.html#glade-app-command-undo">glade_app_command_undo</a>          (void);
 void        <a href="GladeApp.html#glade-app-command-redo">glade_app_command_redo</a>          (void);
 void        <a href="GladeApp.html#glade-app-command-copy">glade_app_command_copy</a>          (void);
@@ -103,7 +102,7 @@ gboolean    <a href="GladeApp.html#glade-app-is-selected">glade_app_is_selected<
 </pre>
 </div>
 <div class="refsect1" lang="en">
-<a name="id2526548"></a><h2>Object Hierarchy</h2>
+<a name="id2526525"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
 
   GObject
@@ -111,27 +110,23 @@ gboolean    <a href="GladeApp.html#glade-app-is-selected">glade_app_is_selected<
 </pre>
 </div>
 <div class="refsect1" lang="en">
-<a name="id2526573"></a><h2>Properties</h2>
+<a name="id2526550"></a><h2>Properties</h2>
 <pre class="synopsis">
 
   "<a href="GladeApp.html#GladeApp--active-project">active-project</a>"       <a href="GladeProject.html" title="GladeProject">GladeProject</a>          : Read / Write
+  "<a href="GladeApp.html#GladeApp--pointer-mode">pointer-mode</a>"         GladePointerMode      : Read / Write
 </pre>
 </div>
 <div class="refsect1" lang="en">
-<a name="id2526606"></a><h2>Signals</h2>
+<a name="id2526601"></a><h2>Signals</h2>
 <pre class="synopsis">
 
 "<a href="GladeApp.html#GladeApp-update-ui">update-ui</a>" void        user_function      (<a href="GladeApp.html" title="GladeApp">GladeApp</a> *gladeapp,
                                             gpointer  user_data)      : Run first
-"<a href="GladeApp.html#GladeApp-widget-event">widget-event</a>"
-            gboolean    user_function      (<a href="GladeApp.html" title="GladeApp">GladeApp</a>    *gladeapp,
-                                            <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *arg1,
-                                            GdkEvent    *arg2,
-                                            gpointer     user_data)      : Run last
 </pre>
 </div>
 <div class="refsect1" lang="en">
-<a name="id2526703"></a><h2>Description</h2>
+<a name="id2526649"></a><h2>Description</h2>
 <p>
 This main control object is where we try to draw the line between
 what is the Glade core and what is the main application. The main
@@ -140,20 +135,20 @@ to initialize the Glade core.
 </p>
 </div>
 <div class="refsect1" lang="en">
-<a name="id2526721"></a><h2>Details</h2>
+<a name="id2526668"></a><h2>Details</h2>
 <div class="refsect2" lang="en">
-<a name="id2526731"></a><h3>
+<a name="id2526678"></a><h3>
 <a name="GladeApp-struct"></a>GladeApp</h3>
-<a class="indexterm" name="id2526744"></a><pre class="programlisting">typedef struct _GladeApp GladeApp;</pre>
+<a class="indexterm" name="id2526690"></a><pre class="programlisting">typedef struct _GladeApp GladeApp;</pre>
 <p>
 
 </p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2526759"></a><h3>
+<a name="id2526705"></a><h3>
 <a name="glade-app-get"></a>glade_app_get ()</h3>
-<a class="indexterm" name="id2526771"></a><pre class="programlisting"><a href="GladeApp.html" title="GladeApp">GladeApp</a>*   glade_app_get                   (void);</pre>
+<a class="indexterm" name="id2526718"></a><pre class="programlisting"><a href="GladeApp.html" title="GladeApp">GladeApp</a>*   glade_app_get                   (void);</pre>
 <p>
 
 </p>
@@ -171,18 +166,18 @@ to initialize the Glade core.
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2526805"></a><h3>
+<a name="id2526751"></a><h3>
 <a name="glade-app-update-ui"></a>glade_app_update_ui ()</h3>
-<a class="indexterm" name="id2526820"></a><pre class="programlisting">void        glade_app_update_ui             (void);</pre>
+<a class="indexterm" name="id2526766"></a><pre class="programlisting">void        glade_app_update_ui             (void);</pre>
 <p>
 
 </p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2526841"></a><h3>
+<a name="id2526787"></a><h3>
 <a name="glade-app-set-window"></a>glade_app_set_window ()</h3>
-<a class="indexterm" name="id2526858"></a><pre class="programlisting">void        glade_app_set_window            (GtkWidget *window);</pre>
+<a class="indexterm" name="id2526804"></a><pre class="programlisting">void        glade_app_set_window            (GtkWidget *window);</pre>
 <p>
 
 </p>
@@ -200,9 +195,9 @@ to initialize the Glade core.
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2526903"></a><h3>
+<a name="id2526849"></a><h3>
 <a name="glade-app-get-window"></a>glade_app_get_window ()</h3>
-<a class="indexterm" name="id2526916"></a><pre class="programlisting">GtkWidget*  glade_app_get_window            (void);</pre>
+<a class="indexterm" name="id2526862"></a><pre class="programlisting">GtkWidget*  glade_app_get_window            (void);</pre>
 <p>
 
 </p>
@@ -220,9 +215,9 @@ to initialize the Glade core.
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2526951"></a><h3>
+<a name="id2526897"></a><h3>
 <a name="glade-app-get-editor"></a>glade_app_get_editor ()</h3>
-<a class="indexterm" name="id2526963"></a><pre class="programlisting"><a href="GladeEditor.html" title="GladeEditor">GladeEditor</a>* glade_app_get_editor           (void);</pre>
+<a class="indexterm" name="id2526910"></a><pre class="programlisting"><a href="GladeEditor.html" title="GladeEditor">GladeEditor</a>* glade_app_get_editor           (void);</pre>
 <p>
 
 </p>
@@ -240,9 +235,9 @@ to initialize the Glade core.
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2527000"></a><h3>
+<a name="id2526946"></a><h3>
 <a name="glade-app-get-palette"></a>glade_app_get_palette ()</h3>
-<a class="indexterm" name="id2527012"></a><pre class="programlisting"><a href="GladePalette.html" title="GladePalette">GladePalette</a>* glade_app_get_palette         (void);</pre>
+<a class="indexterm" name="id2526958"></a><pre class="programlisting"><a href="GladePalette.html" title="GladePalette">GladePalette</a>* glade_app_get_palette         (void);</pre>
 <p>
 
 </p>
@@ -260,9 +255,9 @@ to initialize the Glade core.
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2527048"></a><h3>
+<a name="id2526994"></a><h3>
 <a name="glade-app-get-clipboard"></a>glade_app_get_clipboard ()</h3>
-<a class="indexterm" name="id2527060"></a><pre class="programlisting"><a href="GladeClipboard.html" title="GladeClipboard">GladeClipboard</a>* glade_app_get_clipboard     (void);</pre>
+<a class="indexterm" name="id2527007"></a><pre class="programlisting"><a href="GladeClipboard.html" title="GladeClipboard">GladeClipboard</a>* glade_app_get_clipboard     (void);</pre>
 <p>
 
 </p>
@@ -280,9 +275,9 @@ to initialize the Glade core.
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2527097"></a><h3>
+<a name="id2527043"></a><h3>
 <a name="glade-app-get-clipboard-view"></a>glade_app_get_clipboard_view ()</h3>
-<a class="indexterm" name="id2527109"></a><pre class="programlisting">GtkWidget*  glade_app_get_clipboard_view    (void);</pre>
+<a class="indexterm" name="id2527056"></a><pre class="programlisting">GtkWidget*  glade_app_get_clipboard_view    (void);</pre>
 <p>
 
 </p>
@@ -300,9 +295,9 @@ to initialize the Glade core.
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2527145"></a><h3>
+<a name="id2527091"></a><h3>
 <a name="glade-app-set-project"></a>glade_app_set_project ()</h3>
-<a class="indexterm" name="id2527158"></a><pre class="programlisting">void        glade_app_set_project           (<a href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
+<a class="indexterm" name="id2527104"></a><pre class="programlisting">void        glade_app_set_project           (<a href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
 <p>
 Sets the active project in the <a href="GladeApp.html" title="GladeApp"><span class="type">GladeApp</span></a> to <em class="parameter"><code>project</code></em>.</p>
 <p>
@@ -320,9 +315,9 @@ Sets the active project in the <a href="GladeApp.html" title="GladeApp"><span cl
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2527230"></a><h3>
+<a name="id2527176"></a><h3>
 <a name="glade-app-get-project"></a>glade_app_get_project ()</h3>
-<a class="indexterm" name="id2527243"></a><pre class="programlisting"><a href="GladeProject.html" title="GladeProject">GladeProject</a>* glade_app_get_project         (void);</pre>
+<a class="indexterm" name="id2527189"></a><pre class="programlisting"><a href="GladeProject.html" title="GladeProject">GladeProject</a>* glade_app_get_project         (void);</pre>
 <p>
 
 </p>
@@ -340,9 +335,9 @@ Sets the active project in the <a href="GladeApp.html" title="GladeApp"><span cl
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2527279"></a><h3>
+<a name="id2527225"></a><h3>
 <a name="glade-app-add-project"></a>glade_app_add_project ()</h3>
-<a class="indexterm" name="id2527292"></a><pre class="programlisting">void        glade_app_add_project           (<a href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
+<a class="indexterm" name="id2527238"></a><pre class="programlisting">void        glade_app_add_project           (<a href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
 <p>
 
 </p>
@@ -360,9 +355,9 @@ Sets the active project in the <a href="GladeApp.html" title="GladeApp"><span cl
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2527338"></a><h3>
+<a name="id2527284"></a><h3>
 <a name="glade-app-remove-project"></a>glade_app_remove_project ()</h3>
-<a class="indexterm" name="id2527351"></a><pre class="programlisting">void        glade_app_remove_project        (<a href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
+<a class="indexterm" name="id2527298"></a><pre class="programlisting">void        glade_app_remove_project        (<a href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
 <p>
 
 </p>
@@ -380,9 +375,9 @@ Sets the active project in the <a href="GladeApp.html" title="GladeApp"><span cl
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2527398"></a><h3>
+<a name="id2527344"></a><h3>
 <a name="glade-app-get-project-by-path"></a>glade_app_get_project_by_path ()</h3>
-<a class="indexterm" name="id2527411"></a><pre class="programlisting"><a href="GladeProject.html" title="GladeProject">GladeProject</a>* glade_app_get_project_by_path (const gchar *project_path);</pre>
+<a class="indexterm" name="id2527357"></a><pre class="programlisting"><a href="GladeProject.html" title="GladeProject">GladeProject</a>* glade_app_get_project_by_path (const gchar *project_path);</pre>
 <p>
 Finds an open project with <em class="parameter"><code>path</code></em></p>
 <p>
@@ -408,9 +403,9 @@ Finds an open project with <em class="parameter"><code>path</code></em></p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2527486"></a><h3>
+<a name="id2527433"></a><h3>
 <a name="glade-app-get-projects"></a>glade_app_get_projects ()</h3>
-<a class="indexterm" name="id2527499"></a><pre class="programlisting">GList*      glade_app_get_projects          (void);</pre>
+<a class="indexterm" name="id2527445"></a><pre class="programlisting">GList*      glade_app_get_projects          (void);</pre>
 <p>
 
 </p>
@@ -428,9 +423,9 @@ Finds an open project with <em class="parameter"><code>path</code></em></p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2527535"></a><h3>
+<a name="id2527481"></a><h3>
 <a name="glade-app-get-config"></a>glade_app_get_config ()</h3>
-<a class="indexterm" name="id2527548"></a><pre class="programlisting">GKeyFile*   glade_app_get_config            (void);</pre>
+<a class="indexterm" name="id2527494"></a><pre class="programlisting">GKeyFile*   glade_app_get_config            (void);</pre>
 <p>
 
 </p>
@@ -448,9 +443,9 @@ Finds an open project with <em class="parameter"><code>path</code></em></p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2527583"></a><h3>
+<a name="id2527530"></a><h3>
 <a name="glade-app-is-project-loaded"></a>glade_app_is_project_loaded ()</h3>
-<a class="indexterm" name="id2527597"></a><pre class="programlisting">gboolean    glade_app_is_project_loaded     (const gchar *project_path);</pre>
+<a class="indexterm" name="id2527543"></a><pre class="programlisting">gboolean    glade_app_is_project_loaded     (const gchar *project_path);</pre>
 <p>
 
 </p>
@@ -476,9 +471,9 @@ Finds an open project with <em class="parameter"><code>path</code></em></p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2527653"></a><h3>
+<a name="id2527599"></a><h3>
 <a name="glade-app-show-properties"></a>glade_app_show_properties ()</h3>
-<a class="indexterm" name="id2527666"></a><pre class="programlisting">void        glade_app_show_properties       (gboolean raise);</pre>
+<a class="indexterm" name="id2527613"></a><pre class="programlisting">void        glade_app_show_properties       (gboolean raise);</pre>
 <p>
 
 </p>
@@ -496,56 +491,36 @@ Finds an open project with <em class="parameter"><code>path</code></em></p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2527712"></a><h3>
+<a name="id2527658"></a><h3>
 <a name="glade-app-hide-properties"></a>glade_app_hide_properties ()</h3>
-<a class="indexterm" name="id2527725"></a><pre class="programlisting">void        glade_app_hide_properties       (void);</pre>
+<a class="indexterm" name="id2527672"></a><pre class="programlisting">void        glade_app_hide_properties       (void);</pre>
 <p>
 
 </p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2527746"></a><h3>
-<a name="glade-app-add-project-view"></a>glade_app_add_project_view ()</h3>
-<a class="indexterm" name="id2527759"></a><pre class="programlisting">void        glade_app_add_project_view      (<a href="GladeProjectView.html" title="GladeProjectView">GladeProjectView</a> *view);</pre>
-<p>
-
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody><tr>
-<td>
-<span class="term"><em class="parameter"><code>view</code></em>&#160;:</span></td>
-<td>
-
-
-</td>
-</tr></tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2" lang="en">
-<a name="id2527805"></a><h3>
+<a name="id2527692"></a><h3>
 <a name="glade-app-command-undo"></a>glade_app_command_undo ()</h3>
-<a class="indexterm" name="id2527818"></a><pre class="programlisting">void        glade_app_command_undo          (void);</pre>
+<a class="indexterm" name="id2527705"></a><pre class="programlisting">void        glade_app_command_undo          (void);</pre>
 <p>
 
 </p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2527839"></a><h3>
+<a name="id2527726"></a><h3>
 <a name="glade-app-command-redo"></a>glade_app_command_redo ()</h3>
-<a class="indexterm" name="id2527852"></a><pre class="programlisting">void        glade_app_command_redo          (void);</pre>
+<a class="indexterm" name="id2527739"></a><pre class="programlisting">void        glade_app_command_redo          (void);</pre>
 <p>
 
 </p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2527874"></a><h3>
+<a name="id2527761"></a><h3>
 <a name="glade-app-command-copy"></a>glade_app_command_copy ()</h3>
-<a class="indexterm" name="id2527886"></a><pre class="programlisting">void        glade_app_command_copy          (void);</pre>
+<a class="indexterm" name="id2527773"></a><pre class="programlisting">void        glade_app_command_copy          (void);</pre>
 <p>
 Copy the active project's selection (the new copies
 will end up on the clipboard and will be set as
@@ -556,9 +531,9 @@ the clipboards selection).</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2527913"></a><h3>
+<a name="id2527800"></a><h3>
 <a name="glade-app-command-cut"></a>glade_app_command_cut ()</h3>
-<a class="indexterm" name="id2527926"></a><pre class="programlisting">void        glade_app_command_cut           (void);</pre>
+<a class="indexterm" name="id2527813"></a><pre class="programlisting">void        glade_app_command_cut           (void);</pre>
 <p>
 Cut the active project's selection (the cut objects
 will end up on the clipboard and will be set as
@@ -569,9 +544,9 @@ the clipboards selection).</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2527953"></a><h3>
+<a name="id2527840"></a><h3>
 <a name="glade-app-command-paste"></a>glade_app_command_paste ()</h3>
-<a class="indexterm" name="id2527966"></a><pre class="programlisting">void        glade_app_command_paste         (<a href="GladePlaceholder.html" title="GladePlaceholder">GladePlaceholder</a> *placeholder);</pre>
+<a class="indexterm" name="id2527853"></a><pre class="programlisting">void        glade_app_command_paste         (<a href="GladePlaceholder.html" title="GladePlaceholder">GladePlaceholder</a> *placeholder);</pre>
 <p>
 Paste the clipboard selection to the active project's 
 selection (the project must have only one object selected).</p>
@@ -583,18 +558,16 @@ selection (the project must have only one object selected).</p>
 <tbody><tr>
 <td>
 <span class="term"><em class="parameter"><code>placeholder</code></em>&#160;:</span></td>
-<td>
-
-
+<td> A <a href="GladePlaceholder.html" title="GladePlaceholder"><span class="type">GladePlaceholder</span></a>
 </td>
 </tr></tbody>
 </table></div>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2528017"></a><h3>
+<a name="id2527912"></a><h3>
 <a name="glade-app-command-delete"></a>glade_app_command_delete ()</h3>
-<a class="indexterm" name="id2528030"></a><pre class="programlisting">void        glade_app_command_delete        (void);</pre>
+<a class="indexterm" name="id2527925"></a><pre class="programlisting">void        glade_app_command_delete        (void);</pre>
 <p>
 Delete the active project's selection.</p>
 <p>
@@ -603,9 +576,9 @@ Delete the active project's selection.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2528055"></a><h3>
+<a name="id2527951"></a><h3>
 <a name="glade-app-command-delete-clipboard"></a>glade_app_command_delete_clipboard ()</h3>
-<a class="indexterm" name="id2528069"></a><pre class="programlisting">void        glade_app_command_delete_clipboard
+<a class="indexterm" name="id2527965"></a><pre class="programlisting">void        glade_app_command_delete_clipboard
                                             (void);</pre>
 <p>
 Delete the clipboard's selection.</p>
@@ -615,9 +588,9 @@ Delete the clipboard's selection.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2528095"></a><h3>
+<a name="id2527990"></a><h3>
 <a name="glade-app-config-save"></a>glade_app_config_save ()</h3>
-<a class="indexterm" name="id2528108"></a><pre class="programlisting">gint        glade_app_config_save           (void);</pre>
+<a class="indexterm" name="id2528003"></a><pre class="programlisting">gint        glade_app_config_save           (void);</pre>
 <p>
 Saves the GKeyFile to "<code class="function">g_get_user_config_dir()</code>/GLADE_CONFIG_FILENAME"
 </p>
@@ -640,9 +613,9 @@ Return 0 on success.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2528164"></a><h3>
+<a name="id2528059"></a><h3>
 <a name="glade-app-set-transient-parent"></a>glade_app_set_transient_parent ()</h3>
-<a class="indexterm" name="id2528177"></a><pre class="programlisting">void        glade_app_set_transient_parent  (GtkWindow *parent);</pre>
+<a class="indexterm" name="id2528072"></a><pre class="programlisting">void        glade_app_set_transient_parent  (GtkWindow *parent);</pre>
 <p>
 
 </p>
@@ -660,9 +633,9 @@ Return 0 on success.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2528223"></a><h3>
+<a name="id2528118"></a><h3>
 <a name="glade-app-get-transient-parent"></a>glade_app_get_transient_parent ()</h3>
-<a class="indexterm" name="id2528237"></a><pre class="programlisting">GtkWindow*  glade_app_get_transient_parent  (void);</pre>
+<a class="indexterm" name="id2528132"></a><pre class="programlisting">GtkWindow*  glade_app_get_transient_parent  (void);</pre>
 <p>
 
 </p>
@@ -680,9 +653,9 @@ Return 0 on success.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2528273"></a><h3>
+<a name="id2528168"></a><h3>
 <a name="glade-app-set-accel-group"></a>glade_app_set_accel_group ()</h3>
-<a class="indexterm" name="id2528287"></a><pre class="programlisting">void        glade_app_set_accel_group       (GtkAccelGroup *accel_group);</pre>
+<a class="indexterm" name="id2528182"></a><pre class="programlisting">void        glade_app_set_accel_group       (GtkAccelGroup *accel_group);</pre>
 <p>
 
 </p>
@@ -700,9 +673,9 @@ Return 0 on success.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2528333"></a><h3>
+<a name="id2528228"></a><h3>
 <a name="glade-app-update-instance-count"></a>glade_app_update_instance_count ()</h3>
-<a class="indexterm" name="id2528346"></a><pre class="programlisting">void        glade_app_update_instance_count (<a href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
+<a class="indexterm" name="id2528241"></a><pre class="programlisting">void        glade_app_update_instance_count (<a href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
 <p>
 
 </p>
@@ -720,9 +693,9 @@ Return 0 on success.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2528392"></a><h3>
+<a name="id2528288"></a><h3>
 <a name="glade-app-undo-button-new"></a>glade_app_undo_button_new ()</h3>
-<a class="indexterm" name="id2528406"></a><pre class="programlisting">GtkWidget*  glade_app_undo_button_new       (void);</pre>
+<a class="indexterm" name="id2528302"></a><pre class="programlisting">GtkWidget*  glade_app_undo_button_new       (void);</pre>
 <p>
 
 </p>
@@ -740,9 +713,9 @@ Return 0 on success.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2528442"></a><h3>
+<a name="id2528337"></a><h3>
 <a name="glade-app-redo-button-new"></a>glade_app_redo_button_new ()</h3>
-<a class="indexterm" name="id2528456"></a><pre class="programlisting">GtkWidget*  glade_app_redo_button_new       (void);</pre>
+<a class="indexterm" name="id2528351"></a><pre class="programlisting">GtkWidget*  glade_app_redo_button_new       (void);</pre>
 <p>
 
 </p>
@@ -760,9 +733,9 @@ Return 0 on success.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2528491"></a><h3>
+<a name="id2528386"></a><h3>
 <a name="glade-app-selection-add"></a>glade_app_selection_add ()</h3>
-<a class="indexterm" name="id2528504"></a><pre class="programlisting">void        glade_app_selection_add         (GObject *object,
+<a class="indexterm" name="id2528399"></a><pre class="programlisting">void        glade_app_selection_add         (GObject *object,
                                              gboolean emit_signal);</pre>
 <p>
 
@@ -789,9 +762,9 @@ Return 0 on success.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2528571"></a><h3>
+<a name="id2528466"></a><h3>
 <a name="glade-app-selection-remove"></a>glade_app_selection_remove ()</h3>
-<a class="indexterm" name="id2528585"></a><pre class="programlisting">void        glade_app_selection_remove      (GObject *object,
+<a class="indexterm" name="id2528480"></a><pre class="programlisting">void        glade_app_selection_remove      (GObject *object,
                                              gboolean emit_signal);</pre>
 <p>
 
@@ -818,18 +791,18 @@ Return 0 on success.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2528652"></a><h3>
+<a name="id2528547"></a><h3>
 <a name="glade-app-selection-changed"></a>glade_app_selection_changed ()</h3>
-<a class="indexterm" name="id2528665"></a><pre class="programlisting">void        glade_app_selection_changed     (void);</pre>
+<a class="indexterm" name="id2528560"></a><pre class="programlisting">void        glade_app_selection_changed     (void);</pre>
 <p>
 
 </p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2528686"></a><h3>
+<a name="id2528581"></a><h3>
 <a name="glade-app-get-selection"></a>glade_app_get_selection ()</h3>
-<a class="indexterm" name="id2528699"></a><pre class="programlisting">GList*      glade_app_get_selection         (void);</pre>
+<a class="indexterm" name="id2528594"></a><pre class="programlisting">GList*      glade_app_get_selection         (void);</pre>
 <p>
 
 </p>
@@ -847,9 +820,9 @@ Return 0 on success.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2528735"></a><h3>
+<a name="id2528630"></a><h3>
 <a name="glade-app-selection-clear"></a>glade_app_selection_clear ()</h3>
-<a class="indexterm" name="id2528748"></a><pre class="programlisting">void        glade_app_selection_clear       (gboolean emit_signal);</pre>
+<a class="indexterm" name="id2528643"></a><pre class="programlisting">void        glade_app_selection_clear       (gboolean emit_signal);</pre>
 <p>
 
 </p>
@@ -867,9 +840,9 @@ Return 0 on success.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2528794"></a><h3>
+<a name="id2528689"></a><h3>
 <a name="glade-app-selection-set"></a>glade_app_selection_set ()</h3>
-<a class="indexterm" name="id2528807"></a><pre class="programlisting">void        glade_app_selection_set         (GObject *object,
+<a class="indexterm" name="id2528702"></a><pre class="programlisting">void        glade_app_selection_set         (GObject *object,
                                              gboolean emit_signal);</pre>
 <p>
 
@@ -896,9 +869,9 @@ Return 0 on success.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2528874"></a><h3>
+<a name="id2528769"></a><h3>
 <a name="glade-app-is-selected"></a>glade_app_is_selected ()</h3>
-<a class="indexterm" name="id2528887"></a><pre class="programlisting">gboolean    glade_app_is_selected           (GObject *object);</pre>
+<a class="indexterm" name="id2528782"></a><pre class="programlisting">gboolean    glade_app_is_selected           (GObject *object);</pre>
 <p>
 
 </p>
@@ -924,20 +897,28 @@ Return 0 on success.</p>
 </div>
 </div>
 <div class="refsect1" lang="en">
-<a name="id2528944"></a><h2>Property Details</h2>
+<a name="id2528839"></a><h2>Property Details</h2>
 <div class="refsect2" lang="en">
-<a name="id2528955"></a><h3>
+<a name="id2528850"></a><h3>
 <a name="GladeApp--active-project"></a>The "<code class="literal">active-project</code>" property</h3>
-<a class="indexterm" name="id2528971"></a><pre class="programlisting">  "active-project"       <a href="GladeProject.html" title="GladeProject">GladeProject</a>          : Read / Write</pre>
+<a class="indexterm" name="id2528866"></a><pre class="programlisting">  "active-project"       <a href="GladeProject.html" title="GladeProject">GladeProject</a>          : Read / Write</pre>
 <p>The active project.</p>
 </div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2528889"></a><h3>
+<a name="GladeApp--pointer-mode"></a>The "<code class="literal">pointer-mode</code>" property</h3>
+<a class="indexterm" name="id2528905"></a><pre class="programlisting">  "pointer-mode"         GladePointerMode      : Read / Write</pre>
+<p>Current mode for the pointer in the workspace.</p>
+<p>Default value: select</p>
+</div>
 </div>
 <div class="refsect1" lang="en">
-<a name="id2528995"></a><h2>Signal Details</h2>
+<a name="id2528934"></a><h2>Signal Details</h2>
 <div class="refsect2" lang="en">
-<a name="id2529005"></a><h3>
+<a name="id2528944"></a><h3>
 <a name="GladeApp-update-ui"></a>The "update-ui" signal</h3>
-<a class="indexterm" name="id2529015"></a><pre class="programlisting">void        user_function                  (<a href="GladeApp.html" title="GladeApp">GladeApp</a> *gladeapp,
+<a class="indexterm" name="id2528954"></a><pre class="programlisting">void        user_function                  (<a href="GladeApp.html" title="GladeApp">GladeApp</a> *gladeapp,
                                             gpointer  user_data)      : Run first</pre>
 <p>
 Emitted when a project name changes or a cut/copy/paste/delete occurred.</p>
@@ -957,55 +938,6 @@ Emitted when a project name changes or a cut/copy/paste/delete occurred.</p>
 <td>
 <span class="term"><em class="parameter"><code>user_data</code></em>&#160;:</span></td>
 <td>user data set when the signal handler was connected.</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2" lang="en">
-<a name="id2529095"></a><h3>
-<a name="GladeApp-widget-event"></a>The "widget-event" signal</h3>
-<a class="indexterm" name="id2529106"></a><pre class="programlisting">gboolean    user_function                  (<a href="GladeApp.html" title="GladeApp">GladeApp</a>    *gladeapp,
-                                            <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *arg1,
-                                            GdkEvent    *arg2,
-                                            gpointer     user_data)      : Run last</pre>
-<p>
-Emitted when a <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> or one of its children is a GtkWidget derivative
-and is about to recieve an event from gdk.</p>
-<p>
-
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td>
-<span class="term"><em class="parameter"><code>gladeapp</code></em>&#160;:</span></td>
-<td> the <a href="GladeApp.html" title="GladeApp"><span class="type">GladeApp</span></a> which received the signal.
-</td>
-</tr>
-<tr>
-<td>
-<span class="term"><em class="parameter"><code>arg1</code></em>&#160;:</span></td>
-<td> The toplevel <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> who's hierarchy recieved an event
-</td>
-</tr>
-<tr>
-<td>
-<span class="term"><em class="parameter"><code>arg2</code></em>&#160;:</span></td>
-<td> The <span class="type">GdkEvent</span>
-</td>
-</tr>
-<tr>
-<td>
-<span class="term"><em class="parameter"><code>user_data</code></em>&#160;:</span></td>
-<td>user data set when the signal handler was connected.</td>
-</tr>
-<tr>
-<td>
-<span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
-<td> whether the event was handled or not
-</td>
 </tr>
 </tbody>
 </table></div>

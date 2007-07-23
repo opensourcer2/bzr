@@ -30,7 +30,6 @@
 #define __GLADE_PALETTE_H__
 
 #include <gladeui/glade.h>
-#include <gladeui/glade-palette-item.h>
 
 #include <gtk/gtkvbox.h>
 
@@ -61,6 +60,13 @@ struct _GladePaletteClass
 	void (*toggled)    (GladePalette *palette);
 };
 
+typedef enum
+{
+	GLADE_ITEM_ICON_AND_LABEL,
+	GLADE_ITEM_ICON_ONLY,
+	GLADE_ITEM_LABEL_ONLY
+} GladeItemAppearance;
+
 
 GType                glade_palette_get_type                 (void) G_GNUC_CONST;
 
@@ -83,6 +89,8 @@ void		     glade_palette_set_use_small_item_icons (GladePalette *palette,
 							     
 void		     glade_palette_set_show_selector_button (GladePalette *palette,
 							     gboolean      show_selector_button);
+							     
+gboolean             glade_palette_get_show_selector_button (GladePalette *palette);
 
 G_END_DECLS
 

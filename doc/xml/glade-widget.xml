@@ -16,7 +16,7 @@
 
 <synopsis>
 
-#include &lt;glade.h&gt;
+#include &lt;gladeui/glade.h&gt;
 
 
 struct      <link linkend="GladeWidget-struct">GladeWidget</link>;

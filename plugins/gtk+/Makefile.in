@@ -15,6 +15,7 @@
 @SET_MAKE@
 
 
+
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
 VPATH = @srcdir@
@@ -41,11 +42,12 @@ target_triplet = @target@
 @PLATFORM_WIN32_TRUE@am__append_1 = -no-undefined
 @HAVE_GTK_UNIX_PRINT_TRUE@am__append_2 = gtkunixprint.xml gtkunixprint.xml.in
 subdir = plugins/gtk+
-DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
+DIST_COMMON = $(libgladegtkinclude_HEADERS) $(srcdir)/Makefile.am \
+	$(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/gnome-doc-utils.m4 \
 	$(top_srcdir)/m4/gtk-doc.m4 $(top_srcdir)/m4/intltool.m4 \
-	$(top_srcdir)/m4/python.m4 $(top_srcdir)/configure.ac
+	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
@@ -58,7 +60,8 @@ am__vpath_adj = case $$p in \
   esac;
 am__strip_dir = `echo $$p | sed -e 's|^.*/||'`;
 am__installdirs = "$(DESTDIR)$(gladegtkdir)" \
-	"$(DESTDIR)$(catalogsdir)"
+	"$(DESTDIR)$(catalogsdir)" \
+	"$(DESTDIR)$(libgladegtkincludedir)"
 gladegtkLTLIBRARIES_INSTALL = $(INSTALL)
 LTLIBRARIES = $(gladegtk_LTLIBRARIES)
 am__DEPENDENCIES_1 = $(top_builddir)/gladeui/libgladeui-1.la
@@ -88,11 +91,14 @@ RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
 	uninstall-recursive
 catalogsDATA_INSTALL = $(INSTALL_DATA)
 DATA = $(catalogs_DATA)
+libgladegtkincludeHEADERS_INSTALL = $(INSTALL_HEADER)
+HEADERS = $(libgladegtkinclude_HEADERS)
 ETAGS = etags
 CTAGS = ctags
 DIST_SUBDIRS = $(SUBDIRS)
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
+ACLOCAL_AMFLAGS = @ACLOCAL_AMFLAGS@
 ALL_LINGUAS = @ALL_LINGUAS@
 AMDEP_FALSE = @AMDEP_FALSE@
 AMDEP_TRUE = @AMDEP_TRUE@
@@ -124,6 +130,7 @@ CYGPATH_W = @CYGPATH_W@
 DATADIRNAME = @DATADIRNAME@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
+DISABLE_DEPRECATED = @DISABLE_DEPRECATED@
 DLLTOOL = @DLLTOOL@
 DOC_USER_FORMATS = @DOC_USER_FORMATS@
 ECHO = @ECHO@
@@ -133,14 +140,11 @@ ECHO_T = @ECHO_T@
 EGREP = @EGREP@
 ENABLE_GTK_DOC_FALSE = @ENABLE_GTK_DOC_FALSE@
 ENABLE_GTK_DOC_TRUE = @ENABLE_GTK_DOC_TRUE@
-ENABLE_PYTHON_FALSE = @ENABLE_PYTHON_FALSE@
-ENABLE_PYTHON_TRUE = @ENABLE_PYTHON_TRUE@
 ENABLE_SK_FALSE = @ENABLE_SK_FALSE@
 ENABLE_SK_TRUE = @ENABLE_SK_TRUE@
 EXEEXT = @EXEEXT@
 F77 = @F77@
 FFLAGS = @FFLAGS@
-GCC_WARN_FLAGS = @GCC_WARN_FLAGS@
 GETTEXT_PACKAGE = @GETTEXT_PACKAGE@
 GLADE_AGE = @GLADE_AGE@
 GLADE_CURRENT = @GLADE_CURRENT@
@@ -149,6 +153,9 @@ GLADE_MAJOR_VERSION = @GLADE_MAJOR_VERSION@
 GLADE_MICRO_VERSION = @GLADE_MICRO_VERSION@
 GLADE_MINOR_VERSION = @GLADE_MINOR_VERSION@
 GLADE_REVISION = @GLADE_REVISION@
+GLADE_UNSTABLE = @GLADE_UNSTABLE@
+GLADE_UNSTABLE_FALSE = @GLADE_UNSTABLE_FALSE@
+GLADE_UNSTABLE_TRUE = @GLADE_UNSTABLE_TRUE@
 GLIB_GENMARSHAL = @GLIB_GENMARSHAL@
 GMOFILES = @GMOFILES@
 GMSGFMT = @GMSGFMT@
@@ -209,7 +216,8 @@ MAINTAINER_MODE_TRUE = @MAINTAINER_MODE_TRUE@
 MAKEINFO = @MAKEINFO@
 MKINSTALLDIRS = @MKINSTALLDIRS@
 MSGFMT = @MSGFMT@
-NO_STRICT_ALIASING_CFLAGS = @NO_STRICT_ALIASING_CFLAGS@
+NATIVE_WIN32_FALSE = @NATIVE_WIN32_FALSE@
+NATIVE_WIN32_TRUE = @NATIVE_WIN32_TRUE@
 OBJDUMP = @OBJDUMP@
 OBJEXT = @OBJEXT@
 OMF_DIR = @OMF_DIR@
@@ -223,31 +231,18 @@ PATH_SEPARATOR = @PATH_SEPARATOR@
 PKG_CONFIG = @PKG_CONFIG@
 PLATFORM_WIN32_FALSE = @PLATFORM_WIN32_FALSE@
 PLATFORM_WIN32_TRUE = @PLATFORM_WIN32_TRUE@
+PLUGINS_WARN_CFLAGS = @PLUGINS_WARN_CFLAGS@
 POFILES = @POFILES@
 POSUB = @POSUB@
 PO_IN_DATADIR_FALSE = @PO_IN_DATADIR_FALSE@
 PO_IN_DATADIR_TRUE = @PO_IN_DATADIR_TRUE@
-PYGTK_CFLAGS = @PYGTK_CFLAGS@
-PYGTK_CODEGEN = @PYGTK_CODEGEN@
-PYGTK_DEFSDIR = @PYGTK_DEFSDIR@
-PYGTK_H2DEF = @PYGTK_H2DEF@
-PYGTK_LIBS = @PYGTK_LIBS@
-PYTHON = @PYTHON@
-PYTHON_CFLAGS = @PYTHON_CFLAGS@
-PYTHON_EXEC_PREFIX = @PYTHON_EXEC_PREFIX@
-PYTHON_EXTRA_LIBS = @PYTHON_EXTRA_LIBS@
-PYTHON_INCLUDES = @PYTHON_INCLUDES@
-PYTHON_LIBS = @PYTHON_LIBS@
-PYTHON_LIB_LOC = @PYTHON_LIB_LOC@
-PYTHON_PLATFORM = @PYTHON_PLATFORM@
-PYTHON_PREFIX = @PYTHON_PREFIX@
-PYTHON_VERSION = @PYTHON_VERSION@
 RANLIB = @RANLIB@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
+WARN_CFLAGS = @WARN_CFLAGS@
 WINDRES = @WINDRES@
 XGETTEXT = @XGETTEXT@
 ac_ct_CC = @ac_ct_CC@
@@ -290,13 +285,9 @@ mandir = @mandir@
 mkdir_p = @mkdir_p@
 oldincludedir = @oldincludedir@
 pdfdir = @pdfdir@
-pkgpyexecdir = @pkgpyexecdir@
-pkgpythondir = @pkgpythondir@
 prefix = @prefix@
 program_transform_name = @program_transform_name@
 psdir = @psdir@
-pyexecdir = @pyexecdir@
-pythondir = @pythondir@
 sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
@@ -317,17 +308,19 @@ libgladegtk_la_CPPLAGS = \
 	$(AM_CPPFLAGS)
 
 libgladegtk_la_CFLAGS = \
-	-g @GCC_WARN_FLAGS@ \
-	-I$(top_srcdir)     \
-	-I$(top_srcdir)     \
-	-I$(top_builddir)   \
-	$(GTK_CFLAGS)	    \
+	-DG_LOG_DOMAIN=\"GladeUI-GTK\" \
+	-I$(top_srcdir)                \
+	-I$(top_builddir)              \
+	$(GTK_CFLAGS)	               \
+	$(PLUGINS_WARN_CFLAGS)         \
 	$(AM_CFLAGS)
 
-libgladegtk_la_SOURCES = glade-gtk.c glade-gtk.h
+libgladegtk_la_SOURCES = glade-gtk.c fixed-bg.xpm
 libgladegtk_la_LDFLAGS = -module -avoid-version $(AM_LDFLAGS) \
 	$(am__append_1)
 libgladegtk_la_LIBADD = $(libgladeui) $(GTK_LIBS)
+libgladegtkincludedir = $(includedir)/libgladeui-1.0/gladeui
+libgladegtkinclude_HEADERS = glade-gtk.h
 
 # catalog data
 catalogsdir = $(pkgdatadir)/catalogs
@@ -458,6 +451,23 @@ uninstall-catalogsDATA:
 	  f=$(am__strip_dir) \
 	  echo " rm -f '$(DESTDIR)$(catalogsdir)/$$f'"; \
 	  rm -f "$(DESTDIR)$(catalogsdir)/$$f"; \
+	done
+install-libgladegtkincludeHEADERS: $(libgladegtkinclude_HEADERS)
+	@$(NORMAL_INSTALL)
+	test -z "$(libgladegtkincludedir)" || $(mkdir_p) "$(DESTDIR)$(libgladegtkincludedir)"
+	@list='$(libgladegtkinclude_HEADERS)'; for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  f=$(am__strip_dir) \
+	  echo " $(libgladegtkincludeHEADERS_INSTALL) '$$d$$p' '$(DESTDIR)$(libgladegtkincludedir)/$$f'"; \
+	  $(libgladegtkincludeHEADERS_INSTALL) "$$d$$p" "$(DESTDIR)$(libgladegtkincludedir)/$$f"; \
+	done
+
+uninstall-libgladegtkincludeHEADERS:
+	@$(NORMAL_UNINSTALL)
+	@list='$(libgladegtkinclude_HEADERS)'; for p in $$list; do \
+	  f=$(am__strip_dir) \
+	  echo " rm -f '$(DESTDIR)$(libgladegtkincludedir)/$$f'"; \
+	  rm -f "$(DESTDIR)$(libgladegtkincludedir)/$$f"; \
 	done
 
 # This directory's subdirectories are mostly independent; you can cd
@@ -636,10 +646,10 @@ distdir: $(DISTFILES)
 	done
 check-am: all-am
 check: check-recursive
-all-am: Makefile $(LTLIBRARIES) $(DATA)
+all-am: Makefile $(LTLIBRARIES) $(DATA) $(HEADERS)
 installdirs: installdirs-recursive
 installdirs-am:
-	for dir in "$(DESTDIR)$(gladegtkdir)" "$(DESTDIR)$(catalogsdir)"; do \
+	for dir in "$(DESTDIR)$(gladegtkdir)" "$(DESTDIR)$(catalogsdir)" "$(DESTDIR)$(libgladegtkincludedir)"; do \
 	  test -z "$$dir" || $(mkdir_p) "$$dir"; \
 	done
 install: install-recursive
@@ -688,7 +698,8 @@ info: info-recursive
 
 info-am:
 
-install-data-am: install-catalogsDATA install-gladegtkLTLIBRARIES
+install-data-am: install-catalogsDATA install-gladegtkLTLIBRARIES \
+	install-libgladegtkincludeHEADERS
 
 install-exec-am:
 
@@ -717,7 +728,7 @@ ps: ps-recursive
 ps-am:
 
 uninstall-am: uninstall-catalogsDATA uninstall-gladegtkLTLIBRARIES \
-	uninstall-info-am
+	uninstall-info-am uninstall-libgladegtkincludeHEADERS
 
 uninstall-info: uninstall-info-recursive
 
@@ -729,14 +740,14 @@ uninstall-info: uninstall-info-recursive
 	html-am info info-am install install-am install-catalogsDATA \
 	install-data install-data-am install-exec install-exec-am \
 	install-gladegtkLTLIBRARIES install-info install-info-am \
-	install-man install-strip installcheck installcheck-am \
-	installdirs installdirs-am maintainer-clean \
-	maintainer-clean-generic maintainer-clean-recursive \
-	mostlyclean mostlyclean-compile mostlyclean-generic \
-	mostlyclean-libtool mostlyclean-recursive pdf pdf-am ps ps-am \
-	tags tags-recursive uninstall uninstall-am \
+	install-libgladegtkincludeHEADERS install-man install-strip \
+	installcheck installcheck-am installdirs installdirs-am \
+	maintainer-clean maintainer-clean-generic \
+	maintainer-clean-recursive mostlyclean mostlyclean-compile \
+	mostlyclean-generic mostlyclean-libtool mostlyclean-recursive \
+	pdf pdf-am ps ps-am tags tags-recursive uninstall uninstall-am \
 	uninstall-catalogsDATA uninstall-gladegtkLTLIBRARIES \
-	uninstall-info-am
+	uninstall-info-am uninstall-libgladegtkincludeHEADERS
 
 
 @INTLTOOL_XML_NOMERGE_RULE@

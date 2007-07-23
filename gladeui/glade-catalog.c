@@ -21,22 +21,17 @@
  *   Chema Celorio <chema@celorio.com>
  */
 
-
-#include <string.h>
-
-#ifdef HAVE_CONFIG_H
 #include <config.h>
-#endif
-
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <glib.h>
-#include <glib/gi18n-lib.h>
 
 #include "glade.h"
 #include "glade-catalog.h"
 #include "glade-widget-adaptor.h"
-#include "glade-binding.h"
+
+#include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <glib.h>
+#include <glib/gi18n-lib.h>
 
 typedef void   (*GladeCatalogInitFunc) (void);
 
@@ -74,8 +69,8 @@ struct _GladeCatalog
 
 struct _GladeWidgetGroup
 {
-	gchar *name;             /* Group name                        */
-	gchar *title;            /* Group name in the palette             */
+	gchar *name;             /* Group name */
+	gchar *title;            /* Group name in the palette */
 
 	gboolean expanded;       /* Whether group is expanded in the palette */
 
@@ -83,16 +78,27 @@ struct _GladeWidgetGroup
 };
 
 static void            catalog_load         (GladeCatalog     *catalog);
+
 static GladeCatalog   *catalog_open         (const gchar      *filename);
+
 static GList          *catalog_sort         (GList            *catalogs);
+
 static gboolean        catalog_load_classes (GladeCatalog     *catalog,
+
 					     GladeXmlNode     *widgets_node);
+					     
 static gboolean        catalog_load_group   (GladeCatalog     *catalog,
+
 					     GladeXmlNode     *group_node);
 
-static void            widget_group_free    (GladeWidgetGroup *group);
+static void            widget_group_destroy (GladeWidgetGroup *group);
 
-/* List of catalog names successfully loaded.
+static void            catalog_destroy      (GladeCatalog *catalog);
+
+static void            module_close         (GModule *module);
+
+
+/* List of catalogs successfully loaded.
  */
 static GList *loaded_catalogs = NULL;
 
@@ -108,6 +114,30 @@ catalog_get_function (GladeCatalog *catalog,
 		return g_module_symbol (catalog->module, symbol_name, symbol_ptr);
 
 	return FALSE;
+}
+
+static GladeCatalog *
+catalog_allocate (void)
+{
+	GladeCatalog *catalog;
+	
+	catalog = g_slice_new0 (GladeCatalog);
+	
+	catalog->language = NULL;
+	catalog->library = NULL;
+	catalog->name = NULL;
+	catalog->dep_catalog = NULL;      
+	catalog->domain = NULL;	
+	catalog->book = NULL;
+	catalog->icon_prefix = NULL;
+	catalog->init_function_name = NULL;
+	catalog->module = NULL;
+
+	catalog->context = NULL;
+	catalog->adaptors = NULL;
+	catalog->widget_groups = NULL;
+	
+	return catalog;
 }
 
 static GladeCatalog *
@@ -139,49 +169,24 @@ catalog_open (const gchar *filename)
 		return NULL;
 	}
 
-	catalog = g_new0 (GladeCatalog, 1);
+	catalog = catalog_allocate ();
 	catalog->context = context;
 	catalog->name    = glade_xml_get_property_string (root, GLADE_TAG_NAME);
 
 	if (!catalog->name) 
 	{
 		g_warning ("Couldn't find required property 'name' in catalog root node");
-		g_free (catalog);
-		glade_xml_context_free (context);
+		catalog_destroy (catalog);
 		return NULL;
 	}
 	
-	catalog->language =
-		glade_xml_get_property_string (root, GLADE_TAG_LANGUAGE);
+	catalog->library      = glade_xml_get_property_string (root, GLADE_TAG_LIBRARY);
+	catalog->dep_catalog  = glade_xml_get_property_string (root, GLADE_TAG_DEPENDS);
+	catalog->domain       = glade_xml_get_property_string (root, GLADE_TAG_DOMAIN);
+	catalog->book         = glade_xml_get_property_string (root, GLADE_TAG_BOOK);
+	catalog->icon_prefix  = glade_xml_get_property_string (root, GLADE_TAG_ICON_PREFIX);
+	catalog->init_function_name = glade_xml_get_value_string (root, GLADE_TAG_INIT_FUNCTION);
 	
-	if (catalog->language && (glade_binding_get (catalog->language)) == NULL)
-	{
-		g_warning ("%s language is not supported. "
-			   "Make sure the corresponding GladeBinding module is available.",
-			   catalog->language);
-		g_free (catalog->name);
-		g_free (catalog->language);
-		g_free (catalog);
-		glade_xml_context_free (context);
-		return NULL;
-	}
-	
-	loaded_catalogs = g_list_prepend (loaded_catalogs, g_strdup (catalog->name));
-	
-	catalog->library =
-		glade_xml_get_property_string (root, GLADE_TAG_LIBRARY);
-	catalog->dep_catalog =
-		glade_xml_get_property_string (root, GLADE_TAG_DEPENDS);
-	catalog->domain =
-		glade_xml_get_property_string (root, GLADE_TAG_DOMAIN);
-	catalog->book =
-		glade_xml_get_property_string (root, GLADE_TAG_BOOK);
-	catalog->icon_prefix =
-		glade_xml_get_property_string (root, GLADE_TAG_ICON_PREFIX);
-	catalog->init_function_name =
-		glade_xml_get_value_string (root, GLADE_TAG_INIT_FUNCTION);
-	
-
 	/* catalog->icon_prefix defaults to catalog->name */
 	if (!catalog->icon_prefix)
 		catalog->icon_prefix = g_strdup (catalog->name);
@@ -255,7 +260,7 @@ catalog_sort (GList *catalogs)
 				(catalogs, catalog->dep_catalog,
 				 (GCompareFunc)catalog_find_by_name);
 
-			if ((cat = node->data) == NULL)
+			if (!node || (cat = node->data) == NULL)
 			{
 				g_critical ("Catalog %s depends on catalog %s, not found",
 					    catalog->name, catalog->dep_catalog);
@@ -289,30 +294,24 @@ catalog_load_library (GladeCatalog *catalog)
 	GModule *module;
 
 	if (modules == NULL)
-		modules = g_hash_table_new (g_str_hash, g_str_equal);
+		modules = g_hash_table_new_full (g_str_hash,
+					         g_str_equal,
+					         (GDestroyNotify) g_free,
+					         (GDestroyNotify) module_close);
 		
-	if (catalog->library == NULL) return NULL;
-
-	if (catalog->language)
-	{
-		GladeBinding *binding = glade_binding_get (catalog->language);
-		if (binding)
-			glade_binding_library_load (binding, catalog->library);
+	if (catalog->library == NULL)
 		return NULL;
-	}
+
+	if ((module = g_hash_table_lookup (modules, catalog->library)))
+		return module;	
+	
+	if ((module = glade_util_load_library (catalog->library)))
+		g_hash_table_insert (modules, g_strdup (catalog->library), module);
 	else
-	{
-		if ((module = g_hash_table_lookup (modules, catalog->library)))
-			return module;	
+		g_warning ("Failed to load external library '%s'",
+			   catalog->library);
 		
-		if ((module = glade_util_load_library (catalog->library)))
-			g_hash_table_insert (modules, g_strdup (catalog->library), module);
-		else
-			g_warning ("Failed to load external library '%s'",
-				   catalog->library);
-		
-		return module;
-	}
+	return module;
 }
 
 static gboolean
@@ -351,8 +350,9 @@ catalog_load_group (GladeCatalog *catalog, GladeXmlNode *group_node)
 {
 	GladeWidgetGroup *group;
 	GladeXmlNode     *node;
+        char *title, *translated_title;
 
-	group = g_new0 (GladeWidgetGroup, 1);
+	group = g_slice_new0 (GladeWidgetGroup);
 	
 	group->name = glade_xml_get_property_string (group_node, 
 						     GLADE_TAG_NAME);
@@ -360,18 +360,16 @@ catalog_load_group (GladeCatalog *catalog, GladeXmlNode *group_node)
 	if (!group->name) 
 	{ 
 		g_warning ("Required property 'name' not found in group node");
-	
-		widget_group_free (group);
+		widget_group_destroy (group);
 		return FALSE;
 	}
 	
-	group->title = glade_xml_get_property_string (group_node,
-						      GLADE_TAG_TITLE);
-	if (!group->title) 
+	title = glade_xml_get_property_string (group_node,
+					       GLADE_TAG_TITLE);
+	if (!title)
 	{ 
 		g_warning ("Required property 'title' not found in group node");
-
-		widget_group_free (group);
+		widget_group_destroy (group);
 		return FALSE;	
 	}
 
@@ -379,9 +377,18 @@ catalog_load_group (GladeCatalog *catalog, GladeXmlNode *group_node)
 	group->expanded = TRUE;
 
 	/* Translate it */
-	group->title = dgettext (catalog->domain ? 
-				 catalog->domain : catalog->library, 
-				 group->title);
+	translated_title = dgettext (catalog->domain ?
+				     catalog->domain : catalog->library, 
+				     title);
+        if (translated_title != title)
+        {
+                group->title = g_strdup (translated_title);
+                g_free (title);
+        }
+        else
+        {
+                group->title = title;
+        }
 
 	group->adaptors = NULL;
 
@@ -426,25 +433,12 @@ catalog_load_group (GladeCatalog *catalog, GladeXmlNode *group_node)
 
 	group->adaptors = g_list_reverse (group->adaptors);
 
-	catalog->widget_groups = g_list_prepend (catalog->widget_groups,
-						 group);
+	catalog->widget_groups = g_list_prepend (catalog->widget_groups, group);
 
 	return TRUE;
 }
 
-static void
-widget_group_free (GladeWidgetGroup *group)
-{
-	g_return_if_fail (group != NULL);
-	
-	g_free (group->name);
-	g_free (group->title);
-
-	/* The actual widget classes will be free elsewhere */
-	g_list_free (group->adaptors);
-}
-	
-GList *
+const GList *
 glade_catalog_load_all (void)
 {
 	GDir         *dir;
@@ -485,6 +479,7 @@ glade_catalog_load_all (void)
 			g_warning ("Unable to open the catalog file %s.\n", 
 				   filename);
 	}
+	g_dir_close (dir);
 
 	/* After sorting, execute init function and then load */
 	catalogs = catalog_sort (catalogs);
@@ -492,7 +487,8 @@ glade_catalog_load_all (void)
 	for (l = catalogs; l; l = l->next)
 	{
 		catalog = l->data;
-		if (catalog->init_function) catalog->init_function ();
+		if (catalog->init_function)
+			catalog->init_function ();
 	}
 	
 	for (l = catalogs; l; l = l->next)
@@ -501,8 +497,9 @@ glade_catalog_load_all (void)
 		catalog_load (catalog);
 	}
 	
-	g_dir_close (dir);
-	return catalogs;
+	loaded_catalogs = catalogs;
+	
+	return loaded_catalogs;
 }
 
 const gchar *
@@ -529,34 +526,83 @@ glade_catalog_get_adaptors (GladeCatalog *catalog)
 	return catalog->adaptors;	
 }
 
-void
-glade_catalog_free (GladeCatalog *catalog)
+gboolean
+glade_catalog_is_loaded (const gchar *name)
 {
-	GList *list;
+	GList *l;
+	
+	g_return_val_if_fail (name != NULL, FALSE);
+	g_assert (loaded_catalogs != NULL);
+	
+	for (l = loaded_catalogs; l; l = l->next)
+	{
+		GladeCatalog *catalog = GLADE_CATALOG (l->data);
+		if (strcmp (catalog->name, name) == 0)
+			return TRUE;
+	}
+	
+	return FALSE;
+}
 
-	if (catalog == NULL)
-		return;
+static void
+catalog_destroy (GladeCatalog *catalog)
+{
+	g_return_if_fail (GLADE_IS_CATALOG (catalog));
 
 	g_free (catalog->name);
-	if (catalog->book)
-		g_free (catalog->book);
-		
-	if (catalog->icon_prefix)
-		g_free (catalog->icon_prefix);
-	
-	for (list = catalog->adaptors; list; list = list->next)
-		g_object_unref (list->data);
-	
-	g_list_free (catalog->adaptors);
+	g_free (catalog->language);
+	g_free (catalog->library);	
+	g_free (catalog->dep_catalog);      
+	g_free (catalog->domain);           	
+	g_free (catalog->book);
+	g_free (catalog->icon_prefix);
+	g_free (catalog->init_function_name);
 
-	for (list = catalog->widget_groups; list; list = list->next) 
-		widget_group_free (GLADE_WIDGET_GROUP (list->data));
-				   
-	g_list_free (catalog->widget_groups);
-				   
-	
-	g_free (catalog);
+	if (catalog->adaptors)
+	{
+		/* TODO: free adaptors */
+		g_list_free (catalog->adaptors);
+	}
+
+	if (catalog->widget_groups)
+	{
+		g_list_foreach (catalog->widget_groups, (GFunc) widget_group_destroy, NULL);
+		g_list_free (catalog->widget_groups);
+	}
+
+	if (catalog->context)
+		glade_xml_context_free (catalog->context);
+
+	g_slice_free (GladeCatalog, catalog);
 }
+
+static void 
+module_close (GModule *module)
+{
+	g_module_close (module);
+}
+
+void
+glade_catalog_destroy_all (void)
+{	
+	/* close catalogs */
+	if (loaded_catalogs)
+	{
+		GList *l;
+		for (l = loaded_catalogs; l; l = l->next)
+			catalog_destroy (GLADE_CATALOG (l->data));
+		g_list_free (loaded_catalogs);
+		loaded_catalogs = NULL;
+	}
+	
+	/* close plugin modules */
+	if (modules)
+	{
+		g_hash_table_destroy (modules);
+		modules = NULL;
+	}
+}
+
 const gchar *
 glade_widget_group_get_name (GladeWidgetGroup *group)
 {
@@ -581,7 +627,7 @@ glade_widget_group_get_expanded (GladeWidgetGroup *group)
 	return group->expanded;
 }
 
-GList *
+const GList *
 glade_widget_group_get_adaptors (GladeWidgetGroup *group)
 {
 	g_return_val_if_fail (group != NULL, NULL);
@@ -589,37 +635,16 @@ glade_widget_group_get_adaptors (GladeWidgetGroup *group)
 	return group->adaptors;
 }
 
-gboolean
-glade_catalog_is_loaded (const gchar *name)
+static void
+widget_group_destroy (GladeWidgetGroup *group)
 {
-	GList *l;
-	g_return_val_if_fail (name != NULL, FALSE);
-	for (l = loaded_catalogs; l; l = l->next)
-		if (!strcmp (name, (gchar *)l->data))
-			return TRUE;
-	return FALSE;
-}
+	g_return_if_fail (GLADE_IS_WIDGET_GROUP (group));
+	
+	g_free (group->name);
+	g_free (group->title);
+	g_list_free (group->adaptors);
 
-
-static void 
-catalog_module_close (gpointer key, gpointer value, gpointer user_data)
-{
-	g_module_close (value);
-	g_free (key);
+	g_slice_free (GladeWidgetGroup, group);
 }
+	
 
-/**
- * glade_catalog_modules_close:
- *
- * Close every opened module.
- *
- */
-void
-glade_catalog_modules_close ()
-{
-	if (modules == NULL) return;
-		
-	g_hash_table_foreach (modules, catalog_module_close, NULL);
-	g_hash_table_destroy (modules);
-	modules = NULL;
-}

@@ -44,7 +44,7 @@ DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/gnome-doc-utils.m4 \
 	$(top_srcdir)/m4/gtk-doc.m4 $(top_srcdir)/m4/intltool.m4 \
-	$(top_srcdir)/m4/python.m4 $(top_srcdir)/configure.ac
+	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
@@ -90,6 +90,7 @@ CTAGS = ctags
 DIST_SUBDIRS = $(SUBDIRS)
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
+ACLOCAL_AMFLAGS = @ACLOCAL_AMFLAGS@
 ALL_LINGUAS = @ALL_LINGUAS@
 AMDEP_FALSE = @AMDEP_FALSE@
 AMDEP_TRUE = @AMDEP_TRUE@
@@ -121,6 +122,7 @@ CYGPATH_W = @CYGPATH_W@
 DATADIRNAME = @DATADIRNAME@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
+DISABLE_DEPRECATED = @DISABLE_DEPRECATED@
 DLLTOOL = @DLLTOOL@
 DOC_USER_FORMATS = @DOC_USER_FORMATS@
 ECHO = @ECHO@
@@ -130,14 +132,11 @@ ECHO_T = @ECHO_T@
 EGREP = @EGREP@
 ENABLE_GTK_DOC_FALSE = @ENABLE_GTK_DOC_FALSE@
 ENABLE_GTK_DOC_TRUE = @ENABLE_GTK_DOC_TRUE@
-ENABLE_PYTHON_FALSE = @ENABLE_PYTHON_FALSE@
-ENABLE_PYTHON_TRUE = @ENABLE_PYTHON_TRUE@
 ENABLE_SK_FALSE = @ENABLE_SK_FALSE@
 ENABLE_SK_TRUE = @ENABLE_SK_TRUE@
 EXEEXT = @EXEEXT@
 F77 = @F77@
 FFLAGS = @FFLAGS@
-GCC_WARN_FLAGS = @GCC_WARN_FLAGS@
 GETTEXT_PACKAGE = @GETTEXT_PACKAGE@
 GLADE_AGE = @GLADE_AGE@
 GLADE_CURRENT = @GLADE_CURRENT@
@@ -146,6 +145,9 @@ GLADE_MAJOR_VERSION = @GLADE_MAJOR_VERSION@
 GLADE_MICRO_VERSION = @GLADE_MICRO_VERSION@
 GLADE_MINOR_VERSION = @GLADE_MINOR_VERSION@
 GLADE_REVISION = @GLADE_REVISION@
+GLADE_UNSTABLE = @GLADE_UNSTABLE@
+GLADE_UNSTABLE_FALSE = @GLADE_UNSTABLE_FALSE@
+GLADE_UNSTABLE_TRUE = @GLADE_UNSTABLE_TRUE@
 GLIB_GENMARSHAL = @GLIB_GENMARSHAL@
 GMOFILES = @GMOFILES@
 GMSGFMT = @GMSGFMT@
@@ -206,7 +208,8 @@ MAINTAINER_MODE_TRUE = @MAINTAINER_MODE_TRUE@
 MAKEINFO = @MAKEINFO@
 MKINSTALLDIRS = @MKINSTALLDIRS@
 MSGFMT = @MSGFMT@
-NO_STRICT_ALIASING_CFLAGS = @NO_STRICT_ALIASING_CFLAGS@
+NATIVE_WIN32_FALSE = @NATIVE_WIN32_FALSE@
+NATIVE_WIN32_TRUE = @NATIVE_WIN32_TRUE@
 OBJDUMP = @OBJDUMP@
 OBJEXT = @OBJEXT@
 OMF_DIR = @OMF_DIR@
@@ -220,31 +223,18 @@ PATH_SEPARATOR = @PATH_SEPARATOR@
 PKG_CONFIG = @PKG_CONFIG@
 PLATFORM_WIN32_FALSE = @PLATFORM_WIN32_FALSE@
 PLATFORM_WIN32_TRUE = @PLATFORM_WIN32_TRUE@
+PLUGINS_WARN_CFLAGS = @PLUGINS_WARN_CFLAGS@
 POFILES = @POFILES@
 POSUB = @POSUB@
 PO_IN_DATADIR_FALSE = @PO_IN_DATADIR_FALSE@
 PO_IN_DATADIR_TRUE = @PO_IN_DATADIR_TRUE@
-PYGTK_CFLAGS = @PYGTK_CFLAGS@
-PYGTK_CODEGEN = @PYGTK_CODEGEN@
-PYGTK_DEFSDIR = @PYGTK_DEFSDIR@
-PYGTK_H2DEF = @PYGTK_H2DEF@
-PYGTK_LIBS = @PYGTK_LIBS@
-PYTHON = @PYTHON@
-PYTHON_CFLAGS = @PYTHON_CFLAGS@
-PYTHON_EXEC_PREFIX = @PYTHON_EXEC_PREFIX@
-PYTHON_EXTRA_LIBS = @PYTHON_EXTRA_LIBS@
-PYTHON_INCLUDES = @PYTHON_INCLUDES@
-PYTHON_LIBS = @PYTHON_LIBS@
-PYTHON_LIB_LOC = @PYTHON_LIB_LOC@
-PYTHON_PLATFORM = @PYTHON_PLATFORM@
-PYTHON_PREFIX = @PYTHON_PREFIX@
-PYTHON_VERSION = @PYTHON_VERSION@
 RANLIB = @RANLIB@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
+WARN_CFLAGS = @WARN_CFLAGS@
 WINDRES = @WINDRES@
 XGETTEXT = @XGETTEXT@
 ac_ct_CC = @ac_ct_CC@
@@ -287,13 +277,9 @@ mandir = @mandir@
 mkdir_p = @mkdir_p@
 oldincludedir = @oldincludedir@
 pdfdir = @pdfdir@
-pkgpyexecdir = @pkgpyexecdir@
-pkgpythondir = @pkgpythondir@
 prefix = @prefix@
 program_transform_name = @program_transform_name@
 psdir = @psdir@
-pyexecdir = @pyexecdir@
-pythondir = @pythondir@
 sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
@@ -311,11 +297,12 @@ gladegnomedir = $(pkglibdir)/modules
 libgladegnome_la_SOURCES = glade-gnome.c
 libgladegnome_la_CPPFLAGS = $(AM_CPPFLAGS)
 libgladegnome_la_CFLAGS = \
-	-g @GCC_WARN_FLAGS@          \
-	-I$(top_srcdir)              \
-	-I$(top_builddir)            \
-	-I$(top_srcdir)/plugins/gtk+ \
-	$(GNOME_CFLAGS)              \
+        -DG_LOG_DOMAIN=\"GladeUI-GNOME\" \
+	-I$(top_srcdir)                  \
+	-I$(top_builddir)                \
+	-I$(top_srcdir)/plugins/gtk+     \
+	$(GNOME_CFLAGS)                  \
+	$(PLUGINS_WARN_CFLAGS)           \
 	$(AM_CPPFLAGS)
 
 libgladegnome_la_LDFLAGS = -module -avoid-version $(GNOME_LIBS) \

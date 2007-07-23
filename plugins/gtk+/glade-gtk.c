@@ -25,10 +25,11 @@
 #include <config.h>
 
 #include "glade-gtk.h"
+#include "fixed-bg.xpm"
 
 #include <gladeui/glade-editor-property.h>
 #include <gladeui/glade-base-editor.h>
-#include <gladeui/fixed_bg.xpm>
+
 
 #include <gtk/gtk.h>
 #include <glib/gi18n-lib.h>
@@ -178,14 +179,11 @@ glade_gtk_image_type_get_type (void)
 	static GType etype = 0;
 	if (etype == 0) {
 		static GEnumValue values[] = {
-			{ GLADEGTK_IMAGE_FILENAME,  "a",   "glade-gtk-image-filename" },
-			{ GLADEGTK_IMAGE_STOCK,     "b",      "glade-gtk-image-stock" },
-			{ GLADEGTK_IMAGE_ICONTHEME, "c", "glade-gtk-image-icontheme" },
+			{ GLADEGTK_IMAGE_FILENAME,  "GLADEGTK_IMAGE_FILENAME",   "glade-gtk-image-filename" },
+			{ GLADEGTK_IMAGE_STOCK,     "GLADEGTK_IMAGE_STOCK",      "glade-gtk-image-stock" },
+			{ GLADEGTK_IMAGE_ICONTHEME, "GLADEGTK_IMAGE_ICONTHEME", "glade-gtk-image-icontheme" },
 			{ 0, NULL, NULL }
 		};
-		values[GLADEGTK_IMAGE_FILENAME].value_name  = _("Filename");
-		values[GLADEGTK_IMAGE_STOCK].value_name     = _("Stock");
-		values[GLADEGTK_IMAGE_ICONTHEME].value_name = _("Icon Theme");
 
 		etype = g_enum_register_static ("GladeGtkImageType", values);
 	}
@@ -198,14 +196,11 @@ glade_gtk_button_type_get_type (void)
 	static GType etype = 0;
 	if (etype == 0) {
 		static GEnumValue values[] = {
-			{ GLADEGTK_BUTTON_LABEL,     "a", "glade-gtk-button-label" },
-			{ GLADEGTK_BUTTON_STOCK,     "b", "glade-gtk-button-stock" },
-			{ GLADEGTK_BUTTON_CONTAINER, "c", "glade-gtk-button-container" },
+			{ GLADEGTK_BUTTON_LABEL,     "GLADEGTK_BUTTON_LABEL", "glade-gtk-button-label" },
+			{ GLADEGTK_BUTTON_STOCK,     "GLADEGTK_BUTTON_STOCK", "glade-gtk-button-stock" },
+			{ GLADEGTK_BUTTON_CONTAINER, "GLADEGTK_BUTTON_CONTAINER", "glade-gtk-button-container" },
 			{ 0, NULL, NULL }
 		};
-		values[GLADEGTK_BUTTON_LABEL].value_name      = _("Label");
-		values[GLADEGTK_BUTTON_STOCK].value_name      = _("Stock");
-		values[GLADEGTK_BUTTON_CONTAINER].value_name  = _("Container");
 
 		etype = g_enum_register_static ("GladeGtkButtonType", values);
 	}
@@ -247,6 +242,38 @@ glade_gtk_stop_emission_POINTER (gpointer instance, gpointer dummy, gpointer dat
 }
 
 /* ----------------------------- GtkWidget ------------------------------ */
+static void
+widget_parent_changed (GtkWidget          *widget,
+		       GParamSpec         *pspec,
+		       GladeWidgetAdaptor *adaptor)
+{
+	GladeWidget *gwidget = glade_widget_get_from_gobject (widget);
+
+	if (gwidget->parent && !GTK_IS_WINDOW (glade_widget_get_object (gwidget->parent)))
+		glade_widget_set_action_sensitive (gwidget, "remove_parent", TRUE);
+	else
+		glade_widget_set_action_sensitive (gwidget, "remove_parent", FALSE);
+
+}
+
+void
+glade_gtk_widget_deep_post_create (GladeWidgetAdaptor *adaptor,
+				   GObject            *widget, 
+				   GladeCreateReason   reason)
+{
+	GladeWidget *gwidget = glade_widget_get_from_gobject (widget);
+	
+	glade_widget_set_action_sensitive (gwidget, "remove_parent", FALSE);
+
+	if (GTK_IS_WINDOW (widget))
+		glade_widget_set_action_sensitive (gwidget, "add_parent", FALSE);
+
+	/* Watch parents and set actions sensitive/insensitive */
+	g_signal_connect (G_OBJECT (widget), "notify::parent",
+			  G_CALLBACK (widget_parent_changed), adaptor);
+}
+
+
 void
 glade_gtk_widget_set_property (GladeWidgetAdaptor *adaptor,
 			       GObject            *object, 
@@ -288,6 +315,154 @@ glade_gtk_widget_get_property (GladeWidgetAdaptor *adaptor,
 	else 
 		GWA_GET_CLASS (G_TYPE_OBJECT)->get_property (adaptor, object, id, value);
 }
+
+static GList *
+create_command_property_list (GladeWidget *gnew, GList *saved_props)
+{
+	GList *l, *command_properties = NULL;
+	
+	for (l = saved_props; l; l = l->next)
+	{
+		GladeProperty *property = l->data;
+		GladeProperty *orig_prop = glade_widget_get_pack_property (gnew, property->klass->id);
+		GCSetPropData *pdata = g_new0 (GCSetPropData, 1);
+
+		pdata->property  = orig_prop;
+		pdata->old_value = g_new0 (GValue, 1);
+		pdata->new_value = g_new0 (GValue, 1);
+
+		glade_property_get_value (orig_prop, pdata->old_value);
+		glade_property_get_value (property, pdata->new_value);
+
+		command_properties = g_list_prepend (command_properties, pdata);
+	}
+	return g_list_reverse (command_properties);
+}
+
+
+void
+glade_gtk_widget_action_activate (GladeWidgetAdaptor *adaptor,
+				  GObject *object,
+				  const gchar *action_path)
+{
+	GladeWidget *gwidget = glade_widget_get_from_gobject (object), *gparent;
+	GList       this_widget = { 0, }, that_widget = { 0, };
+	GtkWidget   *parent = GTK_WIDGET (object)->parent;
+
+	g_assert (parent);
+
+	gparent = glade_widget_get_from_gobject (parent);
+	
+	if (strcmp (action_path, "remove_parent") == 0)
+	{
+		GladeWidget *new_gparent = gparent->parent;
+
+		/* Since toplevel project objects for now must be GtkWindow,
+		 * we'll just assert this for now (should be an insensitive action).
+		 */
+		g_assert (!GTK_IS_WINDOW (parent));
+		
+		glade_command_push_group (_("Removing parent of %s"), 
+					  gwidget->name);
+
+		/* Remove "this" widget */
+		this_widget.data = gwidget;
+		glade_command_delete (&this_widget);
+		
+		/* Delete the parent */
+		that_widget.data = gparent;
+		glade_command_delete (&that_widget);
+
+		/* Add "this" widget to the new parent */
+		glade_command_paste(&this_widget, new_gparent, NULL);
+		
+		glade_command_pop_group ();
+	}
+	else if (strncmp (action_path, "add_parent/", 11) == 0)
+	{
+		GType new_type = 0;
+		
+		if (strcmp (action_path + 11, "alignment") == 0)
+			new_type = GTK_TYPE_ALIGNMENT;
+		else if (strcmp (action_path + 11, "viewport") == 0)
+			new_type = GTK_TYPE_VIEWPORT;
+		else if (strcmp (action_path + 11, "eventbox") == 0)
+			new_type = GTK_TYPE_EVENT_BOX;
+		else if (strcmp (action_path + 11, "frame") == 0)
+			new_type = GTK_TYPE_FRAME;
+		else if (strcmp (action_path + 11, "aspect_frame") == 0)
+			new_type = GTK_TYPE_ASPECT_FRAME;
+		else if (strcmp (action_path + 11, "scrolled_window") == 0)
+			new_type = GTK_TYPE_SCROLLED_WINDOW;
+		else if (strcmp (action_path + 11, "expander") == 0)
+			new_type = GTK_TYPE_EXPANDER;
+		else if (strcmp (action_path + 11, "table") == 0)
+			new_type = GTK_TYPE_TABLE;
+		else if (strcmp (action_path + 11, "hbox") == 0)
+			new_type = GTK_TYPE_HBOX;
+		else if (strcmp (action_path + 11, "vbox") == 0)
+			new_type = GTK_TYPE_VBOX;
+		else if (strcmp (action_path + 11, "hpaned") == 0)
+			new_type = GTK_TYPE_HPANED;
+		else if (strcmp (action_path + 11, "vpaned") == 0)
+			new_type = GTK_TYPE_VPANED;
+
+		
+		if (new_type)
+		{
+			GladeWidgetAdaptor *adaptor = glade_widget_adaptor_get_by_type (new_type);
+			GList              *saved_props, *prop_cmds;
+			
+			glade_command_push_group (_("Adding parent %s to %s"), 
+						  adaptor->title, gwidget->name);
+
+			/* Record packing properties */
+			saved_props = glade_widget_dup_properties (gwidget->packing_properties, FALSE);
+			
+			/* Remove "this" widget */
+			this_widget.data = gwidget;
+			glade_command_delete (&this_widget);
+			
+			/* Create new widget and put it where the placeholder was */
+			that_widget.data =
+				glade_command_create (adaptor, gparent, NULL, 
+						      glade_widget_get_project (gparent));
+
+
+			/* Remove the alignment that we added in the frame's post_create... */
+			if (new_type == GTK_TYPE_FRAME)
+			{
+				GObject     *frame = glade_widget_get_object (that_widget.data);
+				GladeWidget *galign = glade_widget_get_from_gobject (GTK_BIN (frame)->child);
+				GList        to_delete = { 0, };
+
+				to_delete.data = galign;
+				glade_command_delete (&to_delete);
+			}
+						
+			/* Create heavy-duty glade-command properties stuff */
+			prop_cmds = create_command_property_list (that_widget.data, saved_props);
+			g_list_foreach (saved_props, (GFunc)g_object_unref, NULL);
+			g_list_free (saved_props);
+
+			/* Apply the properties in an undoable way */
+			if (prop_cmds)
+				glade_command_set_properties_list (glade_widget_get_project (gparent), prop_cmds);
+			
+			/* Add "this" widget to the new parent */
+			glade_command_paste(&this_widget, GLADE_WIDGET (that_widget.data), NULL);
+			
+			glade_command_pop_group ();
+		}
+
+	}
+
+	else
+		GWA_GET_CLASS (G_TYPE_OBJECT)->action_activate (adaptor,
+								object,
+								action_path);
+}
+
 
 /* ----------------------------- GtkContainer ------------------------------ */
 void
@@ -962,11 +1137,62 @@ glade_gtk_box_add_child (GladeWidgetAdaptor *adaptor,
 	glade_widget_property_set (gbox, "size", num_children);
 	
 	gchild = glade_widget_get_from_gobject (child);
+
+	/* The "Remove Slot" operation only makes sence on placeholders,
+	 * otherwise its a "Delete" operation on the child widget.
+	 */
+	if (gchild)
+		glade_widget_remove_pack_action (gchild, "remove_slot");
 	
 	/* Packing props arent around when parenting during a glade_widget_dup() */
 	if (gchild && gchild->packing_properties)
 		glade_widget_pack_property_set (gchild, "position", num_children - 1);
 }
+
+void
+glade_gtk_box_remove_child (GladeWidgetAdaptor *adaptor,
+			    GObject            *object, 
+			    GObject            *child)
+{
+	GladeWidget *gbox;
+	gint size;
+	
+	g_return_if_fail (GTK_IS_BOX (object));
+	g_return_if_fail (GTK_IS_WIDGET (child));
+	
+	gbox = glade_widget_get_from_gobject (object);
+	
+	gtk_container_remove (GTK_CONTAINER (object), GTK_WIDGET (child));
+
+	if (glade_widget_superuser () == FALSE)
+	{
+		glade_widget_property_get (gbox, "size", &size);
+		glade_widget_property_set (gbox, "size", size);
+	}
+}
+
+
+void
+glade_gtk_box_replace_child (GladeWidgetAdaptor *adaptor,
+			     GObject            *container,
+			     GObject            *current,
+			     GObject            *new_widget)
+{
+	GladeWidget  *gchild;
+
+	GWA_GET_CLASS (GTK_TYPE_CONTAINER)->replace_child (adaptor,
+							   container,
+							   current,
+							   new_widget);
+
+	if ((gchild = glade_widget_get_from_gobject (new_widget)) != NULL)
+		/* The "Remove Slot" operation only makes sence on placeholders,
+		 * otherwise its a "Delete" operation on the child widget.
+		 */
+		glade_widget_remove_pack_action (gchild, "remove_slot");
+
+}
+
 
 GObject *
 glade_gtk_box_get_internal_child (GladeWidgetAdaptor *adaptor,
@@ -997,28 +1223,6 @@ glade_gtk_box_get_internal_child (GladeWidgetAdaptor *adaptor,
 	return child;
 }
 
-void
-glade_gtk_box_remove_child (GladeWidgetAdaptor *adaptor,
-			    GObject            *object, 
-			    GObject            *child)
-{
-	GladeWidget *gbox;
-	gint size;
-	
-	g_return_if_fail (GTK_IS_BOX (object));
-	g_return_if_fail (GTK_IS_WIDGET (child));
-	
-	gbox = glade_widget_get_from_gobject (object);
-	
-	gtk_container_remove (GTK_CONTAINER (object), GTK_WIDGET (child));
-
-	if (glade_widget_superuser () == FALSE)
-	{
-		glade_widget_property_get (gbox, "size", &size);
-		glade_widget_property_set (gbox, "size", size);
-	}
-}
-
 static void
 glade_gtk_box_notebook_child_insert_remove_action (GladeWidgetAdaptor *adaptor,
 						   GObject *container,
@@ -1047,6 +1251,13 @@ glade_gtk_box_child_action_activate (GladeWidgetAdaptor *adaptor,
 								   object, "size",
 								   _("Insert placeholder to %s"),
 								   FALSE, FALSE);
+	}
+	else if (strcmp (action_path, "remove_slot") == 0)
+	{
+		glade_gtk_box_notebook_child_insert_remove_action (adaptor, container,
+								   object, "size",
+								   _("Remove placeholder from %s"),
+								   TRUE, FALSE);
 	}
 	else
 		GWA_GET_CLASS (GTK_TYPE_CONTAINER)->child_action_activate (adaptor,
@@ -2124,6 +2335,7 @@ glade_gtk_frame_add_child (GladeWidgetAdaptor *adaptor,
 typedef struct 
 {
 	gint   pages;
+	gint   page;
 
 	GList *children;
 	GList *tabs;
@@ -2274,6 +2486,7 @@ glade_gtk_notebook_extract_children (GtkWidget *notebook)
 
 	nchildren        = g_new0 (NotebookChildren, 1);
 	nchildren->pages = gtk_notebook_get_n_pages (GTK_NOTEBOOK (notebook));
+	nchildren->page  = gtk_notebook_get_current_page (GTK_NOTEBOOK (notebook));
 		
 	/* Ref all the project widgets and build returned list first */
 	for (list = children; list; list = list->next)
@@ -2357,6 +2570,9 @@ glade_gtk_notebook_insert_children (GtkWidget *notebook, NotebookChildren *nchil
 		g_object_unref (G_OBJECT (page));
 		g_object_unref (G_OBJECT (tab));
 	}
+
+	/* Stay on the same page */
+	gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), nchildren->page);
 	
 	/* Free the original lists now */
 	if (nchildren->children)
@@ -4165,7 +4381,7 @@ glade_gtk_image_set_stock (GObject *object, const GValue *value)
 	g_free (str);
 }
 
-void
+static void
 glade_gtk_image_set_glade_stock (GObject *object, const GValue *value)
 {
 	GladeWidget   *gwidget;
@@ -4215,7 +4431,7 @@ glade_gtk_image_set_property (GladeWidgetAdaptor *adaptor,
 
 /* ----------------------------- GtkMenuShell ------------------------------ */
 void
-glade_gtk_menu_shell_add_item (GladeWidgetAdaptor  *adaptor, 
+glade_gtk_menu_shell_add_child (GladeWidgetAdaptor  *adaptor, 
 			       GObject             *object, 
 			       GObject             *child)
 {
@@ -4228,7 +4444,7 @@ glade_gtk_menu_shell_add_item (GladeWidgetAdaptor  *adaptor,
 
 
 void
-glade_gtk_menu_shell_remove_item (GladeWidgetAdaptor  *adaptor,
+glade_gtk_menu_shell_remove_child (GladeWidgetAdaptor  *adaptor,
 				  GObject             *object, 
 				  GObject             *child)
 {
@@ -4575,8 +4791,8 @@ glade_gtk_menu_item_get_children (GladeWidgetAdaptor *adaptor,
 }
 
 void
-glade_gtk_menu_item_add_submenu (GladeWidgetAdaptor *adaptor,
-				 GObject *object, GObject *child)
+glade_gtk_menu_item_add_child (GladeWidgetAdaptor *adaptor,
+			       GObject *object, GObject *child)
 {
 	g_return_if_fail (GTK_IS_MENU_ITEM (object));
 	g_return_if_fail (GTK_IS_MENU (child));
@@ -4591,8 +4807,8 @@ glade_gtk_menu_item_add_submenu (GladeWidgetAdaptor *adaptor,
 }
 
 void
-glade_gtk_menu_item_remove_submenu (GladeWidgetAdaptor *adaptor,
-				    GObject *object, GObject *child)
+glade_gtk_menu_item_remove_child (GladeWidgetAdaptor *adaptor,
+				  GObject *object, GObject *child)
 {
 	g_return_if_fail (GTK_IS_MENU_ITEM (object));
 	g_return_if_fail (GTK_IS_MENU (child));
@@ -5320,7 +5536,7 @@ glade_gtk_toolbar_child_selected (GladeBaseEditor *editor,
 						  "group", "active", NULL);	
 }
 
-void
+static void
 glade_gtk_toolbar_launch_editor (GladeWidgetAdaptor *adaptor, 
 				 GObject            *toolbar)
 {
@@ -5393,6 +5609,8 @@ glade_gtk_tool_button_set_type (GObject *object, const GValue *value)
 	
 	g_return_if_fail (GTK_IS_TOOL_BUTTON (object));
 	gbutton = glade_widget_get_from_gobject (object);
+	
+	if (glade_util_object_is_loading (object)) return;
 	
 	glade_widget_property_set_sensitive (gbutton, "icon", FALSE,
 				_("This only applies with file type images"));
@@ -5515,6 +5733,7 @@ glade_gtk_tool_button_set_icon (GObject *object, const GValue *value)
 	if ((pixbuf = g_value_get_object (value)))
 	{
 		image = gtk_image_new_from_pixbuf (GDK_PIXBUF (pixbuf));
+		gtk_widget_show (image);
 		glade_widget_property_set (gbutton, "glade-type", GLADEGTK_IMAGE_FILENAME);
 	}
 	
@@ -5570,7 +5789,7 @@ glade_gtk_label_set_label (GObject *object, const GValue *value)
 {
 	GladeWidget *glabel;
 	gboolean use_markup = FALSE, use_underline = FALSE;
-	
+
 	g_return_if_fail (GTK_IS_LABEL (object));
 	glabel = glade_widget_get_from_gobject (object);
 	g_return_if_fail (GLADE_IS_WIDGET (glabel));
@@ -5585,6 +5804,29 @@ glade_gtk_label_set_label (GObject *object, const GValue *value)
 	glade_widget_property_get (glabel, "use-underline", &use_underline);
 	if (use_underline)
 		gtk_label_set_use_underline (GTK_LABEL (object), use_underline);
+}
+
+static void
+ensure_label_props (GObject            *label,
+		    GladeWidgetAdaptor *adaptor)
+{
+	GladeWidget   *gwidget = glade_widget_get_from_gobject (label);
+	GladeProperty *prop    = glade_widget_get_property (gwidget, "label");
+
+	glade_gtk_label_set_label (label, prop->value);
+}
+
+void
+glade_gtk_label_post_create (GladeWidgetAdaptor *adaptor, 
+			     GObject            *object, 
+			     GladeCreateReason   reason)
+{
+	/* For some reason labels dont show up with markup
+	 * and mnemonic underlines in the runtime at load time,
+	 * resetting them at realize time fixes this glitch.
+	 */
+	g_signal_connect_after (G_OBJECT (object), "realize",
+				G_CALLBACK (ensure_label_props), adaptor);
 }
 
 void

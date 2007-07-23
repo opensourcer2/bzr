@@ -18,12 +18,12 @@
  *
  * Authors:
  *   Chema Celorio <chema@celorio.com>
- *   Vincent Geddes <vgeddes@metroweb.co.za>
+ *   Vincent Geddes <vgeddes@gnome.org>
  */
 
 #include <config.h>
 
-#include "glade-project-window.h"
+#include "glade-window.h"
 
 #include <gladeui/glade.h>
 #include <gladeui/glade-app.h>
@@ -65,17 +65,20 @@ static gboolean verbose = FALSE;
 
 static GOptionEntry debug_option_entries[] = 
 {
-  { "verbose", 'v', 0, G_OPTION_ARG_NONE, &verbose, "be verbose", NULL },
+  { "verbose", 'v', 0, G_OPTION_ARG_NONE, &verbose, N_("be verbose"), NULL },
   { NULL }
 };
 
 int
 main (int argc, char *argv[])
 {
-	GladeProjectWindow *project_window;
+	GladeWindow *window;
 	GOptionContext *option_context;
 	GOptionGroup *option_group;
 	GError *error = NULL;
+
+	if (!g_thread_supported ())
+		g_thread_init (NULL);
 
 #ifdef ENABLE_NLS
 	setlocale (LC_ALL, "");
@@ -98,10 +101,11 @@ main (int argc, char *argv[])
 	g_option_group_set_translation_domain (option_group, GETTEXT_PACKAGE);
 
 	option_group = g_option_group_new ("debug",
-					   "Glade debug options",
-					   "Show Glade debug options",
+					   N_("Glade debug options"),
+					   N_("Show Glade debug options"),
 					   NULL, NULL);
 	g_option_group_add_entries (option_group, debug_option_entries);
+	g_option_group_set_translation_domain (option_group, GETTEXT_PACKAGE);
 	g_option_context_add_group (option_context, option_group);
 
 	/* Add Gtk option group */
@@ -152,10 +156,10 @@ main (int argc, char *argv[])
 	glade_setup_log_handlers ();
 	
 	
-	project_window = glade_project_window_new ();
+	window = GLADE_WINDOW (glade_window_new ());
 	
 	if (without_devhelp == FALSE)
-		glade_project_window_check_devhelp (project_window);
+		glade_window_check_devhelp (window);
 	
 	
 	/* load files specified on commandline */
@@ -166,7 +170,7 @@ main (int argc, char *argv[])
 		for (i=0; files[i] ; ++i)
 		{
 			if (g_file_test (files[i], G_FILE_TEST_EXISTS) != FALSE)
-				glade_project_window_open_project (project_window, files[i]);
+				glade_window_open_project (window, files[i]);
 			else
 				g_warning (_("Unable to open '%s', the file does not exist.\n"), files[i]);
 		}
@@ -174,14 +178,11 @@ main (int argc, char *argv[])
 	}
 
 	if (glade_app_get_project () == NULL)
-		glade_project_window_new_project (project_window);
+		glade_window_new_project (window);
 
-	glade_project_window_show_all (project_window);
+	gtk_widget_show (GTK_WIDGET (window));
 
 	gtk_main ();
-
-	/* destroy GladeApp */
-	g_object_unref (project_window);
 
 	return 0;
 }

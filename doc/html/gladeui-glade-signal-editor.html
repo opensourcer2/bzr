@@ -6,7 +6,7 @@
 <meta name="generator" content="DocBook XSL Stylesheets V1.68.1">
 <link rel="start" href="index.html" title="Glade UI Builder Reference Manual">
 <link rel="up" href="dockables.html" title="Part&#160;III.&#160;Dockable Glade UI Widgets">
-<link rel="prev" href="GladeProjectView.html" title="GladeProjectView">
+<link rel="prev" href="GladeInspector.html" title="GladeInspector">
 <link rel="next" href="misc.html" title="Part&#160;IV.&#160;Miscellaneous utilities">
 <meta name="generator" content="GTK-Doc V1.7 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
@@ -19,22 +19,22 @@
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
 <tr valign="middle">
-<td><a accesskey="p" href="GladeProjectView.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="p" href="GladeInspector.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
 <td><a accesskey="u" href="dockables.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
 <th width="100%" align="center">Glade UI Builder Reference Manual</th>
 <td><a accesskey="n" href="misc.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr>
-<tr><td colspan="5" class="shortcuts"><nobr><a href="#id2607670" class="shortcut">Top</a>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#id2608080" class="shortcut">Top</a>
                   &#160;|&#160;
-                  <a href="#id2607773" class="shortcut">Description</a></nobr></td></tr>
+                  <a href="#id2608183" class="shortcut">Description</a></nobr></td></tr>
 </table>
 <div class="refentry" lang="en">
 <a name="gladeui-glade-signal-editor"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
 <h2>
-<a name="id2607670"></a><span class="refentrytitle">Glade Signal Editor</span>
+<a name="id2608080"></a><span class="refentrytitle">Glade Signal Editor</span>
 </h2>
 <p>Glade Signal Editor &#8212; An interface to edit signals for a <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a></p>
 </td>
@@ -44,7 +44,7 @@
 <h2>Synopsis</h2>
 <pre class="synopsis">
 
-#include &lt;glade.h&gt;
+#include &lt;gladeui/glade.h&gt;
 
 
             <a href="gladeui-glade-signal-editor.html#GladeSignalEditor">GladeSignalEditor</a>;
@@ -56,7 +56,7 @@ void        <a href="gladeui-glade-signal-editor.html#glade-signal-editor-load-w
 </pre>
 </div>
 <div class="refsect1" lang="en">
-<a name="id2607773"></a><h2>Description</h2>
+<a name="id2608183"></a><h2>Description</h2>
 <p>
 This isnt really a dockable widget, since you need to access the
 <a href="gladeui-glade-signal-editor.html#GladeSignalEditor"><span class="type">GladeSignalEditor</span></a> struct's '-&gt;main_window' widget, the signal editor
@@ -64,11 +64,11 @@ is mostly of interest when implementing a custom object editor.
 </p>
 </div>
 <div class="refsect1" lang="en">
-<a name="id2607799"></a><h2>Details</h2>
+<a name="id2608209"></a><h2>Details</h2>
 <div class="refsect2" lang="en">
-<a name="id2607809"></a><h3>
+<a name="id2608220"></a><h3>
 <a name="GladeSignalEditor"></a>GladeSignalEditor</h3>
-<a class="indexterm" name="id2607822"></a><pre class="programlisting">typedef struct {
+<a class="indexterm" name="id2608232"></a><pre class="programlisting">typedef struct {
 	GtkWidget *main_window;  /* A vbox where all the widgets are added */
 
 	GladeWidget *widget;
@@ -91,9 +91,9 @@ is mostly of interest when implementing a custom object editor.
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2607844"></a><h3>
+<a name="id2608254"></a><h3>
 <a name="glade-signal-editor-get-widget"></a>glade_signal_editor_get_widget ()</h3>
-<a class="indexterm" name="id2607857"></a><pre class="programlisting">GtkWidget*  glade_signal_editor_get_widget  (<a href="gladeui-glade-signal-editor.html#GladeSignalEditor">GladeSignalEditor</a> *editor);</pre>
+<a class="indexterm" name="id2608268"></a><pre class="programlisting">GtkWidget*  glade_signal_editor_get_widget  (<a href="gladeui-glade-signal-editor.html#GladeSignalEditor">GladeSignalEditor</a> *editor);</pre>
 <p>
 </p>
 <p>
@@ -120,9 +120,9 @@ is mostly of interest when implementing a custom object editor.
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2607951"></a><h3>
+<a name="id2608361"></a><h3>
 <a name="glade-signal-editor-new"></a>glade_signal_editor_new ()</h3>
-<a class="indexterm" name="id2607964"></a><pre class="programlisting"><a href="gladeui-glade-signal-editor.html#GladeSignalEditor">GladeSignalEditor</a>* glade_signal_editor_new  (gpointer *editor);</pre>
+<a class="indexterm" name="id2608374"></a><pre class="programlisting"><a href="gladeui-glade-signal-editor.html#GladeSignalEditor">GladeSignalEditor</a>* glade_signal_editor_new  (gpointer *editor);</pre>
 <p>
 </p>
 <p>
@@ -148,9 +148,9 @@ is mostly of interest when implementing a custom object editor.
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2608046"></a><h3>
+<a name="id2608456"></a><h3>
 <a name="glade-signal-editor-load-widget"></a>glade_signal_editor_load_widget ()</h3>
-<a class="indexterm" name="id2608059"></a><pre class="programlisting">void        glade_signal_editor_load_widget (<a href="gladeui-glade-signal-editor.html#GladeSignalEditor">GladeSignalEditor</a> *editor,
+<a class="indexterm" name="id2608469"></a><pre class="programlisting">void        glade_signal_editor_load_widget (<a href="gladeui-glade-signal-editor.html#GladeSignalEditor">GladeSignalEditor</a> *editor,
                                              <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
 <p>
 TODO: write me</p>

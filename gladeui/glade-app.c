@@ -28,7 +28,6 @@
 #include "glade-cursor.h"
 #include "glade-catalog.h"
 #include "glade-fixed.h"
-#include "glade-binding.h"
 #include "glade-marshallers.h"
 #include "glade-accumulators.h"
 
@@ -45,7 +44,6 @@
 
 enum
 {
-	WIDGET_EVENT,
 	UPDATE_UI,
 	LAST_SIGNAL
 };
@@ -53,7 +51,8 @@ enum
 enum
 {
 	PROP_0,
-	PROP_ACTIVE_PROJECT
+	PROP_ACTIVE_PROJECT,
+	PROP_POINTER_MODE
 };
 
 struct _GladeAppPrivate
@@ -66,8 +65,7 @@ struct _GladeAppPrivate
 	GladeEditor *editor;           /* See glade-editor */
 	GladeClipboard *clipboard;     /* See glade-clipboard */
 	GList *catalogs;               /* See glade-catalog */
-	
-	GList *views;    /* A list of GladeProjectView item */
+
 	GList *projects; /* The list of Projects */
 	
 	GKeyFile *config;/* The configuration file */
@@ -78,6 +76,8 @@ struct _GladeAppPrivate
 				      */
 	GtkAccelGroup *accel_group;	/* Default acceleration group for this app */
 	GList *undo_list, *redo_list;	/* Lists of buttons to refresh in update-ui signal */
+
+	GladePointerMode pointer_mode;  /* Current mode for the pointer in the workspace */
 };
 
 static guint glade_app_signals[LAST_SIGNAL] = { 0 };
@@ -85,7 +85,6 @@ static guint glade_app_signals[LAST_SIGNAL] = { 0 };
 /* installation paths */
 static gchar *catalogs_dir = NULL;
 static gchar *modules_dir  = NULL;
-static gchar *bindings_dir = NULL;
 static gchar *plugins_dir  = NULL;
 static gchar *pixmaps_dir  = NULL;
 static gchar *locale_dir   = NULL;
@@ -95,6 +94,27 @@ static GladeApp *singleton_app = NULL;
 static void glade_init_check (void);
 
 G_DEFINE_TYPE (GladeApp, glade_app, G_TYPE_OBJECT);
+
+
+GType
+glade_pointer_mode_get_type (void)
+{
+	static GType etype = 0;
+
+	if (etype == 0) 
+	{
+		static const GEnumValue values[] = 
+		{
+			{ GLADE_POINTER_SELECT,      "select",      "Select widgets" },
+			{ GLADE_POINTER_ADD_WIDGET,  "add",         "Add widgets" },
+			{ GLADE_POINTER_DRAG_RESIZE, "drag-resize", "Drag and resize widgets" },
+			{ 0, NULL, NULL }
+		};
+		etype = g_enum_register_static ("GladePointerMode", 
+						values);
+	}
+	return etype;
+}
 
 
 /*****************************************************************
@@ -145,7 +165,7 @@ glade_app_dispose (GObject *app)
 		gtk_widget_destroy (GTK_WIDGET (priv->clipboard->view));
 		priv->clipboard = NULL;
 	}
-	/* FIXME: Remove views and projects */
+	/* FIXME: Remove projects */
 	
 	if (priv->config)
 	{
@@ -159,18 +179,12 @@ glade_app_dispose (GObject *app)
 static void
 glade_app_finalize (GObject *app)
 {
-
-#ifdef G_OS_WIN32
 	g_free (catalogs_dir);
 	g_free (modules_dir);
-	g_free (bindings_dir);
 	g_free (pixmaps_dir);	
 	g_free (locale_dir);
-#endif
 	
-	glade_binding_unload_all ();
-	
-	glade_catalog_modules_close ();
+	glade_catalog_destroy_all ();
 
 	G_OBJECT_CLASS (glade_app_parent_class)->finalize (app);
 }
@@ -185,6 +199,9 @@ glade_app_set_property (GObject      *object,
 	{
 	case PROP_ACTIVE_PROJECT:
 		glade_app_set_project (g_value_get_object (value));
+		break;
+	case PROP_POINTER_MODE:
+		glade_app_set_pointer_mode (g_value_get_enum (value));
 		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID
@@ -206,6 +223,9 @@ glade_app_get_property (GObject      *object,
 	{
 	case PROP_ACTIVE_PROJECT:
 		g_value_set_object (value, app->priv->active_project);
+		break;
+	case PROP_POINTER_MODE:
+		g_value_set_enum (value, app->priv->pointer_mode);
 		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID(object,property_id,pspec);
@@ -247,7 +267,7 @@ glade_app_refresh_undo_redo_button (GladeApp *app,
 	gtk_widget_set_sensitive (button, command != NULL);
 }
 
-void
+static void
 glade_app_update_ui_default (GladeApp *app)
 {
 	GList *list;
@@ -349,14 +369,6 @@ glade_app_get_locale_dir (void)
 	return locale_dir;
 }
 
-const gchar *
-glade_app_get_bindings_dir (void)
-{
-	glade_init_check ();
-	
-	return bindings_dir;
-}
-
 /* build package paths at runtime */
 static void
 build_package_paths (void)
@@ -368,13 +380,11 @@ build_package_paths (void)
 	pixmaps_dir  = g_build_filename (prefix, "share", PACKAGE, "pixmaps", NULL);
 	catalogs_dir = g_build_filename (prefix, "share", PACKAGE, "catalogs", NULL);
 	modules_dir  = g_build_filename (prefix, "lib", PACKAGE, "modules", NULL);
-	bindings_dir = g_build_filename (prefix, "lib", PACKAGE, "bindings", NULL);
 	locale_dir   = g_build_filename (prefix, "share", "locale", NULL);
 	g_free (prefix);
 #else
 	catalogs_dir = g_strdup (GLADE_CATALOGSDIR);
 	modules_dir  = g_strdup (GLADE_MODULESDIR);
-	bindings_dir = g_strdup (GLADE_BINDINGSDIR);
 	plugins_dir  = g_strdup (GLADE_PLUGINSDIR);
 	pixmaps_dir  = g_strdup (GLADE_PIXMAPSDIR);
 	locale_dir   = g_strdup (GLADE_LOCALEDIR);
@@ -414,15 +424,13 @@ glade_app_init (GladeApp *app)
 	
 		glade_cursor_init ();
 		
-		glade_binding_load_all ();
-		
 		initialized = TRUE;
 	}
 
 	app->priv->accel_group = NULL;
 	
 	/* Initialize app objects */
-	app->priv->catalogs = glade_catalog_load_all ();
+	app->priv->catalogs = (GList *) glade_catalog_load_all ();
 	
 	/* Create palette */
 	app->priv->palette = (GladePalette *) glade_palette_new (app->priv->catalogs);
@@ -485,30 +493,6 @@ glade_app_class_init (GladeAppClass * klass)
 			      g_cclosure_marshal_VOID__VOID,
 			      G_TYPE_NONE, 0);
 
-
-	/**
-	 * GladeApp::widget-event:
-	 * @gladeapp: the #GladeApp which received the signal.
-	 * @arg1: The toplevel #GladeWidget who's hierarchy recieved an event
-	 * @arg2: The #GdkEvent
-	 *
-	 * Emitted when a #GladeWidget or one of its children is a GtkWidget derivative
-	 * and is about to recieve an event from gdk.
-	 *
-	 * Returns: whether the event was handled or not
-	 */
-	glade_app_signals[WIDGET_EVENT] =
-		g_signal_new ("widget-event",
-			      G_TYPE_FROM_CLASS (object_class),
-			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (GladeAppClass,
-					       widget_event),
-			      glade_boolean_handled_accumulator, NULL,
-			      glade_marshal_BOOLEAN__OBJECT_BOXED,
-			      G_TYPE_BOOLEAN, 2, 
-			      GLADE_TYPE_WIDGET, 
-			      GDK_TYPE_EVENT | G_SIGNAL_TYPE_STATIC_SCOPE);
-
 	g_object_class_install_property 
 		(object_class, PROP_ACTIVE_PROJECT,
 		 g_param_spec_object 
@@ -516,6 +500,14 @@ glade_app_class_init (GladeAppClass * klass)
 		  _("The active project"),
 		  GLADE_TYPE_PROJECT, G_PARAM_READWRITE));
 
+	g_object_class_install_property 
+		(object_class, PROP_POINTER_MODE,
+		 g_param_spec_enum 
+		 ("pointer-mode", _("Pointer Mode"), 
+		  _("Current mode for the pointer in the workspace"),
+		  GLADE_TYPE_POINTER_MODE,
+		  GLADE_POINTER_SELECT,
+		  G_PARAM_READWRITE));
 	
 	g_type_class_add_private (klass, sizeof (GladeAppPrivate));
 }
@@ -722,38 +714,6 @@ glade_app_update_ui (void)
 		       glade_app_signals[UPDATE_UI], 0);
 }
 
-/**
- * glade_app_widget_event:
- * @widget: the #GladeWidget that recieved the event
- * @event: the #GdkEvent
- *
- * Notifies the core that a widget recieved an event,
- * the core will then take responsability of sending
- * the right event to the right widget.
- *
- * Returns whether the event was handled by glade.
- */
-gboolean
-glade_app_widget_event (GladeWidget *widget, 
-			GdkEvent    *event)
-{
-	GladeApp    *app = glade_app_get ();
-	GladeWidget *toplevel = widget;
-	gboolean     retval = FALSE;
-
-	g_return_val_if_fail (GLADE_IS_WIDGET (widget), FALSE);
-	g_return_val_if_fail (event != NULL, FALSE);
-	
-	while (toplevel->parent) 
-		toplevel = toplevel->parent;
-
-	g_signal_emit (G_OBJECT (app),
-		       glade_app_signals[WIDGET_EVENT], 0, widget, event, &retval);
-
-	return retval;
-}
-
-
 void
 glade_app_set_window (GtkWidget *window)
 {
@@ -816,19 +776,6 @@ glade_app_get_config (void)
 {
 	GladeApp *app = glade_app_get ();
 	return app->priv->config;
-}
-
-void
-glade_app_add_project_view (GladeProjectView *view)
-{
-	GladeApp *app;
-	g_return_if_fail (GLADE_IS_PROJECT_VIEW (view));
-
-	app = glade_app_get ();
-
-	app->priv->views = g_list_prepend (app->priv->views, view);
-	if (app->priv->active_project)
-		glade_project_view_set_project (view, app->priv->active_project);
 }
 
 gboolean
@@ -975,6 +922,8 @@ glade_app_add_project (GladeProject *project)
 
 	app = glade_app_get ();
 	
+	g_object_ref (project);
+	
 	app->priv->projects = g_list_append (app->priv->projects, project);
 	
 	/* connect to the project signals so that the editor can be updated */
@@ -1036,7 +985,6 @@ void
 glade_app_set_project (GladeProject *project)
 {
 	GladeApp *app = glade_app_get();
-	GList *list;
 
 	g_return_if_fail (GLADE_IS_PROJECT (project));
 
@@ -1056,12 +1004,6 @@ glade_app_set_project (GladeProject *project)
 
 	app->priv->active_project = project;
 
-	for (list = app->priv->views; list; list = list->next)
-	{
-		GladeProjectView *view = list->data;
-		glade_project_view_set_project (view, project);
-	}
-
 	/* (XXX really ?) trigger the selection changed signal to update the editor */
 	glade_project_selection_changed (project);
 	
@@ -1069,6 +1011,39 @@ glade_app_set_project (GladeProject *project)
 	glade_app_update_ui ();
 
 	g_object_notify (G_OBJECT (app), "active-project");
+}
+
+
+/**
+ * glade_app_set_pointer_mode:
+ * @mode: A #GladePointerMode
+ *
+ * Sets the #GladePointerMode
+ */
+void
+glade_app_set_pointer_mode (GladePointerMode mode)
+{
+	GladeApp *app = glade_app_get();
+
+	app->priv->pointer_mode = mode;
+
+	g_object_notify (G_OBJECT (app), "pointer-mode");
+}
+
+
+/**
+ * glade_app_get_pointer_mode:
+ *
+ * Gets the current #GladePointerMode
+ * 
+ * Returns: The #GladePointerMode
+ */
+GladePointerMode
+glade_app_get_pointer_mode (void)
+{
+	GladeApp *app = glade_app_get();
+
+	return app->priv->pointer_mode;
 }
 
 /**
@@ -1181,7 +1156,7 @@ glade_app_command_cut (void)
 
 /**
  * glade_app_command_paste:
- * @app: A #GladeApp
+ * @placeholder: A #GladePlaceholder
  *
  * Paste the clipboard selection to the active project's 
  * selection (the project must have only one object selected).
@@ -1305,7 +1280,6 @@ glade_app_command_paste (GladePlaceholder *placeholder)
 
 /**
  * glade_app_command_delete:
- * @app: A #GladeApp
  *
  * Delete the active project's selection.
  */
@@ -1355,7 +1329,6 @@ glade_app_command_delete (void)
 
 /**
  * glade_app_command_delete_clipboard:
- * @app: A #GladeApp
  *
  * Delete the clipboard's selection.
  */
@@ -1420,7 +1393,7 @@ glade_app_command_redo (void)
 /*
  * glade_app_set_accel_group:
  *
- * Sets @accel_group to @app.
+ * Sets @accel_group to app.
  * The acceleration group will be attached to every toplevel widget in this application.
  */
 void
@@ -1629,3 +1602,10 @@ glade_app_selection_changed (void)
 		glade_project_selection_changed (project);
 	}
 }
+
+GladeApp*
+glade_app_new (void)
+{
+	return g_object_new (GLADE_TYPE_APP, NULL);
+}
+
