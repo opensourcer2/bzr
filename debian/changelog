@@ -1,3 +1,43 @@
+glade-3 (3.3.2-0ubuntu1) gutsy; urgency=low
+
+  * New upstream release:
+    - Bindings work has been moved out into a branch
+    - Added toolbar item for "Drag/Resize" mode
+    - Added history lists to undo/redo buttons 
+    - Current notebook page is more consistant (bug 394382)
+    - Use gnome-common macros in configure.ac/Makefiles (bug 399134) 
+    - Fixed lots of compiler warnings from new macros
+    - Added a bunch of translatable/displayable values for new enumerations/values
+    - Display some specially marked backend actions in the toolbar
+    - Attempt to reload an open project if the user tries to open it again (bug 450483)
+    - Monitor and update project saved state wrt undo (bug 392324)
+    - Properly handle dgettext() operations (bug 453105)
+    - Fixed some hangups (bug 453253)
+    - Remove user name and host from comment in glade file (bug 453174)
+    - Now the palette/inspector and property editor are "dockable" (just 
+      dock/undock via view menu, nothing fancy)
+    - Warn about missing displayable values for enums/flags
+    - Fixed glitch with changing notebook pages (bug 456013)
+    - Implemented "Add/Remove Parent" context menu items for all widgets (bug 343786)
+    - Added "Remove Slot" action for placeholders inside GtkBoxes (closes bug 387963)
+    - Markup & mnemonics in labels load properly now (bug 396446)
+    - Context menu for placeholders now have actions that apply to the widget they are in,
+      while "paste" remains contextual to the placeholder in question - Tristan Van Berkom
+    - Misc bug fixes 453105 453107 453111 453110 406039 457224 457222... 
+  * Finnish translation included (LP: #122192)
+  * debian/patches/01_launchpad_integration.patch:
+    - updated
+  * debian/patches/20_python_bindings.patch
+    - dropped, since bindings have been moved out
+  * debian/patches/90_autoconf.patch:
+    - updated
+  * debian/glade-3.install
+    - removed debian/tmp/usr/lib/glade3/bindings/libgladepython.so
+  * debian/control.in
+    - removed build-deps python-gtk2-dev, python-dev
+
+ -- Aron Sisak <aron@ubuntu.hu>  Mon, 23 Jul 2007 23:41:51 +0200
+
 glade-3 (3.3.1-0ubuntu1) gutsy; urgency=low
 
   * New upstream version (3.3.1):

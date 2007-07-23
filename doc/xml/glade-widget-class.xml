@@ -16,7 +16,7 @@
 
 <synopsis>
 
-#include &lt;glade.h&gt;
+#include &lt;gladeui/glade.h&gt;
 
 
             <link linkend="GladeWidgetClass">GladeWidgetClass</link>;
@@ -112,7 +112,7 @@ classes; it also provides an abstraction later to container apis.
 </para></refsect2>
 <refsect2>
 <title><anchor id="GladeCreateReason" role="enum"/>enum GladeCreateReason</title>
-<indexterm><primary>GladeCreateReason</primary></indexterm><programlisting>typedef enum _GladeCreateReason
+<indexterm><primary>GladeCreateReason</primary></indexterm><programlisting>typedef enum
 {
 	GLADE_CREATE_USER = 0,
 	GLADE_CREATE_COPY,

@@ -29,7 +29,7 @@
 
 #include <libbonoboui.h>
 #include <libgnome/libgnome.h>
-#include <libgnomeui/libgnomeui.h>
+#include <libgnomeui/libgnomeui.h>	
 
 /* This function does absolutely nothing
  * (and is for use in overriding post_create functions).
@@ -41,7 +41,7 @@ empty (GObject *container, GladeCreateReason reason)
 
 /* Catalog init function */
 void
-glade_gnomeui_init ()
+glade_gnomeui_init (void)
 {
 	gchar *argv[2] = {"glade-3", NULL};
 	GtkStockItem items [] = {
@@ -279,7 +279,7 @@ glade_gnome_app_set_property (GladeWidgetAdaptor *adaptor,
 
 /* GnomeAppBar */
 GType
-gnome_app_bar_get_type ()
+gnome_app_bar_get_type (void)
 {
 	return gnome_appbar_get_type ();
 }
@@ -1176,14 +1176,6 @@ glade_gnome_file_entry_set_property (GladeWidgetAdaptor *adaptor,
 							     id, value);
 }
 
-/* GnomePixmapEntry */
-void
-glade_gnome_pixmap_entry_set_do_preview (GObject *object, GValue *value)
-{
-	gnome_pixmap_entry_set_preview (GNOME_PIXMAP_ENTRY (object),
-					g_value_get_boolean (value));
-}
-
 /* GnomeFontPicker */
 static void
 glade_gnome_font_picker_set_mode (GObject *object, const GValue *value)
@@ -1389,19 +1381,6 @@ glade_gnome_pixmap_set_scaled_common (GObject *object,
 			glade_widget_property_set (gp, property, 0);
 	}
 }
-
-void
-glade_gnome_pixmap_set_scaled_width (GObject *object, GValue *value)
-{
-	glade_gnome_pixmap_set_scaled_common (object, value, "scaled-height");
-}
-
-void
-glade_gnome_pixmap_set_scaled_height (GObject *object, GValue *value)
-{
-	glade_gnome_pixmap_set_scaled_common (object, value, "scaled-width");
-}
-
 
 void
 glade_gnome_pixmap_set_property (GladeWidgetAdaptor *adaptor,

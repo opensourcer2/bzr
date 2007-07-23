@@ -3,7 +3,7 @@
 #define __GLADE_GTK_H__
 
 #include <gladeui/glade.h>
-#include <glib-object.h>
+#include <gtk/gtk.h>
 
 /* Types */
 
@@ -19,7 +19,14 @@ typedef enum {
 	GLADEGTK_BUTTON_CONTAINER
 } GladeGtkButtonType;
 
-GType glade_gtk_image_type_get_type (void);
-GType glade_gtk_button_type_get_type (void);
+GType       glade_gtk_image_type_get_type  (void);
+GType       glade_gtk_button_type_get_type (void);
 
+GParamSpec *glade_gtk_gnome_ui_info_spec   (void);
+
+GParamSpec *glade_gtk_image_type_spec      (void);
+
+GParamSpec *glade_gtk_button_type_spec     (void);
+
+			 		    
 #endif /* __GLADE_GTK_H__ */

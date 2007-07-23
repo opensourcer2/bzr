@@ -16,7 +16,7 @@
 
 <synopsis>
 
-#include &lt;glade.h&gt;
+#include &lt;gladeui/glade.h&gt;
 
 
 struct      <link linkend="GladeProject-struct">GladeProject</link>;
@@ -97,7 +97,7 @@ struct      <link linkend="GladeProject-struct">GladeProject</link>;
 <synopsis>
 
   &quot;<link linkend="GladeProject--has-selection">has-selection</link>&quot;        <link linkend="gboolean">gboolean</link>              : Read
-  &quot;<link linkend="GladeProject--has-unsaved-changes">has-unsaved-changes</link>&quot;  <link linkend="gboolean">gboolean</link>              : Read
+  &quot;<link linkend="GladeProject--modified">modified</link>&quot;             <link linkend="gboolean">gboolean</link>              : Read
   &quot;<link linkend="GladeProject--path">path</link>&quot;                 <link linkend="gchararray">gchararray</link>            : Read
   &quot;<link linkend="GladeProject--read-only">read-only</link>&quot;            <link linkend="gboolean">gboolean</link>              : Read
 </synopsis>
@@ -630,7 +630,7 @@ and will be copied into the project's directory when selected.</para>
 <varlistentry><term><parameter>project</parameter>&nbsp;:</term>
 <listitem><simpara> A <link linkend="GladeProject"><type>GladeProject</type></link>
 </simpara></listitem></varlistentry>
-<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> Whether the project is being loaded or not.
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> Whether the project is being loaded or not
       
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
@@ -670,9 +670,9 @@ Gets whether the project is read only or not</para>
 <indexterm><primary>GladeProject:has-selection</primary></indexterm><programlisting>  &quot;has-selection&quot;        <link linkend="gboolean">gboolean</link>              : Read</programlisting>
 <para>Whether project has a selection.</para><para>Default value: FALSE</para>
 </refsect2>
-<refsect2><title><anchor id="GladeProject--has-unsaved-changes"/>The &quot;<literal>has-unsaved-changes</literal>&quot; property</title>
-<indexterm><primary>GladeProject:has-unsaved-changes</primary></indexterm><programlisting>  &quot;has-unsaved-changes&quot;  <link linkend="gboolean">gboolean</link>              : Read</programlisting>
-<para>Whether project has unsaved changes.</para><para>Default value: FALSE</para>
+<refsect2><title><anchor id="GladeProject--modified"/>The &quot;<literal>modified</literal>&quot; property</title>
+<indexterm><primary>GladeProject:modified</primary></indexterm><programlisting>  &quot;modified&quot;             <link linkend="gboolean">gboolean</link>              : Read</programlisting>
+<para>Whether project has beem modified since it was last saved.</para><para>Default value: FALSE</para>
 </refsect2>
 <refsect2><title><anchor id="GladeProject--path"/>The &quot;<literal>path</literal>&quot; property</title>
 <indexterm><primary>GladeProject:path</primary></indexterm><programlisting>  &quot;path&quot;                 <link linkend="gchararray">gchararray</link>            : Read</programlisting>

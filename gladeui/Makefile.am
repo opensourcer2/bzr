@@ -1,11 +1,11 @@
 
 common_defines = \
+	-DG_LOG_DOMAIN=\"GladeUI\"                      \
 	-DGLADE_DATADIR="\"$(pkgdatadir)\""		\
 	-DGLADE_LIBDIR="\"$(pkglibdir)\""		\
 	-DGLADE_CATALOGSDIR="\"$(pkgdatadir)/catalogs\""\
 	-DGLADE_MODULESDIR="\"$(pkglibdir)/modules\""	\
 	-DGLADE_PLUGINSDIR="\"$(pkglibdir)/plugins\""	\
-	-DGLADE_BINDINGSDIR="\"$(pkglibdir)/bindings\""	\
 	-DGLADE_PIXMAPSDIR="\"$(pkgdatadir)/pixmaps\""	\
 	-DGLADE_LOCALEDIR="\"$(datadir)/locale\""
 
@@ -23,7 +23,7 @@ libgladeui_1_la_SOURCES = \
 	glade-parameter.c \
 	glade-placeholder.c \
 	glade-custom.c \
-	glade-project-view.c \
+	glade-inspector.c \
 	glade-xml-utils.c \
 	glade-palette.c \
 	glade-palette-item.c \
@@ -54,7 +54,6 @@ libgladeui_1_la_SOURCES = \
 	glade-app.c \
 	glade-keysyms.c \
 	glade-fixed.c \
-	glade-binding.c \
 	glade-base-editor.c \
 	glade-palette-item.h \
 	glade-palette-box.h \
@@ -72,8 +71,8 @@ libgladeui_1_la_CPPFLAGS =  \
 	$(AM_CPPFLAGS)
 
 libgladeui_1_la_CFLAGS =    \
-	-g @GCC_WARN_FLAGS@ \
 	$(GTK_CFLAGS)       \
+	$(WARN_CFLAGS)      \
 	$(AM_CFLAGS)
 
 libgladeui_1_la_LDFLAGS = -version-info $(GLADE_CURRENT):$(GLADE_REVISION):$(GLADE_AGE) $(AM_LDFLAGS)
@@ -85,7 +84,7 @@ libgladeuiinclude_HEADERS = \
 	glade.h \
 	glade-debug.h \
 	glade-project.h \
-	glade-project-view.h \
+	glade-inspector.h \
 	glade-parameter.h \
 	glade-placeholder.h \
 	glade-custom.h \
@@ -107,19 +106,21 @@ libgladeuiinclude_HEADERS = \
 	glade-app.h \
 	glade-builtins.h \
 	glade-fixed.h \
-	glade-binding.h \
 	glade-base-editor.h \
 	glade-xml-utils.h \
 	glade-parser.h \
 	glade-signal.h \
 	glade-cursor.h \
-	glade-widget-action.h \
-	fixed_bg.xpm
+	glade-widget-action.h
 	
 
 if PLATFORM_WIN32
-  libgladeui_1_la_LDFLAGS += -no-undefined -Wl,gladeui-win32-res.o -export-symbols gladeui.def
-  libgladeui_1_la_DEPENDENCIES = gladeui.def gladeui-win32-res.o
+libgladeui_1_la_LDFLAGS += -no-undefined
+endif
+
+if NATIVE_WIN32
+libgladeui_1_la_LDFLAGS += -Wl,gladeui-win32-res.o -export-symbols gladeui.def
+libgladeui_1_la_DEPENDENCIES = gladeui-win32-res.o gladeui.def
 endif
 
 gladeui-win32-res.o: gladeui.rc
@@ -152,7 +153,7 @@ glade-marshallers.h: glade-marshallers.list $(GLIB_GENMARSHAL)
 	&& mv glade-marshallers-h.tmp glade-marshallers.h \
 	|| ( rm -f glade-marshallers-h.tmp && exit 1)
 glade-marshallers.c: glade-marshallers.list $(GLIB_GENMARSHAL)
-	$(GLIB_GENMARSHAL) --prefix=glade_marshal $(srcdir)/glade-marshallers.list --body > glade-marshallers-c.tmp     \
+	$(GLIB_GENMARSHAL) --prefix=glade_marshal $(srcdir)/glade-marshallers.list --body --header > glade-marshallers-c.tmp     \
 	&& mv glade-marshallers-c.tmp glade-marshallers.c \
 	|| ( rm -f glade-marshallers-c.tmp && exit 1 )
 

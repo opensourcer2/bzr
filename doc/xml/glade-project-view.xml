@@ -1,4 +1,4 @@
-<refentry id="GladeProjectView">
+<refentry id="gladeui-GladeProjectView">
 <refmeta>
 <refentrytitle role="top_of_page">GladeProjectView</refentrytitle>
 <manvolnum>3</manvolnum>
@@ -19,54 +19,16 @@
 #include &lt;glade.h&gt;
 
 
-            <link linkend="GladeProjectView-struct">GladeProjectView</link>;
-<link linkend="GtkWidget">GtkWidget</link>*  <link linkend="glade-project-view-new">glade_project_view_new</link>          (void);
-<link linkend="GladeProject">GladeProject</link>* <link linkend="glade-project-view-get-project">glade_project_view_get_project</link>
-                                            (<link linkend="GladeProjectView">GladeProjectView</link> *view);
-<link linkend="void">void</link>        <link linkend="glade-project-view-set-project">glade_project_view_set_project</link>  (<link linkend="GladeProjectView">GladeProjectView</link> *view,
-                                             <link linkend="GladeProject">GladeProject</link> *project);
 
 </synopsis>
 </refsynopsisdiv>
 
-<refsect1 role="object_hierarchy">
-<title role="object_hierarchy.title">Object Hierarchy</title>
-<synopsis>
-
-  <link linkend="GObject">GObject</link>
-   +----<link linkend="GInitiallyUnowned">GInitiallyUnowned</link>
-         +----<link linkend="GtkObject">GtkObject</link>
-               +----<link linkend="GtkWidget">GtkWidget</link>
-                     +----<link linkend="GtkContainer">GtkContainer</link>
-                           +----<link linkend="GtkBin">GtkBin</link>
-                                 +----<link linkend="GtkScrolledWindow">GtkScrolledWindow</link>
-                                       +----GladeProjectView
-</synopsis>
-
-</refsect1>
 
 
 
-<refsect1 role="impl_interfaces">
-<title role="impl_interfaces.title">Implemented Interfaces</title>
-<para>
-GladeProjectView implements
- <link linkend="AtkImplementorIface">AtkImplementorIface</link>.</para>
-
-</refsect1>
 
 
 
-<refsect1 role="signal_proto">
-<title role="signal_proto.title">Signals</title>
-<synopsis>
-
-&quot;<link linkend="GladeProjectView-item-activated">item-activated</link>&quot;
-            <link linkend="void">void</link>        user_function      (<link linkend="GladeProjectView">GladeProjectView</link> *widget,
-                                            <link linkend="GladeWidget">GladeWidget</link>      *arg1,
-                                            <link linkend="gpointer">gpointer</link>          user_data)      : Run last
-</synopsis>
-</refsect1>
 
 
 <refsect1 role="desc">
@@ -80,76 +42,9 @@ objects in the <link linkend="GladeProject"><type>GladeProject</type></link>.
 
 <refsect1 role="details">
 <title role="details.title">Details</title>
-<refsect2>
-<title><anchor id="GladeProjectView-struct" role="struct"/>GladeProjectView</title>
-<indexterm><primary>GladeProjectView</primary></indexterm><programlisting>typedef struct _GladeProjectView GladeProjectView;</programlisting>
-<para>
-
-</para></refsect2>
-<refsect2>
-<title><anchor id="glade-project-view-new" role="function"/>glade_project_view_new ()</title>
-<indexterm><primary>glade_project_view_new</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*  glade_project_view_new          (void);</programlisting>
-<para>
-Creates a new <link linkend="GladeProjectView"><type>GladeProjectView</type></link></para>
-<para>
-
-</para><variablelist role="params">
-<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a new <link linkend="GladeProjectView"><type>GladeProjectView</type></link>
-</simpara></listitem></varlistentry>
-</variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-project-view-get-project" role="function"/>glade_project_view_get_project ()</title>
-<indexterm><primary>glade_project_view_get_project</primary></indexterm><programlisting><link linkend="GladeProject">GladeProject</link>* glade_project_view_get_project
-                                            (<link linkend="GladeProjectView">GladeProjectView</link> *view);</programlisting>
-<para>
-</para>
-<para>
-
-</para><variablelist role="params">
-<varlistentry><term><parameter>view</parameter>&nbsp;:</term>
-<listitem><simpara> a <link linkend="GladeProjectView"><type>GladeProjectView</type></link>
-</simpara></listitem></varlistentry>
-<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the <link linkend="GladeProject"><type>GladeProject</type></link> <parameter>view</parameter> represents
-</simpara></listitem></varlistentry>
-</variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-project-view-set-project" role="function"/>glade_project_view_set_project ()</title>
-<indexterm><primary>glade_project_view_set_project</primary></indexterm><programlisting><link linkend="void">void</link>        glade_project_view_set_project  (<link linkend="GladeProjectView">GladeProjectView</link> *view,
-                                             <link linkend="GladeProject">GladeProject</link> *project);</programlisting>
-<para>
-Sets the project of <parameter>view</parameter> to <parameter>project</parameter>. If <parameter>project</parameter> is <link linkend="NULL:CAPS"><literal>NULL</literal></link>, <parameter>view</parameter> will
-stop being a view of a project.</para>
-<para>
-
-</para><variablelist role="params">
-<varlistentry><term><parameter>view</parameter>&nbsp;:</term>
-<listitem><simpara> a <link linkend="GladeProjectView"><type>GladeProjectView</type></link>
-</simpara></listitem></varlistentry>
-<varlistentry><term><parameter>project</parameter>&nbsp;:</term>
-<listitem><simpara> a <link linkend="GladeProject"><type>GladeProject</type></link> or <link linkend="NULL:CAPS"><literal>NULL</literal></link>
-</simpara></listitem></varlistentry>
-</variablelist></refsect2>
 
 </refsect1>
 
-<refsect1 role="signals">
-<title role="signals.title">Signal Details</title>
-<refsect2><title><anchor id="GladeProjectView-item-activated"/>The &quot;item-activated&quot; signal</title>
-<indexterm><primary>GladeProjectView::item-activated</primary></indexterm><programlisting><link linkend="void">void</link>        user_function                  (<link linkend="GladeProjectView">GladeProjectView</link> *widget,
-                                            <link linkend="GladeWidget">GladeWidget</link>      *arg1,
-                                            <link linkend="gpointer">gpointer</link>          user_data)      : Run last</programlisting>
-<para>
-Emitted when a item is activated in the GtkTreeView of a GladeProjectView.</para>
-<para>
-
-</para><variablelist role="params">
-<varlistentry><term><parameter>widget</parameter>&nbsp;:</term>
-<listitem><simpara> the <link linkend="GladeWidget"><type>GladeWidget</type></link> that was activated.
-</simpara></listitem></varlistentry>
-<varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
-<listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
-</variablelist></refsect2>
-</refsect1>
 
 
 

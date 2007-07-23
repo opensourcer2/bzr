@@ -94,10 +94,10 @@ static void glade_palette_append_item_group (GladePalette *palette, GladeWidgetG
 
 static void glade_palette_update_appearance (GladePalette *palette);
 
-G_DEFINE_TYPE(GladePalette, glade_palette, GTK_TYPE_VBOX)
+G_DEFINE_TYPE (GladePalette, glade_palette, GTK_TYPE_VBOX)
 
 
-void
+static void
 selector_button_toggled_cb (GtkToggleButton *button, GladePalette *palette)
 {
 	if (gtk_toggle_button_get_active (button))
@@ -358,7 +358,7 @@ glade_palette_class_init (GladePaletteClass *klass)
 					 g_param_spec_enum ("item-appearance",
 							     "Item Appearance",
 							     "The appearance of the palette items",
-							     GLADE_ITEM_APPEARANCE_TYPE,
+							     GLADE_TYPE_ITEM_APPEARANCE,
 							     GLADE_ITEM_ICON_ONLY,
 							     G_PARAM_READWRITE));
 
@@ -410,6 +410,10 @@ glade_palette_on_button_toggled (GtkWidget *button, GladePalette *palette)
 	if (priv->current_item == GLADE_PALETTE_ITEM (button))
 	{
 		priv->current_item = NULL;
+		g_object_notify (G_OBJECT (palette), "current-item");
+
+		glade_app_set_pointer_mode (GLADE_POINTER_SELECT);
+
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->selector_button), TRUE);	
 
 		priv->sticky_selection_mode = FALSE;
@@ -427,13 +431,16 @@ glade_palette_on_button_toggled (GtkWidget *button, GladePalette *palette)
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->current_item), FALSE);
 		
 	priv->current_item = GLADE_PALETTE_ITEM (button);
+	g_object_notify (G_OBJECT (palette), "current-item");
+
+	glade_app_set_pointer_mode (GLADE_POINTER_ADD_WIDGET);
+
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->selector_button), FALSE);	
 	
 	/* check whether to enable sticky selection */
 	adaptor = glade_palette_item_get_adaptor (GLADE_PALETTE_ITEM (button));	
 	gdk_window_get_pointer (button->window, NULL, NULL, &mask);
   	priv->sticky_selection_mode = (!GWA_IS_TOPLEVEL (adaptor)) && (mask & GDK_CONTROL_MASK);
-
 
 	g_signal_emit (G_OBJECT (palette), glade_palette_signals[TOGGLED], 0);
 }
@@ -477,7 +484,7 @@ glade_palette_new_item_group (GladePalette *palette, GladeWidgetGroup *group)
 	box = glade_palette_box_new ();
 
 	/* Go through all the widget classes in this catalog. */
-	for (l = glade_widget_group_get_adaptors (group); l; l = l->next)
+	for (l = (GList *) glade_widget_group_get_adaptors (group); l; l = l->next)
 	{
 		GladeWidgetAdaptor *adaptor =  GLADE_WIDGET_ADAPTOR (l->data);
 
@@ -722,8 +729,12 @@ glade_palette_deselect_current_item (GladePalette *palette, gboolean sticky_awar
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (palette->priv->selector_button), TRUE);		
 		
 		palette->priv->current_item = NULL;
+		g_object_notify (G_OBJECT (palette), "current-item");
+
+		glade_app_set_pointer_mode (GLADE_POINTER_SELECT);
 
 		g_signal_emit (G_OBJECT (palette), glade_palette_signals[TOGGLED], 0);
+
 	}
 	
 }

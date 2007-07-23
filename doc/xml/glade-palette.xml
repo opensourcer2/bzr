@@ -16,7 +16,7 @@
 
 <synopsis>
 
-#include &lt;glade.h&gt;
+#include &lt;gladeui/glade.h&gt;
 
 
             <link linkend="GladePalette-struct">GladePalette</link>;

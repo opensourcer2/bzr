@@ -1,5 +1,406 @@
 2006-06-18  Tristan Van Berkom <tvb@gnome.org>
 
+	* NEWS, configure.ac: Rolling 3.3.2
+
+2006-07-23  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-widget.[ch]: 
+	  - Adding convenience funcs that help with debugging property values in plugins: 
+	    glade_widget_property_string(), glade_widget_pack_property_string().
+	  - Fixed order in which we setup packing actions when adding/replacing widgets in
+	    containers and also commented about how packing properties are different in this
+	    regard (this change allowed me to glade_widget_remove_pack_action() from the
+	    backend's replace_child/add_child handlers).
+
+	* gladeui/glade-popup.c: Added parent options in placeholder context menus.
+
+	* plugins/gtk+/glade-gtk.c, plugins/gtk+/gtk+.xml.in: 
+	  - Reset label/markup/use-underline properties at realize time, this 
+	    fixes load time glitches with markup and mnemonics (bug 396446).
+	  - Added a "Remove Slot" packing action to delete placeholders from GtkBox (bug 387963)
+
+2007-07-20  Vincent Geddes <vgeddes@gnome.org>
+
+	* gladeui/glade-design-layout.c:
+	  - Use cairo instead of GdkGC to draw frame.
+	  - Draw slightly darker border to ensure border is visible on some themes.
+
+2006-07-18  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-command.[ch]: 
+	  fixed memory leaks of description strings in usage of glade_command_push_group()
+	  
+	* gladeui/glade-widget.[ch]: Added convenience apis to set sensitivity on
+	  GladeWidgetActions.
+
+	* gladeui/glade-widget-adaptor.[ch], gladeui/glade-xml-utils.c: Added
+	  deep_post_create() vfunc, in this one you must always chain up to the parent.
+
+	* plugins/gtk+/glade-gtk.c, plugins/gtk+/gtk+.xml.in: Added "Add/Remove" parent
+	  feature (bug 343786), implemented types: Alignment, Viewport, Event Box, Frame,
+	  Aspect Frame, Scrolled Window, Expander, Table, Horizontal Box, Vertical Box,
+	  Horizontal Panes, Vertical Panes
+	
+2007-07-18  Vincent Geddes <vgeddes@gnome.org>
+
+	* gladeui/glade-design-layout.h: Make header file look pretty.
+
+	* gladeui/glade-design-layout.c: Do not override GtkWidget::event().
+	  Ensures that child widgets only receive events when necessary.
+	  
+	* src/glade-window.c: Rename "Help" menu item to "Contents" (as per convention).
+
+	* src/glade-window.c: Add About dialog credits for artists and documenters.
+
+2007-07-17  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* gladeui/glade-widget-adaptor.c: translate action name in gwa_action_update_from_node()
+
+	* gladeui/glade-property-class.c: simplified displayable value message in 
+	  gpc_get_displayable_values_from_node() closes #448915
+
+2006-07-17  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-widget-adaptor.c: untranslate the "half translated" warning
+	  message in gwa_displayable_values_check().
+
+	* gladeui/glade-app.[ch]: Removed glade_app_widget_event() and the "widget-event"
+	  signal
+
+	* gladeui/glade-design-layout.c: Expose glade_design_layout_widget_event() to
+	  be used internally by GladeWidget (no longer listening to "widget-event" signal
+	  on glade-app).
+
+	* gladeui/glade-widget.c: glade_widget_event_private() Find the parenting
+	  GladeDesignLayout and dispatch the event through glade_design_layout_widget_event()
+	  (this fixes multiple projects recieving the same events, bug 456013).
+
+	* gladeui/glade-fixed.c: Dont connect event handlers to child objects of fixed
+	  containers that are not widgets.
+
+2006-07-16  Tristan Van Berkom <tvb@gnome.org>
+
+	* src/glade-window.c: Now undocked windows can be redocked by hitting
+	the close button and UI tool components dont sport redundant indicator labels.
+
+2007-07-16  Gabor Kelemen <kelemeng@gnome.hu>
+
+	* po/POTFILES.in: Added missing files (bug 457222)
+
+	* src/main.c: Added some missing translatable strings (bug 457224)
+	
+2007-07-12  Vincent Geddes <vgeddes@gnome.org>
+
+	* gladeui/glade-widget.c 
+	gladeui/glade-design-layout.c
+        gladeui/glade-placeholder.c
+	gladeui/glade-placeholder.h: Update to use G_DEFINE_TYPE macros. Removed
+	the manual peeks to get the parent class.
+
+2007-07-12  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* gladeui/glade-widget-adaptor.c: added gwa_displayable_values_check() and use it to check 
+	  for displayable values in enums and flags properties in  glade_widget_adaptor_from_catalog()
+	  this way we can check every properties not only the ones that are explicited in the catalog.
+
+	* gladeui/glade-property-class.c: removed displayable values check from 
+	  glade_property_class_update_from_node()
+
+	* plugins/gtk+/gtk+.xml.in: added displayable values for
+	  GtkToolbar::icon-size
+	  GtkLabel::wrap-mode
+	  GtkIconView::selection-mode, orientation
+	  GtkRange::lower-stepper-sensitivity, upper-stepper-sensitivity
+	  GtkRuler::metric
+	  GtkList::selection-mode
+	  GtkCList::shadow-type, selection-mode, sort-type
+
+2006-07-11  Tristan Van Berkom <tvb@gnome.org>
+
+	* src/glade-window.c: Implemented docking view menu.
+
+2007-07-11  Vincent Geddes <vgeddes@gnome.org>
+
+	* gladeui/glade-app.c (glade_app_add_project): Ref project when
+	  adding it to the app.
+	  
+	* gladeui/glade-widget-adaptor.h: s/GLADE_CREATE_REASON/GLADE_TYPE_CREATE_REASON/.
+
+2007-07-10  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	Removed bindings framework since now all binding work will be done
+	in the branch until we have a proper framework and a full implementation (python)
+
+2007-07-10  Vincent Geddes <vgeddes@gnome.org>
+
+	* gladeui/glade-project: fix bug with regards to setting the
+	  project as unmodified when undoing the command that caused
+	  the first unsaved command.
+
+2007-07-09  Vincent Geddes <vgeddes@gnome.org>
+
+	* configure.ac, src/main.c: Initialize threading system (#406039).
+	
+	* gladeui/glade-project.c: Remove user name and host
+	  from comment in glade file (#453174).
+	
+2007-07-07  Vincent Geddes <vgeddes@gnome.org>
+
+	* configure.ac: Increment version to 3.3.2 as we modified API
+	  since the last public release. Fixes Anjuta build.
+
+2007-07-06  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* gladeui/glade-property.c: skip properties that are not readable in
+	  glade_property_load_impl() (fixes #453107 and #453111)
+
+	* plugins/gtk+/gtk+.xml.in: added default value to GtkLinkButton::uri property
+	  fixes #453110
+
+2007-07-04  Vincent Geddes <vgeddes@gnome.org>
+
+	* gladeui/glade-property-class.c
+	  (glade_property_class_update_from_node), (gpc_get_displayable_values_from_node):
+	  Fix some mishandled dgettext operations (#453105).
+
+2007-07-03  Vincent Geddes <vgeddes@gnome.org>
+
+	* gladeui/glade-binding.c: Upgrade to g_slice_new().
+	
+	* bindings/python/glade-python.c: Run garbage collector before finalizing
+	  interpreter. Use Py_InitializeEx() instead of Py_Initialize() (#453104).
+	  
+	* gladeui/glade-app.h, gladeui/glade-app.c: New method glade_app_new().
+
+	* src/glade-project-window.h, src/glade-project-window.c: Renamed
+	  to glade-window.h and glade-window.c respectively. GladeWindow now
+	  subclasses GtkWindow instead of GladeApp (#449928).
+
+2007-07-03  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* gladeui/glade-widget-adaptor.[ch]: set glade_widget_adaptor_child_verify_property()
+	  value parameter as constant.
+
+	* gladeui/glade-property.c: added packing property verify check in 
+	  glade_property_set_value_impl().
+
+	* plugins/gtk+/gtk+.xml.in: fixed verify-function and child-verify-function tags
+	  for GtkBox, GtkTable, GtkNotebook and GtkAssistant classes. fixes #453253
+
+2007-07-02  Vincent Geddes <vgeddes@gnome.org>
+
+	* gladeui/glade-catalog.c, gladeui/glade-widget-adaptor.c: Properly
+	  handle dgettext() operations (#453105, Christian Persch).
+	  
+	* gladeui/glade-binding.c (glade_binding_load_all): Close GDir when
+	  finished reading.
+
+2007-07-01  Vincent Geddes <vgeddes@gnome.org>
+
+	* gladeui/glade-catalog.h, gladeui/glade-catalog.c:
+	  Add glade_catalog_destroy_all(). Use g_slice_new() for mem allocation.
+	  
+	* gladeui/glade-app.c: Free catalogs in finalize.
+
+2007-06-29  Vincent Geddes <vgeddes@gnome.org>
+
+	* gladeui/glade-project.c, gladeui/glade-project.h: Rename
+	  glade_project_get_has_unsaved_changes() to glade_project_get_modified().
+	  Set "modified" to FALSE if we undo the command that caused the first
+	  unsaved modification in a project (#392324).
+	
+	* src/glade-project-window.c: Update for API changes in GladeProject.
+
+2007-06-28  Vincent Geddes <vgeddes@gnome.org>
+
+	* gladeui/fixed_bg.xpm, gladeui/Makefile.am,
+	  plugins/gtk+/Makefile.am: Moved gladeui/fixed_bg.xpm to plugins/gtk+/fixed-bg.xpm.
+	  The graphic is only used by the GTK+ plugin.
+
+	* gladeui/glade-editor.c: HIGify query dialog.
+
+	* plugins/gtk+/Makefile.am, plugins/gnome/Makefile.am: Set log domains
+	  "GladeUI-GTK" and "GladeUI-GNOME" respectively.
+
+	* gladeui/glade-palette.h, gladeui/glade-palette-item.h: Move GladeItemAppearance
+	  enum from glade-palette-item.h to glade-palette.h (so it is visible in the docs).
+	
+	* src/glade-project-window.c (check_reload_project): Set alternative button order
+	  on message dialog.
+
+	* src/glade-project-window.c (glade_project_window_open_project), (switch_project),
+	  (check_reload_project), (open_project): Attempt to reload an open project if
+	  the user tries to open it again (#450483).
+
+2007-06-27  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* gladeui/glade-popup.[ch]
+	  - added packing actions to placeholders
+
+	* gladeui/glade-widget-action.[ch]: added "important" flag to GWActionClass
+
+	* gladeui/glade-widget-adaptor.[ch]:
+	  - parse important tag in gwa_action_update_from_node()
+
+	  - added new "important" parameter to glade_widget_adaptor_pack_action_add() and
+	    glade_widget_adaptor_action_add()
+
+	* gladeui/glade-xml-utils.h: addded GLADE_TAG_IMPORTANT tag
+
+	* plugins/gtk+/gtk+.xml.in: marked launch_editor actions as important
+
+	* gladeui/glade-inspector.c: make inspector popup include only normal actions.
+
+	* src/glade-project-window.c: added important actions to the toolbar.
+
+2007-06-26  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* gladeui/glade-property-class.c: print a message for missing displayable values in
+	  glade_property_class_update_from_node() and gpc_get_displayable_values_from_node()
+
+	* plugins/gtk+/glade-gtk.c: removed inline displayable values in
+	   glade_gtk_image_type_get_type() and glade_gtk_button_type_get_type()
+
+	* plugins/gtk+/gtk+.xml.in: added missing displayable values in GtkToolButton::glade-type,
+	  GtkButton::glade-type, GtkImage::glade-type and GtkArrow::arrow-type
+
+2007-06-26  Vincent Geddes <vgeddes@gnome.org>
+
+	* src/Makefile.am
+	  configure.ac
+	  gladeui/Makefile.am: Cygwin build fixes. Only apply "-mwindows" ld flag
+	  if we are in unstable development.
+	  
+	* configure.ac, plugins/gtk+/Makefile.am, plugins/gtk+/glade-gtk.h, 
+	  plugins/gnome/glade-gnome.h, plugins/gnome/Makefile.am: Substitute PLUGINS_WARN_CFLAGS
+	  as the warning flags for compiling plugins. Don't use the warning flags
+	  defined by GNOME_COMPILE_WARNINGS. Delete plugins/gnome/glade-gnome.h.
+
+2007-06-24  Vincent Geddes <vgeddes@gnome.org>
+
+	* gladeui/Makefile.am: Set log domain for libgladeui to "GladeUI".
+
+2007-06-23  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* plugins/gtk+/glade-gtk.c: glade_gtk_tool_button_set_type() return if loading 
+	  fixes #450177. glade_gtk_tool_button_set_icon() show image widget.
+
+2007-06-22  Vincent Geddes <vgeddes@gnome.org>
+
+	* plugins/gnome/glade-gnome.h,
+	  plugins/gtk+/glade-gtk.c
+	  plugins/gtk+/glade-gtk.h
+	  plugins/gtk+/Makefile.am,
+	  plugins/gnome/glade-gnome.c,
+	  plugins/gnome/Makefile.am,
+	  src/glade-project-window.c,
+	  gladeui/glade-editor-property.c,
+	  gladeui/glade-parameter.c,
+	  gladeui/glade-widget.c,
+	  gladeui/glade-command.c,
+	  gladeui/glade-palette.c,
+	  gladeui/glade-utils.c,
+	  gladeui/glade-accumulators.c,
+	  gladeui/glade-palette.h,
+	  gladeui/glade-binding.h,
+	  gladeui/glade-app.c,
+	  gladeui/glade-property.c,
+	  gladeui/glade-builtins.c,
+	  gladeui/glade-project.c,
+	  gladeui/Makefile.am: Fix "missing prototype" errors reported by
+	  gcc due to increased warning level (-Wmissing-prototypes). Added
+	  glade-gnome.h with function prototypes as well.
+	  
+	* src/glade-project-window.c, src/glade-project-window.h: Beautify
+	  header file, add tooltips for undo history menus. 
+
+2007-06-21  Christian Persch  <chpe@gnome.org>
+
+	* bindings/python/Makefile.am:
+	* configure.ac:
+	* gladeui/Makefile.am:
+	* plugins/gnome/Makefile.am:
+	* plugins/gtk+/Makefile.am:
+	* src/Makefile.am: Use gnome-common macro for WARN_CFLAGS. Bug
+	#399134.
+
+2006-06-21  Vincent Geddes <vincent.geddes@gmail.com>
+	
+	* gladeui/glade-app.[ch], gladeui/glade-widget-adaptor.c: Misc cleanups.
+
+2006-06-20  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/glade-gtk.c: Remember notebook page when 
+	  reconstructing (Fixes bug 394382)
+
+	* src/glade-project-window.c: Refresh active GladeDesignView upon
+	  update_ui calls (fixes occasional outline glitch in the design-view).
+
+	* doc/gladeui.types: Removed glade_project_view_get_type added
+	glade_inspector_get_type
+
+2006-06-20  Vincent Geddes <vincent.geddes@gmail.com>
+
+	* doc/gladeui-docs.sgml, doc/gladeui.types, doc/gladeui-sections.txt,
+	  doc/tmpl/glade-inspector.sgml: Set up documentation for GladeInspector.
+	  
+	* po/POTFILES.in: Add glade-inspector.c
+	
+	* gladeui/glade-inspector.[ch]: Add convenience function
+	  `glade_inspector_new_with_project()'.
+
+2007-06-20  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* gladeui/glade-inspector.c: added extra check in project_remove_widget_cb()
+	  iter could be NULL!
+
+2006-06-20  Vincent Geddes <vincent.geddes@gmail.com>
+
+	* gladeui/glade-inspector.[ch]: New Inspector implementation.
+	  - The Inspector no longer records session data. 
+	  - GtkTreeModel of inspector is now synchronised with project data
+	    in an incremental fashion, instead of being totally rebuilt on changes.
+	  
+	* gladeui/glade-project-view.[ch]: Removed.
+	
+	* gladeui/glade-app.[ch]: Remove glade_app_add_project_view(). Inspectors
+	  are now managed by the frontend.
+	  
+	* src/glade-project-window: A unique GladeInspector is associated with	
+	  each open project. These inspectors are stored in a GtkNotebook. 
+
+2006-06-19  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/gtk+.xml.in: Added launch_editor action for toolbars.
+
+	* gladeui/glade-project.[ch]: added glade_project_undo_items() and
+	glade_project_redo_items().
+
+	* src/glade-project-window.c: 
+	  - Made Undo/Redo buttons use a GtkMenuToolButton and include 
+	    undo/redo history in those buttons
+	  - Added Drag/Resize button in the toolbar
+
+	* gladeui/glade-design-layout.c: More reliable pointer handling
+
+	* gladeui/glade-app.c: New pointer-mode property
+	
+	* gladeui/glade-fixed.c, gladeui/glade-placeholder.c, gladeui/glade-palette.c:
+	  Use pointer-mode to set pointer interaction mode
+
+	* gladeui/glade-builtins.c: Added trailing end marker on the stock list
+	  enum paramspec.
+	
+2007-06-18  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* bindings/python/glade-python-gwa.defs: deleted launch_editor wrapper.
+
+	* bindings/python/glade-python-gwa.c: updated
+
+2006-06-18  Tristan Van Berkom <tvb@gnome.org>
+
+	* NEWS, configure.ac: Rolling 3.3.1
+
 	* gladeui/plugins/gtk+/glade-gtk.c: Corrected undo item for
 	"remove page" action to say "Removed page from notebook1".
 
@@ -282,8 +683,8 @@
 
 2007-05-04  Vincent Geddes <vincent.geddes@gmail.com>
 
-        * doc/tmpl/glade-project.sgml, doc/tmpl/glade-app.sgml,
-          doc/tmpl/glade-widget.sgml, doc/tmpl/glade-property.sgml,
+	* doc/tmpl/glade-project.sgml, doc/tmpl/glade-app.sgml,
+	  doc/tmpl/glade-widget.sgml, doc/tmpl/glade-property.sgml,
 	  doc/tmpl/glade-widget-class.sgml, doc/tmpl/glade-fixed.sgml
 	  doc/tmpl/glade-utils.sgml: Update documentation templates.
 
@@ -353,21 +754,21 @@
 
 	* gladeui/glade-project.h, gladeui/glade-project.c:
 	  - Hide private implementation details (Added GladeProjectPrivate).
-          - Added private field accessors glade_project_get_path, glade_project_get_name,
-            glade_project_get_objects, and glade_project_get_has_unsaved_changes.
-          - Removed project->name field.
-          - Removed glade_project_display_name method.
-          
-        * gladeui/glade-editor-property.c, gladeui/glade-project-view.c,
+	  - Added private field accessors glade_project_get_path, glade_project_get_name,
+	    glade_project_get_objects, and glade_project_get_has_unsaved_changes.
+	  - Removed project->name field.
+	  - Removed glade_project_display_name method.
+	  
+	* gladeui/glade-editor-property.c, gladeui/glade-project-view.c,
 	  gladeui/glade-cursor.c, gladeui/glade-signal-editor.c, gladeui/glade-app.c
 	  gladeui/glade-property-class.c: Update for change in GladeProject.
    
-        * src/glade-project-window.c: Update for change in GladeProject. Added
-          methods for formatting paths and names. Fix display of tooltips for
-          items in the project list menu.
-          
-        * gladeui/glade-palette-item.c, gladeui/glade-palette.c: Update to use 
-          g_object_ref_sink().        
+	* src/glade-project-window.c: Update for change in GladeProject. Added
+	  methods for formatting paths and names. Fix display of tooltips for
+	  items in the project list menu.
+	  
+	* gladeui/glade-palette-item.c, gladeui/glade-palette.c: Update to use 
+	  g_object_ref_sink().	
 
 2007-04-25  Juan Pablo Ugarte <juanpablougarte@gmail.com>
 
@@ -386,14 +787,14 @@
 	  unused embedding implementation. Fix embedding warning.
 	  
 	* glade-id-allocator.c, glade-id-allocator.h: Performed house cleaning.
-          - Use g_slice_new where appropriate.
-          - Hide private implementation details.
-          - Added g_return_if_fail guards.
-          
-        * gladeui/glade-project.c, gladeui/glade-project.h:
-          - Move to using GladeIDAllocator for allocating unsaved numbers.
-          - Rename some variables since projects are now considered "unsaved"
-            instead of "untitled" (#400357, Wouter Bolsterlee).
+	  - Use g_slice_new where appropriate.
+	  - Hide private implementation details.
+	  - Added g_return_if_fail guards.
+	  
+	* gladeui/glade-project.c, gladeui/glade-project.h:
+	  - Move to using GladeIDAllocator for allocating unsaved numbers.
+	  - Rename some variables since projects are now considered "unsaved"
+	    instead of "untitled" (#400357, Wouter Bolsterlee).
 
 2007-04-20  Vincent Geddes <vincent.geddes@gmail.com>
 
@@ -688,27 +1089,27 @@
 	* src/main.c:
 	  - Add summary of the application's functionality in the '--help'
 	    output (with g_option_context_set_summary()).
-	  - Set translation domain for the main option group.          
+	  - Set translation domain for the main option group.	  
 
-        * docs/catalogintro.sgml: pkg-config file is now 'gladeui-1.0'.
-        
-        * data/glade-3.desktop.in.in: Added 'GUIDesigner' to 'Categories'.
+	* docs/catalogintro.sgml: pkg-config file is now 'gladeui-1.0'.
+	
+	* data/glade-3.desktop.in.in: Added 'GUIDesigner' to 'Categories'.
 
-        * gladeui/glade.h, gladeui/glade-app.[ch]:
-          - Added a private initialisation function `glade_init_check()' for
-            libgladeui.
-          - Remove the 'bad' public variables that defined various installation
-            paths. These paths can now be obtained from static class methods on
-            GladeApp (static as in the Java and C++ sense).        
-        
-        * src/main.c, src/glade-project-window.c, gladeui/glade-catalog.c,
-          gladeui/glade-binding.c, gladeui/glade-cursor.c,
-          gladeui/glade-palette.c gladeui/glade-widget-adaptor.c, 
-          gladeui/glade-utils.c, bindings/python/glade-python.c: Use the new
-          GladeApp methods for obtaining installation paths.
-          
-        * gladeui/glade-palette-box.[ch]: Use G_DEFINE_TYPE() and
-          g_type_class_add_private().
+	* gladeui/glade.h, gladeui/glade-app.[ch]:
+	  - Added a private initialisation function `glade_init_check()' for
+	    libgladeui.
+	  - Remove the 'bad' public variables that defined various installation
+	    paths. These paths can now be obtained from static class methods on
+	    GladeApp (static as in the Java and C++ sense).	
+	
+	* src/main.c, src/glade-project-window.c, gladeui/glade-catalog.c,
+	  gladeui/glade-binding.c, gladeui/glade-cursor.c,
+	  gladeui/glade-palette.c gladeui/glade-widget-adaptor.c, 
+	  gladeui/glade-utils.c, bindings/python/glade-python.c: Use the new
+	  GladeApp methods for obtaining installation paths.
+	  
+	* gladeui/glade-palette-box.[ch]: Use G_DEFINE_TYPE() and
+	  g_type_class_add_private().
 
 2007-02-09  Juan Pablo Ugarte <juanpablougarte@gmail.com>
 
@@ -722,19 +1123,19 @@
 
 2007-02-08  Vincent Geddes <vincent.geddes@gmail.com>
 
-        * gladeui/*.[ch]: Replaced C++ style comments with the more portable ISO C syntax.
-          
-        * gladeui/glade-app.[ch]: Use the G_DEFINE_TYPE() and
-          g_type_class_add_private() idioms for registering the class.
-          
-        * README.cvs: Renamed to 'README.svn'.
-        
-        * README: Corrected some typos and updated GTK+ required to 2.10.0.
-        
-        * plugins/gtk+/icons/16x16/Makefile.am, plugins/gtk+/icons/22x22/Makefile.am:
-          Added some icons.
-          
-        * src/glade-project-window.c: Set the label for the Selector toolbutton.
+	* gladeui/*.[ch]: Replaced C++ style comments with the more portable ISO C syntax.
+	  
+	* gladeui/glade-app.[ch]: Use the G_DEFINE_TYPE() and
+	  g_type_class_add_private() idioms for registering the class.
+	  
+	* README.cvs: Renamed to 'README.svn'.
+	
+	* README: Corrected some typos and updated GTK+ required to 2.10.0.
+	
+	* plugins/gtk+/icons/16x16/Makefile.am, plugins/gtk+/icons/22x22/Makefile.am:
+	  Added some icons.
+	  
+	* src/glade-project-window.c: Set the label for the Selector toolbutton.
 
 2007-02-07  Paul <ephraim_owns@hotmail.com>
 
@@ -979,7 +1380,7 @@
 
 2007-01-07  Vincent Geddes <vincent.geddes@gmail.com>
 
-        * configure.in: Quote some macro arguments. Use AS_HELP_STRING
+	* configure.in: Quote some macro arguments. Use AS_HELP_STRING
 	  to format the messages for AC_ARG_ENABLE macros. Other cleanups
 	  and updates.
 
@@ -1012,7 +1413,7 @@
 	* src/glade-signal.c:
 	* src/glade-xml-utils.c: Include config.h.
 
-        * src/glade-app.c: (glade_app_init): Bind the gettext domain. Bug
+	* src/glade-app.c: (glade_app_init): Bind the gettext domain. Bug
 	#397429.
 
 2007-01-17  Tristan Van Berkom <tvb@gnome.org>

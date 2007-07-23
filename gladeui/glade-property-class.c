@@ -297,13 +297,15 @@ glade_property_class_free (GladePropertyClass *property_class)
 			gchar *name, *nick;
 			
 			name = (gchar *) g_array_index (disp_val, GEnumValue, i).value_name;
-			if (name) g_free(name);
+			if (name)
+				g_free (name);
 			
 			nick = (gchar *) g_array_index (disp_val, GEnumValue, i).value_nick;
-			if (nick) g_free(nick);
+			if (nick)
+				g_free (nick);
 		}
 		
-		g_array_free(disp_val, TRUE);
+		g_array_free (disp_val, TRUE);
 	}	
 	
 	g_free (property_class);
@@ -1376,12 +1378,27 @@ glade_property_class_get_displayable_value(GladePropertyClass *klass, gint value
  */
 static GArray *
 gpc_get_displayable_values_from_node (GladeXmlNode *node, 
-				      GEnumValue   *values, 
-				      gint          n_values,
+				      GladePropertyClass *klass,				   
 				      const gchar  *domain)
 {
+	gpointer the_class = g_type_class_ref (klass->pspec->value_type);
 	GArray *array;
 	GladeXmlNode *child;
+	GEnumValue *values;
+	gint n_values;
+	
+	if (G_IS_PARAM_SPEC_ENUM (klass->pspec))
+	{
+		GEnumClass *eclass = the_class;
+		values = eclass->values;
+		n_values = eclass->n_values;
+	}
+	else
+	{
+		GFlagsClass *fclass = the_class;
+		values = (GEnumValue*)fclass->values;
+		n_values = fclass->n_values;
+	}
 	
 	if ((child = glade_xml_search_child (node, GLADE_TAG_VALUE)) == NULL)
 		return NULL;
@@ -1403,32 +1420,55 @@ gpc_get_displayable_values_from_node (GladeXmlNode *node,
 		{
 			if(strcmp (id, values[i].value_name) == 0)
 			{
+				gchar *translated;
+			
 				val=values[i];
 				
-				/* Tedious memory handleing; if gettext doesn't return
+				/* Tedious memory handling; if dgettext doesn't return
 				 * a translation, dont free the untranslated string.
 				 */
-				if(name) 
+				if (name) 
 				{
-					val.value_name = dgettext (domain, name);
-					if (name != val.value_name)
+					translated = dgettext (domain, name);
+					if (name != translated)
+					{
+						val.value_name = g_strdup (translated);
 						g_free (name);
+					}
+					else
+					{
+						val.value_name = name;
+					}
 				}
-				if(nick)
+				if (nick)
 				{
-					val.value_nick = dgettext (domain, nick);
-					if (nick != val.value_nick)
+					translated = dgettext (domain, nick);
+					if (nick != translated)
+					{
+						val.value_nick = g_strdup (translated);
 						g_free (nick);
+					}
+					else
+					{
+						val.value_nick = nick;
+					}	
 				}
 
-				g_array_append_val(array, val);
+				g_array_append_val (array, val);
 				break;
 			}
 		}
+		
 		g_free(id);
 		
 		child = glade_xml_node_next (child);
 	}
+	
+	if (n_values != array->len)
+		g_message ("%d missing displayable value for %s::%s", n_values - array->len,
+			   ((GladeWidgetAdaptor*)klass->handle)->name, klass->id);
+	
+	g_type_class_unref (the_class);
 	
 	return array;
 }
@@ -1528,7 +1568,7 @@ glade_property_class_update_from_node (GladeXmlNode        *node,
 				       const gchar         *domain)
 {
 	GladePropertyClass *klass;
-	gchar *buff;
+	gchar *buf, *translated;
 	GladeXmlNode *child;
 
 	g_return_val_if_fail (property_class != NULL, FALSE);
@@ -1540,10 +1580,10 @@ glade_property_class_update_from_node (GladeXmlNode        *node,
 	g_return_val_if_fail (glade_xml_node_verify (node, GLADE_TAG_PROPERTY), FALSE);
 
 	/* check the id */
-	buff = glade_xml_get_property_string_required (node, GLADE_TAG_ID, NULL);
-	if (!buff)
+	buf = glade_xml_get_property_string_required (node, GLADE_TAG_ID, NULL);
+	if (!buf)
 		return FALSE;
-	g_free (buff);
+	g_free (buf);
 
 	
 	/* If Disabled="TRUE" we set *property_class to NULL, but we return TRUE.
@@ -1557,11 +1597,11 @@ glade_property_class_update_from_node (GladeXmlNode        *node,
 	}
 
 	/* ...the spec... */
-	buff = glade_xml_get_value_string (node, GLADE_TAG_SPEC);
-	if (buff)
+	buf = glade_xml_get_value_string (node, GLADE_TAG_SPEC);
+	if (buf)
 	{
 		/* ... get the tooltip from the pspec ... */
-		if ((klass->pspec = glade_utils_get_pspec_from_funcname (buff)) != NULL)
+		if ((klass->pspec = glade_utils_get_pspec_from_funcname (buf)) != NULL)
 		{
 			/* Make sure we can tell properties apart by there 
 			 * owning class.
@@ -1589,7 +1629,7 @@ glade_property_class_update_from_node (GladeXmlNode        *node,
 
 		}
 
- 		g_free (buff);
+ 		g_free (buf);
 	}
 	else if (!klass->pspec) 
 	{
@@ -1604,54 +1644,50 @@ glade_property_class_update_from_node (GladeXmlNode        *node,
 	}
 
 	/* Get the default */
-	if ((buff = glade_xml_get_property_string (node, GLADE_TAG_DEFAULT)) != NULL)
+	if ((buf = glade_xml_get_property_string (node, GLADE_TAG_DEFAULT)) != NULL)
 	{
 		if (klass->def) {
 			g_value_unset (klass->def);
 			g_free (klass->def);
 		}
-		klass->def = glade_property_class_make_gvalue_from_string (klass, buff, NULL);
-		g_free (buff);
+		klass->def = glade_property_class_make_gvalue_from_string (klass, buf, NULL);
+		g_free (buf);
 	}
 
 	/* If needed, update the name... */
-	if ((buff = glade_xml_get_property_string (node, GLADE_TAG_NAME)) != NULL)
+	if ((buf = glade_xml_get_property_string (node, GLADE_TAG_NAME)) != NULL)
 	{
 		g_free (klass->name);
-		klass->name = g_strdup (dgettext (domain, buff));
+		
+		translated = dgettext (domain, buf);
+		if (buf != translated)
+		{
+			/* translated is owned by gettext */
+			klass->name = g_strdup (translated);
+			g_free (buf);	
+		}
+		else
+		{
+			klass->name = buf;
+		}
 	}
 	
 	/* ...and the tooltip */
-	if ((buff = glade_xml_get_value_string (node, GLADE_TAG_TOOLTIP)) != NULL)
+	if ((buf = glade_xml_get_value_string (node, GLADE_TAG_TOOLTIP)) != NULL)
 	{
 		g_free (klass->tooltip);
-		klass->tooltip = g_strdup (dgettext (domain, buff));
-	}
-
-	/* If this property's value is an enumeration then we try to get the displayable values */
-	if (G_IS_PARAM_SPEC_ENUM(klass->pspec))
-	{
-		GEnumClass  *eclass = g_type_class_ref(klass->pspec->value_type);
 		
-		child = glade_xml_search_child (node, GLADE_TAG_DISPLAYABLE_VALUES);
-		if (child)
-			klass->displayable_values = gpc_get_displayable_values_from_node
-				(child, eclass->values, eclass->n_values, domain);
-		
-		g_type_class_unref(eclass);
-	}
-	
-	/* the same way if it is a Flags property */
-	if (G_IS_PARAM_SPEC_FLAGS(klass->pspec))
-	{
-		GFlagsClass  *fclass = g_type_class_ref(klass->pspec->value_type);
-		
-		child = glade_xml_search_child (node, GLADE_TAG_DISPLAYABLE_VALUES);
-		if (child)
-			klass->displayable_values = gpc_get_displayable_values_from_node
-				(child, (GEnumValue*)fclass->values, fclass->n_values, domain);
-		
-		g_type_class_unref(fclass);
+		translated = dgettext (domain, buf);
+		if (buf != translated)
+		{
+			/* translated is owned by gettext */
+			klass->tooltip = g_strdup (translated);
+			g_free (buf);	
+		}
+		else
+		{
+			klass->tooltip = buf;
+		}
 	}
 
 	/* Visible lines */
@@ -1678,6 +1714,12 @@ glade_property_class_update_from_node (GladeXmlNode        *node,
 	klass->weight   = glade_xml_get_property_double  (node, GLADE_TAG_WEIGHT,   klass->weight);
 	klass->transfer_on_paste = glade_xml_get_property_boolean (node, GLADE_TAG_TRANSFER_ON_PASTE, klass->transfer_on_paste);
 	klass->save_always = glade_xml_get_property_boolean (node, GLADE_TAG_SAVE_ALWAYS, klass->save_always);
+	
+	/* If this property's value is an enumeration or flag then we try to get the displayable values */
+	if ((G_IS_PARAM_SPEC_ENUM(klass->pspec) || G_IS_PARAM_SPEC_FLAGS(klass->pspec)) &&
+	    (child = glade_xml_search_child (node, GLADE_TAG_DISPLAYABLE_VALUES)))
+		klass->displayable_values = gpc_get_displayable_values_from_node
+							(child, klass, domain);
 	
 	/* A sprinkle of hard-code to get atk properties working right
 	 */

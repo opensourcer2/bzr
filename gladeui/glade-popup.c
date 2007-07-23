@@ -35,7 +35,6 @@
 #include "glade-command.h"
 #include "glade-project.h"
 #include "glade-app.h"
-#include "glade-binding.h"
 
 /********************************************************
                       WIDGET POPUP
@@ -245,6 +244,7 @@ glade_popup_action_populate_menu_real (GtkWidget *menu,
 						(a->actions) ? NULL : a->klass->path);
 		
 		g_object_set_data (G_OBJECT (item), "gwa-data", data);
+
 		gtk_widget_set_sensitive (item, a->sensitive);
 		
 		if (submenu)
@@ -261,6 +261,7 @@ glade_popup_action_populate_menu_real (GtkWidget *menu,
  * @menu: a GtkMenu to put the actions menu items.
  * @widget: A #GladeWidget
  * @action: a @widget subaction or NULL to include all actions.
+ * @packing: TRUE to include packing actions
  *
  * Populate a GtkMenu with widget's actions
  *
@@ -269,7 +270,8 @@ glade_popup_action_populate_menu_real (GtkWidget *menu,
 gint
 glade_popup_action_populate_menu (GtkWidget *menu,
 				  GladeWidget *widget,
-				  GladeWidgetAction *action)
+				  GladeWidgetAction *action,
+				  gboolean packing)
 {
 	gint n;
 
@@ -299,7 +301,7 @@ glade_popup_action_populate_menu (GtkWidget *menu,
 						   G_CALLBACK (glade_popup_menuitem_activated),
 						   widget);
 	
-	if (widget->packing_actions)
+	if (packing && widget->packing_actions)
 	{
 		if (n)
 		{
@@ -317,7 +319,9 @@ glade_popup_action_populate_menu (GtkWidget *menu,
 }
 
 static GtkWidget *
-glade_popup_create_menu (GladeWidget *widget)
+glade_popup_create_menu (GladeWidget      *widget,
+			 GladePlaceholder *placeholder,
+			 gboolean          packing)
 {
 	GtkWidget *popup_menu;
 	gboolean   sensitive;
@@ -331,38 +335,21 @@ glade_popup_create_menu (GladeWidget *widget)
 	glade_popup_append_item (popup_menu, GTK_STOCK_COPY, NULL, TRUE,
 				 glade_popup_copy_cb, widget);
 
+	/* paste is placholder specific when the popup is on a placeholder */
 	sensitive = glade_clipboard_get_has_selection (glade_app_get_clipboard ());
-	glade_popup_append_item (popup_menu, GTK_STOCK_PASTE, NULL, sensitive,
-				 glade_popup_paste_cb, widget);
+	if (placeholder)
+		glade_popup_append_item (popup_menu, GTK_STOCK_PASTE, NULL, sensitive,
+					 glade_popup_placeholder_paste_cb, placeholder);
+	else
+		glade_popup_append_item (popup_menu, GTK_STOCK_PASTE, NULL, sensitive,
+					 glade_popup_paste_cb, widget);
 
 	glade_popup_append_item (popup_menu, GTK_STOCK_DELETE, NULL, TRUE,
 				 glade_popup_delete_cb, widget);
 
-	if (widget->actions || widget->packing_actions)
-	{
-		GtkWidget *separator = gtk_menu_item_new ();
-		gtk_menu_shell_append (GTK_MENU_SHELL (popup_menu), separator);
-		gtk_widget_show (separator);
 
-		glade_popup_action_populate_menu (popup_menu, widget, NULL);
-	}
-
-	return popup_menu;
-}
-
-static GtkWidget *
-glade_popup_create_placeholder_menu (GladePlaceholder *placeholder)
-{
-	GtkWidget   *popup_menu;
-	gboolean     sensitive;
-
-	popup_menu = gtk_menu_new ();
-
-	sensitive = glade_clipboard_get_has_selection (glade_app_get_clipboard ());
-	glade_popup_append_item (popup_menu, GTK_STOCK_PASTE, NULL, sensitive,
-				 glade_popup_placeholder_paste_cb, placeholder);
-
-	if (placeholder->packing_actions)
+	/* packing actions are a little different on placholders */
+	if (placeholder && placeholder->packing_actions)
 	{
 		GtkWidget *separator = gtk_menu_item_new ();
 		gtk_menu_shell_append (GTK_MENU_SHELL (popup_menu), separator);
@@ -373,10 +360,17 @@ glade_popup_create_placeholder_menu (GladePlaceholder *placeholder)
 						       G_CALLBACK (glade_popup_menuitem_ph_packing_activated),
 						       placeholder);
 	}
-	
+	else if (widget->actions || (packing && widget->packing_actions))
+	{
+		GtkWidget *separator = gtk_menu_item_new ();
+		gtk_menu_shell_append (GTK_MENU_SHELL (popup_menu), separator);
+		gtk_widget_show (separator);
+
+		glade_popup_action_populate_menu (popup_menu, widget, NULL, packing);
+	}
+
 	return popup_menu;
 }
-
 
 static GtkWidget *
 glade_popup_create_clipboard_menu (GladeWidget *widget)
@@ -399,7 +393,9 @@ glade_popup_create_clipboard_menu (GladeWidget *widget)
 }
 
 void
-glade_popup_widget_pop (GladeWidget *widget, GdkEventButton *event)
+glade_popup_widget_pop (GladeWidget *widget,
+			GdkEventButton *event,
+			gboolean packing)
 {
 	GtkWidget *popup_menu;
 	gint button;
@@ -407,7 +403,7 @@ glade_popup_widget_pop (GladeWidget *widget, GdkEventButton *event)
 
 	g_return_if_fail (GLADE_IS_WIDGET (widget));
 
-	popup_menu = glade_popup_create_menu (widget);
+	popup_menu = glade_popup_create_menu (widget, NULL, packing);
 
 	if (event)
 	{
@@ -427,13 +423,16 @@ void
 glade_popup_placeholder_pop (GladePlaceholder *placeholder,
 			     GdkEventButton *event)
 {
+	GladeWidget *widget;
 	GtkWidget *popup_menu;
 	gint button;
 	gint event_time;
 
 	g_return_if_fail (GLADE_IS_PLACEHOLDER (placeholder));
 
-	popup_menu = glade_popup_create_placeholder_menu (placeholder);
+	widget = glade_placeholder_get_parent (placeholder);
+	
+	popup_menu = glade_popup_create_menu (widget, placeholder, TRUE);
 
 	if (event)
 	{

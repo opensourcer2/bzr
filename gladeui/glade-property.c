@@ -93,7 +93,7 @@ glade_property_dup_impl (GladeProperty *template_prop, GladeWidget *widget)
 	return property;
 }
 
-gboolean
+static gboolean
 glade_property_equals_value_impl (GladeProperty *property,
 				  const GValue  *value)
 {
@@ -174,6 +174,29 @@ glade_property_update_prop_refs (GladeProperty *property,
 	}
 }
 
+static gboolean
+glade_property_verify (GladeProperty *property, const GValue *value)
+{
+	if (property->klass->packing)
+	{
+		if (property->widget->parent)
+			return glade_widget_adaptor_child_verify_property (property->widget->parent->adaptor,
+									   property->widget->parent->object,
+									   property->widget->object,
+									   property->klass->id,
+									   value);
+		else
+			return FALSE;
+	}
+	else
+	{
+		return glade_widget_adaptor_verify_property (property->widget->adaptor, 
+							     property->widget->object,
+							     property->klass->id,
+							     value);
+	}
+}
+
 static void
 glade_property_set_value_impl (GladeProperty *property, const GValue *value)
 {
@@ -203,13 +226,9 @@ glade_property_set_value_impl (GladeProperty *property, const GValue *value)
 	/* Check if the backend doesnt give us permission to
 	 * set this value.
 	 */
-	if (glade_property_superuser () == FALSE &&
-	    property->widget &&
+	if (glade_property_superuser () == FALSE && property->widget &&
 	    project && glade_project_is_loading (project) == FALSE &&
-	    glade_widget_adaptor_verify_property (property->widget->adaptor, 
-						  property->widget->object,
-						  property->klass->id,
-						  value) == FALSE)
+	    glade_property_verify (property, value) == FALSE)
 		return;
 	
 	/* save "changed" state.
@@ -311,7 +330,8 @@ glade_property_load_impl (GladeProperty *property)
 	
 	if (property->widget == NULL ||
 	    property->klass->packing ||
-	    property->klass->type != GPC_NORMAL)
+	    property->klass->type != GPC_NORMAL ||
+	    !(property->klass->pspec->flags & G_PARAM_READABLE))
 		return;
 	object = glade_widget_get_object (property->widget);
 	oclass = G_OBJECT_GET_CLASS (object);
@@ -939,9 +959,11 @@ glade_property_read_accel_prop (GladeProperty      *property,
 	g_value_init (gvalue, GLADE_TYPE_ACCEL_GLIST);
 	g_value_take_boxed (gvalue, accels);
 
+
 	if (property)
 		GLADE_PROPERTY_GET_KLASS
 			(property)->set_value (property, gvalue);
+
 	
 	if (free_value)
 	{
@@ -1099,7 +1121,7 @@ glade_property_equals_value (GladeProperty      *property,
  *
  * Returns: Whether this property is equal to the value provided
  */
-gboolean
+static gboolean
 glade_property_equals_va_list (GladeProperty *property, va_list vl)
 {
 	GValue   *value;

@@ -1,69 +1,70 @@
-diff -Nur glade3-3.3.1/configure.ac glade3-3.3.1.new/configure.ac
---- glade3-3.3.1/configure.ac	2007-06-18 17:12:38.000000000 +0200
-+++ glade3-3.3.1.new/configure.ac	2007-06-19 11:17:41.000000000 +0200
-@@ -87,7 +87,7 @@
+diff -Nur glade3-3.3.2/configure.ac glade3-3.3.2.new/configure.ac
+--- glade3-3.3.2/configure.ac	2007-07-23 22:57:17.000000000 +0200
++++ glade3-3.3.2.new/configure.ac	2007-07-24 00:20:57.000000000 +0200
+@@ -116,7 +116,7 @@
  dnl ================================================================
  dnl Check for gtk+
  dnl ================================================================
--PKG_CHECK_MODULES(GTK, [gtk+-2.0 >= 2.10.0  libxml-2.0 >= 2.4.0])
-+PKG_CHECK_MODULES(GTK, [gtk+-2.0 >= 2.10.0  libxml-2.0 >= 2.4.0 launchpad-integration])
+-PKG_CHECK_MODULES(GTK, [gtk+-2.0 >= 2.10.0  gthread-2.0 libxml-2.0 >= 2.4.0])
++PKG_CHECK_MODULES(GTK, [gtk+-2.0 >= 2.10.0  gthread-2.0 libxml-2.0 >= 2.4.0 launchpad-integration])
  AC_SUBST(GTK_LIBS)
  AC_SUBST(GTK_CFLAGS)
  
-diff -Nur glade3-3.3.1/src/glade-project-window.c glade3-3.3.1.new/src/glade-project-window.c
---- glade3-3.3.1/src/glade-project-window.c	2007-06-18 15:34:43.000000000 +0200
-+++ glade3-3.3.1.new/src/glade-project-window.c	2007-06-19 11:17:41.000000000 +0200
-@@ -36,6 +36,7 @@
+diff -Nur glade3-3.3.2/src/glade-window.c glade3-3.3.2.new/src/glade-window.c
+--- glade3-3.3.2/src/glade-window.c	2007-07-23 15:37:55.000000000 +0200
++++ glade3-3.3.2.new/src/glade-window.c	2007-07-24 00:34:45.000000000 +0200
+@@ -37,6 +37,7 @@
  #include <glib/gi18n.h>
  #include <gdk/gdkkeysyms.h>
  #include <gtk/gtkstock.h>
 +#include <launchpad-integration.h>
  
- #define GLADE_ACTION_GROUP_STATIC "GladeStatic"
- #define GLADE_ACTION_GROUP_PROJECT "GladeProject"
-@@ -1779,6 +1780,8 @@
- "      <menuitem action='HelpContents'/>\n"
- "      <menuitem action='DeveloperReference'/>\n"
- "      <separator/>\n"
-+"      <placeholder name='LaunchpadIntegrationPlaceholder'/>\n"
-+"      <separator/>\n"
- "      <menuitem action='About'/>\n"
- "    </menu>\n"
- "  </menubar>\n"
-@@ -1964,6 +1967,7 @@
- gpw_construct_menu (GladeProjectWindow *gpw)
+ #define ACTION_GROUP_STATIC             "GladeStatic"
+ #define ACTION_GROUP_PROJECT            "GladeProject"
+@@ -2134,6 +2135,8 @@
+ "      <menuitem action='HelpContents'/>"
+ "      <menuitem action='DeveloperReference'/>"
+ "      <separator/>"
++"      <placeholder name='LaunchpadIntegrationPlaceholder'/>"
++"      <separator/>"
+ "      <menuitem action='About'/>"
+ "    </menu>"
+ "  </menubar>"
+@@ -2331,6 +2334,7 @@
+ construct_menu (GladeWindow *window)
  {
  	GError *error = NULL;
 +	GtkActionGroup *group;
  	
- 	gpw->priv->static_actions = gtk_action_group_new (GLADE_ACTION_GROUP_STATIC);
- 	gtk_action_group_set_translation_domain (gpw->priv->static_actions, GETTEXT_PACKAGE);
-@@ -2004,6 +2008,10 @@
- 	gtk_ui_manager_insert_action_group (gpw->priv->ui, gpw->priv->project_actions, 1);
- 	gtk_ui_manager_insert_action_group (gpw->priv->ui, gpw->priv->projects_list_menu_actions, 3);
+ 	window->priv->static_actions = gtk_action_group_new (ACTION_GROUP_STATIC);
+ 	gtk_action_group_set_translation_domain (window->priv->static_actions, GETTEXT_PACKAGE);
+@@ -2370,6 +2374,10 @@
+ 	gtk_ui_manager_insert_action_group (window->priv->ui, window->priv->static_actions, 0);
+ 	gtk_ui_manager_insert_action_group (window->priv->ui, window->priv->project_actions, 1);
+ 	gtk_ui_manager_insert_action_group (window->priv->ui, window->priv->projects_list_menu_actions, 3);
++
++ 	group = launchpad_integration_get_action_group ();
++ 	gtk_ui_manager_insert_action_group (window->priv->ui, group, 4);
++ 	g_object_unref (group);		
  	
-+	group = launchpad_integration_get_action_group ();
-+	gtk_ui_manager_insert_action_group (gpw->priv->ui, group, 4);
-+	g_object_unref (group);		
-+	
- 	gtk_window_add_accel_group (GTK_WINDOW (gpw->priv->window), 
- 				  gtk_ui_manager_get_accel_group (gpw->priv->ui));
- 
-@@ -2013,6 +2021,8 @@
+ 	gtk_window_add_accel_group (GTK_WINDOW (window), 
+ 				  gtk_ui_manager_get_accel_group (window->priv->ui));
+@@ -2380,6 +2388,8 @@
  		g_error_free (error);
  	}
  	
-+	launchpad_integration_add_ui (gpw->priv->ui, "/MenuBar/HelpMenu/LaunchpadIntegrationPlaceholder");
-+	
- 	return gtk_ui_manager_get_widget (gpw->priv->ui, "/MenuBar");
++ 	launchpad_integration_add_ui (window->priv->ui, "/MenuBar/HelpMenu/LaunchpadIntegrationPlaceholder");
++
+ 	return gtk_ui_manager_get_widget (window->priv->ui, "/MenuBar");
  }
  
-@@ -2489,6 +2499,8 @@
- 	gpw->priv->label = NULL;
- 	gpw->priv->default_path = NULL;
- 	
-+	launchpad_integration_set_sourcepackagename ("glade-3");	
-+	
- 	gtk_about_dialog_set_url_hook ((GtkAboutDialogActivateLinkFunc) about_dialog_activate_link_func, gpw, NULL);
- 	
- }
+@@ -3027,7 +3037,8 @@
+ 			  G_CALLBACK (clipboard_notify_handler_cb),
+ 			  window);
+ 
+-	
++ 	launchpad_integration_set_sourcepackagename ("glade-3");		
++
+ 	gtk_about_dialog_set_url_hook ((GtkAboutDialogActivateLinkFunc) about_dialog_activate_link_func, window, NULL);
+ 
+ 	glade_app_set_window (GTK_WIDGET (window));
