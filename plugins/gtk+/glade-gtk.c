@@ -489,6 +489,7 @@ glade_gtk_container_replace_child (GladeWidgetAdaptor *adaptor,
 				   GtkWidget          *new_widget)
 {
 	GParamSpec **param_spec;
+	GladePropertyClass *pclass;
 	GValue *value;
 	guint nproperties;
 	guint i;
@@ -500,7 +501,8 @@ glade_gtk_container_replace_child (GladeWidgetAdaptor *adaptor,
 		(G_OBJECT_GET_CLASS (container), &nproperties);
 	value = g_malloc0 (sizeof(GValue) * nproperties);
 
-	for (i = 0; i < nproperties; i++) {
+	for (i = 0; i < nproperties; i++) 
+	{
 		g_value_init (&value[i], param_spec[i]->value_type);
 		gtk_container_child_get_property
 			(GTK_CONTAINER (container), current, param_spec[i]->name, &value[i]);
@@ -509,7 +511,23 @@ glade_gtk_container_replace_child (GladeWidgetAdaptor *adaptor,
 	gtk_container_remove (GTK_CONTAINER (container), current);
 	gtk_container_add (GTK_CONTAINER (container), new_widget);
 
-	for (i = 0; i < nproperties; i++) {
+	for (i = 0; i < nproperties; i++) 
+	{
+		/* If the added widget is a placeholder then we
+		 * want to keep all the "tranfer-on-paste" properties
+		 * as default so that it looks fresh (transfer-on-paste
+		 * properties dont effect the position/slot inside a 
+		 * contianer)
+		 */
+		if (GLADE_IS_PLACEHOLDER (new_widget))
+		{
+			pclass = glade_widget_adaptor_get_pack_property_class
+				(adaptor, param_spec[i]->name);
+
+			if (pclass && pclass->transfer_on_paste)
+				continue;
+		}
+
 		gtk_container_child_set_property
 			(GTK_CONTAINER (container), new_widget, param_spec[i]->name, &value[i]);
 	}
@@ -2645,6 +2663,7 @@ glade_gtk_notebook_get_first_blank_page (GtkNotebook *notebook)
 static void
 glade_gtk_notebook_set_n_pages (GObject *object, const GValue *value)
 {
+	static GladeWidgetAdaptor *wadaptor = NULL;
 	GladeWidget *widget;
 	GtkNotebook *notebook;
 	GtkWidget   *child_widget, *tab_widget;
@@ -2659,6 +2678,9 @@ glade_gtk_notebook_set_n_pages (GObject *object, const GValue *value)
 
 	new_size = g_value_get_int (value);
 
+	if (wadaptor == NULL)
+		wadaptor = glade_widget_adaptor_get_by_type (GTK_TYPE_LABEL);
+	
 	/* Ensure base size of notebook */
 	if (glade_widget_superuser () == FALSE)
 	{
@@ -2666,13 +2688,32 @@ glade_gtk_notebook_set_n_pages (GObject *object, const GValue *value)
 		{
 			gint position = glade_gtk_notebook_get_first_blank_page (notebook);
 			GtkWidget *placeholder     = glade_placeholder_new ();
-			GtkWidget *tab_placeholder = glade_placeholder_new ();
+
+			GladeWidget *glabel =
+				glade_widget_adaptor_create_widget
+				(wadaptor, FALSE,
+				 "parent", widget, 
+				 "project", glade_widget_get_project (widget), 
+				 NULL);
+			gchar *str = g_strdup_printf ("page %d", i + 1);
+			glade_widget_property_set (glabel, "label", str);
+			g_free (str);
+			
+			g_object_set_data (glabel->object, "special-child-type", "tab");
+			gtk_widget_show (GTK_WIDGET (glabel->object));
 			
 			gtk_notebook_insert_page (notebook, placeholder,
 						  NULL, position);
-			
-			gtk_notebook_set_tab_label (notebook, placeholder, tab_placeholder);
-			g_object_set_data (G_OBJECT (tab_placeholder), "special-child-type", "tab");
+
+			/* Must tell the project that were adding a widget (so that
+			 * saving works properly & it appears in the inspector properly)
+			 */
+			glade_project_add_object (glade_widget_get_project (widget), NULL, glabel->object);
+
+			/* Must pass through GladeWidget api so that packing props
+			 * are correctly assigned.
+			 */
+			glade_widget_add_child (widget, glabel, FALSE);
 		}
 	}
 
@@ -2685,18 +2726,28 @@ glade_gtk_notebook_set_n_pages (GObject *object, const GValue *value)
 	 */
 	while (old_size > new_size) {
 		/* Get the last widget. */
+		GladeWidget *gtab;
 		child_widget = gtk_notebook_get_nth_page (notebook, old_size-1);
 		tab_widget   = gtk_notebook_get_tab_label (notebook, child_widget);
 
-		/* 
-		 * If we got it, and its not a placeholder, remove it
-		 * from project.
+		/* Ok there shouldnt be widget in the content area, that's
+		 * the placeholder, we should clean up the project widget that
+		 * we put in the tab here though (this happens in the case where
+		 * we undo increasing the "pages" property).
 		 */
-		if (glade_widget_get_from_gobject (child_widget) ||
-		    glade_widget_get_from_gobject (tab_widget))
-			break;
-
+		if (glade_widget_get_from_gobject (child_widget))
+			g_critical ("Bug in notebook_set_n_pages()");
+		
 		gtk_notebook_remove_page (notebook, old_size-1);
+
+		/* Cleanup possible tab widgets
+		 */
+		if ((gtab = glade_widget_get_from_gobject (tab_widget)) != NULL)
+		{
+			glade_project_remove_object (glade_widget_get_project (gtab), gtab->object);
+			g_object_unref (gtab);
+		}
+
 		old_size--;
 	}
 }
@@ -2767,7 +2818,8 @@ glade_gtk_notebook_add_child (GladeWidgetAdaptor *adaptor,
 	notebook = GTK_NOTEBOOK (object);
 
 	num_page = gtk_notebook_get_n_pages (notebook);
-
+	gwidget = glade_widget_get_from_gobject (object);
+	
 	/* Just append pages blindly when loading/dupping
 	 */
 	if (glade_widget_superuser ())
@@ -2784,7 +2836,6 @@ glade_gtk_notebook_add_child (GladeWidgetAdaptor *adaptor,
 		{
 			gtk_container_add (GTK_CONTAINER (object), GTK_WIDGET (child));
 			
-			gwidget = glade_widget_get_from_gobject (object);
 			glade_widget_property_set (gwidget, "pages", num_page + 1);
 			
 			gwidget = glade_widget_get_from_gobject (child);
@@ -4429,6 +4480,27 @@ glade_gtk_image_set_property (GladeWidgetAdaptor *adaptor,
 							       id, value);
 }
 
+/* ----------------------------- GtkMenu ------------------------------ */
+GObject *
+glade_gtk_menu_constructor (GType                  type,
+			    guint                  n_construct_properties,
+			    GObjectConstructParam *construct_properties)
+{
+	GladeWidgetAdaptor   *adaptor;
+	GObject              *ret_obj;
+	
+	ret_obj = GWA_GET_OCLASS(GTK_TYPE_CONTAINER)->constructor
+		(type, n_construct_properties, construct_properties);
+
+	adaptor = GLADE_WIDGET_ADAPTOR (ret_obj);
+
+	glade_widget_adaptor_action_remove (adaptor, "add_parent");
+	glade_widget_adaptor_action_remove (adaptor, "remove_parent");
+
+	return ret_obj;
+}
+
+
 /* ----------------------------- GtkMenuShell ------------------------------ */
 void
 glade_gtk_menu_shell_add_child (GladeWidgetAdaptor  *adaptor, 
@@ -4607,7 +4679,7 @@ glade_gtk_menu_shell_delete_child (GladeBaseEditor *editor,
 	GObject *item = glade_widget_get_object (gparent);
 	GtkWidget *submenu = NULL;
 	GList list = {0, };
-	gint n_children;
+	gint n_children = 0;
 	
 	if (GTK_IS_MENU_ITEM (item) &&
 	    (submenu = gtk_menu_item_get_submenu (GTK_MENU_ITEM (item))))
@@ -4771,6 +4843,25 @@ glade_gtk_menu_shell_action_activate (GladeWidgetAdaptor *adaptor,
 }
 
 /* ----------------------------- GtkMenuItem(s) ------------------------------ */
+GObject *
+glade_gtk_menu_item_constructor (GType                  type,
+				 guint                  n_construct_properties,
+				 GObjectConstructParam *construct_properties)
+{
+	GladeWidgetAdaptor   *adaptor;
+	GObject              *ret_obj;
+
+	ret_obj = GWA_GET_OCLASS(GTK_TYPE_CONTAINER)->constructor
+		(type, n_construct_properties, construct_properties);
+
+	adaptor = GLADE_WIDGET_ADAPTOR (ret_obj);
+
+	glade_widget_adaptor_action_remove (adaptor, "add_parent");
+	glade_widget_adaptor_action_remove (adaptor, "remove_parent");
+
+	return ret_obj;
+}
+
 GList *
 glade_gtk_menu_item_get_children (GladeWidgetAdaptor *adaptor,
 				 GObject *object)
@@ -5586,6 +5677,25 @@ glade_gtk_toolbar_action_activate (GladeWidgetAdaptor *adaptor,
 }
 
 /* ----------------------------- GtkToolItem ------------------------------ */
+GObject *
+glade_gtk_tool_item_constructor (GType                  type,
+				 guint                  n_construct_properties,
+				 GObjectConstructParam *construct_properties)
+{
+	GladeWidgetAdaptor   *adaptor;
+	GObject              *ret_obj;
+	
+	ret_obj = GWA_GET_OCLASS(GTK_TYPE_CONTAINER)->constructor
+		(type, n_construct_properties, construct_properties);
+
+	adaptor = GLADE_WIDGET_ADAPTOR (ret_obj);
+
+	glade_widget_adaptor_action_remove (adaptor, "add_parent");
+	glade_widget_adaptor_action_remove (adaptor, "remove_parent");
+
+	return ret_obj;
+}
+
 void
 glade_gtk_tool_item_post_create (GladeWidgetAdaptor *adaptor, 
 				 GObject            *object, 

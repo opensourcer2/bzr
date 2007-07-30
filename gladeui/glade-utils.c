@@ -763,17 +763,16 @@ glade_util_can_draw_nodes (GtkWidget *sel_widget, GdkWindow *sel_win,
 }
 
 /**
- * glade_util_draw_nodes_idle:
+ * glade_util_draw_selection_nodes:
  * @expose_win: a #GdkWindow
  *
  * Redraws any selection nodes that intersect @expose_win. Steps through all
  * selected widgets, finds their coordinates, and calls glade_util_draw_nodes()
  * if appropriate.
  *
- * Returns: %FALSE
  */
-static gboolean
-glade_util_draw_nodes_idle (GdkWindow *expose_win)
+void
+glade_util_draw_selection_nodes (GdkWindow *expose_win)
 {
 	GtkWidget *expose_widget;
 	gint expose_win_x, expose_win_y;
@@ -782,9 +781,7 @@ glade_util_draw_nodes_idle (GdkWindow *expose_win)
 	GdkGC *gc;
 	GList *elem;
 
-	/* Check that the window is still alive. */
-	if (!gdk_window_is_viewable (expose_win))
-		goto out;
+	g_return_if_fail (GDK_IS_WINDOW (expose_win));
 
 	/* Find the corresponding GtkWidget */
 	gdk_window_get_user_data (expose_win, (gpointer)&expose_widget);
@@ -836,37 +833,7 @@ glade_util_draw_nodes_idle (GdkWindow *expose_win)
 			}
 		}
 	}
-
- out:
-	/* Remove the reference added in glade_util_queue_draw_nodes(). */
-	g_object_unref (G_OBJECT (expose_win));
-	
-	/* Return FALSE so the idle handler isn't called again. */
-	return FALSE;
 }
-
-#define GLADE_DRAW_NODES_IDLE_PRIORITY	GTK_PRIORITY_DEFAULT + 10
-
-/**
- * glade_util_queue_draw_nodes:
- * @window: A #GdkWindow
- *
- * This function should be called whenever a widget in the interface receives 
- * an expose event. It sets up an idle function which will redraw any selection
- * nodes that intersect the the exposed window.
- */
-void
-glade_util_queue_draw_nodes (GdkWindow *window)
-{
-	g_return_if_fail (GDK_IS_WINDOW (window));
-
-	g_idle_add_full (GLADE_DRAW_NODES_IDLE_PRIORITY,
-			 (GSourceFunc)glade_util_draw_nodes_idle,
-			 window, NULL);
-
-	g_object_ref (G_OBJECT (window));
-}
-
 
 /**
  * glade_util_add_selection:
@@ -1409,6 +1376,20 @@ glade_util_class_implements_interface (GType class_type,
 }
 
 
+static GModule *
+try_load_library (const gchar *library_path,
+		  const gchar *library_name)
+{
+	GModule *module;
+	gchar   *path;
+
+	path = g_module_build_path (library_path, library_name);
+	module = g_module_open (path, G_MODULE_BIND_LAZY);
+	g_free (path);
+
+	return module;
+}
+
 /**
  * glade_util_load_library:
  * @library_name: name of the library
@@ -1424,19 +1405,34 @@ glade_util_class_implements_interface (GType class_type,
 GModule *
 glade_util_load_library (const gchar *library_name)
 {
-	gchar   *path;
-	GModule *module;
-
-	path = g_module_build_path (glade_app_get_modules_dir (), library_name);
-
-	if ((module = g_module_open (path, G_MODULE_BIND_LAZY)) == NULL)
+	GModule      *module = NULL;
+	const gchar  *default_paths[] = { glade_app_get_modules_dir (), "/lib", "/usr/lib", "/usr/local/lib", NULL };
+	const gchar  *search_path;
+	gchar       **split;
+	gint          i;
+	
+	if ((search_path = g_getenv (GLADE_ENV_MODULE_PATH)) != NULL)
 	{
-		g_warning (_("Unable to open the module %s (%s)."),
-			   path, g_module_error());
+		if ((split = g_strsplit (search_path, ":", 0)) != NULL)
+		{
+			for (i = 0; split[i] != NULL; i++)
+				if ((module = try_load_library (split[i], library_name)) != NULL)
+					break;
+
+			g_strfreev (split);
+		}
 	}
 
-	g_free (path);
+	if (!module)
+	{
+		for (i = 0; default_paths[i] != NULL; i++)
+			if ((module = try_load_library (default_paths[i], library_name)) != NULL)
+				break;
+	}
 
+	if (!module)
+		g_critical ("Unable to load module '%s' from any search paths", library_name);
+	
 	return module;
 }
 

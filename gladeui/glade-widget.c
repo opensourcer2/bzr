@@ -373,10 +373,6 @@ glade_widget_event_impl (GladeWidget *gwidget,
 			       glade_widget_signals[MOTION_NOTIFY_EVENT], 0, 
 			       event, &handled);
 		break;
-	case GDK_EXPOSE:
-	case GDK_CONFIGURE:
-		glade_util_queue_draw_nodes (((GdkEventExpose*) event)->window);
-		break;
 	default:
 		break;
 	}
@@ -1700,6 +1696,15 @@ glade_widget_set_adaptor (GladeWidget *widget, GladeWidgetAdaptor *adaptor)
 	glade_widget_set_actions (widget, adaptor);
 }
 
+static void
+expose_draw_selection (GtkWidget       *widget_gtk,
+		       GdkEventExpose  *event,
+		       GladeWidget     *gwidget)
+{
+	glade_util_draw_selection_nodes (event->window);
+}
+
+
 /* Connects a signal handler to the 'event' signal for a widget and
    all its children recursively. We need this to draw the selection
    rectangles and to get button press/release events reliably. */
@@ -1726,6 +1731,10 @@ glade_widget_connect_signal_handlers (GtkWidget   *widget_gtk,
 		g_signal_connect (G_OBJECT (widget_gtk), "event",
 				  callback, gwidget);
 
+		g_signal_connect_after (G_OBJECT (widget_gtk), "expose-event",
+					G_CALLBACK (expose_draw_selection), gwidget);
+		
+		
 		g_object_set_data (G_OBJECT (widget_gtk),
 				   GLADE_TAG_EVENT_HANDLER_CONNECTED,
 				   GINT_TO_POINTER (1));
@@ -2649,7 +2658,8 @@ glade_widget_get_adaptor (GladeWidget *widget)
 void
 glade_widget_set_project (GladeWidget *widget, GladeProject *project)
 {
-	if (widget->project != project) {
+	if (widget->project != project)
+	{
 		widget->project = project;
 		g_object_notify (G_OBJECT (widget), "project");
 	}
@@ -3322,8 +3332,15 @@ glade_widget_event_private (GtkWidget   *widget,
 	GtkWidget *layout = widget;
 
 	/* Find the parenting layout container */
-	while (!GLADE_IS_DESIGN_LAYOUT (layout))
+	while (layout && !GLADE_IS_DESIGN_LAYOUT (layout))
 		layout = layout->parent;
+
+	/* Event outside the logical heirarchy, could be a menuitem
+	 * or other such popup window, we'll presume to send it directly
+	 * to the GladeWidget that connected here.
+	 */
+	if (!layout)
+		return glade_widget_event (gwidget, event);
 
 	/* Let the parenting GladeDesignLayout decide which GladeWidget to
 	 * marshall this event to.

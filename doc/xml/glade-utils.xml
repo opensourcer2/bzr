@@ -53,7 +53,6 @@ enum        <link linkend="GladeUIMessageType">GladeUIMessageType</link>;
 <link linkend="gboolean">gboolean</link>    <link linkend="glade-util-has-selection">glade_util_has_selection</link>        (<link linkend="GtkWidget">GtkWidget</link> *widget);
 <link linkend="void">void</link>        <link linkend="glade-util-clear-selection">glade_util_clear_selection</link>      (void);
 <link linkend="GList">GList</link>*      <link linkend="glade-util-get-selection">glade_util_get_selection</link>        (void);
-<link linkend="void">void</link>        <link linkend="glade-util-queue-draw-nodes">glade_util_queue_draw_nodes</link>     (<link linkend="GdkWindow">GdkWindow</link> *window);
 <link linkend="GList">GList</link>*      <link linkend="glade-util-container-get-all-children">glade_util_container_get_all_children</link>
                                             (<link linkend="GtkContainer">GtkContainer</link> *container);
 <link linkend="gint">gint</link>        <link linkend="glade-util-count-placeholders">glade_util_count_placeholders</link>   (<link linkend="GladeWidget">GladeWidget</link> *parent);
@@ -412,20 +411,6 @@ Clear all visual selections</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
 
 
-</simpara></listitem></varlistentry>
-</variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-queue-draw-nodes" role="function"/>glade_util_queue_draw_nodes ()</title>
-<indexterm><primary>glade_util_queue_draw_nodes</primary></indexterm><programlisting><link linkend="void">void</link>        glade_util_queue_draw_nodes     (<link linkend="GdkWindow">GdkWindow</link> *window);</programlisting>
-<para>
-This function should be called whenever a widget in the interface receives 
-an expose event. It sets up an idle function which will redraw any selection
-nodes that intersect the the exposed window.</para>
-<para>
-
-</para><variablelist role="params">
-<varlistentry><term><parameter>window</parameter>&nbsp;:</term>
-<listitem><simpara> A <link linkend="GdkWindow"><type>GdkWindow</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>

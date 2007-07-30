@@ -322,6 +322,7 @@
     </glade-widget-class>
 
     <glade-widget-class use-placeholders="False" name="GtkMenuItem" generic-name="menuitem" title="Menu Item">
+      <constructor-function>glade_gtk_menu_item_constructor</constructor-function>
       <post-create-function>glade_gtk_menu_item_post_create</post-create-function>
       <get-children-function>glade_gtk_menu_item_get_children</get-children-function>
       <set-property-function>glade_gtk_menu_item_set_property</set-property-function>
@@ -472,10 +473,12 @@
     
     <glade-widget-class title="GtkToolItem" name="GtkToolItem" generic-name="toolitem">
       <post-create-function>glade_gtk_tool_item_post_create</post-create-function>
+      <constructor-function>glade_gtk_tool_item_constructor</constructor-function>
     </glade-widget-class>
     
     <glade-widget-class name="GtkSeparatorToolItem" generic-name="separatortoolitem" title="Separator Tool Item"></glade-widget-class>
 	
+
     <glade-widget-class name="GtkToolButton" generic-name="toolbutton" title="Tool Button">
 
       <set-property-function>glade_gtk_tool_button_set_property</set-property-function>
@@ -1067,7 +1070,7 @@
 	<property id="label" disabled="True"/>
 	<property id="shadow" disabled="True"/>
 	<property id="label-widget" disabled="True"/>
-	<property id="label-xalign" default="0.0"/>
+	<property save-always="True" id="label-xalign" default="0.0"/>
       	<property id="shadow-type" default="GTK_SHADOW_NONE">
   	  <displayable-values>
 	    <value id="GTK_SHADOW_NONE" name="None"></value>
@@ -1130,6 +1133,7 @@
     
     <glade-widget-class toplevel="True" name="GtkMenu" generic-name="menu" title="Popup Menu">
       
+      <constructor-function>glade_gtk_menu_constructor</constructor-function>
       <post-create-function>empty</post-create-function>
       <actions>
         <action stock="gtk-edit" important="True" id="launch_editor" name="Edit&#8230;"></action>
