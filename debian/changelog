@@ -1,3 +1,24 @@
+glade-3 (3.3.3-0ubuntu1) gutsy; urgency=low
+
+  * New upstream release:
+    - Add tab labels by default to notebook pages (bug 345438)
+    - Now child menu items are selectable (fixed event handling for widgets that are
+      not in the logical hierarchy, in 3.3.2 this was a crash actually)
+    - Now we draw selection in g_signal_connect_after (..."expose-event"...) instead
+      of queuing an idle timeout
+    - Fixed the UI to be insensitive when no projects are loaded (some widgets were
+      sensitive and causing errors)
+    - Made it possible to declare a widget class in the catalog without giving a real type, 
+      only automatically derive from a type specified in the catalog (bug 352714)
+    - Defined environment variables GLADE_MODULE_PATH & GLADE_CATALOG_PATH, catalogs will be
+      searched in GLADE_CATALOG_PATH and widget libraries/support modules in GLADE_MODULE_PATH.
+    - Disable Add/Remove parent actions on GtkToolItem, GtkMenu and GtkMenuItem
+    - misc bugfixes 459953 460272
+    - New and updated translations
+      - es, ja, sv, vi, fi, pl, bn_IN, hu, sl
+
+ -- Aron Sisak <aron@ubuntu.hu>  Mon, 30 Jul 2007 17:32:03 +0200
+
 glade-3 (3.3.2-0ubuntu1) gutsy; urgency=low
 
   * New upstream release:

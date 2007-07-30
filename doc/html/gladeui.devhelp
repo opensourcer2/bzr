@@ -405,7 +405,6 @@
     <function name="glade_util_has_selection ()" link="gladeui-glade-utils.html#glade-util-has-selection"/>
     <function name="glade_util_clear_selection ()" link="gladeui-glade-utils.html#glade-util-clear-selection"/>
     <function name="glade_util_get_selection ()" link="gladeui-glade-utils.html#glade-util-get-selection"/>
-    <function name="glade_util_queue_draw_nodes ()" link="gladeui-glade-utils.html#glade-util-queue-draw-nodes"/>
     <function name="glade_util_container_get_all_children ()" link="gladeui-glade-utils.html#glade-util-container-get-all-children"/>
     <function name="glade_util_count_placeholders ()" link="gladeui-glade-utils.html#glade-util-count-placeholders"/>
     <function name="glade_util_find_iter_by_widget ()" link="gladeui-glade-utils.html#glade-util-find-iter-by-widget"/>

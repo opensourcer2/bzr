@@ -1,4 +1,59 @@
-2006-06-18  Tristan Van Berkom <tvb@gnome.org>
+2006-06-25  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/glade-gtk.c: 
+	  - Make undoing increasing notebook size work properly (needed to destroy 
+	    the added tab label project widget and remove it from the project).
+	  - Disable Add/Remove parent actions on GtkToolItem, GtkMenu and GtkMenuItem.
+
+	* plugins/gtk+/gtk+.xml.in: Set "label-xalign" of GtkFrame to be "save-always"
+	  (to counter the evil effects of gtk+ bug 460272, which made it impossible to
+	  set the label-xalign to 0.5).
+
+	* gladeui/glade-catalog.c: Loop through user defined search paths and load
+	  catalogs from there first.
+
+	* gladeui/glade-utils.c: Loop through user defined search paths for modules,
+	  then fallback on the compile time default, then fallback on default system
+	  library paths.
+
+	* gladeui/glade-app.h: Define env variables GLADE_MODULE_PATH & GLADE_CATALOG_PATH
+
+	* gladeui/glade-xml-utils.h: Added GLADE_TAG_PARENT
+
+	* gladeui/glade-widget-adaptor.c: Made it possible to declare a widget class in the
+	  catalog without giving a real type, only automatically derive from a type specified
+	  in the catalog (refit Muntyan's patch from bug 352714).
+
+	* gladeui/glade-popup.c: Fixed placeholder menu to also include actions of the
+	  parent widget.
+
+2006-06-24  Tristan Van Berkom <tvb@gnome.org>
+
+	* src/glade-window.c: Set custom label on the property editor sensitive/insensitive
+	  according to whether there is a project loaded or not
+
+	* gladeui/glade-app.c: Unset editor widget and set insensitive when no project is
+	  loaded (fixes segfaults from editing widgets that dont exist when project is
+	  closed, also looks consistant with the rest of the insensitive UI with no project
+	  loaded).
+
+	* gladeui/glade-utils.c: Made glade_util_queue_draw_nodes --> glade_util_draw_selection_nodes()
+	  (without the idle timeout now)
+
+	* gladeui/glade-widget.c, gladeui/glade-placeholder.c: 
+	  - Use glade_util_draw_selection_nodes(), (selection wasnt being drawn on some widgets, 
+	    now it's working and there's less "flicker" when drag/resizing widgets too).
+	  - Now child menu items are selectable (fixed event handling for widgets that are
+	    not in the logical hierarchy)
+
+	* gladeui/glade-project.c: Dont add objects to a project that already contains the said object.
+
+	* plugins/gtk+/glade-gtk.c: 
+	  - Add tab labels by default to notebook pages (bug 345438)
+	  - Dont transfer "transfer-on-paste" properties to newly added placeholders
+	    in glade_gtk_container_replace_child (fixes bug 459953)
+
+2006-06-23  Tristan Van Berkom <tvb@gnome.org>
 
 	* NEWS, configure.ac: Rolling 3.3.2
 
