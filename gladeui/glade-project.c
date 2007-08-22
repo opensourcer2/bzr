@@ -22,6 +22,15 @@
 
 #include <config.h>
 
+/**
+ * SECTION:glade-project
+ * @Short_Description: The Glade document hub and Load/Save interface.
+ *
+ * This object owns all project objects and is responsable for loading and
+ * saving the glade document, you can monitor the project state via this
+ * object and its signals.
+ */
+
 #include <string.h>
 #include <stdlib.h>
 #include <glib.h>
@@ -684,7 +693,7 @@ glade_project_class_init (GladeProjectClass *klass)
 					 PROP_MODIFIED,
 					 g_param_spec_boolean ("modified",
 							       _(""),
-							       _("Whether project has beem modified since it was last saved"),
+							       _("Whether project has been modified since it was last saved"),
 							       FALSE,
 							       G_PARAM_READABLE));
 

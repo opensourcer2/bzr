@@ -1,10 +1,116 @@
+2007-08-22  Ilkka Tuohela  <hile@iki.fi>
+
+	* fi.po: Updated Finnish translation.
+
+2007-08-22  Priit Laes  <plaes@svn.gnome.org>
+
+	* et.po: Estonian translation updates by Ivar Smolin <okul@linux.ee>
+
+2007-08-21  Jorge Gonzalez <jorgegonz@svn.gnome.org>
+
+	* es.po: Updated Spanish translation.
+
+2007-08-21  Priit Laes  <plaes@svn.gnome.org>
+
+	* LINGUAS: Added et (Estonian) to LINGUAS.
+
+2007-08-21  Priit Laes  <plaes@svn.gnome.org>
+
+	* et.po: Estonian translation updates by Ivar Smolin <okul@linux.ee>
+
+2007-08-21  Duarte Loreto <happyguy_pt@hotmail.com>
+
+	* pt.po: Updated Portuguese translation.
+
+2007-08-21  Jovan Naumovski  <jovan@lugola.net>
+ 
+ 	 * mk.po: Updated Macedonian translation.
+
+2007-08-19  Theppitak Karoonboonyanan  <thep@linux.thai.net>
+
+	* th.po: Updated Thai translation.
+
+2007-08-16  Jorge Gonzalez <jorgegonz@svn.gnome.org>
+
+	* es.po: Updated Spanish translation.
+
+2007-08-15  Adam Weinberger  <adamw@gnome.org>
+
+	* en_CA.po: Updated Canadian English translation.
+
+2007-08-15  Ilkka Tuohela  <hile@iki.fi>
+
+	* fi.po: Updated Finnish translation.
+
+2007-08-15  Daniel Nylander <po@danielnylander.se>
+
+	* sv.po: Updated Swedish translation.
+
+2007-08-13  Ilkka Tuohela  <hile@iki.fi>
+
+	* fi.po: Updated Finnish translation.
+
+2007-08-12  Takeshi AIHANA <takeshi.aihana@gmail.com>
+
+	* ja.po: Updated Japanese translation.
+
+2007-08-11  Daniel Nylander <po@danielnylander.se>
+
+	* sv.po: Updated Swedish translation.
+
+2007-08-10  Jorge Gonzalez <jorgegonz@svn.gnome.org>
+
+	* es.po: Updated Spanish translation
+
+2007-08-10  Theppitak Karoonboonyanan  <thep@linux.thai.net>
+
+	* th.po: Updated Thai translation.
+
+2007-08-06  Daniel Nylander <po@danielnylander.se>
+
+	* sv.po: Updated Swedish translation.
+
+2007-08-06  Sunil Mohan Adapa  <sunil@atc.tcs.com>
+
+	* te.po: Added Telugu translation done by
+	Pramod <pramodfsf@gmail.com>.
+
+2007-08-06  Ilkka Tuohela  <hile@iki.fi>
+
+	* fi.po: Updated Finnish translation.
+
+2007-08-05  Leonardo Ferreira Fontenelle  <leonardof@svn.gnome.org>
+
+	* pt_BR.po: s/_Conteúdo/S_umário; see bug #461308.
+
+2007-08-04  Leonardo Ferreira Fontenelle  <leonardof@svn.gnome.org>
+
+	* pt_BR.po: Brazilian Portuguese translation updated by Igor Pires
+	Soares <igor@projetofedora>.
+
+2007-08-02  Jorge Gonzalez <jorgegonz@svn.gnome.org>
+
+	* es.po: Updated Spanish translation
+
+2007-08-02  Theppitak Karoonboonyanan  <thep@linux.thai.net>
+
+	* th.po: Updated Thai translation.
+
+2007-08-02  Theppitak Karoonboonyanan  <thep@linux.thai.net>
+
+	* th.po: Updated Thai translation by aka.ape <aka.ape@gmail.com>.
+
+2007-08-01  Daniel Nylander <po@danielnylander.se>
+
+	* sv.po: Updated Swedish translation.
+
 2007-07-27  Takeshi AIHANA <takeshi.aihana@gmail.com>
 
 	* ja.po: Updated Japanese translation.
 
 2007-07-24  Jorge Gonzalez <jorgegonz@svn.gnome.org>
 
-        * es.po: Updated Spanish translation
+	* es.po: Updated Spanish translation
 
 2007-07-23  Matic Žgur  <mr.zgur@gmail.com>
 
@@ -13,7 +119,7 @@
 
 2007-07-19  Jorge Gonzalez <jorgegonz@svn.gnome.org>
 
-        * es.po: Updated Spanish translation
+	* es.po: Updated Spanish translation
 
 2007-07-18 Gabor Kelemen  <kelemeng@gnome.hu>
 
