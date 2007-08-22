@@ -79,6 +79,7 @@ am_libgladeui_1_la_OBJECTS = libgladeui_1_la-glade-widget-adaptor.lo \
 	libgladeui_1_la-glade-palette-expander.lo \
 	libgladeui_1_la-glade-design-layout.lo \
 	libgladeui_1_la-glade-design-view.lo \
+	libgladeui_1_la-glade-named-icon-chooser-dialog.lo \
 	libgladeui_1_la-glade-cursor.lo \
 	libgladeui_1_la-glade-catalog.lo \
 	libgladeui_1_la-glade-property.lo \
@@ -330,7 +331,7 @@ common_defines = \
 
 lib_LTLIBRARIES = libgladeui-1.la
 BUILT_SOURCES = glade-marshallers.c glade-marshallers.h
-EXTRA_DIST = glade-marshallers.list gladeui.rc.in
+EXTRA_DIST = glade-marshallers.list gladeui.rc.in icon-naming-spec.c
 
 # The glade-3 core library
 libgladeui_1_la_SOURCES = \
@@ -348,6 +349,8 @@ libgladeui_1_la_SOURCES = \
 	glade-palette-expander.c \
 	glade-design-layout.c \
 	glade-design-view.c \
+	glade-named-icon-chooser-dialog.c \
+	glade-named-icon-chooser-dialog.h \
 	glade-cursor.c \
 	glade-catalog.c \
 	glade-property.c \
@@ -524,6 +527,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-inspector.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-keysyms.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-marshallers.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-named-icon-chooser-dialog.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-palette-box.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-palette-expander.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-palette-item.Plo@am__quote@
@@ -661,6 +665,13 @@ libgladeui_1_la-glade-design-view.lo: glade-design-view.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-design-view.c' object='libgladeui_1_la-glade-design-view.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladeui_1_la_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-design-view.lo `test -f 'glade-design-view.c' || echo '$(srcdir)/'`glade-design-view.c
+
+libgladeui_1_la-glade-named-icon-chooser-dialog.lo: glade-named-icon-chooser-dialog.c
+@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladeui_1_la_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-named-icon-chooser-dialog.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-named-icon-chooser-dialog.Tpo" -c -o libgladeui_1_la-glade-named-icon-chooser-dialog.lo `test -f 'glade-named-icon-chooser-dialog.c' || echo '$(srcdir)/'`glade-named-icon-chooser-dialog.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-named-icon-chooser-dialog.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-named-icon-chooser-dialog.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-named-icon-chooser-dialog.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-named-icon-chooser-dialog.c' object='libgladeui_1_la-glade-named-icon-chooser-dialog.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladeui_1_la_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-named-icon-chooser-dialog.lo `test -f 'glade-named-icon-chooser-dialog.c' || echo '$(srcdir)/'`glade-named-icon-chooser-dialog.c
 
 libgladeui_1_la-glade-cursor.lo: glade-cursor.c
 @am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladeui_1_la_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-cursor.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-cursor.Tpo" -c -o libgladeui_1_la-glade-cursor.lo `test -f 'glade-cursor.c' || echo '$(srcdir)/'`glade-cursor.c; \

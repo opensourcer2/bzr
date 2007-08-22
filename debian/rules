@@ -8,6 +8,8 @@ include /usr/share/cdbs/1/rules/simple-patchsys.mk
 include /usr/share/gnome-pkg-tools/1/rules/uploaders.mk
 
 DEB_CONFIGURE_EXTRA_FLAGS := --enable-static --enable-python
+DEB_DH_MAKESHLIBS_ARGS_libgladeui-1-7 := -V "libgladeui-1-7 (>= 3.3.4)"
+DEB_DH_MAKESHLIBS_ARGS_libgladeui-1-common := -V "libgladeui-1-common (>= 3.3.4)"
 
 # ensures that libgladeui's shlibs are in place when calling dh_shlibdeps
 binary-glade-3:: binary-libgladeui-1-7

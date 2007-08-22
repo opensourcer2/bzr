@@ -71,6 +71,7 @@ void                 glade_base_editor_add_default_properties (GladeBaseEditor *
 
 void                 glade_base_editor_add_properties         (GladeBaseEditor *editor,
 							       GladeWidget *gchild,
+							       gboolean packing,
 							       ...);
 
 void                 glade_base_editor_add_label              (GladeBaseEditor *editor,
@@ -85,7 +86,7 @@ void                 glade_base_editor_set_show_signal_editor (GladeBaseEditor *
 /* Convenience functions */
 GtkWidget           *glade_base_editor_pack_new_window        (GladeBaseEditor *editor,
 							       gchar *title,
-							       gchar *markup);
+							       gchar *help_markup);
 
 G_END_DECLS
 

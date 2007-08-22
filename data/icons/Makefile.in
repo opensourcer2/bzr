@@ -271,7 +271,7 @@ target_vendor = @target_vendor@
 SUBDIRS = hicolor
 gtk_update_icon_cache = gtk-update-icon-cache -f -t $(datadir)/icons/hicolor
 pixmapsdir = $(pkgdatadir)/pixmaps
-pixmaps_DATA = selector.png devhelp.png plus.png atk.png
+pixmaps_DATA = selector.png devhelp.png plus.png atk.png drag-resize.png
 EXTRA_DIST = $(pixmaps_DATA) glade-3.ico
 all: all-recursive
 

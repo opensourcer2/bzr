@@ -2687,7 +2687,8 @@ glade_gtk_notebook_set_n_pages (GObject *object, const GValue *value)
 		for (i = gtk_notebook_get_n_pages (notebook); i < new_size; i++)
 		{
 			gint position = glade_gtk_notebook_get_first_blank_page (notebook);
-			GtkWidget *placeholder     = glade_placeholder_new ();
+			GtkWidget *placeholder = glade_placeholder_new ();
+			gchar *str;
 
 			GladeWidget *glabel =
 				glade_widget_adaptor_create_widget
@@ -2695,7 +2696,7 @@ glade_gtk_notebook_set_n_pages (GObject *object, const GValue *value)
 				 "parent", widget, 
 				 "project", glade_widget_get_project (widget), 
 				 NULL);
-			gchar *str = g_strdup_printf ("page %d", i + 1);
+			str = g_strdup_printf ("page %d", i + 1);
 			glade_widget_property_set (glabel, "label", str);
 			g_free (str);
 			
@@ -4754,14 +4755,14 @@ glade_gtk_menu_shell_child_selected (GladeBaseEditor *editor,
 	
 	glade_base_editor_add_label (editor, "Properties");
 	
-	glade_base_editor_add_properties (editor, gchild, "label", "tooltip", NULL);
+	glade_base_editor_add_properties (editor, gchild, FALSE, "label", "tooltip", NULL);
 
 	if (type == GTK_TYPE_IMAGE_MENU_ITEM)
 	{
 		GtkWidget *image;
 		GladeWidget *internal;
 
-		glade_base_editor_add_properties (editor, gchild, "stock", NULL);
+		glade_base_editor_add_properties (editor, gchild, FALSE, "stock", NULL);
 		
 		if ((image = gtk_image_menu_item_get_image (GTK_IMAGE_MENU_ITEM (child))))
 		{
@@ -4771,17 +4772,17 @@ glade_gtk_menu_shell_child_selected (GladeBaseEditor *editor,
 				glade_base_editor_add_label
 					(editor, "Internal Image Properties");
 				glade_base_editor_add_properties
-					(editor, internal, "glade-type", "pixbuf", 
+					(editor, internal, FALSE, "glade-type", "pixbuf", 
 					 "glade-stock", "icon-name", NULL);
 			}
 		}
 	}
 	else if (type == GTK_TYPE_CHECK_MENU_ITEM)
-		glade_base_editor_add_properties (editor, gchild, 
+		glade_base_editor_add_properties (editor, gchild, FALSE,
 						  "active", "draw-as-radio",
 						  "inconsistent", NULL);
 	else if (type == GTK_TYPE_RADIO_MENU_ITEM)
-		glade_base_editor_add_properties (editor, gchild,
+		glade_base_editor_add_properties (editor, gchild, FALSE,
 						  "active", "group", NULL);
 }
 
@@ -5477,6 +5478,40 @@ glade_gtk_menu_bar_post_create (GladeWidgetAdaptor *adaptor,
 }
 
 /* ----------------------------- GtkToolBar ------------------------------ */
+
+/* need to unset/reset toolbar style when property is disabled/enabled */
+static void
+property_toolbar_style_notify_enabled (GladeProperty *property,
+				       GParamSpec    *spec,
+				       GtkToolbar    *toolbar)
+{
+	GtkToolbarStyle style;
+
+	if (glade_property_get_enabled (property))
+	{
+		glade_property_get (property, &style);
+		gtk_toolbar_set_style (toolbar, style);
+	}
+	else
+		gtk_toolbar_unset_style (toolbar);
+} 
+
+void
+glade_gtk_toolbar_post_create (GladeWidgetAdaptor *adaptor,
+			       GObject            *object, 
+			       GladeCreateReason   reason)
+{
+	GladeWidget   *widget;
+	GladeProperty *toolbar_style_property;	
+	
+	widget = glade_widget_get_from_gobject (object);
+	toolbar_style_property = glade_widget_get_property (widget, "toolbar-style");
+	
+	g_signal_connect (toolbar_style_property, "notify::enabled",
+			  G_CALLBACK (property_toolbar_style_notify_enabled),
+			  object);
+}
+
 void
 glade_gtk_toolbar_get_child_property (GladeWidgetAdaptor *adaptor,
 				      GObject            *container,
@@ -5494,11 +5529,12 @@ glade_gtk_toolbar_get_child_property (GladeWidgetAdaptor *adaptor,
 						     GTK_TOOL_ITEM (child)));
 	}
 	else
-		/* Chain Up */
+	{	/* Chain Up */
 		GWA_GET_CLASS
 			(GTK_TYPE_CONTAINER)->child_get_property (adaptor, 
 								  container, child,
 								  property_name, value);
+	}
 }
 
 void
@@ -5606,7 +5642,7 @@ glade_gtk_toolbar_child_selected (GladeBaseEditor *editor,
 	
 	glade_base_editor_add_label (editor, "Properties");
 	
-	glade_base_editor_add_properties (editor, gchild,
+	glade_base_editor_add_properties (editor, gchild, FALSE,
 					  "visible-horizontal",
 					  "visible-vertical",
 					  NULL);
@@ -5614,7 +5650,7 @@ glade_gtk_toolbar_child_selected (GladeBaseEditor *editor,
 	if (type == GTK_TYPE_SEPARATOR_TOOL_ITEM) return;
 
 	if (GTK_IS_TOOL_BUTTON (child))
-		glade_base_editor_add_properties (editor, gchild,
+		glade_base_editor_add_properties (editor, gchild, FALSE,
 						  "label", 
 						  "glade-type",
 						  "icon",
@@ -5623,8 +5659,13 @@ glade_gtk_toolbar_child_selected (GladeBaseEditor *editor,
 						  NULL);
 	
 	if (type == GTK_TYPE_RADIO_TOOL_BUTTON)
-		glade_base_editor_add_properties (editor, gchild,
+		glade_base_editor_add_properties (editor, gchild, FALSE,
 						  "group", "active", NULL);	
+
+	glade_base_editor_add_label (editor, "Packing");
+	glade_base_editor_add_properties (editor, gchild, TRUE,
+					  "expand", "homogeneous", NULL);
+
 }
 
 static void

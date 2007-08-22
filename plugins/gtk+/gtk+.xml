@@ -289,8 +289,6 @@
 	<property id="allow-grow" disabled="True"/>
 	<property id="resize-mode" disabled="True"/>
 	<property id="screen" disabled="True"/>
-	<property id="role"/>
-	<property id="icon-name"/>
 	<property ignore="True" id="resizable"/>
 	<property ignore="True" id="decorated"/>
 	<property translatable="True" ignore="True" id="title"/>
@@ -333,6 +331,7 @@
         <action stock="gtk-edit" important="True" id="launch_editor" name="Edit&#8230;"></action>
       </actions>
       <properties>
+        <property id="submenu" disabled="True"/>
         <property translatable="True" id="label" name="Label">
 	  <tooltip>The text of the menu item</tooltip>
           <spec>glade_standard_string_spec</spec>
@@ -417,7 +416,7 @@
     </glade-widget-class>
       
     <glade-widget-class use-placeholders="False" name="GtkToolbar" generic-name="toolbar" title="Tool Bar">
-      <post-create-function>empty</post-create-function>
+      <post-create-function>glade_gtk_toolbar_post_create</post-create-function>
       <add-child-function>glade_gtk_toolbar_add_child</add-child-function>
       <remove-child-function>glade_gtk_toolbar_remove_child</remove-child-function>
       <child-set-property-function>glade_gtk_toolbar_set_child_property</child-set-property-function>
@@ -434,7 +433,7 @@
 	    <value id="GTK_ORIENTATION_VERTICAL" name="Vertical"></value>
 	  </displayable-values>
 	</property>
-      	<property id="toolbar-style">
+      	<property save-always="True" optional-default="False" optional="True" id="toolbar-style">
   	  <displayable-values>
 	    <value id="GTK_TOOLBAR_ICONS" name="Icons only"></value>
 	    <value id="GTK_TOOLBAR_TEXT" name="Text only"></value>
