@@ -1,3 +1,14 @@
+glade-3 (3.4.0-0ubuntu1) gutsy; urgency=low
+
+  * New upstream release:
+    - New and updated translations:
+        et, es, fi, gl, sv, en_CA, ja, pt_PR, th, hu, pt, da, vi, bg, lt, mk,
+        nb, uk, it, de, si, bn, fr, ar, en_GB, ru, pl, ca
+  * debian/control.in:
+    - Using binary version dependency on libgladeui-1-dev -> libgladeui-1-7
+
+ -- Aron Sisak <aron@ubuntu.hu>  Fri, 21 Sep 2007 09:29:11 +0200
+
 glade-3 (3.3.4-0ubuntu1) gutsy; urgency=low
 
   * New upstream release:
