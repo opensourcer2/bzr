@@ -1,3 +1,11 @@
+glade-3 (3.4.0-2ubuntu2) hardy; urgency=low
+
+  * debian/rules:
+    - use gnome.mk so the icon cache and translations template are updated
+      (LP: #134598)
+
+ -- Sebastien Bacher <seb128@canonical.com>  Tue, 27 Nov 2007 15:04:43 +0100
+
 glade-3 (3.4.0-2ubuntu1) hardy; urgency=low
 
   * Sync with Debian
