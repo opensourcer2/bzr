@@ -1,3 +1,6 @@
+# Description: launchpad integration changes
+# UbuntuSpecific: ubuntu and launchpad
+# 
 diff -Nur glade3-3.3.2/configure.ac glade3-3.3.2.new/configure.ac
 --- glade3-3.3.2/configure.ac	2007-07-23 22:57:17.000000000 +0200
 +++ glade3-3.3.2.new/configure.ac	2007-07-24 00:20:57.000000000 +0200

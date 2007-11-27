@@ -1,15 +1,24 @@
 #!/usr/bin/make -f
-#-*- makefile -*-
+
+ALLOWED_DISTS += unstable
 
 include /usr/share/cdbs/1/rules/buildcore.mk
 include /usr/share/cdbs/1/class/autotools.mk
 include /usr/share/cdbs/1/rules/debhelper.mk
 include /usr/share/cdbs/1/rules/simple-patchsys.mk
 include /usr/share/gnome-pkg-tools/1/rules/uploaders.mk
+include /usr/share/gnome-pkg-tools/1/rules/check-dist.mk
+-include /usr/share/gnome-pkg-tools/1/rules/gnome-get-source.mk
 
-DEB_CONFIGURE_EXTRA_FLAGS := --enable-static --enable-python
-DEB_DH_MAKESHLIBS_ARGS_libgladeui-1-7 := -V "libgladeui-1-7 (>= 3.3.4)"
-DEB_DH_MAKESHLIBS_ARGS_libgladeui-1-common := -V "libgladeui-1-common (>= 3.3.4)"
+GNOME_MODULE := glade3
+
+DEB_CONFIGURE_EXTRA_FLAGS += \
+			--enable-gtk-doc \
+			--disable-scrollkeeper
+# Disabled until there are some useful python widget catalogs:
+#                            --enable-python
+
+LDFLAGS += -Wl,-z,defs -Wl,-O1 -Wl,--as-needed
 
 # ensures that libgladeui's shlibs are in place when calling dh_shlibdeps
 binary-glade-3:: binary-libgladeui-1-7
@@ -19,10 +28,14 @@ binary-glade-gnome-3:: binary-libgladeui-1-7
 # generated shlib information
 DEB_SHLIBDEPS_LIBRARY_glade-3 += libgladeui-1-7
 DEB_SHLIBDEPS_INCLUDE_glade-3 += debian/libgladeui-1-7/usr/lib/
-DEB_SHLIBDEPS_LIBRARY_glade-gnome-3 += libgladeui-1-7
-DEB_SHLIBDEPS_INCLUDE_glade-gnome-3 += debian/libgladeui-1-7/usr/lib/
+DEB_SHLIBDEPS_LIBRARY_glade-common += libgladeui-1-7
+DEB_SHLIBDEPS_INCLUDE_glade-common += debian/libgladeui-1-7/usr/lib/
 
-# remove stuff that will go in glade-gnome
+# move stuff that will go in glade-gnome-3
 binary-post-install/libgladeui-1-7::
-	find debian/libgladeui-1-7/usr/share/glade3/pixmaps/ -name gnome\* -exec rm {} \;
-	find debian/libgladeui-1-7/usr/share/glade3/pixmaps/ -name bonobo\* -exec rm {} \;
+	for file in $$(find debian/libgladeui-1-7/usr/share/glade3/pixmaps/ -name \*gnome\* -or -name \*bonobo\*); do \
+		target_dir=$$(dirname $${file} | sed 's/libgladeui-1-7/glade-gnome-3/'); \
+		mkdir -p $${target_dir}; \
+		mv $${file} $${target_dir}; \
+	done
+

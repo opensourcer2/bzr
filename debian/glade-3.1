@@ -2,12 +2,12 @@
 .\" First parameter, NAME, should be all caps
 .\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
 .\" other parameters are allowed: see man(7), man(1)
-.TH GLADE-2 1 "24 January 2005"
+.TH GLADE-3 1 "24 January 2005"
 .\" Please adjust this date whenever revising the manpage.
 .SH NAME
-glade-2 \- GUI Builder for GTK+ 2
+glade-3 \- GUI Builder for GTK+ 2
 .SH SYNOPSIS
-.B glade-2
+.B glade-3
 .RI [ options ] " file"
 .br
 .SH DESCRIPTION
@@ -25,32 +25,33 @@ functionality, instead of the presentation.
 .\" respectively.
 .SH OPTIONS
 .TP
-.B \-w, \-\-write-source
-Write the "source" code output files defined by the XML input file
-.TP
-.B \-\-hide-palette
-Start with the palette hidden (only available with Gnome support)
-.TP
-.B \-\-hide-property-editor
-Start with the property editor hidden (only available with Gnome support)
-.TP
-.B \-\-show-widget-tree
-Start with the widget tree shown (only available with Gnome support)
-.TP
-.B \-\-show-clipboard
-Start with the clipboard shown (only available with Gnome support)
-.TP
 .B \-h, \-\-help
 Show summary of options.
 .TP
+.B \-without\-devhelp
+Disable Devhelp integration
+.TP
+.B \-\-display=DISPLAY
+X display to use
+.TP
 .B \-v, \-\-version
 Show version of program.
+.P
+.B Glade
+also accepts the standard GNOME and GTK options.
 .SH FILES
 A single input XML file may be given as an argument.  This file should
 have been previous created by an interactive session with \fBGlade\fP.
 .SH AUTHOR
-glade-2 was written by Damon Chaplin.
+glade-3 was written by Chema Celorio <chema@ximian.com>.
 .PP
 This manual page was written by Justin Pryzby
 <justinpryzby@users.sf.net>, for the Debian project (but may be used
 by others).
+.SH SEE ALSO
+.BR "gtk-options" (7),
+.BR "gnome-options" (7)
+.P
+The online documentation available through the program's
+.I Help
+menu.

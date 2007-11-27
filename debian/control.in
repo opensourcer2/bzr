@@ -4,15 +4,38 @@ Priority: optional
 Maintainer: Ubuntu Desktop Team <ubuntu-desktop@lists.ubuntu.com>
 XSBC-Original-Maintainer: Gustavo Noronha Silva <kov@debian.org>
 Uploaders: @GNOME_TEAM@
-Build-Depends: cdbs, debhelper (>= 4.2.21), gettext (>= 0.10.40), libgnomecanvas2-dev (>= 2.0.0), libgnomeui-dev (>= 2.9.0), scrollkeeper (>= 0.1.4), libbonobo2-dev (>= 2.4), libxml2-dev (>= 2.4.1), libgnomeprintui2.2-dev, libbonoboui2-dev (>= 2.0.0), autotools-dev, gnome-common (>= 2.8.0), gnome-pkg-tools, dpkg-dev (>= 1.13.19), libgtk2.0-dev (>= 2.10), libx11-dev, libgail-gnome-dev, liblaunchpad-integration-dev
+Build-Depends: cdbs (>= 0.4.41),
+               debhelper (>= 5),
+               gettext (>= 0.10.40),
+               libgnomeui-dev,
+               scrollkeeper (>= 0.1.4),
+               libxml2-dev (>= 2.4.0),
+               libbonoboui2-dev,
+               autotools-dev,
+               gnome-common (>= 2.8.0),
+               gnome-pkg-tools (>= 0.10),
+               dpkg-dev (>= 1.13.19),
+               libgtk2.0-dev (>= 2.10.0),
+               gtk-doc-tools (>= 1.4),
+               gnome-doc-utils (>= 0.9.0),
+               liblaunchpad-integration-dev
 Standards-Version: 3.7.2
 
 Package: libgladeui-1-7
 Architecture: any
-Section: devel
-Depends: ${shlibs:Depends}, libgladeui-1-common
-Conflicts: libgladeui-1-1, libgladeui-1-2, libgladeui-1-4, libgladeui-1-5, libgladeui-1-6
-Replaces: libgladeui-1-1, libgladeui-1-2, libgladeui-1-4, libgladeui-1-5, libgladeui-1-6
+Section: libdevel
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Conflicts: libgladeui-1-1,
+           libgladeui-1-2,
+           libgladeui-1-3,
+           libgladeui-1-4,
+           libgladeui-1-5
+Replaces: libgladeui-1-1,
+          libgladeui-1-2,
+          libgladeui-1-3,
+          libgladeui-1-4,
+          libgladeui-1-5
 Description: GTK+ User Interface Build core library
  Glade is a RAD tool to enable quick and easy development of user
  interfaces for the GTK+ 2 toolkit.
@@ -24,28 +47,14 @@ Description: GTK+ User Interface Build core library
  .
  This library provides all the widgets and core code, like parsing and
  saving files.
-
-Package: libgladeui-1-common
-Architecture: all
-Replaces: libgladeui-1-2
-Description: GTK+ User Interface Build core library
- Glade is a RAD tool to enable quick and easy development of user
- interfaces for the GTK+ 2 toolkit.
- .
- Glade is, since its "3.0" major version, highly modular, and composed
- of widgets which can be used by other applications to integrate
- functionality similar to the one provided by the Glade application
- itself.
- .
- This library provides all the widgets and core code, like parsing and
- saving files.
- .
- This package contains the translations for the library.
 
 Package: libgladeui-1-dev
-Architecture: any
-Section: devel
-Depends: ${shlibs:Depends}, libgladeui-1-7 (= ${binary:Version}), libgtk2.0-dev (>= 2.10), libxml2-dev (>= 2.4.0)
+Architecture: all
+Section: libdevel
+Depends: ${misc:Depends},
+         libgladeui-1-7 (>= ${source:Version}),
+         libgtk2.0-dev (>= 2.10.0),
+         libxml2-dev (>= 2.4.0)
 Description: GTK+ User Interface Build core library (development files)
  Glade is a RAD tool to enable quick and easy development of user
  interfaces for the GTK+ 2 toolkit.
@@ -64,9 +73,12 @@ Description: GTK+ User Interface Build core library (development files)
 Package: glade-3
 Architecture: any
 Section: devel
-Depends: ${shlibs:Depends}
-Recommends: autoconf (>= 2.52), automake1.4, gettext (>= 0.10.40), libgtk2.0-dev(>= 2.3.0), libgail17
-Suggests: glade-doc, glade-gnome-3, libglade2-dev (>= 2.3.0), menu (>> 2.0)
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: libgtk2.0-dev (>= 2.10.0),
+            libglade2-dev (>= 1:2.6.0),
+            devhelp
+Suggests: glade-gnome-3
 Description: GTK+ 2 User Interface Builder
  Glade is a RAD tool to enable quick and easy development of user
  interfaces for the GTK+ 2 toolkit.
@@ -78,15 +90,20 @@ Description: GTK+ 2 User Interface Builder
  .
  This version is more modular than previous ones, so you can install
  modules to add aditional widgets for Glade to use. You can install
- the glade-gnome-3 package to provide GNOME widgets, for instance.
+ the glade-gnome package to provide GNOME widgets, for instance.
  .
  Homepage: http://glade.gnome.org/
 
 Package: glade-gnome-3
 Architecture: any
 Section: gnome
-Priority: optional
-Depends: glade-3 (>= ${source:Version}), gnome-common (>= 2.8.0), ${shlibs:Depends}
+Depends: ${misc:Depends},
+         glade-3 (= ${binary:Version}),
+         gnome-common (>= 2.8.0),
+         ${shlibs:Depends}
+Recommends: libgnomeui-dev,
+            libbonoboui2-dev
+Replaces: libgladeui-1-7 (<< 3.4.0-2)
 Description: GTK+ 2 User Interface Builder (with GNOME 2 support)
  Glade is a RAD tool to enable quick and easy development of user
  interfaces for the GTK+ 2 toolkit.
@@ -100,4 +117,3 @@ Description: GTK+ 2 User Interface Builder (with GNOME 2 support)
  widgets in its pallete.
  .
  Homepage: http://glade.gnome.org/
-

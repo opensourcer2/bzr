@@ -1,3 +1,6 @@
+# Description: update the configure
+# UbuntuSpecific: the launchpad integration changes require a configure update
+#
 diff -Nur glade3-3.4.0/configure glade3-3.4.0.new/configure
 --- glade3-3.4.0/configure	2007-09-17 16:04:12.000000000 +0200
 +++ glade3-3.4.0.new/configure	2007-09-21 09:38:53.218287491 +0200
