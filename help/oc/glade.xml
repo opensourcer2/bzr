@@ -34,7 +34,7 @@
     </copyright> 
 
     <publisher> 
-      <publishername>GNOME Documentation Project</publishername> 
+      <publishername>Projècte de documentacion de GNOME</publishername> 
     </publisher> 
 
    <include xmlns="http://www.w3.org/2001/XInclude" href="legal.xml"/>
@@ -44,13 +44,13 @@
 	<firstname>Vincent</firstname> 
 	<surname>Geddes</surname> 
 	<affiliation> 
-	  <orgname>GNOME Documentation Project</orgname>
+	  <orgname>Projècte de documentacion de GNOME</orgname>
 	  <address><email>vincent.geddes@gmail.com</email></address>
 	</affiliation>
       </author> 
       <author> 
         <firstname>Sun</firstname> 
-        <surname>GNOME Documentation Team</surname> 
+        <surname>Còla de documentacion de GNOME</surname> 
         <affiliation> 
           <orgname>Sun Microsystems</orgname> 
         </affiliation> 
@@ -59,7 +59,7 @@
          <firstname>Michael</firstname> 
          <surname>Vance</surname> 
          <affiliation> 
-           <orgname>GNOME Documentation Project</orgname> 
+           <orgname>Projècte de documentacion de GNOME</orgname> 
            </affiliation> 
        </author> 
     </authorgroup>
@@ -80,51 +80,51 @@
 <!-- to V3.0, and so on. -->  
     <revhistory>
         <revision> 
-		<revnumber>Glade Manual 3.0</revnumber> 
+		<revnumber>Manual de Glade 3.0</revnumber> 
 		<date>5 de decembre de 2006</date>
 		<revdescription> 
 	  		<para role="author">Vincent Geddes</para>
-	  		<para role="publisher">GNOME Documentation Project</para>
+	  		<para role="publisher">Projècte de documentacion de GNOME</para>
 		</revdescription> 
         </revision>
         <revision> 
                 <revnumber>Glade Manual 2.1;</revnumber> 
-                <date>17 June 2004</date> 
+                <date>17 de junh de 2004</date> 
                 <revdescription> 
-                        <para role="author">Sun GNOME Documentation Team</para>
-                        <para role="publisher">GNOME Documentation Project</para>
+                        <para role="author">Còla Sun de documentacion de GNOME</para>
+                        <para role="publisher">Projècte de documentacion de GNOME</para>
                 </revdescription> 
         </revision>
         <revision> 
-                <revnumber>Glade User Manual 2.0</revnumber> 
+                <revnumber>Manual de l'utilizaire de Glade 2.0</revnumber> 
                 <date>25 de febrièr de 2004</date> 
                 <revdescription> 
-                        <para role="author">Sun GNOME Documentation Team</para>
-                        <para role="publisher">GNOME Documentation Project</para>
+                        <para role="author">Còla Sun de documentacion de GNOME</para>
+                        <para role="publisher">Projècte de documentacion de GNOME</para>
                 </revdescription> 
         </revision>             
         <revision> 
-                <revnumber>Glade User Manual 1.2</revnumber> 
-                <date>10 Feb 2004</date> 
+                <revnumber>Manual de l'utilizaire de Glade 1.2</revnumber> 
+                <date>10 de febrièr de 2004</date> 
                 <revdescription> 
-                        <para role="author">Sun GNOME Documentation Team</para>
-                        <para role="publisher">GNOME Documentation Project</para>
+                        <para role="author">Còla Sun de documentacion de GNOME</para>
+                        <para role="publisher">Projècte de documentacion de GNOME</para>
                 </revdescription> 
         </revision>  
         <revision> 
-                <revnumber>Glade User Manual 1.1</revnumber> 
-                <date>30 Mar 2002</date> 
+                <revnumber>Manual de l'utilizaire de Glade 1.1</revnumber> 
+                <date>30 de març de 2002</date> 
                 <revdescription> 
                         <para role="author">Michael Vance</para>
-                        <para role="publisher">GNOME Documentation Project</para>
+                        <para role="publisher">Projècte de documentacion de GNOME</para>
                 </revdescription> 
         </revision> 
         <revision> 
-                <revnumber>Glade User Manual 1.0</revnumber> 
-                <date>11 May 2000</date> 
+                <revnumber>Manual de l'utilizaire de Glade 1.0</revnumber> 
+                <date>11 de mai de 2000</date> 
                 <revdescription> 
                         <para role="author">Michael Vance</para>
-                        <para role="publisher">GNOME Documentation Project</para>
+                        <para role="publisher">Projècte de documentacion de GNOME</para>
                 </revdescription> 
         </revision> 
     </revhistory> 
@@ -174,7 +174,7 @@
     </para> 
     <variablelist>
     	<varlistentry>
-    		<term><guimenu>Applications</guimenu> menu</term>
+    		<term>Menut <guimenu>Applications</guimenu></term>
     		<listitem>
     		<para>Choose 
     		<menuchoice>
@@ -184,7 +184,7 @@
     		</listitem>
     	</varlistentry>
     	<varlistentry>
-    		<term>Linha de comandas</term>
+    		<term>Linha de comanda</term>
     		<listitem>
     		<para>To start <application>Glade</application> from a command line, type the following command, 
     		then press <keycap>Return</keycap>: <command>glade-3</command></para>	 
@@ -215,7 +215,7 @@
             <para>The menus on the menubar contain all of the commands you need to work with files in <application>Glade</application>.</para>
             </listitem>
           </varlistentry>
-          <varlistentry> <term>Toolbar</term>
+          <varlistentry> <term>Barra d'espleches</term>
             <listitem>
             <para>The toolbar contains a subset of the commands that you can access from the menubar.</para>
             </listitem>
@@ -225,7 +225,7 @@
             <para> The design area is where a user interface can be visually edited.</para>
             </listitem>
           </varlistentry>
-          <varlistentry> <term>Palette</term>
+          <varlistentry> <term>Paleta</term>
             <listitem>
             <para>The palette contains the widgets that can be used to build a user interface.</para>
             </listitem>
@@ -240,7 +240,7 @@
             <para>The property editor is used to manipulate the properties of widgets, as well as adding connections to source code.</para>
             </listitem>
           </varlistentry>
-          <varlistentry> <term>Statusbar</term>
+          <varlistentry> <term>Barra d'estat</term>
             <listitem>
             <para>The statusbar displays information about current <application>Glade</application> activity and contextual information about the menu items.</para>
             </listitem>
@@ -256,18 +256,18 @@
  
 <!-- To Create a New Project  -->
 	 <sect2 id="glade-create-new-project"> 
-		<title>Creating a New Project</title>
+		<title>Crear un projècte novèl</title>
 		<para>To create a new project, choose <menuchoice><guimenu>File</guimenu><guimenuitem>New</guimenuitem></menuchoice>. The application displays a new blank project in the <application>Glade</application> window.</para>
 	 </sect2>
 
 	 <sect2 id="glade-open-project"> 
-		<title>Opening a Project</title>
+		<title>Dobrir un projècte</title>
 		<para>To open an existing project, choose <menuchoice><guimenu>File</guimenu><guimenuitem>Open</guimenuitem></menuchoice>. The application displays the project in the <application>Glade</application> window.</para>
 	 </sect2>
 
 <!-- To Save a Project -->
 	 <sect2 id="glade-save-project"> 
-		<title>Saving a Project</title>
+		<title>Enregistrar un projècte</title>
 		<para>You can save projects in the following ways:</para>
 		<itemizedlist> 
 		  <listitem><para>To save changes to an existing project file, choose <menuchoice><guimenu>File</guimenu><guimenuitem>Save</guimenuitem></menuchoice>. </para>
@@ -290,7 +290,7 @@ ways:
                 </para>
                 <variablelist> 
                   <varlistentry> 
-                         <term>Selection mode</term> 
+                         <term>Mòde de seleccion</term> 
                          <listitem>
                                 <para>
                                   To use selection mode,
@@ -357,14 +357,14 @@ the <guilabel>Palette</guilabel> window:
 <itemizedlist>
 <listitem><para>Horizontal Box</para>
 </listitem><listitem><para>Vertical Box</para></listitem>
-<listitem><para>Table</para></listitem>
+<listitem><para>Tablèu</para></listitem>
 <listitem><para>Fixed Positions</para></listitem>
 <listitem><para>Horizontal Button Box</para></listitem>
 <listitem><para>Vertical Button Box</para></listitem>
 <listitem><para>Horizontal Panes</para></listitem>
 <listitem><para>Vertical Panes</para></listitem>
 <listitem><para>Notebook</para></listitem>
-<listitem><para>Frame</para></listitem>
+<listitem><para>Encastre</para></listitem>
 <listitem><para>Scrolled Window</para></listitem>
 <listitem><para>Viewport</para></listitem>
 </itemizedlist>

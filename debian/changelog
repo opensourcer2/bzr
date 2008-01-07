@@ -1,3 +1,23 @@
+glade-3 (3.4.1-0ubuntu1) hardy; urgency=low
+
+  * New upstream version:
+    - Crash in Glade Interface Designer: Clicked the GtkInputDial...
+      (LP: #131060)
+    - Glade3 hangs when loading certain projects containing GtkAssistants
+    - Fix options context summary
+    - Use gtk_widget_get_action
+    - Icon Theme search path is incorrect for win32
+    - Doesn't build on ia64
+    - Activating "Add Parent" on an internal widget component causes crah
+    - GtkImage/GdkPixbuf porps misc fixes
+  * debian/patches/01_gladeui_types_headers.patch:
+    - dropped, fixed with the new version
+  * debian/patches/90_autoconf.patch,
+    debian/patches/99_ltmain_as-needed.patch:
+    - updated
+
+ -- Sebastien Bacher <seb128@canonical.com>  Mon, 07 Jan 2008 15:22:46 +0100
+
 glade-3 (3.4.0-2ubuntu2) hardy; urgency=low
 
   * debian/rules:

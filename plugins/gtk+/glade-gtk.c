@@ -249,11 +249,14 @@ widget_parent_changed (GtkWidget          *widget,
 {
 	GladeWidget *gwidget = glade_widget_get_from_gobject (widget);
 
-	if (gwidget->parent && !GTK_IS_WINDOW (glade_widget_get_object (gwidget->parent)))
+	if (gwidget->parent && !GTK_IS_WINDOW (glade_widget_get_object (gwidget->parent)) &&
+	    gwidget->parent->internal == NULL)
 		glade_widget_set_action_sensitive (gwidget, "remove_parent", TRUE);
 	else
 		glade_widget_set_action_sensitive (gwidget, "remove_parent", FALSE);
 
+	if (gwidget->internal)
+		glade_widget_set_action_sensitive (gwidget, "add_parent", FALSE);	
 }
 
 void
@@ -265,7 +268,7 @@ glade_gtk_widget_deep_post_create (GladeWidgetAdaptor *adaptor,
 	
 	glade_widget_set_action_sensitive (gwidget, "remove_parent", FALSE);
 
-	if (GTK_IS_WINDOW (widget))
+	if (GTK_IS_WINDOW (widget) || gwidget->internal)
 		glade_widget_set_action_sensitive (gwidget, "add_parent", FALSE);
 
 	/* Watch parents and set actions sensitive/insensitive */
@@ -4269,6 +4272,7 @@ glade_gtk_image_disable_stock (GladeWidget *gwidget)
 {
 	glade_widget_property_set (gwidget, "glade-stock", NULL);
 	glade_widget_property_set (gwidget, "stock", NULL);
+	glade_widget_property_set_enabled (gwidget, "stock", FALSE);
 	glade_widget_property_set_sensitive (gwidget, "glade-stock", FALSE,
 		 	_("This only applies with stock type images"));
 }
@@ -4377,6 +4381,7 @@ glade_gtk_image_set_type (GObject *object, const GValue *value)
 		case GLADEGTK_IMAGE_STOCK:
 			glade_gtk_image_disable_filename (gwidget);
 			glade_gtk_image_disable_icon_name (gwidget);
+			glade_widget_property_set_enabled (gwidget, "stock", TRUE);
 			glade_gtk_image_refresh (gwidget, "glade-stock");
 		break;
 
@@ -6654,7 +6659,9 @@ glade_gtk_assistant_set_child_property (GladeWidgetAdaptor *adaptor,
 		gint pos, size;
 		gboolean set_current;
 		
-		if ((pos = g_value_get_int (value)) < 0);
+		if ((pos = g_value_get_int (value)) < 0) return;
+		if (pos == glade_gtk_assistant_get_page (assistant, widget))
+			return;
 		set_current = gtk_assistant_get_current_page (assistant) == 
 			      glade_gtk_assistant_get_page (assistant, widget);
 		
@@ -6702,6 +6709,31 @@ glade_gtk_assistant_get_child_property (GladeWidgetAdaptor *adaptor,
 	GWA_GET_CLASS (GTK_TYPE_WINDOW)->child_get_property (adaptor, 
 							     container, 
 							     child,
+							     property_name, 
+							     value);
+}
+
+/*--------------------------- GtkRadioButton ---------------------------------*/
+void
+glade_gtk_radio_button_set_property (GladeWidgetAdaptor *adaptor,
+				     GObject *object,
+				     const gchar *property_name,
+				     const GValue *value)
+{
+	if (strcmp (property_name, "group") == 0)
+	{
+		GtkRadioButton *radio = g_value_get_object (value);
+		/* g_object_set () on this property produces a bogus warning,
+		 * so we better use the API GtkRadioButton provides.
+		 */
+		gtk_radio_button_set_group (GTK_RADIO_BUTTON (object), 
+					    radio ? gtk_radio_button_get_group (radio) : NULL);
+		return;
+	}
+	
+	/* Chain Up */
+	GWA_GET_CLASS (GTK_TYPE_CHECK_BUTTON)->set_property (adaptor,
+							     object,
 							     property_name, 
 							     value);
 }

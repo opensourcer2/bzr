@@ -1,3 +1,4 @@
+# translation of oc.po to Occitan
 # Occitan translation of glade documentation.
 # Copyright (C) 2007 Free Software Foundation, Inc.
 # This file is distributed under the same license as the glade
@@ -5,18 +6,19 @@
 #
 # Yannig MARCHEGAY (yannig@marchegay.org) - 2006-2007
 #
+# Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: glade3 doc fr\n"
+"Project-Id-Version: oc\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-03-23 22:11+0100\n"
-"PO-Revision-Date: 2007-08-21 20:41+0200\n"
+"PO-Revision-Date: 2007-12-05 15:34+0100\n"
 "Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
-"Language-Team: Occitan (post 1500) <ubuntu-l10n-oci@lists.ubuntu.com>\n"
+"Language-Team: Occitan <ubuntu-l10n-oci@lists.ubuntu.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);"
+"Plural-Forms: nplurals=2; plural=(n > 1);X-Generator: KBabel 1.11.4"
 
 #: ../C/legal.xml:2(para)
 msgid ""
@@ -80,10 +82,8 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/glade.xml:206(None)
-msgid ""
-"@@image: 'figures/main-window.png'; md5=0ab7dd8af6d049544c81748e72064941"
-msgstr ""
-"@@image: 'figures/main-window.png'; md5=0ab7dd8af6d049544c81748e72064941"
+msgid "@@image: 'figures/main-window.png'; md5=0ab7dd8af6d049544c81748e72064941"
+msgstr "@@image: 'figures/main-window.png'; md5=0ab7dd8af6d049544c81748e72064941"
 
 #: ../C/glade.xml:17(title)
 msgid "Glade Interface Designer Manual"
@@ -111,7 +111,7 @@ msgstr "2003"
 
 #: ../C/glade.xml:30(holder) ../C/glade.xml:56(orgname)
 msgid "Sun Microsystems"
-msgstr ""
+msgstr "Sun Microsystems"
 
 #: ../C/glade.xml:33(year)
 msgid "2002"
@@ -130,7 +130,7 @@ msgstr "Michael Vance"
 #: ../C/glade.xml:104(para) ../C/glade.xml:112(para) ../C/glade.xml:120(para)
 #: ../C/glade.xml:128(para)
 msgid "GNOME Documentation Project"
-msgstr ""
+msgstr "Projècte de documentacion de GNOME"
 
 #: ../C/glade.xml:45(firstname)
 msgid "Vincent"
@@ -146,11 +146,11 @@ msgstr "vincent.geddes@gmail.com"
 
 #: ../C/glade.xml:53(firstname)
 msgid "Sun"
-msgstr ""
+msgstr "Sun"
 
 #: ../C/glade.xml:54(surname)
 msgid "GNOME Documentation Team"
-msgstr ""
+msgstr "Còla de documentacion de GNOME"
 
 #: ../C/glade.xml:60(firstname)
 msgid "Michael"
@@ -162,7 +162,7 @@ msgstr ""
 
 #: ../C/glade.xml:84(revnumber)
 msgid "Glade Manual 3.0"
-msgstr ""
+msgstr "Manual de Glade 3.0"
 
 #: ../C/glade.xml:85(date)
 msgid "5 December 2006"
@@ -174,15 +174,15 @@ msgstr ""
 
 #: ../C/glade.xml:93(date)
 msgid "17 June 2004"
-msgstr ""
+msgstr "17 de junh de 2004"
 
 #: ../C/glade.xml:95(para) ../C/glade.xml:103(para) ../C/glade.xml:111(para)
 msgid "Sun GNOME Documentation Team"
-msgstr ""
+msgstr "Còla Sun de documentacion de GNOME"
 
 #: ../C/glade.xml:100(revnumber)
 msgid "Glade User Manual 2.0"
-msgstr ""
+msgstr "Manual de l'utilizaire de Glade 2.0"
 
 #: ../C/glade.xml:101(date)
 msgid "25 February 2004"
@@ -190,27 +190,27 @@ msgstr "25 de febrièr de 2004"
 
 #: ../C/glade.xml:108(revnumber)
 msgid "Glade User Manual 1.2"
-msgstr ""
+msgstr "Manual de l'utilizaire de Glade 1.2"
 
 #: ../C/glade.xml:109(date)
 msgid "10 Feb 2004"
-msgstr ""
+msgstr "10 de febrièr de 2004"
 
 #: ../C/glade.xml:116(revnumber)
 msgid "Glade User Manual 1.1"
-msgstr ""
+msgstr "Manual de l'utilizaire de Glade 1.1"
 
 #: ../C/glade.xml:117(date)
 msgid "30 Mar 2002"
-msgstr ""
+msgstr "30 de març de 2002"
 
 #: ../C/glade.xml:124(revnumber)
 msgid "Glade User Manual 1.0"
-msgstr ""
+msgstr "Manual de l'utilizaire de Glade 1.0"
 
 #: ../C/glade.xml:125(date)
 msgid "11 May 2000"
-msgstr ""
+msgstr "11 de mai de 2000"
 
 #: ../C/glade.xml:133(releaseinfo)
 msgid "This manual describes version 3.1.0 of Glade."
@@ -277,7 +277,7 @@ msgstr ""
 
 #: ../C/glade.xml:179(term)
 msgid "<guimenu>Applications</guimenu> menu"
-msgstr ""
+msgstr "Menut <guimenu>Applications</guimenu>"
 
 #: ../C/glade.xml:181(para)
 msgid ""
@@ -287,7 +287,7 @@ msgstr ""
 
 #: ../C/glade.xml:189(term)
 msgid "Command line"
-msgstr "Linha de comandas"
+msgstr "Linha de comanda"
 
 #: ../C/glade.xml:191(para)
 msgid ""
@@ -319,8 +319,7 @@ msgid "Shows the<placeholder-1/> window."
 msgstr ""
 
 #: ../C/glade.xml:212(para)
-msgid ""
-"The <application>Glade</application> window contains the following elements:"
+msgid "The <application>Glade</application> window contains the following elements:"
 msgstr ""
 
 #: ../C/glade.xml:215(term)
@@ -335,7 +334,7 @@ msgstr ""
 
 #: ../C/glade.xml:220(term)
 msgid "Toolbar"
-msgstr ""
+msgstr "Barra d'espleches"
 
 #: ../C/glade.xml:222(para)
 msgid ""
@@ -353,11 +352,10 @@ msgstr ""
 
 #: ../C/glade.xml:230(term)
 msgid "Palette"
-msgstr ""
+msgstr "Paleta"
 
 #: ../C/glade.xml:232(para)
-msgid ""
-"The palette contains the widgets that can be used to build a user interface."
+msgid "The palette contains the widgets that can be used to build a user interface."
 msgstr ""
 
 #: ../C/glade.xml:235(term)
@@ -380,7 +378,7 @@ msgstr ""
 
 #: ../C/glade.xml:245(term)
 msgid "Statusbar"
-msgstr ""
+msgstr "Barra d'estat"
 
 #: ../C/glade.xml:247(para)
 msgid ""
@@ -394,7 +392,7 @@ msgstr ""
 
 #: ../C/glade.xml:261(title)
 msgid "Creating a New Project"
-msgstr ""
+msgstr "Crear un projècte novèl"
 
 #: ../C/glade.xml:262(para)
 msgid ""
@@ -405,7 +403,7 @@ msgstr ""
 
 #: ../C/glade.xml:266(title)
 msgid "Opening a Project"
-msgstr ""
+msgstr "Dobrir un projècte"
 
 #: ../C/glade.xml:267(para)
 msgid ""
@@ -416,7 +414,7 @@ msgstr ""
 
 #: ../C/glade.xml:272(title)
 msgid "Saving a Project"
-msgstr ""
+msgstr "Enregistrar un projècte"
 
 #: ../C/glade.xml:273(para)
 msgid "You can save projects in the following ways:"
@@ -453,7 +451,7 @@ msgstr ""
 
 #: ../C/glade.xml:295(term)
 msgid "Selection mode"
-msgstr ""
+msgstr "Mòde de seleccion"
 
 #: ../C/glade.xml:297(para)
 msgid ""
@@ -526,7 +524,7 @@ msgstr ""
 
 #: ../C/glade.xml:362(para)
 msgid "Table"
-msgstr ""
+msgstr "Tablèu"
 
 #: ../C/glade.xml:363(para)
 msgid "Fixed Positions"
@@ -554,7 +552,7 @@ msgstr ""
 
 #: ../C/glade.xml:369(para)
 msgid "Frame"
-msgstr ""
+msgstr "Encastre"
 
 #: ../C/glade.xml:370(para)
 msgid "Scrolled Window"
@@ -686,5 +684,5 @@ msgstr ""
 #. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2.
 #: ../C/glade.xml:0(None)
 msgid "translator-credits"
-msgstr ""
+msgstr "Yannig Marchegay (Kokoyaya) <yannig@marchegay.org)"
 

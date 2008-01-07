@@ -1,3 +1,69 @@
+2007-12-18  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* NEWS, configure.ac: Rolling 3.4.1
+
+2007-12-18  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* plugins/gtk+/glade-gtk.c: fixed bug #503955
+	  'Activating "Add Parent" on an internal widget component causes crash'
+
+2007-12-10  Vincent Geddes  <vgeddes@gnome.org>
+
+	* gladeui/glade-app.c (glade_app_init): Fix icon theme path for win32
+	  (#469854, Martin Schlemmer).
+	  
+	* gladeui/glade.h: Add missing headers to glade.h (#499623, Josselin Mouette).
+
+2007-12-05  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* plugins/gtk+/glade-gtk.c: fixed bug introduced while disabling GtkImage::stock,
+	  it should be re enabled when going back to stock mode :)
+
+2007-12-02  Christian Persch  <chpe@gnome.org>
+
+	* src/glade-window.c: (menu_item_selected_cb),
+	(ui_connect_proxy_cb): Use gtk_widget_get_action. Bug #500943.
+
+2007-12-02  Christian Persch  <chpe@gnome.org>
+
+	* src/main.c: (main): Use g_option_context_set_translation domain, and
+	use N_() when setting the summary. Bug #500940.
+
+2007-11-09  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* plugins/gtk+/glade-gtk.c: commited  J. Ali Harlow <ali@avrc.city.ac.uk> patch. (fixes #495057)
+	  o glade_gtk_assistant_set_child_property() return if the current page is the same as position.
+
+2007-10-26  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* plugins/gtk+/glade-gtk.c: added glade_gtk_radio_button_set_property() to avoid bogus warning
+
+	* plugins/gtk+/gtk+.xml.in: added GtkRadioButton set-property-function
+
+2007-10-22  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* gladeui/glade-widget.c: fixed variable redeclaration in glade_widget_embed() bug #488977
+	  
+2007-10-18  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* gladeui/glade-widget.c: fixed bug #480495, if the widget is realized we just call
+	  gtk_widget_unrealize()
+
+2007-10-15  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* plugins/gtk+/glade-gtk.c: disable GtkImage::stock when edit type is not in stock mode.
+	  This fixs a bug pasting a filename GtkImage.
+
+	* gladeui/glade-property-class.c: glade_property_class_make_object_from_string() now returns NULL
+	  for pixbuf props on an empty string, so you can set up pixbuf props back to NULL.
+
+	* gladeui/glade-widget.c: almost fixed bug #480495, it does not crash anymore.
+	  It refuses to reparent a widget if it cant embed it.
+
+2007-09-17  Tristan Van Berkom <tvb@gnome.org>
+
+	* NEWS, configure.ac: Rolling 3.4.0
+
 2007-08-21  Jens Granseuer <jensgr@gmx.net>
 
 	* gladeui/glade-editor-property.c: fixed build with gcc 2.x (again) (bug 469357).
