@@ -199,7 +199,7 @@ glade_editor_notebook_page (GladeEditor *editor, const gchar *name)
 	gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 0, 0, 6, 0);
 
 	/* construct tab label widget */
-	if (g_utf8_collate (name, _("Accessibility")) == 0)
+	if (strcmp (name, _("Accessibility")) == 0)
 	{
 		path = g_build_filename (glade_app_get_pixmaps_dir (), "atk.png", NULL);
 		image = gtk_image_new_from_file (path);
@@ -208,7 +208,7 @@ glade_editor_notebook_page (GladeEditor *editor, const gchar *name)
 		gtk_widget_show (label_widget);
 		gtk_widget_show (image);
 
-		glade_util_widget_set_tooltip (label_widget, name);
+		gtk_widget_set_tooltip_text (label_widget, name);
 	}
 	else
 	{
@@ -216,7 +216,7 @@ glade_editor_notebook_page (GladeEditor *editor, const gchar *name)
 	}
 	
 	/* configure page container */
-	if (g_utf8_collate (name, _("_Signals")) == 0)
+	if (strcmp (name, _("_Signals")) == 0)
 	{
 		gtk_alignment_set (GTK_ALIGNMENT (alignment), 0.5, 0.5, 1, 1);
 		gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 0, 0, 0, 0);
@@ -280,7 +280,7 @@ glade_editor_create_info_button (GladeEditor *editor)
 
 	gtk_container_add (GTK_CONTAINER (button), image);
 
-	glade_util_widget_set_tooltip (button, _("View documentation for the selected widget"));
+	gtk_widget_set_tooltip_text (button, _("View documentation for the selected widget"));
 	g_signal_connect (G_OBJECT (button), "clicked",
 			  G_CALLBACK (glade_editor_on_docs_click), editor);
 
@@ -300,7 +300,7 @@ glade_editor_create_reset_button (GladeEditor *editor)
 
 	gtk_container_add (GTK_CONTAINER (button), image);
 
-	glade_util_widget_set_tooltip (button, _("Reset widget properties to their defaults"));
+	gtk_widget_set_tooltip_text (button, _("Reset widget properties to their defaults"));
 	g_signal_connect (G_OBJECT (button), "clicked",
 			  G_CALLBACK (glade_editor_on_reset_click), editor);
 
@@ -416,16 +416,6 @@ glade_editor_widget_name_changed (GtkWidget *editable, GladeEditor *editor)
 	g_free (new_name);
 }
 
-
-static gboolean
-glade_editor_widget_name_focus_out (GtkWidget           *entry,
-				    GdkEventFocus       *event,
-				    GladeEditor         *editor)
-{
-	glade_editor_widget_name_changed (entry, editor);
-	return FALSE;
-}
-
 static void
 glade_editor_table_attach (GtkWidget *table, GtkWidget *child, gint pos, gint row)
 {
@@ -445,7 +435,7 @@ glade_editor_table_append_item (GladeEditorTable *table,
 
 	property = glade_editor_property_new (klass, from_query_dialog == FALSE);
 	gtk_widget_show (GTK_WIDGET (property));
-	gtk_widget_show_all (property->eventbox);
+	gtk_widget_show_all (property->item_label);
 
 	if (table->editor->show_context_info && from_query_dialog == FALSE)
 		glade_editor_property_show_info (property);
@@ -456,7 +446,7 @@ glade_editor_table_append_item (GladeEditorTable *table,
 			  G_CALLBACK (glade_editor_gtk_doc_search_cb), 
 			  table->editor);
 
-	glade_editor_table_attach (table->table_widget, property->eventbox, 0, table->rows);
+	glade_editor_table_attach (table->table_widget, property->item_label, 0, table->rows);
 	glade_editor_table_attach (table->table_widget, GTK_WIDGET (property), 1, table->rows);
 
 	table->rows++;
@@ -481,8 +471,8 @@ glade_editor_table_append_name_field (GladeEditorTable *table)
 			  G_CALLBACK (glade_editor_widget_name_changed),
 			  table->editor);
 	
-	g_signal_connect (G_OBJECT (table->name_entry), "focus-out-event",
-			  G_CALLBACK (glade_editor_widget_name_focus_out),
+	g_signal_connect (G_OBJECT (table->name_entry), "changed",
+			  G_CALLBACK (glade_editor_widget_name_changed),
 			  table->editor);
 
 	glade_editor_table_attach (table->table_widget, label, 0, table->rows);
@@ -656,6 +646,8 @@ glade_editor_get_table_from_class (GladeEditor *editor,
 	GladeEditorTable *table;
 	GList *list;
 
+	g_return_if_fail (GLADE_IS_WIDGET_ADAPTOR (adaptor));
+
 	for (list = editor->widget_tables; list; list = list->next)
 	{
 		table = list->data;
@@ -751,7 +743,15 @@ glade_editor_load_page (GladeEditor          *editor,
 void
 glade_editor_update_widget_name (GladeEditor *editor)
 {
-	GladeEditorTable *table = glade_editor_get_table_from_class
+	GladeEditorTable *table;
+
+	/* it can happen that a widget name is changing that is only
+	 * available in a custom editor so we have no table
+	 */
+	if (!editor->loaded_adaptor)
+		return;
+
+	table = glade_editor_get_table_from_class
 		(editor, editor->loaded_adaptor, TABLE_TYPE_GENERAL);
 
 	g_signal_handlers_block_by_func (G_OBJECT (table->name_entry), glade_editor_widget_name_changed, editor);

@@ -252,13 +252,9 @@ glade_app_refresh_undo_redo_button (GladeApp *app,
 				    gboolean undo)
 {
 	GladeCommand *command = NULL;
-	static GtkTooltips *button_tips = NULL;
 	GladeProject *project;
 	gchar *desc;
 
-	if (button_tips == NULL)
-		button_tips = gtk_tooltips_new ();
-	
 	if ((project = glade_app_get_project ()) != NULL)
 	{
 		if (undo)
@@ -270,7 +266,7 @@ glade_app_refresh_undo_redo_button (GladeApp *app,
 	/* Change tooltips */
 	desc = g_strdup_printf ((undo) ? _("Undo: %s") : _("Redo: %s"),
 			command ? command->description : _("the last action"));
-	gtk_tooltips_set_tip (GTK_TOOLTIPS (button_tips), button, desc, NULL);
+        gtk_widget_set_tooltip_text (button, desc);
 	g_free (desc);
 
 	/* Set sensitivity on the button */
@@ -947,6 +943,21 @@ glade_app_add_project (GladeProject *project)
 		glade_project_set_accel_group (project, app->priv->accel_group);
 	
 	glade_app_set_project (project);
+
+	/* Select the first window in the project */
+	if (g_list_length (app->priv->projects) == 1)
+	{
+		GList *node;
+		for (node = glade_project_get_objects (project);
+		     node != NULL;
+		     node = g_list_next (node))
+		{
+			GObject *obj = G_OBJECT (node->data);
+			if (GTK_IS_WINDOW (obj))
+				glade_widget_show (glade_widget_get_from_gobject (obj));
+			break;
+		}
+	}
 
 	/* XXX I think the palette & editor should detect this by itself */
 	gtk_widget_set_sensitive (GTK_WIDGET (app->priv->palette), TRUE);

@@ -162,24 +162,8 @@ glade_editor_property_tooltip_cb (GladeProperty       *property,
 				  const gchar         *tooltip,
 				  GladeEditorProperty *eprop)
 {
-	glade_util_widget_set_tooltip (eprop->input, tooltip);
-	glade_util_widget_set_tooltip (eprop->eventbox, tooltip);
-}
-
-static void
-glade_eprop_label_style_update_cb (GtkWidget           *label,
-				GtkStyle            *prev,
-				GladeEditorProperty *eprop)
-{
-	if (eprop->insensitive_colour)
-		gdk_color_free (eprop->insensitive_colour);
-	if (eprop->normal_colour)
-		gdk_color_free (eprop->normal_colour);
-
-	eprop->insensitive_colour =
-		gdk_color_copy (&(label->style->fg[GTK_STATE_INSENSITIVE]));
-	eprop->normal_colour      =
-		gdk_color_copy (&(label->style->fg[GTK_STATE_NORMAL]));
+	gtk_widget_set_tooltip_text (eprop->input, tooltip);
+	gtk_widget_set_tooltip_text (eprop->item_label, tooltip);
 }
 
 static void
@@ -189,20 +173,9 @@ glade_editor_property_sensitivity_cb (GladeProperty       *property,
 {
 	gboolean sensitive = glade_property_get_sensitive (eprop->property);
 
-	g_signal_handlers_block_by_func
-		(eprop->item_label, glade_eprop_label_style_update_cb, eprop);
-	gtk_widget_modify_fg 
-		(GTK_WIDGET (eprop->item_label), 
-		 GTK_STATE_NORMAL, 
-		 sensitive ? eprop->normal_colour : eprop->insensitive_colour);
-	g_signal_handlers_unblock_by_func
-		(eprop->item_label, glade_eprop_label_style_update_cb, eprop);
-
-	if (sensitive == FALSE)
-		gtk_widget_set_sensitive (eprop->input, FALSE);
-	else if (glade_property_get_enabled (property) != FALSE)
-		gtk_widget_set_sensitive (eprop->input, TRUE);
-
+        gtk_widget_set_sensitive (eprop->item_label, sensitive);
+        gtk_widget_set_sensitive (eprop->input, sensitive &&
+                                                glade_property_get_enabled (property));
 	if (eprop->check)
 		gtk_widget_set_sensitive (eprop->check, sensitive);
 }
@@ -281,7 +254,7 @@ glade_editor_property_create_info_button (GladeEditorProperty *eprop)
 
 	gtk_container_add (GTK_CONTAINER (button), image);
 
-	glade_util_widget_set_tooltip (button, _("View GTK+ documentation for this property"));
+	gtk_widget_set_tooltip_text (button, _("View GTK+ documentation for this property"));
 
 	return button;
 }
@@ -301,23 +274,12 @@ glade_editor_property_constructor (GType                  type,
 	
 	eprop = GLADE_EDITOR_PROPERTY (obj);
 
-	/* Create label (make label visible but not the eventbox) */
+	/* Create label */
 	text = g_strdup_printf ("%s:", eprop->klass->name);
 	eprop->item_label = gtk_label_new (text);
-	eprop->eventbox   = gtk_event_box_new ();
 	g_free (text);
-	gtk_widget_show (eprop->item_label);
-
-	/* Deal with label colours */
-	glade_eprop_label_style_update_cb (eprop->item_label, NULL, eprop);
-	g_signal_connect (G_OBJECT (eprop->item_label), "style-set",
-			  G_CALLBACK (glade_eprop_label_style_update_cb), eprop);
-	
-	/* keep our own reference */
-	g_object_ref (G_OBJECT (eprop->eventbox));
 
 	gtk_misc_set_alignment (GTK_MISC (eprop->item_label), 1.0, 0.5);
-	gtk_container_add (GTK_CONTAINER (eprop->eventbox), eprop->item_label);
 
 	/* Create hbox and possibly check button
 	 */
@@ -328,7 +290,6 @@ glade_editor_property_constructor (GType                  type,
 		gtk_box_pack_start (GTK_BOX (eprop), eprop->check, FALSE, FALSE, 0);
 		g_signal_connect (G_OBJECT (eprop->check), "toggled", 
 				  G_CALLBACK (glade_editor_property_enabled_toggled_cb), eprop);
-
 	}
 
 	/* Create the class specific input widget and add it */
@@ -355,11 +316,6 @@ glade_editor_property_finalize (GObject *object)
 	/* detatch from loaded property */
 	glade_editor_property_load_common (eprop, NULL);
 
-	if (eprop->insensitive_colour)
-		gdk_color_free (eprop->insensitive_colour);
-	if (eprop->normal_colour)
-		gdk_color_free (eprop->normal_colour);
-	
 	G_OBJECT_CLASS (table_class)->finalize (object);
 }
 
@@ -437,12 +393,12 @@ glade_editor_property_load_common (GladeEditorProperty *eprop,
 	if (property)
 	{
 		gtk_widget_show (GTK_WIDGET (eprop));
-		gtk_widget_show (eprop->eventbox);
+		gtk_widget_show (eprop->item_label);
 	}
 	else
 	{
 		gtk_widget_hide (GTK_WIDGET (eprop));
-		gtk_widget_hide (eprop->eventbox);
+		gtk_widget_hide (eprop->item_label);
 	}
 
 	/* disconnect anything from previously loaded property */
@@ -1634,27 +1590,14 @@ glade_eprop_text_changed (GtkWidget           *entry,
 	g_free (text);
 }
 
-static gboolean
-glade_eprop_text_entry_focus_out (GtkWidget           *entry,
-				  GdkEventFocus       *event,
-				  GladeEditorProperty *eprop)
-{
-	glade_eprop_text_changed (entry, eprop);
-	return FALSE;
-}
-
-static gboolean
-glade_eprop_text_text_view_focus_out (GtkTextView         *view,
-				      GdkEventFocus       *event,
-				      GladeEditorProperty *eprop)
+static void
+glade_eprop_text_buffer_changed (GtkTextBuffer       *buffer,
+				 GladeEditorProperty *eprop)
 {
 	gchar *text;
-	GtkTextBuffer *buffer;
 	GtkTextIter    start, end;
 	
-	if (eprop->loading) return FALSE;
-
-	buffer = gtk_text_view_get_buffer (view);
+	if (eprop->loading) return;
 
 	gtk_text_buffer_get_start_iter (buffer, &start);
 	gtk_text_buffer_get_end_iter (buffer, &end);
@@ -1664,7 +1607,6 @@ glade_eprop_text_text_view_focus_out (GtkTextView         *view,
 	glade_eprop_text_changed_common (eprop, text, eprop->use_command);
 
 	g_free (text);
-	return FALSE;
 }
 
 static void
@@ -1759,7 +1701,7 @@ glade_eprop_text_show_i18n_dialog (GtkWidget           *entry,
 	if ((pspec =
 	     g_object_class_find_property (G_OBJECT_GET_CLASS (eprop->property),
 					   "i18n-translatable")) != NULL)
-		glade_util_widget_set_tooltip (translatable_button,
+		gtk_widget_set_tooltip_text (translatable_button,
 					       g_param_spec_get_blurb (pspec));
 
 	context_button = gtk_check_button_new_with_mnemonic (_("_Has context prefix"));
@@ -1772,7 +1714,7 @@ glade_eprop_text_show_i18n_dialog (GtkWidget           *entry,
 	if ((pspec =
 	     g_object_class_find_property (G_OBJECT_GET_CLASS (eprop->property),
 					   "i18n-has-context")) != NULL)
-		glade_util_widget_set_tooltip (context_button,
+		gtk_widget_set_tooltip_text (context_button,
 					       g_param_spec_get_blurb (pspec));
 
 	alignment = gtk_alignment_new (0.5, 0.5, 1, 1);
@@ -1866,6 +1808,7 @@ glade_eprop_text_create_input (GladeEditorProperty *eprop)
 	    klass->pspec->value_type == G_TYPE_VALUE_ARRAY) 
 	{
 		GtkWidget  *swindow;
+		GtkTextBuffer *buffer;
 
 		swindow = gtk_scrolled_window_new (NULL, NULL);
 
@@ -1874,27 +1817,25 @@ glade_eprop_text_create_input (GladeEditorProperty *eprop)
 		gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (swindow), GTK_SHADOW_IN);
 
 		eprop_text->text_entry = gtk_text_view_new ();
+		buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (eprop_text->text_entry));
 
 		gtk_container_add (GTK_CONTAINER (swindow), eprop_text->text_entry);
 		gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET (swindow), TRUE, TRUE, 0); 
 
 		gtk_widget_show_all (swindow);
-
-		g_signal_connect (G_OBJECT (eprop_text->text_entry), "focus-out-event",
-				  G_CALLBACK (glade_eprop_text_text_view_focus_out),
+		
+		g_signal_connect (G_OBJECT (buffer), "changed",
+				  G_CALLBACK (glade_eprop_text_buffer_changed),
 				  eprop);
+
 	} else {
 		eprop_text->text_entry = gtk_entry_new ();
 		gtk_widget_show (eprop_text->text_entry);
 
 		gtk_box_pack_start (GTK_BOX (hbox), eprop_text->text_entry, TRUE, TRUE, 0); 
 
-		g_signal_connect (G_OBJECT (eprop_text->text_entry), "activate",
+		g_signal_connect (G_OBJECT (eprop_text->text_entry), "changed",
 				  G_CALLBACK (glade_eprop_text_changed),
-				  eprop);
-		
-		g_signal_connect (G_OBJECT (eprop_text->text_entry), "focus-out-event",
-				  G_CALLBACK (glade_eprop_text_entry_focus_out),
 				  eprop);
 	}
 	
@@ -2376,10 +2317,15 @@ glade_eprop_object_populate_view_real (GladeEditorProperty *eprop,
 					 glade_param_spec_objects_get_type 
 					 (GLADE_PARAM_SPEC_OBJECTS(eprop->klass->pspec)));
 				good_type = 
+					g_type_is_a
+					(widget->adaptor->type,
+					 glade_param_spec_objects_get_type 
+					 (GLADE_PARAM_SPEC_OBJECTS(eprop->klass->pspec))) ||
 					glade_util_class_implements_interface
 					(widget->adaptor->type, 
 					 glade_param_spec_objects_get_type 
 					 (GLADE_PARAM_SPEC_OBJECTS(eprop->klass->pspec)));
+
 			}
 			else
 			{
@@ -2493,6 +2439,7 @@ glade_eprop_object_selected (GtkCellRendererToggle *cell,
 	gboolean     enabled, radio;
 
 	radio = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (model), "radio-list"));
+
 
 	gtk_tree_model_get_iter (model, &iter, path);
 	gtk_tree_model_get (model, &iter,
@@ -2830,8 +2777,11 @@ glade_eprop_objects_selected_widget (GtkTreeModel  *model,
 			    OBJ_COLUMN_SELECTED,  &selected, 
 			    OBJ_COLUMN_WIDGET,    &widget, -1);
 
+
 	if (selected) 
+	{
 		*ret = g_list_append (*ret, widget->object);
+	}
 
 	return FALSE;
 }
@@ -3136,16 +3086,14 @@ glade_eprop_adjustment_table_add_label (GtkTable *table,
 					gchar *label,
 					gchar *tip)
 {
-	GtkWidget *widget, *eventbox = gtk_event_box_new ();
+	GtkWidget *widget;
 	
 	widget = gtk_label_new (label);
 	gtk_misc_set_alignment (GTK_MISC (widget), 1, 0);
 
-	gtk_container_add (GTK_CONTAINER (eventbox), widget);
+	gtk_widget_set_tooltip_text (widget, tip);
 	
-	glade_util_widget_set_tooltip (eventbox, tip);
-	
-	gtk_table_attach_defaults (table, eventbox, 0, 1, pos, pos + 1);
+	gtk_table_attach_defaults (table, widget, 0, 1, pos, pos + 1);
 }
 
 static GtkWidget *
@@ -4082,6 +4030,8 @@ glade_editor_property_show_info (GladeEditorProperty *eprop)
 	g_return_if_fail (GLADE_IS_EDITOR_PROPERTY (eprop));
 
 	adaptor = glade_widget_adaptor_from_pspec (eprop->klass->pspec);
+
+	g_return_if_fail (GLADE_IS_WIDGET_ADAPTOR (adaptor));
 
 	g_object_get (adaptor, "book", &book, NULL);
 

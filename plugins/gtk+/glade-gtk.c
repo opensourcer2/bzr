@@ -249,6 +249,11 @@ widget_parent_changed (GtkWidget          *widget,
 {
 	GladeWidget *gwidget = glade_widget_get_from_gobject (widget);
 
+	/* this could get called for a stale instance of an object
+	 * being rebuilt for a contruct-only property. */
+	if (!gwidget)
+		return;
+
 	if (gwidget->parent && !GTK_IS_WINDOW (glade_widget_get_object (gwidget->parent)) &&
 	    gwidget->parent->internal == NULL)
 		glade_widget_set_action_sensitive (gwidget, "remove_parent", TRUE);
@@ -265,6 +270,11 @@ glade_gtk_widget_deep_post_create (GladeWidgetAdaptor *adaptor,
 				   GladeCreateReason   reason)
 {
 	GladeWidget *gwidget = glade_widget_get_from_gobject (widget);
+
+	/* Work around bug 472555 by resetting the default event mask,
+	 * this way only user edits will be saved to the glade file. */
+	if (reason == GLADE_CREATE_USER)
+		glade_widget_property_reset (gwidget, "events");
 	
 	glade_widget_set_action_sensitive (gwidget, "remove_parent", FALSE);
 
@@ -283,22 +293,13 @@ glade_gtk_widget_set_property (GladeWidgetAdaptor *adaptor,
 			       const gchar        *id,
 			       const GValue       *value)
 {
+        /* FIXME: is this still needed with the new gtk+ tooltips? */
 	if (!strcmp (id, "tooltip"))
 	{
-		GladeWidget   *glade_widget = glade_widget_get_from_gobject (object);
-		GladeProject  *project      = glade_widget_get_project (glade_widget);
-		GtkTooltips   *tooltips     = glade_project_get_tooltips (project);
-		const gchar   *tooltip;
-		
-		/* TODO: handle GtkToolItems with gtk_tool_item_set_tooltip() */
-		tooltip = g_value_get_string (value);
-		if (tooltip && *tooltip)
-			gtk_tooltips_set_tip (tooltips, GTK_WIDGET (object), tooltip, NULL);
-		else
-			gtk_tooltips_set_tip (tooltips, GTK_WIDGET (object), NULL, NULL);
-	}
-	else 
-		GWA_GET_CLASS (G_TYPE_OBJECT)->set_property (adaptor, object, id, value);
+                id = "tooltip-text";
+        }
+
+        GWA_GET_CLASS (G_TYPE_OBJECT)->set_property (adaptor, object, id, value);
 }
 
 void
@@ -309,14 +310,10 @@ glade_gtk_widget_get_property (GladeWidgetAdaptor *adaptor,
 {
 	if (!strcmp (id, "tooltip"))
 	{
-		GtkTooltipsData *tooltips_data = gtk_tooltips_data_get (GTK_WIDGET (object));
-		
-		g_value_reset (value);
-		g_value_set_string (value,
-				    tooltips_data ? tooltips_data->tip_text : NULL);
+                id = "tooltip-text";
 	}
-	else 
-		GWA_GET_CLASS (G_TYPE_OBJECT)->get_property (adaptor, object, id, value);
+	
+        GWA_GET_CLASS (G_TYPE_OBJECT)->get_property (adaptor, object, id, value);
 }
 
 static GList *
@@ -370,7 +367,7 @@ glade_gtk_widget_action_activate (GladeWidgetAdaptor *adaptor,
 
 		/* Remove "this" widget */
 		this_widget.data = gwidget;
-		glade_command_delete (&this_widget);
+		glade_command_cut (&this_widget);
 		
 		/* Delete the parent */
 		that_widget.data = gparent;
@@ -424,7 +421,7 @@ glade_gtk_widget_action_activate (GladeWidgetAdaptor *adaptor,
 			
 			/* Remove "this" widget */
 			this_widget.data = gwidget;
-			glade_command_delete (&this_widget);
+			glade_command_cut (&this_widget);
 			
 			/* Create new widget and put it where the placeholder was */
 			that_widget.data =

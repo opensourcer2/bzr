@@ -183,7 +183,7 @@ Removes <parameter>widgets</parameter> from <parameter>clipboard</parameter>.</p
 </refsect1>
 <refsect1 role="property_details">
 <title role="property_details.title">Property Details</title>
-<refsect2><title><anchor id="GladeClipboard--has-selection"/>The <literal>&quot;has-selection&quot;</literal> property</title>
+<refsect2><title><anchor id="GladeClipboard--has-selection"/>The &quot;<literal>has-selection</literal>&quot; property</title>
 <indexterm><primary>GladeClipboard:has-selection</primary></indexterm><programlisting>  &quot;has-selection&quot;            <link linkend="gboolean">gboolean</link>              : Read</programlisting>
 <para>Whether clipboard has a selection of items to paste.</para><para>Default value: FALSE</para>
 </refsect2>
@@ -193,6 +193,4 @@ Removes <parameter>widgets</parameter> from <parameter>clipboard</parameter>.</p
 
 
 
-
-<refsect1><refsect2 /><refsect2 /></refsect1>
 </refentry>

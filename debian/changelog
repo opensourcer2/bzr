@@ -1,3 +1,19 @@
+glade-3 (3.4.2-0ubuntu1) hardy; urgency=low
+
+  * New upstream version:
+    - Port to gtk 2.12 tooltips API. Bug #500947. - Christian Persch
+    - Atk Relations bug fix
+    - Added GtkVolumeButton and GtkScaleButton widgets (Ross Burton)
+    - Misc fixes 477025, 509128, 388869, 504603, 495853, 506713, 
+      511651, 472555, 493418
+  * debian/control.in:
+    - updated libgtk requirement
+  * debian/patches/01_launchpad-integration.patch,
+    debian/patches/90_autoconf.patch:
+    - new version update
+
+ -- Sebastien Bacher <seb128@canonical.com>  Mon, 10 Mar 2008 09:22:05 +0100
+
 glade-3 (3.4.1-0ubuntu1) hardy; urgency=low
 
   * New upstream version:

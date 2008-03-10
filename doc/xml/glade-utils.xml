@@ -135,15 +135,15 @@ This is where all of that really usefull miscalanious stuff lands up.</para>
 <indexterm><primary>glade_util_widget_set_tooltip</primary></indexterm><programlisting><link linkend="void">void</link>                glade_util_widget_set_tooltip       (<link linkend="GtkWidget">GtkWidget</link> *widget,
                                                          const <link linkend="gchar">gchar</link> *str);</programlisting>
 <para>
-Creates a new tooltip from <parameter>str</parameter> and sets <parameter>widget</parameter> to use it.</para>
-<para>
 
 </para><variablelist role="params">
 <varlistentry><term><parameter>widget</parameter>&nbsp;:</term>
-<listitem><simpara> a <link linkend="GtkWidget"><type>GtkWidget</type></link>
+<listitem><simpara>
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>str</parameter>&nbsp;:</term>
-<listitem><simpara> a string
+<listitem><simpara>
+
+
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
@@ -770,6 +770,4 @@ Gets the UTC modification time of file <parameter>filename</parameter>.</para>
 
 
 
-
-<refsect1><refsect2 /><refsect2 /></refsect1>
 </refentry>

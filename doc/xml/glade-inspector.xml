@@ -178,7 +178,7 @@ Returns the selected items in the inspector.</para>
 </refsect1>
 <refsect1 role="property_details">
 <title role="property_details.title">Property Details</title>
-<refsect2><title><anchor id="GladeInspector--project"/>The <literal>&quot;project&quot;</literal> property</title>
+<refsect2><title><anchor id="GladeInspector--project"/>The &quot;<literal>project</literal>&quot; property</title>
 <indexterm><primary>GladeInspector:project</primary></indexterm><programlisting>  &quot;project&quot;                  <link linkend="GladeProject">GladeProject</link>          : Read / Write</programlisting>
 <para>The project being inspected.</para></refsect2>
 
@@ -186,7 +186,7 @@ Returns the selected items in the inspector.</para>
 
 <refsect1 role="signals">
 <title role="signals.title">Signal Details</title>
-<refsect2><title><anchor id="GladeInspector-item-activated"/>The <literal>&quot;item-activated&quot;</literal> signal</title>
+<refsect2><title><anchor id="GladeInspector-item-activated"/>The &quot;item-activated&quot; signal</title>
 <indexterm><primary>GladeInspector::item-activated</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="GladeInspector">GladeInspector</link> *inspector,
                                                         <link linkend="gpointer">gpointer</link>        user_data)      : Run Last</programlisting>
 <para>
@@ -199,7 +199,7 @@ Emitted when a item is activated in the GladeInspector.</para>
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
 <listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
-</variablelist></refsect2><refsect2><title><anchor id="GladeInspector-selection-changed"/>The <literal>&quot;selection-changed&quot;</literal> signal</title>
+</variablelist></refsect2><refsect2><title><anchor id="GladeInspector-selection-changed"/>The &quot;selection-changed&quot; signal</title>
 <indexterm><primary>GladeInspector::selection-changed</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="GladeInspector">GladeInspector</link> *inspector,
                                                         <link linkend="gpointer">gpointer</link>        user_data)      : Run Last</programlisting>
 <para>
@@ -217,6 +217,4 @@ Emitted when the selection changes in the GladeInspector.</para>
 
 
 
-
-<refsect1><refsect2 /><refsect2 /></refsect1>
 </refentry>

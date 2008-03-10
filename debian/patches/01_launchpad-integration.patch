@@ -8,8 +8,8 @@ diff -Nur glade3-3.3.2/configure.ac glade3-3.3.2.new/configure.ac
  dnl ================================================================
  dnl Check for gtk+
  dnl ================================================================
--PKG_CHECK_MODULES(GTK, [gtk+-2.0 >= 2.10.0  gthread-2.0 libxml-2.0 >= 2.4.0])
-+PKG_CHECK_MODULES(GTK, [gtk+-2.0 >= 2.10.0  gthread-2.0 libxml-2.0 >= 2.4.0 launchpad-integration])
+-PKG_CHECK_MODULES(GTK, [gtk+-2.0 >= 2.12.0  gthread-2.0 libxml-2.0 >= 2.4.0])
++PKG_CHECK_MODULES(GTK, [gtk+-2.0 >= 2.12.0  gthread-2.0 libxml-2.0 >= 2.4.0 launchpad-integration])
  AC_SUBST(GTK_LIBS)
  AC_SUBST(GTK_CFLAGS)
  

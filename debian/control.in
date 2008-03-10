@@ -15,7 +15,7 @@ Build-Depends: cdbs (>= 0.4.41),
                gnome-common (>= 2.8.0),
                gnome-pkg-tools (>= 0.10),
                dpkg-dev (>= 1.13.19),
-               libgtk2.0-dev (>= 2.10.0),
+               libgtk2.0-dev (>= 2.12.0),
                gtk-doc-tools (>= 1.4),
                gnome-doc-utils (>= 0.9.0),
                liblaunchpad-integration-dev
@@ -53,7 +53,7 @@ Architecture: all
 Section: libdevel
 Depends: ${misc:Depends},
          libgladeui-1-7 (>= ${source:Version}),
-         libgtk2.0-dev (>= 2.10.0),
+         libgtk2.0-dev (>= 2.12.0),
          libxml2-dev (>= 2.4.0)
 Description: GTK+ User Interface Build core library (development files)
  Glade is a RAD tool to enable quick and easy development of user
@@ -75,7 +75,7 @@ Architecture: any
 Section: devel
 Depends: ${misc:Depends},
          ${shlibs:Depends}
-Recommends: libgtk2.0-dev (>= 2.10.0),
+Recommends: libgtk2.0-dev (>= 2.12.0),
             libglade2-dev (>= 1:2.6.0),
             devhelp
 Suggests: glade-gnome-3

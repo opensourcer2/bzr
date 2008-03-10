@@ -36,8 +36,8 @@
     <sub name="Index" link="ix01.html"/>
   </chapters>
   <functions>
-    <keyword type="" name="Displayable Values, Packing defaults and such" link="properties.html#id343112"/>
-    <keyword type="" name="Container Relationship Parameter Tag Definitions" link="children.html#id343720"/>
+    <keyword type="" name="Displayable Values, Packing defaults and such" link="properties.html#id327281"/>
+    <keyword type="" name="Container Relationship Parameter Tag Definitions" link="children.html#id327889"/>
     <keyword type="macro" name="GLADE_TYPE_POINTER_MODE" link="GladeApp.html#GLADE-TYPE-POINTER-MODE:CAPS"/>
     <keyword type="struct" name="GladeAppPrivate" link="GladeApp.html#GladeAppPrivate"/>
     <keyword type="struct" name="GladeApp" link="GladeApp.html#GladeApp-struct"/>
@@ -92,8 +92,6 @@
     <keyword type="" name="The &quot;active-project&quot; property" link="GladeApp.html#GladeApp--active-project"/>
     <keyword type="" name="The &quot;pointer-mode&quot; property" link="GladeApp.html#GladeApp--pointer-mode"/>
     <keyword type="" name="The &quot;update-ui&quot; signal" link="GladeApp.html#GladeApp-update-ui"/>
-    <keyword type="" name="" link="GladeApp.html#id348094"/>
-    <keyword type="" name="" link="GladeApp.html#id348095"/>
     <keyword type="struct" name="GladeProjectPrivate" link="GladeProject.html#GladeProjectPrivate"/>
     <keyword type="struct" name="struct GladeProject" link="GladeProject.html#GladeProject-struct"/>
     <keyword type="function" name="glade_project_new ()" link="GladeProject.html#glade-project-new"/>
@@ -118,7 +116,6 @@
     <keyword type="function" name="glade_project_get_widget_by_name ()" link="GladeProject.html#glade-project-get-widget-by-name"/>
     <keyword type="function" name="glade_project_new_widget_name ()" link="GladeProject.html#glade-project-new-widget-name"/>
     <keyword type="function" name="glade_project_widget_name_changed ()" link="GladeProject.html#glade-project-widget-name-changed"/>
-    <keyword type="function" name="glade_project_get_tooltips ()" link="GladeProject.html#glade-project-get-tooltips"/>
     <keyword type="function" name="glade_project_is_selected ()" link="GladeProject.html#glade-project-is-selected"/>
     <keyword type="function" name="glade_project_selection_set ()" link="GladeProject.html#glade-project-selection-set"/>
     <keyword type="function" name="glade_project_selection_add ()" link="GladeProject.html#glade-project-selection-add"/>
@@ -149,8 +146,6 @@
     <keyword type="" name="The &quot;resource-removed&quot; signal" link="GladeProject.html#GladeProject-resource-removed"/>
     <keyword type="" name="The &quot;selection-changed&quot; signal" link="GladeProject.html#GladeProject-selection-changed"/>
     <keyword type="" name="The &quot;widget-name-changed&quot; signal" link="GladeProject.html#GladeProject-widget-name-changed"/>
-    <keyword type="" name="" link="GladeProject.html#id358543"/>
-    <keyword type="" name="" link="GladeProject.html#id358544"/>
     <keyword type="struct" name="struct GladeWidget" link="GladeWidget.html#GladeWidget-struct"/>
     <keyword type="function" name="glade_widget_get_from_gobject ()" link="GladeWidget.html#glade-widget-get-from-gobject"/>
     <keyword type="function" name="glade_widget_add_child ()" link="GladeWidget.html#glade-widget-add-child"/>
@@ -241,8 +236,6 @@
     <keyword type="" name="The &quot;change-signal-handler&quot; signal" link="GladeWidget.html#GladeWidget-change-signal-handler"/>
     <keyword type="" name="The &quot;motion-notify-event&quot; signal" link="GladeWidget.html#GladeWidget-motion-notify-event"/>
     <keyword type="" name="The &quot;remove-signal-handler&quot; signal" link="GladeWidget.html#GladeWidget-remove-signal-handler"/>
-    <keyword type="" name="" link="GladeWidget.html#id376895"/>
-    <keyword type="" name="" link="GladeWidget.html#id376896"/>
     <keyword type="macro" name="GLADE_FIXED_CURSOR_TOP()" link="GladeFixed.html#GLADE-FIXED-CURSOR-TOP:CAPS"/>
     <keyword type="macro" name="GLADE_FIXED_CURSOR_BOTTOM()" link="GladeFixed.html#GLADE-FIXED-CURSOR-BOTTOM:CAPS"/>
     <keyword type="macro" name="GLADE_FIXED_CURSOR_RIGHT()" link="GladeFixed.html#GLADE-FIXED-CURSOR-RIGHT:CAPS"/>
@@ -256,8 +249,6 @@
     <keyword type="" name="The &quot;configure-begin&quot; signal" link="GladeFixed.html#GladeFixed-configure-begin"/>
     <keyword type="" name="The &quot;configure-child&quot; signal" link="GladeFixed.html#GladeFixed-configure-child"/>
     <keyword type="" name="The &quot;configure-end&quot; signal" link="GladeFixed.html#GladeFixed-configure-end"/>
-    <keyword type="" name="" link="GladeFixed.html#id389552"/>
-    <keyword type="" name="" link="GladeFixed.html#id389553"/>
     <keyword type="macro" name="GLADE_PROPERTY_KLASS()" link="gladeui-glade-property.html#GLADE-PROPERTY-KLASS:CAPS"/>
     <keyword type="macro" name="GLADE_IS_PROPERTY_KLASS()" link="gladeui-glade-property.html#GLADE-IS-PROPERTY-KLASS:CAPS"/>
     <keyword type="macro" name="GLADE_PROPERTY_GET_KLASS()" link="gladeui-glade-property.html#GLADE-PROPERTY-GET-KLASS:CAPS"/>
@@ -307,8 +298,6 @@
     <keyword type="" name="The &quot;sensitive&quot; property" link="gladeui-glade-property.html#GladeProperty--sensitive"/>
     <keyword type="" name="The &quot;tooltip-changed&quot; signal" link="gladeui-glade-property.html#GladeProperty-tooltip-changed"/>
     <keyword type="" name="The &quot;value-changed&quot; signal" link="gladeui-glade-property.html#GladeProperty-value-changed"/>
-    <keyword type="" name="" link="gladeui-glade-property.html#id396135"/>
-    <keyword type="" name="" link="gladeui-glade-property.html#id396136"/>
     <keyword type="struct" name="GladeWidgetAdaptorPrivate" link="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptorPrivate"/>
     <keyword type="macro" name="GWA_IS_FIXED()" link="gladeui-GladeWidgetAdaptor.html#GWA-IS-FIXED:CAPS"/>
     <keyword type="macro" name="GWA_IS_TOPLEVEL()" link="gladeui-GladeWidgetAdaptor.html#GWA-IS-TOPLEVEL:CAPS"/>
@@ -371,8 +360,6 @@
     <keyword type="function" name="glade_widget_adaptor_pack_actions_new ()" link="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-pack-actions-new"/>
     <keyword type="function" name="glade_widget_adaptor_action_activate ()" link="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-action-activate"/>
     <keyword type="function" name="glade_widget_adaptor_child_action_activate ()" link="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-child-action-activate"/>
-    <keyword type="" name="" link="gladeui-GladeWidgetAdaptor.html#id410904"/>
-    <keyword type="" name="" link="gladeui-GladeWidgetAdaptor.html#id410905"/>
     <keyword type="macro" name="GPC_OBJECT_DELIMITER" link="gladeui-GladePropertyClass.html#GPC-OBJECT-DELIMITER:CAPS"/>
     <keyword type="macro" name="GPC_PROPERTY_NAMELEN" link="gladeui-GladePropertyClass.html#GPC-PROPERTY-NAMELEN:CAPS"/>
     <keyword type="enum" name="enum GPCType" link="gladeui-GladePropertyClass.html#GPCType"/>
@@ -396,8 +383,6 @@
     <keyword type="function" name="glade_property_class_match ()" link="gladeui-GladePropertyClass.html#glade-property-class-match"/>
     <keyword type="function" name="glade_property_class_void_value ()" link="gladeui-GladePropertyClass.html#glade-property-class-void-value"/>
     <keyword type="function" name="glade_property_class_atk_realname ()" link="gladeui-GladePropertyClass.html#glade-property-class-atk-realname"/>
-    <keyword type="" name="" link="gladeui-GladePropertyClass.html#id423311"/>
-    <keyword type="" name="" link="gladeui-GladePropertyClass.html#id423312"/>
     <keyword type="struct" name="GCSetPropData" link="GladeCommand.html#GCSetPropData"/>
     <keyword type="struct" name="GladeCommand" link="GladeCommand.html#GladeCommand-struct"/>
     <keyword type="function" name="glade_command_push_group ()" link="GladeCommand.html#glade-command-push-group"/>
@@ -421,8 +406,6 @@
     <keyword type="function" name="glade_command_remove_signal ()" link="GladeCommand.html#glade-command-remove-signal"/>
     <keyword type="function" name="glade_command_change_signal ()" link="GladeCommand.html#glade-command-change-signal"/>
     <keyword type="function" name="glade_command_set_i18n ()" link="GladeCommand.html#glade-command-set-i18n"/>
-    <keyword type="" name="" link="GladeCommand.html#id429412"/>
-    <keyword type="" name="" link="GladeCommand.html#id429413"/>
     <keyword type="struct" name="GladeClipboard" link="GladeClipboard.html#GladeClipboard-struct"/>
     <keyword type="function" name="glade_clipboard_new ()" link="GladeClipboard.html#glade-clipboard-new"/>
     <keyword type="function" name="glade_clipboard_add ()" link="GladeClipboard.html#glade-clipboard-add"/>
@@ -432,8 +415,6 @@
     <keyword type="function" name="glade_clipboard_selection_clear ()" link="GladeClipboard.html#glade-clipboard-selection-clear"/>
     <keyword type="function" name="glade_clipboard_get_has_selection ()" link="GladeClipboard.html#glade-clipboard-get-has-selection"/>
     <keyword type="" name="The &quot;has-selection&quot; property" link="GladeClipboard.html#GladeClipboard--has-selection"/>
-    <keyword type="" name="" link="GladeClipboard.html#id433379"/>
-    <keyword type="" name="" link="GladeClipboard.html#id433380"/>
     <keyword type="struct" name="GladeBaseEditorPrivate" link="gladeui-GladeBaseEditor.html#GladeBaseEditorPrivate"/>
     <keyword type="struct" name="GladeBaseEditor" link="gladeui-GladeBaseEditor.html#GladeBaseEditor"/>
     <keyword type="function" name="glade_base_editor_new ()" link="gladeui-GladeBaseEditor.html#glade-base-editor-new"/>
@@ -443,13 +424,9 @@
     <keyword type="function" name="glade_base_editor_add_popup_items ()" link="gladeui-GladeBaseEditor.html#glade-base-editor-add-popup-items"/>
     <keyword type="function" name="glade_base_editor_set_show_signal_editor ()" link="gladeui-GladeBaseEditor.html#glade-base-editor-set-show-signal-editor"/>
     <keyword type="function" name="glade_base_editor_pack_new_window ()" link="gladeui-GladeBaseEditor.html#glade-base-editor-pack-new-window"/>
-    <keyword type="" name="" link="gladeui-GladeBaseEditor.html#id435562"/>
-    <keyword type="" name="" link="gladeui-GladeBaseEditor.html#id435563"/>
     <keyword type="struct" name="GladePlaceholder" link="GladePlaceholder.html#GladePlaceholder-struct"/>
     <keyword type="function" name="glade_placeholder_new ()" link="GladePlaceholder.html#glade-placeholder-new"/>
     <keyword type="function" name="glade_placeholder_get_parent ()" link="GladePlaceholder.html#glade-placeholder-get-parent"/>
-    <keyword type="" name="" link="GladePlaceholder.html#id437105"/>
-    <keyword type="" name="" link="GladePlaceholder.html#id437106"/>
     <keyword type="macro" name="GLADE_EDITOR_TABLE()" link="GladeEditor.html#GLADE-EDITOR-TABLE:CAPS"/>
     <keyword type="macro" name="GLADE_IS_EDITOR_TABLE()" link="GladeEditor.html#GLADE-IS-EDITOR-TABLE:CAPS"/>
     <keyword type="struct" name="GladeEditorTable" link="GladeEditor.html#GladeEditorTable"/>
@@ -467,8 +444,6 @@
     <keyword type="" name="The &quot;show-context-info&quot; property" link="GladeEditor.html#GladeEditor--show-context-info"/>
     <keyword type="" name="The &quot;show-info&quot; property" link="GladeEditor.html#GladeEditor--show-info"/>
     <keyword type="" name="The &quot;gtk-doc-search&quot; signal" link="GladeEditor.html#GladeEditor-gtk-doc-search"/>
-    <keyword type="" name="" link="GladeEditor.html#id439184"/>
-    <keyword type="" name="" link="GladeEditor.html#id439185"/>
     <keyword type="struct" name="GladeEditorProperty" link="GladeEditorProperty.html#GladeEditorProperty-struct"/>
     <keyword type="function" name="glade_editor_property_new ()" link="GladeEditorProperty.html#glade-editor-property-new"/>
     <keyword type="function" name="glade_editor_property_new_from_widget ()" link="GladeEditorProperty.html#glade-editor-property-new-from-widget"/>
@@ -481,8 +456,6 @@
     <keyword type="" name="The &quot;show-info&quot; property" link="GladeEditorProperty.html#GladeEditorProperty--show-info"/>
     <keyword type="" name="The &quot;use-command&quot; property" link="GladeEditorProperty.html#GladeEditorProperty--use-command"/>
     <keyword type="" name="The &quot;gtk-doc-search&quot; signal" link="GladeEditorProperty.html#GladeEditorProperty-gtk-doc-search"/>
-    <keyword type="" name="" link="GladeEditorProperty.html#id442395"/>
-    <keyword type="" name="" link="GladeEditorProperty.html#id442396"/>
     <keyword type="struct" name="GladePalettePrivate" link="GladePalette.html#GladePalettePrivate"/>
     <keyword type="struct" name="GladePalette" link="GladePalette.html#GladePalette-struct"/>
     <keyword type="enum" name="enum GladeItemAppearance" link="GladePalette.html#GladeItemAppearance"/>
@@ -501,15 +474,11 @@
     <keyword type="" name="The &quot;show-selector-button&quot; property" link="GladePalette.html#GladePalette--show-selector-button"/>
     <keyword type="" name="The &quot;use-small-item-icons&quot; property" link="GladePalette.html#GladePalette--use-small-item-icons"/>
     <keyword type="" name="The &quot;toggled&quot; signal" link="GladePalette.html#GladePalette-toggled"/>
-    <keyword type="" name="" link="GladePalette.html#id445690"/>
-    <keyword type="" name="" link="GladePalette.html#id445691"/>
     <keyword type="struct" name="GladeClipboardView" link="GladeClipboardView.html#GladeClipboardView-struct"/>
     <keyword type="function" name="glade_clipboard_view_new ()" link="GladeClipboardView.html#glade-clipboard-view-new"/>
     <keyword type="function" name="glade_clipboard_view_add ()" link="GladeClipboardView.html#glade-clipboard-view-add"/>
     <keyword type="function" name="glade_clipboard_view_remove ()" link="GladeClipboardView.html#glade-clipboard-view-remove"/>
     <keyword type="function" name="glade_clipboard_view_refresh_sel ()" link="GladeClipboardView.html#glade-clipboard-view-refresh-sel"/>
-    <keyword type="" name="" link="GladeClipboardView.html#id448085"/>
-    <keyword type="" name="" link="GladeClipboardView.html#id448086"/>
     <keyword type="struct" name="GladeInspectorPrivate" link="GladeInspector.html#GladeInspectorPrivate"/>
     <keyword type="struct" name="GladeInspector" link="GladeInspector.html#GladeInspector-struct"/>
     <keyword type="function" name="glade_inspector_new ()" link="GladeInspector.html#glade-inspector-new"/>
@@ -520,14 +489,10 @@
     <keyword type="" name="The &quot;project&quot; property" link="GladeInspector.html#GladeInspector--project"/>
     <keyword type="" name="The &quot;item-activated&quot; signal" link="GladeInspector.html#GladeInspector-item-activated"/>
     <keyword type="" name="The &quot;selection-changed&quot; signal" link="GladeInspector.html#GladeInspector-selection-changed"/>
-    <keyword type="" name="" link="GladeInspector.html#id449977"/>
-    <keyword type="" name="" link="GladeInspector.html#id449978"/>
     <keyword type="struct" name="GladeSignalEditor" link="gladeui-glade-signal-editor.html#GladeSignalEditor"/>
     <keyword type="function" name="glade_signal_editor_get_widget ()" link="gladeui-glade-signal-editor.html#glade-signal-editor-get-widget"/>
     <keyword type="function" name="glade_signal_editor_new ()" link="gladeui-glade-signal-editor.html#glade-signal-editor-new"/>
     <keyword type="function" name="glade_signal_editor_load_widget ()" link="gladeui-glade-signal-editor.html#glade-signal-editor-load-widget"/>
-    <keyword type="" name="" link="gladeui-glade-signal-editor.html#id451640"/>
-    <keyword type="" name="" link="gladeui-glade-signal-editor.html#id451641"/>
     <keyword type="struct" name="GladeParameter" link="gladeui-glade-parameter.html#GladeParameter"/>
     <keyword type="function" name="glade_parameter_new ()" link="gladeui-glade-parameter.html#glade-parameter-new"/>
     <keyword type="function" name="glade_parameter_clone ()" link="gladeui-glade-parameter.html#glade-parameter-clone"/>
@@ -537,8 +502,6 @@
     <keyword type="function" name="glade_parameter_get_boolean ()" link="gladeui-glade-parameter.html#glade-parameter-get-boolean"/>
     <keyword type="function" name="glade_parameter_get_string ()" link="gladeui-glade-parameter.html#glade-parameter-get-string"/>
     <keyword type="function" name="glade_parameter_list_new_from_node ()" link="gladeui-glade-parameter.html#glade-parameter-list-new-from-node"/>
-    <keyword type="" name="" link="gladeui-glade-parameter.html#id453473"/>
-    <keyword type="" name="" link="gladeui-glade-parameter.html#id453474"/>
     <keyword type="enum" name="enum GladeUtilFileDialogType" link="gladeui-glade-utils.html#GladeUtilFileDialogType"/>
     <keyword type="enum" name="enum GladeUIMessageType" link="gladeui-glade-utils.html#GladeUIMessageType"/>
     <keyword type="function" name="glade_util_widget_set_tooltip ()" link="gladeui-glade-utils.html#glade-util-widget-set-tooltip"/>
@@ -578,7 +541,5 @@
     <keyword type="function" name="glade_util_object_is_loading ()" link="gladeui-glade-utils.html#glade-util-object-is-loading"/>
     <keyword type="function" name="glade_util_url_show ()" link="gladeui-glade-utils.html#glade-util-url-show"/>
     <keyword type="function" name="glade_util_get_file_mtime ()" link="gladeui-glade-utils.html#glade-util-get-file-mtime"/>
-    <keyword type="" name="" link="gladeui-glade-utils.html#id459574"/>
-    <keyword type="" name="" link="gladeui-glade-utils.html#id459575"/>
   </functions>
 </book>

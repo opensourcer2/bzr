@@ -1706,12 +1706,13 @@ glade_widget_set_adaptor (GladeWidget *widget, GladeWidgetAdaptor *adaptor)
 	glade_widget_set_actions (widget, adaptor);
 }
 
-static void
+static gboolean
 expose_draw_selection (GtkWidget       *widget_gtk,
 		       GdkEventExpose  *event,
 		       GladeWidget     *gwidget)
 {
 	glade_util_draw_selection_nodes (event->window);
+        return FALSE;
 }
 
 
@@ -2148,6 +2149,16 @@ glade_widget_debug (GladeWidget *widget)
 	glade_widget_debug_real (widget, 0);
 }
 
+static gboolean
+glade_widget_show_idle (GladeWidget *widget)
+{
+	/* This could be dangerous */ 
+	if (GLADE_IS_WIDGET (widget))
+		glade_widget_show (widget);
+
+	return FALSE;
+}
+
 /**
  * glade_widget_show:
  * @widget: A #GladeWidget
@@ -2167,6 +2178,16 @@ glade_widget_show (GladeWidget *widget)
 	{
 		view = glade_design_view_get_from_project (glade_widget_get_project (widget));
 		layout = GTK_WIDGET (glade_design_view_get_layout (view));
+
+		/* This case causes a black window */
+		if (layout && !GTK_WIDGET_REALIZED (layout))
+		{
+			/* XXX Dangerous !!! give her a little kick */
+			g_idle_add (glade_widget_show_idle, widget);
+			return;
+		}
+		else if (!layout)
+			return;
 		
 		if (gtk_bin_get_child (GTK_BIN (layout)) != NULL)
 			gtk_container_remove (GTK_CONTAINER (layout), gtk_bin_get_child (GTK_BIN (layout)));

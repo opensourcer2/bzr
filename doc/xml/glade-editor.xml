@@ -303,11 +303,11 @@ TODO: write me</para>
 </refsect1>
 <refsect1 role="property_details">
 <title role="property_details.title">Property Details</title>
-<refsect2><title><anchor id="GladeEditor--show-context-info"/>The <literal>&quot;show-context-info&quot;</literal> property</title>
+<refsect2><title><anchor id="GladeEditor--show-context-info"/>The &quot;<literal>show-context-info</literal>&quot; property</title>
 <indexterm><primary>GladeEditor:show-context-info</primary></indexterm><programlisting>  &quot;show-context-info&quot;        <link linkend="gboolean">gboolean</link>              : Read</programlisting>
 <para>Whether to show an informational button for each property and signal in the editor.</para><para>Default value: FALSE</para>
 </refsect2>
-<refsect2><title><anchor id="GladeEditor--show-info"/>The <literal>&quot;show-info&quot;</literal> property</title>
+<refsect2><title><anchor id="GladeEditor--show-info"/>The &quot;<literal>show-info</literal>&quot; property</title>
 <indexterm><primary>GladeEditor:show-info</primary></indexterm><programlisting>  &quot;show-info&quot;                <link linkend="gboolean">gboolean</link>              : Read</programlisting>
 <para>Whether to show an informational button for the loaded widget.</para><para>Default value: FALSE</para>
 </refsect2>
@@ -316,7 +316,7 @@ TODO: write me</para>
 
 <refsect1 role="signals">
 <title role="signals.title">Signal Details</title>
-<refsect2><title><anchor id="GladeEditor-gtk-doc-search"/>The <literal>&quot;gtk-doc-search&quot;</literal> signal</title>
+<refsect2><title><anchor id="GladeEditor-gtk-doc-search"/>The &quot;gtk-doc-search&quot; signal</title>
 <indexterm><primary>GladeEditor::gtk-doc-search</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="GladeEditor">GladeEditor</link> *gladeeditor,
                                                         <link linkend="gchar">gchar</link>       *arg1,
                                                         <link linkend="gchar">gchar</link>       *arg2,
@@ -346,6 +346,4 @@ Emitted when the editor requests that a doc-search be performed.</para>
 
 
 
-
-<refsect1><refsect2 /><refsect2 /></refsect1>
 </refentry>
