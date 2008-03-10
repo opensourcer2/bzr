@@ -54,7 +54,6 @@ const <link linkend="GList">GList</link>*        <link linkend="glade-project-ge
 <link linkend="void">void</link>                <link linkend="glade-project-widget-name-changed">glade_project_widget_name_changed</link>   (<link linkend="GladeProject">GladeProject</link> *project,
                                                          <link linkend="GladeWidget">GladeWidget</link> *widget,
                                                          const <link linkend="char">char</link> *old_name);
-<link linkend="GtkTooltips">GtkTooltips</link>*        <link linkend="glade-project-get-tooltips">glade_project_get_tooltips</link>          (<link linkend="GladeProject">GladeProject</link> *project);
 <link linkend="gboolean">gboolean</link>            <link linkend="glade-project-is-selected">glade_project_is_selected</link>           (<link linkend="GladeProject">GladeProject</link> *project,
                                                          <link linkend="GObject">GObject</link> *object);
 <link linkend="void">void</link>                <link linkend="glade-project-selection-set">glade_project_selection_set</link>         (<link linkend="GladeProject">GladeProject</link> *project,
@@ -505,20 +504,6 @@ TODO: write me</para>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="glade-project-get-tooltips" role="function"/>glade_project_get_tooltips ()</title>
-<indexterm><primary>glade_project_get_tooltips</primary></indexterm><programlisting><link linkend="GtkTooltips">GtkTooltips</link>*        glade_project_get_tooltips          (<link linkend="GladeProject">GladeProject</link> *project);</programlisting>
-<para>
-</para>
-<para>
-
-</para><variablelist role="params">
-<varlistentry><term><parameter>project</parameter>&nbsp;:</term>
-<listitem><simpara> a <link linkend="GladeProject"><type>GladeProject</type></link>
-</simpara></listitem></varlistentry>
-<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a <link linkend="GtkTooltips"><type>GtkTooltips</type></link> object containing all tooltips for <parameter>project</parameter>
-</simpara></listitem></varlistentry>
-</variablelist></refsect2>
-<refsect2>
 <title><anchor id="glade-project-is-selected" role="function"/>glade_project_is_selected ()</title>
 <indexterm><primary>glade_project_is_selected</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_project_is_selected           (<link linkend="GladeProject">GladeProject</link> *project,
                                                          <link linkend="GObject">GObject</link> *object);</programlisting>
@@ -821,19 +806,19 @@ Get's whether the project has been modified since it was last saved.</para>
 </refsect1>
 <refsect1 role="property_details">
 <title role="property_details.title">Property Details</title>
-<refsect2><title><anchor id="GladeProject--has-selection"/>The <literal>&quot;has-selection&quot;</literal> property</title>
+<refsect2><title><anchor id="GladeProject--has-selection"/>The &quot;<literal>has-selection</literal>&quot; property</title>
 <indexterm><primary>GladeProject:has-selection</primary></indexterm><programlisting>  &quot;has-selection&quot;            <link linkend="gboolean">gboolean</link>              : Read</programlisting>
 <para>Whether project has a selection.</para><para>Default value: FALSE</para>
 </refsect2>
-<refsect2><title><anchor id="GladeProject--modified"/>The <literal>&quot;modified&quot;</literal> property</title>
+<refsect2><title><anchor id="GladeProject--modified"/>The &quot;<literal>modified</literal>&quot; property</title>
 <indexterm><primary>GladeProject:modified</primary></indexterm><programlisting>  &quot;modified&quot;                 <link linkend="gboolean">gboolean</link>              : Read</programlisting>
 <para>Whether project has been modified since it was last saved.</para><para>Default value: FALSE</para>
 </refsect2>
-<refsect2><title><anchor id="GladeProject--path"/>The <literal>&quot;path&quot;</literal> property</title>
+<refsect2><title><anchor id="GladeProject--path"/>The &quot;<literal>path</literal>&quot; property</title>
 <indexterm><primary>GladeProject:path</primary></indexterm><programlisting>  &quot;path&quot;                     <link linkend="gchararray">gchararray</link>            : Read</programlisting>
 <para>The filesystem path of the project.</para><para>Default value: NULL</para>
 </refsect2>
-<refsect2><title><anchor id="GladeProject--read-only"/>The <literal>&quot;read-only&quot;</literal> property</title>
+<refsect2><title><anchor id="GladeProject--read-only"/>The &quot;<literal>read-only</literal>&quot; property</title>
 <indexterm><primary>GladeProject:read-only</primary></indexterm><programlisting>  &quot;read-only&quot;                <link linkend="gboolean">gboolean</link>              : Read</programlisting>
 <para>Whether project is read only or not.</para><para>Default value: FALSE</para>
 </refsect2>
@@ -842,7 +827,7 @@ Get's whether the project has been modified since it was last saved.</para>
 
 <refsect1 role="signals">
 <title role="signals.title">Signal Details</title>
-<refsect2><title><anchor id="GladeProject-add-widget"/>The <literal>&quot;add-widget&quot;</literal> signal</title>
+<refsect2><title><anchor id="GladeProject-add-widget"/>The &quot;add-widget&quot; signal</title>
 <indexterm><primary>GladeProject::add-widget</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="GladeProject">GladeProject</link> *gladeproject,
                                                         <link linkend="GladeWidget">GladeWidget</link>  *arg1,
                                                         <link linkend="gpointer">gpointer</link>      user_data)         : Run Last</programlisting>
@@ -859,7 +844,7 @@ Emitted when a widget is added to a project.</para>
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
 <listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
-</variablelist></refsect2><refsect2><title><anchor id="GladeProject-changed"/>The <literal>&quot;changed&quot;</literal> signal</title>
+</variablelist></refsect2><refsect2><title><anchor id="GladeProject-changed"/>The &quot;changed&quot; signal</title>
 <indexterm><primary>GladeProject::changed</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="GladeProject">GladeProject</link> *gladeproject,
                                                         <link linkend="GladeCommand">GladeCommand</link> *arg1,
                                                         <link linkend="gboolean">gboolean</link>      arg2,
@@ -880,7 +865,7 @@ Emitted when a <parameter>gladeproject</parameter>'s state changes via a <link l
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
 <listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
-</variablelist></refsect2><refsect2><title><anchor id="GladeProject-close"/>The <literal>&quot;close&quot;</literal> signal</title>
+</variablelist></refsect2><refsect2><title><anchor id="GladeProject-close"/>The &quot;close&quot; signal</title>
 <indexterm><primary>GladeProject::close</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="GladeProject">GladeProject</link> *gladeproject,
                                                         <link linkend="gpointer">gpointer</link>      user_data)         : Run Last</programlisting>
 <para>
@@ -894,7 +879,7 @@ any associated resources).</para>
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
 <listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
-</variablelist></refsect2><refsect2><title><anchor id="GladeProject-parse-finished"/>The <literal>&quot;parse-finished&quot;</literal> signal</title>
+</variablelist></refsect2><refsect2><title><anchor id="GladeProject-parse-finished"/>The &quot;parse-finished&quot; signal</title>
 <indexterm><primary>GladeProject::parse-finished</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="GladeProject">GladeProject</link> *gladeproject,
                                                         <link linkend="gpointer">gpointer</link>      user_data)         : Run First</programlisting>
 <para>
@@ -907,7 +892,7 @@ Emitted when <parameter>gladeproject</parameter> parsing has finished.</para>
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
 <listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
-</variablelist></refsect2><refsect2><title><anchor id="GladeProject-remove-widget"/>The <literal>&quot;remove-widget&quot;</literal> signal</title>
+</variablelist></refsect2><refsect2><title><anchor id="GladeProject-remove-widget"/>The &quot;remove-widget&quot; signal</title>
 <indexterm><primary>GladeProject::remove-widget</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="GladeProject">GladeProject</link> *gladeproject,
                                                         <link linkend="GladeWidget">GladeWidget</link>  *arg1,
                                                         <link linkend="gpointer">gpointer</link>      user_data)         : Run Last</programlisting>
@@ -924,7 +909,7 @@ Emitted when a widget is removed from a project.</para>
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
 <listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
-</variablelist></refsect2><refsect2><title><anchor id="GladeProject-resource-added"/>The <literal>&quot;resource-added&quot;</literal> signal</title>
+</variablelist></refsect2><refsect2><title><anchor id="GladeProject-resource-added"/>The &quot;resource-added&quot; signal</title>
 <indexterm><primary>GladeProject::resource-added</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="GladeProject">GladeProject</link> *gladeproject,
                                                         <link linkend="gchar">gchar</link>        *arg1,
                                                         <link linkend="gpointer">gpointer</link>      user_data)         : Run Last</programlisting>
@@ -942,7 +927,7 @@ added to <parameter>gladeproject</parameter></para>
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
 <listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
-</variablelist></refsect2><refsect2><title><anchor id="GladeProject-resource-removed"/>The <literal>&quot;resource-removed&quot;</literal> signal</title>
+</variablelist></refsect2><refsect2><title><anchor id="GladeProject-resource-removed"/>The &quot;resource-removed&quot; signal</title>
 <indexterm><primary>GladeProject::resource-removed</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="GladeProject">GladeProject</link> *gladeproject,
                                                         <link linkend="gchar">gchar</link>        *arg1,
                                                         <link linkend="gpointer">gpointer</link>      user_data)         : Run Last</programlisting>
@@ -959,7 +944,7 @@ Emitted when a resource file is removed from <parameter>gladeproject</parameter>
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
 <listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
-</variablelist></refsect2><refsect2><title><anchor id="GladeProject-selection-changed"/>The <literal>&quot;selection-changed&quot;</literal> signal</title>
+</variablelist></refsect2><refsect2><title><anchor id="GladeProject-selection-changed"/>The &quot;selection-changed&quot; signal</title>
 <indexterm><primary>GladeProject::selection-changed</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="GladeProject">GladeProject</link> *gladeproject,
                                                         <link linkend="gpointer">gpointer</link>      user_data)         : Run Last</programlisting>
 <para>
@@ -972,7 +957,7 @@ Emitted when <parameter>gladeproject</parameter> selection list changes.</para>
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
 <listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
-</variablelist></refsect2><refsect2><title><anchor id="GladeProject-widget-name-changed"/>The <literal>&quot;widget-name-changed&quot;</literal> signal</title>
+</variablelist></refsect2><refsect2><title><anchor id="GladeProject-widget-name-changed"/>The &quot;widget-name-changed&quot; signal</title>
 <indexterm><primary>GladeProject::widget-name-changed</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="GladeProject">GladeProject</link> *gladeproject,
                                                         <link linkend="GladeWidget">GladeWidget</link>  *arg1,
                                                         <link linkend="gpointer">gpointer</link>      user_data)         : Run Last</programlisting>
@@ -994,6 +979,4 @@ Emitted when <parameter>gwidget</parameter>'s name changes.</para>
 
 
 
-
-<refsect1><refsect2 /><refsect2 /></refsect1>
 </refentry>

@@ -1,3 +1,110 @@
+2008-03-09  Tristan Van Berkom <tvb@gnome.org>
+
+	* NEWS, configure.ac: Rolling 3.4.2
+	
+	* plugins/gtk+/glade-gtk.c: 
+	  - Fixed a crash detail bug 493418.
+	  - Reset "events" property for newly created widgets
+	    (workaround for bug 472555).
+	  - Added GtkVolumeButton and GtkScaleButton widgets (Ross Burton)
+	  - Add/Remove parent doesnt dup widgets anymore (bug 517388)
+	
+	* plugins/gnome/glade-gnome.c: Fixed some crashes on 
+	  gnome druid page properties (bug 511651).
+	
+	* gladeui/glade-editor-property.c: 
+	  - added return_if_fail guard as per bug 479468.
+	  - Fixed crasher bug 506713.
+	  - Reverted to real time string editing and not using
+	    focus-out handlers anymore.
+	  - Fixed treeview issues with objects dialog, fixing the
+	    atk relations bug 512081.
+	
+	* gladeui/glade-base-editor.c: Made sure idle handlers werent
+	  updating treeviews after the object is destroyed (also bug 506713).
+	
+	* gladeui/glade-app.c: When adding a first project, display the
+	  first toplevel in the design layout.
+
+	* gladeui/glade-widget.c: Handle glade_widget_show() with unrealized
+	  design-view, connect-after the design-view's realize and retry.
+
+2008-02-16  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+	
+	* plugins/gtk+/gtk+.xml.in: ignore GtkWindow::accept-focus.
+	  Fixes bug #accept-focus "crash, GtkWindow, Accept focus"
+
+2008-01-15  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* src/glade-window.c:
+	  o set palette a default size
+	  o do not set desing/editor paned position since by default the window is
+	    maximized.
+
+2008-01-15  Ivan Baldo <ibaldo@adinet.com.uy>
+
+	* gladeui/glade-palette-expander.c: fixed bug #495853
+	  "palette takes up too much space"
+
+2008-01-15  Yang Hong <hongyang@redflag-linux.com>
+
+	* gladeui/glade-project.c: fixed bug #504603
+	  "crash while open .glade file from command line arg"
+
+2008-01-15  Cosimo Cecchi <anarki@lilik.it>
+
+	* gladeui/glade-editor.c: Fixed bug #388869
+	  "Property edits dropped due to bad focus-event handling"
+
+2008-01-13  Vincent Geddes <vgeddes@gnome.org>
+
+	* gladeui/glade-project.c, src/glade-window.c: Fix a few i18n fumbles (#509128).
+
+2007-12-20  Juan Pablo Ugarte juanpablougarte@gmail.com>
+
+	* plugins/gtk+/gtk+.xml.in:
+	  updated displayable values for GtkButtonBox::layout-style
+	  added displayable values for GtkEntry::shadow-type
+
+	* gladeui/glade-widget-adaptor.c: fixed bug #477025 "missing icones"
+	  create_icon_name_for_adaptor() renamed to create_icon_name_for_adaptor()
+
+2007-12-19  Christian Persch  <chpe@gnome.org>
+
+	* configure.ac:
+	* gladeui/glade-app.c: (glade_app_refresh_undo_redo_button):
+	* gladeui/glade-base-editor.c: (glade_base_editor_add_properties):
+	* gladeui/glade-editor-property.c:
+	(glade_editor_property_tooltip_cb),
+	(glade_editor_property_sensitivity_cb),
+	(glade_editor_property_create_info_button),
+	(glade_editor_property_constructor),
+	(glade_editor_property_finalize),
+	(glade_editor_property_load_common),
+	(glade_eprop_text_show_i18n_dialog),
+	(glade_eprop_adjustment_table_add_label):
+	* gladeui/glade-editor-property.h:
+	* gladeui/glade-editor.c: (glade_editor_notebook_page),
+	(glade_editor_create_info_button),
+	(glade_editor_create_reset_button),
+	(glade_editor_table_append_item):
+	* gladeui/glade-palette.c: (glade_palette_dispose),
+	(glade_palette_new_item), (glade_palette_new_item_group),
+	(glade_palette_update_appearance), (glade_palette_init):
+	* gladeui/glade-project.c: (glade_project_dispose),
+	(glade_project_init):
+	* gladeui/glade-project.h:
+	* gladeui/glade-property-class.c:
+	(glade_property_class_new_from_spec):
+	* gladeui/glade-utils.c:
+	* gladeui/glade-widget.c: (expose_draw_selection):
+	* plugins/gtk+/glade-gtk.c: (glade_gtk_widget_set_property),
+	(glade_gtk_widget_get_property):
+	* src/glade-window.c: (format_project_list_item_tooltip),
+	(refresh_projects_list_menu), (glade_window_init): Port to gtk 2.12
+	tooltips API. Bug #500947. Remove the unnecessary event boxes on the property
+	labels, part of bug #490157.
+
 2007-12-18  Juan Pablo Ugarte <juanpablougarte@gmail.com>
 
 	* NEWS, configure.ac: Rolling 3.4.1

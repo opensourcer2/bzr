@@ -814,23 +814,23 @@ to always be saved regardless of its default value.
 </refsect1>
 <refsect1 role="property_details">
 <title role="property_details.title">Property Details</title>
-<refsect2><title><anchor id="GladeProperty--enabled"/>The <literal>&quot;enabled&quot;</literal> property</title>
+<refsect2><title><anchor id="GladeProperty--enabled"/>The &quot;<literal>enabled</literal>&quot; property</title>
 <indexterm><primary>GladeProperty:enabled</primary></indexterm><programlisting>  &quot;enabled&quot;                  <link linkend="gboolean">gboolean</link>              : Read / Write</programlisting>
 <para>If the property is optional, this is its enabled state.</para><para>Default value: TRUE</para>
 </refsect2>
-<refsect2><title><anchor id="GladeProperty--i18n-comment"/>The <literal>&quot;i18n-comment&quot;</literal> property</title>
+<refsect2><title><anchor id="GladeProperty--i18n-comment"/>The &quot;<literal>i18n-comment</literal>&quot; property</title>
 <indexterm><primary>GladeProperty:i18n-comment</primary></indexterm><programlisting>  &quot;i18n-comment&quot;             <link linkend="gchararray">gchararray</link>            : Read / Write</programlisting>
 <para>Comment for translators.</para><para>Default value: NULL</para>
 </refsect2>
-<refsect2><title><anchor id="GladeProperty--i18n-has-context"/>The <literal>&quot;i18n-has-context&quot;</literal> property</title>
+<refsect2><title><anchor id="GladeProperty--i18n-has-context"/>The &quot;<literal>i18n-has-context</literal>&quot; property</title>
 <indexterm><primary>GladeProperty:i18n-has-context</primary></indexterm><programlisting>  &quot;i18n-has-context&quot;         <link linkend="gboolean">gboolean</link>              : Read / Write</programlisting>
 <para>Whether or not the translatable string has a context prefix.</para><para>Default value: FALSE</para>
 </refsect2>
-<refsect2><title><anchor id="GladeProperty--i18n-translatable"/>The <literal>&quot;i18n-translatable&quot;</literal> property</title>
+<refsect2><title><anchor id="GladeProperty--i18n-translatable"/>The &quot;<literal>i18n-translatable</literal>&quot; property</title>
 <indexterm><primary>GladeProperty:i18n-translatable</primary></indexterm><programlisting>  &quot;i18n-translatable&quot;        <link linkend="gboolean">gboolean</link>              : Read / Write</programlisting>
 <para>Whether this property is translatable or not.</para><para>Default value: TRUE</para>
 </refsect2>
-<refsect2><title><anchor id="GladeProperty--sensitive"/>The <literal>&quot;sensitive&quot;</literal> property</title>
+<refsect2><title><anchor id="GladeProperty--sensitive"/>The &quot;<literal>sensitive</literal>&quot; property</title>
 <indexterm><primary>GladeProperty:sensitive</primary></indexterm><programlisting>  &quot;sensitive&quot;                <link linkend="gboolean">gboolean</link>              : Read / Write</programlisting>
 <para>This gives backends control to set property sensitivity.</para><para>Default value: TRUE</para>
 </refsect2>
@@ -839,7 +839,7 @@ to always be saved regardless of its default value.
 
 <refsect1 role="signals">
 <title role="signals.title">Signal Details</title>
-<refsect2><title><anchor id="GladeProperty-tooltip-changed"/>The <literal>&quot;tooltip-changed&quot;</literal> signal</title>
+<refsect2><title><anchor id="GladeProperty-tooltip-changed"/>The &quot;tooltip-changed&quot; signal</title>
 <indexterm><primary>GladeProperty::tooltip-changed</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="GladeProperty">GladeProperty</link> *gladeproperty,
                                                         <link linkend="gpointer">gpointer</link>       arg1,
                                                         <link linkend="gpointer">gpointer</link>       user_data)          : Run Last</programlisting>
@@ -855,7 +855,7 @@ to always be saved regardless of its default value.
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
 <listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
-</variablelist></refsect2><refsect2><title><anchor id="GladeProperty-value-changed"/>The <literal>&quot;value-changed&quot;</literal> signal</title>
+</variablelist></refsect2><refsect2><title><anchor id="GladeProperty-value-changed"/>The &quot;value-changed&quot; signal</title>
 <indexterm><primary>GladeProperty::value-changed</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="GladeProperty">GladeProperty</link> *gladeproperty,
                                                         <link linkend="gpointer">gpointer</link>       arg1,
                                                         <link linkend="gpointer">gpointer</link>       arg2,
@@ -880,6 +880,4 @@ to always be saved regardless of its default value.
 
 
 
-
-<refsect1><refsect2 /><refsect2 /></refsect1>
 </refentry>

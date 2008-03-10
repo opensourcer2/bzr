@@ -394,11 +394,7 @@ will end up on the clipboard and will be set as
 the clipboards selection).</para>
 <para>
 
-</para><variablelist role="params">
-<varlistentry><term><parameter>app</parameter>&nbsp;:</term>
-<listitem><simpara> A <link linkend="GladeApp"><type>GladeApp</type></link>
-</simpara></listitem></varlistentry>
-</variablelist></refsect2>
+</para></refsect2>
 <refsect2>
 <title><anchor id="glade-app-command-cut" role="function"/>glade_app_command_cut ()</title>
 <indexterm><primary>glade_app_command_cut</primary></indexterm><programlisting><link linkend="void">void</link>                glade_app_command_cut               (void);</programlisting>
@@ -408,11 +404,7 @@ will end up on the clipboard and will be set as
 the clipboards selection).</para>
 <para>
 
-</para><variablelist role="params">
-<varlistentry><term><parameter>app</parameter>&nbsp;:</term>
-<listitem><simpara> A <link linkend="GladeApp"><type>GladeApp</type></link>
-</simpara></listitem></varlistentry>
-</variablelist></refsect2>
+</para></refsect2>
 <refsect2>
 <title><anchor id="glade-app-command-paste" role="function"/>glade_app_command_paste ()</title>
 <indexterm><primary>glade_app_command_paste</primary></indexterm><programlisting><link linkend="void">void</link>                glade_app_command_paste             (<link linkend="GladePlaceholder">GladePlaceholder</link> *placeholder);</programlisting>
@@ -689,10 +681,10 @@ Return 0 on success.</para>
 </refsect1>
 <refsect1 role="property_details">
 <title role="property_details.title">Property Details</title>
-<refsect2><title><anchor id="GladeApp--active-project"/>The <literal>&quot;active-project&quot;</literal> property</title>
+<refsect2><title><anchor id="GladeApp--active-project"/>The &quot;<literal>active-project</literal>&quot; property</title>
 <indexterm><primary>GladeApp:active-project</primary></indexterm><programlisting>  &quot;active-project&quot;           <link linkend="GladeProject">GladeProject</link>          : Read / Write</programlisting>
 <para>The active project.</para></refsect2>
-<refsect2><title><anchor id="GladeApp--pointer-mode"/>The <literal>&quot;pointer-mode&quot;</literal> property</title>
+<refsect2><title><anchor id="GladeApp--pointer-mode"/>The &quot;<literal>pointer-mode</literal>&quot; property</title>
 <indexterm><primary>GladeApp:pointer-mode</primary></indexterm><programlisting>  &quot;pointer-mode&quot;             <link linkend="GladePointerMode">GladePointerMode</link>      : Read / Write</programlisting>
 <para>Current mode for the pointer in the workspace.</para><para>Default value: select</para>
 </refsect2>
@@ -701,7 +693,7 @@ Return 0 on success.</para>
 
 <refsect1 role="signals">
 <title role="signals.title">Signal Details</title>
-<refsect2><title><anchor id="GladeApp-update-ui"/>The <literal>&quot;update-ui&quot;</literal> signal</title>
+<refsect2><title><anchor id="GladeApp-update-ui"/>The &quot;update-ui&quot; signal</title>
 <indexterm><primary>GladeApp::update-ui</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="GladeApp">GladeApp</link> *gladeapp,
                                                         <link linkend="gpointer">gpointer</link>  user_data)      : Run First</programlisting>
 <para>
@@ -719,6 +711,4 @@ Emitted when a project name changes or a cut/copy/paste/delete occurred.</para>
 
 
 
-
-<refsect1><refsect2 /><refsect2 /></refsect1>
 </refentry>

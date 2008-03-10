@@ -310,10 +310,11 @@ embedded in another object</_tooltip>
 	    <value id="GTK_WIN_POS_CENTER_ON_PARENT" _name="Center on Parent"/>
           </displayable-values>
 	</property>
+	<property id="accept-focus" ignore="True"/>
       </properties>
     </glade-widget-class>
 
-    <glade-widget-class name="GtkMenuShell" generic-name="menushell" _title="Menu Shell" use-placeholders="False">
+    <glade-widget-class name="GtkMenuShell" _title="Menu Shell" use-placeholders="False">
       <post-create-function>empty</post-create-function>
       <add-child-function>glade_gtk_menu_shell_add_child</add-child-function>
       <remove-child-function>glade_gtk_menu_shell_remove_child</remove-child-function>
@@ -593,7 +594,15 @@ embedded in another object</_tooltip>
       <post-create-function>glade_gtk_entry_post_create</post-create-function>
       <properties>
 	<property id="text" translatable="True"/>
-
+    <property id="shadow-type">
+  	  <displayable-values>
+	    <value id="GTK_SHADOW_NONE" _name="None"/>
+	    <value id="GTK_SHADOW_IN" _name="In"/>
+	    <value id="GTK_SHADOW_OUT" _name="Out"/>
+	    <value id="GTK_SHADOW_ETCHED_IN" _name="Etched In"/>
+	    <value id="GTK_SHADOW_ETCHED_OUT" _name="Etched Out"/>
+	  </displayable-values>
+	</property>
 	<!-- Atk activate property -->
 	<property id="atk-activate" _name="Activate" ignore="True" atk-action="True">
 	  <_tooltip>Set the description of the Activate atk action</_tooltip>
@@ -768,6 +777,24 @@ embedded in another object</_tooltip>
 	<property id="filter" disabled="True" />
       </properties>
     </glade-widget-class>
+
+    <glade-widget-class name="GtkScaleButton" generic-name="scalebutton" _title="Scale Button">
+      <properties>
+        <property id="size">
+  	  <displayable-values>
+	    <value id="GTK_ICON_SIZE_INVALID" _name="Invalid"/>
+	    <value id="GTK_ICON_SIZE_MENU" _name="Menu"/>
+	    <value id="GTK_ICON_SIZE_SMALL_TOOLBAR" _name="Small Toolbar"/>
+	    <value id="GTK_ICON_SIZE_LARGE_TOOLBAR" _name="Large Toolbar"/>
+	    <value id="GTK_ICON_SIZE_BUTTON" _name="Button"/>
+	    <value id="GTK_ICON_SIZE_DND" _name="Drag'n Drop"/>
+	    <value id="GTK_ICON_SIZE_DIALOG" _name="Dialog"/>
+	  </displayable-values>
+        </property>
+      </properties>
+    </glade-widget-class>
+
+    <glade-widget-class name="GtkVolumeButton" generic-name="volumebutton" _title="Volume Button"/>
 
     <glade-widget-class name="GtkFileChooserWidget" generic-name="filechooserwidget" _title="File Chooser Widget">
       <post-create-function>glade_gtk_file_chooser_widget_post_create</post-create-function>
@@ -1164,11 +1191,12 @@ embedded in another object</_tooltip>
       <properties>
       	<property id="layout-style">
   	  <displayable-values>
-            <value id="GTK_BUTTONBOX_DEFAULT_STYLE" _name="Default"/>
+	    <value id="GTK_BUTTONBOX_DEFAULT_STYLE" _name="Default"/>
 	    <value id="GTK_BUTTONBOX_SPREAD" _name="Spread"/>
 	    <value id="GTK_BUTTONBOX_EDGE" _name="Edge"/>
 	    <value id="GTK_BUTTONBOX_START" _name="Start"/>
 	    <value id="GTK_BUTTONBOX_END" _name="End"/>
+	    <value id="GTK_BUTTONBOX_CENTER" _name="Center"/>
 	  </displayable-values>
 	</property>
       </properties>
@@ -1668,6 +1696,8 @@ embedded in another object</_tooltip>
     <glade-widget-class-ref name="GtkColorButton"/>
     <glade-widget-class-ref name="GtkFontButton"/>
     <glade-widget-class-ref name="GtkLinkButton"/>
+    <glade-widget-class-ref name="GtkScaleButton"/>
+    <glade-widget-class-ref name="GtkVolumeButton"/>
 
     <glade-widget-class-ref name="GtkImage"/>
     <glade-widget-class-ref name="GtkLabel"/>

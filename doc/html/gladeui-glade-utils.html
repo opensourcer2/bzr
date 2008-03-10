@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
 <title>Glade Utils</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.72.0">
 <link rel="start" href="index.html" title="Glade UI Builder Reference Manual">
 <link rel="up" href="misc.html" title="Part&#160;IV.&#160;Miscellaneous utilities">
 <link rel="prev" href="gladeui-glade-parameter.html" title="Glade Parameter">
 <link rel="next" href="ix01.html" title="Index">
-<meta name="generator" content="GTK-Doc V1.9 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.8 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 <link rel="part" href="catalog.html" title="Part&#160;I.&#160;Adding your custom widgets">
 <link rel="part" href="core.html" title="Part&#160;II.&#160;Glade Core">
@@ -25,16 +25,16 @@
 <th width="100%" align="center">Glade UI Builder Reference Manual</th>
 <td><a accesskey="n" href="ix01.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr>
-<tr><td colspan="5" class="shortcuts"><nobr><a href="#id454442" class="shortcut">Top</a>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#id437815" class="shortcut">Top</a>
                   &#160;|&#160;
-                  <a href="#id455779" class="shortcut">Description</a></nobr></td></tr>
+                  <a href="#id439151" class="shortcut">Description</a></nobr></td></tr>
 </table>
 <div class="refentry" lang="en">
 <a name="gladeui-glade-utils"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
 <h2>
-<a name="id454442"></a><span class="refentrytitle">Glade Utils</span>
+<a name="id437815"></a><span class="refentrytitle">Glade Utils</span>
 </h2>
 <p>Glade Utils &#8212; Welcome to the zoo.</p>
 </td>
@@ -46,75 +46,75 @@
 
 
 
-enum                <a class="link" href="gladeui-glade-utils.html#GladeUtilFileDialogType">GladeUtilFileDialogType</a>;
-enum                <a class="link" href="gladeui-glade-utils.html#GladeUIMessageType">GladeUIMessageType</a>;
-void                <a class="link" href="gladeui-glade-utils.html#glade-util-widget-set-tooltip">glade_util_widget_set_tooltip</a>       (GtkWidget *widget,
+enum                <a href="gladeui-glade-utils.html#GladeUtilFileDialogType">GladeUtilFileDialogType</a>;
+enum                <a href="gladeui-glade-utils.html#GladeUIMessageType">GladeUIMessageType</a>;
+void                <a href="gladeui-glade-utils.html#glade-util-widget-set-tooltip">glade_util_widget_set_tooltip</a>       (GtkWidget *widget,
                                                          const gchar *str);
-GType               <a class="link" href="gladeui-glade-utils.html#glade-util-get-type-from-name">glade_util_get_type_from_name</a>       (const gchar *name,
+GType               <a href="gladeui-glade-utils.html#glade-util-get-type-from-name">glade_util_get_type_from_name</a>       (const gchar *name,
                                                          gboolean have_func);
-GParamSpec*         <a class="link" href="gladeui-glade-utils.html#glade-utils-get-pspec-from-funcname">glade_utils_get_pspec_from_funcname</a> (const gchar *funcname);
-gboolean            <a class="link" href="gladeui-glade-utils.html#glade-util-ui-message">glade_util_ui_message</a>               (GtkWidget *parent,
-                                                         <a class="link" href="gladeui-glade-utils.html#GladeUIMessageType">GladeUIMessageType</a> type,
+GParamSpec*         <a href="gladeui-glade-utils.html#glade-utils-get-pspec-from-funcname">glade_utils_get_pspec_from_funcname</a> (const gchar *funcname);
+gboolean            <a href="gladeui-glade-utils.html#glade-util-ui-message">glade_util_ui_message</a>               (GtkWidget *parent,
+                                                         <a href="gladeui-glade-utils.html#GladeUIMessageType">GladeUIMessageType</a> type,
                                                          const gchar *format,
                                                          ...);
-void                <a class="link" href="gladeui-glade-utils.html#glade-util-flash-message">glade_util_flash_message</a>            (GtkWidget *statusbar,
+void                <a href="gladeui-glade-utils.html#glade-util-flash-message">glade_util_flash_message</a>            (GtkWidget *statusbar,
                                                          guint context_id,
                                                          gchar *format,
                                                          ...);
-gint                <a class="link" href="gladeui-glade-utils.html#glade-util-compare-stock-labels">glade_util_compare_stock_labels</a>     (gconstpointer a,
+gint                <a href="gladeui-glade-utils.html#glade-util-compare-stock-labels">glade_util_compare_stock_labels</a>     (gconstpointer a,
                                                          gconstpointer b);
-void                <a class="link" href="gladeui-glade-utils.html#glade-util-hide-window">glade_util_hide_window</a>              (GtkWindow *window);
-gchar*              <a class="link" href="gladeui-glade-utils.html#glade-util-gtk-combo-func">glade_util_gtk_combo_func</a>           (gpointer data);
-gpointer            <a class="link" href="gladeui-glade-utils.html#glade-util-gtk-combo-find">glade_util_gtk_combo_find</a>           (GtkCombo *combo);
-GtkWidget*          <a class="link" href="gladeui-glade-utils.html#glade-util-file-dialog-new">glade_util_file_dialog_new</a>          (const gchar *title,
+void                <a href="gladeui-glade-utils.html#glade-util-hide-window">glade_util_hide_window</a>              (GtkWindow *window);
+gchar*              <a href="gladeui-glade-utils.html#glade-util-gtk-combo-func">glade_util_gtk_combo_func</a>           (gpointer data);
+gpointer            <a href="gladeui-glade-utils.html#glade-util-gtk-combo-find">glade_util_gtk_combo_find</a>           (GtkCombo *combo);
+GtkWidget*          <a href="gladeui-glade-utils.html#glade-util-file-dialog-new">glade_util_file_dialog_new</a>          (const gchar *title,
                                                          GtkWindow *parent,
-                                                         <a class="link" href="gladeui-glade-utils.html#GladeUtilFileDialogType">GladeUtilFileDialogType</a> action);
-void                <a class="link" href="gladeui-glade-utils.html#glade-util-replace">glade_util_replace</a>                  (gchar *str,
+                                                         <a href="gladeui-glade-utils.html#GladeUtilFileDialogType">GladeUtilFileDialogType</a> action);
+void                <a href="gladeui-glade-utils.html#glade-util-replace">glade_util_replace</a>                  (gchar *str,
                                                          gchar a,
                                                          gchar b);
-gchar*              <a class="link" href="gladeui-glade-utils.html#glade-util-read-prop-name">glade_util_read_prop_name</a>           (const gchar *str);
-gchar*              <a class="link" href="gladeui-glade-utils.html#glade-util-duplicate-underscores">glade_util_duplicate_underscores</a>    (const gchar *name);
-void                <a class="link" href="gladeui-glade-utils.html#glade-util-add-selection">glade_util_add_selection</a>            (GtkWidget *widget);
-void                <a class="link" href="gladeui-glade-utils.html#glade-util-remove-selection">glade_util_remove_selection</a>         (GtkWidget *widget);
-gboolean            <a class="link" href="gladeui-glade-utils.html#glade-util-has-selection">glade_util_has_selection</a>            (GtkWidget *widget);
-void                <a class="link" href="gladeui-glade-utils.html#glade-util-clear-selection">glade_util_clear_selection</a>          (void);
-GList*              <a class="link" href="gladeui-glade-utils.html#glade-util-get-selection">glade_util_get_selection</a>            (void);
-GList*              <a class="link" href="gladeui-glade-utils.html#glade-util-container-get-all-children">glade_util_container_get_all_children</a>
+gchar*              <a href="gladeui-glade-utils.html#glade-util-read-prop-name">glade_util_read_prop_name</a>           (const gchar *str);
+gchar*              <a href="gladeui-glade-utils.html#glade-util-duplicate-underscores">glade_util_duplicate_underscores</a>    (const gchar *name);
+void                <a href="gladeui-glade-utils.html#glade-util-add-selection">glade_util_add_selection</a>            (GtkWidget *widget);
+void                <a href="gladeui-glade-utils.html#glade-util-remove-selection">glade_util_remove_selection</a>         (GtkWidget *widget);
+gboolean            <a href="gladeui-glade-utils.html#glade-util-has-selection">glade_util_has_selection</a>            (GtkWidget *widget);
+void                <a href="gladeui-glade-utils.html#glade-util-clear-selection">glade_util_clear_selection</a>          (void);
+GList*              <a href="gladeui-glade-utils.html#glade-util-get-selection">glade_util_get_selection</a>            (void);
+GList*              <a href="gladeui-glade-utils.html#glade-util-container-get-all-children">glade_util_container_get_all_children</a>
                                                         (GtkContainer *container);
-gint                <a class="link" href="gladeui-glade-utils.html#glade-util-count-placeholders">glade_util_count_placeholders</a>       (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent);
-GtkTreeIter*        <a class="link" href="gladeui-glade-utils.html#glade-util-find-iter-by-widget">glade_util_find_iter_by_widget</a>      (GtkTreeModel *model,
-                                                         <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *findme,
+gint                <a href="gladeui-glade-utils.html#glade-util-count-placeholders">glade_util_count_placeholders</a>       (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent);
+GtkTreeIter*        <a href="gladeui-glade-utils.html#glade-util-find-iter-by-widget">glade_util_find_iter_by_widget</a>      (GtkTreeModel *model,
+                                                         <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *findme,
                                                          gint column);
-gboolean            <a class="link" href="gladeui-glade-utils.html#glade-util-basenames-match">glade_util_basenames_match</a>          (const gchar *path1,
+gboolean            <a href="gladeui-glade-utils.html#glade-util-basenames-match">glade_util_basenames_match</a>          (const gchar *path1,
                                                          const gchar *path2);
-GList*              <a class="link" href="gladeui-glade-utils.html#glade-util-purify-list">glade_util_purify_list</a>              (GList *list);
-GList*              <a class="link" href="gladeui-glade-utils.html#glade-util-added-in-list">glade_util_added_in_list</a>            (GList *old_list,
+GList*              <a href="gladeui-glade-utils.html#glade-util-purify-list">glade_util_purify_list</a>              (GList *list);
+GList*              <a href="gladeui-glade-utils.html#glade-util-added-in-list">glade_util_added_in_list</a>            (GList *old_list,
                                                          GList *new_list);
-GList*              <a class="link" href="gladeui-glade-utils.html#glade-util-removed-from-list">glade_util_removed_from_list</a>        (GList *old_list,
+GList*              <a href="gladeui-glade-utils.html#glade-util-removed-from-list">glade_util_removed_from_list</a>        (GList *old_list,
                                                          GList *new_list);
-gchar*              <a class="link" href="gladeui-glade-utils.html#glade-util-canonical-path">glade_util_canonical_path</a>           (const gchar *path);
-gboolean            <a class="link" href="gladeui-glade-utils.html#glade-util-copy-file">glade_util_copy_file</a>                (const gchar *src_path,
+gchar*              <a href="gladeui-glade-utils.html#glade-util-canonical-path">glade_util_canonical_path</a>           (const gchar *path);
+gboolean            <a href="gladeui-glade-utils.html#glade-util-copy-file">glade_util_copy_file</a>                (const gchar *src_path,
                                                          const gchar *dest_path);
-gboolean            <a class="link" href="gladeui-glade-utils.html#glade-util-class-implements-interface">glade_util_class_implements_interface</a>
+gboolean            <a href="gladeui-glade-utils.html#glade-util-class-implements-interface">glade_util_class_implements_interface</a>
                                                         (GType class_type,
                                                          GType iface_type);
-GModule*            <a class="link" href="gladeui-glade-utils.html#glade-util-load-library">glade_util_load_library</a>             (const gchar *library_name);
-gboolean            <a class="link" href="gladeui-glade-utils.html#glade-util-file-is-writeable">glade_util_file_is_writeable</a>        (const gchar *path);
-gboolean            <a class="link" href="gladeui-glade-utils.html#glade-util-have-devhelp">glade_util_have_devhelp</a>             (void);
-GtkWidget*          <a class="link" href="gladeui-glade-utils.html#glade-util-get-devhelp-icon">glade_util_get_devhelp_icon</a>         (GtkIconSize size);
-void                <a class="link" href="gladeui-glade-utils.html#glade-util-search-devhelp">glade_util_search_devhelp</a>           (const gchar *book,
+GModule*            <a href="gladeui-glade-utils.html#glade-util-load-library">glade_util_load_library</a>             (const gchar *library_name);
+gboolean            <a href="gladeui-glade-utils.html#glade-util-file-is-writeable">glade_util_file_is_writeable</a>        (const gchar *path);
+gboolean            <a href="gladeui-glade-utils.html#glade-util-have-devhelp">glade_util_have_devhelp</a>             (void);
+GtkWidget*          <a href="gladeui-glade-utils.html#glade-util-get-devhelp-icon">glade_util_get_devhelp_icon</a>         (GtkIconSize size);
+void                <a href="gladeui-glade-utils.html#glade-util-search-devhelp">glade_util_search_devhelp</a>           (const gchar *book,
                                                          const gchar *page,
                                                          const gchar *search);
-GtkWidget*          <a class="link" href="gladeui-glade-utils.html#glade-util-get-placeholder-from-pointer">glade_util_get_placeholder_from_pointer</a>
+GtkWidget*          <a href="gladeui-glade-utils.html#glade-util-get-placeholder-from-pointer">glade_util_get_placeholder_from_pointer</a>
                                                         (GtkContainer *container);
-gboolean            <a class="link" href="gladeui-glade-utils.html#glade-util-object-is-loading">glade_util_object_is_loading</a>        (GObject *object);
-gboolean            <a class="link" href="gladeui-glade-utils.html#glade-util-url-show">glade_util_url_show</a>                 (const gchar *url);
-time_t              <a class="link" href="gladeui-glade-utils.html#glade-util-get-file-mtime">glade_util_get_file_mtime</a>           (const gchar *filename,
+gboolean            <a href="gladeui-glade-utils.html#glade-util-object-is-loading">glade_util_object_is_loading</a>        (GObject *object);
+gboolean            <a href="gladeui-glade-utils.html#glade-util-url-show">glade_util_url_show</a>                 (const gchar *url);
+time_t              <a href="gladeui-glade-utils.html#glade-util-get-file-mtime">glade_util_get_file_mtime</a>           (const gchar *filename,
                                                          GError **error);
 </pre>
 </div>
 <div class="refsect1" lang="en">
-<a name="id455779"></a><h2>Description</h2>
+<a name="id439151"></a><h2>Description</h2>
 <p>
 This is where all of that really usefull miscalanious stuff lands up.</p>
 <p>
@@ -122,11 +122,11 @@ This is where all of that really usefull miscalanious stuff lands up.</p>
 </p>
 </div>
 <div class="refsect1" lang="en">
-<a name="id455797"></a><h2>Details</h2>
+<a name="id439169"></a><h2>Details</h2>
 <div class="refsect2" lang="en">
-<a name="id455807"></a><h3>
+<a name="id439179"></a><h3>
 <a name="GladeUtilFileDialogType"></a>enum GladeUtilFileDialogType</h3>
-<a class="indexterm" name="id455820"></a><pre class="programlisting">typedef enum _GladeUtilFileDialogType
+<a class="indexterm" name="id439192"></a><pre class="programlisting">typedef enum _GladeUtilFileDialogType
 {
         GLADE_FILE_DIALOG_ACTION_OPEN,
         GLADE_FILE_DIALOG_ACTION_SAVE
@@ -138,9 +138,9 @@ This is where all of that really usefull miscalanious stuff lands up.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id455835"></a><h3>
+<a name="id439208"></a><h3>
 <a name="GladeUIMessageType"></a>enum GladeUIMessageType</h3>
-<a class="indexterm" name="id455848"></a><pre class="programlisting">typedef enum 
+<a class="indexterm" name="id439220"></a><pre class="programlisting">typedef enum 
 {
 	GLADE_UI_INFO,
 	GLADE_UI_WARN,
@@ -155,12 +155,10 @@ This is where all of that really usefull miscalanious stuff lands up.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id455864"></a><h3>
+<a name="id439236"></a><h3>
 <a name="glade-util-widget-set-tooltip"></a>glade_util_widget_set_tooltip ()</h3>
-<a class="indexterm" name="id455876"></a><pre class="programlisting">void                glade_util_widget_set_tooltip       (GtkWidget *widget,
+<a class="indexterm" name="id439249"></a><pre class="programlisting">void                glade_util_widget_set_tooltip       (GtkWidget *widget,
                                                          const gchar *str);</pre>
-<p>
-Creates a new tooltip from <em class="parameter"><code>str</code></em> and sets <em class="parameter"><code>widget</code></em> to use it.</p>
 <p>
 
 </p>
@@ -168,13 +166,15 @@ Creates a new tooltip from <em class="parameter"><code>str</code></em> and sets 
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>widget</code></em>&#160;:</span></p></td>
-<td> a <span class="type">GtkWidget</span>
+<td><span class="term"><em class="parameter"><code>widget</code></em>&#160;:</span></td>
+<td>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>str</code></em>&#160;:</span></p></td>
-<td> a string
+<td><span class="term"><em class="parameter"><code>str</code></em>&#160;:</span></td>
+<td>
+
+
 </td>
 </tr>
 </tbody>
@@ -182,9 +182,9 @@ Creates a new tooltip from <em class="parameter"><code>str</code></em> and sets 
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id455966"></a><h3>
+<a name="id439315"></a><h3>
 <a name="glade-util-get-type-from-name"></a>glade_util_get_type_from_name ()</h3>
-<a class="indexterm" name="id455979"></a><pre class="programlisting">GType               glade_util_get_type_from_name       (const gchar *name,
+<a class="indexterm" name="id439328"></a><pre class="programlisting">GType               glade_util_get_type_from_name       (const gchar *name,
                                                          gboolean have_func);</pre>
 <p>
 Returns the type using the "get type" function name based on <em class="parameter"><code>name</code></em>.  
@@ -197,17 +197,17 @@ function is contrived from <em class="parameter"><code>name</code></em> then use
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>name</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>name</code></em>&#160;:</span></td>
 <td> the name of the <span class="type">GType</span> - like 'GtkWidget' or a "get-type" function.
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>have_func</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>have_func</code></em>&#160;:</span></td>
 <td> function-name flag -- true if the name is a "get-type" function.
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td> the new <span class="type">GType</span>
 </td>
 </tr>
@@ -216,9 +216,9 @@ function is contrived from <em class="parameter"><code>name</code></em> then use
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id456101"></a><h3>
+<a name="id439450"></a><h3>
 <a name="glade-utils-get-pspec-from-funcname"></a>glade_utils_get_pspec_from_funcname ()</h3>
-<a class="indexterm" name="id456114"></a><pre class="programlisting">GParamSpec*         glade_utils_get_pspec_from_funcname (const gchar *funcname);</pre>
+<a class="indexterm" name="id439463"></a><pre class="programlisting">GParamSpec*         glade_utils_get_pspec_from_funcname (const gchar *funcname);</pre>
 <p>
 </p>
 <p>
@@ -228,12 +228,12 @@ function is contrived from <em class="parameter"><code>name</code></em> then use
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>funcname</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>funcname</code></em>&#160;:</span></td>
 <td> the symbol name of a function to generate a <span class="type">GParamSpec</span>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td> A <span class="type">GParamSpec</span> created by the delagate function
          specified by <em class="parameter"><code>funcname</code></em>
 </td>
@@ -243,10 +243,10 @@ function is contrived from <em class="parameter"><code>name</code></em> then use
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id456195"></a><h3>
+<a name="id439544"></a><h3>
 <a name="glade-util-ui-message"></a>glade_util_ui_message ()</h3>
-<a class="indexterm" name="id456208"></a><pre class="programlisting">gboolean            glade_util_ui_message               (GtkWidget *parent,
-                                                         <a class="link" href="gladeui-glade-utils.html#GladeUIMessageType">GladeUIMessageType</a> type,
+<a class="indexterm" name="id439557"></a><pre class="programlisting">gboolean            glade_util_ui_message               (GtkWidget *parent,
+                                                         <a href="gladeui-glade-utils.html#GladeUIMessageType">GladeUIMessageType</a> type,
                                                          const gchar *format,
                                                          ...);</pre>
 <p>
@@ -260,27 +260,27 @@ on <em class="parameter"><code>type</code></em>, a cancel button may apear or th
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>parent</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>parent</code></em>&#160;:</span></td>
 <td> a <span class="type">GtkWindow</span> cast as a <span class="type">GtkWidget</span>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>type</code></em>&#160;:</span></p></td>
-<td>   a <a class="link" href="gladeui-glade-utils.html#GladeUIMessageType"><span class="type">GladeUIMessageType</span></a>
+<td><span class="term"><em class="parameter"><code>type</code></em>&#160;:</span></td>
+<td>   a <a href="gladeui-glade-utils.html#GladeUIMessageType"><span class="type">GladeUIMessageType</span></a>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>format</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>format</code></em>&#160;:</span></td>
 <td> a printf style format string
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>...</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>...</code></em>&#160;:</span></td>
 <td>    args for the format.
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td> True if the <em class="parameter"><code>type</code></em> was GLADE_UI_ARE_YOU_SURE and the user
          selected "OK", True if the <em class="parameter"><code>type</code></em> was GLADE_UI_YES_OR_NO and
          the user selected "YES"; False otherwise.
@@ -291,9 +291,9 @@ on <em class="parameter"><code>type</code></em>, a cancel button may apear or th
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id456379"></a><h3>
+<a name="id439728"></a><h3>
 <a name="glade-util-flash-message"></a>glade_util_flash_message ()</h3>
-<a class="indexterm" name="id456392"></a><pre class="programlisting">void                glade_util_flash_message            (GtkWidget *statusbar,
+<a class="indexterm" name="id439741"></a><pre class="programlisting">void                glade_util_flash_message            (GtkWidget *statusbar,
                                                          guint context_id,
                                                          gchar *format,
                                                          ...);</pre>
@@ -304,22 +304,22 @@ on <em class="parameter"><code>type</code></em>, a cancel button may apear or th
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>statusbar</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>statusbar</code></em>&#160;:</span></td>
 <td>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>context_id</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>context_id</code></em>&#160;:</span></td>
 <td>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>format</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>format</code></em>&#160;:</span></td>
 <td>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>...</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>...</code></em>&#160;:</span></td>
 <td>
 
 
@@ -330,9 +330,9 @@ on <em class="parameter"><code>type</code></em>, a cancel button may apear or th
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id456492"></a><h3>
+<a name="id439842"></a><h3>
 <a name="glade-util-compare-stock-labels"></a>glade_util_compare_stock_labels ()</h3>
-<a class="indexterm" name="id456505"></a><pre class="programlisting">gint                glade_util_compare_stock_labels     (gconstpointer a,
+<a class="indexterm" name="id439854"></a><pre class="programlisting">gint                glade_util_compare_stock_labels     (gconstpointer a,
                                                          gconstpointer b);</pre>
 <p>
 This is a <span class="type">GCompareFunc</span> that compares the labels of two stock items, 
@@ -344,17 +344,17 @@ ignoring any '_' characters. It isn't particularly efficient.</p>
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>a</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>a</code></em>&#160;:</span></td>
 <td> a <span class="type">gconstpointer</span> to a <span class="type">GtkStockItem</span>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>b</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>b</code></em>&#160;:</span></td>
 <td> a <span class="type">gconstpointer</span> to a <span class="type">GtkStockItem</span>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td> negative value if <em class="parameter"><code>a</code></em> &lt; <em class="parameter"><code>b</code></em>; zero if <em class="parameter"><code>a</code></em> = <em class="parameter"><code>b</code></em>; 
          positive value if <em class="parameter"><code>a</code></em> &gt; <em class="parameter"><code>b</code></em>
 </td>
@@ -364,9 +364,9 @@ ignoring any '_' characters. It isn't particularly efficient.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id456661"></a><h3>
+<a name="id440010"></a><h3>
 <a name="glade-util-hide-window"></a>glade_util_hide_window ()</h3>
-<a class="indexterm" name="id456674"></a><pre class="programlisting">void                glade_util_hide_window              (GtkWindow *window);</pre>
+<a class="indexterm" name="id440023"></a><pre class="programlisting">void                glade_util_hide_window              (GtkWindow *window);</pre>
 <p>
 If you use this function to handle the delete_event of a window, when it
 will be shown again it will appear in the position where it was before
@@ -377,7 +377,7 @@ beeing hidden.</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
-<td><p><span class="term"><em class="parameter"><code>window</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>window</code></em>&#160;:</span></td>
 <td> a <span class="type">GtkWindow</span>
 </td>
 </tr></tbody>
@@ -385,9 +385,9 @@ beeing hidden.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id456732"></a><h3>
+<a name="id440081"></a><h3>
 <a name="glade-util-gtk-combo-func"></a>glade_util_gtk_combo_func ()</h3>
-<a class="indexterm" name="id456745"></a><pre class="programlisting">gchar*              glade_util_gtk_combo_func           (gpointer data);</pre>
+<a class="indexterm" name="id440094"></a><pre class="programlisting">gchar*              glade_util_gtk_combo_func           (gpointer data);</pre>
 <p>
 TODO: write me</p>
 <p>
@@ -397,12 +397,12 @@ TODO: write me</p>
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>data</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>data</code></em>&#160;:</span></td>
 <td>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td>
 </td>
 </tr>
@@ -411,9 +411,9 @@ TODO: write me</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id456804"></a><h3>
+<a name="id440153"></a><h3>
 <a name="glade-util-gtk-combo-find"></a>glade_util_gtk_combo_find ()</h3>
-<a class="indexterm" name="id456817"></a><pre class="programlisting">gpointer            glade_util_gtk_combo_find           (GtkCombo *combo);</pre>
+<a class="indexterm" name="id440166"></a><pre class="programlisting">gpointer            glade_util_gtk_combo_find           (GtkCombo *combo);</pre>
 <p>
 TODO: write me</p>
 <p>
@@ -423,12 +423,12 @@ TODO: write me</p>
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>combo</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>combo</code></em>&#160;:</span></td>
 <td>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td>
 </td>
 </tr>
@@ -437,11 +437,11 @@ TODO: write me</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id456876"></a><h3>
+<a name="id440225"></a><h3>
 <a name="glade-util-file-dialog-new"></a>glade_util_file_dialog_new ()</h3>
-<a class="indexterm" name="id456889"></a><pre class="programlisting">GtkWidget*          glade_util_file_dialog_new          (const gchar *title,
+<a class="indexterm" name="id440238"></a><pre class="programlisting">GtkWidget*          glade_util_file_dialog_new          (const gchar *title,
                                                          GtkWindow *parent,
-                                                         <a class="link" href="gladeui-glade-utils.html#GladeUtilFileDialogType">GladeUtilFileDialogType</a> action);</pre>
+                                                         <a href="gladeui-glade-utils.html#GladeUtilFileDialogType">GladeUtilFileDialogType</a> action);</pre>
 <p>
 </p>
 <p>
@@ -451,22 +451,22 @@ TODO: write me</p>
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>title</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>title</code></em>&#160;:</span></td>
 <td> dialog title
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>parent</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>parent</code></em>&#160;:</span></td>
 <td> the parent <span class="type">GtkWindow</span> for the dialog
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>action</code></em>&#160;:</span></p></td>
-<td> a <a class="link" href="gladeui-glade-utils.html#GladeUtilFileDialogType"><span class="type">GladeUtilFileDialogType</span></a> to say if the dialog will open or save
+<td><span class="term"><em class="parameter"><code>action</code></em>&#160;:</span></td>
+<td> a <a href="gladeui-glade-utils.html#GladeUtilFileDialogType"><span class="type">GladeUtilFileDialogType</span></a> to say if the dialog will open or save
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td> a "glade file" file chooser dialog. The caller is responsible 
          for showing the dialog
 </td>
@@ -476,9 +476,9 @@ TODO: write me</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id457007"></a><h3>
+<a name="id440356"></a><h3>
 <a name="glade-util-replace"></a>glade_util_replace ()</h3>
-<a class="indexterm" name="id457019"></a><pre class="programlisting">void                glade_util_replace                  (gchar *str,
+<a class="indexterm" name="id440368"></a><pre class="programlisting">void                glade_util_replace                  (gchar *str,
                                                          gchar a,
                                                          gchar b);</pre>
 <p>
@@ -490,17 +490,17 @@ Replaces each occurance of the character <em class="parameter"><code>a</code></e
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>str</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>str</code></em>&#160;:</span></td>
 <td> a string
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>a</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>a</code></em>&#160;:</span></td>
 <td> a <span class="type">gchar</span>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>b</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>b</code></em>&#160;:</span></td>
 <td> a <span class="type">gchar</span>
 </td>
 </tr>
@@ -509,9 +509,9 @@ Replaces each occurance of the character <em class="parameter"><code>a</code></e
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id457142"></a><h3>
+<a name="id440491"></a><h3>
 <a name="glade-util-read-prop-name"></a>glade_util_read_prop_name ()</h3>
-<a class="indexterm" name="id457155"></a><pre class="programlisting">gchar*              glade_util_read_prop_name           (const gchar *str);</pre>
+<a class="indexterm" name="id440504"></a><pre class="programlisting">gchar*              glade_util_read_prop_name           (const gchar *str);</pre>
 <p>
 Return a usable version of a property identifier as found
 in a freshly parserd <a
@@ -524,12 +524,12 @@ href="/usr/share/gtk-doc/html/libglade/libglade-Libglade-SAX-Parser.html#GladeIn
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>str</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>str</code></em>&#160;:</span></td>
 <td> a string
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td>
 
 
@@ -540,9 +540,9 @@ href="/usr/share/gtk-doc/html/libglade/libglade-Libglade-SAX-Parser.html#GladeIn
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id457221"></a><h3>
+<a name="id440570"></a><h3>
 <a name="glade-util-duplicate-underscores"></a>glade_util_duplicate_underscores ()</h3>
-<a class="indexterm" name="id457234"></a><pre class="programlisting">gchar*              glade_util_duplicate_underscores    (const gchar *name);</pre>
+<a class="indexterm" name="id440583"></a><pre class="programlisting">gchar*              glade_util_duplicate_underscores    (const gchar *name);</pre>
 <p>
 Duplicates <em class="parameter"><code>name</code></em>, but the copy has two underscores in place of any single
 underscore in the original.</p>
@@ -553,12 +553,12 @@ underscore in the original.</p>
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>name</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>name</code></em>&#160;:</span></td>
 <td> a string
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td> a newly allocated string
 </td>
 </tr>
@@ -567,9 +567,9 @@ underscore in the original.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id457301"></a><h3>
+<a name="id440650"></a><h3>
 <a name="glade-util-add-selection"></a>glade_util_add_selection ()</h3>
-<a class="indexterm" name="id457314"></a><pre class="programlisting">void                glade_util_add_selection            (GtkWidget *widget);</pre>
+<a class="indexterm" name="id440663"></a><pre class="programlisting">void                glade_util_add_selection            (GtkWidget *widget);</pre>
 <p>
 Add visual selection to this GtkWidget</p>
 <p>
@@ -578,7 +578,7 @@ Add visual selection to this GtkWidget</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
-<td><p><span class="term"><em class="parameter"><code>widget</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>widget</code></em>&#160;:</span></td>
 <td> a <span class="type">GtkWidget</span>
 </td>
 </tr></tbody>
@@ -586,9 +586,9 @@ Add visual selection to this GtkWidget</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id457370"></a><h3>
+<a name="id440719"></a><h3>
 <a name="glade-util-remove-selection"></a>glade_util_remove_selection ()</h3>
-<a class="indexterm" name="id457383"></a><pre class="programlisting">void                glade_util_remove_selection         (GtkWidget *widget);</pre>
+<a class="indexterm" name="id440732"></a><pre class="programlisting">void                glade_util_remove_selection         (GtkWidget *widget);</pre>
 <p>
 Remove visual selection from this GtkWidget</p>
 <p>
@@ -597,7 +597,7 @@ Remove visual selection from this GtkWidget</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
-<td><p><span class="term"><em class="parameter"><code>widget</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>widget</code></em>&#160;:</span></td>
 <td> a <span class="type">GtkWidget</span>
 </td>
 </tr></tbody>
@@ -605,9 +605,9 @@ Remove visual selection from this GtkWidget</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id457440"></a><h3>
+<a name="id440789"></a><h3>
 <a name="glade-util-has-selection"></a>glade_util_has_selection ()</h3>
-<a class="indexterm" name="id457453"></a><pre class="programlisting">gboolean            glade_util_has_selection            (GtkWidget *widget);</pre>
+<a class="indexterm" name="id440802"></a><pre class="programlisting">gboolean            glade_util_has_selection            (GtkWidget *widget);</pre>
 <p>
 </p>
 <p>
@@ -617,12 +617,12 @@ Remove visual selection from this GtkWidget</p>
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>widget</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>widget</code></em>&#160;:</span></td>
 <td> a <span class="type">GtkWidget</span>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td> <code class="literal">TRUE</code> if <em class="parameter"><code>widget</code></em> has visual selection, <code class="literal">FALSE</code> otherwise
 </td>
 </tr>
@@ -631,9 +631,9 @@ Remove visual selection from this GtkWidget</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id457546"></a><h3>
+<a name="id440895"></a><h3>
 <a name="glade-util-clear-selection"></a>glade_util_clear_selection ()</h3>
-<a class="indexterm" name="id457559"></a><pre class="programlisting">void                glade_util_clear_selection          (void);</pre>
+<a class="indexterm" name="id440908"></a><pre class="programlisting">void                glade_util_clear_selection          (void);</pre>
 <p>
 Clear all visual selections</p>
 <p>
@@ -642,16 +642,16 @@ Clear all visual selections</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id457583"></a><h3>
+<a name="id440932"></a><h3>
 <a name="glade-util-get-selection"></a>glade_util_get_selection ()</h3>
-<a class="indexterm" name="id457596"></a><pre class="programlisting">GList*              glade_util_get_selection            (void);</pre>
+<a class="indexterm" name="id440945"></a><pre class="programlisting">GList*              glade_util_get_selection            (void);</pre>
 <p>
 
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td>
 
 
@@ -661,9 +661,9 @@ Clear all visual selections</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id457631"></a><h3>
+<a name="id440980"></a><h3>
 <a name="glade-util-container-get-all-children"></a>glade_util_container_get_all_children ()</h3>
-<a class="indexterm" name="id457645"></a><pre class="programlisting">GList*              glade_util_container_get_all_children
+<a class="indexterm" name="id440994"></a><pre class="programlisting">GList*              glade_util_container_get_all_children
                                                         (GtkContainer *container);</pre>
 <p>
 Use this to itterate over all children in a GtkContainer,
@@ -680,12 +680,12 @@ abstraction and will usually end up calling this function.</p>
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>container</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>container</code></em>&#160;:</span></td>
 <td> a <span class="type">GtkContainer</span>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td> a <span class="type">GList</span> giving the contents of <em class="parameter"><code>container</code></em>
 </td>
 </tr>
@@ -694,9 +694,9 @@ abstraction and will usually end up calling this function.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id457765"></a><h3>
+<a name="id441114"></a><h3>
 <a name="glade-util-count-placeholders"></a>glade_util_count_placeholders ()</h3>
-<a class="indexterm" name="id457778"></a><pre class="programlisting">gint                glade_util_count_placeholders       (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent);</pre>
+<a class="indexterm" name="id441127"></a><pre class="programlisting">gint                glade_util_count_placeholders       (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent);</pre>
 <p>
 </p>
 <p>
@@ -706,12 +706,12 @@ abstraction and will usually end up calling this function.</p>
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>parent</code></em>&#160;:</span></p></td>
-<td> a <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>
+<td><span class="term"><em class="parameter"><code>parent</code></em>&#160;:</span></td>
+<td> a <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td>the amount of <span class="type">GladePlaceholders</span> parented by <em class="parameter"><code>parent</code></em>
 </td>
 </tr>
@@ -720,10 +720,10 @@ abstraction and will usually end up calling this function.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id457860"></a><h3>
+<a name="id441209"></a><h3>
 <a name="glade-util-find-iter-by-widget"></a>glade_util_find_iter_by_widget ()</h3>
-<a class="indexterm" name="id457873"></a><pre class="programlisting">GtkTreeIter*        glade_util_find_iter_by_widget      (GtkTreeModel *model,
-                                                         <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *findme,
+<a class="indexterm" name="id441222"></a><pre class="programlisting">GtkTreeIter*        glade_util_find_iter_by_widget      (GtkTreeModel *model,
+                                                         <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *findme,
                                                          gint column);</pre>
 <p>
 Looks through <em class="parameter"><code>model</code></em> for the <span class="type">GtkTreeIter</span> corresponding to 
@@ -735,22 +735,22 @@ Looks through <em class="parameter"><code>model</code></em> for the <span class=
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>model</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>model</code></em>&#160;:</span></td>
 <td> a <span class="type">GtkTreeModel</span>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>findme</code></em>&#160;:</span></p></td>
-<td> a <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>
+<td><span class="term"><em class="parameter"><code>findme</code></em>&#160;:</span></td>
+<td> a <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>column</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>column</code></em>&#160;:</span></td>
 <td> a <span class="type">gint</span>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td> a newly allocated <span class="type">GtkTreeIter</span> from <em class="parameter"><code>model</code></em> corresponding
 to <em class="parameter"><code>findme</code></em> which should be freed with <code class="function">gtk_tree_iter_free()</code>
 
@@ -761,9 +761,9 @@ to <em class="parameter"><code>findme</code></em> which should be freed with <co
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id458054"></a><h3>
+<a name="id441403"></a><h3>
 <a name="glade-util-basenames-match"></a>glade_util_basenames_match ()</h3>
-<a class="indexterm" name="id458067"></a><pre class="programlisting">gboolean            glade_util_basenames_match          (const gchar *path1,
+<a class="indexterm" name="id441416"></a><pre class="programlisting">gboolean            glade_util_basenames_match          (const gchar *path1,
                                                          const gchar *path2);</pre>
 <p>
 
@@ -772,17 +772,17 @@ to <em class="parameter"><code>findme</code></em> which should be freed with <co
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>path1</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>path1</code></em>&#160;:</span></td>
 <td>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>path2</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>path2</code></em>&#160;:</span></td>
 <td>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td>
 
 
@@ -793,9 +793,9 @@ to <em class="parameter"><code>findme</code></em> which should be freed with <co
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id458144"></a><h3>
+<a name="id441493"></a><h3>
 <a name="glade-util-purify-list"></a>glade_util_purify_list ()</h3>
-<a class="indexterm" name="id458156"></a><pre class="programlisting">GList*              glade_util_purify_list              (GList *list);</pre>
+<a class="indexterm" name="id441506"></a><pre class="programlisting">GList*              glade_util_purify_list              (GList *list);</pre>
 <p>
 </p>
 <p>
@@ -805,12 +805,12 @@ to <em class="parameter"><code>findme</code></em> which should be freed with <co
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>list</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>list</code></em>&#160;:</span></td>
 <td> A <span class="type">GList</span>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td> A newly allocated version of <em class="parameter"><code>list</code></em> with no 
          duplicate data entries
 </td>
@@ -820,9 +820,9 @@ to <em class="parameter"><code>findme</code></em> which should be freed with <co
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id458230"></a><h3>
+<a name="id441579"></a><h3>
 <a name="glade-util-added-in-list"></a>glade_util_added_in_list ()</h3>
-<a class="indexterm" name="id458242"></a><pre class="programlisting">GList*              glade_util_added_in_list            (GList *old_list,
+<a class="indexterm" name="id441592"></a><pre class="programlisting">GList*              glade_util_added_in_list            (GList *old_list,
                                                          GList *new_list);</pre>
 <p>
 </p>
@@ -833,17 +833,17 @@ to <em class="parameter"><code>findme</code></em> which should be freed with <co
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>old_list</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>old_list</code></em>&#160;:</span></td>
 <td> the old <span class="type">GList</span>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>new_list</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>new_list</code></em>&#160;:</span></td>
 <td> the new <span class="type">GList</span>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td> A newly allocated <span class="type">GList</span> of elements that
          are in <em class="parameter"><code>new</code></em> but not in <em class="parameter"><code>old</code></em>
 
@@ -854,9 +854,9 @@ to <em class="parameter"><code>findme</code></em> which should be freed with <co
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id458358"></a><h3>
+<a name="id441707"></a><h3>
 <a name="glade-util-removed-from-list"></a>glade_util_removed_from_list ()</h3>
-<a class="indexterm" name="id458371"></a><pre class="programlisting">GList*              glade_util_removed_from_list        (GList *old_list,
+<a class="indexterm" name="id441720"></a><pre class="programlisting">GList*              glade_util_removed_from_list        (GList *old_list,
                                                          GList *new_list);</pre>
 <p>
 </p>
@@ -867,17 +867,17 @@ to <em class="parameter"><code>findme</code></em> which should be freed with <co
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>old_list</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>old_list</code></em>&#160;:</span></td>
 <td> the old <span class="type">GList</span>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>new_list</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>new_list</code></em>&#160;:</span></td>
 <td> the new <span class="type">GList</span>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td> A newly allocated <span class="type">GList</span> of elements that
          are in <em class="parameter"><code>old</code></em> no longer in <em class="parameter"><code>new</code></em>
 
@@ -888,9 +888,9 @@ to <em class="parameter"><code>findme</code></em> which should be freed with <co
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id458486"></a><h3>
+<a name="id441835"></a><h3>
 <a name="glade-util-canonical-path"></a>glade_util_canonical_path ()</h3>
-<a class="indexterm" name="id458499"></a><pre class="programlisting">gchar*              glade_util_canonical_path           (const gchar *path);</pre>
+<a class="indexterm" name="id441848"></a><pre class="programlisting">gchar*              glade_util_canonical_path           (const gchar *path);</pre>
 <p>
 </p>
 <p>
@@ -900,12 +900,12 @@ to <em class="parameter"><code>findme</code></em> which should be freed with <co
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>path</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>path</code></em>&#160;:</span></td>
 <td> any path that may contain ".." or "." components
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td> an absolute path to the specified file or directory
          that contains no ".." or "." components (this does
          not call readlink like <code class="function">realpath()</code> does).
@@ -921,9 +921,9 @@ Note: on some systems; I think its possible that we dont have
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id458584"></a><h3>
+<a name="id441933"></a><h3>
 <a name="glade-util-copy-file"></a>glade_util_copy_file ()</h3>
-<a class="indexterm" name="id458596"></a><pre class="programlisting">gboolean            glade_util_copy_file                (const gchar *src_path,
+<a class="indexterm" name="id441945"></a><pre class="programlisting">gboolean            glade_util_copy_file                (const gchar *src_path,
                                                          const gchar *dest_path);</pre>
 <p>
 Copies a file from <em class="parameter"><code>src</code></em> to <em class="parameter"><code>dest</code></em>, queries the user
@@ -936,17 +936,17 @@ error message upon failure.</p>
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>src_path</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>src_path</code></em>&#160;:</span></td>
 <td>  the path to the source file
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>dest_path</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>dest_path</code></em>&#160;:</span></td>
 <td> the path to the destination file to create or overwrite.
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td> True if the copy was successfull.
 </td>
 </tr>
@@ -955,9 +955,9 @@ error message upon failure.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id458690"></a><h3>
+<a name="id442039"></a><h3>
 <a name="glade-util-class-implements-interface"></a>glade_util_class_implements_interface ()</h3>
-<a class="indexterm" name="id458704"></a><pre class="programlisting">gboolean            glade_util_class_implements_interface
+<a class="indexterm" name="id442053"></a><pre class="programlisting">gboolean            glade_util_class_implements_interface
                                                         (GType class_type,
                                                          GType iface_type);</pre>
 <p>
@@ -969,17 +969,17 @@ error message upon failure.</p>
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>class_type</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>class_type</code></em>&#160;:</span></td>
 <td> A <span class="type">GType</span>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>iface_type</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>iface_type</code></em>&#160;:</span></td>
 <td> A <span class="type">GType</span>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td> whether <em class="parameter"><code>class_type</code></em> implements the <em class="parameter"><code>iface_type</code></em> interface
 </td>
 </tr>
@@ -988,9 +988,9 @@ error message upon failure.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id458811"></a><h3>
+<a name="id442160"></a><h3>
 <a name="glade-util-load-library"></a>glade_util_load_library ()</h3>
-<a class="indexterm" name="id458824"></a><pre class="programlisting">GModule*            glade_util_load_library             (const gchar *library_name);</pre>
+<a class="indexterm" name="id442173"></a><pre class="programlisting">GModule*            glade_util_load_library             (const gchar *library_name);</pre>
 <p>
 Loads the named library from the Glade modules directory, or failing that
 from the standard platform specific directories.
@@ -1005,12 +1005,12 @@ those are automatically added, if needed, by <code class="function">g_module_bui
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>library_name</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>library_name</code></em>&#160;:</span></td>
 <td> name of the library
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td> a <span class="type">GModule</span> on success, or <code class="literal">NULL</code> on failure.
 </td>
 </tr>
@@ -1019,9 +1019,9 @@ those are automatically added, if needed, by <code class="function">g_module_bui
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id458923"></a><h3>
+<a name="id442272"></a><h3>
 <a name="glade-util-file-is-writeable"></a>glade_util_file_is_writeable ()</h3>
-<a class="indexterm" name="id458936"></a><pre class="programlisting">gboolean            glade_util_file_is_writeable        (const gchar *path);</pre>
+<a class="indexterm" name="id442285"></a><pre class="programlisting">gboolean            glade_util_file_is_writeable        (const gchar *path);</pre>
 <p>
 Checks whether the file at <em class="parameter"><code>path</code></em> is writeable</p>
 <p>
@@ -1031,12 +1031,12 @@ Checks whether the file at <em class="parameter"><code>path</code></em> is write
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>path</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>path</code></em>&#160;:</span></td>
 <td>  the path to the file
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td> TRUE if file is writeable
 </td>
 </tr>
@@ -1045,9 +1045,9 @@ Checks whether the file at <em class="parameter"><code>path</code></em> is write
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id459002"></a><h3>
+<a name="id442351"></a><h3>
 <a name="glade-util-have-devhelp"></a>glade_util_have_devhelp ()</h3>
-<a class="indexterm" name="id459014"></a><pre class="programlisting">gboolean            glade_util_have_devhelp             (void);</pre>
+<a class="indexterm" name="id442363"></a><pre class="programlisting">gboolean            glade_util_have_devhelp             (void);</pre>
 <p>
 </p>
 <p>
@@ -1056,7 +1056,7 @@ Checks whether the file at <em class="parameter"><code>path</code></em> is write
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td> whether the devhelp module is loaded
 </td>
 </tr></tbody>
@@ -1064,9 +1064,9 @@ Checks whether the file at <em class="parameter"><code>path</code></em> is write
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id459052"></a><h3>
+<a name="id442401"></a><h3>
 <a name="glade-util-get-devhelp-icon"></a>glade_util_get_devhelp_icon ()</h3>
-<a class="indexterm" name="id459065"></a><pre class="programlisting">GtkWidget*          glade_util_get_devhelp_icon         (GtkIconSize size);</pre>
+<a class="indexterm" name="id442414"></a><pre class="programlisting">GtkWidget*          glade_util_get_devhelp_icon         (GtkIconSize size);</pre>
 <p>
 Creates an image displaying the devhelp icon.</p>
 <p>
@@ -1076,12 +1076,12 @@ Creates an image displaying the devhelp icon.</p>
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>size</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>size</code></em>&#160;:</span></td>
 <td> the preferred icon size
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td> a <span class="type">GtkImage</span>
 </td>
 </tr>
@@ -1090,9 +1090,9 @@ Creates an image displaying the devhelp icon.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id459133"></a><h3>
+<a name="id442482"></a><h3>
 <a name="glade-util-search-devhelp"></a>glade_util_search_devhelp ()</h3>
-<a class="indexterm" name="id459146"></a><pre class="programlisting">void                glade_util_search_devhelp           (const gchar *book,
+<a class="indexterm" name="id442495"></a><pre class="programlisting">void                glade_util_search_devhelp           (const gchar *book,
                                                          const gchar *page,
                                                          const gchar *search);</pre>
 <p>
@@ -1102,17 +1102,17 @@ Creates an image displaying the devhelp icon.</p>
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></td>
 <td>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>page</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>page</code></em>&#160;:</span></td>
 <td>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>search</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>search</code></em>&#160;:</span></td>
 <td>
 
 
@@ -1123,9 +1123,9 @@ Creates an image displaying the devhelp icon.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id459233"></a><h3>
+<a name="id442582"></a><h3>
 <a name="glade-util-get-placeholder-from-pointer"></a>glade_util_get_placeholder_from_pointer ()</h3>
-<a class="indexterm" name="id459247"></a><pre class="programlisting">GtkWidget*          glade_util_get_placeholder_from_pointer
+<a class="indexterm" name="id442596"></a><pre class="programlisting">GtkWidget*          glade_util_get_placeholder_from_pointer
                                                         (GtkContainer *container);</pre>
 <p>
 
@@ -1134,12 +1134,12 @@ Creates an image displaying the devhelp icon.</p>
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>container</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>container</code></em>&#160;:</span></td>
 <td>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td>
 
 
@@ -1150,9 +1150,9 @@ Creates an image displaying the devhelp icon.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id459302"></a><h3>
+<a name="id442651"></a><h3>
 <a name="glade-util-object-is-loading"></a>glade_util_object_is_loading ()</h3>
-<a class="indexterm" name="id459315"></a><pre class="programlisting">gboolean            glade_util_object_is_loading        (GObject *object);</pre>
+<a class="indexterm" name="id442664"></a><pre class="programlisting">gboolean            glade_util_object_is_loading        (GObject *object);</pre>
 <p>
 </p>
 <p>
@@ -1162,12 +1162,12 @@ Creates an image displaying the devhelp icon.</p>
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>object</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>object</code></em>&#160;:</span></td>
 <td> A <span class="type">GObject</span>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td> Whether the object's project is being loaded or not.
       
 </td>
@@ -1177,9 +1177,9 @@ Creates an image displaying the devhelp icon.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id459382"></a><h3>
+<a name="id442732"></a><h3>
 <a name="glade-util-url-show"></a>glade_util_url_show ()</h3>
-<a class="indexterm" name="id459395"></a><pre class="programlisting">gboolean            glade_util_url_show                 (const gchar *url);</pre>
+<a class="indexterm" name="id442744"></a><pre class="programlisting">gboolean            glade_util_url_show                 (const gchar *url);</pre>
 <p>
 Portable function for showing an URL <em class="parameter"><code>url</code></em> in a web browser.</p>
 <p>
@@ -1189,12 +1189,12 @@ Portable function for showing an URL <em class="parameter"><code>url</code></em>
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>url</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>url</code></em>&#160;:</span></td>
 <td> An URL to display
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td> TRUE if a web browser was successfully launched, or FALSE
 
 </td>
@@ -1204,9 +1204,9 @@ Portable function for showing an URL <em class="parameter"><code>url</code></em>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id459460"></a><h3>
+<a name="id442810"></a><h3>
 <a name="glade-util-get-file-mtime"></a>glade_util_get_file_mtime ()</h3>
-<a class="indexterm" name="id459473"></a><pre class="programlisting">time_t              glade_util_get_file_mtime           (const gchar *filename,
+<a class="indexterm" name="id442822"></a><pre class="programlisting">time_t              glade_util_get_file_mtime           (const gchar *filename,
                                                          GError **error);</pre>
 <p>
 Gets the UTC modification time of file <em class="parameter"><code>filename</code></em>.</p>
@@ -1217,17 +1217,17 @@ Gets the UTC modification time of file <em class="parameter"><code>filename</cod
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>filename</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>filename</code></em>&#160;:</span></td>
 <td> A filename
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>error</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>error</code></em>&#160;:</span></td>
 <td> return location for errors
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td> The mtime of the file, or <code class="literal">0</code> if the file attributes
          could not be read.
 </td>
@@ -1235,11 +1235,6 @@ Gets the UTC modification time of file <em class="parameter"><code>filename</cod
 </tbody>
 </table></div>
 </div>
-</div>
-<div class="refsect1" lang="en">
-<a name="id459573"></a><div class="refsect2" lang="en"><a name="id459574"></a></div>
-<hr>
-<div class="refsect2" lang="en"><a name="id459575"></a></div>
 </div>
 </div>
 </body>

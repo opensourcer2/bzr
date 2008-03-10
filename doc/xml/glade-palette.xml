@@ -270,21 +270,21 @@ Sets whether to show the internal widget selector button</para>
 </refsect1>
 <refsect1 role="property_details">
 <title role="property_details.title">Property Details</title>
-<refsect2><title><anchor id="GladePalette--catalogs"/>The <literal>&quot;catalogs&quot;</literal> property</title>
+<refsect2><title><anchor id="GladePalette--catalogs"/>The &quot;<literal>catalogs</literal>&quot; property</title>
 <indexterm><primary>GladePalette:catalogs</primary></indexterm><programlisting>  &quot;catalogs&quot;                 <link linkend="gpointer">gpointer</link>              : Read / Write / Construct Only</programlisting>
 <para>The widget catalogs for the palette.</para></refsect2>
-<refsect2><title><anchor id="GladePalette--current-item"/>The <literal>&quot;current-item&quot;</literal> property</title>
+<refsect2><title><anchor id="GladePalette--current-item"/>The &quot;<literal>current-item</literal>&quot; property</title>
 <indexterm><primary>GladePalette:current-item</primary></indexterm><programlisting>  &quot;current-item&quot;             <link linkend="gpointer">gpointer</link>              : Read</programlisting>
 <para>The GladeWidgetAdaptor of the currently selected item.</para></refsect2>
-<refsect2><title><anchor id="GladePalette--item-appearance"/>The <literal>&quot;item-appearance&quot;</literal> property</title>
+<refsect2><title><anchor id="GladePalette--item-appearance"/>The &quot;<literal>item-appearance</literal>&quot; property</title>
 <indexterm><primary>GladePalette:item-appearance</primary></indexterm><programlisting>  &quot;item-appearance&quot;          <link linkend="GladeItemAppearance">GladeItemAppearance</link>   : Read / Write</programlisting>
 <para>The appearance of the palette items.</para><para>Default value: GLADE_ITEM_ICON_ONLY</para>
 </refsect2>
-<refsect2><title><anchor id="GladePalette--show-selector-button"/>The <literal>&quot;show-selector-button&quot;</literal> property</title>
+<refsect2><title><anchor id="GladePalette--show-selector-button"/>The &quot;<literal>show-selector-button</literal>&quot; property</title>
 <indexterm><primary>GladePalette:show-selector-button</primary></indexterm><programlisting>  &quot;show-selector-button&quot;     <link linkend="gboolean">gboolean</link>              : Read / Write</programlisting>
 <para>Whether to show the internal selector button.</para><para>Default value: TRUE</para>
 </refsect2>
-<refsect2><title><anchor id="GladePalette--use-small-item-icons"/>The <literal>&quot;use-small-item-icons&quot;</literal> property</title>
+<refsect2><title><anchor id="GladePalette--use-small-item-icons"/>The &quot;<literal>use-small-item-icons</literal>&quot; property</title>
 <indexterm><primary>GladePalette:use-small-item-icons</primary></indexterm><programlisting>  &quot;use-small-item-icons&quot;     <link linkend="gboolean">gboolean</link>              : Read / Write</programlisting>
 <para>Whether to use small icons to represent items.</para><para>Default value: FALSE</para>
 </refsect2>
@@ -293,7 +293,7 @@ Sets whether to show the internal widget selector button</para>
 
 <refsect1 role="signals">
 <title role="signals.title">Signal Details</title>
-<refsect2><title><anchor id="GladePalette-toggled"/>The <literal>&quot;toggled&quot;</literal> signal</title>
+<refsect2><title><anchor id="GladePalette-toggled"/>The &quot;toggled&quot; signal</title>
 <indexterm><primary>GladePalette::toggled</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="GladePalette">GladePalette</link> *gladepalette,
                                                         <link linkend="gpointer">gpointer</link>      user_data)         : Run Last</programlisting>
 <para>
@@ -310,6 +310,4 @@ Sets whether to show the internal widget selector button</para>
 
 
 
-
-<refsect1><refsect2 /><refsect2 /></refsect1>
 </refentry>

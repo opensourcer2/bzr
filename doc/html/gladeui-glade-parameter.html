@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
 <title>Glade Parameter</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.72.0">
 <link rel="start" href="index.html" title="Glade UI Builder Reference Manual">
 <link rel="up" href="misc.html" title="Part&#160;IV.&#160;Miscellaneous utilities">
 <link rel="prev" href="misc.html" title="Part&#160;IV.&#160;Miscellaneous utilities">
 <link rel="next" href="gladeui-glade-utils.html" title="Glade Utils">
-<meta name="generator" content="GTK-Doc V1.9 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.8 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 <link rel="part" href="catalog.html" title="Part&#160;I.&#160;Adding your custom widgets">
 <link rel="part" href="core.html" title="Part&#160;II.&#160;Glade Core">
@@ -25,16 +25,16 @@
 <th width="100%" align="center">Glade UI Builder Reference Manual</th>
 <td><a accesskey="n" href="gladeui-glade-utils.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr>
-<tr><td colspan="5" class="shortcuts"><nobr><a href="#id451846" class="shortcut">Top</a>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#id435227" class="shortcut">Top</a>
                   &#160;|&#160;
-                  <a href="#id452447" class="shortcut">Description</a></nobr></td></tr>
+                  <a href="#id435828" class="shortcut">Description</a></nobr></td></tr>
 </table>
 <div class="refentry" lang="en">
 <a name="gladeui-glade-parameter"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
 <h2>
-<a name="id451846"></a><span class="refentrytitle">Glade Parameter</span>
+<a name="id435227"></a><span class="refentrytitle">Glade Parameter</span>
 </h2>
 <p>Glade Parameter &#8212; Parameters set in the catalog retrievable from the plugin.</p>
 </td>
@@ -46,28 +46,28 @@
 
 
 
-                    <a class="link" href="gladeui-glade-parameter.html#GladeParameter">GladeParameter</a>;
-<a class="link" href="gladeui-glade-parameter.html#GladeParameter">GladeParameter</a>*     <a class="link" href="gladeui-glade-parameter.html#glade-parameter-new">glade_parameter_new</a>                 (void);
-<a class="link" href="gladeui-glade-parameter.html#GladeParameter">GladeParameter</a>*     <a class="link" href="gladeui-glade-parameter.html#glade-parameter-clone">glade_parameter_clone</a>               (<a class="link" href="gladeui-glade-parameter.html#GladeParameter">GladeParameter</a> *parameter);
-void                <a class="link" href="gladeui-glade-parameter.html#glade-parameter-free">glade_parameter_free</a>                (<a class="link" href="gladeui-glade-parameter.html#GladeParameter">GladeParameter</a> *parameter);
-void                <a class="link" href="gladeui-glade-parameter.html#glade-parameter-get-float">glade_parameter_get_float</a>           (GList *parameters,
+                    <a href="gladeui-glade-parameter.html#GladeParameter">GladeParameter</a>;
+<a href="gladeui-glade-parameter.html#GladeParameter">GladeParameter</a>*     <a href="gladeui-glade-parameter.html#glade-parameter-new">glade_parameter_new</a>                 (void);
+<a href="gladeui-glade-parameter.html#GladeParameter">GladeParameter</a>*     <a href="gladeui-glade-parameter.html#glade-parameter-clone">glade_parameter_clone</a>               (<a href="gladeui-glade-parameter.html#GladeParameter">GladeParameter</a> *parameter);
+void                <a href="gladeui-glade-parameter.html#glade-parameter-free">glade_parameter_free</a>                (<a href="gladeui-glade-parameter.html#GladeParameter">GladeParameter</a> *parameter);
+void                <a href="gladeui-glade-parameter.html#glade-parameter-get-float">glade_parameter_get_float</a>           (GList *parameters,
                                                          const gchar *key,
                                                          gfloat *value);
-void                <a class="link" href="gladeui-glade-parameter.html#glade-parameter-get-integer">glade_parameter_get_integer</a>         (GList *parameters,
+void                <a href="gladeui-glade-parameter.html#glade-parameter-get-integer">glade_parameter_get_integer</a>         (GList *parameters,
                                                          const gchar *key,
                                                          gint *value);
-void                <a class="link" href="gladeui-glade-parameter.html#glade-parameter-get-boolean">glade_parameter_get_boolean</a>         (GList *parameters,
+void                <a href="gladeui-glade-parameter.html#glade-parameter-get-boolean">glade_parameter_get_boolean</a>         (GList *parameters,
                                                          const gchar *key,
                                                          gboolean *value);
-void                <a class="link" href="gladeui-glade-parameter.html#glade-parameter-get-string">glade_parameter_get_string</a>          (GList *parameters,
+void                <a href="gladeui-glade-parameter.html#glade-parameter-get-string">glade_parameter_get_string</a>          (GList *parameters,
                                                          const gchar *key,
                                                          gchar **value);
-GList*              <a class="link" href="gladeui-glade-parameter.html#glade-parameter-list-new-from-node">glade_parameter_list_new_from_node</a>  (GList *list,
+GList*              <a href="gladeui-glade-parameter.html#glade-parameter-list-new-from-node">glade_parameter_list_new_from_node</a>  (GList *list,
                                                          GladeXmlNode *node);
 </pre>
 </div>
 <div class="refsect1" lang="en">
-<a name="id452447"></a><h2>Description</h2>
+<a name="id435828"></a><h2>Description</h2>
 <p>
 Parameters can be set in your catalog file that may determine how
 your plugin will treat certain widget classes.</p>
@@ -76,11 +76,11 @@ your plugin will treat certain widget classes.</p>
 </p>
 </div>
 <div class="refsect1" lang="en">
-<a name="id452465"></a><h2>Details</h2>
+<a name="id435846"></a><h2>Details</h2>
 <div class="refsect2" lang="en">
-<a name="id452475"></a><h3>
+<a name="id435857"></a><h3>
 <a name="GladeParameter"></a>GladeParameter</h3>
-<a class="indexterm" name="id452488"></a><pre class="programlisting">typedef struct {
+<a class="indexterm" name="id435869"></a><pre class="programlisting">typedef struct {
 	gchar *key;   /* The name of the parameter */
 	gchar *value; /* The textual representation of the parameter */
 } GladeParameter;
@@ -91,9 +91,9 @@ your plugin will treat certain widget classes.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id452504"></a><h3>
+<a name="id435885"></a><h3>
 <a name="glade-parameter-new"></a>glade_parameter_new ()</h3>
-<a class="indexterm" name="id452516"></a><pre class="programlisting"><a class="link" href="gladeui-glade-parameter.html#GladeParameter">GladeParameter</a>*     glade_parameter_new                 (void);</pre>
+<a class="indexterm" name="id435897"></a><pre class="programlisting"><a href="gladeui-glade-parameter.html#GladeParameter">GladeParameter</a>*     glade_parameter_new                 (void);</pre>
 <p>
 </p>
 <p>
@@ -102,17 +102,17 @@ your plugin will treat certain widget classes.</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
-<td> a new <a class="link" href="gladeui-glade-parameter.html#GladeParameter"><span class="type">GladeParameter</span></a>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> a new <a href="gladeui-glade-parameter.html#GladeParameter"><span class="type">GladeParameter</span></a>
 </td>
 </tr></tbody>
 </table></div>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id452562"></a><h3>
+<a name="id435944"></a><h3>
 <a name="glade-parameter-clone"></a>glade_parameter_clone ()</h3>
-<a class="indexterm" name="id452575"></a><pre class="programlisting"><a class="link" href="gladeui-glade-parameter.html#GladeParameter">GladeParameter</a>*     glade_parameter_clone               (<a class="link" href="gladeui-glade-parameter.html#GladeParameter">GladeParameter</a> *parameter);</pre>
+<a class="indexterm" name="id435956"></a><pre class="programlisting"><a href="gladeui-glade-parameter.html#GladeParameter">GladeParameter</a>*     glade_parameter_clone               (<a href="gladeui-glade-parameter.html#GladeParameter">GladeParameter</a> *parameter);</pre>
 <p>
 </p>
 <p>
@@ -122,13 +122,13 @@ your plugin will treat certain widget classes.</p>
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>parameter</code></em>&#160;:</span></p></td>
-<td> a <a class="link" href="gladeui-glade-parameter.html#GladeParameter"><span class="type">GladeParameter</span></a>
+<td><span class="term"><em class="parameter"><code>parameter</code></em>&#160;:</span></td>
+<td> a <a href="gladeui-glade-parameter.html#GladeParameter"><span class="type">GladeParameter</span></a>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
-<td> a new <a class="link" href="gladeui-glade-parameter.html#GladeParameter"><span class="type">GladeParameter</span></a> cloned from <em class="parameter"><code>parameter</code></em>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> a new <a href="gladeui-glade-parameter.html#GladeParameter"><span class="type">GladeParameter</span></a> cloned from <em class="parameter"><code>parameter</code></em>
 </td>
 </tr>
 </tbody>
@@ -136,9 +136,9 @@ your plugin will treat certain widget classes.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id452656"></a><h3>
+<a name="id436037"></a><h3>
 <a name="glade-parameter-free"></a>glade_parameter_free ()</h3>
-<a class="indexterm" name="id452668"></a><pre class="programlisting">void                glade_parameter_free                (<a class="link" href="gladeui-glade-parameter.html#GladeParameter">GladeParameter</a> *parameter);</pre>
+<a class="indexterm" name="id436049"></a><pre class="programlisting">void                glade_parameter_free                (<a href="gladeui-glade-parameter.html#GladeParameter">GladeParameter</a> *parameter);</pre>
 <p>
 Frees <em class="parameter"><code>parameter</code></em> and its associated memory.</p>
 <p>
@@ -147,21 +147,21 @@ Frees <em class="parameter"><code>parameter</code></em> and its associated memor
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
-<td><p><span class="term"><em class="parameter"><code>parameter</code></em>&#160;:</span></p></td>
-<td> a <a class="link" href="gladeui-glade-parameter.html#GladeParameter"><span class="type">GladeParameter</span></a>
+<td><span class="term"><em class="parameter"><code>parameter</code></em>&#160;:</span></td>
+<td> a <a href="gladeui-glade-parameter.html#GladeParameter"><span class="type">GladeParameter</span></a>
 </td>
 </tr></tbody>
 </table></div>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id452731"></a><h3>
+<a name="id436112"></a><h3>
 <a name="glade-parameter-get-float"></a>glade_parameter_get_float ()</h3>
-<a class="indexterm" name="id452744"></a><pre class="programlisting">void                glade_parameter_get_float           (GList *parameters,
+<a class="indexterm" name="id436125"></a><pre class="programlisting">void                glade_parameter_get_float           (GList *parameters,
                                                          const gchar *key,
                                                          gfloat *value);</pre>
 <p>
-Searches through <em class="parameter"><code>parameters</code></em> looking for a <a class="link" href="gladeui-glade-parameter.html#GladeParameter"><span class="type">GladeParameter</span></a> named <em class="parameter"><code>key</code></em>. If
+Searches through <em class="parameter"><code>parameters</code></em> looking for a <a href="gladeui-glade-parameter.html#GladeParameter"><span class="type">GladeParameter</span></a> named <em class="parameter"><code>key</code></em>. If
 found, it stores a <span class="type">gfloat</span> representation of its value into <em class="parameter"><code>value</code></em>.</p>
 <p>
 
@@ -170,17 +170,17 @@ found, it stores a <span class="type">gfloat</span> representation of its value 
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>parameters</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>parameters</code></em>&#160;:</span></td>
 <td> a <span class="type">GList</span> of <span class="type">GladeParameters</span>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>key</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>key</code></em>&#160;:</span></td>
 <td> a string containing the parameter name
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>value</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>value</code></em>&#160;:</span></td>
 <td> a pointer to a <span class="type">gfloat</span>
 </td>
 </tr>
@@ -189,13 +189,13 @@ found, it stores a <span class="type">gfloat</span> representation of its value 
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id452893"></a><h3>
+<a name="id436275"></a><h3>
 <a name="glade-parameter-get-integer"></a>glade_parameter_get_integer ()</h3>
-<a class="indexterm" name="id452906"></a><pre class="programlisting">void                glade_parameter_get_integer         (GList *parameters,
+<a class="indexterm" name="id436288"></a><pre class="programlisting">void                glade_parameter_get_integer         (GList *parameters,
                                                          const gchar *key,
                                                          gint *value);</pre>
 <p>
-Searches through <em class="parameter"><code>parameters</code></em> looking for a <a class="link" href="gladeui-glade-parameter.html#GladeParameter"><span class="type">GladeParameter</span></a> named <em class="parameter"><code>key</code></em>. If
+Searches through <em class="parameter"><code>parameters</code></em> looking for a <a href="gladeui-glade-parameter.html#GladeParameter"><span class="type">GladeParameter</span></a> named <em class="parameter"><code>key</code></em>. If
 found, it stores a <span class="type">gint</span> representation of its value into <em class="parameter"><code>value</code></em>.</p>
 <p>
 
@@ -204,17 +204,17 @@ found, it stores a <span class="type">gint</span> representation of its value in
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>parameters</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>parameters</code></em>&#160;:</span></td>
 <td> a <span class="type">GList</span> of <span class="type">GladeParameters</span>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>key</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>key</code></em>&#160;:</span></td>
 <td> a string containing the parameter name
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>value</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>value</code></em>&#160;:</span></td>
 <td> a pointer to a <span class="type">gint</span>
 </td>
 </tr>
@@ -223,13 +223,13 @@ found, it stores a <span class="type">gint</span> representation of its value in
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id453055"></a><h3>
+<a name="id436436"></a><h3>
 <a name="glade-parameter-get-boolean"></a>glade_parameter_get_boolean ()</h3>
-<a class="indexterm" name="id453068"></a><pre class="programlisting">void                glade_parameter_get_boolean         (GList *parameters,
+<a class="indexterm" name="id436449"></a><pre class="programlisting">void                glade_parameter_get_boolean         (GList *parameters,
                                                          const gchar *key,
                                                          gboolean *value);</pre>
 <p>
-Searches through <em class="parameter"><code>parameters</code></em> looking for a <a class="link" href="gladeui-glade-parameter.html#GladeParameter"><span class="type">GladeParameter</span></a> named <em class="parameter"><code>key</code></em>. If
+Searches through <em class="parameter"><code>parameters</code></em> looking for a <a href="gladeui-glade-parameter.html#GladeParameter"><span class="type">GladeParameter</span></a> named <em class="parameter"><code>key</code></em>. If
 found, it stores a <span class="type">gboolean</span> representation of its value into <em class="parameter"><code>value</code></em>.</p>
 <p>
 
@@ -238,17 +238,17 @@ found, it stores a <span class="type">gboolean</span> representation of its valu
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>parameters</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>parameters</code></em>&#160;:</span></td>
 <td> a <span class="type">GList</span> of <span class="type">GladeParameters</span>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>key</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>key</code></em>&#160;:</span></td>
 <td> a string containing the parameter name
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>value</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>value</code></em>&#160;:</span></td>
 <td> a pointer to a <span class="type">gboolean</span>
 </td>
 </tr>
@@ -257,13 +257,13 @@ found, it stores a <span class="type">gboolean</span> representation of its valu
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id453216"></a><h3>
+<a name="id436597"></a><h3>
 <a name="glade-parameter-get-string"></a>glade_parameter_get_string ()</h3>
-<a class="indexterm" name="id453229"></a><pre class="programlisting">void                glade_parameter_get_string          (GList *parameters,
+<a class="indexterm" name="id436610"></a><pre class="programlisting">void                glade_parameter_get_string          (GList *parameters,
                                                          const gchar *key,
                                                          gchar **value);</pre>
 <p>
-Searches through <em class="parameter"><code>parameters</code></em> looking for a <a class="link" href="gladeui-glade-parameter.html#GladeParameter"><span class="type">GladeParameter</span></a> named <em class="parameter"><code>key</code></em>. If
+Searches through <em class="parameter"><code>parameters</code></em> looking for a <a href="gladeui-glade-parameter.html#GladeParameter"><span class="type">GladeParameter</span></a> named <em class="parameter"><code>key</code></em>. If
 found, it stores a newly copied string representation of its value into 
 <em class="parameter"><code>value</code></em>.</p>
 <p>
@@ -273,17 +273,17 @@ found, it stores a newly copied string representation of its value into
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>parameters</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>parameters</code></em>&#160;:</span></td>
 <td> a <span class="type">GList</span> of <span class="type">GladeParameters</span>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>key</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>key</code></em>&#160;:</span></td>
 <td> a string containing the parameter name
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>value</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>value</code></em>&#160;:</span></td>
 <td> a pointer to an string
 </td>
 </tr>
@@ -292,9 +292,9 @@ found, it stores a newly copied string representation of its value into
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id453362"></a><h3>
+<a name="id436743"></a><h3>
 <a name="glade-parameter-list-new-from-node"></a>glade_parameter_list_new_from_node ()</h3>
-<a class="indexterm" name="id453375"></a><pre class="programlisting">GList*              glade_parameter_list_new_from_node  (GList *list,
+<a class="indexterm" name="id436756"></a><pre class="programlisting">GList*              glade_parameter_list_new_from_node  (GList *list,
                                                          GladeXmlNode *node);</pre>
 <p>
 TODO: write me</p>
@@ -305,28 +305,23 @@ TODO: write me</p>
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>list</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>list</code></em>&#160;:</span></td>
 <td> a <span class="type">GList</span> node
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>node</code></em>&#160;:</span></p></td>
+<td><span class="term"><em class="parameter"><code>node</code></em>&#160;:</span></td>
 <td> a <span class="type">GladeXmlNode</span>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td>
 </td>
 </tr>
 </tbody>
 </table></div>
 </div>
-</div>
-<div class="refsect1" lang="en">
-<a name="id453472"></a><div class="refsect2" lang="en"><a name="id453473"></a></div>
-<hr>
-<div class="refsect2" lang="en"><a name="id453474"></a></div>
 </div>
 </div>
 </body>
