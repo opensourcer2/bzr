@@ -1,3 +1,12 @@
+glade-3 (3.4.2-0ubuntu2) hardy; urgency=low
+
+  * debian/control.in, debian/patches/01_launchpad-integration.patch,
+    debian/patches/90_autoconf.patch:
+    - don't use launchpad integration, the application is not in the default
+      installation and the glade users are not likely to use those items
+
+ -- Sebastien Bacher <seb128@canonical.com>  Wed, 09 Apr 2008 12:11:56 +0200
+
 glade-3 (3.4.2-0ubuntu1) hardy; urgency=low
 
   * New upstream version:
