@@ -1,6 +1,6 @@
 <refentry id="GladeEditor">
 <refmeta>
-<refentrytitle role="top_of_page">GladeEditor</refentrytitle>
+<refentrytitle role="top_of_page" id="GladeEditor.top_of_page">GladeEditor</refentrytitle>
 <manvolnum>3</manvolnum>
 <refmiscinfo>GLADEUI Library</refmiscinfo>
 </refmeta>
@@ -11,13 +11,10 @@
 <!--[<xref linkend="desc" endterm="desc.title"/>]-->
 </refnamediv>
 
-<refsynopsisdiv role="synopsis">
+<refsynopsisdiv id="GladeEditor.synopsis" role="synopsis">
 <title role="synopsis.title">Synopsis</title>
 
 <synopsis>
-
-
-
 #define             <link linkend="GLADE-EDITOR-TABLE:CAPS">GLADE_EDITOR_TABLE</link>                  (t)
 #define             <link linkend="GLADE-IS-EDITOR-TABLE:CAPS">GLADE_IS_EDITOR_TABLE</link>               (t)
                     <link linkend="GladeEditorTable">GladeEditorTable</link>;
@@ -34,14 +31,12 @@ enum                <link linkend="GladeEditorTableType">GladeEditorTableType</l
 <link linkend="void">void</link>                <link linkend="glade-editor-show-context-info">glade_editor_show_context_info</link>      (<link linkend="GladeEditor">GladeEditor</link> *editor);
 <link linkend="void">void</link>                <link linkend="glade-editor-hide-info">glade_editor_hide_info</link>              (<link linkend="GladeEditor">GladeEditor</link> *editor);
 <link linkend="void">void</link>                <link linkend="glade-editor-hide-context-info">glade_editor_hide_context_info</link>      (<link linkend="GladeEditor">GladeEditor</link> *editor);
-
 </synopsis>
 </refsynopsisdiv>
 
-<refsect1 role="object_hierarchy">
+<refsect1 id="GladeEditor.object-hierarchy" role="object_hierarchy">
 <title role="object_hierarchy.title">Object Hierarchy</title>
 <synopsis>
-
   <link linkend="GObject">GObject</link>
    +----<link linkend="GInitiallyUnowned">GInitiallyUnowned</link>
          +----<link linkend="GtkObject">GtkObject</link>
@@ -56,7 +51,7 @@ enum                <link linkend="GladeEditorTableType">GladeEditorTableType</l
 
 
 
-<refsect1 role="impl_interfaces">
+<refsect1 id="GladeEditor.implemented-interfaces" role="impl_interfaces">
 <title role="impl_interfaces.title">Implemented Interfaces</title>
 <para>
 GladeEditor implements
@@ -65,25 +60,23 @@ GladeEditor implements
 </refsect1>
 
 
-<refsect1 role="properties">
+<refsect1 id="GladeEditor.properties" role="properties">
 <title role="properties.title">Properties</title>
 <synopsis>
-
   &quot;<link linkend="GladeEditor--show-context-info">show-context-info</link>&quot;        <link linkend="gboolean">gboolean</link>              : Read
   &quot;<link linkend="GladeEditor--show-info">show-info</link>&quot;                <link linkend="gboolean">gboolean</link>              : Read
 </synopsis>
 </refsect1>
 
-<refsect1 role="signal_proto">
+<refsect1 id="GladeEditor.signals" role="signal_proto">
 <title role="signal_proto.title">Signals</title>
 <synopsis>
-
   &quot;<link linkend="GladeEditor-gtk-doc-search">gtk-doc-search</link>&quot;                                 : Run Last
 </synopsis>
 </refsect1>
 
 
-<refsect1 role="desc">
+<refsect1 id="GladeEditor.description" role="desc">
 <title role="desc.title">Description</title>
 <para>
 This is the Glade Notebook containing all the controls needed to configure a <link linkend="GladeWidget"><type>GladeWidget</type></link>.</para>
@@ -92,11 +85,11 @@ This is the Glade Notebook containing all the controls needed to configure a <li
 </para>
 </refsect1>
 
-<refsect1 role="details">
+<refsect1 id="GladeEditor.details" role="details">
 <title role="details.title">Details</title>
-<refsect2>
-<title><anchor id="GLADE-EDITOR-TABLE:CAPS" role="macro"/>GLADE_EDITOR_TABLE()</title>
-<indexterm><primary>GLADE_EDITOR_TABLE</primary></indexterm><programlisting>#define GLADE_EDITOR_TABLE(t)       ((GladeEditorTable *)t)
+<refsect2 id="GLADE-EDITOR-TABLE:CAPS" role="macro">
+<title>GLADE_EDITOR_TABLE()</title>
+<indexterm zone="GLADE-EDITOR-TABLE:CAPS"><primary>GLADE_EDITOR_TABLE</primary></indexterm><programlisting>#define GLADE_EDITOR_TABLE(t)       ((GladeEditorTable *)t)
 </programlisting>
 <para>
 
@@ -107,9 +100,9 @@ This is the Glade Notebook containing all the controls needed to configure a <li
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="GLADE-IS-EDITOR-TABLE:CAPS" role="macro"/>GLADE_IS_EDITOR_TABLE()</title>
-<indexterm><primary>GLADE_IS_EDITOR_TABLE</primary></indexterm><programlisting>#define GLADE_IS_EDITOR_TABLE(t)    (t != NULL)
+<refsect2 id="GLADE-IS-EDITOR-TABLE:CAPS" role="macro">
+<title>GLADE_IS_EDITOR_TABLE()</title>
+<indexterm zone="GLADE-IS-EDITOR-TABLE:CAPS"><primary>GLADE_IS_EDITOR_TABLE</primary></indexterm><programlisting>#define GLADE_IS_EDITOR_TABLE(t)    (t != NULL)
 </programlisting>
 <para>
 
@@ -120,9 +113,9 @@ This is the Glade Notebook containing all the controls needed to configure a <li
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="GladeEditorTable" role="struct"/>GladeEditorTable</title>
-<indexterm><primary>GladeEditorTable</primary></indexterm><programlisting>typedef struct {
+<refsect2 id="GladeEditorTable" role="struct">
+<title>GladeEditorTable</title>
+<indexterm zone="GladeEditorTable"><primary>GladeEditorTable</primary></indexterm><programlisting>typedef struct {
 	GladeEditor *editor; /* Handy pointer that avoids havving to pass the
 			      * editor arround.
 			      */
@@ -162,9 +155,9 @@ This is the Glade Notebook containing all the controls needed to configure a <li
 <para>
 
 </para></refsect2>
-<refsect2>
-<title><anchor id="GladeEditorTableType" role="enum"/>enum GladeEditorTableType</title>
-<indexterm><primary>GladeEditorTableType</primary></indexterm><programlisting>typedef enum _GladeEditorTableType
+<refsect2 id="GladeEditorTableType" role="enum">
+<title>enum GladeEditorTableType</title>
+<indexterm zone="GladeEditorTableType"><primary>GladeEditorTableType</primary></indexterm><programlisting>typedef enum _GladeEditorTableType
 {
 	TABLE_TYPE_GENERAL,
 	TABLE_TYPE_COMMON,
@@ -176,15 +169,15 @@ This is the Glade Notebook containing all the controls needed to configure a <li
 <para>
 
 </para></refsect2>
-<refsect2>
-<title><anchor id="GladeEditor-struct" role="struct"/>GladeEditor</title>
-<indexterm><primary>GladeEditor</primary></indexterm><programlisting>typedef struct _GladeEditor GladeEditor;</programlisting>
+<refsect2 id="GladeEditor-struct" role="struct">
+<title>GladeEditor</title>
+<indexterm zone="GladeEditor-struct"><primary>GladeEditor</primary></indexterm><programlisting>typedef struct _GladeEditor GladeEditor;</programlisting>
 <para>
 
 </para></refsect2>
-<refsect2>
-<title><anchor id="glade-editor-new" role="function"/>glade_editor_new ()</title>
-<indexterm><primary>glade_editor_new</primary></indexterm><programlisting><link linkend="GladeEditor">GladeEditor</link>*        glade_editor_new                    (void);</programlisting>
+<refsect2 id="glade-editor-new" role="function">
+<title>glade_editor_new ()</title>
+<indexterm zone="glade-editor-new"><primary>glade_editor_new</primary></indexterm><programlisting><link linkend="GladeEditor">GladeEditor</link>*        glade_editor_new                    (void);</programlisting>
 <para>
 </para>
 <para>
@@ -193,9 +186,9 @@ This is the Glade Notebook containing all the controls needed to configure a <li
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a new <link linkend="GladeEditor"><type>GladeEditor</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-editor-load-widget" role="function"/>glade_editor_load_widget ()</title>
-<indexterm><primary>glade_editor_load_widget</primary></indexterm><programlisting><link linkend="void">void</link>                glade_editor_load_widget            (<link linkend="GladeEditor">GladeEditor</link> *editor,
+<refsect2 id="glade-editor-load-widget" role="function">
+<title>glade_editor_load_widget ()</title>
+<indexterm zone="glade-editor-load-widget"><primary>glade_editor_load_widget</primary></indexterm><programlisting><link linkend="void">void</link>                glade_editor_load_widget            (<link linkend="GladeEditor">GladeEditor</link> *editor,
                                                          <link linkend="GladeWidget">GladeWidget</link> *widget);</programlisting>
 <para>
 Load <parameter>widget</parameter> into <parameter>editor</parameter>. If <parameter>widget</parameter> is <link linkend="NULL:CAPS"><literal>NULL</literal></link>, clear the editor.</para>
@@ -209,9 +202,9 @@ Load <parameter>widget</parameter> into <parameter>editor</parameter>. If <param
 <listitem><simpara> a <link linkend="GladeWidget"><type>GladeWidget</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-editor-refresh" role="function"/>glade_editor_refresh ()</title>
-<indexterm><primary>glade_editor_refresh</primary></indexterm><programlisting><link linkend="void">void</link>                glade_editor_refresh                (<link linkend="GladeEditor">GladeEditor</link> *editor);</programlisting>
+<refsect2 id="glade-editor-refresh" role="function">
+<title>glade_editor_refresh ()</title>
+<indexterm zone="glade-editor-refresh"><primary>glade_editor_refresh</primary></indexterm><programlisting><link linkend="void">void</link>                glade_editor_refresh                (<link linkend="GladeEditor">GladeEditor</link> *editor);</programlisting>
 <para>
 Synchronize <parameter>editor</parameter> with the currently loaded widget.</para>
 <para>
@@ -221,9 +214,9 @@ Synchronize <parameter>editor</parameter> with the currently loaded widget.</par
 <listitem><simpara> a <link linkend="GladeEditor"><type>GladeEditor</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-editor-update-widget-name" role="function"/>glade_editor_update_widget_name ()</title>
-<indexterm><primary>glade_editor_update_widget_name</primary></indexterm><programlisting><link linkend="void">void</link>                glade_editor_update_widget_name     (<link linkend="GladeEditor">GladeEditor</link> *editor);</programlisting>
+<refsect2 id="glade-editor-update-widget-name" role="function">
+<title>glade_editor_update_widget_name ()</title>
+<indexterm zone="glade-editor-update-widget-name"><primary>glade_editor_update_widget_name</primary></indexterm><programlisting><link linkend="void">void</link>                glade_editor_update_widget_name     (<link linkend="GladeEditor">GladeEditor</link> *editor);</programlisting>
 <para>
 TODO: write me</para>
 <para>
@@ -233,9 +226,9 @@ TODO: write me</para>
 <listitem><simpara> a <link linkend="GladeEditor"><type>GladeEditor</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-editor-query-dialog" role="function"/>glade_editor_query_dialog ()</title>
-<indexterm><primary>glade_editor_query_dialog</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_editor_query_dialog           (<link linkend="GladeEditor">GladeEditor</link> *editor,
+<refsect2 id="glade-editor-query-dialog" role="function">
+<title>glade_editor_query_dialog ()</title>
+<indexterm zone="glade-editor-query-dialog"><primary>glade_editor_query_dialog</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_editor_query_dialog           (<link linkend="GladeEditor">GladeEditor</link> *editor,
                                                          <link linkend="GladeWidget">GladeWidget</link> *widget);</programlisting>
 <para>
 
@@ -251,9 +244,9 @@ TODO: write me</para>
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-editor-show-info" role="function"/>glade_editor_show_info ()</title>
-<indexterm><primary>glade_editor_show_info</primary></indexterm><programlisting><link linkend="void">void</link>                glade_editor_show_info              (<link linkend="GladeEditor">GladeEditor</link> *editor);</programlisting>
+<refsect2 id="glade-editor-show-info" role="function">
+<title>glade_editor_show_info ()</title>
+<indexterm zone="glade-editor-show-info"><primary>glade_editor_show_info</primary></indexterm><programlisting><link linkend="void">void</link>                glade_editor_show_info              (<link linkend="GladeEditor">GladeEditor</link> *editor);</programlisting>
 <para>
 
 </para><variablelist role="params">
@@ -263,9 +256,9 @@ TODO: write me</para>
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-editor-show-context-info" role="function"/>glade_editor_show_context_info ()</title>
-<indexterm><primary>glade_editor_show_context_info</primary></indexterm><programlisting><link linkend="void">void</link>                glade_editor_show_context_info      (<link linkend="GladeEditor">GladeEditor</link> *editor);</programlisting>
+<refsect2 id="glade-editor-show-context-info" role="function">
+<title>glade_editor_show_context_info ()</title>
+<indexterm zone="glade-editor-show-context-info"><primary>glade_editor_show_context_info</primary></indexterm><programlisting><link linkend="void">void</link>                glade_editor_show_context_info      (<link linkend="GladeEditor">GladeEditor</link> *editor);</programlisting>
 <para>
 
 </para><variablelist role="params">
@@ -275,9 +268,9 @@ TODO: write me</para>
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-editor-hide-info" role="function"/>glade_editor_hide_info ()</title>
-<indexterm><primary>glade_editor_hide_info</primary></indexterm><programlisting><link linkend="void">void</link>                glade_editor_hide_info              (<link linkend="GladeEditor">GladeEditor</link> *editor);</programlisting>
+<refsect2 id="glade-editor-hide-info" role="function">
+<title>glade_editor_hide_info ()</title>
+<indexterm zone="glade-editor-hide-info"><primary>glade_editor_hide_info</primary></indexterm><programlisting><link linkend="void">void</link>                glade_editor_hide_info              (<link linkend="GladeEditor">GladeEditor</link> *editor);</programlisting>
 <para>
 
 </para><variablelist role="params">
@@ -287,9 +280,9 @@ TODO: write me</para>
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-editor-hide-context-info" role="function"/>glade_editor_hide_context_info ()</title>
-<indexterm><primary>glade_editor_hide_context_info</primary></indexterm><programlisting><link linkend="void">void</link>                glade_editor_hide_context_info      (<link linkend="GladeEditor">GladeEditor</link> *editor);</programlisting>
+<refsect2 id="glade-editor-hide-context-info" role="function">
+<title>glade_editor_hide_context_info ()</title>
+<indexterm zone="glade-editor-hide-context-info"><primary>glade_editor_hide_context_info</primary></indexterm><programlisting><link linkend="void">void</link>                glade_editor_hide_context_info      (<link linkend="GladeEditor">GladeEditor</link> *editor);</programlisting>
 <para>
 
 </para><variablelist role="params">
@@ -301,23 +294,23 @@ TODO: write me</para>
 </variablelist></refsect2>
 
 </refsect1>
-<refsect1 role="property_details">
+<refsect1 id="GladeEditor.property-details" role="property_details">
 <title role="property_details.title">Property Details</title>
-<refsect2><title><anchor id="GladeEditor--show-context-info"/>The &quot;<literal>show-context-info</literal>&quot; property</title>
-<indexterm><primary>GladeEditor:show-context-info</primary></indexterm><programlisting>  &quot;show-context-info&quot;        <link linkend="gboolean">gboolean</link>              : Read</programlisting>
+<refsect2 id="GladeEditor--show-context-info"><title>The <literal>&quot;show-context-info&quot;</literal> property</title>
+<indexterm zone="GladeEditor--show-context-info"><primary>GladeEditor:show-context-info</primary></indexterm><programlisting>  &quot;show-context-info&quot;        <link linkend="gboolean">gboolean</link>              : Read</programlisting>
 <para>Whether to show an informational button for each property and signal in the editor.</para><para>Default value: FALSE</para>
 </refsect2>
-<refsect2><title><anchor id="GladeEditor--show-info"/>The &quot;<literal>show-info</literal>&quot; property</title>
-<indexterm><primary>GladeEditor:show-info</primary></indexterm><programlisting>  &quot;show-info&quot;                <link linkend="gboolean">gboolean</link>              : Read</programlisting>
+<refsect2 id="GladeEditor--show-info"><title>The <literal>&quot;show-info&quot;</literal> property</title>
+<indexterm zone="GladeEditor--show-info"><primary>GladeEditor:show-info</primary></indexterm><programlisting>  &quot;show-info&quot;                <link linkend="gboolean">gboolean</link>              : Read</programlisting>
 <para>Whether to show an informational button for the loaded widget.</para><para>Default value: FALSE</para>
 </refsect2>
 
 </refsect1>
 
-<refsect1 role="signals">
+<refsect1 id="GladeEditor.signal-details" role="signals">
 <title role="signals.title">Signal Details</title>
-<refsect2><title><anchor id="GladeEditor-gtk-doc-search"/>The &quot;gtk-doc-search&quot; signal</title>
-<indexterm><primary>GladeEditor::gtk-doc-search</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="GladeEditor">GladeEditor</link> *gladeeditor,
+<refsect2 id="GladeEditor-gtk-doc-search"><title>The <literal>&quot;gtk-doc-search&quot;</literal> signal</title>
+<indexterm zone="GladeEditor-gtk-doc-search"><primary>GladeEditor::gtk-doc-search</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="GladeEditor">GladeEditor</link> *gladeeditor,
                                                         <link linkend="gchar">gchar</link>       *arg1,
                                                         <link linkend="gchar">gchar</link>       *arg2,
                                                         <link linkend="gchar">gchar</link>       *arg3,

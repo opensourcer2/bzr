@@ -1,6 +1,6 @@
 <refentry id="gladeui-glade-parser">
 <refmeta>
-<refentrytitle role="top_of_page">glade-parser</refentrytitle>
+<refentrytitle role="top_of_page" id="gladeui-glade-parser.top_of_page">glade-parser</refentrytitle>
 <manvolnum>3</manvolnum>
 <refmiscinfo>GLADEUI Library</refmiscinfo>
 </refmeta>
@@ -11,13 +11,10 @@
 <!--[<xref linkend="desc" endterm="desc.title"/>]-->
 </refnamediv>
 
-<refsynopsisdiv role="synopsis">
+<refsynopsisdiv id="gladeui-glade-parser.synopsis" role="synopsis">
 <title role="synopsis.title">Synopsis</title>
 
 <synopsis>
-
-
-
 #define             <link linkend="CAST-BAD:CAPS">CAST_BAD</link>
                     <link linkend="GladePropInfo">GladePropInfo</link>;
                     <link linkend="GladeSignalInfo">GladeSignalInfo</link>;
@@ -53,25 +50,25 @@ const <link linkend="gchar">gchar</link>*        <link linkend="glade-parser-pva
 
 
 
-<refsect1 role="desc">
+<refsect1 id="gladeui-glade-parser.description" role="desc">
 <title role="desc.title">Description</title>
 <para>
 
 </para>
 </refsect1>
 
-<refsect1 role="details">
+<refsect1 id="gladeui-glade-parser.details" role="details">
 <title role="details.title">Details</title>
-<refsect2>
-<title><anchor id="CAST-BAD:CAPS" role="macro"/>CAST_BAD</title>
-<indexterm><primary>CAST_BAD</primary></indexterm><programlisting>#define CAST_BAD (gchar *)
+<refsect2 id="CAST-BAD:CAPS" role="macro">
+<title>CAST_BAD</title>
+<indexterm zone="CAST-BAD:CAPS"><primary>CAST_BAD</primary></indexterm><programlisting>#define CAST_BAD (gchar *)
 </programlisting>
 <para>
 
 </para></refsect2>
-<refsect2>
-<title><anchor id="GladePropInfo" role="struct"/>GladePropInfo</title>
-<indexterm><primary>GladePropInfo</primary></indexterm><programlisting>typedef struct {
+<refsect2 id="GladePropInfo" role="struct">
+<title>GladePropInfo</title>
+<indexterm zone="GladePropInfo"><primary>GladePropInfo</primary></indexterm><programlisting>typedef struct {
     gchar *name;
     gchar *value;
     gchar *comment;
@@ -82,9 +79,9 @@ const <link linkend="gchar">gchar</link>*        <link linkend="glade-parser-pva
 <para>
 
 </para></refsect2>
-<refsect2>
-<title><anchor id="GladeSignalInfo" role="struct"/>GladeSignalInfo</title>
-<indexterm><primary>GladeSignalInfo</primary></indexterm><programlisting>typedef struct {
+<refsect2 id="GladeSignalInfo" role="struct">
+<title>GladeSignalInfo</title>
+<indexterm zone="GladeSignalInfo"><primary>GladeSignalInfo</primary></indexterm><programlisting>typedef struct {
     gchar *name;
     gchar *handler;
     gchar *object; /* represents userdata, if lookup is FALSE, then do connect_object with a
@@ -96,9 +93,9 @@ const <link linkend="gchar">gchar</link>*        <link linkend="glade-parser-pva
 <para>
 
 </para></refsect2>
-<refsect2>
-<title><anchor id="GladeAtkActionInfo" role="struct"/>GladeAtkActionInfo</title>
-<indexterm><primary>GladeAtkActionInfo</primary></indexterm><programlisting>typedef struct {
+<refsect2 id="GladeAtkActionInfo" role="struct">
+<title>GladeAtkActionInfo</title>
+<indexterm zone="GladeAtkActionInfo"><primary>GladeAtkActionInfo</primary></indexterm><programlisting>typedef struct {
     gchar *action_name;
     gchar *description;
 } GladeAtkActionInfo;
@@ -106,9 +103,9 @@ const <link linkend="gchar">gchar</link>*        <link linkend="glade-parser-pva
 <para>
 
 </para></refsect2>
-<refsect2>
-<title><anchor id="GladeAccelInfo" role="struct"/>GladeAccelInfo</title>
-<indexterm><primary>GladeAccelInfo</primary></indexterm><programlisting>typedef struct {
+<refsect2 id="GladeAccelInfo" role="struct">
+<title>GladeAccelInfo</title>
+<indexterm zone="GladeAccelInfo"><primary>GladeAccelInfo</primary></indexterm><programlisting>typedef struct {
     guint key;
     GdkModifierType modifiers;
     gchar *signal;
@@ -117,9 +114,9 @@ const <link linkend="gchar">gchar</link>*        <link linkend="glade-parser-pva
 <para>
 
 </para></refsect2>
-<refsect2>
-<title><anchor id="GladeWidgetInfo" role="struct"/>GladeWidgetInfo</title>
-<indexterm><primary>GladeWidgetInfo</primary></indexterm><programlisting>typedef struct {
+<refsect2 id="GladeWidgetInfo" role="struct">
+<title>GladeWidgetInfo</title>
+<indexterm zone="GladeWidgetInfo"><primary>GladeWidgetInfo</primary></indexterm><programlisting>typedef struct {
     GladeWidgetInfo *parent;
 
     gchar *classname;
@@ -150,9 +147,9 @@ const <link linkend="gchar">gchar</link>*        <link linkend="glade-parser-pva
 <para>
 
 </para></refsect2>
-<refsect2>
-<title><anchor id="GladeChildInfo" role="struct"/>GladeChildInfo</title>
-<indexterm><primary>GladeChildInfo</primary></indexterm><programlisting>typedef struct {
+<refsect2 id="GladeChildInfo" role="struct">
+<title>GladeChildInfo</title>
+<indexterm zone="GladeChildInfo"><primary>GladeChildInfo</primary></indexterm><programlisting>typedef struct {
     GladePropInfo *properties;
     guint n_properties;
 
@@ -163,9 +160,9 @@ const <link linkend="gchar">gchar</link>*        <link linkend="glade-parser-pva
 <para>
 
 </para></refsect2>
-<refsect2>
-<title><anchor id="GladeInterface" role="struct"/>GladeInterface</title>
-<indexterm><primary>GladeInterface</primary></indexterm><programlisting>typedef struct {
+<refsect2 id="GladeInterface" role="struct">
+<title>GladeInterface</title>
+<indexterm zone="GladeInterface"><primary>GladeInterface</primary></indexterm><programlisting>typedef struct {
     gchar **requires;
     guint n_requires;
 
@@ -182,9 +179,9 @@ const <link linkend="gchar">gchar</link>*        <link linkend="glade-parser-pva
 <para>
 
 </para></refsect2>
-<refsect2>
-<title><anchor id="GladeAtkRelationInfo" role="struct"/>GladeAtkRelationInfo</title>
-<indexterm><primary>GladeAtkRelationInfo</primary></indexterm><programlisting>typedef struct {
+<refsect2 id="GladeAtkRelationInfo" role="struct">
+<title>GladeAtkRelationInfo</title>
+<indexterm zone="GladeAtkRelationInfo"><primary>GladeAtkRelationInfo</primary></indexterm><programlisting>typedef struct {
     gchar *target;
     gchar *type;
 } GladeAtkRelationInfo;
@@ -192,9 +189,9 @@ const <link linkend="gchar">gchar</link>*        <link linkend="glade-parser-pva
 <para>
 
 </para></refsect2>
-<refsect2>
-<title><anchor id="GladePackingDefault" role="struct"/>GladePackingDefault</title>
-<indexterm><primary>GladePackingDefault</primary></indexterm><programlisting>typedef struct {
+<refsect2 id="GladePackingDefault" role="struct">
+<title>GladePackingDefault</title>
+<indexterm zone="GladePackingDefault"><primary>GladePackingDefault</primary></indexterm><programlisting>typedef struct {
     gchar  *id;
     gchar  *value;
 } GladePackingDefault;
@@ -202,9 +199,9 @@ const <link linkend="gchar">gchar</link>*        <link linkend="glade-parser-pva
 <para>
 
 </para></refsect2>
-<refsect2>
-<title><anchor id="glade-parser-interface-new" role="function"/>glade_parser_interface_new ()</title>
-<indexterm><primary>glade_parser_interface_new</primary></indexterm><programlisting><link linkend="GladeInterface">GladeInterface</link>*     glade_parser_interface_new          (void);</programlisting>
+<refsect2 id="glade-parser-interface-new" role="function">
+<title>glade_parser_interface_new ()</title>
+<indexterm zone="glade-parser-interface-new"><primary>glade_parser_interface_new</primary></indexterm><programlisting><link linkend="GladeInterface">GladeInterface</link>*     glade_parser_interface_new          (void);</programlisting>
 <para>
 </para>
 <para>
@@ -213,9 +210,9 @@ const <link linkend="gchar">gchar</link>*        <link linkend="glade-parser-pva
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>a newly allocated GladeInterface.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-parser-interface-new-from-file" role="function"/>glade_parser_interface_new_from_file ()</title>
-<indexterm><primary>glade_parser_interface_new_from_file</primary></indexterm><programlisting><link linkend="GladeInterface">GladeInterface</link>*     glade_parser_interface_new_from_file
+<refsect2 id="glade-parser-interface-new-from-file" role="function">
+<title>glade_parser_interface_new_from_file ()</title>
+<indexterm zone="glade-parser-interface-new-from-file"><primary>glade_parser_interface_new_from_file</primary></indexterm><programlisting><link linkend="GladeInterface">GladeInterface</link>*     glade_parser_interface_new_from_file
                                                         (const <link linkend="gchar">gchar</link> *file,
                                                          const <link linkend="gchar">gchar</link> *domain);</programlisting>
 <para>
@@ -238,9 +235,9 @@ should go through the GladeXML interfaces.</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the GladeInterface structure for the XML file.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-parser-interface-new-from-buffer" role="function"/>glade_parser_interface_new_from_buffer ()</title>
-<indexterm><primary>glade_parser_interface_new_from_buffer</primary></indexterm><programlisting><link linkend="GladeInterface">GladeInterface</link>*     glade_parser_interface_new_from_buffer
+<refsect2 id="glade-parser-interface-new-from-buffer" role="function">
+<title>glade_parser_interface_new_from_buffer ()</title>
+<indexterm zone="glade-parser-interface-new-from-buffer"><primary>glade_parser_interface_new_from_buffer</primary></indexterm><programlisting><link linkend="GladeInterface">GladeInterface</link>*     glade_parser_interface_new_from_buffer
                                                         (const <link linkend="gchar">gchar</link> *buffer,
                                                          <link linkend="gint">gint</link> len,
                                                          const <link linkend="gchar">gchar</link> *domain);</programlisting>
@@ -267,9 +264,9 @@ should go through the GladeXML interfaces.</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the GladeInterface structure for the XML buffer.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-parser-interface-destroy" role="function"/>glade_parser_interface_destroy ()</title>
-<indexterm><primary>glade_parser_interface_destroy</primary></indexterm><programlisting><link linkend="void">void</link>                glade_parser_interface_destroy      (<link linkend="GladeInterface">GladeInterface</link> *interface);</programlisting>
+<refsect2 id="glade-parser-interface-destroy" role="function">
+<title>glade_parser_interface_destroy ()</title>
+<indexterm zone="glade-parser-interface-destroy"><primary>glade_parser_interface_destroy</primary></indexterm><programlisting><link linkend="void">void</link>                glade_parser_interface_destroy      (<link linkend="GladeInterface">GladeInterface</link> *interface);</programlisting>
 <para>
 Frees a GladeInterface structure.</para>
 <para>
@@ -279,9 +276,9 @@ Frees a GladeInterface structure.</para>
 <listitem><simpara> the GladeInterface structure.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-parser-interface-dump" role="function"/>glade_parser_interface_dump ()</title>
-<indexterm><primary>glade_parser_interface_dump</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_parser_interface_dump         (<link linkend="GladeInterface">GladeInterface</link> *interface,
+<refsect2 id="glade-parser-interface-dump" role="function">
+<title>glade_parser_interface_dump ()</title>
+<indexterm zone="glade-parser-interface-dump"><primary>glade_parser_interface_dump</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_parser_interface_dump         (<link linkend="GladeInterface">GladeInterface</link> *interface,
                                                          const <link linkend="gchar">gchar</link> *filename,
                                                          <link linkend="GError">GError</link> **error);</programlisting>
 <para>
@@ -302,9 +299,9 @@ XML.  It is used by glade to write glade files.</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>whether the write was successfull or not.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-parser-pvalue-from-winfo" role="function"/>glade_parser_pvalue_from_winfo ()</title>
-<indexterm><primary>glade_parser_pvalue_from_winfo</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        glade_parser_pvalue_from_winfo      (<link linkend="GladeWidgetInfo">GladeWidgetInfo</link> *winfo,
+<refsect2 id="glade-parser-pvalue-from-winfo" role="function">
+<title>glade_parser_pvalue_from_winfo ()</title>
+<indexterm zone="glade-parser-pvalue-from-winfo"><primary>glade_parser_pvalue_from_winfo</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        glade_parser_pvalue_from_winfo      (<link linkend="GladeWidgetInfo">GladeWidgetInfo</link> *winfo,
                                                          const <link linkend="gchar">gchar</link> *pname);</programlisting>
 <para>
 

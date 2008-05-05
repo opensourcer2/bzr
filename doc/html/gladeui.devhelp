@@ -36,8 +36,8 @@
     <sub name="Index" link="ix01.html"/>
   </chapters>
   <functions>
-    <function name="Displayable Values, Packing defaults and such" link="properties.html#id327281"/>
-    <function name="Container Relationship Parameter Tag Definitions" link="children.html#id327889"/>
+    <function name="Displayable Values, Packing defaults and such" link="properties.html#id343698"/>
+    <function name="Container Relationship Parameter Tag Definitions" link="children.html#id344279"/>
     <function name="GLADE_TYPE_POINTER_MODE" link="GladeApp.html#GLADE-TYPE-POINTER-MODE:CAPS"/>
     <function name="GladeAppPrivate" link="GladeApp.html#GladeAppPrivate"/>
     <function name="GladeApp" link="GladeApp.html#GladeApp-struct"/>
@@ -504,7 +504,6 @@
     <function name="glade_parameter_list_new_from_node ()" link="gladeui-glade-parameter.html#glade-parameter-list-new-from-node"/>
     <function name="enum GladeUtilFileDialogType" link="gladeui-glade-utils.html#GladeUtilFileDialogType"/>
     <function name="enum GladeUIMessageType" link="gladeui-glade-utils.html#GladeUIMessageType"/>
-    <function name="glade_util_widget_set_tooltip ()" link="gladeui-glade-utils.html#glade-util-widget-set-tooltip"/>
     <function name="glade_util_get_type_from_name ()" link="gladeui-glade-utils.html#glade-util-get-type-from-name"/>
     <function name="glade_utils_get_pspec_from_funcname ()" link="gladeui-glade-utils.html#glade-utils-get-pspec-from-funcname"/>
     <function name="glade_util_ui_message ()" link="gladeui-glade-utils.html#glade-util-ui-message"/>

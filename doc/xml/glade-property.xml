@@ -1,6 +1,6 @@
 <refentry id="gladeui-glade-property">
 <refmeta>
-<refentrytitle role="top_of_page">GladeProperty</refentrytitle>
+<refentrytitle role="top_of_page" id="gladeui-glade-property.top_of_page">GladeProperty</refentrytitle>
 <manvolnum>3</manvolnum>
 <refmiscinfo>GLADEUI Library</refmiscinfo>
 </refmeta>
@@ -11,13 +11,10 @@
 <!--[<xref linkend="desc" endterm="desc.title"/>]-->
 </refnamediv>
 
-<refsynopsisdiv role="synopsis">
+<refsynopsisdiv id="gladeui-glade-property.synopsis" role="synopsis">
 <title role="synopsis.title">Synopsis</title>
 <anchor id="GladeProperty"/>
 <synopsis>
-
-
-
 #define             <link linkend="GLADE-PROPERTY-KLASS:CAPS">GLADE_PROPERTY_KLASS</link>                (klass)
 #define             <link linkend="GLADE-IS-PROPERTY-KLASS:CAPS">GLADE_IS_PROPERTY_KLASS</link>             (klass)
 #define             <link linkend="GLADE-PROPERTY-GET-KLASS:CAPS">GLADE_PROPERTY_GET_KLASS</link>            (o)
@@ -89,14 +86,12 @@ const <link linkend="gchar">gchar</link>*        <link linkend="glade-property-i
 <link linkend="void">void</link>                <link linkend="glade-property-push-superuser">glade_property_push_superuser</link>       (void);
 <link linkend="void">void</link>                <link linkend="glade-property-pop-superuser">glade_property_pop_superuser</link>        (void);
 <link linkend="gboolean">gboolean</link>            <link linkend="glade-property-superuser">glade_property_superuser</link>            (void);
-
 </synopsis>
 </refsynopsisdiv>
 
-<refsect1 role="object_hierarchy">
+<refsect1 id="gladeui-glade-property.object-hierarchy" role="object_hierarchy">
 <title role="object_hierarchy.title">Object Hierarchy</title>
 <synopsis>
-
   <link linkend="GObject">GObject</link>
    +----GladeProperty
 </synopsis>
@@ -107,29 +102,27 @@ const <link linkend="gchar">gchar</link>*        <link linkend="glade-property-i
 
 
 
-<refsect1 role="properties">
+<refsect1 id="gladeui-glade-property.properties" role="properties">
 <title role="properties.title">Properties</title>
 <synopsis>
-
   &quot;<link linkend="GladeProperty--enabled">enabled</link>&quot;                  <link linkend="gboolean">gboolean</link>              : Read / Write
-  &quot;<link linkend="GladeProperty--i18n-comment">i18n-comment</link>&quot;             <link linkend="gchararray">gchararray</link>            : Read / Write
+  &quot;<link linkend="GladeProperty--i18n-comment">i18n-comment</link>&quot;             <link linkend="gchar">gchar</link>*                : Read / Write
   &quot;<link linkend="GladeProperty--i18n-has-context">i18n-has-context</link>&quot;         <link linkend="gboolean">gboolean</link>              : Read / Write
   &quot;<link linkend="GladeProperty--i18n-translatable">i18n-translatable</link>&quot;        <link linkend="gboolean">gboolean</link>              : Read / Write
   &quot;<link linkend="GladeProperty--sensitive">sensitive</link>&quot;                <link linkend="gboolean">gboolean</link>              : Read / Write
 </synopsis>
 </refsect1>
 
-<refsect1 role="signal_proto">
+<refsect1 id="gladeui-glade-property.signals" role="signal_proto">
 <title role="signal_proto.title">Signals</title>
 <synopsis>
-
   &quot;<link linkend="GladeProperty-tooltip-changed">tooltip-changed</link>&quot;                                : Run Last
   &quot;<link linkend="GladeProperty-value-changed">value-changed</link>&quot;                                  : Run Last
 </synopsis>
 </refsect1>
 
 
-<refsect1 role="desc">
+<refsect1 id="gladeui-glade-property.description" role="desc">
 <title role="desc.title">Description</title>
 <para>
 Every object property of every <link linkend="GladeWidget"><type>GladeWidget</type></link> in every <link linkend="GladeProject"><type>GladeProject</type></link> has
@@ -144,11 +137,11 @@ the <link linkend="GladePropertyClass"><type>GladePropertyClass</type></link> de
 </para>
 </refsect1>
 
-<refsect1 role="details">
+<refsect1 id="gladeui-glade-property.details" role="details">
 <title role="details.title">Details</title>
-<refsect2>
-<title><anchor id="GLADE-PROPERTY-KLASS:CAPS" role="macro"/>GLADE_PROPERTY_KLASS()</title>
-<indexterm><primary>GLADE_PROPERTY_KLASS</primary></indexterm><programlisting>#define GLADE_PROPERTY_KLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GLADE_TYPE_PROPERTY, GladePropertyKlass))
+<refsect2 id="GLADE-PROPERTY-KLASS:CAPS" role="macro">
+<title>GLADE_PROPERTY_KLASS()</title>
+<indexterm zone="GLADE-PROPERTY-KLASS:CAPS"><primary>GLADE_PROPERTY_KLASS</primary></indexterm><programlisting>#define GLADE_PROPERTY_KLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GLADE_TYPE_PROPERTY, GladePropertyKlass))
 </programlisting>
 <para>
 
@@ -159,9 +152,9 @@ the <link linkend="GladePropertyClass"><type>GladePropertyClass</type></link> de
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="GLADE-IS-PROPERTY-KLASS:CAPS" role="macro"/>GLADE_IS_PROPERTY_KLASS()</title>
-<indexterm><primary>GLADE_IS_PROPERTY_KLASS</primary></indexterm><programlisting>#define GLADE_IS_PROPERTY_KLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GLADE_TYPE_PROPERTY))
+<refsect2 id="GLADE-IS-PROPERTY-KLASS:CAPS" role="macro">
+<title>GLADE_IS_PROPERTY_KLASS()</title>
+<indexterm zone="GLADE-IS-PROPERTY-KLASS:CAPS"><primary>GLADE_IS_PROPERTY_KLASS</primary></indexterm><programlisting>#define GLADE_IS_PROPERTY_KLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GLADE_TYPE_PROPERTY))
 </programlisting>
 <para>
 
@@ -172,9 +165,9 @@ the <link linkend="GladePropertyClass"><type>GladePropertyClass</type></link> de
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="GLADE-PROPERTY-GET-KLASS:CAPS" role="macro"/>GLADE_PROPERTY_GET_KLASS()</title>
-<indexterm><primary>GLADE_PROPERTY_GET_KLASS</primary></indexterm><programlisting>#define GLADE_PROPERTY_GET_KLASS(o)    (G_TYPE_INSTANCE_GET_CLASS ((o), GLADE_PROPERTY, GladePropertyKlass))
+<refsect2 id="GLADE-PROPERTY-GET-KLASS:CAPS" role="macro">
+<title>GLADE_PROPERTY_GET_KLASS()</title>
+<indexterm zone="GLADE-PROPERTY-GET-KLASS:CAPS"><primary>GLADE_PROPERTY_GET_KLASS</primary></indexterm><programlisting>#define GLADE_PROPERTY_GET_KLASS(o)    (G_TYPE_INSTANCE_GET_CLASS ((o), GLADE_PROPERTY, GladePropertyKlass))
 </programlisting>
 <para>
 
@@ -185,9 +178,9 @@ the <link linkend="GladePropertyClass"><type>GladePropertyClass</type></link> de
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="GladePropertyKlass" role="struct"/>GladePropertyKlass</title>
-<indexterm><primary>GladePropertyKlass</primary></indexterm><programlisting>typedef struct {
+<refsect2 id="GladePropertyKlass" role="struct">
+<title>GladePropertyKlass</title>
+<indexterm zone="GladePropertyKlass"><primary>GladePropertyKlass</primary></indexterm><programlisting>typedef struct {
 	GObjectClass  parent_class;
 
 	/* Class methods */
@@ -209,15 +202,15 @@ the <link linkend="GladePropertyClass"><type>GladePropertyClass</type></link> de
 <para>
 
 </para></refsect2>
-<refsect2>
-<title><anchor id="GladeProperty-struct" role="struct"/>struct GladeProperty</title>
-<indexterm><primary>GladeProperty</primary></indexterm><programlisting>struct GladeProperty;</programlisting>
+<refsect2 id="GladeProperty-struct" role="struct">
+<title>struct GladeProperty</title>
+<indexterm zone="GladeProperty-struct"><primary>GladeProperty</primary></indexterm><programlisting>struct GladeProperty;</programlisting>
 <para>
 
 </para></refsect2>
-<refsect2>
-<title><anchor id="glade-property-new" role="function"/>glade_property_new ()</title>
-<indexterm><primary>glade_property_new</primary></indexterm><programlisting><link linkend="GladeProperty">GladeProperty</link>*      glade_property_new                  (<link linkend="GladePropertyClass">GladePropertyClass</link> *klass,
+<refsect2 id="glade-property-new" role="function">
+<title>glade_property_new ()</title>
+<indexterm zone="glade-property-new"><primary>glade_property_new</primary></indexterm><programlisting><link linkend="GladeProperty">GladeProperty</link>*      glade_property_new                  (<link linkend="GladePropertyClass">GladePropertyClass</link> *klass,
                                                          <link linkend="GladeWidget">GladeWidget</link> *widget,
                                                          <link linkend="GValue">GValue</link> *value);</programlisting>
 <para>
@@ -240,9 +233,9 @@ will be used.</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> The newly created <link linkend="GladeProperty"><type>GladeProperty</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-dup" role="function"/>glade_property_dup ()</title>
-<indexterm><primary>glade_property_dup</primary></indexterm><programlisting><link linkend="GladeProperty">GladeProperty</link>*      glade_property_dup                  (<link linkend="GladeProperty">GladeProperty</link> *template_prop,
+<refsect2 id="glade-property-dup" role="function">
+<title>glade_property_dup ()</title>
+<indexterm zone="glade-property-dup"><primary>glade_property_dup</primary></indexterm><programlisting><link linkend="GladeProperty">GladeProperty</link>*      glade_property_dup                  (<link linkend="GladeProperty">GladeProperty</link> *template_prop,
                                                          <link linkend="GladeWidget">GladeWidget</link> *widget);</programlisting>
 <para>
 </para>
@@ -258,9 +251,9 @@ will be used.</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> A newly duplicated property based on the new widget
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-reset" role="function"/>glade_property_reset ()</title>
-<indexterm><primary>glade_property_reset</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_reset                (<link linkend="GladeProperty">GladeProperty</link> *property);</programlisting>
+<refsect2 id="glade-property-reset" role="function">
+<title>glade_property_reset ()</title>
+<indexterm zone="glade-property-reset"><primary>glade_property_reset</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_reset                (<link linkend="GladeProperty">GladeProperty</link> *property);</programlisting>
 <para>
 Resets this property to its default value</para>
 <para>
@@ -270,9 +263,9 @@ Resets this property to its default value</para>
 <listitem><simpara> A <link linkend="GladeProperty"><type>GladeProperty</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-original-reset" role="function"/>glade_property_original_reset ()</title>
-<indexterm><primary>glade_property_original_reset</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_original_reset       (<link linkend="GladeProperty">GladeProperty</link> *property);</programlisting>
+<refsect2 id="glade-property-original-reset" role="function">
+<title>glade_property_original_reset ()</title>
+<indexterm zone="glade-property-original-reset"><primary>glade_property_original_reset</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_original_reset       (<link linkend="GladeProperty">GladeProperty</link> *property);</programlisting>
 <para>
 Resets this property to its original default value</para>
 <para>
@@ -282,9 +275,9 @@ Resets this property to its original default value</para>
 <listitem><simpara> A <link linkend="GladeProperty"><type>GladeProperty</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-default" role="function"/>glade_property_default ()</title>
-<indexterm><primary>glade_property_default</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_property_default              (<link linkend="GladeProperty">GladeProperty</link> *property);</programlisting>
+<refsect2 id="glade-property-default" role="function">
+<title>glade_property_default ()</title>
+<indexterm zone="glade-property-default"><primary>glade_property_default</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_property_default              (<link linkend="GladeProperty">GladeProperty</link> *property);</programlisting>
 <para>
 </para>
 <para>
@@ -296,9 +289,9 @@ Resets this property to its original default value</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> Whether this property is at its default value
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-original-default" role="function"/>glade_property_original_default ()</title>
-<indexterm><primary>glade_property_original_default</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_property_original_default     (<link linkend="GladeProperty">GladeProperty</link> *property);</programlisting>
+<refsect2 id="glade-property-original-default" role="function">
+<title>glade_property_original_default ()</title>
+<indexterm zone="glade-property-original-default"><primary>glade_property_original_default</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_property_original_default     (<link linkend="GladeProperty">GladeProperty</link> *property);</programlisting>
 <para>
 </para>
 <para>
@@ -310,9 +303,9 @@ Resets this property to its original default value</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> Whether this property is at its original default value
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-equals-value" role="function"/>glade_property_equals_value ()</title>
-<indexterm><primary>glade_property_equals_value</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_property_equals_value         (<link linkend="GladeProperty">GladeProperty</link> *property,
+<refsect2 id="glade-property-equals-value" role="function">
+<title>glade_property_equals_value ()</title>
+<indexterm zone="glade-property-equals-value"><primary>glade_property_equals_value</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_property_equals_value         (<link linkend="GladeProperty">GladeProperty</link> *property,
                                                          const <link linkend="GValue">GValue</link> *value);</programlisting>
 <para>
 </para>
@@ -328,9 +321,9 @@ Resets this property to its original default value</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> Whether this property is equal to the value provided
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-equals" role="function"/>glade_property_equals ()</title>
-<indexterm><primary>glade_property_equals</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_property_equals               (<link linkend="GladeProperty">GladeProperty</link> *property,
+<refsect2 id="glade-property-equals" role="function">
+<title>glade_property_equals ()</title>
+<indexterm zone="glade-property-equals"><primary>glade_property_equals</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_property_equals               (<link linkend="GladeProperty">GladeProperty</link> *property,
                                                          ...);</programlisting>
 <para>
 </para>
@@ -346,9 +339,9 @@ Resets this property to its original default value</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> Whether this property is equal to the value provided
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-set-value" role="function"/>glade_property_set_value ()</title>
-<indexterm><primary>glade_property_set_value</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_set_value            (<link linkend="GladeProperty">GladeProperty</link> *property,
+<refsect2 id="glade-property-set-value" role="function">
+<title>glade_property_set_value ()</title>
+<indexterm zone="glade-property-set-value"><primary>glade_property_set_value</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_set_value            (<link linkend="GladeProperty">GladeProperty</link> *property,
                                                          const <link linkend="GValue">GValue</link> *value);</programlisting>
 <para>
 Sets the property's value</para>
@@ -362,9 +355,9 @@ Sets the property's value</para>
 <listitem><simpara> a <link linkend="GValue"><type>GValue</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-set-va-list" role="function"/>glade_property_set_va_list ()</title>
-<indexterm><primary>glade_property_set_va_list</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_set_va_list          (<link linkend="GladeProperty">GladeProperty</link> *property,
+<refsect2 id="glade-property-set-va-list" role="function">
+<title>glade_property_set_va_list ()</title>
+<indexterm zone="glade-property-set-va-list"><primary>glade_property_set_va_list</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_set_va_list          (<link linkend="GladeProperty">GladeProperty</link> *property,
                                                          <link linkend="va-list">va_list</link> vl);</programlisting>
 <para>
 Sets the property's value</para>
@@ -378,9 +371,9 @@ Sets the property's value</para>
 <listitem><simpara> a va_list with value to set
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-set" role="function"/>glade_property_set ()</title>
-<indexterm><primary>glade_property_set</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_set                  (<link linkend="GladeProperty">GladeProperty</link> *property,
+<refsect2 id="glade-property-set" role="function">
+<title>glade_property_set ()</title>
+<indexterm zone="glade-property-set"><primary>glade_property_set</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_set                  (<link linkend="GladeProperty">GladeProperty</link> *property,
                                                          ...);</programlisting>
 <para>
 Sets the property's value (in a convenient way)</para>
@@ -394,9 +387,9 @@ Sets the property's value (in a convenient way)</para>
 <listitem><simpara> the value to set
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-get-value" role="function"/>glade_property_get_value ()</title>
-<indexterm><primary>glade_property_get_value</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_get_value            (<link linkend="GladeProperty">GladeProperty</link> *property,
+<refsect2 id="glade-property-get-value" role="function">
+<title>glade_property_get_value ()</title>
+<indexterm zone="glade-property-get-value"><primary>glade_property_get_value</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_get_value            (<link linkend="GladeProperty">GladeProperty</link> *property,
                                                          <link linkend="GValue">GValue</link> *value);</programlisting>
 <para>
 Retrieve the property value</para>
@@ -410,9 +403,9 @@ Retrieve the property value</para>
 <listitem><simpara> a <link linkend="GValue"><type>GValue</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-get-default" role="function"/>glade_property_get_default ()</title>
-<indexterm><primary>glade_property_get_default</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_get_default          (<link linkend="GladeProperty">GladeProperty</link> *property,
+<refsect2 id="glade-property-get-default" role="function">
+<title>glade_property_get_default ()</title>
+<indexterm zone="glade-property-get-default"><primary>glade_property_get_default</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_get_default          (<link linkend="GladeProperty">GladeProperty</link> *property,
                                                          <link linkend="GValue">GValue</link> *value);</programlisting>
 <para>
 Retrieve the default property value</para>
@@ -426,9 +419,9 @@ Retrieve the default property value</para>
 <listitem><simpara> a <link linkend="GValue"><type>GValue</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-get-va-list" role="function"/>glade_property_get_va_list ()</title>
-<indexterm><primary>glade_property_get_va_list</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_get_va_list          (<link linkend="GladeProperty">GladeProperty</link> *property,
+<refsect2 id="glade-property-get-va-list" role="function">
+<title>glade_property_get_va_list ()</title>
+<indexterm zone="glade-property-get-va-list"><primary>glade_property_get_va_list</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_get_va_list          (<link linkend="GladeProperty">GladeProperty</link> *property,
                                                          <link linkend="va-list">va_list</link> vl);</programlisting>
 <para>
 Retrieve the property value</para>
@@ -442,9 +435,9 @@ Retrieve the property value</para>
 <listitem><simpara> a va_list
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-get" role="function"/>glade_property_get ()</title>
-<indexterm><primary>glade_property_get</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_get                  (<link linkend="GladeProperty">GladeProperty</link> *property,
+<refsect2 id="glade-property-get" role="function">
+<title>glade_property_get ()</title>
+<indexterm zone="glade-property-get"><primary>glade_property_get</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_get                  (<link linkend="GladeProperty">GladeProperty</link> *property,
                                                          ...);</programlisting>
 <para>
 Retrieve the property value</para>
@@ -458,9 +451,9 @@ Retrieve the property value</para>
 <listitem><simpara> An address to store the value
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-add-object" role="function"/>glade_property_add_object ()</title>
-<indexterm><primary>glade_property_add_object</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_add_object           (<link linkend="GladeProperty">GladeProperty</link> *property,
+<refsect2 id="glade-property-add-object" role="function">
+<title>glade_property_add_object ()</title>
+<indexterm zone="glade-property-add-object"><primary>glade_property_add_object</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_add_object           (<link linkend="GladeProperty">GladeProperty</link> *property,
                                                          <link linkend="GObject">GObject</link> *object);</programlisting>
 <para>
 Adds <parameter>object</parameter> to the object list in <parameter>property</parameter>.
@@ -478,9 +471,9 @@ or <link linkend="GParamSpecObject"><type>GParamSpecObject</type></link> type pr
 <listitem><simpara> The <link linkend="GObject"><type>GObject</type></link> to add
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-remove-object" role="function"/>glade_property_remove_object ()</title>
-<indexterm><primary>glade_property_remove_object</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_remove_object        (<link linkend="GladeProperty">GladeProperty</link> *property,
+<refsect2 id="glade-property-remove-object" role="function">
+<title>glade_property_remove_object ()</title>
+<indexterm zone="glade-property-remove-object"><primary>glade_property_remove_object</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_remove_object        (<link linkend="GladeProperty">GladeProperty</link> *property,
                                                          <link linkend="GObject">GObject</link> *object);</programlisting>
 <para>
 Removes <parameter>object</parameter> from the object list in <parameter>property</parameter>.
@@ -498,9 +491,9 @@ or <link linkend="GParamSpecObject"><type>GParamSpecObject</type></link> type pr
 <listitem><simpara> The <link linkend="GObject"><type>GObject</type></link> to add
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-sync" role="function"/>glade_property_sync ()</title>
-<indexterm><primary>glade_property_sync</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_sync                 (<link linkend="GladeProperty">GladeProperty</link> *property);</programlisting>
+<refsect2 id="glade-property-sync" role="function">
+<title>glade_property_sync ()</title>
+<indexterm zone="glade-property-sync"><primary>glade_property_sync</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_sync                 (<link linkend="GladeProperty">GladeProperty</link> *property);</programlisting>
 <para>
 Synchronize the object with this property</para>
 <para>
@@ -510,9 +503,9 @@ Synchronize the object with this property</para>
 <listitem><simpara> a <link linkend="GladeProperty"><type>GladeProperty</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-load" role="function"/>glade_property_load ()</title>
-<indexterm><primary>glade_property_load</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_load                 (<link linkend="GladeProperty">GladeProperty</link> *property);</programlisting>
+<refsect2 id="glade-property-load" role="function">
+<title>glade_property_load ()</title>
+<indexterm zone="glade-property-load"><primary>glade_property_load</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_load                 (<link linkend="GladeProperty">GladeProperty</link> *property);</programlisting>
 <para>
 Loads the value of <parameter>property</parameter> from the coresponding object instance</para>
 <para>
@@ -522,9 +515,9 @@ Loads the value of <parameter>property</parameter> from the coresponding object 
 <listitem><simpara> a <link linkend="GladeProperty"><type>GladeProperty</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-read" role="function"/>glade_property_read ()</title>
-<indexterm><primary>glade_property_read</primary></indexterm><programlisting><link linkend="GValue">GValue</link>*             glade_property_read                 (<link linkend="GladeProperty">GladeProperty</link> *property,
+<refsect2 id="glade-property-read" role="function">
+<title>glade_property_read ()</title>
+<indexterm zone="glade-property-read"><primary>glade_property_read</primary></indexterm><programlisting><link linkend="GValue">GValue</link>*             glade_property_read                 (<link linkend="GladeProperty">GladeProperty</link> *property,
                                                          <link linkend="GladePropertyClass">GladePropertyClass</link> *pclass,
                                                          <link linkend="GladeProject">GladeProject</link> *project,
                                                          <link linkend="gpointer">gpointer</link> info,
@@ -558,9 +551,9 @@ Note that object values will only be resolved after the project is
 completely loaded
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-write" role="function"/>glade_property_write ()</title>
-<indexterm><primary>glade_property_write</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_property_write                (<link linkend="GladeProperty">GladeProperty</link> *property,
+<refsect2 id="glade-property-write" role="function">
+<title>glade_property_write ()</title>
+<indexterm zone="glade-property-write"><primary>glade_property_write</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_property_write                (<link linkend="GladeProperty">GladeProperty</link> *property,
                                                          <link linkend="GladeInterface">GladeInterface</link> *interface,
                                                          <link linkend="GArray">GArray</link> *props);</programlisting>
 <para>
@@ -582,9 +575,9 @@ Write this property to the GladeInterface metadata</para>
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-get-tooltip" role="function"/>glade_property_get_tooltip ()</title>
-<indexterm><primary>glade_property_get_tooltip</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        glade_property_get_tooltip          (<link linkend="GladeProperty">GladeProperty</link> *property);</programlisting>
+<refsect2 id="glade-property-get-tooltip" role="function">
+<title>glade_property_get_tooltip ()</title>
+<indexterm zone="glade-property-get-tooltip"><primary>glade_property_get_tooltip</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        glade_property_get_tooltip          (<link linkend="GladeProperty">GladeProperty</link> *property);</programlisting>
 <para>
 </para>
 <para>
@@ -596,9 +589,9 @@ Write this property to the GladeInterface metadata</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> The appropriate tooltip for the editor
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-set-sensitive" role="function"/>glade_property_set_sensitive ()</title>
-<indexterm><primary>glade_property_set_sensitive</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_set_sensitive        (<link linkend="GladeProperty">GladeProperty</link> *property,
+<refsect2 id="glade-property-set-sensitive" role="function">
+<title>glade_property_set_sensitive ()</title>
+<indexterm zone="glade-property-set-sensitive"><primary>glade_property_set_sensitive</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_set_sensitive        (<link linkend="GladeProperty">GladeProperty</link> *property,
                                                          <link linkend="gboolean">gboolean</link> sensitive,
                                                          const <link linkend="gchar">gchar</link> *reason);</programlisting>
 <para>
@@ -616,9 +609,9 @@ Write this property to the GladeInterface metadata</para>
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-get-sensitive" role="function"/>glade_property_get_sensitive ()</title>
-<indexterm><primary>glade_property_get_sensitive</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_property_get_sensitive        (<link linkend="GladeProperty">GladeProperty</link> *property);</programlisting>
+<refsect2 id="glade-property-get-sensitive" role="function">
+<title>glade_property_get_sensitive ()</title>
+<indexterm zone="glade-property-get-sensitive"><primary>glade_property_get_sensitive</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_property_get_sensitive        (<link linkend="GladeProperty">GladeProperty</link> *property);</programlisting>
 <para>
 
 </para><variablelist role="params">
@@ -630,9 +623,9 @@ Write this property to the GladeInterface metadata</para>
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-set-save-always" role="function"/>glade_property_set_save_always ()</title>
-<indexterm><primary>glade_property_set_save_always</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_set_save_always      (<link linkend="GladeProperty">GladeProperty</link> *property,
+<refsect2 id="glade-property-set-save-always" role="function">
+<title>glade_property_set_save_always ()</title>
+<indexterm zone="glade-property-set-save-always"><primary>glade_property_set_save_always</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_set_save_always      (<link linkend="GladeProperty">GladeProperty</link> *property,
                                                          <link linkend="gboolean">gboolean</link> setting);</programlisting>
 <para>
 Sets whether this property should be special cased
@@ -650,9 +643,9 @@ or derived widget code).</para>
 <listitem><simpara> the value to set
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-get-save-always" role="function"/>glade_property_get_save_always ()</title>
-<indexterm><primary>glade_property_get_save_always</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_property_get_save_always      (<link linkend="GladeProperty">GladeProperty</link> *property);</programlisting>
+<refsect2 id="glade-property-get-save-always" role="function">
+<title>glade_property_get_save_always ()</title>
+<indexterm zone="glade-property-get-save-always"><primary>glade_property_get_save_always</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_property_get_save_always      (<link linkend="GladeProperty">GladeProperty</link> *property);</programlisting>
 <para>
 </para>
 <para>
@@ -665,9 +658,9 @@ or derived widget code).</para>
 to always be saved regardless of its default value.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-set-enabled" role="function"/>glade_property_set_enabled ()</title>
-<indexterm><primary>glade_property_set_enabled</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_set_enabled          (<link linkend="GladeProperty">GladeProperty</link> *property,
+<refsect2 id="glade-property-set-enabled" role="function">
+<title>glade_property_set_enabled ()</title>
+<indexterm zone="glade-property-set-enabled"><primary>glade_property_set_enabled</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_set_enabled          (<link linkend="GladeProperty">GladeProperty</link> *property,
                                                          <link linkend="gboolean">gboolean</link> enabled);</programlisting>
 <para>
 
@@ -681,9 +674,9 @@ to always be saved regardless of its default value.
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-get-enabled" role="function"/>glade_property_get_enabled ()</title>
-<indexterm><primary>glade_property_get_enabled</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_property_get_enabled          (<link linkend="GladeProperty">GladeProperty</link> *property);</programlisting>
+<refsect2 id="glade-property-get-enabled" role="function">
+<title>glade_property_get_enabled ()</title>
+<indexterm zone="glade-property-get-enabled"><primary>glade_property_get_enabled</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_property_get_enabled          (<link linkend="GladeProperty">GladeProperty</link> *property);</programlisting>
 <para>
 
 </para><variablelist role="params">
@@ -695,9 +688,9 @@ to always be saved regardless of its default value.
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-i18n-set-comment" role="function"/>glade_property_i18n_set_comment ()</title>
-<indexterm><primary>glade_property_i18n_set_comment</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_i18n_set_comment     (<link linkend="GladeProperty">GladeProperty</link> *property,
+<refsect2 id="glade-property-i18n-set-comment" role="function">
+<title>glade_property_i18n_set_comment ()</title>
+<indexterm zone="glade-property-i18n-set-comment"><primary>glade_property_i18n_set_comment</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_i18n_set_comment     (<link linkend="GladeProperty">GladeProperty</link> *property,
                                                          const <link linkend="gchar">gchar</link> *str);</programlisting>
 <para>
 
@@ -711,9 +704,9 @@ to always be saved regardless of its default value.
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-i18n-get-comment" role="function"/>glade_property_i18n_get_comment ()</title>
-<indexterm><primary>glade_property_i18n_get_comment</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        glade_property_i18n_get_comment     (<link linkend="GladeProperty">GladeProperty</link> *property);</programlisting>
+<refsect2 id="glade-property-i18n-get-comment" role="function">
+<title>glade_property_i18n_get_comment ()</title>
+<indexterm zone="glade-property-i18n-get-comment"><primary>glade_property_i18n_get_comment</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        glade_property_i18n_get_comment     (<link linkend="GladeProperty">GladeProperty</link> *property);</programlisting>
 <para>
 
 </para><variablelist role="params">
@@ -725,9 +718,9 @@ to always be saved regardless of its default value.
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-i18n-set-translatable" role="function"/>glade_property_i18n_set_translatable ()</title>
-<indexterm><primary>glade_property_i18n_set_translatable</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_i18n_set_translatable
+<refsect2 id="glade-property-i18n-set-translatable" role="function">
+<title>glade_property_i18n_set_translatable ()</title>
+<indexterm zone="glade-property-i18n-set-translatable"><primary>glade_property_i18n_set_translatable</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_i18n_set_translatable
                                                         (<link linkend="GladeProperty">GladeProperty</link> *property,
                                                          <link linkend="gboolean">gboolean</link> translatable);</programlisting>
 <para>
@@ -742,9 +735,9 @@ to always be saved regardless of its default value.
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-i18n-get-translatable" role="function"/>glade_property_i18n_get_translatable ()</title>
-<indexterm><primary>glade_property_i18n_get_translatable</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_property_i18n_get_translatable
+<refsect2 id="glade-property-i18n-get-translatable" role="function">
+<title>glade_property_i18n_get_translatable ()</title>
+<indexterm zone="glade-property-i18n-get-translatable"><primary>glade_property_i18n_get_translatable</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_property_i18n_get_translatable
                                                         (<link linkend="GladeProperty">GladeProperty</link> *property);</programlisting>
 <para>
 
@@ -757,9 +750,9 @@ to always be saved regardless of its default value.
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-i18n-set-has-context" role="function"/>glade_property_i18n_set_has_context ()</title>
-<indexterm><primary>glade_property_i18n_set_has_context</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_i18n_set_has_context (<link linkend="GladeProperty">GladeProperty</link> *property,
+<refsect2 id="glade-property-i18n-set-has-context" role="function">
+<title>glade_property_i18n_set_has_context ()</title>
+<indexterm zone="glade-property-i18n-set-has-context"><primary>glade_property_i18n_set_has_context</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_i18n_set_has_context (<link linkend="GladeProperty">GladeProperty</link> *property,
                                                          <link linkend="gboolean">gboolean</link> has_context);</programlisting>
 <para>
 
@@ -773,9 +766,9 @@ to always be saved regardless of its default value.
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-i18n-get-has-context" role="function"/>glade_property_i18n_get_has_context ()</title>
-<indexterm><primary>glade_property_i18n_get_has_context</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_property_i18n_get_has_context (<link linkend="GladeProperty">GladeProperty</link> *property);</programlisting>
+<refsect2 id="glade-property-i18n-get-has-context" role="function">
+<title>glade_property_i18n_get_has_context ()</title>
+<indexterm zone="glade-property-i18n-get-has-context"><primary>glade_property_i18n_get_has_context</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_property_i18n_get_has_context (<link linkend="GladeProperty">GladeProperty</link> *property);</programlisting>
 <para>
 
 </para><variablelist role="params">
@@ -787,21 +780,21 @@ to always be saved regardless of its default value.
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-push-superuser" role="function"/>glade_property_push_superuser ()</title>
-<indexterm><primary>glade_property_push_superuser</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_push_superuser       (void);</programlisting>
+<refsect2 id="glade-property-push-superuser" role="function">
+<title>glade_property_push_superuser ()</title>
+<indexterm zone="glade-property-push-superuser"><primary>glade_property_push_superuser</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_push_superuser       (void);</programlisting>
 <para>
 
 </para></refsect2>
-<refsect2>
-<title><anchor id="glade-property-pop-superuser" role="function"/>glade_property_pop_superuser ()</title>
-<indexterm><primary>glade_property_pop_superuser</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_pop_superuser        (void);</programlisting>
+<refsect2 id="glade-property-pop-superuser" role="function">
+<title>glade_property_pop_superuser ()</title>
+<indexterm zone="glade-property-pop-superuser"><primary>glade_property_pop_superuser</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_pop_superuser        (void);</programlisting>
 <para>
 
 </para></refsect2>
-<refsect2>
-<title><anchor id="glade-property-superuser" role="function"/>glade_property_superuser ()</title>
-<indexterm><primary>glade_property_superuser</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_property_superuser            (void);</programlisting>
+<refsect2 id="glade-property-superuser" role="function">
+<title>glade_property_superuser ()</title>
+<indexterm zone="glade-property-superuser"><primary>glade_property_superuser</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_property_superuser            (void);</programlisting>
 <para>
 
 </para><variablelist role="params">
@@ -812,35 +805,35 @@ to always be saved regardless of its default value.
 </variablelist></refsect2>
 
 </refsect1>
-<refsect1 role="property_details">
+<refsect1 id="gladeui-glade-property.property-details" role="property_details">
 <title role="property_details.title">Property Details</title>
-<refsect2><title><anchor id="GladeProperty--enabled"/>The &quot;<literal>enabled</literal>&quot; property</title>
-<indexterm><primary>GladeProperty:enabled</primary></indexterm><programlisting>  &quot;enabled&quot;                  <link linkend="gboolean">gboolean</link>              : Read / Write</programlisting>
+<refsect2 id="GladeProperty--enabled"><title>The <literal>&quot;enabled&quot;</literal> property</title>
+<indexterm zone="GladeProperty--enabled"><primary>GladeProperty:enabled</primary></indexterm><programlisting>  &quot;enabled&quot;                  <link linkend="gboolean">gboolean</link>              : Read / Write</programlisting>
 <para>If the property is optional, this is its enabled state.</para><para>Default value: TRUE</para>
 </refsect2>
-<refsect2><title><anchor id="GladeProperty--i18n-comment"/>The &quot;<literal>i18n-comment</literal>&quot; property</title>
-<indexterm><primary>GladeProperty:i18n-comment</primary></indexterm><programlisting>  &quot;i18n-comment&quot;             <link linkend="gchararray">gchararray</link>            : Read / Write</programlisting>
+<refsect2 id="GladeProperty--i18n-comment"><title>The <literal>&quot;i18n-comment&quot;</literal> property</title>
+<indexterm zone="GladeProperty--i18n-comment"><primary>GladeProperty:i18n-comment</primary></indexterm><programlisting>  &quot;i18n-comment&quot;             <link linkend="gchar">gchar</link>*                : Read / Write</programlisting>
 <para>Comment for translators.</para><para>Default value: NULL</para>
 </refsect2>
-<refsect2><title><anchor id="GladeProperty--i18n-has-context"/>The &quot;<literal>i18n-has-context</literal>&quot; property</title>
-<indexterm><primary>GladeProperty:i18n-has-context</primary></indexterm><programlisting>  &quot;i18n-has-context&quot;         <link linkend="gboolean">gboolean</link>              : Read / Write</programlisting>
+<refsect2 id="GladeProperty--i18n-has-context"><title>The <literal>&quot;i18n-has-context&quot;</literal> property</title>
+<indexterm zone="GladeProperty--i18n-has-context"><primary>GladeProperty:i18n-has-context</primary></indexterm><programlisting>  &quot;i18n-has-context&quot;         <link linkend="gboolean">gboolean</link>              : Read / Write</programlisting>
 <para>Whether or not the translatable string has a context prefix.</para><para>Default value: FALSE</para>
 </refsect2>
-<refsect2><title><anchor id="GladeProperty--i18n-translatable"/>The &quot;<literal>i18n-translatable</literal>&quot; property</title>
-<indexterm><primary>GladeProperty:i18n-translatable</primary></indexterm><programlisting>  &quot;i18n-translatable&quot;        <link linkend="gboolean">gboolean</link>              : Read / Write</programlisting>
+<refsect2 id="GladeProperty--i18n-translatable"><title>The <literal>&quot;i18n-translatable&quot;</literal> property</title>
+<indexterm zone="GladeProperty--i18n-translatable"><primary>GladeProperty:i18n-translatable</primary></indexterm><programlisting>  &quot;i18n-translatable&quot;        <link linkend="gboolean">gboolean</link>              : Read / Write</programlisting>
 <para>Whether this property is translatable or not.</para><para>Default value: TRUE</para>
 </refsect2>
-<refsect2><title><anchor id="GladeProperty--sensitive"/>The &quot;<literal>sensitive</literal>&quot; property</title>
-<indexterm><primary>GladeProperty:sensitive</primary></indexterm><programlisting>  &quot;sensitive&quot;                <link linkend="gboolean">gboolean</link>              : Read / Write</programlisting>
+<refsect2 id="GladeProperty--sensitive"><title>The <literal>&quot;sensitive&quot;</literal> property</title>
+<indexterm zone="GladeProperty--sensitive"><primary>GladeProperty:sensitive</primary></indexterm><programlisting>  &quot;sensitive&quot;                <link linkend="gboolean">gboolean</link>              : Read / Write</programlisting>
 <para>This gives backends control to set property sensitivity.</para><para>Default value: TRUE</para>
 </refsect2>
 
 </refsect1>
 
-<refsect1 role="signals">
+<refsect1 id="gladeui-glade-property.signal-details" role="signals">
 <title role="signals.title">Signal Details</title>
-<refsect2><title><anchor id="GladeProperty-tooltip-changed"/>The &quot;tooltip-changed&quot; signal</title>
-<indexterm><primary>GladeProperty::tooltip-changed</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="GladeProperty">GladeProperty</link> *gladeproperty,
+<refsect2 id="GladeProperty-tooltip-changed"><title>The <literal>&quot;tooltip-changed&quot;</literal> signal</title>
+<indexterm zone="GladeProperty-tooltip-changed"><primary>GladeProperty::tooltip-changed</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="GladeProperty">GladeProperty</link> *gladeproperty,
                                                         <link linkend="gpointer">gpointer</link>       arg1,
                                                         <link linkend="gpointer">gpointer</link>       user_data)          : Run Last</programlisting>
 <para>
@@ -855,8 +848,8 @@ to always be saved regardless of its default value.
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
 <listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
-</variablelist></refsect2><refsect2><title><anchor id="GladeProperty-value-changed"/>The &quot;value-changed&quot; signal</title>
-<indexterm><primary>GladeProperty::value-changed</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="GladeProperty">GladeProperty</link> *gladeproperty,
+</variablelist></refsect2><refsect2 id="GladeProperty-value-changed"><title>The <literal>&quot;value-changed&quot;</literal> signal</title>
+<indexterm zone="GladeProperty-value-changed"><primary>GladeProperty::value-changed</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="GladeProperty">GladeProperty</link> *gladeproperty,
                                                         <link linkend="gpointer">gpointer</link>       arg1,
                                                         <link linkend="gpointer">gpointer</link>       arg2,
                                                         <link linkend="gpointer">gpointer</link>       user_data)          : Run Last</programlisting>

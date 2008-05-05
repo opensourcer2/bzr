@@ -1,6 +1,6 @@
 <refentry id="gladeui-glade-signal">
 <refmeta>
-<refentrytitle role="top_of_page">glade-signal</refentrytitle>
+<refentrytitle role="top_of_page" id="gladeui-glade-signal.top_of_page">glade-signal</refentrytitle>
 <manvolnum>3</manvolnum>
 <refmiscinfo>GLADEUI Library</refmiscinfo>
 </refmeta>
@@ -11,13 +11,10 @@
 <!--[<xref linkend="desc" endterm="desc.title"/>]-->
 </refnamediv>
 
-<refsynopsisdiv role="synopsis">
+<refsynopsisdiv id="gladeui-glade-signal.synopsis" role="synopsis">
 <title role="synopsis.title">Synopsis</title>
 
 <synopsis>
-
-
-
                     <link linkend="GladeSignal">GladeSignal</link>;
 <link linkend="GladeSignal">GladeSignal</link>*        <link linkend="glade-signal-new">glade_signal_new</link>                    (const <link linkend="gchar">gchar</link> *name,
                                                          const <link linkend="gchar">gchar</link> *handler,
@@ -32,7 +29,6 @@
                                                          <link linkend="GladeSignal">GladeSignal</link> *signal,
                                                          <link linkend="GladeInterface">GladeInterface</link> *interface);
 <link linkend="GladeSignal">GladeSignal</link>*        <link linkend="glade-signal-new-from-signal-info">glade_signal_new_from_signal_info</link>   (<link linkend="GladeSignalInfo">GladeSignalInfo</link> *info);
-
 </synopsis>
 </refsynopsisdiv>
 
@@ -44,18 +40,18 @@
 
 
 
-<refsect1 role="desc">
+<refsect1 id="gladeui-glade-signal.description" role="desc">
 <title role="desc.title">Description</title>
 <para>
 
 </para>
 </refsect1>
 
-<refsect1 role="details">
+<refsect1 id="gladeui-glade-signal.details" role="details">
 <title role="details.title">Details</title>
-<refsect2>
-<title><anchor id="GladeSignal" role="struct"/>GladeSignal</title>
-<indexterm><primary>GladeSignal</primary></indexterm><programlisting>typedef struct {
+<refsect2 id="GladeSignal" role="struct">
+<title>GladeSignal</title>
+<indexterm zone="GladeSignal"><primary>GladeSignal</primary></indexterm><programlisting>typedef struct {
 	gchar    *name;         /* Signal name eg "clicked"            */
 	gchar    *handler;      /* Handler function eg "gtk_main_quit" */
 	gchar    *userdata;     /* User data signal handler argument   */
@@ -68,9 +64,9 @@
 <para>
 
 </para></refsect2>
-<refsect2>
-<title><anchor id="glade-signal-new" role="function"/>glade_signal_new ()</title>
-<indexterm><primary>glade_signal_new</primary></indexterm><programlisting><link linkend="GladeSignal">GladeSignal</link>*        glade_signal_new                    (const <link linkend="gchar">gchar</link> *name,
+<refsect2 id="glade-signal-new" role="function">
+<title>glade_signal_new ()</title>
+<indexterm zone="glade-signal-new"><primary>glade_signal_new</primary></indexterm><programlisting><link linkend="GladeSignal">GladeSignal</link>*        glade_signal_new                    (const <link linkend="gchar">gchar</link> *name,
                                                          const <link linkend="gchar">gchar</link> *handler,
                                                          const <link linkend="gchar">gchar</link> *userdata,
                                                          <link linkend="gboolean">gboolean</link> lookup,
@@ -99,9 +95,9 @@ Creates a new <link linkend="GladeSignal"><type>GladeSignal</type></link> with t
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the new <link linkend="GladeSignal"><type>GladeSignal</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-signal-clone" role="function"/>glade_signal_clone ()</title>
-<indexterm><primary>glade_signal_clone</primary></indexterm><programlisting><link linkend="GladeSignal">GladeSignal</link>*        glade_signal_clone                  (const <link linkend="GladeSignal">GladeSignal</link> *signal);</programlisting>
+<refsect2 id="glade-signal-clone" role="function">
+<title>glade_signal_clone ()</title>
+<indexterm zone="glade-signal-clone"><primary>glade_signal_clone</primary></indexterm><programlisting><link linkend="GladeSignal">GladeSignal</link>*        glade_signal_clone                  (const <link linkend="GladeSignal">GladeSignal</link> *signal);</programlisting>
 <para>
 </para>
 <para>
@@ -113,9 +109,9 @@ Creates a new <link linkend="GladeSignal"><type>GladeSignal</type></link> with t
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a new <link linkend="GladeSignal"><type>GladeSignal</type></link> with the same attributes as <parameter>signal</parameter>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-signal-free" role="function"/>glade_signal_free ()</title>
-<indexterm><primary>glade_signal_free</primary></indexterm><programlisting><link linkend="void">void</link>                glade_signal_free                   (<link linkend="GladeSignal">GladeSignal</link> *signal);</programlisting>
+<refsect2 id="glade-signal-free" role="function">
+<title>glade_signal_free ()</title>
+<indexterm zone="glade-signal-free"><primary>glade_signal_free</primary></indexterm><programlisting><link linkend="void">void</link>                glade_signal_free                   (<link linkend="GladeSignal">GladeSignal</link> *signal);</programlisting>
 <para>
 Frees <parameter>signal</parameter> and its associated memory.</para>
 <para>
@@ -125,9 +121,9 @@ Frees <parameter>signal</parameter> and its associated memory.</para>
 <listitem><simpara> a <link linkend="GladeSignal"><type>GladeSignal</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-signal-equal" role="function"/>glade_signal_equal ()</title>
-<indexterm><primary>glade_signal_equal</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_signal_equal                  (<link linkend="GladeSignal">GladeSignal</link> *sig1,
+<refsect2 id="glade-signal-equal" role="function">
+<title>glade_signal_equal ()</title>
+<indexterm zone="glade-signal-equal"><primary>glade_signal_equal</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_signal_equal                  (<link linkend="GladeSignal">GladeSignal</link> *sig1,
                                                          <link linkend="GladeSignal">GladeSignal</link> *sig2);</programlisting>
 <para>
 </para>
@@ -143,9 +139,9 @@ Frees <parameter>signal</parameter> and its associated memory.</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if <parameter>sig1</parameter> and <parameter>sig2</parameter> have identical attributes, <link linkend="FALSE:CAPS"><literal>FALSE</literal></link> otherwise
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-signal-write" role="function"/>glade_signal_write ()</title>
-<indexterm><primary>glade_signal_write</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_signal_write                  (<link linkend="GladeSignalInfo">GladeSignalInfo</link> *info,
+<refsect2 id="glade-signal-write" role="function">
+<title>glade_signal_write ()</title>
+<indexterm zone="glade-signal-write"><primary>glade_signal_write</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_signal_write                  (<link linkend="GladeSignalInfo">GladeSignalInfo</link> *info,
                                                          <link linkend="GladeSignal">GladeSignal</link> *signal,
                                                          <link linkend="GladeInterface">GladeInterface</link> *interface);</programlisting>
 <para>
@@ -165,9 +161,9 @@ Frees <parameter>signal</parameter> and its associated memory.</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> TRUE if succeed
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-signal-new-from-signal-info" role="function"/>glade_signal_new_from_signal_info ()</title>
-<indexterm><primary>glade_signal_new_from_signal_info</primary></indexterm><programlisting><link linkend="GladeSignal">GladeSignal</link>*        glade_signal_new_from_signal_info   (<link linkend="GladeSignalInfo">GladeSignalInfo</link> *info);</programlisting>
+<refsect2 id="glade-signal-new-from-signal-info" role="function">
+<title>glade_signal_new_from_signal_info ()</title>
+<indexterm zone="glade-signal-new-from-signal-info"><primary>glade_signal_new_from_signal_info</primary></indexterm><programlisting><link linkend="GladeSignal">GladeSignal</link>*        glade_signal_new_from_signal_info   (<link linkend="GladeSignalInfo">GladeSignalInfo</link> *info);</programlisting>
 <para>
 
 </para><variablelist role="params">

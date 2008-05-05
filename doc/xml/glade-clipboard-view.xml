@@ -1,6 +1,6 @@
 <refentry id="GladeClipboardView">
 <refmeta>
-<refentrytitle role="top_of_page">GladeClipboardView</refentrytitle>
+<refentrytitle role="top_of_page" id="GladeClipboardView.top_of_page">GladeClipboardView</refentrytitle>
 <manvolnum>3</manvolnum>
 <refmiscinfo>GLADEUI Library</refmiscinfo>
 </refmeta>
@@ -11,13 +11,10 @@
 <!--[<xref linkend="desc" endterm="desc.title"/>]-->
 </refnamediv>
 
-<refsynopsisdiv role="synopsis">
+<refsynopsisdiv id="GladeClipboardView.synopsis" role="synopsis">
 <title role="synopsis.title">Synopsis</title>
 
 <synopsis>
-
-
-
                     <link linkend="GladeClipboardView-struct">GladeClipboardView</link>;
 <link linkend="GtkWidget">GtkWidget</link>*          <link linkend="glade-clipboard-view-new">glade_clipboard_view_new</link>            (<link linkend="GladeClipboard">GladeClipboard</link> *clipboard);
 <link linkend="void">void</link>                <link linkend="glade-clipboard-view-add">glade_clipboard_view_add</link>            (<link linkend="GladeClipboardView">GladeClipboardView</link> *view,
@@ -25,14 +22,12 @@
 <link linkend="void">void</link>                <link linkend="glade-clipboard-view-remove">glade_clipboard_view_remove</link>         (<link linkend="GladeClipboardView">GladeClipboardView</link> *view,
                                                          <link linkend="GladeWidget">GladeWidget</link> *widget);
 <link linkend="void">void</link>                <link linkend="glade-clipboard-view-refresh-sel">glade_clipboard_view_refresh_sel</link>    (<link linkend="GladeClipboardView">GladeClipboardView</link> *view);
-
 </synopsis>
 </refsynopsisdiv>
 
-<refsect1 role="object_hierarchy">
+<refsect1 id="GladeClipboardView.object-hierarchy" role="object_hierarchy">
 <title role="object_hierarchy.title">Object Hierarchy</title>
 <synopsis>
-
   <link linkend="GObject">GObject</link>
    +----<link linkend="GInitiallyUnowned">GInitiallyUnowned</link>
          +----<link linkend="GtkObject">GtkObject</link>
@@ -47,7 +42,7 @@
 
 
 
-<refsect1 role="impl_interfaces">
+<refsect1 id="GladeClipboardView.implemented-interfaces" role="impl_interfaces">
 <title role="impl_interfaces.title">Implemented Interfaces</title>
 <para>
 GladeClipboardView implements
@@ -59,7 +54,7 @@ GladeClipboardView implements
 
 
 
-<refsect1 role="desc">
+<refsect1 id="GladeClipboardView.description" role="desc">
 <title role="desc.title">Description</title>
 <para>
 The <link linkend="GladeClipboardView"><type>GladeClipboardView</type></link> is a widget to view the <link linkend="GladeWidget"><type>GladeWidget</type></link> objects
@@ -69,17 +64,17 @@ in the <link linkend="GladeClipboard"><type>GladeClipboard</type></link>; the us
 </para>
 </refsect1>
 
-<refsect1 role="details">
+<refsect1 id="GladeClipboardView.details" role="details">
 <title role="details.title">Details</title>
-<refsect2>
-<title><anchor id="GladeClipboardView-struct" role="struct"/>GladeClipboardView</title>
-<indexterm><primary>GladeClipboardView</primary></indexterm><programlisting>typedef struct _GladeClipboardView GladeClipboardView;</programlisting>
+<refsect2 id="GladeClipboardView-struct" role="struct">
+<title>GladeClipboardView</title>
+<indexterm zone="GladeClipboardView-struct"><primary>GladeClipboardView</primary></indexterm><programlisting>typedef struct _GladeClipboardView GladeClipboardView;</programlisting>
 <para>
 
 </para></refsect2>
-<refsect2>
-<title><anchor id="glade-clipboard-view-new" role="function"/>glade_clipboard_view_new ()</title>
-<indexterm><primary>glade_clipboard_view_new</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*          glade_clipboard_view_new            (<link linkend="GladeClipboard">GladeClipboard</link> *clipboard);</programlisting>
+<refsect2 id="glade-clipboard-view-new" role="function">
+<title>glade_clipboard_view_new ()</title>
+<indexterm zone="glade-clipboard-view-new"><primary>glade_clipboard_view_new</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*          glade_clipboard_view_new            (<link linkend="GladeClipboard">GladeClipboard</link> *clipboard);</programlisting>
 <para>
 Create a new <link linkend="GladeClipboardView"><type>GladeClipboardView</type></link> widget for <parameter>clipboard</parameter>.</para>
 <para>
@@ -91,9 +86,9 @@ Create a new <link linkend="GladeClipboardView"><type>GladeClipboardView</type><
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a new <link linkend="GladeClipboardView"><type>GladeClipboardView</type></link> cast to be a <link linkend="GtkWidget"><type>GtkWidget</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-clipboard-view-add" role="function"/>glade_clipboard_view_add ()</title>
-<indexterm><primary>glade_clipboard_view_add</primary></indexterm><programlisting><link linkend="void">void</link>                glade_clipboard_view_add            (<link linkend="GladeClipboardView">GladeClipboardView</link> *view,
+<refsect2 id="glade-clipboard-view-add" role="function">
+<title>glade_clipboard_view_add ()</title>
+<indexterm zone="glade-clipboard-view-add"><primary>glade_clipboard_view_add</primary></indexterm><programlisting><link linkend="void">void</link>                glade_clipboard_view_add            (<link linkend="GladeClipboardView">GladeClipboardView</link> *view,
                                                          <link linkend="GladeWidget">GladeWidget</link> *widget);</programlisting>
 <para>
 Adds <parameter>widget</parameter> to <parameter>view</parameter>.</para>
@@ -107,9 +102,9 @@ Adds <parameter>widget</parameter> to <parameter>view</parameter>.</para>
 <listitem><simpara> a <link linkend="GladeWidget"><type>GladeWidget</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-clipboard-view-remove" role="function"/>glade_clipboard_view_remove ()</title>
-<indexterm><primary>glade_clipboard_view_remove</primary></indexterm><programlisting><link linkend="void">void</link>                glade_clipboard_view_remove         (<link linkend="GladeClipboardView">GladeClipboardView</link> *view,
+<refsect2 id="glade-clipboard-view-remove" role="function">
+<title>glade_clipboard_view_remove ()</title>
+<indexterm zone="glade-clipboard-view-remove"><primary>glade_clipboard_view_remove</primary></indexterm><programlisting><link linkend="void">void</link>                glade_clipboard_view_remove         (<link linkend="GladeClipboardView">GladeClipboardView</link> *view,
                                                          <link linkend="GladeWidget">GladeWidget</link> *widget);</programlisting>
 <para>
 
@@ -123,9 +118,9 @@ Adds <parameter>widget</parameter> to <parameter>view</parameter>.</para>
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-clipboard-view-refresh-sel" role="function"/>glade_clipboard_view_refresh_sel ()</title>
-<indexterm><primary>glade_clipboard_view_refresh_sel</primary></indexterm><programlisting><link linkend="void">void</link>                glade_clipboard_view_refresh_sel    (<link linkend="GladeClipboardView">GladeClipboardView</link> *view);</programlisting>
+<refsect2 id="glade-clipboard-view-refresh-sel" role="function">
+<title>glade_clipboard_view_refresh_sel ()</title>
+<indexterm zone="glade-clipboard-view-refresh-sel"><primary>glade_clipboard_view_refresh_sel</primary></indexterm><programlisting><link linkend="void">void</link>                glade_clipboard_view_refresh_sel    (<link linkend="GladeClipboardView">GladeClipboardView</link> *view);</programlisting>
 <para>
 Synchronizes the treeview selection to the clipboard selection.</para>
 <para>

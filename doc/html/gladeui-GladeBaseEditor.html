@@ -1,19 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GladeBaseEditor</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.72.0">
+<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
 <link rel="start" href="index.html" title="Glade UI Builder Reference Manual">
-<link rel="up" href="core.html" title="Part&#160;II.&#160;Glade Core">
+<link rel="up" href="core.html" title="Part II. Glade Core">
 <link rel="prev" href="GladeClipboard.html" title="GladeClipboard">
 <link rel="next" href="GladePlaceholder.html" title="GladePlaceholder">
-<meta name="generator" content="GTK-Doc V1.8 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.10 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="part" href="catalog.html" title="Part&#160;I.&#160;Adding your custom widgets">
-<link rel="part" href="core.html" title="Part&#160;II.&#160;Glade Core">
-<link rel="part" href="dockables.html" title="Part&#160;III.&#160;Dockable Glade UI Widgets">
-<link rel="part" href="misc.html" title="Part&#160;IV.&#160;Miscellaneous utilities">
+<link rel="part" href="catalog.html" title="Part I. Adding your custom widgets">
+<link rel="part" href="core.html" title="Part II. Glade Core">
+<link rel="part" href="dockables.html" title="Part III. Dockable Glade UI Widgets">
+<link rel="part" href="misc.html" title="Part IV. Miscellaneous utilities">
 <link rel="index" href="ix01.html" title="Index">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -25,54 +25,48 @@
 <th width="100%" align="center">Glade UI Builder Reference Manual</th>
 <td><a accesskey="n" href="GladePlaceholder.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr>
-<tr><td colspan="5" class="shortcuts"><nobr><a href="#id417607" class="shortcut">Top</a>
-                  &#160;|&#160;
-                  <a href="#id418195" class="shortcut">Description</a></nobr></td></tr>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#gladeui-GladeBaseEditor.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#gladeui-GladeBaseEditor.description" class="shortcut">Description</a></nobr></td></tr>
 </table>
 <div class="refentry" lang="en">
 <a name="gladeui-GladeBaseEditor"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
-<h2>
-<a name="id417607"></a><span class="refentrytitle">GladeBaseEditor</span>
-</h2>
-<p>GladeBaseEditor &#8212; A customisable editor</p>
+<h2><span class="refentrytitle"><a name="gladeui-GladeBaseEditor.top_of_page"></a>GladeBaseEditor</span></h2>
+<p>GladeBaseEditor — A customisable editor</p>
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
 <div class="refsynopsisdiv">
-<h2>Synopsis</h2>
+<a name="gladeui-GladeBaseEditor.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">
-
-
-
-                    <a href="gladeui-GladeBaseEditor.html#GladeBaseEditorPrivate">GladeBaseEditorPrivate</a>;
-                    <a href="gladeui-GladeBaseEditor.html#GladeBaseEditor">GladeBaseEditor</a>;
-<a href="gladeui-GladeBaseEditor.html#GladeBaseEditor">GladeBaseEditor</a>*    <a href="gladeui-GladeBaseEditor.html#glade-base-editor-new">glade_base_editor_new</a>               (GObject *container,
+                    <a class="link" href="gladeui-GladeBaseEditor.html#GladeBaseEditorPrivate" title="GladeBaseEditorPrivate">GladeBaseEditorPrivate</a>;
+                    <a class="link" href="gladeui-GladeBaseEditor.html#GladeBaseEditor" title="GladeBaseEditor">GladeBaseEditor</a>;
+<a class="link" href="gladeui-GladeBaseEditor.html#GladeBaseEditor" title="GladeBaseEditor">GladeBaseEditor</a>*    <a class="link" href="gladeui-GladeBaseEditor.html#glade-base-editor-new" title="glade_base_editor_new ()">glade_base_editor_new</a>               (GObject *container,
                                                          gboolean tree_like,
                                                          ...);
-void                <a href="gladeui-GladeBaseEditor.html#glade-base-editor-add-default-properties">glade_base_editor_add_default_properties</a>
-                                                        (<a href="gladeui-GladeBaseEditor.html#GladeBaseEditor">GladeBaseEditor</a> *editor,
-                                                         <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gchild);
-void                <a href="gladeui-GladeBaseEditor.html#glade-base-editor-add-properties">glade_base_editor_add_properties</a>    (<a href="gladeui-GladeBaseEditor.html#GladeBaseEditor">GladeBaseEditor</a> *editor,
-                                                         <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gchild,
+void                <a class="link" href="gladeui-GladeBaseEditor.html#glade-base-editor-add-default-properties" title="glade_base_editor_add_default_properties ()">glade_base_editor_add_default_properties</a>
+                                                        (<a class="link" href="gladeui-GladeBaseEditor.html#GladeBaseEditor" title="GladeBaseEditor">GladeBaseEditor</a> *editor,
+                                                         <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gchild);
+void                <a class="link" href="gladeui-GladeBaseEditor.html#glade-base-editor-add-properties" title="glade_base_editor_add_properties ()">glade_base_editor_add_properties</a>    (<a class="link" href="gladeui-GladeBaseEditor.html#GladeBaseEditor" title="GladeBaseEditor">GladeBaseEditor</a> *editor,
+                                                         <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gchild,
                                                          gboolean packing,
                                                          ...);
-void                <a href="gladeui-GladeBaseEditor.html#glade-base-editor-add-label">glade_base_editor_add_label</a>         (<a href="gladeui-GladeBaseEditor.html#GladeBaseEditor">GladeBaseEditor</a> *editor,
+void                <a class="link" href="gladeui-GladeBaseEditor.html#glade-base-editor-add-label" title="glade_base_editor_add_label ()">glade_base_editor_add_label</a>         (<a class="link" href="gladeui-GladeBaseEditor.html#GladeBaseEditor" title="GladeBaseEditor">GladeBaseEditor</a> *editor,
                                                          gchar *str);
-void                <a href="gladeui-GladeBaseEditor.html#glade-base-editor-add-popup-items">glade_base_editor_add_popup_items</a>   (<a href="gladeui-GladeBaseEditor.html#GladeBaseEditor">GladeBaseEditor</a> *editor,
+void                <a class="link" href="gladeui-GladeBaseEditor.html#glade-base-editor-add-popup-items" title="glade_base_editor_add_popup_items ()">glade_base_editor_add_popup_items</a>   (<a class="link" href="gladeui-GladeBaseEditor.html#GladeBaseEditor" title="GladeBaseEditor">GladeBaseEditor</a> *editor,
                                                          ...);
-void                <a href="gladeui-GladeBaseEditor.html#glade-base-editor-set-show-signal-editor">glade_base_editor_set_show_signal_editor</a>
-                                                        (<a href="gladeui-GladeBaseEditor.html#GladeBaseEditor">GladeBaseEditor</a> *editor,
+void                <a class="link" href="gladeui-GladeBaseEditor.html#glade-base-editor-set-show-signal-editor" title="glade_base_editor_set_show_signal_editor ()">glade_base_editor_set_show_signal_editor</a>
+                                                        (<a class="link" href="gladeui-GladeBaseEditor.html#GladeBaseEditor" title="GladeBaseEditor">GladeBaseEditor</a> *editor,
                                                          gboolean val);
-GtkWidget*          <a href="gladeui-GladeBaseEditor.html#glade-base-editor-pack-new-window">glade_base_editor_pack_new_window</a>   (<a href="gladeui-GladeBaseEditor.html#GladeBaseEditor">GladeBaseEditor</a> *editor,
+GtkWidget*          <a class="link" href="gladeui-GladeBaseEditor.html#glade-base-editor-pack-new-window" title="glade_base_editor_pack_new_window ()">glade_base_editor_pack_new_window</a>   (<a class="link" href="gladeui-GladeBaseEditor.html#GladeBaseEditor" title="GladeBaseEditor">GladeBaseEditor</a> *editor,
                                                          gchar *title,
                                                          gchar *help_markup);
-
 </pre>
 </div>
 <div class="refsect1" lang="en">
-<a name="id418195"></a><h2>Description</h2>
+<a name="gladeui-GladeBaseEditor.description"></a><h2>Description</h2>
 <p>
 Convenience object to edit containers where placeholders do not make sense, like GtkMenubar.</p>
 <p>
@@ -80,20 +74,18 @@ Convenience object to edit containers where placeholders do not make sense, like
 </p>
 </div>
 <div class="refsect1" lang="en">
-<a name="id418214"></a><h2>Details</h2>
+<a name="gladeui-GladeBaseEditor.details"></a><h2>Details</h2>
 <div class="refsect2" lang="en">
-<a name="id418224"></a><h3>
-<a name="GladeBaseEditorPrivate"></a>GladeBaseEditorPrivate</h3>
-<a class="indexterm" name="id418236"></a><pre class="programlisting">typedef struct _GladeBaseEditorPrivate GladeBaseEditorPrivate;</pre>
+<a name="GladeBaseEditorPrivate"></a><h3>GladeBaseEditorPrivate</h3>
+<pre class="programlisting">typedef struct _GladeBaseEditorPrivate GladeBaseEditorPrivate;</pre>
 <p>
 
 </p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id418251"></a><h3>
-<a name="GladeBaseEditor"></a>GladeBaseEditor</h3>
-<a class="indexterm" name="id418263"></a><pre class="programlisting">typedef struct {
+<a name="GladeBaseEditor"></a><h3>GladeBaseEditor</h3>
+<pre class="programlisting">typedef struct {
 	GtkVBox parent;
 
 	GladeBaseEditorPrivate *priv;
@@ -105,9 +97,8 @@ Convenience object to edit containers where placeholders do not make sense, like
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id418278"></a><h3>
-<a name="glade-base-editor-new"></a>glade_base_editor_new ()</h3>
-<a class="indexterm" name="id418291"></a><pre class="programlisting"><a href="gladeui-GladeBaseEditor.html#GladeBaseEditor">GladeBaseEditor</a>*    glade_base_editor_new               (GObject *container,
+<a name="glade-base-editor-new"></a><h3>glade_base_editor_new ()</h3>
+<pre class="programlisting"><a class="link" href="gladeui-GladeBaseEditor.html#GladeBaseEditor" title="GladeBaseEditor">GladeBaseEditor</a>*    glade_base_editor_new               (GObject *container,
                                                          gboolean tree_like,
                                                          ...);</pre>
 <p>
@@ -123,23 +114,23 @@ Argument List:
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><span class="term"><em class="parameter"><code>container</code></em>&#160;:</span></td>
+<td><p><span class="term"><em class="parameter"><code>container</code></em> :</span></p></td>
 <td> the container this new editor will edit.
 </td>
 </tr>
 <tr>
-<td><span class="term"><em class="parameter"><code>tree_like</code></em>&#160;:</span></td>
+<td><p><span class="term"><em class="parameter"><code>tree_like</code></em> :</span></p></td>
 <td> TRUE if container's children can have children.
 @... A NULL terminated list of gchar *, GType
 </td>
 </tr>
 <tr>
-<td><span class="term"><em class="parameter"><code>...</code></em>&#160;:</span></td>
+<td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
 <td>
 </td>
 </tr>
 <tr>
-<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>a new GladeBaseEditor.
 </td>
 </tr>
@@ -148,11 +139,10 @@ Argument List:
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id418388"></a><h3>
-<a name="glade-base-editor-add-default-properties"></a>glade_base_editor_add_default_properties ()</h3>
-<a class="indexterm" name="id418401"></a><pre class="programlisting">void                glade_base_editor_add_default_properties
-                                                        (<a href="gladeui-GladeBaseEditor.html#GladeBaseEditor">GladeBaseEditor</a> *editor,
-                                                         <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gchild);</pre>
+<a name="glade-base-editor-add-default-properties"></a><h3>glade_base_editor_add_default_properties ()</h3>
+<pre class="programlisting">void                glade_base_editor_add_default_properties
+                                                        (<a class="link" href="gladeui-GladeBaseEditor.html#GladeBaseEditor" title="GladeBaseEditor">GladeBaseEditor</a> *editor,
+                                                         <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gchild);</pre>
 <p>
 Add <em class="parameter"><code>gchild</code></em> name and type property to <em class="parameter"><code>editor</code></em>
 </p>
@@ -165,13 +155,13 @@ NOTE: This function is intended to be used in "child-selected" callbacks</p>
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><span class="term"><em class="parameter"><code>editor</code></em>&#160;:</span></td>
-<td> a <a href="gladeui-GladeBaseEditor.html#GladeBaseEditor"><span class="type">GladeBaseEditor</span></a>
+<td><p><span class="term"><em class="parameter"><code>editor</code></em> :</span></p></td>
+<td> a <a class="link" href="gladeui-GladeBaseEditor.html#GladeBaseEditor" title="GladeBaseEditor"><span class="type">GladeBaseEditor</span></a>
 </td>
 </tr>
 <tr>
-<td><span class="term"><em class="parameter"><code>gchild</code></em>&#160;:</span></td>
-<td> a <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>
+<td><p><span class="term"><em class="parameter"><code>gchild</code></em> :</span></p></td>
+<td> a <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>
 </td>
 </tr>
 </tbody>
@@ -179,10 +169,9 @@ NOTE: This function is intended to be used in "child-selected" callbacks</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id418503"></a><h3>
-<a name="glade-base-editor-add-properties"></a>glade_base_editor_add_properties ()</h3>
-<a class="indexterm" name="id418515"></a><pre class="programlisting">void                glade_base_editor_add_properties    (<a href="gladeui-GladeBaseEditor.html#GladeBaseEditor">GladeBaseEditor</a> *editor,
-                                                         <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gchild,
+<a name="glade-base-editor-add-properties"></a><h3>glade_base_editor_add_properties ()</h3>
+<pre class="programlisting">void                glade_base_editor_add_properties    (<a class="link" href="gladeui-GladeBaseEditor.html#GladeBaseEditor" title="GladeBaseEditor">GladeBaseEditor</a> *editor,
+                                                         <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gchild,
                                                          gboolean packing,
                                                          ...);</pre>
 <p>
@@ -197,22 +186,22 @@ NOTE: This function is intended to be used in "child-selected" callbacks</p>
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><span class="term"><em class="parameter"><code>editor</code></em>&#160;:</span></td>
-<td> a <a href="gladeui-GladeBaseEditor.html#GladeBaseEditor"><span class="type">GladeBaseEditor</span></a>
+<td><p><span class="term"><em class="parameter"><code>editor</code></em> :</span></p></td>
+<td> a <a class="link" href="gladeui-GladeBaseEditor.html#GladeBaseEditor" title="GladeBaseEditor"><span class="type">GladeBaseEditor</span></a>
 </td>
 </tr>
 <tr>
-<td><span class="term"><em class="parameter"><code>gchild</code></em>&#160;:</span></td>
-<td> a <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>
+<td><p><span class="term"><em class="parameter"><code>gchild</code></em> :</span></p></td>
+<td> a <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>
 </td>
 </tr>
 <tr>
-<td><span class="term"><em class="parameter"><code>packing</code></em>&#160;:</span></td>
+<td><p><span class="term"><em class="parameter"><code>packing</code></em> :</span></p></td>
 <td> whether we are adding packing properties or not
 </td>
 </tr>
 <tr>
-<td><span class="term"><em class="parameter"><code>...</code></em>&#160;:</span></td>
+<td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
 <td> A NULL terminated list of properties names.
 </td>
 </tr>
@@ -221,9 +210,8 @@ NOTE: This function is intended to be used in "child-selected" callbacks</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id418652"></a><h3>
-<a name="glade-base-editor-add-label"></a>glade_base_editor_add_label ()</h3>
-<a class="indexterm" name="id418665"></a><pre class="programlisting">void                glade_base_editor_add_label         (<a href="gladeui-GladeBaseEditor.html#GladeBaseEditor">GladeBaseEditor</a> *editor,
+<a name="glade-base-editor-add-label"></a><h3>glade_base_editor_add_label ()</h3>
+<pre class="programlisting">void                glade_base_editor_add_label         (<a class="link" href="gladeui-GladeBaseEditor.html#GladeBaseEditor" title="GladeBaseEditor">GladeBaseEditor</a> *editor,
                                                          gchar *str);</pre>
 <p>
 Adds a new label to <em class="parameter"><code>editor</code></em>
@@ -237,12 +225,12 @@ NOTE: This function is intended to be used in "child-selected" callbacks</p>
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><span class="term"><em class="parameter"><code>editor</code></em>&#160;:</span></td>
-<td> a <a href="gladeui-GladeBaseEditor.html#GladeBaseEditor"><span class="type">GladeBaseEditor</span></a>
+<td><p><span class="term"><em class="parameter"><code>editor</code></em> :</span></p></td>
+<td> a <a class="link" href="gladeui-GladeBaseEditor.html#GladeBaseEditor" title="GladeBaseEditor"><span class="type">GladeBaseEditor</span></a>
 </td>
 </tr>
 <tr>
-<td><span class="term"><em class="parameter"><code>str</code></em>&#160;:</span></td>
+<td><p><span class="term"><em class="parameter"><code>str</code></em> :</span></p></td>
 <td> the label string
 </td>
 </tr>
@@ -251,9 +239,8 @@ NOTE: This function is intended to be used in "child-selected" callbacks</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id418752"></a><h3>
-<a name="glade-base-editor-add-popup-items"></a>glade_base_editor_add_popup_items ()</h3>
-<a class="indexterm" name="id418765"></a><pre class="programlisting">void                glade_base_editor_add_popup_items   (<a href="gladeui-GladeBaseEditor.html#GladeBaseEditor">GladeBaseEditor</a> *editor,
+<a name="glade-base-editor-add-popup-items"></a><h3>glade_base_editor_add_popup_items ()</h3>
+<pre class="programlisting">void                glade_base_editor_add_popup_items   (<a class="link" href="gladeui-GladeBaseEditor.html#GladeBaseEditor" title="GladeBaseEditor">GladeBaseEditor</a> *editor,
                                                          ...);</pre>
 <p>
 Adds a new popup item to the editor.
@@ -268,12 +255,12 @@ Three parameters are needed for each new popup item:
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><span class="term"><em class="parameter"><code>editor</code></em>&#160;:</span></td>
-<td> a <a href="gladeui-GladeBaseEditor.html#GladeBaseEditor"><span class="type">GladeBaseEditor</span></a>
+<td><p><span class="term"><em class="parameter"><code>editor</code></em> :</span></p></td>
+<td> a <a class="link" href="gladeui-GladeBaseEditor.html#GladeBaseEditor" title="GladeBaseEditor"><span class="type">GladeBaseEditor</span></a>
 </td>
 </tr>
 <tr>
-<td><span class="term"><em class="parameter"><code>...</code></em>&#160;:</span></td>
+<td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
 <td> a NULL terminated list of gchar *, <span class="type">GType</span>, gboolean
 </td>
 </tr>
@@ -282,10 +269,9 @@ Three parameters are needed for each new popup item:
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id418845"></a><h3>
-<a name="glade-base-editor-set-show-signal-editor"></a>glade_base_editor_set_show_signal_editor ()</h3>
-<a class="indexterm" name="id418859"></a><pre class="programlisting">void                glade_base_editor_set_show_signal_editor
-                                                        (<a href="gladeui-GladeBaseEditor.html#GladeBaseEditor">GladeBaseEditor</a> *editor,
+<a name="glade-base-editor-set-show-signal-editor"></a><h3>glade_base_editor_set_show_signal_editor ()</h3>
+<pre class="programlisting">void                glade_base_editor_set_show_signal_editor
+                                                        (<a class="link" href="gladeui-GladeBaseEditor.html#GladeBaseEditor" title="GladeBaseEditor">GladeBaseEditor</a> *editor,
                                                          gboolean val);</pre>
 <p>
 Shows/hide <em class="parameter"><code>editor</code></em> 's signal editor</p>
@@ -296,12 +282,12 @@ Shows/hide <em class="parameter"><code>editor</code></em> 's signal editor</p>
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><span class="term"><em class="parameter"><code>editor</code></em>&#160;:</span></td>
-<td> a <a href="gladeui-GladeBaseEditor.html#GladeBaseEditor"><span class="type">GladeBaseEditor</span></a>
+<td><p><span class="term"><em class="parameter"><code>editor</code></em> :</span></p></td>
+<td> a <a class="link" href="gladeui-GladeBaseEditor.html#GladeBaseEditor" title="GladeBaseEditor"><span class="type">GladeBaseEditor</span></a>
 </td>
 </tr>
 <tr>
-<td><span class="term"><em class="parameter"><code>val</code></em>&#160;:</span></td>
+<td><p><span class="term"><em class="parameter"><code>val</code></em> :</span></p></td>
 <td>
 </td>
 </tr>
@@ -310,9 +296,8 @@ Shows/hide <em class="parameter"><code>editor</code></em> 's signal editor</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id418943"></a><h3>
-<a name="glade-base-editor-pack-new-window"></a>glade_base_editor_pack_new_window ()</h3>
-<a class="indexterm" name="id418956"></a><pre class="programlisting">GtkWidget*          glade_base_editor_pack_new_window   (<a href="gladeui-GladeBaseEditor.html#GladeBaseEditor">GladeBaseEditor</a> *editor,
+<a name="glade-base-editor-pack-new-window"></a><h3>glade_base_editor_pack_new_window ()</h3>
+<pre class="programlisting">GtkWidget*          glade_base_editor_pack_new_window   (<a class="link" href="gladeui-GladeBaseEditor.html#GladeBaseEditor" title="GladeBaseEditor">GladeBaseEditor</a> *editor,
                                                          gchar *title,
                                                          gchar *help_markup);</pre>
 <p>
@@ -324,22 +309,22 @@ This convenience function create a new modal window and packs <em class="paramet
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><span class="term"><em class="parameter"><code>editor</code></em>&#160;:</span></td>
-<td> a <a href="gladeui-GladeBaseEditor.html#GladeBaseEditor"><span class="type">GladeBaseEditor</span></a>
+<td><p><span class="term"><em class="parameter"><code>editor</code></em> :</span></p></td>
+<td> a <a class="link" href="gladeui-GladeBaseEditor.html#GladeBaseEditor" title="GladeBaseEditor"><span class="type">GladeBaseEditor</span></a>
 </td>
 </tr>
 <tr>
-<td><span class="term"><em class="parameter"><code>title</code></em>&#160;:</span></td>
+<td><p><span class="term"><em class="parameter"><code>title</code></em> :</span></p></td>
 <td> the window title
 </td>
 </tr>
 <tr>
-<td><span class="term"><em class="parameter"><code>help_markup</code></em>&#160;:</span></td>
+<td><p><span class="term"><em class="parameter"><code>help_markup</code></em> :</span></p></td>
 <td> the help text
 </td>
 </tr>
 <tr>
-<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>the newly created window
 </td>
 </tr>
@@ -348,5 +333,8 @@ This convenience function create a new modal window and packs <em class="paramet
 </div>
 </div>
 </div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.10</div>
 </body>
 </html>

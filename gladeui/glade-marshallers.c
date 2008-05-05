@@ -60,10 +60,10 @@ extern void glade_marshal_VOID__POINTER_POINTER (GClosure     *closure,
                                                  gpointer      marshal_data);
 void
 glade_marshal_VOID__POINTER_POINTER (GClosure     *closure,
-                                     GValue       *return_value,
+                                     GValue       *return_value G_GNUC_UNUSED,
                                      guint         n_param_values,
                                      const GValue *param_values,
-                                     gpointer      invocation_hint,
+                                     gpointer      invocation_hint G_GNUC_UNUSED,
                                      gpointer      marshal_data)
 {
   typedef void (*GMarshalFunc_VOID__POINTER_POINTER) (gpointer     data1,
@@ -103,10 +103,10 @@ extern void glade_marshal_VOID__STRING_ULONG_UINT_STRING (GClosure     *closure,
                                                           gpointer      marshal_data);
 void
 glade_marshal_VOID__STRING_ULONG_UINT_STRING (GClosure     *closure,
-                                              GValue       *return_value,
+                                              GValue       *return_value G_GNUC_UNUSED,
                                               guint         n_param_values,
                                               const GValue *param_values,
-                                              gpointer      invocation_hint,
+                                              gpointer      invocation_hint G_GNUC_UNUSED,
                                               gpointer      marshal_data)
 {
   typedef void (*GMarshalFunc_VOID__STRING_ULONG_UINT_STRING) (gpointer     data1,
@@ -153,10 +153,10 @@ extern void glade_marshal_VOID__OBJECT_BOOLEAN (GClosure     *closure,
                                                 gpointer      marshal_data);
 void
 glade_marshal_VOID__OBJECT_BOOLEAN (GClosure     *closure,
-                                    GValue       *return_value,
+                                    GValue       *return_value G_GNUC_UNUSED,
                                     guint         n_param_values,
                                     const GValue *param_values,
-                                    gpointer      invocation_hint,
+                                    gpointer      invocation_hint G_GNUC_UNUSED,
                                     gpointer      marshal_data)
 {
   typedef void (*GMarshalFunc_VOID__OBJECT_BOOLEAN) (gpointer     data1,
@@ -196,10 +196,10 @@ extern void glade_marshal_VOID__STRING_STRING_STRING (GClosure     *closure,
                                                       gpointer      marshal_data);
 void
 glade_marshal_VOID__STRING_STRING_STRING (GClosure     *closure,
-                                          GValue       *return_value,
+                                          GValue       *return_value G_GNUC_UNUSED,
                                           guint         n_param_values,
                                           const GValue *param_values,
-                                          gpointer      invocation_hint,
+                                          gpointer      invocation_hint G_GNUC_UNUSED,
                                           gpointer      marshal_data)
 {
   typedef void (*GMarshalFunc_VOID__STRING_STRING_STRING) (gpointer     data1,
@@ -241,10 +241,10 @@ extern void glade_marshal_OBJECT__POINTER (GClosure     *closure,
                                            gpointer      marshal_data);
 void
 glade_marshal_OBJECT__POINTER (GClosure     *closure,
-                               GValue       *return_value,
+                               GValue       *return_value G_GNUC_UNUSED,
                                guint         n_param_values,
                                const GValue *param_values,
-                               gpointer      invocation_hint,
+                               gpointer      invocation_hint G_GNUC_UNUSED,
                                gpointer      marshal_data)
 {
   typedef GObject* (*GMarshalFunc_OBJECT__POINTER) (gpointer     data1,
@@ -286,10 +286,10 @@ extern void glade_marshal_OBJECT__OBJECT_UINT (GClosure     *closure,
                                                gpointer      marshal_data);
 void
 glade_marshal_OBJECT__OBJECT_UINT (GClosure     *closure,
-                                   GValue       *return_value,
+                                   GValue       *return_value G_GNUC_UNUSED,
                                    guint         n_param_values,
                                    const GValue *param_values,
-                                   gpointer      invocation_hint,
+                                   gpointer      invocation_hint G_GNUC_UNUSED,
                                    gpointer      marshal_data)
 {
   typedef GObject* (*GMarshalFunc_OBJECT__OBJECT_UINT) (gpointer     data1,
@@ -333,10 +333,10 @@ extern void glade_marshal_BOOLEAN__STRING (GClosure     *closure,
                                            gpointer      marshal_data);
 void
 glade_marshal_BOOLEAN__STRING (GClosure     *closure,
-                               GValue       *return_value,
+                               GValue       *return_value G_GNUC_UNUSED,
                                guint         n_param_values,
                                const GValue *param_values,
-                               gpointer      invocation_hint,
+                               gpointer      invocation_hint G_GNUC_UNUSED,
                                gpointer      marshal_data)
 {
   typedef gboolean (*GMarshalFunc_BOOLEAN__STRING) (gpointer     data1,
@@ -378,10 +378,10 @@ extern void glade_marshal_BOOLEAN__BOXED (GClosure     *closure,
                                           gpointer      marshal_data);
 void
 glade_marshal_BOOLEAN__BOXED (GClosure     *closure,
-                              GValue       *return_value,
+                              GValue       *return_value G_GNUC_UNUSED,
                               guint         n_param_values,
                               const GValue *param_values,
-                              gpointer      invocation_hint,
+                              gpointer      invocation_hint G_GNUC_UNUSED,
                               gpointer      marshal_data)
 {
   typedef gboolean (*GMarshalFunc_BOOLEAN__BOXED) (gpointer     data1,
@@ -423,10 +423,10 @@ extern void glade_marshal_BOOLEAN__OBJECT (GClosure     *closure,
                                            gpointer      marshal_data);
 void
 glade_marshal_BOOLEAN__OBJECT (GClosure     *closure,
-                               GValue       *return_value,
+                               GValue       *return_value G_GNUC_UNUSED,
                                guint         n_param_values,
                                const GValue *param_values,
-                               gpointer      invocation_hint,
+                               gpointer      invocation_hint G_GNUC_UNUSED,
                                gpointer      marshal_data)
 {
   typedef gboolean (*GMarshalFunc_BOOLEAN__OBJECT) (gpointer     data1,
@@ -468,10 +468,10 @@ extern void glade_marshal_BOOLEAN__OBJECT_BOXED (GClosure     *closure,
                                                  gpointer      marshal_data);
 void
 glade_marshal_BOOLEAN__OBJECT_BOXED (GClosure     *closure,
-                                     GValue       *return_value,
+                                     GValue       *return_value G_GNUC_UNUSED,
                                      guint         n_param_values,
                                      const GValue *param_values,
-                                     gpointer      invocation_hint,
+                                     gpointer      invocation_hint G_GNUC_UNUSED,
                                      gpointer      marshal_data)
 {
   typedef gboolean (*GMarshalFunc_BOOLEAN__OBJECT_BOXED) (gpointer     data1,
@@ -515,10 +515,10 @@ extern void glade_marshal_BOOLEAN__OBJECT_POINTER (GClosure     *closure,
                                                    gpointer      marshal_data);
 void
 glade_marshal_BOOLEAN__OBJECT_POINTER (GClosure     *closure,
-                                       GValue       *return_value,
+                                       GValue       *return_value G_GNUC_UNUSED,
                                        guint         n_param_values,
                                        const GValue *param_values,
-                                       gpointer      invocation_hint,
+                                       gpointer      invocation_hint G_GNUC_UNUSED,
                                        gpointer      marshal_data)
 {
   typedef gboolean (*GMarshalFunc_BOOLEAN__OBJECT_POINTER) (gpointer     data1,
@@ -562,10 +562,10 @@ extern void glade_marshal_BOOLEAN__OBJECT_BOOLEAN (GClosure     *closure,
                                                    gpointer      marshal_data);
 void
 glade_marshal_BOOLEAN__OBJECT_BOOLEAN (GClosure     *closure,
-                                       GValue       *return_value,
+                                       GValue       *return_value G_GNUC_UNUSED,
                                        guint         n_param_values,
                                        const GValue *param_values,
-                                       gpointer      invocation_hint,
+                                       gpointer      invocation_hint G_GNUC_UNUSED,
                                        gpointer      marshal_data)
 {
   typedef gboolean (*GMarshalFunc_BOOLEAN__OBJECT_BOOLEAN) (gpointer     data1,
@@ -609,10 +609,10 @@ extern void glade_marshal_BOOLEAN__OBJECT_UINT (GClosure     *closure,
                                                 gpointer      marshal_data);
 void
 glade_marshal_BOOLEAN__OBJECT_UINT (GClosure     *closure,
-                                    GValue       *return_value,
+                                    GValue       *return_value G_GNUC_UNUSED,
                                     guint         n_param_values,
                                     const GValue *param_values,
-                                    gpointer      invocation_hint,
+                                    gpointer      invocation_hint G_GNUC_UNUSED,
                                     gpointer      marshal_data)
 {
   typedef gboolean (*GMarshalFunc_BOOLEAN__OBJECT_UINT) (gpointer     data1,
@@ -656,10 +656,10 @@ extern void glade_marshal_BOOLEAN__OBJECT_OBJECT (GClosure     *closure,
                                                   gpointer      marshal_data);
 void
 glade_marshal_BOOLEAN__OBJECT_OBJECT (GClosure     *closure,
-                                      GValue       *return_value,
+                                      GValue       *return_value G_GNUC_UNUSED,
                                       guint         n_param_values,
                                       const GValue *param_values,
-                                      gpointer      invocation_hint,
+                                      gpointer      invocation_hint G_GNUC_UNUSED,
                                       gpointer      marshal_data)
 {
   typedef gboolean (*GMarshalFunc_BOOLEAN__OBJECT_OBJECT) (gpointer     data1,
@@ -703,10 +703,10 @@ extern void glade_marshal_BOOLEAN__OBJECT_STRING (GClosure     *closure,
                                                   gpointer      marshal_data);
 void
 glade_marshal_BOOLEAN__OBJECT_STRING (GClosure     *closure,
-                                      GValue       *return_value,
+                                      GValue       *return_value G_GNUC_UNUSED,
                                       guint         n_param_values,
                                       const GValue *param_values,
-                                      gpointer      invocation_hint,
+                                      gpointer      invocation_hint G_GNUC_UNUSED,
                                       gpointer      marshal_data)
 {
   typedef gboolean (*GMarshalFunc_BOOLEAN__OBJECT_STRING) (gpointer     data1,
@@ -750,10 +750,10 @@ extern void glade_marshal_STRING__OBJECT (GClosure     *closure,
                                           gpointer      marshal_data);
 void
 glade_marshal_STRING__OBJECT (GClosure     *closure,
-                              GValue       *return_value,
+                              GValue       *return_value G_GNUC_UNUSED,
                               guint         n_param_values,
                               const GValue *param_values,
-                              gpointer      invocation_hint,
+                              gpointer      invocation_hint G_GNUC_UNUSED,
                               gpointer      marshal_data)
 {
   typedef gchar* (*GMarshalFunc_STRING__OBJECT) (gpointer     data1,

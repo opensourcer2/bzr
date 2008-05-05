@@ -1,19 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Widget Class Definitions</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.72.0">
+<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
 <link rel="start" href="index.html" title="Glade UI Builder Reference Manual">
-<link rel="up" href="catalog.html" title="Part&#160;I.&#160;Adding your custom widgets">
+<link rel="up" href="catalog.html" title="Part I. Adding your custom widgets">
 <link rel="prev" href="catalogintro.html" title="Introducing the Glade Catalog">
 <link rel="next" href="properties.html" title="Property Class Definitions">
-<meta name="generator" content="GTK-Doc V1.8 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.10 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="part" href="catalog.html" title="Part&#160;I.&#160;Adding your custom widgets">
-<link rel="part" href="core.html" title="Part&#160;II.&#160;Glade Core">
-<link rel="part" href="dockables.html" title="Part&#160;III.&#160;Dockable Glade UI Widgets">
-<link rel="part" href="misc.html" title="Part&#160;IV.&#160;Miscellaneous utilities">
+<link rel="part" href="catalog.html" title="Part I. Adding your custom widgets">
+<link rel="part" href="core.html" title="Part II. Glade Core">
+<link rel="part" href="dockables.html" title="Part III. Dockable Glade UI Widgets">
+<link rel="part" href="misc.html" title="Part IV. Miscellaneous utilities">
 <link rel="index" href="ix01.html" title="Index">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -29,14 +29,14 @@
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
 <h2><span class="refentrytitle">Widget Class Definitions</span></h2>
-<p>Widget Classes &#8212; 
+<p>Widget Classes — 
 Adding support for custom widgets 
     </p>
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
 <div class="refsect1" lang="en">
-<a name="id325890"></a><h2>Forward</h2>
+<a name="id342371"></a><h2>Forward</h2>
 <p>
 <span class="type">GladeWidgetClass</span> stuctures are added to a global pool using the `glade-widget-class' tag
 and then later added to the palette through the `glade-widget-group' section; class-wide
@@ -78,12 +78,12 @@ To delve further into details; the complex layout looks like this:
     </p>
 </div>
 <div class="refsect1" lang="en">
-<a name="id326270"></a><h2>Widget Class Parameters</h2>
+<a name="id342737"></a><h2>Widget Class Parameters</h2>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><span class="term">name</span></td>
+<td><p><span class="term">name</span></p></td>
 <td><p>
 The 'name' property is the class name of the widget; unless the 'get-type-function'
 property is present, this will essentially be used to instantiate the actual class 
@@ -92,7 +92,7 @@ in the support library.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">get-type-function</span></td>
+<td><p><span class="term">get-type-function</span></p></td>
 <td><p>
 The 'get-type-function' property is used to explicitly specify the name of the 
 function used to get the type of the widget.  It is optional, but if it is not
@@ -101,7 +101,7 @@ a process that could lead to unexpected results.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">generic-name</span></td>
+<td><p><span class="term">generic-name</span></p></td>
 <td><p>
 The 'generic-name' is used to generate a default name for instances of the
 widget in the UI editor. It is also used in conjunction with the 'icon-prefix'
@@ -109,7 +109,7 @@ to form an icon name for the widget.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">icon-name</span></td>
+<td><p><span class="term">icon-name</span></p></td>
 <td><p>
 The 'icon-name' property is used to explicitly set an icon name for this widget.
 These icon names are looked up in the current icon theme to retrieve an icon for
@@ -117,29 +117,29 @@ the widget.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">title</span></td>
+<td><p><span class="term">title</span></p></td>
 <td><p>
 The'title' property is used to display the name of the class in the palette and widget 
 tree and will be translated before use in the interface.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">toplevel</span></td>
+<td><p><span class="term">toplevel</span></p></td>
 <td><p>
 The'toplevel' property is used to know whether this widget class is toplevel or not
 in Glade context.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">post-create-function</span></td>
+<td><p><span class="term">post-create-function</span></p></td>
 <td><p>
-The 'post-create-function' tag is a <a href="gladeui-GladeWidgetAdaptor.html#GladePostCreateFunc"><span class="type">GladePostCreateFunc</span></a> support function that
+The 'post-create-function' tag is a <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladePostCreateFunc" title="GladePostCreateFunc ()"><span class="type">GladePostCreateFunc</span></a> support function that
 gets called whenever a widget of 'this class' (or a widget derived from 'this class' 
 that didn't provide its own post-create-function) is instantiated.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">launch-editor-function</span></td>
+<td><p><span class="term">launch-editor-function</span></p></td>
 <td><p>
 The 'launch-editor-function' tag is a <span class="type">GladeEditorLaunchFunc</span> support function used to 
 launch a custom editor for this class; a good example for this is the <span class="type">GtkMenuBar</span> 
@@ -147,9 +147,9 @@ which needs a special editor in order to be easier to use.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">get-internal-child-function</span></td>
+<td><p><span class="term">get-internal-child-function</span></p></td>
 <td><p>
-The 'get-internal-child-function' tag is a <a href="gladeui-GladeWidgetAdaptor.html#GladeGetInternalFunc"><span class="type">GladeGetInternalFunc</span></a> support function 
+The 'get-internal-child-function' tag is a <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeGetInternalFunc" title="GladeGetInternalFunc ()"><span class="type">GladeGetInternalFunc</span></a> support function 
 used to retrieve an internal child of a composite object (like a button in a 
 filechooser or something); support for internal children must also be added to
 your application via libglade.
@@ -159,7 +159,7 @@ your application via libglade.
 </table></div>
 </div>
 <div class="refsect1" lang="en">
-<a name="id326448"></a><h2>Icons</h2>
+<a name="id342903"></a><h2>Icons</h2>
 <p>The Glade palette and other components use icons to represent the various widget classes. 
   It is a good idea to provide icons for your widget classes, as this
   enhances the user interface.</p>
@@ -175,7 +175,7 @@ your application via libglade.
 <pre class="programlisting">pkg-config --variable=pixmapdir gladeui-1.0</pre>
 </div>
 <div class="refsect1" lang="en">
-<a name="id326486"></a><h2>Grouping widget classes in the catalog</h2>
+<a name="id342940"></a><h2>Grouping widget classes in the catalog</h2>
 <p>
 The widgets are groups in different groups in the Glade UI. Those groups
 are defined in the catalog file as follows:
@@ -194,5 +194,8 @@ The file should contain one or more widget groups.
     </p>
 </div>
 </div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.10</div>
 </body>
 </html>

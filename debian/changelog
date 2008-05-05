@@ -1,3 +1,19 @@
+glade-3 (3.4.5-0ubuntu1) hardy-proposed; urgency=low
+
+  * New upstream version
+    - Fixed annoying text editing bug (lp: #212103)
+
+ -- Sebastien Bacher <seb128@canonical.com>  Mon, 05 May 2008 23:21:40 +0200
+
+glade-3 (3.4.4-0ubuntu1) hardy-proposed; urgency=low
+
+  * New upstream version
+    - Now first toplevel in project automatically shows up in the workspace
+    - Project no longer allows duplicate widget names
+    - Fixed bugs 528511, and 528552. (lp: #201648)
+
+ -- Sebastien Bacher <seb128@canonical.com>  Mon, 05 May 2008 14:21:05 +0200
+
 glade-3 (3.4.2-0ubuntu2) hardy; urgency=low
 
   * debian/control.in, debian/patches/01_launchpad-integration.patch,
