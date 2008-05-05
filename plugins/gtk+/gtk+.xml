@@ -765,23 +765,8 @@
       </properties>
     </glade-widget-class>
 
-    <glade-widget-class name="GtkScaleButton" generic-name="scalebutton" title="Scale Button">
-      <properties>
-        <property id="size">
-  	  <displayable-values>
-	    <value id="GTK_ICON_SIZE_INVALID" name="Invalid"></value>
-	    <value id="GTK_ICON_SIZE_MENU" name="Menu"></value>
-	    <value id="GTK_ICON_SIZE_SMALL_TOOLBAR" name="Small Toolbar"></value>
-	    <value id="GTK_ICON_SIZE_LARGE_TOOLBAR" name="Large Toolbar"></value>
-	    <value id="GTK_ICON_SIZE_BUTTON" name="Button"></value>
-	    <value id="GTK_ICON_SIZE_DND" name="Drag'n Drop"></value>
-	    <value id="GTK_ICON_SIZE_DIALOG" name="Dialog"></value>
-	  </displayable-values>
-        </property>
-      </properties>
-    </glade-widget-class>
-
-    <glade-widget-class name="GtkVolumeButton" generic-name="volumebutton" title="Volume Button"></glade-widget-class>
+    
+    
 
     <glade-widget-class name="GtkFileChooserWidget" generic-name="filechooserwidget" title="File Chooser Widget">
       <post-create-function>glade_gtk_file_chooser_widget_post_create</post-create-function>
@@ -1676,8 +1661,9 @@
     <glade-widget-class-ref name="GtkColorButton"/>
     <glade-widget-class-ref name="GtkFontButton"/>
     <glade-widget-class-ref name="GtkLinkButton"/>
-    <glade-widget-class-ref name="GtkScaleButton"/>
-    <glade-widget-class-ref name="GtkVolumeButton"/>
+
+
+    
 
     <glade-widget-class-ref name="GtkImage"/>
     <glade-widget-class-ref name="GtkLabel"/>

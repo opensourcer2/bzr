@@ -1,6 +1,6 @@
 <refentry id="gladeui-glade-signal-editor">
 <refmeta>
-<refentrytitle role="top_of_page">GladeSignalEditor</refentrytitle>
+<refentrytitle role="top_of_page" id="gladeui-glade-signal-editor.top_of_page">GladeSignalEditor</refentrytitle>
 <manvolnum>3</manvolnum>
 <refmiscinfo>GLADEUI Library</refmiscinfo>
 </refmeta>
@@ -11,19 +11,15 @@
 <!--[<xref linkend="desc" endterm="desc.title"/>]-->
 </refnamediv>
 
-<refsynopsisdiv role="synopsis">
+<refsynopsisdiv id="gladeui-glade-signal-editor.synopsis" role="synopsis">
 <title role="synopsis.title">Synopsis</title>
 
 <synopsis>
-
-
-
                     <link linkend="GladeSignalEditor">GladeSignalEditor</link>;
 <link linkend="GtkWidget">GtkWidget</link>*          <link linkend="glade-signal-editor-get-widget">glade_signal_editor_get_widget</link>      (<link linkend="GladeSignalEditor">GladeSignalEditor</link> *editor);
 <link linkend="GladeSignalEditor">GladeSignalEditor</link>*  <link linkend="glade-signal-editor-new">glade_signal_editor_new</link>             (<link linkend="gpointer">gpointer</link> *editor);
 <link linkend="void">void</link>                <link linkend="glade-signal-editor-load-widget">glade_signal_editor_load_widget</link>     (<link linkend="GladeSignalEditor">GladeSignalEditor</link> *editor,
                                                          <link linkend="GladeWidget">GladeWidget</link> *widget);
-
 </synopsis>
 </refsynopsisdiv>
 
@@ -35,7 +31,7 @@
 
 
 
-<refsect1 role="desc">
+<refsect1 id="gladeui-glade-signal-editor.description" role="desc">
 <title role="desc.title">Description</title>
 <para>
 This isnt really a dockable widget, since you need to access the
@@ -46,11 +42,11 @@ is mostly of interest when implementing a custom object editor.</para>
 </para>
 </refsect1>
 
-<refsect1 role="details">
+<refsect1 id="gladeui-glade-signal-editor.details" role="details">
 <title role="details.title">Details</title>
-<refsect2>
-<title><anchor id="GladeSignalEditor" role="struct"/>GladeSignalEditor</title>
-<indexterm><primary>GladeSignalEditor</primary></indexterm><programlisting>typedef struct {
+<refsect2 id="GladeSignalEditor" role="struct">
+<title>GladeSignalEditor</title>
+<indexterm zone="GladeSignalEditor"><primary>GladeSignalEditor</primary></indexterm><programlisting>typedef struct {
 	GtkWidget *main_window;  /* A vbox where all the widgets are added */
 
 	GladeWidget *widget;
@@ -70,9 +66,9 @@ is mostly of interest when implementing a custom object editor.</para>
 <para>
 
 </para></refsect2>
-<refsect2>
-<title><anchor id="glade-signal-editor-get-widget" role="function"/>glade_signal_editor_get_widget ()</title>
-<indexterm><primary>glade_signal_editor_get_widget</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*          glade_signal_editor_get_widget      (<link linkend="GladeSignalEditor">GladeSignalEditor</link> *editor);</programlisting>
+<refsect2 id="glade-signal-editor-get-widget" role="function">
+<title>glade_signal_editor_get_widget ()</title>
+<indexterm zone="glade-signal-editor-get-widget"><primary>glade_signal_editor_get_widget</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*          glade_signal_editor_get_widget      (<link linkend="GladeSignalEditor">GladeSignalEditor</link> *editor);</programlisting>
 <para>
 </para>
 <para>
@@ -85,9 +81,9 @@ is mostly of interest when implementing a custom object editor.</para>
          it does not exist
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-signal-editor-new" role="function"/>glade_signal_editor_new ()</title>
-<indexterm><primary>glade_signal_editor_new</primary></indexterm><programlisting><link linkend="GladeSignalEditor">GladeSignalEditor</link>*  glade_signal_editor_new             (<link linkend="gpointer">gpointer</link> *editor);</programlisting>
+<refsect2 id="glade-signal-editor-new" role="function">
+<title>glade_signal_editor_new ()</title>
+<indexterm zone="glade-signal-editor-new"><primary>glade_signal_editor_new</primary></indexterm><programlisting><link linkend="GladeSignalEditor">GladeSignalEditor</link>*  glade_signal_editor_new             (<link linkend="gpointer">gpointer</link> *editor);</programlisting>
 <para>
 </para>
 <para>
@@ -99,9 +95,9 @@ is mostly of interest when implementing a custom object editor.</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a new <link linkend="GladeSignalEditor"><type>GladeSignalEditor</type></link> associated with <parameter>editor</parameter>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-signal-editor-load-widget" role="function"/>glade_signal_editor_load_widget ()</title>
-<indexterm><primary>glade_signal_editor_load_widget</primary></indexterm><programlisting><link linkend="void">void</link>                glade_signal_editor_load_widget     (<link linkend="GladeSignalEditor">GladeSignalEditor</link> *editor,
+<refsect2 id="glade-signal-editor-load-widget" role="function">
+<title>glade_signal_editor_load_widget ()</title>
+<indexterm zone="glade-signal-editor-load-widget"><primary>glade_signal_editor_load_widget</primary></indexterm><programlisting><link linkend="void">void</link>                glade_signal_editor_load_widget     (<link linkend="GladeSignalEditor">GladeSignalEditor</link> *editor,
                                                          <link linkend="GladeWidget">GladeWidget</link> *widget);</programlisting>
 <para>
 TODO: write me</para>

@@ -1,3 +1,50 @@
+2008-05-05  Tristan Van Berkom <tvb@gnome.org>
+
+	* NEWS, configure.ac: Rolling 3.4.5
+	
+	* gladeui/glade-editor-property.c: Avoid feedback loops when committing properties,
+	  fixes bug 527896.
+
+	* src/glade-window.c: Updated copyright dates.
+
+2008-04-18  Tristan Van Berkom <tvb@gnome.org>
+
+	* NEWS, configure.ac: Rolling 3.4.4
+	
+	* gladeui/glade-utils.h: removed trailing function prototype (bug 528552)
+
+2008-04-17  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* gladeui/glade-property-class.[ch]: added glade_property_class_compare()
+	
+	* gladeui/glade-editor-property.c: use new compare function in
+	  glade_editor_property_commit() instead of g_param_values_cmp()
+	  since GBoxed comparison is not well defined.
+	  Fixes bug #528511.
+
+2008-03-10  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-app.c: Now if an empty project is loaded
+	  and anothther project with widgets is loaded, they will
+	  also be shown at load time (first widget in the layout
+	  gets autoloaded).
+
+	* gladeui/glade-id-allocator.c: Avoid crashing on id 0 (bug 442860)
+
+	* gladeui/glade-widget.c, gladeui/glade-project.c: Moved
+	  widget name policing to gladeproject.
+
+	* gladeui/glade-editor.c: Dont commit name values if name
+	  already exists in the project.
+
+2008-03-10  Tristan Van Berkom <tvb@gnome.org>
+
+	* NEWS, configure.ac: Rolling 3.4.3
+
+	* plugins/gtk+/gtk+.xml.in: Backing out GtkScaleButton
+	  and GtkVolumeButton as they introduce strings.
+	
+
 2008-03-09  Tristan Van Berkom <tvb@gnome.org>
 
 	* NEWS, configure.ac: Rolling 3.4.2

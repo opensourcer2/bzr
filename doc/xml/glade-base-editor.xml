@@ -1,6 +1,6 @@
 <refentry id="gladeui-GladeBaseEditor">
 <refmeta>
-<refentrytitle role="top_of_page">GladeBaseEditor</refentrytitle>
+<refentrytitle role="top_of_page" id="gladeui-GladeBaseEditor.top_of_page">GladeBaseEditor</refentrytitle>
 <manvolnum>3</manvolnum>
 <refmiscinfo>GLADEUI Library</refmiscinfo>
 </refmeta>
@@ -11,13 +11,10 @@
 <!--[<xref linkend="desc" endterm="desc.title"/>]-->
 </refnamediv>
 
-<refsynopsisdiv role="synopsis">
+<refsynopsisdiv id="gladeui-GladeBaseEditor.synopsis" role="synopsis">
 <title role="synopsis.title">Synopsis</title>
 
 <synopsis>
-
-
-
                     <link linkend="GladeBaseEditorPrivate">GladeBaseEditorPrivate</link>;
                     <link linkend="GladeBaseEditor">GladeBaseEditor</link>;
 <link linkend="GladeBaseEditor">GladeBaseEditor</link>*    <link linkend="glade-base-editor-new">glade_base_editor_new</link>               (<link linkend="GObject">GObject</link> *container,
@@ -40,7 +37,6 @@
 <link linkend="GtkWidget">GtkWidget</link>*          <link linkend="glade-base-editor-pack-new-window">glade_base_editor_pack_new_window</link>   (<link linkend="GladeBaseEditor">GladeBaseEditor</link> *editor,
                                                          <link linkend="gchar">gchar</link> *title,
                                                          <link linkend="gchar">gchar</link> *help_markup);
-
 </synopsis>
 </refsynopsisdiv>
 
@@ -52,7 +48,7 @@
 
 
 
-<refsect1 role="desc">
+<refsect1 id="gladeui-GladeBaseEditor.description" role="desc">
 <title role="desc.title">Description</title>
 <para>
 Convenience object to edit containers where placeholders do not make sense, like GtkMenubar.</para>
@@ -61,17 +57,17 @@ Convenience object to edit containers where placeholders do not make sense, like
 </para>
 </refsect1>
 
-<refsect1 role="details">
+<refsect1 id="gladeui-GladeBaseEditor.details" role="details">
 <title role="details.title">Details</title>
-<refsect2>
-<title><anchor id="GladeBaseEditorPrivate" role="struct"/>GladeBaseEditorPrivate</title>
-<indexterm><primary>GladeBaseEditorPrivate</primary></indexterm><programlisting>typedef struct _GladeBaseEditorPrivate GladeBaseEditorPrivate;</programlisting>
+<refsect2 id="GladeBaseEditorPrivate" role="struct">
+<title>GladeBaseEditorPrivate</title>
+<indexterm zone="GladeBaseEditorPrivate"><primary>GladeBaseEditorPrivate</primary></indexterm><programlisting>typedef struct _GladeBaseEditorPrivate GladeBaseEditorPrivate;</programlisting>
 <para>
 
 </para></refsect2>
-<refsect2>
-<title><anchor id="GladeBaseEditor" role="struct"/>GladeBaseEditor</title>
-<indexterm><primary>GladeBaseEditor</primary></indexterm><programlisting>typedef struct {
+<refsect2 id="GladeBaseEditor" role="struct">
+<title>GladeBaseEditor</title>
+<indexterm zone="GladeBaseEditor"><primary>GladeBaseEditor</primary></indexterm><programlisting>typedef struct {
 	GtkVBox parent;
 
 	GladeBaseEditorPrivate *priv;
@@ -80,9 +76,9 @@ Convenience object to edit containers where placeholders do not make sense, like
 <para>
 
 </para></refsect2>
-<refsect2>
-<title><anchor id="glade-base-editor-new" role="function"/>glade_base_editor_new ()</title>
-<indexterm><primary>glade_base_editor_new</primary></indexterm><programlisting><link linkend="GladeBaseEditor">GladeBaseEditor</link>*    glade_base_editor_new               (<link linkend="GObject">GObject</link> *container,
+<refsect2 id="glade-base-editor-new" role="function">
+<title>glade_base_editor_new ()</title>
+<indexterm zone="glade-base-editor-new"><primary>glade_base_editor_new</primary></indexterm><programlisting><link linkend="GladeBaseEditor">GladeBaseEditor</link>*    glade_base_editor_new               (<link linkend="GObject">GObject</link> *container,
                                                          <link linkend="gboolean">gboolean</link> tree_like,
                                                          ...);</programlisting>
 <para>
@@ -107,9 +103,9 @@ Argument List:
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>a new GladeBaseEditor.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-base-editor-add-default-properties" role="function"/>glade_base_editor_add_default_properties ()</title>
-<indexterm><primary>glade_base_editor_add_default_properties</primary></indexterm><programlisting><link linkend="void">void</link>                glade_base_editor_add_default_properties
+<refsect2 id="glade-base-editor-add-default-properties" role="function">
+<title>glade_base_editor_add_default_properties ()</title>
+<indexterm zone="glade-base-editor-add-default-properties"><primary>glade_base_editor_add_default_properties</primary></indexterm><programlisting><link linkend="void">void</link>                glade_base_editor_add_default_properties
                                                         (<link linkend="GladeBaseEditor">GladeBaseEditor</link> *editor,
                                                          <link linkend="GladeWidget">GladeWidget</link> *gchild);</programlisting>
 <para>
@@ -127,9 +123,9 @@ NOTE: This function is intended to be used in "child-selected" callbacks</para>
 <listitem><simpara> a <link linkend="GladeWidget"><type>GladeWidget</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-base-editor-add-properties" role="function"/>glade_base_editor_add_properties ()</title>
-<indexterm><primary>glade_base_editor_add_properties</primary></indexterm><programlisting><link linkend="void">void</link>                glade_base_editor_add_properties    (<link linkend="GladeBaseEditor">GladeBaseEditor</link> *editor,
+<refsect2 id="glade-base-editor-add-properties" role="function">
+<title>glade_base_editor_add_properties ()</title>
+<indexterm zone="glade-base-editor-add-properties"><primary>glade_base_editor_add_properties</primary></indexterm><programlisting><link linkend="void">void</link>                glade_base_editor_add_properties    (<link linkend="GladeBaseEditor">GladeBaseEditor</link> *editor,
                                                          <link linkend="GladeWidget">GladeWidget</link> *gchild,
                                                          <link linkend="gboolean">gboolean</link> packing,
                                                          ...);</programlisting>
@@ -154,9 +150,9 @@ NOTE: This function is intended to be used in "child-selected" callbacks</para>
 <listitem><simpara> A NULL terminated list of properties names.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-base-editor-add-label" role="function"/>glade_base_editor_add_label ()</title>
-<indexterm><primary>glade_base_editor_add_label</primary></indexterm><programlisting><link linkend="void">void</link>                glade_base_editor_add_label         (<link linkend="GladeBaseEditor">GladeBaseEditor</link> *editor,
+<refsect2 id="glade-base-editor-add-label" role="function">
+<title>glade_base_editor_add_label ()</title>
+<indexterm zone="glade-base-editor-add-label"><primary>glade_base_editor_add_label</primary></indexterm><programlisting><link linkend="void">void</link>                glade_base_editor_add_label         (<link linkend="GladeBaseEditor">GladeBaseEditor</link> *editor,
                                                          <link linkend="gchar">gchar</link> *str);</programlisting>
 <para>
 Adds a new label to <parameter>editor</parameter>
@@ -173,9 +169,9 @@ NOTE: This function is intended to be used in "child-selected" callbacks</para>
 <listitem><simpara> the label string
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-base-editor-add-popup-items" role="function"/>glade_base_editor_add_popup_items ()</title>
-<indexterm><primary>glade_base_editor_add_popup_items</primary></indexterm><programlisting><link linkend="void">void</link>                glade_base_editor_add_popup_items   (<link linkend="GladeBaseEditor">GladeBaseEditor</link> *editor,
+<refsect2 id="glade-base-editor-add-popup-items" role="function">
+<title>glade_base_editor_add_popup_items ()</title>
+<indexterm zone="glade-base-editor-add-popup-items"><primary>glade_base_editor_add_popup_items</primary></indexterm><programlisting><link linkend="void">void</link>                glade_base_editor_add_popup_items   (<link linkend="GladeBaseEditor">GladeBaseEditor</link> *editor,
                                                          ...);</programlisting>
 <para>
 Adds a new popup item to the editor.
@@ -193,9 +189,9 @@ Three parameters are needed for each new popup item:
 <listitem><simpara> a NULL terminated list of gchar *, <link linkend="GType"><type>GType</type></link>, gboolean
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-base-editor-set-show-signal-editor" role="function"/>glade_base_editor_set_show_signal_editor ()</title>
-<indexterm><primary>glade_base_editor_set_show_signal_editor</primary></indexterm><programlisting><link linkend="void">void</link>                glade_base_editor_set_show_signal_editor
+<refsect2 id="glade-base-editor-set-show-signal-editor" role="function">
+<title>glade_base_editor_set_show_signal_editor ()</title>
+<indexterm zone="glade-base-editor-set-show-signal-editor"><primary>glade_base_editor_set_show_signal_editor</primary></indexterm><programlisting><link linkend="void">void</link>                glade_base_editor_set_show_signal_editor
                                                         (<link linkend="GladeBaseEditor">GladeBaseEditor</link> *editor,
                                                          <link linkend="gboolean">gboolean</link> val);</programlisting>
 <para>
@@ -210,9 +206,9 @@ Shows/hide <parameter>editor</parameter> 's signal editor</para>
 <listitem><simpara>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-base-editor-pack-new-window" role="function"/>glade_base_editor_pack_new_window ()</title>
-<indexterm><primary>glade_base_editor_pack_new_window</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*          glade_base_editor_pack_new_window   (<link linkend="GladeBaseEditor">GladeBaseEditor</link> *editor,
+<refsect2 id="glade-base-editor-pack-new-window" role="function">
+<title>glade_base_editor_pack_new_window ()</title>
+<indexterm zone="glade-base-editor-pack-new-window"><primary>glade_base_editor_pack_new_window</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*          glade_base_editor_pack_new_window   (<link linkend="GladeBaseEditor">GladeBaseEditor</link> *editor,
                                                          <link linkend="gchar">gchar</link> *title,
                                                          <link linkend="gchar">gchar</link> *help_markup);</programlisting>
 <para>

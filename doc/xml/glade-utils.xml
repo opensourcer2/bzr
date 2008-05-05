@@ -1,6 +1,6 @@
 <refentry id="gladeui-glade-utils">
 <refmeta>
-<refentrytitle role="top_of_page">Glade Utils</refentrytitle>
+<refentrytitle role="top_of_page" id="gladeui-glade-utils.top_of_page">Glade Utils</refentrytitle>
 <manvolnum>3</manvolnum>
 <refmiscinfo>GLADEUI Library</refmiscinfo>
 </refmeta>
@@ -11,17 +11,12 @@
 <!--[<xref linkend="desc" endterm="desc.title"/>]-->
 </refnamediv>
 
-<refsynopsisdiv role="synopsis">
+<refsynopsisdiv id="gladeui-glade-utils.synopsis" role="synopsis">
 <title role="synopsis.title">Synopsis</title>
 
 <synopsis>
-
-
-
 enum                <link linkend="GladeUtilFileDialogType">GladeUtilFileDialogType</link>;
 enum                <link linkend="GladeUIMessageType">GladeUIMessageType</link>;
-<link linkend="void">void</link>                <link linkend="glade-util-widget-set-tooltip">glade_util_widget_set_tooltip</link>       (<link linkend="GtkWidget">GtkWidget</link> *widget,
-                                                         const <link linkend="gchar">gchar</link> *str);
 <link linkend="GType">GType</link>               <link linkend="glade-util-get-type-from-name">glade_util_get_type_from_name</link>       (const <link linkend="gchar">gchar</link> *name,
                                                          <link linkend="gboolean">gboolean</link> have_func);
 <link linkend="GParamSpec">GParamSpec</link>*         <link linkend="glade-utils-get-pspec-from-funcname">glade_utils_get_pspec_from_funcname</link> (const <link linkend="gchar">gchar</link> *funcname);
@@ -94,7 +89,7 @@ enum                <link linkend="GladeUIMessageType">GladeUIMessageType</link>
 
 
 
-<refsect1 role="desc">
+<refsect1 id="gladeui-glade-utils.description" role="desc">
 <title role="desc.title">Description</title>
 <para>
 This is where all of that really usefull miscalanious stuff lands up.</para>
@@ -103,11 +98,11 @@ This is where all of that really usefull miscalanious stuff lands up.</para>
 </para>
 </refsect1>
 
-<refsect1 role="details">
+<refsect1 id="gladeui-glade-utils.details" role="details">
 <title role="details.title">Details</title>
-<refsect2>
-<title><anchor id="GladeUtilFileDialogType" role="enum"/>enum GladeUtilFileDialogType</title>
-<indexterm><primary>GladeUtilFileDialogType</primary></indexterm><programlisting>typedef enum _GladeUtilFileDialogType
+<refsect2 id="GladeUtilFileDialogType" role="enum">
+<title>enum GladeUtilFileDialogType</title>
+<indexterm zone="GladeUtilFileDialogType"><primary>GladeUtilFileDialogType</primary></indexterm><programlisting>typedef enum _GladeUtilFileDialogType
 {
         GLADE_FILE_DIALOG_ACTION_OPEN,
         GLADE_FILE_DIALOG_ACTION_SAVE
@@ -116,9 +111,9 @@ This is where all of that really usefull miscalanious stuff lands up.</para>
 <para>
 
 </para></refsect2>
-<refsect2>
-<title><anchor id="GladeUIMessageType" role="enum"/>enum GladeUIMessageType</title>
-<indexterm><primary>GladeUIMessageType</primary></indexterm><programlisting>typedef enum 
+<refsect2 id="GladeUIMessageType" role="enum">
+<title>enum GladeUIMessageType</title>
+<indexterm zone="GladeUIMessageType"><primary>GladeUIMessageType</primary></indexterm><programlisting>typedef enum 
 {
 	GLADE_UI_INFO,
 	GLADE_UI_WARN,
@@ -130,25 +125,9 @@ This is where all of that really usefull miscalanious stuff lands up.</para>
 <para>
 
 </para></refsect2>
-<refsect2>
-<title><anchor id="glade-util-widget-set-tooltip" role="function"/>glade_util_widget_set_tooltip ()</title>
-<indexterm><primary>glade_util_widget_set_tooltip</primary></indexterm><programlisting><link linkend="void">void</link>                glade_util_widget_set_tooltip       (<link linkend="GtkWidget">GtkWidget</link> *widget,
-                                                         const <link linkend="gchar">gchar</link> *str);</programlisting>
-<para>
-
-</para><variablelist role="params">
-<varlistentry><term><parameter>widget</parameter>&nbsp;:</term>
-<listitem><simpara>
-</simpara></listitem></varlistentry>
-<varlistentry><term><parameter>str</parameter>&nbsp;:</term>
-<listitem><simpara>
-
-
-</simpara></listitem></varlistentry>
-</variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-get-type-from-name" role="function"/>glade_util_get_type_from_name ()</title>
-<indexterm><primary>glade_util_get_type_from_name</primary></indexterm><programlisting><link linkend="GType">GType</link>               glade_util_get_type_from_name       (const <link linkend="gchar">gchar</link> *name,
+<refsect2 id="glade-util-get-type-from-name" role="function">
+<title>glade_util_get_type_from_name ()</title>
+<indexterm zone="glade-util-get-type-from-name"><primary>glade_util_get_type_from_name</primary></indexterm><programlisting><link linkend="GType">GType</link>               glade_util_get_type_from_name       (const <link linkend="gchar">gchar</link> *name,
                                                          <link linkend="gboolean">gboolean</link> have_func);</programlisting>
 <para>
 Returns the type using the "get type" function name based on <parameter>name</parameter>.  
@@ -166,9 +145,9 @@ function is contrived from <parameter>name</parameter> then used.</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the new <link linkend="GType"><type>GType</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-utils-get-pspec-from-funcname" role="function"/>glade_utils_get_pspec_from_funcname ()</title>
-<indexterm><primary>glade_utils_get_pspec_from_funcname</primary></indexterm><programlisting><link linkend="GParamSpec">GParamSpec</link>*         glade_utils_get_pspec_from_funcname (const <link linkend="gchar">gchar</link> *funcname);</programlisting>
+<refsect2 id="glade-utils-get-pspec-from-funcname" role="function">
+<title>glade_utils_get_pspec_from_funcname ()</title>
+<indexterm zone="glade-utils-get-pspec-from-funcname"><primary>glade_utils_get_pspec_from_funcname</primary></indexterm><programlisting><link linkend="GParamSpec">GParamSpec</link>*         glade_utils_get_pspec_from_funcname (const <link linkend="gchar">gchar</link> *funcname);</programlisting>
 <para>
 </para>
 <para>
@@ -181,9 +160,9 @@ function is contrived from <parameter>name</parameter> then used.</para>
          specified by <parameter>funcname</parameter>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-ui-message" role="function"/>glade_util_ui_message ()</title>
-<indexterm><primary>glade_util_ui_message</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_util_ui_message               (<link linkend="GtkWidget">GtkWidget</link> *parent,
+<refsect2 id="glade-util-ui-message" role="function">
+<title>glade_util_ui_message ()</title>
+<indexterm zone="glade-util-ui-message"><primary>glade_util_ui_message</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_util_ui_message               (<link linkend="GtkWidget">GtkWidget</link> *parent,
                                                          <link linkend="GladeUIMessageType">GladeUIMessageType</link> type,
                                                          const <link linkend="gchar">gchar</link> *format,
                                                          ...);</programlisting>
@@ -211,9 +190,9 @@ on <parameter>type</parameter>, a cancel button may apear or the icon may change
          the user selected "YES"; False otherwise.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-flash-message" role="function"/>glade_util_flash_message ()</title>
-<indexterm><primary>glade_util_flash_message</primary></indexterm><programlisting><link linkend="void">void</link>                glade_util_flash_message            (<link linkend="GtkWidget">GtkWidget</link> *statusbar,
+<refsect2 id="glade-util-flash-message" role="function">
+<title>glade_util_flash_message ()</title>
+<indexterm zone="glade-util-flash-message"><primary>glade_util_flash_message</primary></indexterm><programlisting><link linkend="void">void</link>                glade_util_flash_message            (<link linkend="GtkWidget">GtkWidget</link> *statusbar,
                                                          <link linkend="guint">guint</link> context_id,
                                                          <link linkend="gchar">gchar</link> *format,
                                                          ...);</programlisting>
@@ -235,9 +214,9 @@ on <parameter>type</parameter>, a cancel button may apear or the icon may change
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-compare-stock-labels" role="function"/>glade_util_compare_stock_labels ()</title>
-<indexterm><primary>glade_util_compare_stock_labels</primary></indexterm><programlisting><link linkend="gint">gint</link>                glade_util_compare_stock_labels     (<link linkend="gconstpointer">gconstpointer</link> a,
+<refsect2 id="glade-util-compare-stock-labels" role="function">
+<title>glade_util_compare_stock_labels ()</title>
+<indexterm zone="glade-util-compare-stock-labels"><primary>glade_util_compare_stock_labels</primary></indexterm><programlisting><link linkend="gint">gint</link>                glade_util_compare_stock_labels     (<link linkend="gconstpointer">gconstpointer</link> a,
                                                          <link linkend="gconstpointer">gconstpointer</link> b);</programlisting>
 <para>
 This is a <link linkend="GCompareFunc"><type>GCompareFunc</type></link> that compares the labels of two stock items, 
@@ -255,9 +234,9 @@ ignoring any '_' characters. It isn't particularly efficient.</para>
          positive value if <parameter>a</parameter> &gt; <parameter>b</parameter>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-hide-window" role="function"/>glade_util_hide_window ()</title>
-<indexterm><primary>glade_util_hide_window</primary></indexterm><programlisting><link linkend="void">void</link>                glade_util_hide_window              (<link linkend="GtkWindow">GtkWindow</link> *window);</programlisting>
+<refsect2 id="glade-util-hide-window" role="function">
+<title>glade_util_hide_window ()</title>
+<indexterm zone="glade-util-hide-window"><primary>glade_util_hide_window</primary></indexterm><programlisting><link linkend="void">void</link>                glade_util_hide_window              (<link linkend="GtkWindow">GtkWindow</link> *window);</programlisting>
 <para>
 If you use this function to handle the delete_event of a window, when it
 will be shown again it will appear in the position where it was before
@@ -269,9 +248,9 @@ beeing hidden.</para>
 <listitem><simpara> a <link linkend="GtkWindow"><type>GtkWindow</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-gtk-combo-func" role="function"/>glade_util_gtk_combo_func ()</title>
-<indexterm><primary>glade_util_gtk_combo_func</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*              glade_util_gtk_combo_func           (<link linkend="gpointer">gpointer</link> data);</programlisting>
+<refsect2 id="glade-util-gtk-combo-func" role="function">
+<title>glade_util_gtk_combo_func ()</title>
+<indexterm zone="glade-util-gtk-combo-func"><primary>glade_util_gtk_combo_func</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*              glade_util_gtk_combo_func           (<link linkend="gpointer">gpointer</link> data);</programlisting>
 <para>
 TODO: write me</para>
 <para>
@@ -283,9 +262,9 @@ TODO: write me</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-gtk-combo-find" role="function"/>glade_util_gtk_combo_find ()</title>
-<indexterm><primary>glade_util_gtk_combo_find</primary></indexterm><programlisting><link linkend="gpointer">gpointer</link>            glade_util_gtk_combo_find           (<link linkend="GtkCombo">GtkCombo</link> *combo);</programlisting>
+<refsect2 id="glade-util-gtk-combo-find" role="function">
+<title>glade_util_gtk_combo_find ()</title>
+<indexterm zone="glade-util-gtk-combo-find"><primary>glade_util_gtk_combo_find</primary></indexterm><programlisting><link linkend="gpointer">gpointer</link>            glade_util_gtk_combo_find           (<link linkend="GtkCombo">GtkCombo</link> *combo);</programlisting>
 <para>
 TODO: write me</para>
 <para>
@@ -297,9 +276,9 @@ TODO: write me</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-file-dialog-new" role="function"/>glade_util_file_dialog_new ()</title>
-<indexterm><primary>glade_util_file_dialog_new</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*          glade_util_file_dialog_new          (const <link linkend="gchar">gchar</link> *title,
+<refsect2 id="glade-util-file-dialog-new" role="function">
+<title>glade_util_file_dialog_new ()</title>
+<indexterm zone="glade-util-file-dialog-new"><primary>glade_util_file_dialog_new</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*          glade_util_file_dialog_new          (const <link linkend="gchar">gchar</link> *title,
                                                          <link linkend="GtkWindow">GtkWindow</link> *parent,
                                                          <link linkend="GladeUtilFileDialogType">GladeUtilFileDialogType</link> action);</programlisting>
 <para>
@@ -320,9 +299,9 @@ TODO: write me</para>
          for showing the dialog
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-replace" role="function"/>glade_util_replace ()</title>
-<indexterm><primary>glade_util_replace</primary></indexterm><programlisting><link linkend="void">void</link>                glade_util_replace                  (<link linkend="gchar">gchar</link> *str,
+<refsect2 id="glade-util-replace" role="function">
+<title>glade_util_replace ()</title>
+<indexterm zone="glade-util-replace"><primary>glade_util_replace</primary></indexterm><programlisting><link linkend="void">void</link>                glade_util_replace                  (<link linkend="gchar">gchar</link> *str,
                                                          <link linkend="gchar">gchar</link> a,
                                                          <link linkend="gchar">gchar</link> b);</programlisting>
 <para>
@@ -340,9 +319,9 @@ Replaces each occurance of the character <parameter>a</parameter> in <parameter>
 <listitem><simpara> a <link linkend="gchar"><type>gchar</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-read-prop-name" role="function"/>glade_util_read_prop_name ()</title>
-<indexterm><primary>glade_util_read_prop_name</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*              glade_util_read_prop_name           (const <link linkend="gchar">gchar</link> *str);</programlisting>
+<refsect2 id="glade-util-read-prop-name" role="function">
+<title>glade_util_read_prop_name ()</title>
+<indexterm zone="glade-util-read-prop-name"><primary>glade_util_read_prop_name</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*              glade_util_read_prop_name           (const <link linkend="gchar">gchar</link> *str);</programlisting>
 <para>
 Return a usable version of a property identifier as found
 in a freshly parserd <link linkend="GladeInterface"><type>GladeInterface</type></link></para>
@@ -357,9 +336,9 @@ in a freshly parserd <link linkend="GladeInterface"><type>GladeInterface</type><
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-duplicate-underscores" role="function"/>glade_util_duplicate_underscores ()</title>
-<indexterm><primary>glade_util_duplicate_underscores</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*              glade_util_duplicate_underscores    (const <link linkend="gchar">gchar</link> *name);</programlisting>
+<refsect2 id="glade-util-duplicate-underscores" role="function">
+<title>glade_util_duplicate_underscores ()</title>
+<indexterm zone="glade-util-duplicate-underscores"><primary>glade_util_duplicate_underscores</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*              glade_util_duplicate_underscores    (const <link linkend="gchar">gchar</link> *name);</programlisting>
 <para>
 Duplicates <parameter>name</parameter>, but the copy has two underscores in place of any single
 underscore in the original.</para>
@@ -372,9 +351,9 @@ underscore in the original.</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a newly allocated string
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-add-selection" role="function"/>glade_util_add_selection ()</title>
-<indexterm><primary>glade_util_add_selection</primary></indexterm><programlisting><link linkend="void">void</link>                glade_util_add_selection            (<link linkend="GtkWidget">GtkWidget</link> *widget);</programlisting>
+<refsect2 id="glade-util-add-selection" role="function">
+<title>glade_util_add_selection ()</title>
+<indexterm zone="glade-util-add-selection"><primary>glade_util_add_selection</primary></indexterm><programlisting><link linkend="void">void</link>                glade_util_add_selection            (<link linkend="GtkWidget">GtkWidget</link> *widget);</programlisting>
 <para>
 Add visual selection to this GtkWidget</para>
 <para>
@@ -384,9 +363,9 @@ Add visual selection to this GtkWidget</para>
 <listitem><simpara> a <link linkend="GtkWidget"><type>GtkWidget</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-remove-selection" role="function"/>glade_util_remove_selection ()</title>
-<indexterm><primary>glade_util_remove_selection</primary></indexterm><programlisting><link linkend="void">void</link>                glade_util_remove_selection         (<link linkend="GtkWidget">GtkWidget</link> *widget);</programlisting>
+<refsect2 id="glade-util-remove-selection" role="function">
+<title>glade_util_remove_selection ()</title>
+<indexterm zone="glade-util-remove-selection"><primary>glade_util_remove_selection</primary></indexterm><programlisting><link linkend="void">void</link>                glade_util_remove_selection         (<link linkend="GtkWidget">GtkWidget</link> *widget);</programlisting>
 <para>
 Remove visual selection from this GtkWidget</para>
 <para>
@@ -396,9 +375,9 @@ Remove visual selection from this GtkWidget</para>
 <listitem><simpara> a <link linkend="GtkWidget"><type>GtkWidget</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-has-selection" role="function"/>glade_util_has_selection ()</title>
-<indexterm><primary>glade_util_has_selection</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_util_has_selection            (<link linkend="GtkWidget">GtkWidget</link> *widget);</programlisting>
+<refsect2 id="glade-util-has-selection" role="function">
+<title>glade_util_has_selection ()</title>
+<indexterm zone="glade-util-has-selection"><primary>glade_util_has_selection</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_util_has_selection            (<link linkend="GtkWidget">GtkWidget</link> *widget);</programlisting>
 <para>
 </para>
 <para>
@@ -410,17 +389,17 @@ Remove visual selection from this GtkWidget</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if <parameter>widget</parameter> has visual selection, <link linkend="FALSE:CAPS"><literal>FALSE</literal></link> otherwise
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-clear-selection" role="function"/>glade_util_clear_selection ()</title>
-<indexterm><primary>glade_util_clear_selection</primary></indexterm><programlisting><link linkend="void">void</link>                glade_util_clear_selection          (void);</programlisting>
+<refsect2 id="glade-util-clear-selection" role="function">
+<title>glade_util_clear_selection ()</title>
+<indexterm zone="glade-util-clear-selection"><primary>glade_util_clear_selection</primary></indexterm><programlisting><link linkend="void">void</link>                glade_util_clear_selection          (void);</programlisting>
 <para>
 Clear all visual selections</para>
 <para>
 
 </para></refsect2>
-<refsect2>
-<title><anchor id="glade-util-get-selection" role="function"/>glade_util_get_selection ()</title>
-<indexterm><primary>glade_util_get_selection</primary></indexterm><programlisting><link linkend="GList">GList</link>*              glade_util_get_selection            (void);</programlisting>
+<refsect2 id="glade-util-get-selection" role="function">
+<title>glade_util_get_selection ()</title>
+<indexterm zone="glade-util-get-selection"><primary>glade_util_get_selection</primary></indexterm><programlisting><link linkend="GList">GList</link>*              glade_util_get_selection            (void);</programlisting>
 <para>
 
 </para><variablelist role="params">
@@ -429,9 +408,9 @@ Clear all visual selections</para>
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-container-get-all-children" role="function"/>glade_util_container_get_all_children ()</title>
-<indexterm><primary>glade_util_container_get_all_children</primary></indexterm><programlisting><link linkend="GList">GList</link>*              glade_util_container_get_all_children
+<refsect2 id="glade-util-container-get-all-children" role="function">
+<title>glade_util_container_get_all_children ()</title>
+<indexterm zone="glade-util-container-get-all-children"><primary>glade_util_container_get_all_children</primary></indexterm><programlisting><link linkend="GList">GList</link>*              glade_util_container_get_all_children
                                                         (<link linkend="GtkContainer">GtkContainer</link> *container);</programlisting>
 <para>
 Use this to itterate over all children in a GtkContainer,
@@ -450,9 +429,9 @@ abstraction and will usually end up calling this function.</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a <link linkend="GList"><type>GList</type></link> giving the contents of <parameter>container</parameter>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-count-placeholders" role="function"/>glade_util_count_placeholders ()</title>
-<indexterm><primary>glade_util_count_placeholders</primary></indexterm><programlisting><link linkend="gint">gint</link>                glade_util_count_placeholders       (<link linkend="GladeWidget">GladeWidget</link> *parent);</programlisting>
+<refsect2 id="glade-util-count-placeholders" role="function">
+<title>glade_util_count_placeholders ()</title>
+<indexterm zone="glade-util-count-placeholders"><primary>glade_util_count_placeholders</primary></indexterm><programlisting><link linkend="gint">gint</link>                glade_util_count_placeholders       (<link linkend="GladeWidget">GladeWidget</link> *parent);</programlisting>
 <para>
 </para>
 <para>
@@ -464,9 +443,9 @@ abstraction and will usually end up calling this function.</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>the amount of <link linkend="GladePlaceholders"><type>GladePlaceholders</type></link> parented by <parameter>parent</parameter>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-find-iter-by-widget" role="function"/>glade_util_find_iter_by_widget ()</title>
-<indexterm><primary>glade_util_find_iter_by_widget</primary></indexterm><programlisting><link linkend="GtkTreeIter">GtkTreeIter</link>*        glade_util_find_iter_by_widget      (<link linkend="GtkTreeModel">GtkTreeModel</link> *model,
+<refsect2 id="glade-util-find-iter-by-widget" role="function">
+<title>glade_util_find_iter_by_widget ()</title>
+<indexterm zone="glade-util-find-iter-by-widget"><primary>glade_util_find_iter_by_widget</primary></indexterm><programlisting><link linkend="GtkTreeIter">GtkTreeIter</link>*        glade_util_find_iter_by_widget      (<link linkend="GtkTreeModel">GtkTreeModel</link> *model,
                                                          <link linkend="GladeWidget">GladeWidget</link> *findme,
                                                          <link linkend="gint">gint</link> column);</programlisting>
 <para>
@@ -489,9 +468,9 @@ to <parameter>findme</parameter> which should be freed with <link linkend="gtk-t
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-basenames-match" role="function"/>glade_util_basenames_match ()</title>
-<indexterm><primary>glade_util_basenames_match</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_util_basenames_match          (const <link linkend="gchar">gchar</link> *path1,
+<refsect2 id="glade-util-basenames-match" role="function">
+<title>glade_util_basenames_match ()</title>
+<indexterm zone="glade-util-basenames-match"><primary>glade_util_basenames_match</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_util_basenames_match          (const <link linkend="gchar">gchar</link> *path1,
                                                          const <link linkend="gchar">gchar</link> *path2);</programlisting>
 <para>
 
@@ -507,9 +486,9 @@ to <parameter>findme</parameter> which should be freed with <link linkend="gtk-t
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-purify-list" role="function"/>glade_util_purify_list ()</title>
-<indexterm><primary>glade_util_purify_list</primary></indexterm><programlisting><link linkend="GList">GList</link>*              glade_util_purify_list              (<link linkend="GList">GList</link> *list);</programlisting>
+<refsect2 id="glade-util-purify-list" role="function">
+<title>glade_util_purify_list ()</title>
+<indexterm zone="glade-util-purify-list"><primary>glade_util_purify_list</primary></indexterm><programlisting><link linkend="GList">GList</link>*              glade_util_purify_list              (<link linkend="GList">GList</link> *list);</programlisting>
 <para>
 </para>
 <para>
@@ -522,9 +501,9 @@ to <parameter>findme</parameter> which should be freed with <link linkend="gtk-t
          duplicate data entries
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-added-in-list" role="function"/>glade_util_added_in_list ()</title>
-<indexterm><primary>glade_util_added_in_list</primary></indexterm><programlisting><link linkend="GList">GList</link>*              glade_util_added_in_list            (<link linkend="GList">GList</link> *old_list,
+<refsect2 id="glade-util-added-in-list" role="function">
+<title>glade_util_added_in_list ()</title>
+<indexterm zone="glade-util-added-in-list"><primary>glade_util_added_in_list</primary></indexterm><programlisting><link linkend="GList">GList</link>*              glade_util_added_in_list            (<link linkend="GList">GList</link> *old_list,
                                                          <link linkend="GList">GList</link> *new_list);</programlisting>
 <para>
 </para>
@@ -542,9 +521,9 @@ to <parameter>findme</parameter> which should be freed with <link linkend="gtk-t
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-removed-from-list" role="function"/>glade_util_removed_from_list ()</title>
-<indexterm><primary>glade_util_removed_from_list</primary></indexterm><programlisting><link linkend="GList">GList</link>*              glade_util_removed_from_list        (<link linkend="GList">GList</link> *old_list,
+<refsect2 id="glade-util-removed-from-list" role="function">
+<title>glade_util_removed_from_list ()</title>
+<indexterm zone="glade-util-removed-from-list"><primary>glade_util_removed_from_list</primary></indexterm><programlisting><link linkend="GList">GList</link>*              glade_util_removed_from_list        (<link linkend="GList">GList</link> *old_list,
                                                          <link linkend="GList">GList</link> *new_list);</programlisting>
 <para>
 </para>
@@ -562,9 +541,9 @@ to <parameter>findme</parameter> which should be freed with <link linkend="gtk-t
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-canonical-path" role="function"/>glade_util_canonical_path ()</title>
-<indexterm><primary>glade_util_canonical_path</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*              glade_util_canonical_path           (const <link linkend="gchar">gchar</link> *path);</programlisting>
+<refsect2 id="glade-util-canonical-path" role="function">
+<title>glade_util_canonical_path ()</title>
+<indexterm zone="glade-util-canonical-path"><primary>glade_util_canonical_path</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*              glade_util_canonical_path           (const <link linkend="gchar">gchar</link> *path);</programlisting>
 <para>
 </para>
 <para>
@@ -583,9 +562,9 @@ Note: on some systems; I think its possible that we dont have
       since libc's <link linkend="realpath"><function>realpath()</function></link> does exactly the same.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-copy-file" role="function"/>glade_util_copy_file ()</title>
-<indexterm><primary>glade_util_copy_file</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_util_copy_file                (const <link linkend="gchar">gchar</link> *src_path,
+<refsect2 id="glade-util-copy-file" role="function">
+<title>glade_util_copy_file ()</title>
+<indexterm zone="glade-util-copy-file"><primary>glade_util_copy_file</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_util_copy_file                (const <link linkend="gchar">gchar</link> *src_path,
                                                          const <link linkend="gchar">gchar</link> *dest_path);</programlisting>
 <para>
 Copies a file from <parameter>src</parameter> to <parameter>dest</parameter>, queries the user
@@ -603,9 +582,9 @@ error message upon failure.</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> True if the copy was successfull.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-class-implements-interface" role="function"/>glade_util_class_implements_interface ()</title>
-<indexterm><primary>glade_util_class_implements_interface</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_util_class_implements_interface
+<refsect2 id="glade-util-class-implements-interface" role="function">
+<title>glade_util_class_implements_interface ()</title>
+<indexterm zone="glade-util-class-implements-interface"><primary>glade_util_class_implements_interface</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_util_class_implements_interface
                                                         (<link linkend="GType">GType</link> class_type,
                                                          <link linkend="GType">GType</link> iface_type);</programlisting>
 <para>
@@ -622,9 +601,9 @@ error message upon failure.</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> whether <parameter>class_type</parameter> implements the <parameter>iface_type</parameter> interface
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-load-library" role="function"/>glade_util_load_library ()</title>
-<indexterm><primary>glade_util_load_library</primary></indexterm><programlisting><link linkend="GModule">GModule</link>*            glade_util_load_library             (const <link linkend="gchar">gchar</link> *library_name);</programlisting>
+<refsect2 id="glade-util-load-library" role="function">
+<title>glade_util_load_library ()</title>
+<indexterm zone="glade-util-load-library"><primary>glade_util_load_library</primary></indexterm><programlisting><link linkend="GModule">GModule</link>*            glade_util_load_library             (const <link linkend="gchar">gchar</link> *library_name);</programlisting>
 <para>
 Loads the named library from the Glade modules directory, or failing that
 from the standard platform specific directories.
@@ -641,9 +620,9 @@ those are automatically added, if needed, by <link linkend="g-module-build-path"
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a <link linkend="GModule"><type>GModule</type></link> on success, or <link linkend="NULL:CAPS"><literal>NULL</literal></link> on failure.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-file-is-writeable" role="function"/>glade_util_file_is_writeable ()</title>
-<indexterm><primary>glade_util_file_is_writeable</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_util_file_is_writeable        (const <link linkend="gchar">gchar</link> *path);</programlisting>
+<refsect2 id="glade-util-file-is-writeable" role="function">
+<title>glade_util_file_is_writeable ()</title>
+<indexterm zone="glade-util-file-is-writeable"><primary>glade_util_file_is_writeable</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_util_file_is_writeable        (const <link linkend="gchar">gchar</link> *path);</programlisting>
 <para>
 Checks whether the file at <parameter>path</parameter> is writeable</para>
 <para>
@@ -655,9 +634,9 @@ Checks whether the file at <parameter>path</parameter> is writeable</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> TRUE if file is writeable
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-have-devhelp" role="function"/>glade_util_have_devhelp ()</title>
-<indexterm><primary>glade_util_have_devhelp</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_util_have_devhelp             (void);</programlisting>
+<refsect2 id="glade-util-have-devhelp" role="function">
+<title>glade_util_have_devhelp ()</title>
+<indexterm zone="glade-util-have-devhelp"><primary>glade_util_have_devhelp</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_util_have_devhelp             (void);</programlisting>
 <para>
 </para>
 <para>
@@ -666,9 +645,9 @@ Checks whether the file at <parameter>path</parameter> is writeable</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> whether the devhelp module is loaded
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-get-devhelp-icon" role="function"/>glade_util_get_devhelp_icon ()</title>
-<indexterm><primary>glade_util_get_devhelp_icon</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*          glade_util_get_devhelp_icon         (<link linkend="GtkIconSize">GtkIconSize</link> size);</programlisting>
+<refsect2 id="glade-util-get-devhelp-icon" role="function">
+<title>glade_util_get_devhelp_icon ()</title>
+<indexterm zone="glade-util-get-devhelp-icon"><primary>glade_util_get_devhelp_icon</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*          glade_util_get_devhelp_icon         (<link linkend="GtkIconSize">GtkIconSize</link> size);</programlisting>
 <para>
 Creates an image displaying the devhelp icon.</para>
 <para>
@@ -680,9 +659,9 @@ Creates an image displaying the devhelp icon.</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a <link linkend="GtkImage"><type>GtkImage</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-search-devhelp" role="function"/>glade_util_search_devhelp ()</title>
-<indexterm><primary>glade_util_search_devhelp</primary></indexterm><programlisting><link linkend="void">void</link>                glade_util_search_devhelp           (const <link linkend="gchar">gchar</link> *book,
+<refsect2 id="glade-util-search-devhelp" role="function">
+<title>glade_util_search_devhelp ()</title>
+<indexterm zone="glade-util-search-devhelp"><primary>glade_util_search_devhelp</primary></indexterm><programlisting><link linkend="void">void</link>                glade_util_search_devhelp           (const <link linkend="gchar">gchar</link> *book,
                                                          const <link linkend="gchar">gchar</link> *page,
                                                          const <link linkend="gchar">gchar</link> *search);</programlisting>
 <para>
@@ -700,9 +679,9 @@ Creates an image displaying the devhelp icon.</para>
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-get-placeholder-from-pointer" role="function"/>glade_util_get_placeholder_from_pointer ()</title>
-<indexterm><primary>glade_util_get_placeholder_from_pointer</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*          glade_util_get_placeholder_from_pointer
+<refsect2 id="glade-util-get-placeholder-from-pointer" role="function">
+<title>glade_util_get_placeholder_from_pointer ()</title>
+<indexterm zone="glade-util-get-placeholder-from-pointer"><primary>glade_util_get_placeholder_from_pointer</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*          glade_util_get_placeholder_from_pointer
                                                         (<link linkend="GtkContainer">GtkContainer</link> *container);</programlisting>
 <para>
 
@@ -715,9 +694,9 @@ Creates an image displaying the devhelp icon.</para>
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-object-is-loading" role="function"/>glade_util_object_is_loading ()</title>
-<indexterm><primary>glade_util_object_is_loading</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_util_object_is_loading        (<link linkend="GObject">GObject</link> *object);</programlisting>
+<refsect2 id="glade-util-object-is-loading" role="function">
+<title>glade_util_object_is_loading ()</title>
+<indexterm zone="glade-util-object-is-loading"><primary>glade_util_object_is_loading</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_util_object_is_loading        (<link linkend="GObject">GObject</link> *object);</programlisting>
 <para>
 </para>
 <para>
@@ -730,9 +709,9 @@ Creates an image displaying the devhelp icon.</para>
       
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-url-show" role="function"/>glade_util_url_show ()</title>
-<indexterm><primary>glade_util_url_show</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_util_url_show                 (const <link linkend="gchar">gchar</link> *url);</programlisting>
+<refsect2 id="glade-util-url-show" role="function">
+<title>glade_util_url_show ()</title>
+<indexterm zone="glade-util-url-show"><primary>glade_util_url_show</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_util_url_show                 (const <link linkend="gchar">gchar</link> *url);</programlisting>
 <para>
 Portable function for showing an URL <parameter>url</parameter> in a web browser.</para>
 <para>
@@ -745,9 +724,9 @@ Portable function for showing an URL <parameter>url</parameter> in a web browser
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-util-get-file-mtime" role="function"/>glade_util_get_file_mtime ()</title>
-<indexterm><primary>glade_util_get_file_mtime</primary></indexterm><programlisting><link linkend="time-t">time_t</link>              glade_util_get_file_mtime           (const <link linkend="gchar">gchar</link> *filename,
+<refsect2 id="glade-util-get-file-mtime" role="function">
+<title>glade_util_get_file_mtime ()</title>
+<indexterm zone="glade-util-get-file-mtime"><primary>glade_util_get_file_mtime</primary></indexterm><programlisting><link linkend="time-t">time_t</link>              glade_util_get_file_mtime           (const <link linkend="gchar">gchar</link> *filename,
                                                          <link linkend="GError">GError</link> **error);</programlisting>
 <para>
 Gets the UTC modification time of file <parameter>filename</parameter>.</para>

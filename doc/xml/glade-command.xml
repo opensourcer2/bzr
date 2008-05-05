@@ -1,6 +1,6 @@
 <refentry id="GladeCommand">
 <refmeta>
-<refentrytitle role="top_of_page">GladeCommand</refentrytitle>
+<refentrytitle role="top_of_page" id="GladeCommand.top_of_page">GladeCommand</refentrytitle>
 <manvolnum>3</manvolnum>
 <refmiscinfo>GLADEUI Library</refmiscinfo>
 </refmeta>
@@ -11,13 +11,10 @@
 <!--[<xref linkend="desc" endterm="desc.title"/>]-->
 </refnamediv>
 
-<refsynopsisdiv role="synopsis">
+<refsynopsisdiv id="GladeCommand.synopsis" role="synopsis">
 <title role="synopsis.title">Synopsis</title>
 
 <synopsis>
-
-
-
                     <link linkend="GCSetPropData">GCSetPropData</link>;
                     <link linkend="GladeCommand-struct">GladeCommand</link>;
 <link linkend="void">void</link>                <link linkend="glade-command-push-group">glade_command_push_group</link>            (const <link linkend="gchar">gchar</link> *fmt,
@@ -65,14 +62,12 @@
                                                          <link linkend="gboolean">gboolean</link> translatable,
                                                          <link linkend="gboolean">gboolean</link> has_context,
                                                          const <link linkend="gchar">gchar</link> *comment);
-
 </synopsis>
 </refsynopsisdiv>
 
-<refsect1 role="object_hierarchy">
+<refsect1 id="GladeCommand.object-hierarchy" role="object_hierarchy">
 <title role="object_hierarchy.title">Object Hierarchy</title>
 <synopsis>
-
   <link linkend="GObject">GObject</link>
    +----GladeCommand
 </synopsis>
@@ -86,7 +81,7 @@
 
 
 
-<refsect1 role="desc">
+<refsect1 id="GladeCommand.description" role="desc">
 <title role="desc.title">Description</title>
 <para>
 The Glade Command api allows us to view user actions as items and execute 
@@ -96,11 +91,11 @@ and undo those items; each <link linkend="GladeProject"><type>GladeProject</type
 </para>
 </refsect1>
 
-<refsect1 role="details">
+<refsect1 id="GladeCommand.details" role="details">
 <title role="details.title">Details</title>
-<refsect2>
-<title><anchor id="GCSetPropData" role="struct"/>GCSetPropData</title>
-<indexterm><primary>GCSetPropData</primary></indexterm><programlisting>typedef struct {
+<refsect2 id="GCSetPropData" role="struct">
+<title>GCSetPropData</title>
+<indexterm zone="GCSetPropData"><primary>GCSetPropData</primary></indexterm><programlisting>typedef struct {
 	GladeProperty *property;
 	GValue        *new_value;
 	GValue        *old_value;
@@ -129,15 +124,15 @@ their old and new <link linkend="GValue"><type>GValue</type></link>.</para>
 </simpara></listitem>
 </varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="GladeCommand-struct" role="struct"/>GladeCommand</title>
-<indexterm><primary>GladeCommand</primary></indexterm><programlisting>typedef struct _GladeCommand GladeCommand;</programlisting>
+<refsect2 id="GladeCommand-struct" role="struct">
+<title>GladeCommand</title>
+<indexterm zone="GladeCommand-struct"><primary>GladeCommand</primary></indexterm><programlisting>typedef struct _GladeCommand GladeCommand;</programlisting>
 <para>
 
 </para></refsect2>
-<refsect2>
-<title><anchor id="glade-command-push-group" role="function"/>glade_command_push_group ()</title>
-<indexterm><primary>glade_command_push_group</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_push_group            (const <link linkend="gchar">gchar</link> *fmt,
+<refsect2 id="glade-command-push-group" role="function">
+<title>glade_command_push_group ()</title>
+<indexterm zone="glade-command-push-group"><primary>glade_command_push_group</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_push_group            (const <link linkend="gchar">gchar</link> *fmt,
                                                          ...);</programlisting>
 <para>
 Marks the begining of a group.</para>
@@ -153,17 +148,17 @@ Marks the begining of a group.</para>
 <listitem><simpara> args to the format string.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-command-pop-group" role="function"/>glade_command_pop_group ()</title>
-<indexterm><primary>glade_command_pop_group</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_pop_group             (void);</programlisting>
+<refsect2 id="glade-command-pop-group" role="function">
+<title>glade_command_pop_group ()</title>
+<indexterm zone="glade-command-pop-group"><primary>glade_command_pop_group</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_pop_group             (void);</programlisting>
 <para>
 Mark the end of a command group.</para>
 <para>
 
 </para></refsect2>
-<refsect2>
-<title><anchor id="glade-command-execute" role="function"/>glade_command_execute ()</title>
-<indexterm><primary>glade_command_execute</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_command_execute               (<link linkend="GladeCommand">GladeCommand</link> *command);</programlisting>
+<refsect2 id="glade-command-execute" role="function">
+<title>glade_command_execute ()</title>
+<indexterm zone="glade-command-execute"><primary>glade_command_execute</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_command_execute               (<link linkend="GladeCommand">GladeCommand</link> *command);</programlisting>
 <para>
 Executes <parameter>command</parameter></para>
 <para>
@@ -175,9 +170,9 @@ Executes <parameter>command</parameter></para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> whether the command was successfully executed
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-command-undo" role="function"/>glade_command_undo ()</title>
-<indexterm><primary>glade_command_undo</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_command_undo                  (<link linkend="GladeCommand">GladeCommand</link> *command);</programlisting>
+<refsect2 id="glade-command-undo" role="function">
+<title>glade_command_undo ()</title>
+<indexterm zone="glade-command-undo"><primary>glade_command_undo</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_command_undo                  (<link linkend="GladeCommand">GladeCommand</link> *command);</programlisting>
 <para>
 Undo the effects of <parameter>command</parameter></para>
 <para>
@@ -189,9 +184,9 @@ Undo the effects of <parameter>command</parameter></para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>whether the command was successfully reversed
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-command-unifies" role="function"/>glade_command_unifies ()</title>
-<indexterm><primary>glade_command_unifies</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_command_unifies               (<link linkend="GladeCommand">GladeCommand</link> *command,
+<refsect2 id="glade-command-unifies" role="function">
+<title>glade_command_unifies ()</title>
+<indexterm zone="glade-command-unifies"><primary>glade_command_unifies</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_command_unifies               (<link linkend="GladeCommand">GladeCommand</link> *command,
                                                          <link linkend="GladeCommand">GladeCommand</link> *other);</programlisting>
 <para>
 Checks whether <parameter>command</parameter> and <parameter>other</parameter> can be unified
@@ -208,9 +203,9 @@ to make one single command.</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> whether they can be unified.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-command-collapse" role="function"/>glade_command_collapse ()</title>
-<indexterm><primary>glade_command_collapse</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_collapse              (<link linkend="GladeCommand">GladeCommand</link> *command,
+<refsect2 id="glade-command-collapse" role="function">
+<title>glade_command_collapse ()</title>
+<indexterm zone="glade-command-collapse"><primary>glade_command_collapse</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_collapse              (<link linkend="GladeCommand">GladeCommand</link> *command,
                                                          <link linkend="GladeCommand">GladeCommand</link> *other);</programlisting>
 <para>
 Merges <parameter>other</parameter> into <parameter>command</parameter>, so that <parameter>command</parameter> now
@@ -225,9 +220,9 @@ covers both commands and <parameter>other</parameter> can be dispensed with.</pa
 <listitem><simpara> another <link linkend="GladeCommand"><type>GladeCommand</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-command-set-property" role="function"/>glade_command_set_property ()</title>
-<indexterm><primary>glade_command_set_property</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_set_property          (<link linkend="GladeProperty">GladeProperty</link> *property,
+<refsect2 id="glade-command-set-property" role="function">
+<title>glade_command_set_property ()</title>
+<indexterm zone="glade-command-set-property"><primary>glade_command_set_property</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_set_property          (<link linkend="GladeProperty">GladeProperty</link> *property,
                                                          ...);</programlisting>
 <para>
 
@@ -241,9 +236,9 @@ covers both commands and <parameter>other</parameter> can be dispensed with.</pa
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-command-set-property-value" role="function"/>glade_command_set_property_value ()</title>
-<indexterm><primary>glade_command_set_property_value</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_set_property_value    (<link linkend="GladeProperty">GladeProperty</link> *property,
+<refsect2 id="glade-command-set-property-value" role="function">
+<title>glade_command_set_property_value ()</title>
+<indexterm zone="glade-command-set-property-value"><primary>glade_command_set_property_value</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_set_property_value    (<link linkend="GladeProperty">GladeProperty</link> *property,
                                                          const <link linkend="GValue">GValue</link> *value);</programlisting>
 <para>
 
@@ -257,9 +252,9 @@ covers both commands and <parameter>other</parameter> can be dispensed with.</pa
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-command-set-properties" role="function"/>glade_command_set_properties ()</title>
-<indexterm><primary>glade_command_set_properties</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_set_properties        (<link linkend="GladeProperty">GladeProperty</link> *property,
+<refsect2 id="glade-command-set-properties" role="function">
+<title>glade_command_set_properties ()</title>
+<indexterm zone="glade-command-set-properties"><primary>glade_command_set_properties</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_set_properties        (<link linkend="GladeProperty">GladeProperty</link> *property,
                                                          const <link linkend="GValue">GValue</link> *old_value,
                                                          const <link linkend="GValue">GValue</link> *new_value,
                                                          ...);</programlisting>
@@ -281,9 +276,9 @@ covers both commands and <parameter>other</parameter> can be dispensed with.</pa
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-command-set-properties-list" role="function"/>glade_command_set_properties_list ()</title>
-<indexterm><primary>glade_command_set_properties_list</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_set_properties_list   (<link linkend="GladeProject">GladeProject</link> *project,
+<refsect2 id="glade-command-set-properties-list" role="function">
+<title>glade_command_set_properties_list ()</title>
+<indexterm zone="glade-command-set-properties-list"><primary>glade_command_set_properties_list</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_set_properties_list   (<link linkend="GladeProject">GladeProject</link> *project,
                                                          <link linkend="GList">GList</link> *props);</programlisting>
 <para>
 
@@ -297,9 +292,9 @@ covers both commands and <parameter>other</parameter> can be dispensed with.</pa
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-command-set-name" role="function"/>glade_command_set_name ()</title>
-<indexterm><primary>glade_command_set_name</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_set_name              (<link linkend="GladeWidget">GladeWidget</link> *glade_widget,
+<refsect2 id="glade-command-set-name" role="function">
+<title>glade_command_set_name ()</title>
+<indexterm zone="glade-command-set-name"><primary>glade_command_set_name</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_set_name              (<link linkend="GladeWidget">GladeWidget</link> *glade_widget,
                                                          const <link linkend="gchar">gchar</link> *name);</programlisting>
 <para>
 
@@ -313,9 +308,9 @@ covers both commands and <parameter>other</parameter> can be dispensed with.</pa
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-command-delete" role="function"/>glade_command_delete ()</title>
-<indexterm><primary>glade_command_delete</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_delete                (<link linkend="GList">GList</link> *widgets);</programlisting>
+<refsect2 id="glade-command-delete" role="function">
+<title>glade_command_delete ()</title>
+<indexterm zone="glade-command-delete"><primary>glade_command_delete</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_delete                (<link linkend="GList">GList</link> *widgets);</programlisting>
 <para>
 Performs a delete command on the list of widgets.</para>
 <para>
@@ -325,9 +320,9 @@ Performs a delete command on the list of widgets.</para>
 <listitem><simpara> a <link linkend="GList"><type>GList</type></link> of <link linkend="GladeWidgets"><type>GladeWidgets</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-command-create" role="function"/>glade_command_create ()</title>
-<indexterm><primary>glade_command_create</primary></indexterm><programlisting><link linkend="GladeWidget">GladeWidget</link>*        glade_command_create                (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+<refsect2 id="glade-command-create" role="function">
+<title>glade_command_create ()</title>
+<indexterm zone="glade-command-create"><primary>glade_command_create</primary></indexterm><programlisting><link linkend="GladeWidget">GladeWidget</link>*        glade_command_create                (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          <link linkend="GladeWidget">GladeWidget</link> *parent,
                                                          <link linkend="GladePlaceholder">GladePlaceholder</link> *placeholder,
                                                          <link linkend="GladeProject">GladeProject</link> *project);</programlisting>
@@ -352,9 +347,9 @@ in the <parameter>project</parameter></para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>the newly created widget.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-command-cut" role="function"/>glade_command_cut ()</title>
-<indexterm><primary>glade_command_cut</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_cut                   (<link linkend="GList">GList</link> *widgets);</programlisting>
+<refsect2 id="glade-command-cut" role="function">
+<title>glade_command_cut ()</title>
+<indexterm zone="glade-command-cut"><primary>glade_command_cut</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_cut                   (<link linkend="GList">GList</link> *widgets);</programlisting>
 <para>
 Removes the list of widgets and adds them to the clipboard.</para>
 <para>
@@ -364,9 +359,9 @@ Removes the list of widgets and adds them to the clipboard.</para>
 <listitem><simpara> a <link linkend="GList"><type>GList</type></link> of <link linkend="GladeWidgets"><type>GladeWidgets</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-command-copy" role="function"/>glade_command_copy ()</title>
-<indexterm><primary>glade_command_copy</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_copy                  (<link linkend="GList">GList</link> *widgets);</programlisting>
+<refsect2 id="glade-command-copy" role="function">
+<title>glade_command_copy ()</title>
+<indexterm zone="glade-command-copy"><primary>glade_command_copy</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_copy                  (<link linkend="GList">GList</link> *widgets);</programlisting>
 <para>
 Copies the list of widgets and adds them to the clipboard.</para>
 <para>
@@ -376,9 +371,9 @@ Copies the list of widgets and adds them to the clipboard.</para>
 <listitem><simpara> a <link linkend="GList"><type>GList</type></link> of <link linkend="GladeWidgets"><type>GladeWidgets</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-command-paste" role="function"/>glade_command_paste ()</title>
-<indexterm><primary>glade_command_paste</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_paste                 (<link linkend="GList">GList</link> *widgets,
+<refsect2 id="glade-command-paste" role="function">
+<title>glade_command_paste ()</title>
+<indexterm zone="glade-command-paste"><primary>glade_command_paste</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_paste                 (<link linkend="GList">GList</link> *widgets,
                                                          <link linkend="GladeWidget">GladeWidget</link> *parent,
                                                          <link linkend="GladePlaceholder">GladePlaceholder</link> *placeholder);</programlisting>
 <para>
@@ -398,9 +393,9 @@ will be used when pasting toplevel objects).</para>
 <listitem><simpara> a <link linkend="GladePlaceholder"><type>GladePlaceholder</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-command-dnd" role="function"/>glade_command_dnd ()</title>
-<indexterm><primary>glade_command_dnd</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_dnd                   (<link linkend="GList">GList</link> *widgets,
+<refsect2 id="glade-command-dnd" role="function">
+<title>glade_command_dnd ()</title>
+<indexterm zone="glade-command-dnd"><primary>glade_command_dnd</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_dnd                   (<link linkend="GList">GList</link> *widgets,
                                                          <link linkend="GladeWidget">GladeWidget</link> *parent,
                                                          <link linkend="GladePlaceholder">GladePlaceholder</link> *placeholder);</programlisting>
 <para>
@@ -420,9 +415,9 @@ parent; the active project will be used when pasting toplevel objects).</para>
 <listitem><simpara> a <link linkend="GladePlaceholder"><type>GladePlaceholder</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-command-add-signal" role="function"/>glade_command_add_signal ()</title>
-<indexterm><primary>glade_command_add_signal</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_add_signal            (<link linkend="GladeWidget">GladeWidget</link> *glade_widget,
+<refsect2 id="glade-command-add-signal" role="function">
+<title>glade_command_add_signal ()</title>
+<indexterm zone="glade-command-add-signal"><primary>glade_command_add_signal</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_add_signal            (<link linkend="GladeWidget">GladeWidget</link> *glade_widget,
                                                          const <link linkend="GladeSignal">GladeSignal</link> *signal);</programlisting>
 <para>
 TODO: write me</para>
@@ -436,9 +431,9 @@ TODO: write me</para>
 <listitem><simpara> a <link linkend="GladeSignal"><type>GladeSignal</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-command-remove-signal" role="function"/>glade_command_remove_signal ()</title>
-<indexterm><primary>glade_command_remove_signal</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_remove_signal         (<link linkend="GladeWidget">GladeWidget</link> *glade_widget,
+<refsect2 id="glade-command-remove-signal" role="function">
+<title>glade_command_remove_signal ()</title>
+<indexterm zone="glade-command-remove-signal"><primary>glade_command_remove_signal</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_remove_signal         (<link linkend="GladeWidget">GladeWidget</link> *glade_widget,
                                                          const <link linkend="GladeSignal">GladeSignal</link> *signal);</programlisting>
 <para>
 TODO: write me</para>
@@ -452,9 +447,9 @@ TODO: write me</para>
 <listitem><simpara> a <link linkend="GladeSignal"><type>GladeSignal</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-command-change-signal" role="function"/>glade_command_change_signal ()</title>
-<indexterm><primary>glade_command_change_signal</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_change_signal         (<link linkend="GladeWidget">GladeWidget</link> *glade_widget,
+<refsect2 id="glade-command-change-signal" role="function">
+<title>glade_command_change_signal ()</title>
+<indexterm zone="glade-command-change-signal"><primary>glade_command_change_signal</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_change_signal         (<link linkend="GladeWidget">GladeWidget</link> *glade_widget,
                                                          const <link linkend="GladeSignal">GladeSignal</link> *old_signal,
                                                          const <link linkend="GladeSignal">GladeSignal</link> *new_signal);</programlisting>
 <para>
@@ -472,9 +467,9 @@ TODO: write me</para>
 <listitem><simpara> a <link linkend="GladeSignal"><type>GladeSignal</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-command-set-i18n" role="function"/>glade_command_set_i18n ()</title>
-<indexterm><primary>glade_command_set_i18n</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_set_i18n              (<link linkend="GladeProperty">GladeProperty</link> *property,
+<refsect2 id="glade-command-set-i18n" role="function">
+<title>glade_command_set_i18n ()</title>
+<indexterm zone="glade-command-set-i18n"><primary>glade_command_set_i18n</primary></indexterm><programlisting><link linkend="void">void</link>                glade_command_set_i18n              (<link linkend="GladeProperty">GladeProperty</link> *property,
                                                          <link linkend="gboolean">gboolean</link> translatable,
                                                          <link linkend="gboolean">gboolean</link> has_context,
                                                          const <link linkend="gchar">gchar</link> *comment);</programlisting>

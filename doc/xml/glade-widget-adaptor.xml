@@ -1,6 +1,6 @@
 <refentry id="gladeui-GladeWidgetAdaptor">
 <refmeta>
-<refentrytitle role="top_of_page">GladeWidgetAdaptor</refentrytitle>
+<refentrytitle role="top_of_page" id="gladeui-GladeWidgetAdaptor.top_of_page">GladeWidgetAdaptor</refentrytitle>
 <manvolnum>3</manvolnum>
 <refmiscinfo>GLADEUI Library</refmiscinfo>
 </refmeta>
@@ -11,13 +11,10 @@
 <!--[<xref linkend="desc" endterm="desc.title"/>]-->
 </refnamediv>
 
-<refsynopsisdiv role="synopsis">
+<refsynopsisdiv id="gladeui-GladeWidgetAdaptor.synopsis" role="synopsis">
 <title role="synopsis.title">Synopsis</title>
 
 <synopsis>
-
-
-
                     <link linkend="GladeWidgetAdaptorPrivate">GladeWidgetAdaptorPrivate</link>;
 #define             <link linkend="GWA-IS-FIXED:CAPS">GWA_IS_FIXED</link>                        (obj)
 #define             <link linkend="GWA-IS-TOPLEVEL:CAPS">GWA_IS_TOPLEVEL</link>                     (obj)
@@ -201,7 +198,6 @@ enum                <link linkend="GladeCreateReason">GladeCreateReason</link>;
                                                          <link linkend="GObject">GObject</link> *container,
                                                          <link linkend="GObject">GObject</link> *object,
                                                          const <link linkend="gchar">gchar</link> *action_path);
-
 </synopsis>
 </refsynopsisdiv>
 
@@ -213,7 +209,7 @@ enum                <link linkend="GladeCreateReason">GladeCreateReason</link>;
 
 
 
-<refsect1 role="desc">
+<refsect1 id="gladeui-GladeWidgetAdaptor.description" role="desc">
 <title role="desc.title">Description</title>
 <para>
 TODO: Add long description.</para>
@@ -222,17 +218,17 @@ TODO: Add long description.</para>
 </para>
 </refsect1>
 
-<refsect1 role="details">
+<refsect1 id="gladeui-GladeWidgetAdaptor.details" role="details">
 <title role="details.title">Details</title>
-<refsect2>
-<title><anchor id="GladeWidgetAdaptorPrivate" role="struct"/>GladeWidgetAdaptorPrivate</title>
-<indexterm><primary>GladeWidgetAdaptorPrivate</primary></indexterm><programlisting>typedef struct _GladeWidgetAdaptorPrivate GladeWidgetAdaptorPrivate;</programlisting>
+<refsect2 id="GladeWidgetAdaptorPrivate" role="struct">
+<title>GladeWidgetAdaptorPrivate</title>
+<indexterm zone="GladeWidgetAdaptorPrivate"><primary>GladeWidgetAdaptorPrivate</primary></indexterm><programlisting>typedef struct _GladeWidgetAdaptorPrivate GladeWidgetAdaptorPrivate;</programlisting>
 <para>
 
 </para></refsect2>
-<refsect2>
-<title><anchor id="GWA-IS-FIXED:CAPS" role="macro"/>GWA_IS_FIXED()</title>
-<indexterm><primary>GWA_IS_FIXED</primary></indexterm><programlisting>#define             GWA_IS_FIXED(obj)</programlisting>
+<refsect2 id="GWA-IS-FIXED:CAPS" role="macro">
+<title>GWA_IS_FIXED()</title>
+<indexterm zone="GWA-IS-FIXED:CAPS"><primary>GWA_IS_FIXED</primary></indexterm><programlisting>#define             GWA_IS_FIXED(obj)</programlisting>
 <para>
 Checks whether this widget adaptor should be handled 
 as a free-form container</para>
@@ -243,9 +239,9 @@ as a free-form container</para>
 <listitem><simpara> A <link linkend="GladeWidgetAdaptor"><type>GladeWidgetAdaptor</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="GWA-IS-TOPLEVEL:CAPS" role="macro"/>GWA_IS_TOPLEVEL()</title>
-<indexterm><primary>GWA_IS_TOPLEVEL</primary></indexterm><programlisting>#define             GWA_IS_TOPLEVEL(obj)</programlisting>
+<refsect2 id="GWA-IS-TOPLEVEL:CAPS" role="macro">
+<title>GWA_IS_TOPLEVEL()</title>
+<indexterm zone="GWA-IS-TOPLEVEL:CAPS"><primary>GWA_IS_TOPLEVEL</primary></indexterm><programlisting>#define             GWA_IS_TOPLEVEL(obj)</programlisting>
 <para>
 Checks whether this widget class has been marked as
 a toplevel one.</para>
@@ -256,9 +252,9 @@ a toplevel one.</para>
 <listitem><simpara> A <link linkend="GladeWidgetAdaptor"><type>GladeWidgetAdaptor</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="GWA-USE-PLACEHOLDERS:CAPS" role="macro"/>GWA_USE_PLACEHOLDERS()</title>
-<indexterm><primary>GWA_USE_PLACEHOLDERS</primary></indexterm><programlisting>#define             GWA_USE_PLACEHOLDERS(obj)</programlisting>
+<refsect2 id="GWA-USE-PLACEHOLDERS:CAPS" role="macro">
+<title>GWA_USE_PLACEHOLDERS()</title>
+<indexterm zone="GWA-USE-PLACEHOLDERS:CAPS"><primary>GWA_USE_PLACEHOLDERS</primary></indexterm><programlisting>#define             GWA_USE_PLACEHOLDERS(obj)</programlisting>
 <para>
 Checks whether this widget class has been marked to
 use placeholders in child widget operations</para>
@@ -269,9 +265,9 @@ use placeholders in child widget operations</para>
 <listitem><simpara> A <link linkend="GladeWidgetAdaptor"><type>GladeWidgetAdaptor</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="GWA-DEFAULT-WIDTH:CAPS" role="macro"/>GWA_DEFAULT_WIDTH()</title>
-<indexterm><primary>GWA_DEFAULT_WIDTH</primary></indexterm><programlisting>#define             GWA_DEFAULT_WIDTH(obj)</programlisting>
+<refsect2 id="GWA-DEFAULT-WIDTH:CAPS" role="macro">
+<title>GWA_DEFAULT_WIDTH()</title>
+<indexterm zone="GWA-DEFAULT-WIDTH:CAPS"><primary>GWA_DEFAULT_WIDTH</primary></indexterm><programlisting>#define             GWA_DEFAULT_WIDTH(obj)</programlisting>
 <para>
 </para>
 <para>
@@ -281,9 +277,9 @@ use placeholders in child widget operations</para>
 <listitem><simpara> A <link linkend="GladeWidgetAdaptor"><type>GladeWidgetAdaptor</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="GWA-DEFAULT-HEIGHT:CAPS" role="macro"/>GWA_DEFAULT_HEIGHT()</title>
-<indexterm><primary>GWA_DEFAULT_HEIGHT</primary></indexterm><programlisting>#define             GWA_DEFAULT_HEIGHT(obj)</programlisting>
+<refsect2 id="GWA-DEFAULT-HEIGHT:CAPS" role="macro">
+<title>GWA_DEFAULT_HEIGHT()</title>
+<indexterm zone="GWA-DEFAULT-HEIGHT:CAPS"><primary>GWA_DEFAULT_HEIGHT</primary></indexterm><programlisting>#define             GWA_DEFAULT_HEIGHT(obj)</programlisting>
 <para>
 </para>
 <para>
@@ -293,9 +289,9 @@ use placeholders in child widget operations</para>
 <listitem><simpara> A <link linkend="GladeWidgetAdaptor"><type>GladeWidgetAdaptor</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="GWA-GET-CLASS:CAPS" role="macro"/>GWA_GET_CLASS()</title>
-<indexterm><primary>GWA_GET_CLASS</primary></indexterm><programlisting>#define             GWA_GET_CLASS(type)</programlisting>
+<refsect2 id="GWA-GET-CLASS:CAPS" role="macro">
+<title>GWA_GET_CLASS()</title>
+<indexterm zone="GWA-GET-CLASS:CAPS"><primary>GWA_GET_CLASS</primary></indexterm><programlisting>#define             GWA_GET_CLASS(type)</programlisting>
 <para>
 Shorthand for referencing glade adaptor classes from
 the plugin eg. GWA_GET_CLASS (GTK_TYPE_CONTAINER)->post_create (adaptor...</para>
@@ -306,9 +302,9 @@ the plugin eg. GWA_GET_CLASS (GTK_TYPE_CONTAINER)->post_create (adaptor...</para
 <listitem><simpara> A <link linkend="GType"><type>GType</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="GWA-GET-OCLASS:CAPS" role="macro"/>GWA_GET_OCLASS()</title>
-<indexterm><primary>GWA_GET_OCLASS</primary></indexterm><programlisting>#define GWA_GET_OCLASS(type) ((GObjectClass*)GWA_GET_CLASS(type))
+<refsect2 id="GWA-GET-OCLASS:CAPS" role="macro">
+<title>GWA_GET_OCLASS()</title>
+<indexterm zone="GWA-GET-OCLASS:CAPS"><primary>GWA_GET_OCLASS</primary></indexterm><programlisting>#define GWA_GET_OCLASS(type) ((GObjectClass*)GWA_GET_CLASS(type))
 </programlisting>
 <para>
 Same as GWA_GET_CLASS but casted to GObjectClass</para>
@@ -319,9 +315,9 @@ Same as GWA_GET_CLASS but casted to GObjectClass</para>
 <listitem><simpara> A <link linkend="GType"><type>GType</type></link>.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="GLADE-VALID-CREATE-REASON:CAPS" role="macro"/>GLADE_VALID_CREATE_REASON()</title>
-<indexterm><primary>GLADE_VALID_CREATE_REASON</primary></indexterm><programlisting>#define GLADE_VALID_CREATE_REASON(reason) (reason &gt;= 0 &amp;&amp; reason &lt; GLADE_CREATE_REASONS)
+<refsect2 id="GLADE-VALID-CREATE-REASON:CAPS" role="macro">
+<title>GLADE_VALID_CREATE_REASON()</title>
+<indexterm zone="GLADE-VALID-CREATE-REASON:CAPS"><primary>GLADE_VALID_CREATE_REASON</primary></indexterm><programlisting>#define GLADE_VALID_CREATE_REASON(reason) (reason &gt;= 0 &amp;&amp; reason &lt; GLADE_CREATE_REASONS)
 </programlisting>
 <para>
 
@@ -332,9 +328,9 @@ Same as GWA_GET_CLASS but casted to GObjectClass</para>
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="GladeCreateReason" role="enum"/>enum GladeCreateReason</title>
-<indexterm><primary>GladeCreateReason</primary></indexterm><programlisting>typedef enum
+<refsect2 id="GladeCreateReason" role="enum">
+<title>enum GladeCreateReason</title>
+<indexterm zone="GladeCreateReason"><primary>GladeCreateReason</primary></indexterm><programlisting>typedef enum
 {
 	GLADE_CREATE_USER = 0,
 	GLADE_CREATE_COPY,
@@ -348,51 +344,51 @@ These are the reasons your <link linkend="GladePostCreateFunc"><type>GladePostCr
 <para>
 
 </para><variablelist role="enum">
-<varlistentry>
-<term><anchor id="GLADE-CREATE-USER:CAPS" role="constant"/><literal>GLADE_CREATE_USER</literal></term>
+<varlistentry id="GLADE-CREATE-USER:CAPS" role="constant">
+<term><literal>GLADE_CREATE_USER</literal></term>
 <listitem><simpara> Was created at the user's request
                     (this is a good time to set any properties
                     or add children to the project; like GtkFrame's 
                     label for example).
 </simpara></listitem>
 </varlistentry>
-<varlistentry>
-<term><anchor id="GLADE-CREATE-COPY:CAPS" role="constant"/><literal>GLADE_CREATE_COPY</literal></term>
+<varlistentry id="GLADE-CREATE-COPY:CAPS" role="constant">
+<term><literal>GLADE_CREATE_COPY</literal></term>
 <listitem><simpara> Was created as a result of the copy/paste 
                     mechanism, at this point you can count on glade
                     to follow up with properties and children on 
                     its own.
 </simpara></listitem>
 </varlistentry>
-<varlistentry>
-<term><anchor id="GLADE-CREATE-LOAD:CAPS" role="constant"/><literal>GLADE_CREATE_LOAD</literal></term>
+<varlistentry id="GLADE-CREATE-LOAD:CAPS" role="constant">
+<term><literal>GLADE_CREATE_LOAD</literal></term>
 <listitem><simpara> Was created during the load process.
 </simpara></listitem>
 </varlistentry>
-<varlistentry>
-<term><anchor id="GLADE-CREATE-REBUILD:CAPS" role="constant"/><literal>GLADE_CREATE_REBUILD</literal></term>
+<varlistentry id="GLADE-CREATE-REBUILD:CAPS" role="constant">
+<term><literal>GLADE_CREATE_REBUILD</literal></term>
 <listitem><simpara> Was created as a replacement for another project 
                        object; this only happens when the user is 
                        changing a property that is marked by the type 
                        system as G_PARAM_SPEC_CONSTRUCT_ONLY.
 </simpara></listitem>
 </varlistentry>
-<varlistentry>
-<term><anchor id="GLADE-CREATE-REASONS:CAPS" role="constant"/><literal>GLADE_CREATE_REASONS</literal></term>
+<varlistentry id="GLADE-CREATE-REASONS:CAPS" role="constant">
+<term><literal>GLADE_CREATE_REASONS</literal></term>
 <listitem><simpara> Never used.
 </simpara></listitem>
 </varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="GLADE-TYPE-CREATE-REASON:CAPS" role="macro"/>GLADE_TYPE_CREATE_REASON</title>
-<indexterm><primary>GLADE_TYPE_CREATE_REASON</primary></indexterm><programlisting>#define GLADE_TYPE_CREATE_REASON (glade_create_reason_get_type())
+<refsect2 id="GLADE-TYPE-CREATE-REASON:CAPS" role="macro">
+<title>GLADE_TYPE_CREATE_REASON</title>
+<indexterm zone="GLADE-TYPE-CREATE-REASON:CAPS"><primary>GLADE_TYPE_CREATE_REASON</primary></indexterm><programlisting>#define GLADE_TYPE_CREATE_REASON (glade_create_reason_get_type())
 </programlisting>
 <para>
 
 </para></refsect2>
-<refsect2>
-<title><anchor id="GladeSetPropertyFunc" role="function"/>GladeSetPropertyFunc ()</title>
-<indexterm><primary>GladeSetPropertyFunc</primary></indexterm><programlisting><link linkend="void">void</link>                (*GladeSetPropertyFunc)             (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+<refsect2 id="GladeSetPropertyFunc" role="function">
+<title>GladeSetPropertyFunc ()</title>
+<indexterm zone="GladeSetPropertyFunc"><primary>GladeSetPropertyFunc</primary></indexterm><programlisting><link linkend="void">void</link>                (*GladeSetPropertyFunc)             (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          <link linkend="GObject">GObject</link> *object,
                                                          const <link linkend="gchar">gchar</link> *property_name,
                                                          const <link linkend="GValue">GValue</link> *value);</programlisting>
@@ -418,9 +414,9 @@ Sets <parameter>value</parameter> on <parameter>object</parameter> for a given <
 <listitem><simpara> The <link linkend="GValue"><type>GValue</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="GladeGetPropertyFunc" role="function"/>GladeGetPropertyFunc ()</title>
-<indexterm><primary>GladeGetPropertyFunc</primary></indexterm><programlisting><link linkend="void">void</link>                (*GladeGetPropertyFunc)             (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+<refsect2 id="GladeGetPropertyFunc" role="function">
+<title>GladeGetPropertyFunc ()</title>
+<indexterm zone="GladeGetPropertyFunc"><primary>GladeGetPropertyFunc</primary></indexterm><programlisting><link linkend="void">void</link>                (*GladeGetPropertyFunc)             (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          <link linkend="GObject">GObject</link> *object,
                                                          const <link linkend="gchar">gchar</link> *property_name,
                                                          <link linkend="GValue">GValue</link> *value);</programlisting>
@@ -442,9 +438,9 @@ Gets <parameter>value</parameter> on <parameter>object</parameter> for a given <
 <listitem><simpara> The <link linkend="GValue"><type>GValue</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="GladeVerifyPropertyFunc" role="function"/>GladeVerifyPropertyFunc ()</title>
-<indexterm><primary>GladeVerifyPropertyFunc</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            (*GladeVerifyPropertyFunc)          (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+<refsect2 id="GladeVerifyPropertyFunc" role="function">
+<title>GladeVerifyPropertyFunc ()</title>
+<indexterm zone="GladeVerifyPropertyFunc"><primary>GladeVerifyPropertyFunc</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            (*GladeVerifyPropertyFunc)          (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          <link linkend="GObject">GObject</link> *object,
                                                          const <link linkend="gchar">gchar</link> *property_name,
                                                          const <link linkend="GValue">GValue</link> *value);</programlisting>
@@ -472,9 +468,9 @@ boundry checker for properties.</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> whether or not its OK to set <parameter>value</parameter> on <parameter>object</parameter>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="GladeChildSetPropertyFunc" role="function"/>GladeChildSetPropertyFunc ()</title>
-<indexterm><primary>GladeChildSetPropertyFunc</primary></indexterm><programlisting><link linkend="void">void</link>                (*GladeChildSetPropertyFunc)        (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+<refsect2 id="GladeChildSetPropertyFunc" role="function">
+<title>GladeChildSetPropertyFunc ()</title>
+<indexterm zone="GladeChildSetPropertyFunc"><primary>GladeChildSetPropertyFunc</primary></indexterm><programlisting><link linkend="void">void</link>                (*GladeChildSetPropertyFunc)        (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          <link linkend="GObject">GObject</link> *container,
                                                          <link linkend="GObject">GObject</link> *child,
                                                          const <link linkend="gchar">gchar</link> *property_name,
@@ -501,9 +497,9 @@ on the <parameter>child</parameter> object of <parameter>container</parameter>.<
 <listitem><simpara> The <link linkend="GValue"><type>GValue</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="GladeChildGetPropertyFunc" role="function"/>GladeChildGetPropertyFunc ()</title>
-<indexterm><primary>GladeChildGetPropertyFunc</primary></indexterm><programlisting><link linkend="void">void</link>                (*GladeChildGetPropertyFunc)        (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+<refsect2 id="GladeChildGetPropertyFunc" role="function">
+<title>GladeChildGetPropertyFunc ()</title>
+<indexterm zone="GladeChildGetPropertyFunc"><primary>GladeChildGetPropertyFunc</primary></indexterm><programlisting><link linkend="void">void</link>                (*GladeChildGetPropertyFunc)        (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          <link linkend="GObject">GObject</link> *container,
                                                          <link linkend="GObject">GObject</link> *child,
                                                          const <link linkend="gchar">gchar</link> *property_name,
@@ -530,9 +526,9 @@ on the <parameter>child</parameter> object of <parameter>container</parameter> i
 <listitem><simpara> The <link linkend="GValue"><type>GValue</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="GladeChildVerifyPropertyFunc" role="function"/>GladeChildVerifyPropertyFunc ()</title>
-<indexterm><primary>GladeChildVerifyPropertyFunc</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            (*GladeChildVerifyPropertyFunc)     (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+<refsect2 id="GladeChildVerifyPropertyFunc" role="function">
+<title>GladeChildVerifyPropertyFunc ()</title>
+<indexterm zone="GladeChildVerifyPropertyFunc"><primary>GladeChildVerifyPropertyFunc</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            (*GladeChildVerifyPropertyFunc)     (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          <link linkend="GObject">GObject</link> *container,
                                                          <link linkend="GObject">GObject</link> *child,
                                                          const <link linkend="gchar">gchar</link> *property_name,
@@ -564,9 +560,9 @@ boundry checker for properties.</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> whether or not its OK to set <parameter>value</parameter> on <parameter>object</parameter>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="GladeGetChildrenFunc" role="function"/>GladeGetChildrenFunc ()</title>
-<indexterm><primary>GladeGetChildrenFunc</primary></indexterm><programlisting><link linkend="GList">GList</link>*              (*GladeGetChildrenFunc)             (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+<refsect2 id="GladeGetChildrenFunc" role="function">
+<title>GladeGetChildrenFunc ()</title>
+<indexterm zone="GladeGetChildrenFunc"><primary>GladeGetChildrenFunc</primary></indexterm><programlisting><link linkend="GList">GList</link>*              (*GladeGetChildrenFunc)             (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          <link linkend="GObject">GObject</link> *container);</programlisting>
 <para>
 A function called to get <parameter>containers</parameter> children.</para>
@@ -582,9 +578,9 @@ A function called to get <parameter>containers</parameter> children.</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> A <link linkend="GList"><type>GList</type></link> of <link linkend="GObject"><type>GObject</type></link> children.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="GladeAddChildFunc" role="function"/>GladeAddChildFunc ()</title>
-<indexterm><primary>GladeAddChildFunc</primary></indexterm><programlisting><link linkend="void">void</link>                (*GladeAddChildFunc)                (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+<refsect2 id="GladeAddChildFunc" role="function">
+<title>GladeAddChildFunc ()</title>
+<indexterm zone="GladeAddChildFunc"><primary>GladeAddChildFunc</primary></indexterm><programlisting><link linkend="void">void</link>                (*GladeAddChildFunc)                (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          <link linkend="GObject">GObject</link> *parent,
                                                          <link linkend="GObject">GObject</link> *child);</programlisting>
 <para>
@@ -602,9 +598,9 @@ Called to add <parameter>child</parameter> to <parameter>parent</parameter>.</pa
 <listitem><simpara> A <link linkend="GObject"><type>GObject</type></link> child
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="GladeRemoveChildFunc" role="function"/>GladeRemoveChildFunc ()</title>
-<indexterm><primary>GladeRemoveChildFunc</primary></indexterm><programlisting><link linkend="void">void</link>                (*GladeRemoveChildFunc)             (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+<refsect2 id="GladeRemoveChildFunc" role="function">
+<title>GladeRemoveChildFunc ()</title>
+<indexterm zone="GladeRemoveChildFunc"><primary>GladeRemoveChildFunc</primary></indexterm><programlisting><link linkend="void">void</link>                (*GladeRemoveChildFunc)             (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          <link linkend="GObject">GObject</link> *parent,
                                                          <link linkend="GObject">GObject</link> *child);</programlisting>
 <para>
@@ -622,9 +618,9 @@ Called to remove <parameter>child</parameter> from <parameter>parent</parameter>
 <listitem><simpara> A <link linkend="GObject"><type>GObject</type></link> child
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="GladeReplaceChildFunc" role="function"/>GladeReplaceChildFunc ()</title>
-<indexterm><primary>GladeReplaceChildFunc</primary></indexterm><programlisting><link linkend="void">void</link>                (*GladeReplaceChildFunc)            (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+<refsect2 id="GladeReplaceChildFunc" role="function">
+<title>GladeReplaceChildFunc ()</title>
+<indexterm zone="GladeReplaceChildFunc"><primary>GladeReplaceChildFunc</primary></indexterm><programlisting><link linkend="void">void</link>                (*GladeReplaceChildFunc)            (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          <link linkend="GObject">GObject</link> *container,
                                                          <link linkend="GObject">GObject</link> *old_obj,
                                                          <link linkend="GObject">GObject</link> *new_obj);</programlisting>
@@ -647,9 +643,9 @@ in containers.</para>
 <listitem><simpara> The new <link linkend="GObject"><type>GObject</type></link> child to take its place
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="GladePostCreateFunc" role="function"/>GladePostCreateFunc ()</title>
-<indexterm><primary>GladePostCreateFunc</primary></indexterm><programlisting><link linkend="void">void</link>                (*GladePostCreateFunc)              (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+<refsect2 id="GladePostCreateFunc" role="function">
+<title>GladePostCreateFunc ()</title>
+<indexterm zone="GladePostCreateFunc"><primary>GladePostCreateFunc</primary></indexterm><programlisting><link linkend="void">void</link>                (*GladePostCreateFunc)              (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          <link linkend="GObject">GObject</link> *object,
                                                          <link linkend="GladeCreateReason">GladeCreateReason</link> reason);</programlisting>
 <para>
@@ -668,9 +664,9 @@ instance and can be for any <link linkend="GladeCreateReason"><type>GladeCreateR
 <listitem><simpara> a <link linkend="GladeCreateReason"><type>GladeCreateReason</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="GladeGetInternalFunc" role="function"/>GladeGetInternalFunc ()</title>
-<indexterm><primary>GladeGetInternalFunc</primary></indexterm><programlisting><link linkend="GObject">GObject</link>*            (*GladeGetInternalFunc)             (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+<refsect2 id="GladeGetInternalFunc" role="function">
+<title>GladeGetInternalFunc ()</title>
+<indexterm zone="GladeGetInternalFunc"><primary>GladeGetInternalFunc</primary></indexterm><programlisting><link linkend="GObject">GObject</link>*            (*GladeGetInternalFunc)             (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          <link linkend="GObject">GObject</link> *parent,
                                                          const <link linkend="gchar">gchar</link> *name);</programlisting>
 <para>
@@ -692,9 +688,9 @@ Called to lookup <parameter>child</parameter> in composite object <parameter>par
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="GladeActionActivateFunc" role="function"/>GladeActionActivateFunc ()</title>
-<indexterm><primary>GladeActionActivateFunc</primary></indexterm><programlisting><link linkend="void">void</link>                (*GladeActionActivateFunc)          (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+<refsect2 id="GladeActionActivateFunc" role="function">
+<title>GladeActionActivateFunc ()</title>
+<indexterm zone="GladeActionActivateFunc"><primary>GladeActionActivateFunc</primary></indexterm><programlisting><link linkend="void">void</link>                (*GladeActionActivateFunc)          (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          <link linkend="GObject">GObject</link> *object,
                                                          const <link linkend="gchar">gchar</link> *action_path);</programlisting>
 <para>
@@ -712,9 +708,9 @@ Called to lookup <parameter>child</parameter> in composite object <parameter>par
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="GladeChildActionActivateFunc" role="function"/>GladeChildActionActivateFunc ()</title>
-<indexterm><primary>GladeChildActionActivateFunc</primary></indexterm><programlisting><link linkend="void">void</link>                (*GladeChildActionActivateFunc)     (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+<refsect2 id="GladeChildActionActivateFunc" role="function">
+<title>GladeChildActionActivateFunc ()</title>
+<indexterm zone="GladeChildActionActivateFunc"><primary>GladeChildActionActivateFunc</primary></indexterm><programlisting><link linkend="void">void</link>                (*GladeChildActionActivateFunc)     (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          <link linkend="GObject">GObject</link> *container,
                                                          <link linkend="GObject">GObject</link> *object,
                                                          const <link linkend="gchar">gchar</link> *action_path);</programlisting>
@@ -736,9 +732,9 @@ Called to lookup <parameter>child</parameter> in composite object <parameter>par
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="GladeWidgetAdaptor" role="struct"/>GladeWidgetAdaptor</title>
-<indexterm><primary>GladeWidgetAdaptor</primary></indexterm><programlisting>typedef struct {
+<refsect2 id="GladeWidgetAdaptor" role="struct">
+<title>GladeWidgetAdaptor</title>
+<indexterm zone="GladeWidgetAdaptor"><primary>GladeWidgetAdaptor</primary></indexterm><programlisting>typedef struct {
 	GObject      parent_instance;
 
 	GType        type;         /* GType of the widget */
@@ -784,9 +780,9 @@ Called to lookup <parameter>child</parameter> in composite object <parameter>par
 <para>
 
 </para></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-create-widget" role="macro"/>glade_widget_adaptor_create_widget()</title>
-<indexterm><primary>glade_widget_adaptor_create_widget</primary></indexterm><programlisting>#define             glade_widget_adaptor_create_widget(adaptor, query, ...)</programlisting>
+<refsect2 id="glade-widget-adaptor-create-widget" role="macro">
+<title>glade_widget_adaptor_create_widget()</title>
+<indexterm zone="glade-widget-adaptor-create-widget"><primary>glade_widget_adaptor_create_widget</primary></indexterm><programlisting>#define             glade_widget_adaptor_create_widget(adaptor, query, ...)</programlisting>
 <para>
 This factory function returns a new <link linkend="GladeWidget"><type>GladeWidget</type></link> of the correct type/class
 with the properties defined in @... and queries the user if nescisary.
@@ -817,9 +813,9 @@ this macro returns the newly created <link linkend="GladeWidget"><type>GladeWidg
           properties
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-from-pclass" role="macro"/>glade_widget_adaptor_from_pclass()</title>
-<indexterm><primary>glade_widget_adaptor_from_pclass</primary></indexterm><programlisting>#define             glade_widget_adaptor_from_pclass(pclass)</programlisting>
+<refsect2 id="glade-widget-adaptor-from-pclass" role="macro">
+<title>glade_widget_adaptor_from_pclass()</title>
+<indexterm zone="glade-widget-adaptor-from-pclass"><primary>glade_widget_adaptor_from_pclass</primary></indexterm><programlisting>#define             glade_widget_adaptor_from_pclass(pclass)</programlisting>
 <para>
 
 </para><variablelist role="params">
@@ -829,9 +825,9 @@ this macro returns the newly created <link linkend="GladeWidget"><type>GladeWidg
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-from-pspec" role="macro"/>glade_widget_adaptor_from_pspec()</title>
-<indexterm><primary>glade_widget_adaptor_from_pspec</primary></indexterm><programlisting>#define             glade_widget_adaptor_from_pspec(pspec)</programlisting>
+<refsect2 id="glade-widget-adaptor-from-pspec" role="macro">
+<title>glade_widget_adaptor_from_pspec()</title>
+<indexterm zone="glade-widget-adaptor-from-pspec"><primary>glade_widget_adaptor_from_pspec</primary></indexterm><programlisting>#define             glade_widget_adaptor_from_pspec(pspec)</programlisting>
 <para>
 
 </para><variablelist role="params">
@@ -841,9 +837,9 @@ this macro returns the newly created <link linkend="GladeWidget"><type>GladeWidg
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-create-reason-get-type" role="function"/>glade_create_reason_get_type ()</title>
-<indexterm><primary>glade_create_reason_get_type</primary></indexterm><programlisting><link linkend="GType">GType</link>               glade_create_reason_get_type        (void);</programlisting>
+<refsect2 id="glade-create-reason-get-type" role="function">
+<title>glade_create_reason_get_type ()</title>
+<indexterm zone="glade-create-reason-get-type"><primary>glade_create_reason_get_type</primary></indexterm><programlisting><link linkend="GType">GType</link>               glade_create_reason_get_type        (void);</programlisting>
 <para>
 
 </para><variablelist role="params">
@@ -852,9 +848,9 @@ this macro returns the newly created <link linkend="GladeWidget"><type>GladeWidg
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-from-catalog" role="function"/>glade_widget_adaptor_from_catalog ()</title>
-<indexterm><primary>glade_widget_adaptor_from_catalog</primary></indexterm><programlisting><link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link>* glade_widget_adaptor_from_catalog   (<link linkend="GladeXmlNode">GladeXmlNode</link> *class_node,
+<refsect2 id="glade-widget-adaptor-from-catalog" role="function">
+<title>glade_widget_adaptor_from_catalog ()</title>
+<indexterm zone="glade-widget-adaptor-from-catalog"><primary>glade_widget_adaptor_from_catalog</primary></indexterm><programlisting><link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link>* glade_widget_adaptor_from_catalog   (<link linkend="GladeXmlNode">GladeXmlNode</link> *class_node,
                                                          const <link linkend="gchar">gchar</link> *catname,
                                                          const <link linkend="gchar">gchar</link> *icon_prefix,
                                                          <link linkend="GModule">GModule</link> *module,
@@ -891,9 +887,9 @@ the relevent catalog info.</para>
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-register" role="function"/>glade_widget_adaptor_register ()</title>
-<indexterm><primary>glade_widget_adaptor_register</primary></indexterm><programlisting><link linkend="void">void</link>                glade_widget_adaptor_register       (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor);</programlisting>
+<refsect2 id="glade-widget-adaptor-register" role="function">
+<title>glade_widget_adaptor_register ()</title>
+<indexterm zone="glade-widget-adaptor-register"><primary>glade_widget_adaptor_register</primary></indexterm><programlisting><link linkend="void">void</link>                glade_widget_adaptor_register       (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor);</programlisting>
 <para>
 Registers <parameter>adaptor</parameter> into the Glade core (every supported
 object type must have a registered adaptor).</para>
@@ -904,9 +900,9 @@ object type must have a registered adaptor).</para>
 <listitem><simpara> A <link linkend="GladeWidgetAdaptor"><type>GladeWidgetAdaptor</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-create-internal" role="function"/>glade_widget_adaptor_create_internal ()</title>
-<indexterm><primary>glade_widget_adaptor_create_internal</primary></indexterm><programlisting><link linkend="GladeWidget">GladeWidget</link>*        glade_widget_adaptor_create_internal
+<refsect2 id="glade-widget-adaptor-create-internal" role="function">
+<title>glade_widget_adaptor_create_internal ()</title>
+<indexterm zone="glade-widget-adaptor-create-internal"><primary>glade_widget_adaptor_create_internal</primary></indexterm><programlisting><link linkend="GladeWidget">GladeWidget</link>*        glade_widget_adaptor_create_internal
                                                         (<link linkend="GladeWidget">GladeWidget</link> *parent,
                                                          <link linkend="GObject">GObject</link> *internal_object,
                                                          const <link linkend="gchar">gchar</link> *internal_name,
@@ -946,9 +942,9 @@ for internal widgets.</para>
          <parameter>internal_object</parameter> of name <parameter>internal_name</parameter>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-create-widget-real" role="function"/>glade_widget_adaptor_create_widget_real ()</title>
-<indexterm><primary>glade_widget_adaptor_create_widget_real</primary></indexterm><programlisting><link linkend="GladeWidget">GladeWidget</link>*        glade_widget_adaptor_create_widget_real
+<refsect2 id="glade-widget-adaptor-create-widget-real" role="function">
+<title>glade_widget_adaptor_create_widget_real ()</title>
+<indexterm zone="glade-widget-adaptor-create-widget-real"><primary>glade_widget_adaptor_create_widget_real</primary></indexterm><programlisting><link linkend="GladeWidget">GladeWidget</link>*        glade_widget_adaptor_create_widget_real
                                                         (<link linkend="gboolean">gboolean</link> query,
                                                          const <link linkend="gchar">gchar</link> *first_property,
                                                          ...);</programlisting>
@@ -969,9 +965,9 @@ for internal widgets.</para>
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-get-by-name" role="function"/>glade_widget_adaptor_get_by_name ()</title>
-<indexterm><primary>glade_widget_adaptor_get_by_name</primary></indexterm><programlisting><link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link>* glade_widget_adaptor_get_by_name    (const <link linkend="gchar">gchar</link> *name);</programlisting>
+<refsect2 id="glade-widget-adaptor-get-by-name" role="function">
+<title>glade_widget_adaptor_get_by_name ()</title>
+<indexterm zone="glade-widget-adaptor-get-by-name"><primary>glade_widget_adaptor_get_by_name</primary></indexterm><programlisting><link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link>* glade_widget_adaptor_get_by_name    (const <link linkend="gchar">gchar</link> *name);</programlisting>
 <para>
 </para>
 <para>
@@ -984,9 +980,9 @@ for internal widgets.</para>
          or <link linkend="NULL:CAPS"><literal>NULL</literal></link> if such a class doesn't exist
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-get-by-type" role="function"/>glade_widget_adaptor_get_by_type ()</title>
-<indexterm><primary>glade_widget_adaptor_get_by_type</primary></indexterm><programlisting><link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link>* glade_widget_adaptor_get_by_type    (<link linkend="GType">GType</link> type);</programlisting>
+<refsect2 id="glade-widget-adaptor-get-by-type" role="function">
+<title>glade_widget_adaptor_get_by_type ()</title>
+<indexterm zone="glade-widget-adaptor-get-by-type"><primary>glade_widget_adaptor_get_by_type</primary></indexterm><programlisting><link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link>* glade_widget_adaptor_get_by_type    (<link linkend="GType">GType</link> type);</programlisting>
 <para>
 </para>
 <para>
@@ -999,9 +995,9 @@ for internal widgets.</para>
          or <link linkend="NULL:CAPS"><literal>NULL</literal></link> if such a class doesn't exist
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-get-property-class" role="function"/>glade_widget_adaptor_get_property_class ()</title>
-<indexterm><primary>glade_widget_adaptor_get_property_class</primary></indexterm><programlisting><link linkend="GladePropertyClass">GladePropertyClass</link>* glade_widget_adaptor_get_property_class
+<refsect2 id="glade-widget-adaptor-get-property-class" role="function">
+<title>glade_widget_adaptor_get_property_class ()</title>
+<indexterm zone="glade-widget-adaptor-get-property-class"><primary>glade_widget_adaptor_get_property_class</primary></indexterm><programlisting><link linkend="GladePropertyClass">GladePropertyClass</link>* glade_widget_adaptor_get_property_class
                                                         (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          const <link linkend="gchar">gchar</link> *name);</programlisting>
 <para>
@@ -1018,9 +1014,9 @@ Retrieves the <link linkend="GladePropertyClass"><type>GladePropertyClass</type>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> A <link linkend="GladePropertyClass"><type>GladePropertyClass</type></link> object
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-get-pack-property-class" role="function"/>glade_widget_adaptor_get_pack_property_class ()</title>
-<indexterm><primary>glade_widget_adaptor_get_pack_property_class</primary></indexterm><programlisting><link linkend="GladePropertyClass">GladePropertyClass</link>* glade_widget_adaptor_get_pack_property_class
+<refsect2 id="glade-widget-adaptor-get-pack-property-class" role="function">
+<title>glade_widget_adaptor_get_pack_property_class ()</title>
+<indexterm zone="glade-widget-adaptor-get-pack-property-class"><primary>glade_widget_adaptor_get_pack_property_class</primary></indexterm><programlisting><link linkend="GladePropertyClass">GladePropertyClass</link>* glade_widget_adaptor_get_pack_property_class
                                                         (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          const <link linkend="gchar">gchar</link> *name);</programlisting>
 <para>
@@ -1038,9 +1034,9 @@ Retrieves the <link linkend="GladePropertyClass"><type>GladePropertyClass</type>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> A <link linkend="GladePropertyClass"><type>GladePropertyClass</type></link> object
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-default-params" role="function"/>glade_widget_adaptor_default_params ()</title>
-<indexterm><primary>glade_widget_adaptor_default_params</primary></indexterm><programlisting><link linkend="GParameter">GParameter</link>*         glade_widget_adaptor_default_params (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+<refsect2 id="glade-widget-adaptor-default-params" role="function">
+<title>glade_widget_adaptor_default_params ()</title>
+<indexterm zone="glade-widget-adaptor-default-params"><primary>glade_widget_adaptor_default_params</primary></indexterm><programlisting><link linkend="GParameter">GParameter</link>*         glade_widget_adaptor_default_params (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          <link linkend="gboolean">gboolean</link> construct,
                                                          <link linkend="guint">guint</link> *n_params);</programlisting>
 <para>
@@ -1060,9 +1056,9 @@ Retrieves the <link linkend="GladePropertyClass"><type>GladePropertyClass</type>
 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-post-create" role="function"/>glade_widget_adaptor_post_create ()</title>
-<indexterm><primary>glade_widget_adaptor_post_create</primary></indexterm><programlisting><link linkend="void">void</link>                glade_widget_adaptor_post_create    (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+<refsect2 id="glade-widget-adaptor-post-create" role="function">
+<title>glade_widget_adaptor_post_create ()</title>
+<indexterm zone="glade-widget-adaptor-post-create"><primary>glade_widget_adaptor_post_create</primary></indexterm><programlisting><link linkend="void">void</link>                glade_widget_adaptor_post_create    (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          <link linkend="GObject">GObject</link> *object,
                                                          <link linkend="GladeCreateReason">GladeCreateReason</link> reason);</programlisting>
 <para>
@@ -1080,9 +1076,9 @@ An adaptor function to be called after the object is created</para>
 <listitem><simpara>    The <link linkend="GladeCreateReason"><type>GladeCreateReason</type></link> that <parameter>object</parameter> was created for
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-get-internal-child" role="function"/>glade_widget_adaptor_get_internal_child ()</title>
-<indexterm><primary>glade_widget_adaptor_get_internal_child</primary></indexterm><programlisting><link linkend="GObject">GObject</link>*            glade_widget_adaptor_get_internal_child
+<refsect2 id="glade-widget-adaptor-get-internal-child" role="function">
+<title>glade_widget_adaptor_get_internal_child ()</title>
+<indexterm zone="glade-widget-adaptor-get-internal-child"><primary>glade_widget_adaptor_get_internal_child</primary></indexterm><programlisting><link linkend="GObject">GObject</link>*            glade_widget_adaptor_get_internal_child
                                                         (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          <link linkend="GObject">GObject</link> *object,
                                                          const <link linkend="gchar">gchar</link> *internal_name);</programlisting>
@@ -1103,9 +1099,9 @@ Retrieves the internal object <parameter>internal_name</parameter> from <paramet
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> The internal <link linkend="GObject"><type>GObject</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-set-property" role="function"/>glade_widget_adaptor_set_property ()</title>
-<indexterm><primary>glade_widget_adaptor_set_property</primary></indexterm><programlisting><link linkend="void">void</link>                glade_widget_adaptor_set_property   (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+<refsect2 id="glade-widget-adaptor-set-property" role="function">
+<title>glade_widget_adaptor_set_property ()</title>
+<indexterm zone="glade-widget-adaptor-set-property"><primary>glade_widget_adaptor_set_property</primary></indexterm><programlisting><link linkend="void">void</link>                glade_widget_adaptor_set_property   (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          <link linkend="GObject">GObject</link> *object,
                                                          const <link linkend="gchar">gchar</link> *property_name,
                                                          const <link linkend="GValue">GValue</link> *value);</programlisting>
@@ -1128,9 +1124,9 @@ the runtime object.</para>
 <listitem><simpara>         The <link linkend="GValue"><type>GValue</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-get-property" role="function"/>glade_widget_adaptor_get_property ()</title>
-<indexterm><primary>glade_widget_adaptor_get_property</primary></indexterm><programlisting><link linkend="void">void</link>                glade_widget_adaptor_get_property   (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+<refsect2 id="glade-widget-adaptor-get-property" role="function">
+<title>glade_widget_adaptor_get_property ()</title>
+<indexterm zone="glade-widget-adaptor-get-property"><primary>glade_widget_adaptor_get_property</primary></indexterm><programlisting><link linkend="void">void</link>                glade_widget_adaptor_get_property   (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          <link linkend="GObject">GObject</link> *object,
                                                          const <link linkend="gchar">gchar</link> *property_name,
                                                          <link linkend="GValue">GValue</link> *value);</programlisting>
@@ -1152,9 +1148,9 @@ Gets <parameter>value</parameter> of <parameter>property_name</parameter> on <pa
 <listitem><simpara>         The <link linkend="GValue"><type>GValue</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-verify-property" role="function"/>glade_widget_adaptor_verify_property ()</title>
-<indexterm><primary>glade_widget_adaptor_verify_property</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_widget_adaptor_verify_property
+<refsect2 id="glade-widget-adaptor-verify-property" role="function">
+<title>glade_widget_adaptor_verify_property ()</title>
+<indexterm zone="glade-widget-adaptor-verify-property"><primary>glade_widget_adaptor_verify_property</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_widget_adaptor_verify_property
                                                         (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          <link linkend="GObject">GObject</link> *object,
                                                          const <link linkend="gchar">gchar</link> *property_name,
@@ -1184,9 +1180,9 @@ boundry checker for properties.</para>
 will silently return TRUE if the class did not provide a verify function.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-add" role="function"/>glade_widget_adaptor_add ()</title>
-<indexterm><primary>glade_widget_adaptor_add</primary></indexterm><programlisting><link linkend="void">void</link>                glade_widget_adaptor_add            (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+<refsect2 id="glade-widget-adaptor-add" role="function">
+<title>glade_widget_adaptor_add ()</title>
+<indexterm zone="glade-widget-adaptor-add"><primary>glade_widget_adaptor_add</primary></indexterm><programlisting><link linkend="void">void</link>                glade_widget_adaptor_add            (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          <link linkend="GObject">GObject</link> *container,
                                                          <link linkend="GObject">GObject</link> *child);</programlisting>
 <para>
@@ -1204,9 +1200,9 @@ Adds <parameter>child</parameter> to <parameter>container</parameter>.</para>
 <listitem><simpara>     The <link linkend="GObject"><type>GObject</type></link> child
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-remove" role="function"/>glade_widget_adaptor_remove ()</title>
-<indexterm><primary>glade_widget_adaptor_remove</primary></indexterm><programlisting><link linkend="void">void</link>                glade_widget_adaptor_remove         (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+<refsect2 id="glade-widget-adaptor-remove" role="function">
+<title>glade_widget_adaptor_remove ()</title>
+<indexterm zone="glade-widget-adaptor-remove"><primary>glade_widget_adaptor_remove</primary></indexterm><programlisting><link linkend="void">void</link>                glade_widget_adaptor_remove         (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          <link linkend="GObject">GObject</link> *container,
                                                          <link linkend="GObject">GObject</link> *child);</programlisting>
 <para>
@@ -1224,9 +1220,9 @@ Removes <parameter>child</parameter> from <parameter>container</parameter>.</par
 <listitem><simpara>     The <link linkend="GObject"><type>GObject</type></link> child
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-get-children" role="function"/>glade_widget_adaptor_get_children ()</title>
-<indexterm><primary>glade_widget_adaptor_get_children</primary></indexterm><programlisting><link linkend="GList">GList</link>*              glade_widget_adaptor_get_children   (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+<refsect2 id="glade-widget-adaptor-get-children" role="function">
+<title>glade_widget_adaptor_get_children ()</title>
+<indexterm zone="glade-widget-adaptor-get-children"><primary>glade_widget_adaptor_get_children</primary></indexterm><programlisting><link linkend="GList">GList</link>*              glade_widget_adaptor_get_children   (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          <link linkend="GObject">GObject</link> *container);</programlisting>
 <para>
 Lists the children of <parameter>container</parameter>.</para>
@@ -1242,9 +1238,9 @@ Lists the children of <parameter>container</parameter>.</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> A <link linkend="GList"><type>GList</type></link> of children
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-has-child" role="function"/>glade_widget_adaptor_has_child ()</title>
-<indexterm><primary>glade_widget_adaptor_has_child</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_widget_adaptor_has_child      (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+<refsect2 id="glade-widget-adaptor-has-child" role="function">
+<title>glade_widget_adaptor_has_child ()</title>
+<indexterm zone="glade-widget-adaptor-has-child"><primary>glade_widget_adaptor_has_child</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_widget_adaptor_has_child      (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          <link linkend="GObject">GObject</link> *container,
                                                          <link linkend="GObject">GObject</link> *child);</programlisting>
 <para>
@@ -1264,9 +1260,9 @@ Lists the children of <parameter>container</parameter>.</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>whether <parameter>child</parameter> is infact inside <parameter>container</parameter>.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-child-set-property" role="function"/>glade_widget_adaptor_child_set_property ()</title>
-<indexterm><primary>glade_widget_adaptor_child_set_property</primary></indexterm><programlisting><link linkend="void">void</link>                glade_widget_adaptor_child_set_property
+<refsect2 id="glade-widget-adaptor-child-set-property" role="function">
+<title>glade_widget_adaptor_child_set_property ()</title>
+<indexterm zone="glade-widget-adaptor-child-set-property"><primary>glade_widget_adaptor_child_set_property</primary></indexterm><programlisting><link linkend="void">void</link>                glade_widget_adaptor_child_set_property
                                                         (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          <link linkend="GObject">GObject</link> *container,
                                                          <link linkend="GObject">GObject</link> *child,
@@ -1293,9 +1289,9 @@ Sets <parameter>child</parameter>'s packing property identified by <parameter>pr
 <listitem><simpara>         The <parameter>GValue</parameter>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-child-get-property" role="function"/>glade_widget_adaptor_child_get_property ()</title>
-<indexterm><primary>glade_widget_adaptor_child_get_property</primary></indexterm><programlisting><link linkend="void">void</link>                glade_widget_adaptor_child_get_property
+<refsect2 id="glade-widget-adaptor-child-get-property" role="function">
+<title>glade_widget_adaptor_child_get_property ()</title>
+<indexterm zone="glade-widget-adaptor-child-get-property"><primary>glade_widget_adaptor_child_get_property</primary></indexterm><programlisting><link linkend="void">void</link>                glade_widget_adaptor_child_get_property
                                                         (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          <link linkend="GObject">GObject</link> *container,
                                                          <link linkend="GObject">GObject</link> *child,
@@ -1322,9 +1318,9 @@ Gets <parameter>child</parameter>'s packing property identified by <parameter>pr
 <listitem><simpara>         The <parameter>GValue</parameter>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-child-verify-property" role="function"/>glade_widget_adaptor_child_verify_property ()</title>
-<indexterm><primary>glade_widget_adaptor_child_verify_property</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_widget_adaptor_child_verify_property
+<refsect2 id="glade-widget-adaptor-child-verify-property" role="function">
+<title>glade_widget_adaptor_child_verify_property ()</title>
+<indexterm zone="glade-widget-adaptor-child-verify-property"><primary>glade_widget_adaptor_child_verify_property</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_widget_adaptor_child_verify_property
                                                         (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          <link linkend="GObject">GObject</link> *container,
                                                          <link linkend="GObject">GObject</link> *child,
@@ -1358,9 +1354,9 @@ boundry checker for properties.</para>
 will silently return TRUE if the class did not provide a verify function.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-replace-child" role="function"/>glade_widget_adaptor_replace_child ()</title>
-<indexterm><primary>glade_widget_adaptor_replace_child</primary></indexterm><programlisting><link linkend="void">void</link>                glade_widget_adaptor_replace_child  (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+<refsect2 id="glade-widget-adaptor-replace-child" role="function">
+<title>glade_widget_adaptor_replace_child ()</title>
+<indexterm zone="glade-widget-adaptor-replace-child"><primary>glade_widget_adaptor_replace_child</primary></indexterm><programlisting><link linkend="void">void</link>                glade_widget_adaptor_replace_child  (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          <link linkend="GObject">GObject</link> *container,
                                                          <link linkend="GObject">GObject</link> *old_obj,
                                                          <link linkend="GObject">GObject</link> *new_obj);</programlisting>
@@ -1384,9 +1380,9 @@ property values.</para>
 <listitem><simpara> The new <link linkend="GObject"><type>GObject</type></link> child
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-query" role="function"/>glade_widget_adaptor_query ()</title>
-<indexterm><primary>glade_widget_adaptor_query</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_widget_adaptor_query          (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor);</programlisting>
+<refsect2 id="glade-widget-adaptor-query" role="function">
+<title>glade_widget_adaptor_query ()</title>
+<indexterm zone="glade-widget-adaptor-query"><primary>glade_widget_adaptor_query</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_widget_adaptor_query          (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor);</programlisting>
 <para>
 </para>
 <para>
@@ -1399,9 +1395,9 @@ property values.</para>
 certain properties upon creation of this class.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-get-packing-default" role="function"/>glade_widget_adaptor_get_packing_default ()</title>
-<indexterm><primary>glade_widget_adaptor_get_packing_default</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*              glade_widget_adaptor_get_packing_default
+<refsect2 id="glade-widget-adaptor-get-packing-default" role="function">
+<title>glade_widget_adaptor_get_packing_default ()</title>
+<indexterm zone="glade-widget-adaptor-get-packing-default"><primary>glade_widget_adaptor_get_packing_default</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*              glade_widget_adaptor_get_packing_default
                                                         (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *child_adaptor,
                                                          <link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *container_adaptor,
                                                          const <link linkend="gchar">gchar</link> *id);</programlisting>
@@ -1423,9 +1419,9 @@ Gets the default value for <parameter>property_id</parameter> on a widget govern
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a string representing the default value for <parameter>property_id</parameter>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-is-container" role="function"/>glade_widget_adaptor_is_container ()</title>
-<indexterm><primary>glade_widget_adaptor_is_container</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_widget_adaptor_is_container   (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor);</programlisting>
+<refsect2 id="glade-widget-adaptor-is-container" role="function">
+<title>glade_widget_adaptor_is_container ()</title>
+<indexterm zone="glade-widget-adaptor-is-container"><primary>glade_widget_adaptor_is_container</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_widget_adaptor_is_container   (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor);</programlisting>
 <para>
 Checks whether or not this adaptor has support
 to interface with child objects.</para>
@@ -1438,9 +1434,9 @@ to interface with child objects.</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>whether or not <parameter>adaptor</parameter> is a container
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-action-add" role="function"/>glade_widget_adaptor_action_add ()</title>
-<indexterm><primary>glade_widget_adaptor_action_add</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_widget_adaptor_action_add     (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+<refsect2 id="glade-widget-adaptor-action-add" role="function">
+<title>glade_widget_adaptor_action_add ()</title>
+<indexterm zone="glade-widget-adaptor-action-add"><primary>glade_widget_adaptor_action_add</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_widget_adaptor_action_add     (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          const <link linkend="gchar">gchar</link> *action_path,
                                                          const <link linkend="gchar">gchar</link> *label,
                                                          const <link linkend="gchar">gchar</link> *stock,
@@ -1469,9 +1465,9 @@ If the action is present then it overrides label and stock</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> whether or not the action was added/updated.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-pack-action-add" role="function"/>glade_widget_adaptor_pack_action_add ()</title>
-<indexterm><primary>glade_widget_adaptor_pack_action_add</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_widget_adaptor_pack_action_add
+<refsect2 id="glade-widget-adaptor-pack-action-add" role="function">
+<title>glade_widget_adaptor_pack_action_add ()</title>
+<indexterm zone="glade-widget-adaptor-pack-action-add"><primary>glade_widget_adaptor_pack_action_add</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_widget_adaptor_pack_action_add
                                                         (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          const <link linkend="gchar">gchar</link> *action_path,
                                                          const <link linkend="gchar">gchar</link> *label,
@@ -1501,9 +1497,9 @@ If the action is present then it overrides label and stock</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> whether or not the action was added/updated.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-action-remove" role="function"/>glade_widget_adaptor_action_remove ()</title>
-<indexterm><primary>glade_widget_adaptor_action_remove</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_widget_adaptor_action_remove  (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
+<refsect2 id="glade-widget-adaptor-action-remove" role="function">
+<title>glade_widget_adaptor_action_remove ()</title>
+<indexterm zone="glade-widget-adaptor-action-remove"><primary>glade_widget_adaptor_action_remove</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_widget_adaptor_action_remove  (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          const <link linkend="gchar">gchar</link> *action_path);</programlisting>
 <para>
 Remove an <parameter>adaptor</parameter>'s action.</para>
@@ -1519,9 +1515,9 @@ Remove an <parameter>adaptor</parameter>'s action.</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> whether or not the action was removed.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-pack-action-remove" role="function"/>glade_widget_adaptor_pack_action_remove ()</title>
-<indexterm><primary>glade_widget_adaptor_pack_action_remove</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_widget_adaptor_pack_action_remove
+<refsect2 id="glade-widget-adaptor-pack-action-remove" role="function">
+<title>glade_widget_adaptor_pack_action_remove ()</title>
+<indexterm zone="glade-widget-adaptor-pack-action-remove"><primary>glade_widget_adaptor_pack_action_remove</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_widget_adaptor_pack_action_remove
                                                         (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          const <link linkend="gchar">gchar</link> *action_path);</programlisting>
 <para>
@@ -1538,9 +1534,9 @@ Remove an <parameter>adaptor</parameter>'s packing action.</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> whether or not the action was removed.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-pack-actions-new" role="function"/>glade_widget_adaptor_pack_actions_new ()</title>
-<indexterm><primary>glade_widget_adaptor_pack_actions_new</primary></indexterm><programlisting><link linkend="GList">GList</link>*              glade_widget_adaptor_pack_actions_new
+<refsect2 id="glade-widget-adaptor-pack-actions-new" role="function">
+<title>glade_widget_adaptor_pack_actions_new ()</title>
+<indexterm zone="glade-widget-adaptor-pack-actions-new"><primary>glade_widget_adaptor_pack_actions_new</primary></indexterm><programlisting><link linkend="GList">GList</link>*              glade_widget_adaptor_pack_actions_new
                                                         (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor);</programlisting>
 <para>
 Create a list of packing actions.</para>
@@ -1553,9 +1549,9 @@ Create a list of packing actions.</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a new list of GladeWidgetAction.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-action-activate" role="function"/>glade_widget_adaptor_action_activate ()</title>
-<indexterm><primary>glade_widget_adaptor_action_activate</primary></indexterm><programlisting><link linkend="void">void</link>                glade_widget_adaptor_action_activate
+<refsect2 id="glade-widget-adaptor-action-activate" role="function">
+<title>glade_widget_adaptor_action_activate ()</title>
+<indexterm zone="glade-widget-adaptor-action-activate"><primary>glade_widget_adaptor_action_activate</primary></indexterm><programlisting><link linkend="void">void</link>                glade_widget_adaptor_action_activate
                                                         (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          <link linkend="GObject">GObject</link> *object,
                                                          const <link linkend="gchar">gchar</link> *action_path);</programlisting>
@@ -1574,9 +1570,9 @@ An adaptor function to be called on widget actions.</para>
 <listitem><simpara> The action identifier in the action tree
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-widget-adaptor-child-action-activate" role="function"/>glade_widget_adaptor_child_action_activate ()</title>
-<indexterm><primary>glade_widget_adaptor_child_action_activate</primary></indexterm><programlisting><link linkend="void">void</link>                glade_widget_adaptor_child_action_activate
+<refsect2 id="glade-widget-adaptor-child-action-activate" role="function">
+<title>glade_widget_adaptor_child_action_activate ()</title>
+<indexterm zone="glade-widget-adaptor-child-action-activate"><primary>glade_widget_adaptor_child_action_activate</primary></indexterm><programlisting><link linkend="void">void</link>                glade_widget_adaptor_child_action_activate
                                                         (<link linkend="GladeWidgetAdaptor">GladeWidgetAdaptor</link> *adaptor,
                                                          <link linkend="GObject">GObject</link> *container,
                                                          <link linkend="GObject">GObject</link> *object,

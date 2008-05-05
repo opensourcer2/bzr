@@ -1,6 +1,6 @@
 <refentry id="gladeui-GladePropertyClass">
 <refmeta>
-<refentrytitle role="top_of_page">GladePropertyClass</refentrytitle>
+<refentrytitle role="top_of_page" id="gladeui-GladePropertyClass.top_of_page">GladePropertyClass</refentrytitle>
 <manvolnum>3</manvolnum>
 <refmiscinfo>GLADEUI Library</refmiscinfo>
 </refmeta>
@@ -11,13 +11,10 @@
 <!--[<xref linkend="desc" endterm="desc.title"/>]-->
 </refnamediv>
 
-<refsynopsisdiv role="synopsis">
+<refsynopsisdiv id="gladeui-GladePropertyClass.synopsis" role="synopsis">
 <title role="synopsis.title">Synopsis</title>
 
 <synopsis>
-
-
-
 #define             <link linkend="GPC-OBJECT-DELIMITER:CAPS">GPC_OBJECT_DELIMITER</link>
 #define             <link linkend="GPC-PROPERTY-NAMELEN:CAPS">GPC_PROPERTY_NAMELEN</link>
 enum                <link linkend="GPCType">GPCType</link>;
@@ -69,7 +66,6 @@ const <link linkend="gchar">gchar</link>*        <link linkend="glade-property-c
 <link linkend="gboolean">gboolean</link>            <link linkend="glade-property-class-void-value">glade_property_class_void_value</link>     (<link linkend="GladePropertyClass">GladePropertyClass</link> *klass,
                                                          <link linkend="GValue">GValue</link> *value);
 const <link linkend="gchar">gchar</link>*        <link linkend="glade-property-class-atk-realname">glade_property_class_atk_realname</link>   (const <link linkend="gchar">gchar</link> *atk_name);
-
 </synopsis>
 </refsynopsisdiv>
 
@@ -81,7 +77,7 @@ const <link linkend="gchar">gchar</link>*        <link linkend="glade-property-c
 
 
 
-<refsect1 role="desc">
+<refsect1 id="gladeui-GladePropertyClass.description" role="desc">
 <title role="desc.title">Description</title>
 <para>
 <link linkend="GladePropertyClass"><type>GladePropertyClass</type></link> is a structure based on a <link linkend="GParamSpec"><type>GParamSpec</type></link> and parameters
@@ -93,25 +89,25 @@ va_lists etc (back and forth).</para>
 </para>
 </refsect1>
 
-<refsect1 role="details">
+<refsect1 id="gladeui-GladePropertyClass.details" role="details">
 <title role="details.title">Details</title>
-<refsect2>
-<title><anchor id="GPC-OBJECT-DELIMITER:CAPS" role="macro"/>GPC_OBJECT_DELIMITER</title>
-<indexterm><primary>GPC_OBJECT_DELIMITER</primary></indexterm><programlisting>#define GPC_OBJECT_DELIMITER ", "
+<refsect2 id="GPC-OBJECT-DELIMITER:CAPS" role="macro">
+<title>GPC_OBJECT_DELIMITER</title>
+<indexterm zone="GPC-OBJECT-DELIMITER:CAPS"><primary>GPC_OBJECT_DELIMITER</primary></indexterm><programlisting>#define GPC_OBJECT_DELIMITER ", "
 </programlisting>
 <para>
 
 </para></refsect2>
-<refsect2>
-<title><anchor id="GPC-PROPERTY-NAMELEN:CAPS" role="macro"/>GPC_PROPERTY_NAMELEN</title>
-<indexterm><primary>GPC_PROPERTY_NAMELEN</primary></indexterm><programlisting>#define GPC_PROPERTY_NAMELEN 512  /* Enough space for a property name I think */
+<refsect2 id="GPC-PROPERTY-NAMELEN:CAPS" role="macro">
+<title>GPC_PROPERTY_NAMELEN</title>
+<indexterm zone="GPC-PROPERTY-NAMELEN:CAPS"><primary>GPC_PROPERTY_NAMELEN</primary></indexterm><programlisting>#define GPC_PROPERTY_NAMELEN 512  /* Enough space for a property name I think */
 </programlisting>
 <para>
 
 </para></refsect2>
-<refsect2>
-<title><anchor id="GPCType" role="enum"/>enum GPCType</title>
-<indexterm><primary>GPCType</primary></indexterm><programlisting>typedef enum {
+<refsect2 id="GPCType" role="enum">
+<title>enum GPCType</title>
+<indexterm zone="GPCType"><primary>GPCType</primary></indexterm><programlisting>typedef enum {
 	GPC_NORMAL,
 	GPC_ATK_PROPERTY,
 	GPC_ATK_RELATION,
@@ -124,35 +120,35 @@ va_lists etc (back and forth).</para>
 <para>
 
 </para><variablelist role="enum">
-<varlistentry>
-<term><anchor id="GPC-NORMAL:CAPS" role="constant"/><literal>GPC_NORMAL</literal></term>
+<varlistentry id="GPC-NORMAL:CAPS" role="constant">
+<term><literal>GPC_NORMAL</literal></term>
 <listitem><simpara> is not an atk property
 </simpara></listitem>
 </varlistentry>
-<varlistentry>
-<term><anchor id="GPC-ATK-PROPERTY:CAPS" role="constant"/><literal>GPC_ATK_PROPERTY</literal></term>
+<varlistentry id="GPC-ATK-PROPERTY:CAPS" role="constant">
+<term><literal>GPC_ATK_PROPERTY</literal></term>
 <listitem><simpara> is a property of an <link linkend="AtkImplementor"><type>AtkImplementor</type></link> object
 </simpara></listitem>
 </varlistentry>
-<varlistentry>
-<term><anchor id="GPC-ATK-RELATION:CAPS" role="constant"/><literal>GPC_ATK_RELATION</literal></term>
+<varlistentry id="GPC-ATK-RELATION:CAPS" role="constant">
+<term><literal>GPC_ATK_RELATION</literal></term>
 <listitem><simpara> is an atk relation set property
 </simpara></listitem>
 </varlistentry>
-<varlistentry>
-<term><anchor id="GPC-ATK-ACTION:CAPS" role="constant"/><literal>GPC_ATK_ACTION</literal></term>
+<varlistentry id="GPC-ATK-ACTION:CAPS" role="constant">
+<term><literal>GPC_ATK_ACTION</literal></term>
 <listitem><simpara> is an atk action property
 </simpara></listitem>
 </varlistentry>
-<varlistentry>
-<term><anchor id="GPC-ACCEL-PROPERTY:CAPS" role="constant"/><literal>GPC_ACCEL_PROPERTY</literal></term>
+<varlistentry id="GPC-ACCEL-PROPERTY:CAPS" role="constant">
+<term><literal>GPC_ACCEL_PROPERTY</literal></term>
 <listitem><simpara> is an accelerator key property
 </simpara></listitem>
 </varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-class-new" role="function"/>glade_property_class_new ()</title>
-<indexterm><primary>glade_property_class_new</primary></indexterm><programlisting><link linkend="GladePropertyClass">GladePropertyClass</link>* glade_property_class_new            (<link linkend="gpointer">gpointer</link> handle);</programlisting>
+<refsect2 id="glade-property-class-new" role="function">
+<title>glade_property_class_new ()</title>
+<indexterm zone="glade-property-class-new"><primary>glade_property_class_new</primary></indexterm><programlisting><link linkend="GladePropertyClass">GladePropertyClass</link>* glade_property_class_new            (<link linkend="gpointer">gpointer</link> handle);</programlisting>
 <para>
 </para>
 <para>
@@ -164,9 +160,9 @@ va_lists etc (back and forth).</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a new <link linkend="GladePropertyClass"><type>GladePropertyClass</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-class-new-from-spec" role="function"/>glade_property_class_new_from_spec ()</title>
-<indexterm><primary>glade_property_class_new_from_spec</primary></indexterm><programlisting><link linkend="GladePropertyClass">GladePropertyClass</link>* glade_property_class_new_from_spec  (<link linkend="gpointer">gpointer</link> handle,
+<refsect2 id="glade-property-class-new-from-spec" role="function">
+<title>glade_property_class_new_from_spec ()</title>
+<indexterm zone="glade-property-class-new-from-spec"><primary>glade_property_class_new_from_spec</primary></indexterm><programlisting><link linkend="GladePropertyClass">GladePropertyClass</link>* glade_property_class_new_from_spec  (<link linkend="gpointer">gpointer</link> handle,
                                                          <link linkend="GParamSpec">GParamSpec</link> *spec);</programlisting>
 <para>
 </para>
@@ -183,9 +179,9 @@ va_lists etc (back and forth).</para>
          or <link linkend="NULL:CAPS"><literal>NULL</literal></link> if its unsupported.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-class-list-atk-relations" role="function"/>glade_property_class_list_atk_relations ()</title>
-<indexterm><primary>glade_property_class_list_atk_relations</primary></indexterm><programlisting><link linkend="GList">GList</link>*              glade_property_class_list_atk_relations
+<refsect2 id="glade-property-class-list-atk-relations" role="function">
+<title>glade_property_class_list_atk_relations ()</title>
+<indexterm zone="glade-property-class-list-atk-relations"><primary>glade_property_class_list_atk_relations</primary></indexterm><programlisting><link linkend="GList">GList</link>*              glade_property_class_list_atk_relations
                                                         (<link linkend="gpointer">gpointer</link> handle,
                                                          <link linkend="GType">GType</link> owner_type);</programlisting>
 <para>
@@ -202,9 +198,9 @@ va_lists etc (back and forth).</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a <link linkend="GList"><type>GList</type></link> of newly created atk relation <link linkend="GladePropertyClass"><type>GladePropertyClass</type></link>.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-class-accel-property" role="function"/>glade_property_class_accel_property ()</title>
-<indexterm><primary>glade_property_class_accel_property</primary></indexterm><programlisting><link linkend="GladePropertyClass">GladePropertyClass</link>* glade_property_class_accel_property (<link linkend="gpointer">gpointer</link> handle,
+<refsect2 id="glade-property-class-accel-property" role="function">
+<title>glade_property_class_accel_property ()</title>
+<indexterm zone="glade-property-class-accel-property"><primary>glade_property_class_accel_property</primary></indexterm><programlisting><link linkend="GladePropertyClass">GladePropertyClass</link>* glade_property_class_accel_property (<link linkend="gpointer">gpointer</link> handle,
                                                          <link linkend="GType">GType</link> owner_type);</programlisting>
 <para>
 </para>
@@ -221,9 +217,9 @@ va_lists etc (back and forth).</para>
          of the prescribed <parameter>owner_type</parameter>.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-class-clone" role="function"/>glade_property_class_clone ()</title>
-<indexterm><primary>glade_property_class_clone</primary></indexterm><programlisting><link linkend="GladePropertyClass">GladePropertyClass</link>* glade_property_class_clone          (<link linkend="GladePropertyClass">GladePropertyClass</link> *property_class);</programlisting>
+<refsect2 id="glade-property-class-clone" role="function">
+<title>glade_property_class_clone ()</title>
+<indexterm zone="glade-property-class-clone"><primary>glade_property_class_clone</primary></indexterm><programlisting><link linkend="GladePropertyClass">GladePropertyClass</link>* glade_property_class_clone          (<link linkend="GladePropertyClass">GladePropertyClass</link> *property_class);</programlisting>
 <para>
 </para>
 <para>
@@ -235,9 +231,9 @@ va_lists etc (back and forth).</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a new <link linkend="GladePropertyClass"><type>GladePropertyClass</type></link> cloned from <parameter>property_class</parameter>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-class-free" role="function"/>glade_property_class_free ()</title>
-<indexterm><primary>glade_property_class_free</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_class_free           (<link linkend="GladePropertyClass">GladePropertyClass</link> *property_class);</programlisting>
+<refsect2 id="glade-property-class-free" role="function">
+<title>glade_property_class_free ()</title>
+<indexterm zone="glade-property-class-free"><primary>glade_property_class_free</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_class_free           (<link linkend="GladePropertyClass">GladePropertyClass</link> *property_class);</programlisting>
 <para>
 Frees <parameter>klass</parameter> and its associated memory.</para>
 <para>
@@ -247,9 +243,9 @@ Frees <parameter>klass</parameter> and its associated memory.</para>
 <listitem><simpara> a <link linkend="GladePropertyClass"><type>GladePropertyClass</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-class-is-visible" role="function"/>glade_property_class_is_visible ()</title>
-<indexterm><primary>glade_property_class_is_visible</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_property_class_is_visible     (<link linkend="GladePropertyClass">GladePropertyClass</link> *property_class);</programlisting>
+<refsect2 id="glade-property-class-is-visible" role="function">
+<title>glade_property_class_is_visible ()</title>
+<indexterm zone="glade-property-class-is-visible"><primary>glade_property_class_is_visible</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_property_class_is_visible     (<link linkend="GladePropertyClass">GladePropertyClass</link> *property_class);</programlisting>
 <para>
 </para>
 <para>
@@ -261,9 +257,9 @@ Frees <parameter>klass</parameter> and its associated memory.</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> whether or not to show this property in the editor
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-class-is-object" role="function"/>glade_property_class_is_object ()</title>
-<indexterm><primary>glade_property_class_is_object</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_property_class_is_object      (<link linkend="GladePropertyClass">GladePropertyClass</link> *property_class);</programlisting>
+<refsect2 id="glade-property-class-is-object" role="function">
+<title>glade_property_class_is_object ()</title>
+<indexterm zone="glade-property-class-is-object"><primary>glade_property_class_is_object</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_property_class_is_object      (<link linkend="GladePropertyClass">GladePropertyClass</link> *property_class);</programlisting>
 <para>
 </para>
 <para>
@@ -276,9 +272,9 @@ Frees <parameter>klass</parameter> and its associated memory.</para>
 that refers to another object in this project.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-class-make-gvalue-from-string" role="function"/>glade_property_class_make_gvalue_from_string ()</title>
-<indexterm><primary>glade_property_class_make_gvalue_from_string</primary></indexterm><programlisting><link linkend="GValue">GValue</link>*             glade_property_class_make_gvalue_from_string
+<refsect2 id="glade-property-class-make-gvalue-from-string" role="function">
+<title>glade_property_class_make_gvalue_from_string ()</title>
+<indexterm zone="glade-property-class-make-gvalue-from-string"><primary>glade_property_class_make_gvalue_from_string</primary></indexterm><programlisting><link linkend="GValue">GValue</link>*             glade_property_class_make_gvalue_from_string
                                                         (<link linkend="GladePropertyClass">GladePropertyClass</link> *property_class,
                                                          const <link linkend="gchar">gchar</link> *string,
                                                          <link linkend="GladeProject">GladeProject</link> *project);</programlisting>
@@ -301,9 +297,9 @@ that refers to another object in this project.
          and <parameter>string</parameter> criteria.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-class-make-string-from-gvalue" role="function"/>glade_property_class_make_string_from_gvalue ()</title>
-<indexterm><primary>glade_property_class_make_string_from_gvalue</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*              glade_property_class_make_string_from_gvalue
+<refsect2 id="glade-property-class-make-string-from-gvalue" role="function">
+<title>glade_property_class_make_string_from_gvalue ()</title>
+<indexterm zone="glade-property-class-make-string-from-gvalue"><primary>glade_property_class_make_string_from_gvalue</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*              glade_property_class_make_string_from_gvalue
                                                         (<link linkend="GladePropertyClass">GladePropertyClass</link> *property_class,
                                                          const <link linkend="GValue">GValue</link> *value);</programlisting>
 <para>
@@ -320,9 +316,9 @@ that refers to another object in this project.
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> A newly allocated string representation of <parameter>value</parameter>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-class-make-gvalue-from-vl" role="function"/>glade_property_class_make_gvalue_from_vl ()</title>
-<indexterm><primary>glade_property_class_make_gvalue_from_vl</primary></indexterm><programlisting><link linkend="GValue">GValue</link>*             glade_property_class_make_gvalue_from_vl
+<refsect2 id="glade-property-class-make-gvalue-from-vl" role="function">
+<title>glade_property_class_make_gvalue_from_vl ()</title>
+<indexterm zone="glade-property-class-make-gvalue-from-vl"><primary>glade_property_class_make_gvalue_from_vl</primary></indexterm><programlisting><link linkend="GValue">GValue</link>*             glade_property_class_make_gvalue_from_vl
                                                         (<link linkend="GladePropertyClass">GladePropertyClass</link> *property_class,
                                                          <link linkend="va-list">va_list</link> vl);</programlisting>
 <para>
@@ -341,9 +337,9 @@ that refers to another object in this project.
          and a <parameter>vl</parameter> arg of the correct type.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-class-set-vl-from-gvalue" role="function"/>glade_property_class_set_vl_from_gvalue ()</title>
-<indexterm><primary>glade_property_class_set_vl_from_gvalue</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_class_set_vl_from_gvalue
+<refsect2 id="glade-property-class-set-vl-from-gvalue" role="function">
+<title>glade_property_class_set_vl_from_gvalue ()</title>
+<indexterm zone="glade-property-class-set-vl-from-gvalue"><primary>glade_property_class_set_vl_from_gvalue</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_class_set_vl_from_gvalue
                                                         (<link linkend="GladePropertyClass">GladePropertyClass</link> *klass,
                                                          <link linkend="GValue">GValue</link> *value,
                                                          <link linkend="va-list">va_list</link> vl);</programlisting>
@@ -363,9 +359,9 @@ Sets <parameter>vl</parameter> from <parameter>value</parameter> based on <param
      specified by <parameter>klass</parameter>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-class-make-gvalue" role="function"/>glade_property_class_make_gvalue ()</title>
-<indexterm><primary>glade_property_class_make_gvalue</primary></indexterm><programlisting><link linkend="GValue">GValue</link>*             glade_property_class_make_gvalue    (<link linkend="GladePropertyClass">GladePropertyClass</link> *klass,
+<refsect2 id="glade-property-class-make-gvalue" role="function">
+<title>glade_property_class_make_gvalue ()</title>
+<indexterm zone="glade-property-class-make-gvalue"><primary>glade_property_class_make_gvalue</primary></indexterm><programlisting><link linkend="GValue">GValue</link>*             glade_property_class_make_gvalue    (<link linkend="GladePropertyClass">GladePropertyClass</link> *klass,
                                                          ...);</programlisting>
 <para>
 </para>
@@ -382,9 +378,9 @@ Sets <parameter>vl</parameter> from <parameter>value</parameter> based on <param
          and the provided argument.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-class-get-from-gvalue" role="function"/>glade_property_class_get_from_gvalue ()</title>
-<indexterm><primary>glade_property_class_get_from_gvalue</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_class_get_from_gvalue
+<refsect2 id="glade-property-class-get-from-gvalue" role="function">
+<title>glade_property_class_get_from_gvalue ()</title>
+<indexterm zone="glade-property-class-get-from-gvalue"><primary>glade_property_class_get_from_gvalue</primary></indexterm><programlisting><link linkend="void">void</link>                glade_property_class_get_from_gvalue
                                                         (<link linkend="GladePropertyClass">GladePropertyClass</link> *klass,
                                                          <link linkend="GValue">GValue</link> *value,
                                                          ...);</programlisting>
@@ -403,9 +399,9 @@ Assignes the provided return location to <parameter>value</parameter></para>
 <listitem><simpara> a return location of the correct type
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-class-update-from-node" role="function"/>glade_property_class_update_from_node ()</title>
-<indexterm><primary>glade_property_class_update_from_node</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_property_class_update_from_node
+<refsect2 id="glade-property-class-update-from-node" role="function">
+<title>glade_property_class_update_from_node ()</title>
+<indexterm zone="glade-property-class-update-from-node"><primary>glade_property_class_update_from_node</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_property_class_update_from_node
                                                         (<link linkend="GladeXmlNode">GladeXmlNode</link> *node,
                                                          <link linkend="GModule">GModule</link> *module,
                                                          <link linkend="GType">GType</link> object_type,
@@ -436,9 +432,9 @@ file. Only the values found in the xml file are overridden.</para>
          has Disabled="TRUE".
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-class-get-displayable-value" role="function"/>glade_property_class_get_displayable_value ()</title>
-<indexterm><primary>glade_property_class_get_displayable_value</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        glade_property_class_get_displayable_value
+<refsect2 id="glade-property-class-get-displayable-value" role="function">
+<title>glade_property_class_get_displayable_value ()</title>
+<indexterm zone="glade-property-class-get-displayable-value"><primary>glade_property_class_get_displayable_value</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        glade_property_class_get_displayable_value
                                                         (<link linkend="GladePropertyClass">GladePropertyClass</link> *klass,
                                                          <link linkend="gint">gint</link> value);</programlisting>
 <para>
@@ -455,9 +451,9 @@ Search a displayable values for <parameter>value</parameter> in this property cl
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a (gchar *) if a diplayable value was found, otherwise NULL.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-class-make-adjustment" role="function"/>glade_property_class_make_adjustment ()</title>
-<indexterm><primary>glade_property_class_make_adjustment</primary></indexterm><programlisting><link linkend="GtkAdjustment">GtkAdjustment</link>*      glade_property_class_make_adjustment
+<refsect2 id="glade-property-class-make-adjustment" role="function">
+<title>glade_property_class_make_adjustment ()</title>
+<indexterm zone="glade-property-class-make-adjustment"><primary>glade_property_class_make_adjustment</primary></indexterm><programlisting><link linkend="GtkAdjustment">GtkAdjustment</link>*      glade_property_class_make_adjustment
                                                         (<link linkend="GladePropertyClass">GladePropertyClass</link> *property_class);</programlisting>
 <para>
 Creates and appropriate GtkAdjustment for use in the editor</para>
@@ -470,9 +466,9 @@ Creates and appropriate GtkAdjustment for use in the editor</para>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> An appropriate <link linkend="GtkAdjustment"><type>GtkAdjustment</type></link> for use in the Property editor
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-class-match" role="function"/>glade_property_class_match ()</title>
-<indexterm><primary>glade_property_class_match</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_property_class_match          (<link linkend="GladePropertyClass">GladePropertyClass</link> *klass,
+<refsect2 id="glade-property-class-match" role="function">
+<title>glade_property_class_match ()</title>
+<indexterm zone="glade-property-class-match"><primary>glade_property_class_match</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_property_class_match          (<link linkend="GladePropertyClass">GladePropertyClass</link> *klass,
                                                          <link linkend="GladePropertyClass">GladePropertyClass</link> *comp);</programlisting>
 <para>
 </para>
@@ -490,9 +486,9 @@ Creates and appropriate GtkAdjustment for use in the editor</para>
           have the same name are not matches).
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-class-void-value" role="function"/>glade_property_class_void_value ()</title>
-<indexterm><primary>glade_property_class_void_value</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_property_class_void_value     (<link linkend="GladePropertyClass">GladePropertyClass</link> *klass,
+<refsect2 id="glade-property-class-void-value" role="function">
+<title>glade_property_class_void_value ()</title>
+<indexterm zone="glade-property-class-void-value"><primary>glade_property_class_void_value</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            glade_property_class_void_value     (<link linkend="GladePropertyClass">GladePropertyClass</link> *klass,
                                                          <link linkend="GValue">GValue</link> *value);</programlisting>
 <para>
 </para>
@@ -509,9 +505,9 @@ Creates and appropriate GtkAdjustment for use in the editor</para>
          can be a <link linkend="NULL:CAPS"><literal>NULL</literal></link> value for boxed or object type param specs.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
-<refsect2>
-<title><anchor id="glade-property-class-atk-realname" role="function"/>glade_property_class_atk_realname ()</title>
-<indexterm><primary>glade_property_class_atk_realname</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        glade_property_class_atk_realname   (const <link linkend="gchar">gchar</link> *atk_name);</programlisting>
+<refsect2 id="glade-property-class-atk-realname" role="function">
+<title>glade_property_class_atk_realname ()</title>
+<indexterm zone="glade-property-class-atk-realname"><primary>glade_property_class_atk_realname</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        glade_property_class_atk_realname   (const <link linkend="gchar">gchar</link> *atk_name);</programlisting>
 <para>
 Translates a GladePropertyClass->id to the name that should be
 saved into the glade file.</para>
