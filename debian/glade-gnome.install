@@ -1,0 +1,4 @@
+debian/tmp/usr/lib/glade3/modules/libgladegnome.so
+debian/tmp/usr/share/glade3/catalogs/bonobo.xml
+debian/tmp/usr/share/glade3/catalogs/canvas.xml
+debian/tmp/usr/share/glade3/catalogs/gnome.xml
