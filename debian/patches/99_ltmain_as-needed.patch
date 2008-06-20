@@ -1,6 +1,5 @@
-diff -Nur -x '*.orig' -x '*~' glade-3-3.4.1/ltmain.sh glade-3-3.4.1.new/ltmain.sh
---- glade-3-3.4.1/ltmain.sh	2007-11-27 21:09:41.000000000 +0100
-+++ glade-3-3.4.1.new/ltmain.sh	2008-01-08 13:13:34.000000000 +0100
+--- ltmain.sh~	2007-11-28 04:09:41.000000000 +0800
++++ ltmain.sh	2007-12-19 21:19:06.000000000 +0800
 @@ -1794,6 +1794,11 @@
  	arg=`$echo "X$arg" | $Xsed -e "s/^ //"`
  	;;
@@ -17,15 +16,15 @@ diff -Nur -x '*.orig' -x '*~' glade-3-3.4.1/ltmain.sh glade-3-3.4.1.new/ltmain.s
  	lib=
  	found=no
  	case $deplib in
-+ 	-Wl,--as-needed)
-+ 	  if test "$linkmode,$pass" = "prog,link"; then
-+ 	    compile_deplibs="$deplib $compile_deplibs"
-+ 	    finalize_deplibs="$deplib $finalize_deplibs"
-+ 	  else
-+ 	    deplibs="$deplib $deplibs"
-+ 	  fi
-+ 	  continue
-+ 	  ;;
++	-Wl,--as-needed)
++	  if test "$linkmode,$pass" = "prog,link"; then
++	    compile_deplibs="$deplib $compile_deplibs"
++	    finalize_deplibs="$deplib $finalize_deplibs"
++	  else
++	    deplibs="$deplib $deplibs"
++	  fi
++	  continue
++	  ;;
  	-mt|-mthreads|-kthread|-Kthread|-pthread|-pthreads|--thread-safe|-threads)
  	  if test "$linkmode,$pass" = "prog,link"; then
  	    compile_deplibs="$deplib $compile_deplibs"

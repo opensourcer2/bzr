@@ -8,7 +8,7 @@ Build-Depends: cdbs (>= 0.4.41),
                debhelper (>= 5),
                gettext (>= 0.10.40),
                libgnomeui-dev,
-               scrollkeeper (>= 0.1.4),
+               scrollkeeper,
                libxml2-dev (>= 2.4.0),
                libbonoboui2-dev,
                autotools-dev,
@@ -18,7 +18,8 @@ Build-Depends: cdbs (>= 0.4.41),
                libgtk2.0-dev (>= 2.12.0),
                gtk-doc-tools (>= 1.4),
                gnome-doc-utils (>= 0.9.0)
-Standards-Version: 3.7.2
+Standards-Version: 3.7.3
+Homepage: http://glade.gnome.org
 
 Package: libgladeui-1-7
 Architecture: any
@@ -90,8 +91,6 @@ Description: GTK+ 2 User Interface Builder
  This version is more modular than previous ones, so you can install
  modules to add aditional widgets for Glade to use. You can install
  the glade-gnome package to provide GNOME widgets, for instance.
- .
- Homepage: http://glade.gnome.org/
 
 Package: glade-gnome-3
 Architecture: any
@@ -102,7 +101,6 @@ Depends: ${misc:Depends},
          ${shlibs:Depends}
 Recommends: libgnomeui-dev,
             libbonoboui2-dev
-Replaces: libgladeui-1-7 (<< 3.4.0-2)
 Description: GTK+ 2 User Interface Builder (with GNOME 2 support)
  Glade is a RAD tool to enable quick and easy development of user
  interfaces for the GTK+ 2 toolkit.
@@ -114,5 +112,4 @@ Description: GTK+ 2 User Interface Builder (with GNOME 2 support)
  .
  This package include the module that allows Glade to provide GNOME
  widgets in its pallete.
- .
- Homepage: http://glade.gnome.org/
+

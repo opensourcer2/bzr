@@ -1,91 +1,86 @@
-glade-3 (3.4.5-0ubuntu1) hardy-proposed; urgency=low
+glade-3 (3.4.5-3ubuntu1) intrepid; urgency=low
 
-  * New upstream version
-    - Fixed annoying text editing bug (lp: #212103)
-
- -- Sebastien Bacher <seb128@canonical.com>  Mon, 05 May 2008 23:21:40 +0200
-
-glade-3 (3.4.4-0ubuntu1) hardy-proposed; urgency=low
-
-  * New upstream version
-    - Now first toplevel in project automatically shows up in the workspace
-    - Project no longer allows duplicate widget names
-    - Fixed bugs 528511, and 528552. (lp: #201648)
-
- -- Sebastien Bacher <seb128@canonical.com>  Mon, 05 May 2008 14:21:05 +0200
-
-glade-3 (3.4.2-0ubuntu2) hardy; urgency=low
-
-  * debian/control.in, debian/patches/01_launchpad-integration.patch,
-    debian/patches/90_autoconf.patch:
-    - don't use launchpad integration, the application is not in the default
-      installation and the glade users are not likely to use those items
-
- -- Sebastien Bacher <seb128@canonical.com>  Wed, 09 Apr 2008 12:11:56 +0200
-
-glade-3 (3.4.2-0ubuntu1) hardy; urgency=low
-
-  * New upstream version:
-    - Port to gtk 2.12 tooltips API. Bug #500947. - Christian Persch
-    - Atk Relations bug fix
-    - Added GtkVolumeButton and GtkScaleButton widgets (Ross Burton)
-    - Misc fixes 477025, 509128, 388869, 504603, 495853, 506713, 
-      511651, 472555, 493418
-  * debian/control.in:
-    - updated libgtk requirement
-  * debian/patches/01_launchpad-integration.patch,
-    debian/patches/90_autoconf.patch:
-    - new version update
-
- -- Sebastien Bacher <seb128@canonical.com>  Mon, 10 Mar 2008 09:22:05 +0100
-
-glade-3 (3.4.1-0ubuntu1) hardy; urgency=low
-
-  * New upstream version:
-    - Crash in Glade Interface Designer: Clicked the GtkInputDial...
-      (LP: #131060)
-    - Glade3 hangs when loading certain projects containing GtkAssistants
-    - Fix options context summary
-    - Use gtk_widget_get_action
-    - Icon Theme search path is incorrect for win32
-    - Doesn't build on ia64
-    - Activating "Add Parent" on an internal widget component causes crah
-    - GtkImage/GdkPixbuf porps misc fixes
-  * debian/patches/01_gladeui_types_headers.patch:
-    - dropped, fixed with the new version
-  * debian/patches/90_autoconf.patch,
-    debian/patches/99_ltmain_as-needed.patch:
-    - updated
-
- -- Sebastien Bacher <seb128@canonical.com>  Mon, 07 Jan 2008 15:22:46 +0100
-
-glade-3 (3.4.0-2ubuntu2) hardy; urgency=low
-
-  * debian/rules:
-    - use gnome.mk so the icon cache and translations template are updated
-      (LP: #134598)
-
- -- Sebastien Bacher <seb128@canonical.com>  Tue, 27 Nov 2007 15:04:43 +0100
-
-glade-3 (3.4.0-2ubuntu1) hardy; urgency=low
-
-  * Sync with Debian
+  * Sync on Debian
   * Version binaries so they don't conflict with the previous glade version
   * debian/control.in:
-    - Build-Depends on liblaunchpad-integration-dev
     - don't use conflict on glade
     - updated binary naming
     - updated maintainer information
     - use replaces required
-  * debian/patches/01_launchpad-integration.patch:
-    - launchpad integration changes
-  * debian/patches/90_autoconf.patch:
-    - required configure update
   * debian/rules:
     - correctly install icons
     - updated for the ubuntu binaries naming
+    - use gnome.mk so the icon cache and translations template are updated
 
- -- Sebastien Bacher <seb128@canonical.com>  Tue, 27 Nov 2007 01:02:58 +0100
+ -- Sebastien Bacher <seb128@canonical.com>  Fri, 20 Jun 2008 14:43:35 +0200
+
+glade-3 (3.4.5-3) unstable; urgency=high
+
+  [ Josselin Mouette ]
+  * 02_rename_crash.patch [Pavel Kostyuchenko]: stolen from bugzilla
+    #533471. Fix crasher when renaming a menu item. Closes: #476134.
+
+  [ Deng Xiyue ]
+  * Drop 01_includes.patch.  Should only apply to 3.5+. (Closes: #480764)
+
+ -- Josselin Mouette <joss@debian.org>  Sun, 18 May 2008 16:32:46 +0200
+
+glade-3 (3.4.5-2) unstable; urgency=low
+
+  * debian/patches/01_includes.patch:
+    + Patch by Andreas Henriksson to fix FTBFS on IA64 (Closes: #477513).
+
+ -- Sebastian Dröge <slomo@debian.org>  Thu, 08 May 2008 12:41:08 +0200
+
+glade-3 (3.4.5-1) unstable; urgency=low
+
+  [ Deng Xiyue ]
+  * backport several changes from experimental branch:
+    + Remove versioned dependency on scrollkeeper to make package providing
+      scrollkeeper can be used as alternative.  (Closes: #469699)
+    + Use sed to get shared library name from debian/control to make further
+      soversion update easier.
+  * Make glade Recommends libgtk2.0-dev >= 2.12.0 as consistent as others.
+
+  [ Sebastian Dröge ]
+  * New upstream bugfix release.
+
+ -- Sebastian Dröge <slomo@debian.org>  Thu, 08 May 2008 12:25:58 +0200
+
+glade-3 (3.4.4-1) unstable; urgency=low
+
+  * New upstream bugfix release.
+
+ -- Sebastian Dröge <slomo@debian.org>  Fri, 18 Apr 2008 11:39:37 +0200
+
+glade-3 (3.4.3-1) unstable; urgency=low
+
+  [ Josselin Mouette ]
+  * debian/rules: fix bashism. Closes: #459068.
+
+  [ Deng Xiyue ]
+  * New upstream release.
+    + Bump libgtk2.0-dev dependency to >= 2.12.0 as per configure script.
+  * Refine watch file to be syntactically consistent with other GNOME
+    packages, as well as the URL.
+
+ -- Deng Xiyue <manphiz-guest@users.alioth.debian.org>  Tue, 11 Mar 2008 06:06:25 +0100
+
+glade-3 (3.4.1-1) unstable; urgency=low
+
+  [ Deng Xiyue ]
+  * New upstream version.
+    + Creating an input dialog doesn't crash anymore. (Closes: #421350)
+  * Renew 99_ltmain_as-needed.patch to apply cleanly.
+
+  [ Sebastian Dröge ]
+  * debian/control.in:
+    + Update Standards-Version to 3.7.3, no additional changes needed.
+    + Move homepage from the description to the Homepage field.
+  * debian/patches/01_gladeui_types_headers.patch:
+    + Dropped, merged upstream.
+
+ -- Sebastian Dröge <slomo@debian.org>  Sun, 30 Dec 2007 18:02:57 +0100
 
 glade-3 (3.4.0-2) unstable; urgency=low
 

@@ -1,0 +1,27 @@
+#!/bin/sh
+
+set -e
+
+action="$1"
+
+case "$action" in
+  upgrade)
+    version="$2"
+
+    # remove symlink from versions older than 2.91.3+CVS20060621-1 manually 
+    # on upgrades
+    if dpkg --compare-versions "$version" lt 2.91.3+CVS20060621-1; then
+        rm -f /usr/share/doc/glade
+    fi
+  ;;
+
+  install|abort-upgrade)
+  ;;
+
+  *)
+    echo "preinst called with unknown argument \`$action'" >&2
+    exit 1
+  ;;
+esac
+
+#DEBHELPER#

@@ -9,9 +9,10 @@ include /usr/share/cdbs/1/rules/simple-patchsys.mk
 include /usr/share/gnome-pkg-tools/1/rules/uploaders.mk
 include /usr/share/gnome-pkg-tools/1/rules/check-dist.mk
 -include /usr/share/gnome-pkg-tools/1/rules/gnome-get-source.mk
-include /usr/share/cdbs/1/class/gnome.mk
 
 GNOME_MODULE := glade3
+
+SHARED_PKG := $(shell sed -rn 's/Package:[[:space:]]*(libgladeui-[0-9\.]+-[0-9][0-9a-z]*)[[:space:]]*$$/\1/p' debian/control)
 
 DEB_CONFIGURE_EXTRA_FLAGS += \
 			--enable-gtk-doc \
@@ -22,20 +23,20 @@ DEB_CONFIGURE_EXTRA_FLAGS += \
 LDFLAGS += -Wl,-z,defs -Wl,-O1 -Wl,--as-needed
 
 # ensures that libgladeui's shlibs are in place when calling dh_shlibdeps
-binary-glade-3:: binary-libgladeui-1-7
-binary-glade-gnome-3:: binary-libgladeui-1-7
+binary-glade-3:: binary-$(SHARED_PKG)
+binary-glade-gnome-3:: binary-$(SHARED_PKG)
 
 # link with the freshly build libgladeui during dh_shlibdeps, and use freshly
 # generated shlib information
-DEB_SHLIBDEPS_LIBRARY_glade-3 += libgladeui-1-7
-DEB_SHLIBDEPS_INCLUDE_glade-3 += debian/libgladeui-1-7/usr/lib/
-DEB_SHLIBDEPS_LIBRARY_glade-common += libgladeui-1-7
-DEB_SHLIBDEPS_INCLUDE_glade-common += debian/libgladeui-1-7/usr/lib/
+DEB_SHLIBDEPS_LIBRARY_glade-3 += $(SHARED_PKG)
+DEB_SHLIBDEPS_INCLUDE_glade-3 += debian/$(SHARED_PKG)/usr/lib/
+DEB_SHLIBDEPS_LIBRARY_glade-common += $(SHARED_PKG)
+DEB_SHLIBDEPS_INCLUDE_glade-common += debian/$(SHARED_PKG)/usr/lib/
 
-# move stuff that will go in glade-gnome-3
-binary-post-install/libgladeui-1-7::
-	for file in $$(find debian/libgladeui-1-7/usr/share/glade3/pixmaps/ -name \*gnome\* -or -name \*bonobo\*); do \
-		target_dir=$$(dirname $${file} | sed 's/libgladeui-1-7/glade-gnome-3/'); \
+# move stuff that will go in glade-gnome
+binary-post-install/$(SHARED_PKG)::
+	for file in $$(find debian/$(SHARED_PKG)/usr/share/glade3/pixmaps/ -name \*gnome\* -or -name \*bonobo\*); do \
+		target_dir=$$(dirname debian/glade-gnome-3/$${file#debian/$(SHARED_PKG)/}); \
 		mkdir -p $${target_dir}; \
 		mv $${file} $${target_dir}; \
 	done
