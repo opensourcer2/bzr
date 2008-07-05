@@ -1,0 +1,4 @@
+debian/tmp/usr/lib/*.so
+debian/tmp/usr/include
+debian/tmp/usr/lib/pkgconfig
+debian/tmp/usr/share/gtk-doc/html/gladeui/* /usr/share/doc/libgladeui-1-dev/html/
