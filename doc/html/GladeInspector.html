@@ -1,0 +1,295 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>GladeInspector</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.72.0">
+<link rel="start" href="index.html" title="Glade User Interface Designer Reference Manual">
+<link rel="up" href="dockables.html" title="Part&#160;III.&#160;Dockable Glade UI Widgets">
+<link rel="prev" href="GladeClipboardView.html" title="GladeClipboardView">
+<link rel="next" href="gladeui-glade-signal-editor.html" title="GladeSignalEditor">
+<meta name="generator" content="GTK-Doc V1.9 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="part" href="catalog.html" title="Part&#160;I.&#160;Adding your custom widgets">
+<link rel="part" href="core.html" title="Part&#160;II.&#160;Glade Core">
+<link rel="part" href="dockables.html" title="Part&#160;III.&#160;Dockable Glade UI Widgets">
+<link rel="part" href="misc.html" title="Part&#160;IV.&#160;Miscellaneous utilities">
+<link rel="index" href="ix01.html" title="Index">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="GladeClipboardView.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="dockables.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Glade User Interface Designer Reference Manual</th>
+<td><a accesskey="n" href="gladeui-glade-signal-editor.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#id440711" class="shortcut">Top</a>
+                  &#160;|&#160;
+                  <a href="#id441356" class="shortcut">Description</a>
+                  &#160;|&#160;
+                  <a href="#id441194" class="shortcut">Object Hierarchy</a>
+                  &#160;|&#160;
+                  <a href="#id441260" class="shortcut">Implemented Interfaces</a>
+                  &#160;|&#160;
+                  <a href="#id441289" class="shortcut">Properties</a>
+                  &#160;|&#160;
+                  <a href="#id441321" class="shortcut">Signals</a></nobr></td></tr>
+</table>
+<div class="refentry" lang="en">
+<a name="GladeInspector"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2>
+<a name="id440711"></a><span class="refentrytitle">GladeInspector</span>
+</h2>
+<p>GladeInspector &#8212; A widget for inspecting objects in a <a href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>.</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<h2>Synopsis</h2>
+<pre class="synopsis">
+
+
+
+                    <a href="GladeInspector.html#GladeInspector-struct">GladeInspector</a>;
+GtkWidget*          <a href="GladeInspector.html#glade-inspector-new">glade_inspector_new</a>                 (void);
+GtkWidget*          <a href="GladeInspector.html#glade-inspector-new-with-project">glade_inspector_new_with_project</a>    (<a href="GladeProject.html" title="GladeProject">GladeProject</a> *project);
+void                <a href="GladeInspector.html#glade-inspector-set-project">glade_inspector_set_project</a>         (<a href="GladeInspector.html" title="GladeInspector">GladeInspector</a> *inspector,
+                                                         <a href="GladeProject.html" title="GladeProject">GladeProject</a> *project);
+<a href="GladeProject.html" title="GladeProject">GladeProject</a>*       <a href="GladeInspector.html#glade-inspector-get-project">glade_inspector_get_project</a>         (<a href="GladeInspector.html" title="GladeInspector">GladeInspector</a> *inspector);
+GList*              <a href="GladeInspector.html#glade-inspector-get-selected-items">glade_inspector_get_selected_items</a>  (<a href="GladeInspector.html" title="GladeInspector">GladeInspector</a> *inspector);
+
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id441194"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+
+  GObject
+   +----GInitiallyUnowned
+         +----GtkObject
+               +----GtkWidget
+                     +----GtkContainer
+                           +----GtkBox
+                                 +----GtkVBox
+                                       +----GladeInspector
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id441260"></a><h2>Implemented Interfaces</h2>
+<p>
+GladeInspector implements
+ AtkImplementorIface and  GtkBuildable.</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="id441289"></a><h2>Properties</h2>
+<pre class="synopsis">
+
+  "<a href="GladeInspector.html#GladeInspector--project">project</a>"                  <a href="GladeProject.html" title="GladeProject">GladeProject</a>          : Read / Write
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id441321"></a><h2>Signals</h2>
+<pre class="synopsis">
+
+  "<a href="GladeInspector.html#GladeInspector-item-activated">item-activated</a>"                                 : Run Last
+  "<a href="GladeInspector.html#GladeInspector-selection-changed">selection-changed</a>"                              : Run Last
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id441356"></a><h2>Description</h2>
+<p>
+A <a href="GladeInspector.html" title="GladeInspector"><span class="type">GladeInspector</span></a> is a widget for inspecting the objects that make up a user interface. 
+</p>
+<p>
+An inspector is created by calling either <a href="GladeInspector.html#glade-inspector-new"><code class="function">glade_inspector_new()</code></a> or <a href="GladeInspector.html#glade-inspector-new-with-project"><code class="function">glade_inspector_new_with_project()</code></a>. 
+The current project been inspected can be changed by calling <a href="GladeInspector.html#glade-inspector-set-project"><code class="function">glade_inspector_set_project()</code></a>.</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="id441414"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="id441424"></a><h3>
+<a name="GladeInspector-struct"></a>GladeInspector</h3>
+<a class="indexterm" name="id441437"></a><pre class="programlisting">typedef struct _GladeInspector GladeInspector;</pre>
+<p>
+The <a href="GladeInspector.html" title="GladeInspector"><span class="type">GladeInspector</span></a> struct contains private data only, and should be manipulated using the functions below.</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id441462"></a><h3>
+<a name="glade-inspector-new"></a>glade_inspector_new ()</h3>
+<a class="indexterm" name="id441474"></a><pre class="programlisting">GtkWidget*          glade_inspector_new                 (void);</pre>
+<p>
+Creates a new <a href="GladeInspector.html" title="GladeInspector"><span class="type">GladeInspector</span></a></p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> a new <a href="GladeInspector.html" title="GladeInspector"><span class="type">GladeInspector</span></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id441526"></a><h3>
+<a name="glade-inspector-new-with-project"></a>glade_inspector_new_with_project ()</h3>
+<a class="indexterm" name="id441538"></a><pre class="programlisting">GtkWidget*          glade_inspector_new_with_project    (<a href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
+<p>
+Creates a new <a href="GladeInspector.html" title="GladeInspector"><span class="type">GladeInspector</span></a> with <em class="parameter"><code>project</code></em></p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>project</code></em>&#160;:</span></td>
+<td> a <a href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> a new <a href="GladeInspector.html" title="GladeInspector"><span class="type">GladeInspector</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id441624"></a><h3>
+<a name="glade-inspector-set-project"></a>glade_inspector_set_project ()</h3>
+<a class="indexterm" name="id441637"></a><pre class="programlisting">void                glade_inspector_set_project         (<a href="GladeInspector.html" title="GladeInspector">GladeInspector</a> *inspector,
+                                                         <a href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
+<p>
+Sets the current project of <em class="parameter"><code>inspector</code></em> to <em class="parameter"><code>project</code></em>. To unset the current
+project, pass <code class="literal">NULL</code> for <em class="parameter"><code>project</code></em>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>inspector</code></em>&#160;:</span></td>
+<td> a <a href="GladeInspector.html" title="GladeInspector"><span class="type">GladeInspector</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>project</code></em>&#160;:</span></td>
+<td> a <a href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id441748"></a><h3>
+<a name="glade-inspector-get-project"></a>glade_inspector_get_project ()</h3>
+<a class="indexterm" name="id441761"></a><pre class="programlisting"><a href="GladeProject.html" title="GladeProject">GladeProject</a>*       glade_inspector_get_project         (<a href="GladeInspector.html" title="GladeInspector">GladeInspector</a> *inspector);</pre>
+<p>
+Note that the method does not ref the returned <a href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>inspector</code></em>&#160;:</span></td>
+<td> a <a href="GladeInspector.html" title="GladeInspector"><span class="type">GladeInspector</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> A <a href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id441841"></a><h3>
+<a name="glade-inspector-get-selected-items"></a>glade_inspector_get_selected_items ()</h3>
+<a class="indexterm" name="id441854"></a><pre class="programlisting">GList*              glade_inspector_get_selected_items  (<a href="GladeInspector.html" title="GladeInspector">GladeInspector</a> *inspector);</pre>
+<p>
+Returns the selected items in the inspector.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>inspector</code></em>&#160;:</span></td>
+<td> a <a href="GladeInspector.html" title="GladeInspector"><span class="type">GladeInspector</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> A <span class="type">GList</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1" lang="en">
+<a name="id441928"></a><h2>Property Details</h2>
+<div class="refsect2" lang="en">
+<a name="id441938"></a><h3>
+<a name="GladeInspector--project"></a>The <code class="literal">"project"</code> property</h3>
+<a class="indexterm" name="id441953"></a><pre class="programlisting">  "project"                  <a href="GladeProject.html" title="GladeProject">GladeProject</a>          : Read / Write</pre>
+<p>The project being inspected.</p>
+</div>
+</div>
+<div class="refsect1" lang="en">
+<a name="id441977"></a><h2>Signal Details</h2>
+<div class="refsect2" lang="en">
+<a name="id441987"></a><h3>
+<a name="GladeInspector-item-activated"></a>The <code class="literal">"item-activated"</code> signal</h3>
+<a class="indexterm" name="id442002"></a><pre class="programlisting">void                user_function                      (<a href="GladeInspector.html" title="GladeInspector">GladeInspector</a> *inspector,
+                                                        gpointer        user_data)      : Run Last</pre>
+<p>
+Emitted when a item is activated in the GladeInspector.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>inspector</code></em>&#160;:</span></td>
+<td> the object which received the signal
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>user_data</code></em>&#160;:</span></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id442070"></a><h3>
+<a name="GladeInspector-selection-changed"></a>The <code class="literal">"selection-changed"</code> signal</h3>
+<a class="indexterm" name="id442086"></a><pre class="programlisting">void                user_function                      (<a href="GladeInspector.html" title="GladeInspector">GladeInspector</a> *inspector,
+                                                        gpointer        user_data)      : Run Last</pre>
+<p>
+Emitted when the selection changes in the GladeInspector.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>inspector</code></em>&#160;:</span></td>
+<td> the object which received the signal
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>user_data</code></em>&#160;:</span></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1" lang="en">
+<a name="id442156"></a><div class="refsect2" lang="en"><a name="id442157"></a></div>
+<hr>
+<div class="refsect2" lang="en"><a name="id442158"></a></div>
+</div>
+</div>
+</body>
+</html>

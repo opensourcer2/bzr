@@ -1,0 +1,2479 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>GladeWidgetAdaptor</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.72.0">
+<link rel="start" href="index.html" title="Glade User Interface Designer Reference Manual">
+<link rel="up" href="core.html" title="Part&#160;II.&#160;Glade Core">
+<link rel="prev" href="gladeui-glade-property.html" title="GladeProperty">
+<link rel="next" href="gladeui-GladePropertyClass.html" title="GladePropertyClass">
+<meta name="generator" content="GTK-Doc V1.9 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="part" href="catalog.html" title="Part&#160;I.&#160;Adding your custom widgets">
+<link rel="part" href="core.html" title="Part&#160;II.&#160;Glade Core">
+<link rel="part" href="dockables.html" title="Part&#160;III.&#160;Dockable Glade UI Widgets">
+<link rel="part" href="misc.html" title="Part&#160;IV.&#160;Miscellaneous utilities">
+<link rel="index" href="ix01.html" title="Index">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="gladeui-glade-property.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="core.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Glade User Interface Designer Reference Manual</th>
+<td><a accesskey="n" href="gladeui-GladePropertyClass.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#id382966" class="shortcut">Top</a>
+                  &#160;|&#160;
+                  <a href="#id385611" class="shortcut">Description</a></nobr></td></tr>
+</table>
+<div class="refentry" lang="en">
+<a name="gladeui-GladeWidgetAdaptor"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2>
+<a name="id382966"></a><span class="refentrytitle">GladeWidgetAdaptor</span>
+</h2>
+<p>GladeWidgetAdaptor &#8212; Adaptor base class to add runtime support for each widget class.</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<h2>Synopsis</h2>
+<pre class="synopsis">
+
+
+
+enum                <a href="gladeui-GladeWidgetAdaptor.html#GladeCreateReason">GladeCreateReason</a>;
+#define             <a href="gladeui-GladeWidgetAdaptor.html#GWA-IS-FIXED:CAPS">GWA_IS_FIXED</a>                        (obj)
+#define             <a href="gladeui-GladeWidgetAdaptor.html#GWA-IS-TOPLEVEL:CAPS">GWA_IS_TOPLEVEL</a>                     (obj)
+#define             <a href="gladeui-GladeWidgetAdaptor.html#GWA-USE-PLACEHOLDERS:CAPS">GWA_USE_PLACEHOLDERS</a>                (obj)
+#define             <a href="gladeui-GladeWidgetAdaptor.html#GWA-DEFAULT-WIDTH:CAPS">GWA_DEFAULT_WIDTH</a>                   (obj)
+#define             <a href="gladeui-GladeWidgetAdaptor.html#GWA-DEFAULT-HEIGHT:CAPS">GWA_DEFAULT_HEIGHT</a>                  (obj)
+#define             <a href="gladeui-GladeWidgetAdaptor.html#GWA-GET-CLASS:CAPS">GWA_GET_CLASS</a>                       (type)
+#define             <a href="gladeui-GladeWidgetAdaptor.html#GWA-GET-OCLASS:CAPS">GWA_GET_OCLASS</a>                      (type)
+#define             <a href="gladeui-GladeWidgetAdaptor.html#GLADE-VALID-CREATE-REASON:CAPS">GLADE_VALID_CREATE_REASON</a>           (reason)
+#define             <a href="gladeui-GladeWidgetAdaptor.html#GLADE-TYPE-CREATE-REASON:CAPS">GLADE_TYPE_CREATE_REASON</a>
+void                (<a href="gladeui-GladeWidgetAdaptor.html#GladeSetPropertyFunc">*GladeSetPropertyFunc</a>)             (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         const gchar *property_name,
+                                                         const GValue *value);
+void                (<a href="gladeui-GladeWidgetAdaptor.html#GladeGetPropertyFunc">*GladeGetPropertyFunc</a>)             (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         const gchar *property_name,
+                                                         GValue *value);
+gboolean            (<a href="gladeui-GladeWidgetAdaptor.html#GladeVerifyPropertyFunc">*GladeVerifyPropertyFunc</a>)          (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         const gchar *property_name,
+                                                         const GValue *value);
+void                (<a href="gladeui-GladeWidgetAdaptor.html#GladeChildSetPropertyFunc">*GladeChildSetPropertyFunc</a>)        (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *child,
+                                                         const gchar *property_name,
+                                                         const GValue *value);
+void                (<a href="gladeui-GladeWidgetAdaptor.html#GladeChildGetPropertyFunc">*GladeChildGetPropertyFunc</a>)        (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *child,
+                                                         const gchar *property_name,
+                                                         GValue *value);
+gboolean            (<a href="gladeui-GladeWidgetAdaptor.html#GladeChildVerifyPropertyFunc">*GladeChildVerifyPropertyFunc</a>)     (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *child,
+                                                         const gchar *property_name,
+                                                         const GValue *value);
+GList*              (<a href="gladeui-GladeWidgetAdaptor.html#GladeGetChildrenFunc">*GladeGetChildrenFunc</a>)             (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container);
+void                (<a href="gladeui-GladeWidgetAdaptor.html#GladeAddChildFunc">*GladeAddChildFunc</a>)                (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *parent,
+                                                         GObject *child);
+void                (<a href="gladeui-GladeWidgetAdaptor.html#GladeRemoveChildFunc">*GladeRemoveChildFunc</a>)             (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *parent,
+                                                         GObject *child);
+void                (<a href="gladeui-GladeWidgetAdaptor.html#GladeReplaceChildFunc">*GladeReplaceChildFunc</a>)            (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *old_obj,
+                                                         GObject *new_obj);
+void                (<a href="gladeui-GladeWidgetAdaptor.html#GladePostCreateFunc">*GladePostCreateFunc</a>)              (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         <a href="gladeui-GladeWidgetAdaptor.html#GladeCreateReason">GladeCreateReason</a> reason);
+GObject*            (<a href="gladeui-GladeWidgetAdaptor.html#GladeGetInternalFunc">*GladeGetInternalFunc</a>)             (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *parent,
+                                                         const gchar *name);
+void                (<a href="gladeui-GladeWidgetAdaptor.html#GladeActionActivateFunc">*GladeActionActivateFunc</a>)          (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         const gchar *action_path);
+void                (<a href="gladeui-GladeWidgetAdaptor.html#GladeChildActionActivateFunc">*GladeChildActionActivateFunc</a>)     (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *object,
+                                                         const gchar *action_path);
+void                (<a href="gladeui-GladeWidgetAdaptor.html#GladeReadWidgetFunc">*GladeReadWidgetFunc</a>)              (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         GladeXmlNode *node);
+void                (<a href="gladeui-GladeWidgetAdaptor.html#GladeWriteWidgetFunc">*GladeWriteWidgetFunc</a>)             (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         GladeXmlContext *context,
+                                                         GladeXmlNode *node);
+<a href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a>* (<a href="gladeui-GladeWidgetAdaptor.html#GladeCreateEPropFunc">*GladeCreateEPropFunc</a>)            (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         <a href="gladeui-GladePropertyClass.html#GladePropertyClass">GladePropertyClass</a> *klass,
+                                                         gboolean use_command);
+gchar*              (<a href="gladeui-GladeWidgetAdaptor.html#GladeStringFromValueFunc">*GladeStringFromValueFunc</a>)         (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         <a href="gladeui-GladePropertyClass.html#GladePropertyClass">GladePropertyClass</a> *klass,
+                                                         const GValue *value);
+                    <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a>;
+#define             <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-create-widget">glade_widget_adaptor_create_widget</a>  (adaptor, query, ...)
+<a href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a>* <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-create-eprop">glade_widget_adaptor_create_eprop</a>  (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         <a href="gladeui-GladePropertyClass.html#GladePropertyClass">GladePropertyClass</a> *klass,
+                                                         gboolean use_command);
+#define             <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-from-pclass">glade_widget_adaptor_from_pclass</a>    (pclass)
+#define             <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-from-pspec">glade_widget_adaptor_from_pspec</a>     (pspec)
+<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a>* <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-from-catalog">glade_widget_adaptor_from_catalog</a>   (GladeXmlNode *class_node,
+                                                         const gchar *catname,
+                                                         const gchar *icon_prefix,
+                                                         GModule *module,
+                                                         const gchar *domain,
+                                                         const gchar *book);
+void                <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-register">glade_widget_adaptor_register</a>       (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor);
+<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a>*        <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-create-internal">glade_widget_adaptor_create_internal</a>
+                                                        (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
+                                                         GObject *internal_object,
+                                                         const gchar *internal_name,
+                                                         const gchar *parent_name,
+                                                         gboolean anarchist,
+                                                         <a href="gladeui-GladeWidgetAdaptor.html#GladeCreateReason">GladeCreateReason</a> reason);
+<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a>*        <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-create-widget-real">glade_widget_adaptor_create_widget_real</a>
+                                                        (gboolean query,
+                                                         const gchar *first_property,
+                                                         ...);
+<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a>* <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-by-name">glade_widget_adaptor_get_by_name</a>    (const gchar *name);
+<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a>* <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-by-type">glade_widget_adaptor_get_by_type</a>    (GType type);
+<a href="gladeui-GladePropertyClass.html#GladePropertyClass">GladePropertyClass</a>* <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-property-class">glade_widget_adaptor_get_property_class</a>
+                                                        (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         const gchar *name);
+<a href="gladeui-GladePropertyClass.html#GladePropertyClass">GladePropertyClass</a>* <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-pack-property-class">glade_widget_adaptor_get_pack_property_class</a>
+                                                        (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         const gchar *name);
+GParameter*         <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-default-params">glade_widget_adaptor_default_params</a> (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         gboolean construct,
+                                                         guint *n_params);
+void                <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-post-create">glade_widget_adaptor_post_create</a>    (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         <a href="gladeui-GladeWidgetAdaptor.html#GladeCreateReason">GladeCreateReason</a> reason);
+GObject*            <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-internal-child">glade_widget_adaptor_get_internal_child</a>
+                                                        (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         const gchar *internal_name);
+void                <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-set-property">glade_widget_adaptor_set_property</a>   (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         const gchar *property_name,
+                                                         const GValue *value);
+void                <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-property">glade_widget_adaptor_get_property</a>   (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         const gchar *property_name,
+                                                         GValue *value);
+gboolean            <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-verify-property">glade_widget_adaptor_verify_property</a>
+                                                        (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         const gchar *property_name,
+                                                         const GValue *value);
+void                <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-add">glade_widget_adaptor_add</a>            (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *child);
+void                <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-remove">glade_widget_adaptor_remove</a>         (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *child);
+GList*              <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-children">glade_widget_adaptor_get_children</a>   (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container);
+gboolean            <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-has-child">glade_widget_adaptor_has_child</a>      (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *child);
+void                <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-child-set-property">glade_widget_adaptor_child_set_property</a>
+                                                        (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *child,
+                                                         const gchar *property_name,
+                                                         const GValue *value);
+void                <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-child-get-property">glade_widget_adaptor_child_get_property</a>
+                                                        (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *child,
+                                                         const gchar *property_name,
+                                                         GValue *value);
+gboolean            <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-child-verify-property">glade_widget_adaptor_child_verify_property</a>
+                                                        (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *child,
+                                                         const gchar *property_name,
+                                                         const GValue *value);
+void                <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-replace-child">glade_widget_adaptor_replace_child</a>  (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *old_obj,
+                                                         GObject *new_obj);
+void                <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-read-child">glade_widget_adaptor_read_child</a>     (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         GladeXmlNode *node);
+void                <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-read-widget">glade_widget_adaptor_read_widget</a>    (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         GladeXmlNode *node);
+void                <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-write-child">glade_widget_adaptor_write_child</a>    (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         GladeXmlContext *context,
+                                                         GladeXmlNode *node);
+void                <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-write-widget">glade_widget_adaptor_write_widget</a>   (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         GladeXmlContext *context,
+                                                         GladeXmlNode *node);
+gboolean            <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-query">glade_widget_adaptor_query</a>          (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor);
+gchar*              <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-packing-default">glade_widget_adaptor_get_packing_default</a>
+                                                        (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *child_adaptor,
+                                                         <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *container_adaptor,
+                                                         const gchar *id);
+gboolean            <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-is-container">glade_widget_adaptor_is_container</a>   (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor);
+gboolean            <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-action-add">glade_widget_adaptor_action_add</a>     (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         const gchar *action_path,
+                                                         const gchar *label,
+                                                         const gchar *stock,
+                                                         gboolean important);
+gboolean            <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-pack-action-add">glade_widget_adaptor_pack_action_add</a>
+                                                        (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         const gchar *action_path,
+                                                         const gchar *label,
+                                                         const gchar *stock,
+                                                         gboolean important);
+gboolean            <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-action-remove">glade_widget_adaptor_action_remove</a>  (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         const gchar *action_path);
+gboolean            <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-pack-action-remove">glade_widget_adaptor_pack_action_remove</a>
+                                                        (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         const gchar *action_path);
+GList*              <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-pack-actions-new">glade_widget_adaptor_pack_actions_new</a>
+                                                        (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor);
+void                <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-action-activate">glade_widget_adaptor_action_activate</a>
+                                                        (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         const gchar *action_path);
+void                <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-child-action-activate">glade_widget_adaptor_child_action_activate</a>
+                                                        (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *object,
+                                                         const gchar *action_path);
+gchar*              <a href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-string-from-value">glade_widget_adaptor_string_from_value</a>
+                                                        (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         <a href="gladeui-GladePropertyClass.html#GladePropertyClass">GladePropertyClass</a> *klass,
+                                                         const GValue *value);
+
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id385611"></a><h2>Description</h2>
+<p>
+The <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a> object is a proxy for widget class support in Glade.
+it is automatically generated from the xml and allows you to override its
+methods in the plugin library for fine grained support on how you load/save
+widgets and handle thier properties in the runtime and more.</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="id385636"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="id385646"></a><h3>
+<a name="GladeCreateReason"></a>enum GladeCreateReason</h3>
+<a class="indexterm" name="id385659"></a><pre class="programlisting">typedef enum
+{
+	GLADE_CREATE_USER = 0,
+	GLADE_CREATE_COPY,
+	GLADE_CREATE_LOAD,
+	GLADE_CREATE_REBUILD,
+	GLADE_CREATE_REASONS
+} GladeCreateReason;
+</pre>
+<p>
+These are the reasons your <a href="gladeui-GladeWidgetAdaptor.html#GladePostCreateFunc"><span class="type">GladePostCreateFunc</span></a> can be called.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><a name="GLADE-CREATE-USER:CAPS"></a><code class="literal">GLADE_CREATE_USER</code></span></td>
+<td> Was created at the user's request
+                    (this is a good time to set any properties
+                    or add children to the project; like GtkFrame's 
+                    label for example).
+</td>
+</tr>
+<tr>
+<td><span class="term"><a name="GLADE-CREATE-COPY:CAPS"></a><code class="literal">GLADE_CREATE_COPY</code></span></td>
+<td> Was created as a result of the copy/paste 
+                    mechanism, at this point you can count on glade
+                    to follow up with properties and children on 
+                    its own.
+</td>
+</tr>
+<tr>
+<td><span class="term"><a name="GLADE-CREATE-LOAD:CAPS"></a><code class="literal">GLADE_CREATE_LOAD</code></span></td>
+<td> Was created during the load process.
+</td>
+</tr>
+<tr>
+<td><span class="term"><a name="GLADE-CREATE-REBUILD:CAPS"></a><code class="literal">GLADE_CREATE_REBUILD</code></span></td>
+<td> Was created as a replacement for another project 
+                       object; this only happens when the user is 
+                       changing a property that is marked by the type 
+                       system as G_PARAM_SPEC_CONSTRUCT_ONLY.
+</td>
+</tr>
+<tr>
+<td><span class="term"><a name="GLADE-CREATE-REASONS:CAPS"></a><code class="literal">GLADE_CREATE_REASONS</code></span></td>
+<td> Never used.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id385801"></a><h3>
+<a name="GWA-IS-FIXED:CAPS"></a>GWA_IS_FIXED()</h3>
+<a class="indexterm" name="id385814"></a><pre class="programlisting">#define             GWA_IS_FIXED(obj)</pre>
+<p>
+Checks whether this widget adaptor should be handled 
+as a free-form container</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>obj</code></em>&#160;:</span></td>
+<td> A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id385855"></a><h3>
+<a name="GWA-IS-TOPLEVEL:CAPS"></a>GWA_IS_TOPLEVEL()</h3>
+<a class="indexterm" name="id385867"></a><pre class="programlisting">#define             GWA_IS_TOPLEVEL(obj)</pre>
+<p>
+Checks whether this widget class has been marked as
+a toplevel one.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>obj</code></em>&#160;:</span></td>
+<td> A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id385909"></a><h3>
+<a name="GWA-USE-PLACEHOLDERS:CAPS"></a>GWA_USE_PLACEHOLDERS()</h3>
+<a class="indexterm" name="id385923"></a><pre class="programlisting">#define             GWA_USE_PLACEHOLDERS(obj)</pre>
+<p>
+Checks whether this widget class has been marked to
+use placeholders in child widget operations</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>obj</code></em>&#160;:</span></td>
+<td> A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id385964"></a><h3>
+<a name="GWA-DEFAULT-WIDTH:CAPS"></a>GWA_DEFAULT_WIDTH()</h3>
+<a class="indexterm" name="id385977"></a><pre class="programlisting">#define             GWA_DEFAULT_WIDTH(obj)</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>obj</code></em>&#160;:</span></td>
+<td> A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> the default width to be used when this widget
+is toplevel in the GladeDesignLayout
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id386029"></a><h3>
+<a name="GWA-DEFAULT-HEIGHT:CAPS"></a>GWA_DEFAULT_HEIGHT()</h3>
+<a class="indexterm" name="id386042"></a><pre class="programlisting">#define             GWA_DEFAULT_HEIGHT(obj)</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>obj</code></em>&#160;:</span></td>
+<td> A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> the default width to be used when this widget
+is toplevel in the GladeDesignLayout
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id386094"></a><h3>
+<a name="GWA-GET-CLASS:CAPS"></a>GWA_GET_CLASS()</h3>
+<a class="indexterm" name="id386107"></a><pre class="programlisting">#define             GWA_GET_CLASS(type)</pre>
+<p>
+Shorthand for referencing glade adaptor classes from
+the plugin eg. GWA_GET_CLASS (GTK_TYPE_CONTAINER)-&gt;post_create (adaptor...</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>type</code></em>&#160;:</span></td>
+<td> A <span class="type">GType</span>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id386149"></a><h3>
+<a name="GWA-GET-OCLASS:CAPS"></a>GWA_GET_OCLASS()</h3>
+<a class="indexterm" name="id386162"></a><pre class="programlisting">#define GWA_GET_OCLASS(type) ((GObjectClass*)GWA_GET_CLASS(type))
+</pre>
+<p>
+Same as GWA_GET_CLASS but casted to GObjectClass</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>type</code></em>&#160;:</span></td>
+<td> A <span class="type">GType</span>.
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id386204"></a><h3>
+<a name="GLADE-VALID-CREATE-REASON:CAPS"></a>GLADE_VALID_CREATE_REASON()</h3>
+<a class="indexterm" name="id386217"></a><pre class="programlisting">#define GLADE_VALID_CREATE_REASON(reason) (reason &gt;= 0 &amp;&amp; reason &lt; GLADE_CREATE_REASONS)
+</pre>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id386230"></a><h3>
+<a name="GLADE-TYPE-CREATE-REASON:CAPS"></a>GLADE_TYPE_CREATE_REASON</h3>
+<a class="indexterm" name="id386243"></a><pre class="programlisting">#define GLADE_TYPE_CREATE_REASON (glade_create_reason_get_type())
+</pre>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id386256"></a><h3>
+<a name="GladeSetPropertyFunc"></a>GladeSetPropertyFunc ()</h3>
+<a class="indexterm" name="id386268"></a><pre class="programlisting">void                (*GladeSetPropertyFunc)             (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         const gchar *property_name,
+                                                         const GValue *value);</pre>
+<p>
+This delagate function is used to apply the property value on
+the runtime object.
+</p>
+<p>
+Sets <em class="parameter"><code>value</code></em> on <em class="parameter"><code>object</code></em> for a given <a href="gladeui-GladePropertyClass.html#GladePropertyClass"><span class="type">GladePropertyClass</span></a></p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td> A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>object</code></em>&#160;:</span></td>
+<td> The <span class="type">GObject</span>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>property_name</code></em>&#160;:</span></td>
+<td> The property identifier
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>value</code></em>&#160;:</span></td>
+<td> The <span class="type">GValue</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id386424"></a><h3>
+<a name="GladeGetPropertyFunc"></a>GladeGetPropertyFunc ()</h3>
+<a class="indexterm" name="id386437"></a><pre class="programlisting">void                (*GladeGetPropertyFunc)             (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         const gchar *property_name,
+                                                         GValue *value);</pre>
+<p>
+Gets <em class="parameter"><code>value</code></em> on <em class="parameter"><code>object</code></em> for a given <a href="gladeui-GladePropertyClass.html#GladePropertyClass"><span class="type">GladePropertyClass</span></a></p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td> A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>object</code></em>&#160;:</span></td>
+<td> The <span class="type">GObject</span>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>property_name</code></em>&#160;:</span></td>
+<td> The property identifier
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>value</code></em>&#160;:</span></td>
+<td> The <span class="type">GValue</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id386589"></a><h3>
+<a name="GladeVerifyPropertyFunc"></a>GladeVerifyPropertyFunc ()</h3>
+<a class="indexterm" name="id386602"></a><pre class="programlisting">gboolean            (*GladeVerifyPropertyFunc)          (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         const gchar *property_name,
+                                                         const GValue *value);</pre>
+<p>
+This delagate function is always called whenever setting any
+properties with the exception of load time, and copy/paste time
+(basicly the two places where we recreate a hierarchy that we
+already know "works") its basicly an optional backend provided
+boundry checker for properties.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td> A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>object</code></em>&#160;:</span></td>
+<td> The <span class="type">GObject</span>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>property_name</code></em>&#160;:</span></td>
+<td> The property identifier
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>value</code></em>&#160;:</span></td>
+<td> The <span class="type">GValue</span>
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> whether or not its OK to set <em class="parameter"><code>value</code></em> on <em class="parameter"><code>object</code></em>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id386760"></a><h3>
+<a name="GladeChildSetPropertyFunc"></a>GladeChildSetPropertyFunc ()</h3>
+<a class="indexterm" name="id386772"></a><pre class="programlisting">void                (*GladeChildSetPropertyFunc)        (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *child,
+                                                         const gchar *property_name,
+                                                         const GValue *value);</pre>
+<p>
+Called to set the packing property <em class="parameter"><code>property_name</code></em> to <em class="parameter"><code>value</code></em>
+on the <em class="parameter"><code>child</code></em> object of <em class="parameter"><code>container</code></em>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td> A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>container</code></em>&#160;:</span></td>
+<td> The <span class="type">GObject</span> container
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>child</code></em>&#160;:</span></td>
+<td> The <span class="type">GObject</span> child
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>property_name</code></em>&#160;:</span></td>
+<td> The property name
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>value</code></em>&#160;:</span></td>
+<td> The <span class="type">GValue</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id386959"></a><h3>
+<a name="GladeChildGetPropertyFunc"></a>GladeChildGetPropertyFunc ()</h3>
+<a class="indexterm" name="id386972"></a><pre class="programlisting">void                (*GladeChildGetPropertyFunc)        (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *child,
+                                                         const gchar *property_name,
+                                                         GValue *value);</pre>
+<p>
+Called to get the packing property <em class="parameter"><code>property_name</code></em>
+on the <em class="parameter"><code>child</code></em> object of <em class="parameter"><code>container</code></em> into <em class="parameter"><code>value</code></em>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td> A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>container</code></em>&#160;:</span></td>
+<td> The <span class="type">GObject</span> container
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>child</code></em>&#160;:</span></td>
+<td> The <span class="type">GObject</span> child
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>property_name</code></em>&#160;:</span></td>
+<td> The property name
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>value</code></em>&#160;:</span></td>
+<td> The <span class="type">GValue</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id387158"></a><h3>
+<a name="GladeChildVerifyPropertyFunc"></a>GladeChildVerifyPropertyFunc ()</h3>
+<a class="indexterm" name="id387171"></a><pre class="programlisting">gboolean            (*GladeChildVerifyPropertyFunc)     (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *child,
+                                                         const gchar *property_name,
+                                                         const GValue *value);</pre>
+<p>
+This delagate function is always called whenever setting any
+properties with the exception of load time, and copy/paste time
+(basicly the two places where we recreate a hierarchy that we
+already know "works") its basicly an optional backend provided
+boundry checker for properties.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td> A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>container</code></em>&#160;:</span></td>
+<td> The <span class="type">GObject</span> container
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>child</code></em>&#160;:</span></td>
+<td> The <span class="type">GObject</span> child
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>property_name</code></em>&#160;:</span></td>
+<td> The property name
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>value</code></em>&#160;:</span></td>
+<td> The <span class="type">GValue</span>
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> whether or not its OK to set <em class="parameter"><code>value</code></em> on <em class="parameter"><code>object</code></em>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id387358"></a><h3>
+<a name="GladeGetChildrenFunc"></a>GladeGetChildrenFunc ()</h3>
+<a class="indexterm" name="id387371"></a><pre class="programlisting">GList*              (*GladeGetChildrenFunc)             (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container);</pre>
+<p>
+A function called to get <em class="parameter"><code>containers</code></em> children.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>container</code></em>&#160;:</span></td>
+<td> A <span class="type">GObject</span> container
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> A <span class="type">GList</span> of <span class="type">GObject</span> children.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id387465"></a><h3>
+<a name="GladeAddChildFunc"></a>GladeAddChildFunc ()</h3>
+<a class="indexterm" name="id387478"></a><pre class="programlisting">void                (*GladeAddChildFunc)                (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *parent,
+                                                         GObject *child);</pre>
+<p>
+Called to add <em class="parameter"><code>child</code></em> to <em class="parameter"><code>parent</code></em>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>parent</code></em>&#160;:</span></td>
+<td> A <span class="type">GObject</span> container
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>child</code></em>&#160;:</span></td>
+<td> A <span class="type">GObject</span> child
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id387580"></a><h3>
+<a name="GladeRemoveChildFunc"></a>GladeRemoveChildFunc ()</h3>
+<a class="indexterm" name="id387592"></a><pre class="programlisting">void                (*GladeRemoveChildFunc)             (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *parent,
+                                                         GObject *child);</pre>
+<p>
+Called to remove <em class="parameter"><code>child</code></em> from <em class="parameter"><code>parent</code></em>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>parent</code></em>&#160;:</span></td>
+<td> A <span class="type">GObject</span> container
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>child</code></em>&#160;:</span></td>
+<td> A <span class="type">GObject</span> child
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id387695"></a><h3>
+<a name="GladeReplaceChildFunc"></a>GladeReplaceChildFunc ()</h3>
+<a class="indexterm" name="id387707"></a><pre class="programlisting">void                (*GladeReplaceChildFunc)            (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *old_obj,
+                                                         GObject *new_obj);</pre>
+<p>
+Called to swap placeholders with project objects
+in containers.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>container</code></em>&#160;:</span></td>
+<td> A <span class="type">GObject</span> container
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>old_obj</code></em>&#160;:</span></td>
+<td> The old <span class="type">GObject</span> child
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>new_obj</code></em>&#160;:</span></td>
+<td> The new <span class="type">GObject</span> child to take its place
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id387828"></a><h3>
+<a name="GladePostCreateFunc"></a>GladePostCreateFunc ()</h3>
+<a class="indexterm" name="id387840"></a><pre class="programlisting">void                (*GladePostCreateFunc)              (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         <a href="gladeui-GladeWidgetAdaptor.html#GladeCreateReason">GladeCreateReason</a> reason);</pre>
+<p>
+This function is called exactly once for any project object
+instance and can be for any <a href="gladeui-GladeWidgetAdaptor.html#GladeCreateReason"><span class="type">GladeCreateReason</span></a>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>object</code></em>&#160;:</span></td>
+<td> a <span class="type">GObject</span>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>reason</code></em>&#160;:</span></td>
+<td> a <a href="gladeui-GladeWidgetAdaptor.html#GladeCreateReason"><span class="type">GladeCreateReason</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id387939"></a><h3>
+<a name="GladeGetInternalFunc"></a>GladeGetInternalFunc ()</h3>
+<a class="indexterm" name="id387951"></a><pre class="programlisting">GObject*            (*GladeGetInternalFunc)             (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *parent,
+                                                         const gchar *name);</pre>
+<p>
+Called to lookup <em class="parameter"><code>child</code></em> in composite object <em class="parameter"><code>parent</code></em> by <em class="parameter"><code>name</code></em>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>parent</code></em>&#160;:</span></td>
+<td> A <span class="type">GObject</span> composite object
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>name</code></em>&#160;:</span></td>
+<td> A string identifier
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> The specified internal widget.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id388063"></a><h3>
+<a name="GladeActionActivateFunc"></a>GladeActionActivateFunc ()</h3>
+<a class="indexterm" name="id388075"></a><pre class="programlisting">void                (*GladeActionActivateFunc)          (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         const gchar *action_path);</pre>
+<p>
+This delagate function is used to catch actions from the core.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td> A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>object</code></em>&#160;:</span></td>
+<td> The <span class="type">GObject</span>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>action_path</code></em>&#160;:</span></td>
+<td> The action path
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id388180"></a><h3>
+<a name="GladeChildActionActivateFunc"></a>GladeChildActionActivateFunc ()</h3>
+<a class="indexterm" name="id388193"></a><pre class="programlisting">void                (*GladeChildActionActivateFunc)     (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *object,
+                                                         const gchar *action_path);</pre>
+<p>
+This delagate function is used to catch packing actions from the core.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td> A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>container</code></em>&#160;:</span></td>
+<td> The <span class="type">GtkContainer</span>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>object</code></em>&#160;:</span></td>
+<td> The <span class="type">GObject</span>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>action_path</code></em>&#160;:</span></td>
+<td> The action path
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id388327"></a><h3>
+<a name="GladeReadWidgetFunc"></a>GladeReadWidgetFunc ()</h3>
+<a class="indexterm" name="id388339"></a><pre class="programlisting">void                (*GladeReadWidgetFunc)              (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         GladeXmlNode *node);</pre>
+<p>
+This function is called to update <em class="parameter"><code>widget</code></em> from <em class="parameter"><code>node</code></em>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td> A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>widget</code></em>&#160;:</span></td>
+<td> The <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>node</code></em>&#160;:</span></td>
+<td> The <span class="type">GladeXmlNode</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id388463"></a><h3>
+<a name="GladeWriteWidgetFunc"></a>GladeWriteWidgetFunc ()</h3>
+<a class="indexterm" name="id388475"></a><pre class="programlisting">void                (*GladeWriteWidgetFunc)             (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         GladeXmlContext *context,
+                                                         GladeXmlNode *node);</pre>
+<p>
+This function is called to fill in <em class="parameter"><code>node</code></em> from <em class="parameter"><code>widget</code></em>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td> A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>widget</code></em>&#160;:</span></td>
+<td> The <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>node</code></em>&#160;:</span></td>
+<td> The <span class="type">GladeXmlNode</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id388606"></a><h3>
+<a name="GladeCreateEPropFunc"></a>GladeCreateEPropFunc ()</h3>
+<a class="indexterm" name="id388619"></a><pre class="programlisting"><a href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a>* (*GladeCreateEPropFunc)            (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         <a href="gladeui-GladePropertyClass.html#GladePropertyClass">GladePropertyClass</a> *klass,
+                                                         gboolean use_command);</pre>
+<p>
+Creates a GladeEditorProperty to edit <em class="parameter"><code>klass</code></em></p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td> A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>klass</code></em>&#160;:</span></td>
+<td> The <a href="gladeui-GladePropertyClass.html#GladePropertyClass"><span class="type">GladePropertyClass</span></a> to be edited
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>use_command</code></em>&#160;:</span></td>
+<td> whether to use the GladeCommand interface
+to commit property changes
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> A newly created <a href="GladeEditorProperty.html" title="GladeEditorProperty"><span class="type">GladeEditorProperty</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id388747"></a><h3>
+<a name="GladeStringFromValueFunc"></a>GladeStringFromValueFunc ()</h3>
+<a class="indexterm" name="id388760"></a><pre class="programlisting">gchar*              (*GladeStringFromValueFunc)         (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         <a href="gladeui-GladePropertyClass.html#GladePropertyClass">GladePropertyClass</a> *klass,
+                                                         const GValue *value);</pre>
+<p>
+For normal properties this is used to serialize
+property values, for custom properties its still
+needed to update the UI for undo/redo items etc.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td> A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>klass</code></em>&#160;:</span></td>
+<td> The <a href="gladeui-GladePropertyClass.html#GladePropertyClass"><span class="type">GladePropertyClass</span></a> 
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>value</code></em>&#160;:</span></td>
+<td> The <span class="type">GValue</span> to convert to a string
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> A newly allocated string representation of <em class="parameter"><code>value</code></em>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id388890"></a><h3>
+<a name="GladeWidgetAdaptor"></a>GladeWidgetAdaptor</h3>
+<a class="indexterm" name="id388902"></a><pre class="programlisting">typedef struct {
+	GObject      parent_instance;
+
+	GType        type;         /* GType of the widget */
+
+	gchar       *name;         /* Name of the widget, for example GtkButton */
+
+
+	gchar       *generic_name; /* Used to generate names of new widgets, for
+				    * example "button" so that we generate button1,
+				    * button2, buttonX ..
+				    */
+				    
+	gchar       *icon_name;    /* icon name for widget class */
+
+	gchar       *title;        /* Translated class name used in the UI */
+
+	GList       *properties;   /* List of GladePropertyClass objects.
+				    * [see glade-property.h] this list contains
+				    * properties about the widget that we are going
+				    * to modify. Like "title", "label", "rows" .
+				    * Each property creates an input in the propety
+				    * editor.
+				    */
+	GList       *packing_props; /* List of GladePropertyClass objects that describe
+				     * properties for child objects packing definition -
+				     * note there may be more than one type of child supported
+				     * by a widget and thus they may have different sets
+				     * of properties for each type - this association is
+				     * managed on the GladePropertyClass proper.
+				     */
+  
+	GList       *signals;        /* List of GladeSignalClass objects */
+
+        GList       *child_packings; /* Default packing property values */
+
+	GList       *actions;        /* A list of GWActionClass */
+	
+	GList       *packing_actions;/* A list of GWActionClass for child objects */
+
+	GladeWidgetAdaptorPrivate *priv;
+} GladeWidgetAdaptor;
+</pre>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id388928"></a><h3>
+<a name="glade-widget-adaptor-create-widget"></a>glade_widget_adaptor_create_widget()</h3>
+<a class="indexterm" name="id388940"></a><pre class="programlisting">#define             glade_widget_adaptor_create_widget(adaptor, query, ...)</pre>
+<p>
+This factory function returns a new <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> of the correct type/class
+with the properties defined in @... and queries the user if nescisary.
+</p>
+<p>
+The resulting object will have all default properties applied to it
+including the overrides specified in the catalog, unless the catalog
+has specified 'ignore' for that property.
+</p>
+<p>
+Note that the widget class must be fed twice; once as the
+leading arg... and also as the property for the <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>
+</p>
+<p>
+this macro returns the newly created <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a></p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td> a <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>query</code></em>&#160;:</span></td>
+<td>   whether to display query dialogs if
+          applicable to the class
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>...</code></em>&#160;:</span></td>
+<td>     a <code class="literal">NULL</code> terminated list of string/value pairs of <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> 
+          properties
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id389065"></a><h3>
+<a name="glade-widget-adaptor-create-eprop"></a>glade_widget_adaptor_create_eprop ()</h3>
+<a class="indexterm" name="id389078"></a><pre class="programlisting"><a href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a>* glade_widget_adaptor_create_eprop  (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         <a href="gladeui-GladePropertyClass.html#GladePropertyClass">GladePropertyClass</a> *klass,
+                                                         gboolean use_command);</pre>
+<p>
+Creates a GladeEditorProperty to edit <em class="parameter"><code>klass</code></em></p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td> A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>klass</code></em>&#160;:</span></td>
+<td> The <a href="gladeui-GladePropertyClass.html#GladePropertyClass"><span class="type">GladePropertyClass</span></a> to be edited
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>use_command</code></em>&#160;:</span></td>
+<td> whether to use the GladeCommand interface
+to commit property changes
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> A newly created <a href="GladeEditorProperty.html" title="GladeEditorProperty"><span class="type">GladeEditorProperty</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id389206"></a><h3>
+<a name="glade-widget-adaptor-from-pclass"></a>glade_widget_adaptor_from_pclass()</h3>
+<a class="indexterm" name="id389218"></a><pre class="programlisting">#define             glade_widget_adaptor_from_pclass(pclass)</pre>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id389231"></a><h3>
+<a name="glade-widget-adaptor-from-pspec"></a>glade_widget_adaptor_from_pspec()</h3>
+<a class="indexterm" name="id389244"></a><pre class="programlisting">#define             glade_widget_adaptor_from_pspec(pspec)</pre>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id389257"></a><h3>
+<a name="glade-widget-adaptor-from-catalog"></a>glade_widget_adaptor_from_catalog ()</h3>
+<a class="indexterm" name="id389270"></a><pre class="programlisting"><a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a>* glade_widget_adaptor_from_catalog   (GladeXmlNode *class_node,
+                                                         const gchar *catname,
+                                                         const gchar *icon_prefix,
+                                                         GModule *module,
+                                                         const gchar *domain,
+                                                         const gchar *book);</pre>
+<p>
+Dynamicly creates a subclass of <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a> and subclasses
+the closest parent adaptor (parent class adapters must be creates/registerd
+prior to child classes, otherwise inheritance wont work) and parses in
+the relevent catalog info.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>class_node</code></em>&#160;:</span></td>
+<td> A <span class="type">GladeXmlNode</span>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>catname</code></em>&#160;:</span></td>
+<td> the name of the owning catalog
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>icon_prefix</code></em>&#160;:</span></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>module</code></em>&#160;:</span></td>
+<td> the plugin GModule.
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>domain</code></em>&#160;:</span></td>
+<td> the domain to translate strings from this plugin from
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></td>
+<td> the devhelp search domain for the owning catalog.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id389440"></a><h3>
+<a name="glade-widget-adaptor-register"></a>glade_widget_adaptor_register ()</h3>
+<a class="indexterm" name="id389453"></a><pre class="programlisting">void                glade_widget_adaptor_register       (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor);</pre>
+<p>
+Registers <em class="parameter"><code>adaptor</code></em> into the Glade core (every supported
+object type must have a registered adaptor).</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td> A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id389514"></a><h3>
+<a name="glade-widget-adaptor-create-internal"></a>glade_widget_adaptor_create_internal ()</h3>
+<a class="indexterm" name="id389527"></a><pre class="programlisting"><a href="GladeWidget.html" title="GladeWidget">GladeWidget</a>*        glade_widget_adaptor_create_internal
+                                                        (<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
+                                                         GObject *internal_object,
+                                                         const gchar *internal_name,
+                                                         const gchar *parent_name,
+                                                         gboolean anarchist,
+                                                         <a href="gladeui-GladeWidgetAdaptor.html#GladeCreateReason">GladeCreateReason</a> reason);</pre>
+<p>
+A convenienve function to create a <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> of the prescribed type
+for internal widgets.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>parent</code></em>&#160;:</span></td>
+<td>            The parent <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>, or <code class="literal">NULL</code> for children
+                    outside of the hierarchy.
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>internal_object</code></em>&#160;:</span></td>
+<td>   the <span class="type">GObject</span>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>internal_name</code></em>&#160;:</span></td>
+<td>     a string identifier for this internal widget.
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>anarchist</code></em>&#160;:</span></td>
+<td>         Whether or not this widget is a widget outside
+                    of the parent's hierarchy (like a popup window)
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>reason</code></em>&#160;:</span></td>
+<td>            The <a href="gladeui-GladeWidgetAdaptor.html#GladeCreateReason"><span class="type">GladeCreateReason</span></a> for which this internal widget
+                    was created (usually just pass the reason from the post_create
+                    function; note also this is used only by the plugin code so
+                    pass something usefull here).
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> a freshly created <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> wrapper object for the
+         <em class="parameter"><code>internal_object</code></em> of name <em class="parameter"><code>internal_name</code></em>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id389742"></a><h3>
+<a name="glade-widget-adaptor-create-widget-real"></a>glade_widget_adaptor_create_widget_real ()</h3>
+<a class="indexterm" name="id389756"></a><pre class="programlisting"><a href="GladeWidget.html" title="GladeWidget">GladeWidget</a>*        glade_widget_adaptor_create_widget_real
+                                                        (gboolean query,
+                                                         const gchar *first_property,
+                                                         ...);</pre>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id389789"></a><h3>
+<a name="glade-widget-adaptor-get-by-name"></a>glade_widget_adaptor_get_by_name ()</h3>
+<a class="indexterm" name="id389802"></a><pre class="programlisting"><a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a>* glade_widget_adaptor_get_by_name    (const gchar *name);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>name</code></em>&#160;:</span></td>
+<td> name of the widget class (for instance: GtkButton)
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> an existing <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a> with the name equaling <em class="parameter"><code>name</code></em>,
+         or <code class="literal">NULL</code> if such a class doesn't exist
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id389884"></a><h3>
+<a name="glade-widget-adaptor-get-by-type"></a>glade_widget_adaptor_get_by_type ()</h3>
+<a class="indexterm" name="id389897"></a><pre class="programlisting"><a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a>* glade_widget_adaptor_get_by_type    (GType type);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>type</code></em>&#160;:</span></td>
+<td> the <span class="type">GType</span> of an object class
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> an existing <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a> with the type equaling <em class="parameter"><code>type</code></em>,
+         or <code class="literal">NULL</code> if such a class doesn't exist
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id389986"></a><h3>
+<a name="glade-widget-adaptor-get-property-class"></a>glade_widget_adaptor_get_property_class ()</h3>
+<a class="indexterm" name="id389999"></a><pre class="programlisting"><a href="gladeui-GladePropertyClass.html#GladePropertyClass">GladePropertyClass</a>* glade_widget_adaptor_get_property_class
+                                                        (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         const gchar *name);</pre>
+<p>
+Retrieves the <a href="gladeui-GladePropertyClass.html#GladePropertyClass"><span class="type">GladePropertyClass</span></a> for <em class="parameter"><code>name</code></em> in <em class="parameter"><code>adaptor</code></em></p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td> a <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>name</code></em>&#160;:</span></td>
+<td> a string
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> A <a href="gladeui-GladePropertyClass.html#GladePropertyClass"><span class="type">GladePropertyClass</span></a> object
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id390112"></a><h3>
+<a name="glade-widget-adaptor-get-pack-property-class"></a>glade_widget_adaptor_get_pack_property_class ()</h3>
+<a class="indexterm" name="id390125"></a><pre class="programlisting"><a href="gladeui-GladePropertyClass.html#GladePropertyClass">GladePropertyClass</a>* glade_widget_adaptor_get_pack_property_class
+                                                        (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         const gchar *name);</pre>
+<p>
+Retrieves the <a href="gladeui-GladePropertyClass.html#GladePropertyClass"><span class="type">GladePropertyClass</span></a> for <em class="parameter"><code>name</code></em> in 
+<em class="parameter"><code>adaptor</code></em>'s child properties</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td> a <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>name</code></em>&#160;:</span></td>
+<td> a string
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> A <a href="gladeui-GladePropertyClass.html#GladePropertyClass"><span class="type">GladePropertyClass</span></a> object
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id390240"></a><h3>
+<a name="glade-widget-adaptor-default-params"></a>glade_widget_adaptor_default_params ()</h3>
+<a class="indexterm" name="id390253"></a><pre class="programlisting">GParameter*         glade_widget_adaptor_default_params (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         gboolean construct,
+                                                         guint *n_params);</pre>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id390293"></a><h3>
+<a name="glade-widget-adaptor-post-create"></a>glade_widget_adaptor_post_create ()</h3>
+<a class="indexterm" name="id390306"></a><pre class="programlisting">void                glade_widget_adaptor_post_create    (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         <a href="gladeui-GladeWidgetAdaptor.html#GladeCreateReason">GladeCreateReason</a> reason);</pre>
+<p>
+An adaptor function to be called after the object is created</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td>   A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>object</code></em>&#160;:</span></td>
+<td>    The <span class="type">GObject</span>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>reason</code></em>&#160;:</span></td>
+<td>    The <a href="gladeui-GladeWidgetAdaptor.html#GladeCreateReason"><span class="type">GladeCreateReason</span></a> that <em class="parameter"><code>object</code></em> was created for
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id390425"></a><h3>
+<a name="glade-widget-adaptor-get-internal-child"></a>glade_widget_adaptor_get_internal_child ()</h3>
+<a class="indexterm" name="id390438"></a><pre class="programlisting">GObject*            glade_widget_adaptor_get_internal_child
+                                                        (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         const gchar *internal_name);</pre>
+<p>
+Retrieves the internal object <em class="parameter"><code>internal_name</code></em> from <em class="parameter"><code>object</code></em></p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td>       A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>object</code></em>&#160;:</span></td>
+<td>        The <span class="type">GObject</span>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>internal_name</code></em>&#160;:</span></td>
+<td> The string identifier of the internal object
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> The internal <span class="type">GObject</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id390572"></a><h3>
+<a name="glade-widget-adaptor-set-property"></a>glade_widget_adaptor_set_property ()</h3>
+<a class="indexterm" name="id390585"></a><pre class="programlisting">void                glade_widget_adaptor_set_property   (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         const gchar *property_name,
+                                                         const GValue *value);</pre>
+<p>
+This delagate function is used to apply the property value on
+the runtime object.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td>       A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>object</code></em>&#160;:</span></td>
+<td>        The <span class="type">GObject</span>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>property_name</code></em>&#160;:</span></td>
+<td> The property identifier
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>value</code></em>&#160;:</span></td>
+<td>         The <span class="type">GValue</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id390719"></a><h3>
+<a name="glade-widget-adaptor-get-property"></a>glade_widget_adaptor_get_property ()</h3>
+<a class="indexterm" name="id390732"></a><pre class="programlisting">void                glade_widget_adaptor_get_property   (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         const gchar *property_name,
+                                                         GValue *value);</pre>
+<p>
+Gets <em class="parameter"><code>value</code></em> of <em class="parameter"><code>property_name</code></em> on <em class="parameter"><code>object</code></em>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td>       A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>object</code></em>&#160;:</span></td>
+<td>        The <span class="type">GObject</span>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>property_name</code></em>&#160;:</span></td>
+<td> The property identifier
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>value</code></em>&#160;:</span></td>
+<td>         The <span class="type">GValue</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id390884"></a><h3>
+<a name="glade-widget-adaptor-verify-property"></a>glade_widget_adaptor_verify_property ()</h3>
+<a class="indexterm" name="id390896"></a><pre class="programlisting">gboolean            glade_widget_adaptor_verify_property
+                                                        (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         const gchar *property_name,
+                                                         const GValue *value);</pre>
+<p>
+This delagate function is always called whenever setting any
+properties with the exception of load time, and copy/paste time
+(basicly the two places where we recreate a hierarchy that we
+already know "works") its basicly an optional backend provided
+boundry checker for properties.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td>       A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>object</code></em>&#160;:</span></td>
+<td>        The <span class="type">GObject</span>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>property_name</code></em>&#160;:</span></td>
+<td> The property identifier
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>value</code></em>&#160;:</span></td>
+<td>         The <span class="type">GValue</span>
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> whether or not its OK to set <em class="parameter"><code>value</code></em> on <em class="parameter"><code>object</code></em>, this function
+will silently return TRUE if the class did not provide a verify function.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id391056"></a><h3>
+<a name="glade-widget-adaptor-add"></a>glade_widget_adaptor_add ()</h3>
+<a class="indexterm" name="id391068"></a><pre class="programlisting">void                glade_widget_adaptor_add            (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *child);</pre>
+<p>
+Adds <em class="parameter"><code>child</code></em> to <em class="parameter"><code>container</code></em>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td>   A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>container</code></em>&#160;:</span></td>
+<td> The <span class="type">GObject</span> container
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>child</code></em>&#160;:</span></td>
+<td>     The <span class="type">GObject</span> child
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id391193"></a><h3>
+<a name="glade-widget-adaptor-remove"></a>glade_widget_adaptor_remove ()</h3>
+<a class="indexterm" name="id391206"></a><pre class="programlisting">void                glade_widget_adaptor_remove         (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *child);</pre>
+<p>
+Removes <em class="parameter"><code>child</code></em> from <em class="parameter"><code>container</code></em>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td>   A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>container</code></em>&#160;:</span></td>
+<td> The <span class="type">GObject</span> container
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>child</code></em>&#160;:</span></td>
+<td>     The <span class="type">GObject</span> child
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id391331"></a><h3>
+<a name="glade-widget-adaptor-get-children"></a>glade_widget_adaptor_get_children ()</h3>
+<a class="indexterm" name="id391344"></a><pre class="programlisting">GList*              glade_widget_adaptor_get_children   (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container);</pre>
+<p>
+Lists the children of <em class="parameter"><code>container</code></em>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td>   A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>container</code></em>&#160;:</span></td>
+<td> The <span class="type">GObject</span> container
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> A <span class="type">GList</span> of children
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id391451"></a><h3>
+<a name="glade-widget-adaptor-has-child"></a>glade_widget_adaptor_has_child ()</h3>
+<a class="indexterm" name="id391464"></a><pre class="programlisting">gboolean            glade_widget_adaptor_has_child      (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *child);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td>   A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>container</code></em>&#160;:</span></td>
+<td> The <span class="type">GObject</span> container
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>child</code></em>&#160;:</span></td>
+<td>     The <span class="type">GObject</span> child
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> whether <em class="parameter"><code>child</code></em> is infact inside <em class="parameter"><code>container</code></em>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id391599"></a><h3>
+<a name="glade-widget-adaptor-child-set-property"></a>glade_widget_adaptor_child_set_property ()</h3>
+<a class="indexterm" name="id391612"></a><pre class="programlisting">void                glade_widget_adaptor_child_set_property
+                                                        (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *child,
+                                                         const gchar *property_name,
+                                                         const GValue *value);</pre>
+<p>
+Sets <em class="parameter"><code>child</code></em>'s packing property identified by <em class="parameter"><code>property_name</code></em> to <em class="parameter"><code>value</code></em>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td>       A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>container</code></em>&#160;:</span></td>
+<td>     The <span class="type">GObject</span> container
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>child</code></em>&#160;:</span></td>
+<td>         The <span class="type">GObject</span> child
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>property_name</code></em>&#160;:</span></td>
+<td> The id of the property
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>value</code></em>&#160;:</span></td>
+<td>         The <em class="parameter"><code>GValue</code></em>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id391791"></a><h3>
+<a name="glade-widget-adaptor-child-get-property"></a>glade_widget_adaptor_child_get_property ()</h3>
+<a class="indexterm" name="id391805"></a><pre class="programlisting">void                glade_widget_adaptor_child_get_property
+                                                        (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *child,
+                                                         const gchar *property_name,
+                                                         GValue *value);</pre>
+<p>
+Gets <em class="parameter"><code>child</code></em>'s packing property identified by <em class="parameter"><code>property_name</code></em>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td>       A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>container</code></em>&#160;:</span></td>
+<td>     The <span class="type">GObject</span> container
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>child</code></em>&#160;:</span></td>
+<td>         The <span class="type">GObject</span> child
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>property_name</code></em>&#160;:</span></td>
+<td> The id of the property
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>value</code></em>&#160;:</span></td>
+<td>         The <em class="parameter"><code>GValue</code></em>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id391978"></a><h3>
+<a name="glade-widget-adaptor-child-verify-property"></a>glade_widget_adaptor_child_verify_property ()</h3>
+<a class="indexterm" name="id391991"></a><pre class="programlisting">gboolean            glade_widget_adaptor_child_verify_property
+                                                        (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *child,
+                                                         const gchar *property_name,
+                                                         const GValue *value);</pre>
+<p>
+This delagate function is always called whenever setting any
+properties with the exception of load time, and copy/paste time
+(basicly the two places where we recreate a hierarchy that we
+already know "works") its basicly an optional backend provided
+boundry checker for properties.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td>       A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>container</code></em>&#160;:</span></td>
+<td>     The <span class="type">GObject</span> container
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>child</code></em>&#160;:</span></td>
+<td>         The <span class="type">GObject</span> child
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>property_name</code></em>&#160;:</span></td>
+<td> The id of the property
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>value</code></em>&#160;:</span></td>
+<td>         The <em class="parameter"><code>GValue</code></em>
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> whether or not its OK to set <em class="parameter"><code>value</code></em> on <em class="parameter"><code>object</code></em>, this function
+will silently return TRUE if the class did not provide a verify function.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id392181"></a><h3>
+<a name="glade-widget-adaptor-replace-child"></a>glade_widget_adaptor_replace_child ()</h3>
+<a class="indexterm" name="id392193"></a><pre class="programlisting">void                glade_widget_adaptor_replace_child  (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *old_obj,
+                                                         GObject *new_obj);</pre>
+<p>
+Replaces <em class="parameter"><code>old_obj</code></em> with <em class="parameter"><code>new_obj</code></em> in <em class="parameter"><code>container</code></em> while positioning
+<em class="parameter"><code>new_obj</code></em> where <em class="parameter"><code>old_obj</code></em> was and assigning it appropriate packing 
+property values.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td> A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>container</code></em>&#160;:</span></td>
+<td> The <span class="type">GObject</span> container
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>old_obj</code></em>&#160;:</span></td>
+<td> The old <span class="type">GObject</span> child
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>new_obj</code></em>&#160;:</span></td>
+<td> The new <span class="type">GObject</span> child
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id392365"></a><h3>
+<a name="glade-widget-adaptor-read-child"></a>glade_widget_adaptor_read_child ()</h3>
+<a class="indexterm" name="id392378"></a><pre class="programlisting">void                glade_widget_adaptor_read_child     (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         GladeXmlNode *node);</pre>
+<p>
+This function is called to update load a child <em class="parameter"><code>widget</code></em> 
+from <em class="parameter"><code>node</code></em> when loading xml files (will recurse into
+<a href="GladeWidget.html#glade-widget-read"><code class="function">glade_widget_read()</code></a>)</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td> A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>widget</code></em>&#160;:</span></td>
+<td> The <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>node</code></em>&#160;:</span></td>
+<td> The <span class="type">GladeXmlNode</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id392513"></a><h3>
+<a name="glade-widget-adaptor-read-widget"></a>glade_widget_adaptor_read_widget ()</h3>
+<a class="indexterm" name="id392526"></a><pre class="programlisting">void                glade_widget_adaptor_read_widget    (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         GladeXmlNode *node);</pre>
+<p>
+This function is called to update <em class="parameter"><code>widget</code></em> from <em class="parameter"><code>node</code></em> 
+when loading xml files.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td> A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>widget</code></em>&#160;:</span></td>
+<td> The <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>node</code></em>&#160;:</span></td>
+<td> The <span class="type">GladeXmlNode</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id392650"></a><h3>
+<a name="glade-widget-adaptor-write-child"></a>glade_widget_adaptor_write_child ()</h3>
+<a class="indexterm" name="id392663"></a><pre class="programlisting">void                glade_widget_adaptor_write_child    (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         GladeXmlContext *context,
+                                                         GladeXmlNode *node);</pre>
+<p>
+This function is called to write the child <em class="parameter"><code>widget</code></em> to <em class="parameter"><code>node</code></em> 
+when writing xml files (takes care of packing and recurses
+into <a href="GladeWidget.html#glade-widget-write"><code class="function">glade_widget_write()</code></a>)</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td> A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>widget</code></em>&#160;:</span></td>
+<td> The <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>context</code></em>&#160;:</span></td>
+<td> The <span class="type">GladeXmlContext</span>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>node</code></em>&#160;:</span></td>
+<td> The <span class="type">GladeXmlNode</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id392827"></a><h3>
+<a name="glade-widget-adaptor-write-widget"></a>glade_widget_adaptor_write_widget ()</h3>
+<a class="indexterm" name="id392840"></a><pre class="programlisting">void                glade_widget_adaptor_write_widget   (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         <a href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         GladeXmlContext *context,
+                                                         GladeXmlNode *node);</pre>
+<p>
+This function is called to write <em class="parameter"><code>widget</code></em> to <em class="parameter"><code>node</code></em> 
+when writing xml files.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td> A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>widget</code></em>&#160;:</span></td>
+<td> The <a href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>context</code></em>&#160;:</span></td>
+<td> The <span class="type">GladeXmlContext</span>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>node</code></em>&#160;:</span></td>
+<td> The <span class="type">GladeXmlNode</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id392993"></a><h3>
+<a name="glade-widget-adaptor-query"></a>glade_widget_adaptor_query ()</h3>
+<a class="indexterm" name="id393006"></a><pre class="programlisting">gboolean            glade_widget_adaptor_query          (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td> A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> whether the user needs to be queried for
+certain properties upon creation of this class.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id393071"></a><h3>
+<a name="glade-widget-adaptor-get-packing-default"></a>glade_widget_adaptor_get_packing_default ()</h3>
+<a class="indexterm" name="id393084"></a><pre class="programlisting">gchar*              glade_widget_adaptor_get_packing_default
+                                                        (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *child_adaptor,
+                                                         <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *container_adaptor,
+                                                         const gchar *id);</pre>
+<p>
+Gets the default value for <em class="parameter"><code>property_id</code></em> on a widget governed by
+<em class="parameter"><code>child_adaptor</code></em> when parented in a widget governed by <em class="parameter"><code>parent_adaptor</code></em></p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>child_adaptor</code></em>&#160;:</span></td>
+<td>  A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>container_adaptor</code></em>&#160;:</span></td>
+<td> The <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a> for the parent object
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>id</code></em>&#160;:</span></td>
+<td>    The string property identifier
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> a string representing the default value for <em class="parameter"><code>property_id</code></em>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id393224"></a><h3>
+<a name="glade-widget-adaptor-is-container"></a>glade_widget_adaptor_is_container ()</h3>
+<a class="indexterm" name="id393237"></a><pre class="programlisting">gboolean            glade_widget_adaptor_is_container   (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor);</pre>
+<p>
+Checks whether or not this adaptor has support
+to interface with child objects.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td> A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> whether or not <em class="parameter"><code>adaptor</code></em> is a container
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id393308"></a><h3>
+<a name="glade-widget-adaptor-action-add"></a>glade_widget_adaptor_action_add ()</h3>
+<a class="indexterm" name="id393321"></a><pre class="programlisting">gboolean            glade_widget_adaptor_action_add     (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         const gchar *action_path,
+                                                         const gchar *label,
+                                                         const gchar *stock,
+                                                         gboolean important);</pre>
+<p>
+Add an action to <em class="parameter"><code>adaptor</code></em>.
+If the action is present then it overrides label and stock</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td> A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>action_path</code></em>&#160;:</span></td>
+<td> The identifier of this action in the action tree
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>label</code></em>&#160;:</span></td>
+<td> A translated label to show in the UI for this action
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>stock</code></em>&#160;:</span></td>
+<td> If set, this stock item will be shown in the UI along side the label.
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>important</code></em>&#160;:</span></td>
+<td> if this action is important.
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> whether or not the action was added/updated.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id393478"></a><h3>
+<a name="glade-widget-adaptor-pack-action-add"></a>glade_widget_adaptor_pack_action_add ()</h3>
+<a class="indexterm" name="id393491"></a><pre class="programlisting">gboolean            glade_widget_adaptor_pack_action_add
+                                                        (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         const gchar *action_path,
+                                                         const gchar *label,
+                                                         const gchar *stock,
+                                                         gboolean important);</pre>
+<p>
+Add a packing action to <em class="parameter"><code>adaptor</code></em>.
+If the action is present then it overrides label and stock</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td> A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>action_path</code></em>&#160;:</span></td>
+<td> The identifier of this action in the action tree
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>label</code></em>&#160;:</span></td>
+<td> A translated label to show in the UI for this action
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>stock</code></em>&#160;:</span></td>
+<td> If set, this stock item will be shown in the UI along side the label.
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>important</code></em>&#160;:</span></td>
+<td> if this action is important.
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> whether or not the action was added/updated.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id393649"></a><h3>
+<a name="glade-widget-adaptor-action-remove"></a>glade_widget_adaptor_action_remove ()</h3>
+<a class="indexterm" name="id393662"></a><pre class="programlisting">gboolean            glade_widget_adaptor_action_remove  (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         const gchar *action_path);</pre>
+<p>
+Remove an <em class="parameter"><code>adaptor</code></em>'s action.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td> A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>action_path</code></em>&#160;:</span></td>
+<td> The identifier of this action in the action tree
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> whether or not the action was removed.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id393755"></a><h3>
+<a name="glade-widget-adaptor-pack-action-remove"></a>glade_widget_adaptor_pack_action_remove ()</h3>
+<a class="indexterm" name="id393768"></a><pre class="programlisting">gboolean            glade_widget_adaptor_pack_action_remove
+                                                        (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         const gchar *action_path);</pre>
+<p>
+Remove an <em class="parameter"><code>adaptor</code></em>'s packing action.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td> A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>action_path</code></em>&#160;:</span></td>
+<td> The identifier of this action in the action tree
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> whether or not the action was removed.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id393861"></a><h3>
+<a name="glade-widget-adaptor-pack-actions-new"></a>glade_widget_adaptor_pack_actions_new ()</h3>
+<a class="indexterm" name="id393874"></a><pre class="programlisting">GList*              glade_widget_adaptor_pack_actions_new
+                                                        (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor);</pre>
+<p>
+Create a list of packing actions.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td> A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> a new list of GladeWidgetAction.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id393939"></a><h3>
+<a name="glade-widget-adaptor-action-activate"></a>glade_widget_adaptor_action_activate ()</h3>
+<a class="indexterm" name="id393952"></a><pre class="programlisting">void                glade_widget_adaptor_action_activate
+                                                        (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         const gchar *action_path);</pre>
+<p>
+An adaptor function to be called on widget actions.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td>   A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>object</code></em>&#160;:</span></td>
+<td>    The <span class="type">GObject</span>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>action_path</code></em>&#160;:</span></td>
+<td> The action identifier in the action tree
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id394058"></a><h3>
+<a name="glade-widget-adaptor-child-action-activate"></a>glade_widget_adaptor_child_action_activate ()</h3>
+<a class="indexterm" name="id394071"></a><pre class="programlisting">void                glade_widget_adaptor_child_action_activate
+                                                        (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *object,
+                                                         const gchar *action_path);</pre>
+<p>
+An adaptor function to be called on widget actions.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td>   A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>object</code></em>&#160;:</span></td>
+<td>    The <span class="type">GObject</span>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>action_path</code></em>&#160;:</span></td>
+<td> The action identifier in the action tree
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id394184"></a><h3>
+<a name="glade-widget-adaptor-string-from-value"></a>glade_widget_adaptor_string_from_value ()</h3>
+<a class="indexterm" name="id394197"></a><pre class="programlisting">gchar*              glade_widget_adaptor_string_from_value
+                                                        (<a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         <a href="gladeui-GladePropertyClass.html#GladePropertyClass">GladePropertyClass</a> *klass,
+                                                         const GValue *value);</pre>
+<p>
+Looks up signal class <em class="parameter"><code>name</code></em> on <em class="parameter"><code>adaptor</code></em>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>adaptor</code></em>&#160;:</span></td>
+<td> A <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>name</code></em>&#160;:</span></td>
+<td> the name of the signal class.
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> a <span class="type">GladeSignalClass</span> or <code class="literal">NULL</code>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1" lang="en">
+<a name="id394322"></a><div class="refsect2" lang="en"><a name="id394323"></a></div>
+<hr>
+<div class="refsect2" lang="en"><a name="id394324"></a></div>
+</div>
+</div>
+</body>
+</html>
