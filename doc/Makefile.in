@@ -91,10 +91,8 @@ DATADIRNAME = @DATADIRNAME@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
 DISABLE_DEPRECATED = @DISABLE_DEPRECATED@
-DISTCHECK_CONFIGURE_FLAGS = @DISTCHECK_CONFIGURE_FLAGS@
 DLLTOOL = @DLLTOOL@
 DOC_USER_FORMATS = @DOC_USER_FORMATS@
-DSYMUTIL = @DSYMUTIL@
 ECHO = @ECHO@
 ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
@@ -177,10 +175,8 @@ MAKEINFO = @MAKEINFO@
 MKINSTALLDIRS = @MKINSTALLDIRS@
 MSGFMT = @MSGFMT@
 MSGFMT_OPTS = @MSGFMT_OPTS@
-MSGMERGE = @MSGMERGE@
 NATIVE_WIN32_FALSE = @NATIVE_WIN32_FALSE@
 NATIVE_WIN32_TRUE = @NATIVE_WIN32_TRUE@
-NMEDIT = @NMEDIT@
 OBJDUMP = @OBJDUMP@
 OBJEXT = @OBJEXT@
 OMF_DIR = @OMF_DIR@
@@ -262,7 +258,7 @@ target_os = @target_os@
 target_vendor = @target_vendor@
 
 # We require automake 1.6 at least.
-AUTOMAKE_OPTIONS = 1.9
+AUTOMAKE_OPTIONS = 1.6
 
 # This is a blank Makefile.am for using gtk-doc.
 # Copy this to your project's API docs directory and modify the variables to
@@ -319,12 +315,12 @@ IGNORE_HFILES = \
 	glade-id-allocator.h \
 	glade-catalog.h \
 	glade.h \
-	glade-xml-utils.h \
+	glade-design-layout.h \
 	glade-popup.h \
-	glade-devhelp.h \
 	glade-gtk.h \
 	glade-palette-expander.h \
 	glade-palette-item.h \
+	glade-named-icon-chooser-dialog.h \
 	glade-palette-box.h
 
 
@@ -338,8 +334,7 @@ content_files = \
 	version.xml \
 	catalogintro.sgml \
 	widgetclasses.sgml \
-	properties.sgml \
-	children.sgml
+	properties.sgml
 
 
 # SGML files where gtk-doc abbrevations (#GtkWidget) are expanded
@@ -348,8 +343,7 @@ content_files = \
 expand_content_files = \
 	catalogintro.sgml \
 	widgetclasses.sgml \
-	properties.sgml \
-	children.sgml
+	properties.sgml
 
 
 # CFLAGS and LDFLAGS for compiling gtkdoc-scangobj with your library.
@@ -365,10 +359,10 @@ GTKDOC_CFLAGS = \
 	`pkg-config --cflags gtk+-2.0`
 
 GTKDOC_LIBS = ${top_builddir}/gladeui/libgladeui-1.la
-@GTK_DOC_USE_LIBTOOL_FALSE@GTKDOC_CC = $(CC) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
-@GTK_DOC_USE_LIBTOOL_TRUE@GTKDOC_CC = $(LIBTOOL) --mode=compile $(CC) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
-@GTK_DOC_USE_LIBTOOL_FALSE@GTKDOC_LD = $(CC) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS)
-@GTK_DOC_USE_LIBTOOL_TRUE@GTKDOC_LD = $(LIBTOOL) --mode=link $(CC) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS)
+@GTK_DOC_USE_LIBTOOL_FALSE@GTKDOC_CC = $(CC) $(INCLUDES) $(AM_CFLAGS) $(CFLAGS)
+@GTK_DOC_USE_LIBTOOL_TRUE@GTKDOC_CC = $(LIBTOOL) --mode=compile $(CC) $(INCLUDES) $(AM_CFLAGS) $(CFLAGS)
+@GTK_DOC_USE_LIBTOOL_FALSE@GTKDOC_LD = $(CC) $(AM_CFLAGS) $(CFLAGS) $(LDFLAGS)
+@GTK_DOC_USE_LIBTOOL_TRUE@GTKDOC_LD = $(LIBTOOL) --mode=link $(CC) $(AM_CFLAGS) $(CFLAGS) $(LDFLAGS)
 
 # We set GPATH here; this gives us semantics for GNU make
 # which are more like other make's VPATH, when it comes to
@@ -385,8 +379,8 @@ TARGET_DIR = $(HTML_DIR)/$(DOC_MODULE)
 EXTRA_DIST = $(content_files) $(HTML_IMAGES) $(DOC_MAIN_SGML_FILE) \
 	$(DOC_MODULE)-sections.txt $(DOC_MODULE)-overrides.txt \
 	version.xml.in
-DOC_STAMPS = scan-build.stamp tmpl-build.stamp sgml-build.stamp html-build.stamp \
-	   $(srcdir)/tmpl.stamp $(srcdir)/sgml.stamp $(srcdir)/html.stamp
+DOC_STAMPS = scan-build.stamp sgml-build.stamp html-build.stamp \
+	   $(srcdir)/sgml.stamp $(srcdir)/html.stamp
 
 SCANOBJ_FILES = \
 	$(DOC_MODULE).args 	 \
@@ -401,10 +395,12 @@ REPORT_FILES = \
 	$(DOC_MODULE)-unused.txt
 
 CLEANFILES = $(SCANOBJ_FILES) $(REPORT_FILES) $(DOC_STAMPS)
-GTK_HOME = http://developer.gnome.org/doc/API/2.0/gtk
-GDK_HOME = http://developer.gnome.org/doc/API/2.0/gdk
-GOBJECT_HOME = http://developer.gnome.org/doc/API/2.0/gobject
-GLIB_HOME = http://developer.gnome.org/doc/API/2.0/glib
+
+# XXX Seems this is no longer working with gtkdoc 1.9 :(
+GTK_HOME = http://library.gnome.org/devel/gtk/stable
+GDK_HOME = http://library.gnome.org/devel/gdk/stable
+GOBJECT_HOME = http://library.gnome.org/devel/gobject/stable
+GLIB_HOME = http://library.gnome.org/devel/glib/stable
 all: all-am
 
 .SUFFIXES:
@@ -602,23 +598,9 @@ scan-build.stamp: $(HFILE_GLOB) $(CFILE_GLOB)
 $(DOC_MODULE)-decl.txt $(SCANOBJ_FILES) $(DOC_MODULE)-sections.txt $(DOC_MODULE)-overrides.txt: scan-build.stamp
 	@true
 
-#### templates ####
-
-tmpl-build.stamp: $(DOC_MODULE)-decl.txt $(SCANOBJ_FILES) $(DOC_MODULE)-sections.txt $(DOC_MODULE)-overrides.txt
-	@echo 'gtk-doc: Rebuilding template files'
-	@-chmod -R u+w $(srcdir)
-	cd $(srcdir) && gtkdoc-mktmpl --module=$(DOC_MODULE) $(MKTMPL_OPTIONS)
-	touch tmpl-build.stamp
-
-tmpl.stamp: tmpl-build.stamp
-	@true
-
-tmpl/*.sgml:
-	@true
-
 #### xml ####
 
-sgml-build.stamp: tmpl.stamp $(HFILE_GLOB) $(CFILE_GLOB) $(DOC_MODULE)-sections.txt $(srcdir)/tmpl/*.sgml $(expand_content_files)
+sgml-build.stamp: $(DOC_MODULE)-decl.txt $(SCANOBJ_FILES) $(DOC_MODULE)-sections.txt $(DOC_MODULE)-overrides.txt $(expand_content_files)
 	@echo 'gtk-doc: Building XML'
 	@-chmod -R u+w $(srcdir)
 	cd $(srcdir) && \
@@ -653,10 +635,10 @@ distclean-local:
 	         $(DOC_MODULE)-decl-list.txt $(DOC_MODULE)-decl.txt
 
 maintainer-clean-local: clean
-	cd $(srcdir) && rm -rf xml html
+	cd $(srcdir) && rm -rf html
 
 install-data-local:
-	-installfiles=`echo $(srcdir)/html/*`; \
+	installfiles=`echo $(srcdir)/html/*`; \
 	if test "$$installfiles" = '$(srcdir)/html/*'; \
 	then echo '-- Nothing to install' ; \
 	else \
@@ -667,8 +649,9 @@ install-data-local:
 	  done; \
 	  echo '-- Installing $(srcdir)/html/index.sgml' ; \
 	  $(INSTALL_DATA) $(srcdir)/html/index.sgml $(DESTDIR)$(TARGET_DIR) || :; \
-	  which gtkdoc-rebase >/dev/null && \
+	  if test `which gtkdoc-rebase` != ""; then \
 	    gtkdoc-rebase --relative --dest-dir=$(DESTDIR) --html-dir=$(DESTDIR)$(TARGET_DIR) ; \
+	  fi \
 	fi
 
 uninstall-local:
@@ -683,14 +666,10 @@ uninstall-local:
 @ENABLE_GTK_DOC_FALSE@	@false
 
 dist-hook: dist-check-gtkdoc dist-hook-local
-	mkdir $(distdir)/tmpl
-	mkdir $(distdir)/xml
 	mkdir $(distdir)/html
-	-cp $(srcdir)/tmpl/*.sgml $(distdir)/tmpl
-	-cp $(srcdir)/xml/*.xml $(distdir)/xml
 	cp $(srcdir)/html/* $(distdir)/html
-	-cp $(srcdir)/$(DOC_MODULE).types $(distdir)/
-	-cp $(srcdir)/$(DOC_MODULE)-sections.txt $(distdir)/
+	cp $(srcdir)/$(DOC_MODULE).types $(distdir)/
+	cp $(srcdir)/$(DOC_MODULE)-sections.txt $(distdir)/
 	cd $(distdir) && rm -f $(DISTCLEANFILES)
 	-gtkdoc-rebase --online --relative --html-dir=$(distdir)/html
 

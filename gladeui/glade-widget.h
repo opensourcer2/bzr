@@ -97,7 +97,6 @@ struct _GladeWidget
 	
 	/* Construct parameters: */
 	GladeWidget       *construct_template;
-	GladeWidgetInfo   *construct_info;
 	GladeCreateReason  construct_reason;
 	gchar             *construct_internal;
 };
@@ -135,13 +134,7 @@ void                    glade_widget_add_child              (GladeWidget      *p
 
 void                    glade_widget_remove_child           (GladeWidget      *parent,
 							     GladeWidget      *child);
- 
-GladeWidgetInfo        *glade_widget_write                  (GladeWidget      *widget,
-							     GladeInterface   *interface);
- 
-GladeWidget            *glade_widget_read                   (GladeProject     *project,
-							     GladeWidgetInfo  *info);
- 
+
 void                    glade_widget_replace                (GladeWidget      *parent,
 							     GObject          *old_object,
 							     GObject          *new_object);
@@ -150,6 +143,9 @@ void                    glade_widget_rebuild                (GladeWidget      *g
  
 GladeWidget            *glade_widget_dup                    (GladeWidget      *template_widget,
 							     gboolean          exact);
+
+GList                  *glade_widget_get_signal_list        (GladeWidget      *widget);
+
 void                    glade_widget_copy_signals           (GladeWidget      *widget,
 							     GladeWidget      *template_widget);
 void                    glade_widget_copy_properties        (GladeWidget      *widget,
@@ -219,6 +215,43 @@ void                    glade_widget_remove_pack_action     (GladeWidget *widget
 GtkWidget *             glade_widget_create_action_menu     (GladeWidget *widget,
 							     const gchar *action_path);
 
+void                    glade_widget_write                  (GladeWidget     *widget,
+							     GladeXmlContext *context,
+							     GladeXmlNode    *node);
+
+void                    glade_widget_write_child            (GladeWidget     *widget,
+							     GladeXmlContext *context,
+							     GladeXmlNode    *node);
+
+void                    glade_widget_write_placeholder      (GladeWidget     *parent,
+							     GObject         *object,
+							     GladeXmlContext *context,
+							     GladeXmlNode    *node);
+	
+GladeWidget            *glade_widget_read                   (GladeProject     *project,
+							     GladeWidget      *parent,
+							     GladeXmlNode     *node,
+							     const gchar      *internal);
+
+void                    glade_widget_read_child             (GladeWidget      *widget,
+							     GladeXmlNode     *node);
+
+
+void                    glade_widget_write_special_child_prop (GladeWidget     *parent, 
+							       GObject         *object,
+							       GladeXmlContext *context,
+							       GladeXmlNode    *node);
+
+void                  glade_widget_set_child_type_from_node (GladeWidget         *parent,
+							     GObject             *child,
+							     GladeXmlNode        *node);
+
+GladeEditorProperty    *glade_widget_create_editor_property (GladeWidget      *widget,
+							     const gchar      *property,
+							     gboolean          packing,
+							     gboolean          use_command);
+
+gchar                  *glade_widget_generate_path_name     (GladeWidget      *widget);
 /*******************************************************************************
                       Project, object property references
  *******************************************************************************/

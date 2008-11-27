@@ -186,8 +186,9 @@ glade_utils_get_pspec_from_funcname (const gchar *funcname)
 /**
  * glade_util_ui_message:
  * @parent: a #GtkWindow cast as a #GtkWidget
- * @format: a printf style format string
  * @type:   a #GladeUIMessageType
+ * @widget: a #GtkWidget to append to the dialog vbox
+ * @format: a printf style format string
  * @...:    args for the format.
  *
  * Creates a new warning dialog window as a child of @parent containing
@@ -198,9 +199,10 @@ glade_utils_get_pspec_from_funcname (const gchar *funcname)
  *          selected "OK", True if the @type was GLADE_UI_YES_OR_NO and
  *          the user selected "YES"; False otherwise.
  */
-gboolean
+gint
 glade_util_ui_message (GtkWidget           *parent, 
 		       GladeUIMessageType   type,
+		       GtkWidget           *widget,
 		       const gchar         *format,
 		       ...)
 {
@@ -253,6 +255,12 @@ glade_util_ui_message (GtkWidget           *parent,
 					 message_type,
 					 buttons_type,
 					 string);
+
+	gtk_window_set_resizable (GTK_WINDOW (dialog), TRUE);
+
+	if (widget)
+		gtk_box_pack_end (GTK_BOX (GTK_DIALOG (dialog)->vbox), 
+				  widget, TRUE, TRUE, 2);
 
 	response = gtk_dialog_run (GTK_DIALOG (dialog));
 
@@ -484,18 +492,85 @@ glade_util_hide_window (GtkWindow *window)
 	gtk_window_move(window, x, y);
 }
 
+
+static void
+format_libglade_button_clicked (GtkWidget *widget,
+				GladeProject *project)
+{
+	glade_project_set_format (project, GLADE_PROJECT_FORMAT_LIBGLADE);
+}
+
+static void
+format_builder_button_clicked (GtkWidget *widget,
+			       GladeProject *project)
+{
+	glade_project_set_format (project, GLADE_PROJECT_FORMAT_GTKBUILDER);
+}
+
+static void
+add_format_options (GtkDialog    *dialog,
+		    GladeProject *project)
+{
+	GtkWidget *vbox, *frame;
+	GtkWidget *glade_radio, *builder_radio;
+	GtkWidget *label, *alignment;
+	gchar     *string = g_strdup_printf ("<b>%s</b>", _("File format"));
+
+	frame = gtk_frame_new (NULL);
+	vbox = gtk_vbox_new (FALSE, 0);
+	alignment = gtk_alignment_new (0.5F, 0.5F, 1.0F, 1.0F);
+
+	gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 2, 0, 12, 0);
+
+	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_NONE);
+
+	label = gtk_label_new (string);
+	g_free (string);
+	gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
+
+	glade_radio = gtk_radio_button_new_with_label (NULL, "Libglade");
+	builder_radio = gtk_radio_button_new_with_label_from_widget
+		(GTK_RADIO_BUTTON (glade_radio), "GtkBuilder");
+
+	if (glade_project_get_format (project) == GLADE_PROJECT_FORMAT_GTKBUILDER)
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (builder_radio), TRUE);
+	else
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (glade_radio), TRUE);
+
+	g_signal_connect (G_OBJECT (glade_radio), "clicked",
+			  G_CALLBACK (format_libglade_button_clicked), project);
+
+	g_signal_connect (G_OBJECT (builder_radio), "clicked",
+			  G_CALLBACK (format_builder_button_clicked), project);
+
+	gtk_box_pack_start (GTK_BOX (vbox), builder_radio, TRUE, TRUE, 2);
+	gtk_box_pack_start (GTK_BOX (vbox), glade_radio, TRUE, TRUE, 2);
+
+	gtk_frame_set_label_widget (GTK_FRAME (frame), label);
+	gtk_container_add (GTK_CONTAINER (alignment), vbox);
+	gtk_container_add (GTK_CONTAINER (frame), alignment);
+
+	gtk_widget_show_all (frame);
+	
+	gtk_box_pack_end (GTK_BOX (dialog->vbox), frame, FALSE, TRUE, 2);
+}
+
+
 /**
  * glade_util_file_dialog_new:
  * @title: dialog title
- * @parent: the parent #GtkWindow for the dialog
+ * @project: a #GladeProject used when saving
+ * @parent: a parent #GtkWindow for the dialog
  * @action: a #GladeUtilFileDialogType to say if the dialog will open or save
  *
  * Returns: a "glade file" file chooser dialog. The caller is responsible 
  *          for showing the dialog
  */
 GtkWidget *
-glade_util_file_dialog_new (const gchar *title, GtkWindow *parent, 
-			     GladeUtilFileDialogType action)
+glade_util_file_dialog_new (const gchar             *title, 
+			    GladeProject            *project,
+			    GtkWindow               *parent, 
+			    GladeUtilFileDialogType  action)
 {
 	GtkWidget *file_dialog;
 	GtkFileFilter *file_filter;
@@ -503,6 +578,9 @@ glade_util_file_dialog_new (const gchar *title, GtkWindow *parent,
 	g_return_val_if_fail ((action == GLADE_FILE_DIALOG_ACTION_OPEN ||
 			       action == GLADE_FILE_DIALOG_ACTION_SAVE), NULL);
 	
+	g_return_val_if_fail ((action != GLADE_FILE_DIALOG_ACTION_SAVE ||
+			       GLADE_IS_PROJECT (project)), NULL);
+
 	file_dialog = gtk_file_chooser_dialog_new (title, parent, action,
 						   GTK_STOCK_CANCEL,
 						   GTK_RESPONSE_CANCEL,
@@ -510,6 +588,10 @@ glade_util_file_dialog_new (const gchar *title, GtkWindow *parent,
 						   GTK_STOCK_OPEN : GTK_STOCK_SAVE,
 						   GTK_RESPONSE_OK,
 						   NULL);
+
+
+	if (action == GLADE_FILE_DIALOG_ACTION_SAVE)
+		add_format_options (GTK_DIALOG (file_dialog), project);
 	
 	file_filter = gtk_file_filter_new ();
 	gtk_file_filter_add_pattern (file_filter, "*");
@@ -518,7 +600,18 @@ glade_util_file_dialog_new (const gchar *title, GtkWindow *parent,
 
 	file_filter = gtk_file_filter_new ();
 	gtk_file_filter_add_pattern (file_filter, "*.glade");
-	gtk_file_filter_set_name (file_filter, _("Glade Files"));
+	gtk_file_filter_set_name (file_filter, _("Libglade Files"));
+	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (file_dialog), file_filter);
+
+	file_filter = gtk_file_filter_new ();
+	gtk_file_filter_add_pattern (file_filter, "*.ui");
+	gtk_file_filter_set_name (file_filter, _("GtkBuilder Files"));
+	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (file_dialog), file_filter);
+
+	file_filter = gtk_file_filter_new ();
+	gtk_file_filter_add_pattern (file_filter, "*.ui");
+	gtk_file_filter_add_pattern (file_filter, "*.glade");
+	gtk_file_filter_set_name (file_filter, _("All Glade Files"));
 	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (file_dialog), file_filter);
 
 	gtk_file_chooser_set_filter (GTK_FILE_CHOOSER (file_dialog), file_filter);
@@ -569,15 +662,6 @@ glade_util_read_prop_name (const gchar *str)
 
 	glade_util_replace (id, '_', '-');
 
-	if (strstr (id, "::"))
-	{
-		/* Extract the second half of "AtkObject::accessible_name"
-		 */
-		gchar **split = g_strsplit (id, "::", 0);
-		g_free (id);
-		id = g_strdup (split[1]);
-		g_strfreev (split);
-	}
 	return id;
 }
 
@@ -948,7 +1032,7 @@ glade_util_container_get_all_children (GtkContainer *container)
  * glade_util_count_placeholders:
  * @parent: a #GladeWidget
  *
- * Returns the amount of #GladePlaceholders parented by @parent
+ * Returns: the amount of #GladePlaceholders parented by @parent
  */
 gint
 glade_util_count_placeholders (GladeWidget *parent)
@@ -1232,7 +1316,7 @@ glade_util_copy_file (const gchar  *src_path,
 
 	if (g_file_test (dest_path, G_FILE_TEST_IS_REGULAR) != FALSE)
 		if (glade_util_ui_message
-		    (glade_app_get_window(), GLADE_UI_YES_OR_NO,
+		    (glade_app_get_window(), GLADE_UI_YES_OR_NO, NULL,
 		     _("%s exists.\nDo you want to replace it?"), dest_path) == FALSE)
 		    return FALSE;
 
@@ -1260,7 +1344,7 @@ glade_util_copy_file (const gchar  *src_path,
 				if (write_status == G_IO_STATUS_ERROR)
 				{
 					glade_util_ui_message (glade_app_get_window(),
-							       GLADE_UI_ERROR,
+							       GLADE_UI_ERROR, NULL,
 							       _("Error writing to %s: %s"),
 							       dest_path, error->message);
 					error = (g_error_free (error), NULL);
@@ -1274,7 +1358,7 @@ glade_util_copy_file (const gchar  *src_path,
 			if (read_status == G_IO_STATUS_ERROR)
 			{
 				glade_util_ui_message (glade_app_get_window(),
-						       GLADE_UI_ERROR,
+						       GLADE_UI_ERROR, NULL,
 						       _("Error reading %s: %s"),
 						       src_path, error->message);
 				error = (g_error_free (error), NULL);
@@ -1289,7 +1373,7 @@ glade_util_copy_file (const gchar  *src_path,
 			{
 				glade_util_ui_message
 					(glade_app_get_window(),
-					 GLADE_UI_ERROR,
+					 GLADE_UI_ERROR, NULL,
 					 _("Error shutting down I/O channel %s: %s"),
 						       dest_path, error->message);
 				error = (g_error_free (error), NULL);
@@ -1299,7 +1383,7 @@ glade_util_copy_file (const gchar  *src_path,
 		else
 		{
 			glade_util_ui_message (glade_app_get_window(),
-					       GLADE_UI_ERROR,
+					       GLADE_UI_ERROR, NULL,
 					       _("Failed to open %s for writing: %s"), 
 					       dest_path, error->message);
 			error = (g_error_free (error), NULL);
@@ -1310,7 +1394,7 @@ glade_util_copy_file (const gchar  *src_path,
 		if (g_io_channel_shutdown (src, TRUE, &error) != G_IO_STATUS_NORMAL)
 		{
 			glade_util_ui_message (glade_app_get_window(),
-					       GLADE_UI_ERROR,
+					       GLADE_UI_ERROR, NULL,
 					       _("Error shutting down io channel %s: %s"),
 					       src_path, error->message);
 			success = FALSE;
@@ -1319,7 +1403,7 @@ glade_util_copy_file (const gchar  *src_path,
 	else 
 	{
 		glade_util_ui_message (glade_app_get_window(),
-				       GLADE_UI_ERROR,
+				       GLADE_UI_ERROR, NULL,
 				       _("Failed to open %s for reading: %s"), 
 				       src_path, error->message);
 		error = (g_error_free (error), NULL);
@@ -1821,3 +1905,4 @@ glade_util_get_file_mtime (const gchar *filename, GError **error)
 		return info.st_mtime;
 	}
 }
+

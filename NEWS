@@ -1,27 +1,50 @@
 ===========
-Glade 3.4.5
+Glade 3.5.2
 ===========
-	- Fixed annoying text editing bug (527896).
+	- oops, was parsing booleans as doubles, fixed bugs with 
+	  builder-unsupported and deprecated.
 
 ===========
-Glade 3.4.4
+Glade 3.5.1
 ===========
-	- Now first toplevel in project automatically shows up in
-	  the workspace
-	- Project no longer allows duplicate widget names
-	- Fixed bugs 528511, and 528552.
+	- Added versioning support, you can always chose the target version of
+	  your project starting with gtk+ 2.8 - a project preferences dialog has
+	  been added where you can switch your format, switch your target version
+	  and test for incompatabilities. incompatability error dialogs are also
+	  launched on save as. Target versions are saved to the glade file; 
+	  TODO: patch GtkBuilder to test the required gtk+ version from
+	  <requires lib="gtk+" version="2.8"> and at least warn, also let
+	  third party widget developers test thier own versions using builder
+	  (all new catalog tags and properties are also documented).
+
+===========
+Glade 3.5.0
+===========
+	- Resurrected GtkScaleButton and GtkVolumeButton
+	- We finally have Vincent Geddes's icon choser dialog 
+	  (was skipped before because of string changes)
+	- Not allowed to have duplicate widget names anymore (bug 442860)
+	- Now the first widget in a project shows up automatically
+	  when opening the project.
+	- Old parser was trashed and rewritten from the ground up.
+	- New plugin support for read_widget() and write_widget(), also
+	  create_eprop() which allows the plugin to create widgets to
+	  edit properties in the editor (accelerators are edited from
+	  the plugin now for instance).
+	- Dual file format support available, its a beginning, you dont
+	  get any of the GObjects that GtkBuilder supports but all widgets
+	  you were formerly using with glade can now be loaded/saved in 
+	  builder format.
+	- Api reference docs for embedders and widget authors ressurected
+	  after 2 years, concerning integrating widgets, the docs are
+	  practically rewritten.
 
 New and updated translations
 ============================
+	- Priit Laes (et)
 	- Laurent Dhima (sq)
 	- Baris Cicek (tr)
 	- Alexander Shopov (bg)
-	- Kenneth Nielsen (da)
-	- Jorge Gonzalez (es)
-	- Philip Withnall (en_GB)
-	- Ani Peter (ml)
-	- Leonardo Ferreira Fontenelle (pt_BR)
-	- Rajesh Ranjan (hi)
 
 ===========
 Glade 3.4.3
