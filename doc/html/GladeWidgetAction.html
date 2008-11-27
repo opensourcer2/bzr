@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>GladeWidgetAction</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.72.0">
+<link rel="start" href="index.html" title="Glade User Interface Designer Reference Manual">
+<link rel="up" href="core.html" title="Part&#160;II.&#160;Glade Core">
+<link rel="prev" href="gladeui-GladePropertyClass.html" title="GladePropertyClass">
+<link rel="next" href="GladeCommand.html" title="GladeCommand">
+<meta name="generator" content="GTK-Doc V1.9 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="part" href="catalog.html" title="Part&#160;I.&#160;Adding your custom widgets">
+<link rel="part" href="core.html" title="Part&#160;II.&#160;Glade Core">
+<link rel="part" href="dockables.html" title="Part&#160;III.&#160;Dockable Glade UI Widgets">
+<link rel="part" href="misc.html" title="Part&#160;IV.&#160;Miscellaneous utilities">
+<link rel="index" href="ix01.html" title="Index">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="gladeui-GladePropertyClass.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="core.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Glade User Interface Designer Reference Manual</th>
+<td><a accesskey="n" href="GladeCommand.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#id409710" class="shortcut">Top</a>
+                  &#160;|&#160;
+                  <a href="#id410256" class="shortcut">Description</a>
+                  &#160;|&#160;
+                  <a href="#id410183" class="shortcut">Object Hierarchy</a>
+                  &#160;|&#160;
+                  <a href="#id410207" class="shortcut">Properties</a></nobr></td></tr>
+</table>
+<div class="refentry" lang="en">
+<a name="GladeWidgetAction"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2>
+<a name="id409710"></a><span class="refentrytitle">GladeWidgetAction</span>
+</h2>
+<p>GladeWidgetAction &#8212; Context menu and toolbar actions.</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<h2>Synopsis</h2>
+<pre class="synopsis">
+
+
+
+                    <a href="GladeWidgetAction.html#GWActionClass">GWActionClass</a>;
+                    <a href="GladeWidgetAction.html#GladeWidgetAction-struct">GladeWidgetAction</a>;
+void                <a href="GladeWidgetAction.html#glade-widget-action-class-free">glade_widget_action_class_free</a>      (<a href="GladeWidgetAction.html#GWActionClass">GWActionClass</a> *action);
+<a href="GladeWidgetAction.html#GWActionClass">GWActionClass</a>*      <a href="GladeWidgetAction.html#glade-widget-action-class-clone">glade_widget_action_class_clone</a>     (<a href="GladeWidgetAction.html#GWActionClass">GWActionClass</a> *action);
+gboolean            <a href="GladeWidgetAction.html#glade-widget-action-remove">glade_widget_action_remove</a>          (<a href="GladeWidgetAction.html" title="GladeWidgetAction">GladeWidgetAction</a> *action,
+                                                         <a href="GladeWidgetAction.html" title="GladeWidgetAction">GladeWidgetAction</a> *child);
+void                <a href="GladeWidgetAction.html#glade-widget-action-set-sensitive">glade_widget_action_set_sensitive</a>   (<a href="GladeWidgetAction.html" title="GladeWidgetAction">GladeWidgetAction</a> *action,
+                                                         gboolean sensitive);
+
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id410183"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+
+  GObject
+   +----GladeWidgetAction
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id410207"></a><h2>Properties</h2>
+<pre class="synopsis">
+
+  "<a href="GladeWidgetAction.html#GladeWidgetAction--class">class</a>"                    gpointer              : Write / Construct Only
+  "<a href="GladeWidgetAction.html#GladeWidgetAction--sensitive">sensitive</a>"                gboolean              : Read / Write
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id410256"></a><h2>Description</h2>
+<p>
+Use <a href="GladeWidgetAction.html" title="GladeWidgetAction"><span class="type">GladeWidgetAction</span></a> to create custom routines to operate
+on widgets you add to glade, when running <a href="gladeui-GladeWidgetAdaptor.html#GladeActionActivateFunc"><span class="type">GladeActionActivateFunc</span></a> functions
+you should make sure to use <a href="GladeCommand.html" title="GladeCommand"><span class="type">GladeCommand</span></a>.</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="id410295"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="id410305"></a><h3>
+<a name="GWActionClass"></a>GWActionClass</h3>
+<a class="indexterm" name="id410318"></a><pre class="programlisting">typedef struct {
+	gchar    *id;           /* The identifier of this action in the action tree */
+	gchar    *path;		/* Full action path  */
+	gchar    *label;        /* A translated label to show in the UI for this action */
+	gchar    *stock;        /* If set, this stock item will be shown in the UI along side
+				 * the label */
+	gboolean important;	/* If this action is important */
+
+	GList    *actions;      /* Recursive list of child actions */
+} GWActionClass;
+</pre>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id410334"></a><h3>
+<a name="GladeWidgetAction-struct"></a>GladeWidgetAction</h3>
+<a class="indexterm" name="id410347"></a><pre class="programlisting">typedef struct _GladeWidgetAction GladeWidgetAction;</pre>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id410359"></a><h3>
+<a name="glade-widget-action-class-free"></a>glade_widget_action_class_free ()</h3>
+<a class="indexterm" name="id410372"></a><pre class="programlisting">void                glade_widget_action_class_free      (<a href="GladeWidgetAction.html#GWActionClass">GWActionClass</a> *action);</pre>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id410397"></a><h3>
+<a name="glade-widget-action-class-clone"></a>glade_widget_action_class_clone ()</h3>
+<a class="indexterm" name="id410410"></a><pre class="programlisting"><a href="GladeWidgetAction.html#GWActionClass">GWActionClass</a>*      glade_widget_action_class_clone     (<a href="GladeWidgetAction.html#GWActionClass">GWActionClass</a> *action);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>action</code></em>&#160;:</span></td>
+<td> a GWActionClass
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> a newlly allocated copy of <em class="parameter"><code>action</code></em>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id410473"></a><h3>
+<a name="glade-widget-action-remove"></a>glade_widget_action_remove ()</h3>
+<a class="indexterm" name="id410486"></a><pre class="programlisting">gboolean            glade_widget_action_remove          (<a href="GladeWidgetAction.html" title="GladeWidgetAction">GladeWidgetAction</a> *action,
+                                                         <a href="GladeWidgetAction.html" title="GladeWidgetAction">GladeWidgetAction</a> *child);</pre>
+<p>
+Remove an action.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>action</code></em>&#160;:</span></td>
+<td> a <a href="GladeWidgetAction.html" title="GladeWidgetAction"><span class="type">GladeWidgetAction</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>child</code></em>&#160;:</span></td>
+<td> a <a href="GladeWidgetAction.html" title="GladeWidgetAction"><span class="type">GladeWidgetAction</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> whether or not <em class="parameter"><code>child</code></em> was removed from <em class="parameter"><code>action</code></em>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id410591"></a><h3>
+<a name="glade-widget-action-set-sensitive"></a>glade_widget_action_set_sensitive ()</h3>
+<a class="indexterm" name="id410604"></a><pre class="programlisting">void                glade_widget_action_set_sensitive   (<a href="GladeWidgetAction.html" title="GladeWidgetAction">GladeWidgetAction</a> *action,
+                                                         gboolean sensitive);</pre>
+<p>
+Set whether or not this action is sensitive.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><span class="term"><em class="parameter"><code>action</code></em>&#160;:</span></td>
+<td> a <a href="GladeWidgetAction.html" title="GladeWidgetAction"><span class="type">GladeWidgetAction</span></a>
+</td>
+</tr>
+<tr>
+<td><span class="term"><em class="parameter"><code>sensitive</code></em>&#160;:</span></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1" lang="en">
+<a name="id410681"></a><h2>Property Details</h2>
+<div class="refsect2" lang="en">
+<a name="id410691"></a><h3>
+<a name="GladeWidgetAction--class"></a>The <code class="literal">"class"</code> property</h3>
+<a class="indexterm" name="id410707"></a><pre class="programlisting">  "class"                    gpointer              : Write / Construct Only</pre>
+<p>GladeWidgetActionClass structure pointer.</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id410729"></a><h3>
+<a name="GladeWidgetAction--sensitive"></a>The <code class="literal">"sensitive"</code> property</h3>
+<a class="indexterm" name="id410745"></a><pre class="programlisting">  "sensitive"                gboolean              : Read / Write</pre>
+<p>Whether or not this action is sensitive.</p>
+<p>Default value: TRUE</p>
+</div>
+</div>
+<div class="refsect1" lang="en">
+<a name="id410772"></a><div class="refsect2" lang="en"><a name="id410773"></a></div>
+<hr>
+<div class="refsect2" lang="en"><a name="id410774"></a></div>
+</div>
+</div>
+</body>
+</html>

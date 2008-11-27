@@ -205,7 +205,7 @@ glade_command_execute (GladeCommand *command)
  *
  * Undo the effects of @command
  *
- * Returns whether the command was successfully reversed
+ * Returns: whether the command was successfully reversed
  */
 gboolean
 glade_command_undo (GladeCommand *command)
@@ -364,8 +364,9 @@ glade_command_set_property_execute (GladeCommand *cmd)
 #if 0
 		{
 			gchar *str =
-				glade_property_class_make_string_from_gvalue 
-				(sdata->property->klass, &new_value);
+				glade_widget_adaptor_string_from_value
+				(GLADE_WIDGET_ADAPTOR (sdata->property->klass->handle),
+				 sdata->property->klass, &new_value);
 
 			g_print ("Setting %s property of %s to %s (sumode: %d)\n",
 				 sdata->property->klass->id,
@@ -550,8 +551,10 @@ glade_command_set_property_description (GladeCommandSetProperty *me)
 	else 
 	{
 		sdata = me->sdata->data;
-		value_name = glade_property_class_make_string_from_gvalue (sdata->property->klass, 
-									   sdata->new_value);
+		value_name = glade_widget_adaptor_string_from_value
+			(GLADE_WIDGET_ADAPTOR (sdata->property->klass->handle),
+			 sdata->property->klass, sdata->new_value);
+
 		if (!value_name || strlen (value_name) > MAX_UNDO_MENU_ITEM_VALUE_LEN
 		    || strchr (value_name, '_')) {
 			description = g_strdup_printf (_("Setting %s of %s"),
@@ -1023,7 +1026,7 @@ glade_command_remove (GList *widgets)
 		if (widget->internal)
 		{
 			glade_util_ui_message (glade_app_get_window(),	
-				       GLADE_UI_WARN,
+					       GLADE_UI_WARN, NULL,
 					       _("You cannot remove a widget internal to a composite widget."));
 			return;
 		}
@@ -1547,7 +1550,7 @@ glade_command_clipboard_add_remove_collapse (GladeCommand *this_cmd, GladeComman
  * Creates a new widget using @adaptor and put in place of the @placeholder
  * in the @project
  *
- * Returns the newly created widget.
+ * Returns: the newly created widget.
  */
 GladeWidget*
 glade_command_create(GladeWidgetAdaptor *adaptor, GladeWidget *parent, GladePlaceholder *placeholder, GladeProject *project)

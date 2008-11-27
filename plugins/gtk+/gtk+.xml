@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<glade-catalog name="gtk+" library="gladegtk" icon-prefix="gtk" domain="glade3" book="gtk">
+<glade-catalog version="2.12" targetable="2.10,2.8" name="gtk+" library="gladegtk" icon-prefix="gtk" domain="glade3" book="gtk">
   <glade-widget-classes>
 
     <glade-widget-class name="GtkWidget" default-width="100" default-height="60" title="Widget">
@@ -8,6 +8,16 @@
       <set-property-function>glade_gtk_widget_set_property</set-property-function>
       <get-property-function>glade_gtk_widget_get_property</get-property-function>
       <action-activate-function>glade_gtk_widget_action_activate</action-activate-function>
+      <read-widget-function>glade_gtk_widget_read_widget</read-widget-function>
+      <write-widget-function>glade_gtk_widget_write_widget</write-widget-function>
+      <create-editor-property-function>glade_gtk_widget_create_eprop</create-editor-property-function>
+      <string-from-value-function>glade_gtk_widget_string_from_value</string-from-value-function>
+
+      <signals>
+	<signal since="2.12" id="drag-failed"/>
+	<signal since="2.12" id="keynav-failed"/>
+	<signal since="2.12" id="query-tooltip"/>
+      </signals>
 
       <actions>
         <action stock="gtk-remove" id="remove_parent" name="Remove Parent"></action>
@@ -29,6 +39,8 @@
 
 
       <properties>
+	<property since="2.12" id="tooltip-text"/>
+	<property since="2.12" id="tooltip-markup"/>
 	<property ignore="True" id="visible" default="True" common="True"/>
 	<property optional-default="False" optional="True" id="width-request" default="0" common="True"/>
 	<property optional-default="False" optional="True" id="height-request" default="0" common="True"/>
@@ -81,95 +93,95 @@
 	<property ignore="True" id="has-default" common="True"/>
 
 	
-	<property ignore="True" id="accelerator" common="True" name="Accelerators">
+	<property save="False" ignore="True" id="accelerator" common="True" name="Accelerators">
 	  <spec>glade_standard_accel_spec</spec>
 	</property>
 
 	
-	<property translatable="True" ignore="True" id="accessible-name" atk-property="True" name="Accessible Name">
+	<property translatable="True" save="False" ignore="True" id="AtkObject::accessible-name" atk-property="True" name="Accessible Name">
 	  <tooltip>Object instance's name formatted for assistive technology access</tooltip>
 	  <spec>glade_standard_string_spec</spec>
 	  <visible-lines>2</visible-lines>
 	</property>
 
-	<property translatable="True" ignore="True" id="accessible-description" atk-property="True" name="Accessible Description">
+	<property translatable="True" save="False" ignore="True" id="AtkObject::accessible-description" atk-property="True" name="Accessible Description">
 	  <tooltip>Description of an object, formatted for assistive technology access</tooltip>
 	  <spec>glade_standard_string_spec</spec>
 	  <visible-lines>2</visible-lines>
 	</property>
 
 	
-	<property ignore="True" id="controlled-by" atk-property="True" name="Controlled By">
+	<property save="False" ignore="True" id="controlled-by" atk-property="True" name="Controlled By">
 	  <tooltip>Indicates an object controlled by one or more target objects</tooltip>
 	  <spec>glade_standard_objects_spec</spec>
 	</property>
 
-	<property ignore="True" id="controller-for" atk-property="True" name="Controller For">
+	<property save="False" ignore="True" id="controller-for" atk-property="True" name="Controller For">
 	  <tooltip>Indicates an object is a controller for one or more target objects</tooltip>
 	  <spec>glade_standard_objects_spec</spec>
 	</property>
 
-	<property ignore="True" id="labelled-by" atk-property="True" name="Labelled By">
+	<property save="False" ignore="True" id="labelled-by" atk-property="True" name="Labelled By">
 	  <tooltip>Indicates an object is labelled by one or more target objects</tooltip>
 	  <spec>glade_standard_objects_spec</spec>
 	</property>
 
-	<property ignore="True" id="label-for" atk-property="True" name="Label For">
+	<property save="False" ignore="True" id="label-for" atk-property="True" name="Label For">
 	  <tooltip>Indicates an object is a label for one or more target objects</tooltip>
 	  <spec>glade_standard_objects_spec</spec>
 	</property>
 
-	<property ignore="True" id="member-of" atk-property="True" name="Member Of">
+	<property save="False" ignore="True" id="member-of" atk-property="True" name="Member Of">
 	  <tooltip>Indicates an object is a member of a group of one or more target objects</tooltip>
 	  <spec>glade_standard_objects_spec</spec>
 	</property>
 
-	<property ignore="True" id="node-child-of" atk-property="True" name="Node Child Of">
+	<property save="False" ignore="True" id="node-child-of" atk-property="True" name="Node Child Of">
 	  <tooltip>Indicates an object is a cell in a treetable which is displayed because a cell in the same column is expanded and identifies that cell</tooltip>
 	  <spec>glade_standard_objects_spec</spec>
 	</property>
 
-	<property ignore="True" id="flows-to" atk-property="True" name="Flows To">
+	<property save="False" ignore="True" id="flows-to" atk-property="True" name="Flows To">
 	  <tooltip>Indicates that the object has content that flows logically to another AtkObject in a sequential way, (for instance text-flow)</tooltip>
 	  <spec>glade_standard_objects_spec</spec>
 	</property>
 
-	<property ignore="True" id="flows-from" atk-property="True" name="Flows From">
+	<property save="False" ignore="True" id="flows-from" atk-property="True" name="Flows From">
 	  <tooltip>Indicates that the object has content that flows logically from another AtkObject in a sequential way, (for instance text-flow)</tooltip>
 	  <spec>glade_standard_objects_spec</spec>
 	</property>
 
-	<property ignore="True" id="subwindow-of" atk-property="True" name="Subwindow Of">
+	<property save="False" ignore="True" id="subwindow-of" atk-property="True" name="Subwindow Of">
 	  <tooltip>Indicates a subwindow attached to a component but otherwise has no connection in the UI hierarchy to that component</tooltip>
 	  <spec>glade_standard_objects_spec</spec>
 	</property>
 
-	<property ignore="True" id="embeds" atk-property="True" name="Embeds">
+	<property save="False" ignore="True" id="embeds" atk-property="True" name="Embeds">
 	  <tooltip>Indicates that the object visually embeds another object's content, i.e. this object's content flows around another's content</tooltip>
 	  <spec>glade_standard_objects_spec</spec>
 	</property>
 
-	<property ignore="True" id="embedded-by" atk-property="True" name="Embedded By">
+	<property save="False" ignore="True" id="embedded-by" atk-property="True" name="Embedded By">
 	  <tooltip>Inverse of 'Embeds', indicates that this object's content is visually embedded in another object</tooltip>
 	  <spec>glade_standard_objects_spec</spec>
 	</property>
 
-	<property ignore="True" id="popup-for" atk-property="True" name="Popup For">
+	<property save="False" ignore="True" id="popup-for" atk-property="True" name="Popup For">
 	  <tooltip>Indicates that an object is a popup for another object</tooltip>
 	  <spec>glade_standard_objects_spec</spec>
 	</property>
 
-	<property ignore="True" id="parent-window-of" atk-property="True" name="Parent Window Of">
+	<property save="False" ignore="True" id="parent-window-of" atk-property="True" name="Parent Window Of">
 	  <tooltip>Indicates that an object is a parent window of another object</tooltip>
 	  <spec>glade_standard_objects_spec</spec>
 	</property>
 
-	<property ignore="True" id="described-by" atk-property="True" name="Described By">
+	<property save="False" ignore="True" id="described-by" atk-property="True" name="Described By">
 	  <tooltip>Indicates that another object provides descriptive information about this object; more verbose than 'Labelled By'</tooltip>
 	  <spec>glade_standard_objects_spec</spec>
 	</property>
 
-	<property ignore="True" id="description-for" atk-property="True" name="Description For">
+	<property save="False" ignore="True" id="description-for" atk-property="True" name="Description For">
 	  <tooltip>Indicates that an object provides descriptive information about another object; more verbose than 'Label For'</tooltip>
 	  <spec>glade_standard_objects_spec</spec>
 	</property>
@@ -243,7 +255,12 @@
       <post-create-function>glade_gtk_window_post_create</post-create-function>
 
       <properties> 
+	<property since="2.12" id="opacity"/>
+	<property since="2.12" id="startup-id"/>
+	<property since="2.10" id="deletable"/>
+	<property since="2.10" id="transient-for"/>
 	<property id="visible" default="False"/>
+	<property themed-icon="True" ignore="True" id="icon-name"/>
      	<property id="gravity" common="True">
   	  <displayable-values>
 	    <value id="GDK_GRAVITY_NORTH_WEST" name="North West"></value>
@@ -312,6 +329,11 @@
       <child-set-property-function>glade_gtk_menu_shell_set_child_property</child-set-property-function>
       <child-get-property-function>glade_gtk_menu_shell_get_child_property</child-get-property-function>
       <action-activate-function>glade_gtk_menu_shell_action_activate</action-activate-function>
+
+      <signals>
+	<signal since="2.10" id="move-selected"/>
+      </signals>
+
       <packing-properties>
         <property save="False" id="position" default="-1" name="Position">
           <spec>glade_standard_int_spec</spec>
@@ -332,7 +354,7 @@
         <action stock="gtk-edit" important="True" id="launch_editor" name="Edit&#8230;"></action>
       </actions>
       <properties>
-        <property id="submenu" disabled="True"/>
+        <property since="2.12" id="submenu" disabled="True"/>
         <property translatable="True" id="label" name="Label">
 	  <tooltip>The text of the menu item</tooltip>
           <spec>glade_standard_string_spec</spec>
@@ -341,7 +363,7 @@
           <spec>glade_standard_boolean_spec</spec>
         </property>
 	
-	<property ignore="True" id="atk-click" atk-action="True" name="Click">
+	<property save="False" ignore="True" id="atk-click" atk-property="True" name="Click">
 	  <tooltip>Set the description of the Click atk action</tooltip>
 	  <spec>glade_standard_string_spec</spec>
 	  <visible-lines>2</visible-lines>
@@ -428,6 +450,7 @@
         <action stock="gtk-edit" important="True" id="launch_editor" name="Edit&#8230;"></action>
       </actions>
       <properties>
+      	<property since="2.10" id="icon-size-set"/>
 	<property id="orientation">
   	  <displayable-values>
 	    <value id="GTK_ORIENTATION_HORIZONTAL" name="Horizontal"></value>
@@ -442,7 +465,7 @@
 	    <value id="GTK_TOOLBAR_BOTH_HORIZ" name="Text beside icons"></value>
 	  </displayable-values>
 	</property>
-      	<property id="icon-size">
+      	<property since="2.10" id="icon-size">
   	  <displayable-values>
 	    <value id="GTK_ICON_SIZE_INVALID" name="Invalid"></value>
 	    <value id="GTK_ICON_SIZE_MENU" name="Menu"></value>
@@ -567,7 +590,7 @@
 	    <value id="PANGO_ELLIPSIZE_END" name="End"></value>
 	  </displayable-values>
 	</property>
-      	<property id="wrap-mode">
+      	<property since="2.10" id="wrap-mode">
   	  <displayable-values>
              <value id="PANGO_WRAP_WORD" name="Word"></value>
 	    <value id="PANGO_WRAP_CHAR" name="Character"></value>
@@ -581,7 +604,9 @@
       <post-create-function>glade_gtk_entry_post_create</post-create-function>
       <properties>
 	<property translatable="True" id="text"/>
-    <property id="shadow-type">
+        <property since="2.10" id="inner-border"/>
+        <property since="2.10" id="truncate-multiline"/>
+	<property since="2.12" id="shadow-type">
   	  <displayable-values>
 	    <value id="GTK_SHADOW_NONE" name="None"></value>
 	    <value id="GTK_SHADOW_IN" name="In"></value>
@@ -591,7 +616,7 @@
 	  </displayable-values>
 	</property>
 	
-	<property ignore="True" id="atk-activate" atk-action="True" name="Activate">
+	<property save="False" ignore="True" id="atk-activate" atk-property="True" name="Activate">
 	  <tooltip>Set the description of the Activate atk action</tooltip>
 	  <spec>glade_standard_string_spec</spec>
 	  <visible-lines>2</visible-lines>
@@ -685,21 +710,21 @@
 	</property>
 
 	
-	<property ignore="True" id="atk-click" atk-action="True" name="Click">
+	<property save="False" ignore="True" id="atk-click" atk-property="True" name="Click">
 	  <tooltip>Set the description of the Click atk action</tooltip>
 	  <spec>glade_standard_string_spec</spec>
 	  <visible-lines>2</visible-lines>
 	</property>
 
 	
-	<property ignore="True" id="atk-press" atk-action="True" name="Press">
+	<property save="False" ignore="True" id="atk-press" atk-property="True" name="Press">
 	  <tooltip>Set the description of the Press atk action</tooltip>
 	  <spec>glade_standard_string_spec</spec>
 	  <visible-lines>2</visible-lines>
 	</property>
 
 	
-	<property ignore="True" id="atk-release" atk-action="True" name="Release">
+	<property save="False" ignore="True" id="atk-release" atk-property="True" name="Release">
 	  <tooltip>Set the description of the Release atk action</tooltip>
 	  <spec>glade_standard_string_spec</spec>
 	  <visible-lines>2</visible-lines>
@@ -724,6 +749,11 @@
     <glade-widget-class name="GtkSpinButton" generic-name="spinbutton" title="Spin Button">
       <post-create-function>empty</post-create-function>
       <set-property-function>glade_gtk_spin_button_set_property</set-property-function>
+
+      <signals>
+	<signal since="2.10" id="wrapped"/>
+      </signals>
+
       <properties>
         <property id="text" disabled="True"/>
         <property id="value" disabled="True"/>
@@ -747,10 +777,16 @@
     </glade-widget-class>
 
     <glade-widget-class name="GtkFileChooserButton" generic-name="filechooserbutton" title="File Chooser Button">
+
+      <signals>
+	<signal since="2.12" id="file-set"/>
+      </signals>
+
       <properties>
 	<property translatable="True" id="title"/>
 	<property id="size" disabled="True"/>
 	<property id="dialog" disabled="True"/>
+	<property since="2.10" id="focus-on-click"/>
         <property id="action">
   	  <displayable-values>
 	    <value id="GTK_FILE_CHOOSER_ACTION_SAVE" name="Save"></value>
@@ -765,8 +801,23 @@
       </properties>
     </glade-widget-class>
 
-    
-    
+    <glade-widget-class since="2.12" name="GtkScaleButton" generic-name="scalebutton" title="Scale Button">
+      <properties>
+        <property id="size">
+  	  <displayable-values>
+	    <value id="GTK_ICON_SIZE_INVALID" name="Invalid"></value>
+	    <value id="GTK_ICON_SIZE_MENU" name="Menu"></value>
+	    <value id="GTK_ICON_SIZE_SMALL_TOOLBAR" name="Small Toolbar"></value>
+	    <value id="GTK_ICON_SIZE_LARGE_TOOLBAR" name="Large Toolbar"></value>
+	    <value id="GTK_ICON_SIZE_BUTTON" name="Button"></value>
+	    <value id="GTK_ICON_SIZE_DND" name="Drag &amp; Drop"></value>
+	    <value id="GTK_ICON_SIZE_DIALOG" name="Dialog"></value>
+	  </displayable-values>
+        </property>
+      </properties>
+    </glade-widget-class>
+
+    <glade-widget-class name="GtkVolumeButton" generic-name="volumebutton" title="Volume Button"></glade-widget-class>
 
     <glade-widget-class name="GtkFileChooserWidget" generic-name="filechooserwidget" title="File Chooser Widget">
       <post-create-function>glade_gtk_file_chooser_widget_post_create</post-create-function>
@@ -814,7 +865,15 @@
     <glade-widget-class name="GtkComboBox" generic-name="combobox" title="Combo Box">
       <post-create-function>glade_gtk_combo_box_post_create</post-create-function>
       <set-property-function>glade_gtk_combo_box_set_property</set-property-function>
+      <signals>
+	<signal since="2.12" id="move-action"/>
+	<signal since="2.12" id="popdown"/>
+	<signal since="2.12" id="popup"/>
+      </signals>
       <properties>
+        <property since="2.10" id="popup-shown"/>
+        <property since="2.10" id="tearoff-title"/>
+        <property id="model" disabled="True"/>
         <property id="model" disabled="True"/>
         <property ignore="True" id="active"/>
         <property ignore="True" id="column-span-column"/>
@@ -825,7 +884,7 @@
 	</property>
 
 	
-	<property ignore="True" id="atk-press" atk-action="True" name="Press">
+	<property save="False" ignore="True" id="atk-press" atk-property="True" name="Press">
 	  <tooltip>Set the description of the Press atk action</tooltip>
 	  <spec>glade_standard_string_spec</spec>
 	  <visible-lines>2</visible-lines>
@@ -841,6 +900,8 @@
     <glade-widget-class name="GtkTreeView" generic-name="treeview" title="Tree View">
       <post-create-function>glade_gtk_tree_view_post_create</post-create-function>
       <properties>
+        <property since="2.12" id="level-indentation"/>
+        <property since="2.12" id="show-expanders"/>
         <property ignore="True" id="enable-grid-lines">
   	  <displayable-values>
 	    <value id="GTK_TREE_VIEW_GRID_LINES_NONE" name="None"></value>
@@ -930,7 +991,7 @@
 	  <spec>glade_standard_stock_image_spec</spec>
 	  <tooltip>The stock item for this image</tooltip>
 	</property>
-	<property weight="1.6" id="icon-name" name="Icon Name"></property>
+	<property weight="1.6" themed-icon="True" id="icon-name" name="Icon Name"></property>
       </properties>
     </glade-widget-class>
 
@@ -1033,6 +1094,13 @@
       <verify-function>glade_gtk_notebook_verify_property</verify-function>
       <child-action-activate-function>glade_gtk_notebook_child_action_activate</child-action-activate-function>
 
+      <signals>
+	<signal since="2.10" id="page-added"/>
+	<signal since="2.10" id="page-removed"/>
+	<signal since="2.10" id="page-reordered"/>
+	<signal since="2.12" id="create-window"/>
+      </signals>
+
       <packing-actions>
         <action stock="gtk-add" id="insert_page_before" name="Insert Page Before"></action>
         <action stock="gtk-add" id="insert_page_after" name="Insert Page After"></action>
@@ -1040,6 +1108,7 @@
       </packing-actions>
 
       <properties>
+	<property since="2.12" id="group"/>
 	<property save="False" id="page">
 	  <tooltip>Set the current page (strictly for editing purposes)</tooltip>
 	</property>
@@ -1099,6 +1168,9 @@
 
     <glade-widget-class name="GtkRange" title="Range">
       <properties>
+        <property since="2.12" id="fill-level"/>
+        <property since="2.12" id="restrict-to-fill-level"/>
+        <property since="2.12" id="show-fill-level"/>
         <property id="adjustment" default="0 0 100 1 10 10"/>
       	<property id="update-policy">
   	  <displayable-values>
@@ -1260,7 +1332,7 @@
 	<property id="label-widget" disabled="True"/>
 
 	
-	<property ignore="True" id="atk-activate" atk-action="True" name="Activate">
+	<property save="False" ignore="True" id="atk-activate" atk-property="True" name="Activate">
 	  <tooltip>Set the description of the Activate atk action</tooltip>
 	  <spec>glade_standard_string_spec</spec>
 	  <visible-lines>2</visible-lines>
@@ -1289,7 +1361,7 @@
         <property save-always="True" id="can-focus"/>
         <property id="hadjustment" disabled="True"/>
         <property id="vadjustment" disabled="True"/>
-        <property ignore="True" id="window-placement-set"/>
+        <property since="2.10" ignore="True" id="window-placement-set"/>
       	<property id="shadow-type">
   	  <displayable-values>
 	    <value id="GTK_SHADOW_NONE" name="None"></value>
@@ -1328,6 +1400,7 @@
     
    <glade-widget-class name="GtkAboutDialog" generic-name="aboutdialog" title="About Dialog">
       <properties>
+	<property since="2.12" id="program-name"/>
 	<property translatable="True" id="copyright">
 	  <visible-lines>2</visible-lines>
 	</property>
@@ -1392,6 +1465,13 @@
 	<property id="can-default" common="True"/>
 	<property id="has-default" common="True"/>
 	<property id="can-focus" common="True"/>
+
+	<property since="2.10" id="image"/>
+	<property since="2.10" id="secondary-text"/>
+	<property since="2.10" id="secondary-use-markup"/>
+	<property since="2.10" id="text"/>
+	<property since="2.10" id="use-markup"/>
+
 	<property id="message-type">
   	  <displayable-values>
 	    <value id="GTK_MESSAGE_INFO" name="Info"></value>
@@ -1433,7 +1513,7 @@
     
     <glade-widget-class name="GtkVRuler" generic-name="vruler" title="Vertical Ruler"></glade-widget-class>
 
-    <glade-widget-class name="GtkCombo" generic-name="combo" title="Combo">
+    <glade-widget-class name="GtkCombo" generic-name="combo" deprecated="True" builder-unsupported="True" title="Combo">
       <post-create-function>glade_gtk_combo_post_create</post-create-function>
       <get-internal-child-function>glade_gtk_combo_get_internal_child</get-internal-child-function>
       <get-children-function>glade_gtk_combo_get_children</get-children-function>
@@ -1442,7 +1522,7 @@
 	<property id="size" disabled="True"/>
 
 	
-	<property ignore="True" id="atk-press" atk-action="True" name="Press">
+	<property save="False" ignore="True" id="atk-press" atk-property="True" name="Press">
 	  <tooltip>Set the description of the Press atk action</tooltip>
 	  <spec>glade_standard_string_spec</spec>
 	  <visible-lines>2</visible-lines>
@@ -1451,10 +1531,10 @@
 
     </glade-widget-class>
     
-    <glade-widget-class name="GtkOptionMenu" generic-name="optionmenu" title="Option Menu">
+    <glade-widget-class name="GtkOptionMenu" generic-name="optionmenu" deprecated="True" builder-unsupported="True" title="Option Menu">
       <properties>
 	
-	<property ignore="True" id="atk-press" atk-action="True" name="Press">
+	<property save="False" ignore="True" id="atk-press" atk-property="True" name="Press">
 	  <tooltip>Set the description of the Press atk action</tooltip>
 	  <spec>glade_standard_string_spec</spec>
 	  <visible-lines>2</visible-lines>
@@ -1462,7 +1542,7 @@
       </properties>
     </glade-widget-class>
 
-    <glade-widget-class name="GtkList" generic-name="list" title="List">
+    <glade-widget-class name="GtkList" generic-name="list" deprecated="True" builder-unsupported="True" title="List">
       <add-child-function>glade_gtk_listitem_add_child</add-child-function>
       <remove-child-function>glade_gtk_listitem_remove_child</remove-child-function>
       <properties>
@@ -1478,7 +1558,7 @@
       </properties>
     </glade-widget-class>
 
-    <glade-widget-class name="GtkListItem" generic-name="listitem" title="List Item">
+    <glade-widget-class name="GtkListItem" generic-name="listitem" deprecated="True" builder-unsupported="True" title="List Item">
       <post-create-function>glade_gtk_list_item_post_create</post-create-function>
       <set-property-function>glade_gtk_list_item_set_property</set-property-function>
       <get-property-function>glade_gtk_list_item_get_property</get-property-function>
@@ -1490,7 +1570,7 @@
       </properties>
     </glade-widget-class>
 
-    <glade-widget-class name="GtkCList" generic-name="clist" title="Columned List">
+    <glade-widget-class name="GtkCList" generic-name="clist" deprecated="True" builder-unsupported="True" title="Columned List">
       <properties>
         <property id="selection-mode">
   	  <displayable-values>
@@ -1546,7 +1626,7 @@
       </properties>
     </glade-widget-class>
 
-    <glade-widget-class name="GtkAssistant" generic-name="assistant" title="Assistant">
+    <glade-widget-class since="2.10" name="GtkAssistant" generic-name="assistant" title="Assistant">
       <post-create-function>glade_gtk_assistant_post_create</post-create-function>
       <add-child-function>glade_gtk_assistant_add_child</add-child-function>
       <remove-child-function>glade_gtk_assistant_remove_child</remove-child-function>
@@ -1583,14 +1663,28 @@
     <glade-widget-class name="GtkLinkButton" generic-name="linkbutton" title="Link Button">
       <properties>
         
-        <property id="uri" default="http://glade.gnome.org"/>
+        <property since="2.10" id="uri" default="http://glade.gnome.org"/>
       </properties>
    </glade-widget-class>
 
     <glade-widget-class name="GtkRecentChooserWidget" generic-name="recentchooser" title="Recent Chooser">
+
+      <signals>
+	<signal since="2.10" id="item-activated"/>
+	<signal since="2.10" id="selection-changed"/>
+      </signals>
+
       <properties>
 	<property id="size" disabled="True"/>
-        <property id="sort-type">
+	<property since="2.10" id="filter"/>
+	<property since="2.10" id="limit"/>
+	<property since="2.10" id="local-only"/>
+	<property since="2.10" id="recent-manager"/>
+	<property since="2.10" id="select-multiple"/>
+	<property since="2.10" id="show-icons"/>
+	<property since="2.10" id="show-not-found"/>
+	<property since="2.10" id="show-tips"/>
+        <property since="2.10" id="sort-type">
   	  <displayable-values>
 	    <value id="GTK_RECENT_SORT_NONE" name="None"></value>
 	    <value id="GTK_RECENT_SORT_MRU" name="Most Recently Used first"></value>
@@ -1661,9 +1755,8 @@
     <glade-widget-class-ref name="GtkColorButton"/>
     <glade-widget-class-ref name="GtkFontButton"/>
     <glade-widget-class-ref name="GtkLinkButton"/>
-
-
-    
+    <glade-widget-class-ref name="GtkScaleButton"/>
+    <glade-widget-class-ref name="GtkVolumeButton"/>\
 
     <glade-widget-class-ref name="GtkImage"/>
     <glade-widget-class-ref name="GtkLabel"/>

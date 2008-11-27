@@ -78,7 +78,6 @@ struct _GladePropertyKlass
 	void                    (* get_default)           (GladeProperty *, GValue *);
 	void                    (* sync)                  (GladeProperty *);
 	void                    (* load)                  (GladeProperty *);
-	gboolean                (* write)                 (GladeProperty *, GladeInterface *, GArray *);
 	G_CONST_RETURN gchar *  (* get_tooltip)           (GladeProperty *);
 
 	/* Signals */
@@ -98,11 +97,11 @@ GladeProperty          *glade_property_dup                   (GladeProperty     
 
 void                    glade_property_reset                 (GladeProperty      *property);
 
-void                    glade_property_original_reset    (GladeProperty      *property);
+void                    glade_property_original_reset        (GladeProperty      *property);
 
 gboolean                glade_property_default               (GladeProperty      *property);
 
-gboolean                glade_property_original_default  (GladeProperty      *property);
+gboolean                glade_property_original_default      (GladeProperty      *property);
 
 gboolean                glade_property_equals_value          (GladeProperty      *property, 
 							      const GValue       *value);
@@ -141,15 +140,13 @@ void                    glade_property_sync                  (GladeProperty     
 
 void                    glade_property_load                  (GladeProperty      *property);
 
-GValue                 *glade_property_read                  (GladeProperty      *property,
-							      GladePropertyClass *pclass,
+void                    glade_property_read                  (GladeProperty      *property,
 							      GladeProject       *project,
-							      gpointer            info,
-							      gboolean            free_value);
+							      GladeXmlNode       *node);
 
-gboolean                glade_property_write                 (GladeProperty      *property, 
-							      GladeInterface     *interface, 
-							      GArray             *props);
+void                    glade_property_write                 (GladeProperty      *property,	
+							      GladeXmlContext    *context,
+							      GladeXmlNode       *node);
 
 G_CONST_RETURN gchar   *glade_property_get_tooltip           (GladeProperty      *property);
 

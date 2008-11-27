@@ -1,33 +1,194 @@
-2008-05-05  Tristan Van Berkom <tvb@gnome.org>
+2008-04-09  Tristan Van Berkom <tvb@gnome.org>
 
-	* NEWS, configure.ac: Rolling 3.4.5
+	* NEWS, configure.ac: Rolling 3.5.2. quick bugfix release
+
+	* gladeui/glade-widget-adaptor.c: oops, was parsing booleans
+	as doubles, fixed bugs with builder-unsupported and deprecated.
 	
-	* gladeui/glade-editor-property.c: Avoid feedback loops when committing properties,
-	  fixes bug 527896.
+2008-04-09  Tristan Van Berkom <tvb@gnome.org>
 
-	* src/glade-window.c: Updated copyright dates.
-
-2008-04-18  Tristan Van Berkom <tvb@gnome.org>
-
-	* NEWS, configure.ac: Rolling 3.4.4
+	* NEWS, configure.ac: Rolling 3.5.1.
 	
-	* gladeui/glade-utils.h: removed trailing function prototype (bug 528552)
+	* plugins/gtk+/gtk+.xml.in: Filled in all since, deprecated and
+	  builder-unsupported properties.
 
-2008-04-17  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+	* gladeui/glade-widget.c, gladeui/glade-widget.h, gladeui/glade-widget-adaptor.c,
+	gladeui/glade-command.c, gladeui/glade-widget-adaptor.h,
+	gladeui/glade-utils.h, gladeui/glade-catalog.c, 
+	gladeui/glade-catalog.h, gladeui/glade-app.c, gladeui/glade-app.h, 
+	gladeui/glade-property-class.c, gladeui/glade-property-class.h, 
+	gladeui/glade-project.c, gladeui/glade-project.h:
+	Added versioning support, you can always chose the target version of
+	your project starting with gtk+ 2.8 - a project preferences dialog has
+	been added where you can switch your format, switch your target version
+	and test for incompatabilities. incompatability error dialogs are also
+	launched on save as. Target versions are saved to the glade file; 
+	TODO: patch GtkBuilder to test the required gtk+ version from
+	<requires lib="gtk+" version="2.8"> and at least warn, also let
+	third party widget developers test thier own versions using builder.
 
-	* gladeui/glade-property-class.[ch]: added glade_property_class_compare()
+	* gladeui/glade-xml-utils.h, gladeui/glade-xml-utils.c: routines
+	for parsing version numbers.
+
+
+	* gladeui/glade-utils.c: glade_util_ui_message() takes a widget to
+	embed arg now.
+
+	* doc/catalogintro.sgml, doc/widgetclasses.sgml, doc/properties.sgml:
+	Documented newly added catalog tags.
+
+2008-04-08  Tristan Van Berkom <tvb@gnome.org>
+
+	* NEWS: Rolling 3.5.0
 	
-	* gladeui/glade-editor-property.c: use new compare function in
-	  glade_editor_property_commit() instead of g_param_values_cmp()
-	  since GBoxed comparison is not well defined.
-	  Fixes bug #528511.
+	* src/glade-window.c: Reverted the project format menu from edit
+
+	* src/glade-utils.c: Add file format option to "save as" dialog,
+	also added new filters for .ui files.
+
+2008-04-07  Tristan Van Berkom <tvb@gnome.org>
+
+	* autogen.sh: Run gtkdocize with --flavour=no-tmpl
+	
+	* configure.ac: Require gtk-doc 1.9 and bump to 3.5.0 dev version.
+	
+	* doc/gladeui-overrides.txt, doc/children.sgml, doc/tmpl/*: Removed unneeded.
+
+	* doc/gladeui-docs.sgml, doc/widgetclasses.sgml,
+	doc/catalogintro.sgml, doc/Makefile.am: Mega docs update, added new
+	files and completely rediscribed the catalog in its new form.
+
+	* gladeui/glade-design-view.c, gladeui/glade-widget.c, 
+	gladeui/glade-widget-adaptor.c, gladeui/glade-command.c,
+	gladeui/glade-widget-adaptor.h, gladeui/glade-base-editor.c,
+	gladeui/glade-widget-action.c, gladeui/glade-xml-utils.c,
+	gladeui/glade-utils.c, gladeui/glade-catalog.c, gladeui/glade-property.c,
+	gladeui/glade-project.c: Added some description statements to newly 
+	documented files, fixed some warnings in other sources.
+
+2008-04-06  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/glade-gtk.c: Implemented dual format for atk
+	  properties, afaics accelerators are loaded and saved identically.
+
+	* doc/gladeui-sections.txt: Updated with new syms.
+
+2008-04-05  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-widget.[ch], glade-widget-adaptor.c:
+	  Now recurse through the plugin to read and write widget
+	  children, allowiong you to do stuff before or after children
+	  are written/read from the xml file.
+
+	* gladeui/glade-widget-adaptor.[ch], gladeui/glade-xml-utils.h,
+	  allow the plugin to handle read_child() write_child() (mostly
+	  just to allow you to skip some children like fake AtkObjects,
+	  but can also be used to parse/write packing stuff (i.e. the
+	  <child> tag) in custom ways).
+
+	* gladeui/glade-widget.[ch], gladeui/glade-widget-adaptor.c
+	  gladeui/glade-xml-utils.[ch], gladeui/glade-project.c,
+	  gladeui/glade-property.c, gladeui/glade-signal.c, 
+	  plugins/gtk+/glade-gtk.c, src/glade-window.c:
+	  Added basic builder support, format can be chosen via a
+	  radiomenuitem in the "Edit" menu, currently supports different
+	  names for the interface and widget tags, and saves special
+	  child widgets accordingly (i.e. notebook tabs and frame labels).
+
+2008-04-04  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-project.c: Resurected <requires> code and
+	  saving the generic comment again, still need to load the
+	  comment.
+
+2008-04-03  Johan Dahlin  <jdahlin@async.com.br>
+
+	reviewed by: Tristan
+
+	* gladeui/glade-project.c:
+	* gladeui/glade-project.h:
+
+	Add file format to GladeProject and public accessors.
+
+2008-04-03  Tristan Van Berkom <tvb@gnome.org>
+
+	* glade-widget, glade-property, glade-gtk (plugin),
+	  glade-project, glade-xml-utils... lots.
+
+	Implemented saving of properties, signals, atkprops
+	accelerators: everything is saving properly now !
+
+	* plugins/gtk+/glade-gtk.c: Fixed crasher on null string
+	  when parsing modifiers.
+
+2008-04-02  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-widget-adaptor.[ch]: Added new entry points
+	  to create editor widgets for plugin provided pspecs and also
+	  to create strings based on plugin provided pspec.
+
+	Moved all accelerater code out of the core and into the plugin,
+	still working on loading glade files with the new parser...
+
+	* gladeui/glade-gtk.c: 
+	  - Implemented loading of accelerators.
+	  - Implemented loading of atk properties (not relations or actions yet...)
+	  - Implemented loading of atk actions now...
+	  - Implemented atk relations
+
+	* gladeui/glade-widget-adaptor.c, gladeui/glade-signal.c:
+	  Implemented loading of signals.
+
+	* gladeui/glade-property-class.[ch], gladeui/glade-editor.c,
+	  gladeui/glade-property.c, gladeui/glade-widget-adaptor.c:
+	  Removed notion of the GPCType (which differentiated atk props
+	  from normal props and also accel props for various purposes),
+	  now there is a boolean "atk" member that only means to put
+	  these properties in the atk tab of the editor, one day we can
+	  hopefully even remove this.	
+
+	* gladeui/glade-widget.c: Fixed special-child-type loading (i.e
+	  notebook tabs and frame labels), and removed some obsolete
+	  loading code from the old implementation.
+
+	* gladeui/glade-widget.[ch], gladeui/glade-project.c:
+	  Basic glade file saving framework in place, currently saves
+	  widgets, thier children and class types and widget names.
+	
+2008-04-01  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-widget.[ch], gladeui/glade-widget-adaptor.[ch],
+	  various files: Implemented loading and building of the widget
+	  hierarchy, currently only types and widget names, no properties
+	  or packing properties - but internal children and placeholders
+	  are loaded correctly.
+
+	* gladeui/glade-widget.[ch], gladeui/glade-widget-adaptor.c,
+	  gladeui/glade-property.[ch]: Implemented loading of packing
+	  properties and normal properties.
+	
+2008-03-30  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-parser.[ch]
+
+	* lots of files: removed references to load/save,
+	  disabled load/save - clearing the way for builder support.
 
 2008-03-10  Tristan Van Berkom <tvb@gnome.org>
+
+	* NEWS, configure.ac: Rolling 3.4.3
+
+	* plugins/gtk+/gtk+.xml.in: Backing out GtkScaleButton
+	  and GtkVolumeButton as they introduce strings.
 
 	* gladeui/glade-app.c: Now if an empty project is loaded
 	  and anothther project with widgets is loaded, they will
 	  also be shown at load time (first widget in the layout
 	  gets autoloaded).
+
+	* plugins/gtk+/gtk+.xml.in: 
+	  - Reintroducing GtkScaleButton and GtkVolumeButton in trunk.
+	  - Reintroducing icon-theme dialog in trunk.
 
 	* gladeui/glade-id-allocator.c: Avoid crashing on id 0 (bug 442860)
 
@@ -36,14 +197,6 @@
 
 	* gladeui/glade-editor.c: Dont commit name values if name
 	  already exists in the project.
-
-2008-03-10  Tristan Van Berkom <tvb@gnome.org>
-
-	* NEWS, configure.ac: Rolling 3.4.3
-
-	* plugins/gtk+/gtk+.xml.in: Backing out GtkScaleButton
-	  and GtkVolumeButton as they introduce strings.
-	
 
 2008-03-09  Tristan Van Berkom <tvb@gnome.org>
 
@@ -54,7 +207,7 @@
 	  - Reset "events" property for newly created widgets
 	    (workaround for bug 472555).
 	  - Added GtkVolumeButton and GtkScaleButton widgets (Ross Burton)
-	  - Add/Remove parent doesnt dup widgets anymore (bug 517388)
+	  - Add/Remove parent doesnt dup widgets anymore (bug 517388)er
 	
 	* plugins/gnome/glade-gnome.c: Fixed some crashes on 
 	  gnome druid page properties (bug 511651).

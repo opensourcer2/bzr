@@ -1,57 +1,66 @@
-glade-3 (3.4.5-3ubuntu1) intrepid; urgency=low
+glade-3 (3.5.2-4ubuntu1) jaunty; urgency=low
 
-  * Sync on Debian
+  * Sync on debian
   * Version binaries so they don't conflict with the previous glade version
   * debian/control.in:
     - don't use conflict on glade
     - updated binary naming
-    - updated maintainer information
     - use replaces required
   * debian/rules:
     - correctly install icons
     - updated for the ubuntu binaries naming
     - use gnome.mk so the icon cache and translations template are updated
 
- -- Sebastien Bacher <seb128@canonical.com>  Fri, 20 Jun 2008 14:43:35 +0200
+ -- Sebastien Bacher <seb128@ubuntu.com>  Thu, 27 Nov 2008 16:38:49 +0100
 
-glade-3 (3.4.5-3) unstable; urgency=high
+glade-3 (3.5.2-4) experimental; urgency=low
+
+  [ Loic Minier ]
+  * Properly anchor package name regexp.
+
+  [ Deng Xiyue ]
+  * Remove 01_includes.patch and add patches/01_gladeui-types.patch.  The
+    former one is flawed.  Thanks Andreas Henriksson.  Closes: #477513
+  * Update standard version to 3.8.0.  No changes needed.
+
+ -- Loic Minier <lool@dooz.org>  Sat, 05 Jul 2008 18:09:48 +0200
+
+glade-3 (3.5.2-3) experimental; urgency=low
+
+  [ Deng Xiyue ]
+  * Add 01_includes.patch to fix FTBFS on ia64.  Thanks Andreas Henriksson for
+    the patch.  (Closes: #477513)
 
   [ Josselin Mouette ]
   * 02_rename_crash.patch [Pavel Kostyuchenko]: stolen from bugzilla
     #533471. Fix crasher when renaming a menu item. Closes: #476134.
 
-  [ Deng Xiyue ]
-  * Drop 01_includes.patch.  Should only apply to 3.5+. (Closes: #480764)
+ -- Deng Xiyue <manphiz-guest@users.alioth.debian.org>  Tue, 06 May 2008 01:13:19 +0800
 
- -- Josselin Mouette <joss@debian.org>  Sun, 18 May 2008 16:32:46 +0200
+glade-3 (3.5.2-2) experimental; urgency=low
 
-glade-3 (3.4.5-2) unstable; urgency=low
+  * Add Conflicts/Replaces back to shared library as it does contain files
+    which will result in conflicts, and add libgladeui-1-7 to the list.
 
-  * debian/patches/01_includes.patch:
-    + Patch by Andreas Henriksson to fix FTBFS on IA64 (Closes: #477513).
+ -- Deng Xiyue <manphiz-guest@users.alioth.debian.org>  Sun, 13 Apr 2008 23:03:02 +0800
 
- -- Sebastian Dröge <slomo@debian.org>  Thu, 08 May 2008 12:41:08 +0200
+glade-3 (3.5.2-1) experimental; urgency=low
 
-glade-3 (3.4.5-1) unstable; urgency=low
+  * New upstream development release.
+    + Soversion updated to 8, rename shared library name to
+      libgladeui-1-8.
+    + Update gtk-doc-tools b-dep to >= 1.9 as required by new version.
+  * Don't (b-)dep on versioned scrollkeeper.  (Closes: #469699)
+  * Comment out ALLOWED_DISTS += unstable, as it's now targeting
+    experimental.
+  * Check for development releases in watch file for now.
+  * Recommend libgtk2.0-dev >= 2.12.0.
+  * Don't make shared library Conflicts/Replaces older versions, as they
+    should be able to coexist.
+  * Use sed to get shared library name SHARED_PKG and replace all
+    references to ease future soversion updates.
 
-  [ Deng Xiyue ]
-  * backport several changes from experimental branch:
-    + Remove versioned dependency on scrollkeeper to make package providing
-      scrollkeeper can be used as alternative.  (Closes: #469699)
-    + Use sed to get shared library name from debian/control to make further
-      soversion update easier.
-  * Make glade Recommends libgtk2.0-dev >= 2.12.0 as consistent as others.
-
-  [ Sebastian Dröge ]
-  * New upstream bugfix release.
-
- -- Sebastian Dröge <slomo@debian.org>  Thu, 08 May 2008 12:25:58 +0200
-
-glade-3 (3.4.4-1) unstable; urgency=low
-
-  * New upstream bugfix release.
-
- -- Sebastian Dröge <slomo@debian.org>  Fri, 18 Apr 2008 11:39:37 +0200
+ -- Deng Xiyue <manphiz-guest@users.alioth.debian.org>  Sun, 13 Apr 2008 14:44:15 +0800
 
 glade-3 (3.4.3-1) unstable; urgency=low
 
@@ -84,7 +93,7 @@ glade-3 (3.4.1-1) unstable; urgency=low
 
 glade-3 (3.4.0-2) unstable; urgency=low
 
-  * 01_gladeui_types_headers.patch: fix implicit declarations that cause 
+  * 01_gladeui_types_headers.patch: fix implicit declarations that cause
     a FTBFS on ia64.
 
  -- Josselin Mouette <joss@debian.org>  Sun, 25 Nov 2007 23:23:16 +0100

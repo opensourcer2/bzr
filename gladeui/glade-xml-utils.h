@@ -3,33 +3,75 @@
 #ifndef __GLADE_XML_UTILS_H__
 #define __GLADE_XML_UTILS_H__
 
-#include <gladeui/glade-parser.h>
+#include <glib.h>
+#include <gmodule.h>
+
 
 G_BEGIN_DECLS
 
 #define GLADE_XML_CONTEXT(c)    ((GladeXmlContext *)c)
 #define GLADE_XML_IS_CONTEXT(c) (c != NULL)
 
+#define CAST_BAD (gchar *)
+
+
 typedef struct _GladeXmlContext GladeXmlContext;
 typedef struct _GladeXmlNode    GladeXmlNode;
 typedef struct _GladeXmlDoc     GladeXmlDoc;
 
+
+#define GLADE_XML_TAG_PROJECT(type) \
+	((type == GLADE_PROJECT_FORMAT_LIBGLADE) ? \
+	 GLADE_XML_TAG_LIBGLADE_PROJECT : GLADE_XML_TAG_BUILDER_PROJECT)
+
+#define GLADE_XML_TAG_WIDGET(type) \
+	((type == GLADE_PROJECT_FORMAT_LIBGLADE) ? \
+	 GLADE_XML_TAG_LIBGLADE_WIDGET : GLADE_XML_TAG_BUILDER_WIDGET)
+
 /* Used for catalog tags and attributes */
-#define GLADE_XML_TAG_PROJECT                     "glade-interface"
+
+
+	gdouble                    version_since; /* Version in which this widget was
+						   * introduced
+						   */
+	gboolean                   deprecated; /* If this widget is currently
+							* deprecated
+							*/
+	gboolean                   builder_unsupported; /* If this widget is not supported
+							 * by gtkbuilder
+							 */
+
+#define GLADE_XML_TAG_LIBGLADE_PROJECT            "glade-interface"
+#define GLADE_XML_TAG_BUILDER_PROJECT             "interface"
+#define GLADE_XML_TAG_LIBGLADE_WIDGET             "widget"
+#define GLADE_XML_TAG_BUILDER_WIDGET              "object"
+
+#define GLADE_XML_TAG_VERSION                     "version"
+#define GLADE_XML_TAG_REQUIRES_LIBGLADE_EXTRA     "requires-version"
 #define GLADE_XML_TAG_REQUIRES                    "requires"
-#define GLADE_XML_TAG_WIDGET                      "widget"
+#define GLADE_XML_TAG_LIB                         "lib"
 #define GLADE_XML_TAG_PROPERTY                    "property"
 #define GLADE_XML_TAG_CLASS                       "class"
 #define GLADE_XML_TAG_ID                          "id"
 #define GLADE_XML_TAG_SIGNAL                      "signal"
 #define GLADE_XML_TAG_HANDLER                     "handler"
+#define GLADE_XML_TAG_AFTER                       "after"
+#define GLADE_XML_TAG_OBJECT                      "object"
 #define GLADE_XML_TAG_NAME                        "name"
 #define GLADE_XML_TAG_CHILD                       "child"
-#define GLADE_XML_TAG_SIGNAL                      "signal"
-#define GLADE_XML_TAG_AFTER                       "after"
 #define GLADE_XML_TAG_PACKING                     "packing"
 #define GLADE_XML_TAG_PLACEHOLDER                 "placeholder"
 #define GLADE_XML_TAG_INTERNAL_CHILD              "internal-child"
+#define GLADE_XML_TAG_I18N_TRUE                   "yes"
+#define GLADE_XML_TAG_SIGNAL_TRUE                 "yes"
+#define GLADE_XML_TAG_TYPE                        "type"
+
+
+#define GLADE_TAG_VERSION                         "version"
+#define GLADE_TAG_TARGETABLE                      "targetable"
+#define GLADE_TAG_VERSION_SINCE                   "since"
+#define GLADE_TAG_DEPRECATED                      "deprecated"
+#define GLADE_TAG_BUILDER_UNSUPPORTED             "builder-unsupported"
 
 #define GLADE_TAG_GLADE_CATALOG                   "glade-catalog"
 #define GLADE_TAG_GLADE_WIDGET_CLASSES            "glade-widget-classes"
@@ -41,7 +83,8 @@ typedef struct _GladeXmlDoc     GladeXmlDoc;
 #define GLADE_TAG_DEPENDS                         "depends"
 #define GLADE_TAG_DOMAIN                          "domain"
 #define GLADE_TAG_BOOK                            "book"
-#define GLADE_TAG_SIGNAL_NAME                     "signal-name"
+#define GLADE_TAG_SIGNALS                         "signals"
+#define GLADE_TAG_SIGNAL                          "signal"
 #define GLADE_TAG_DEFAULT                         "default"
 #define GLADE_TAG_DISABLED                        "disabled"
 #define GLADE_TAG_DEFAULT_PALETTE_STATE           "default-palette-state"
@@ -58,6 +101,12 @@ typedef struct _GladeXmlDoc     GladeXmlDoc;
 #define GLADE_TAG_CONSTRUCTOR_FUNCTION            "constructor-function"
 #define GLADE_TAG_ACTION_ACTIVATE_FUNCTION        "action-activate-function"
 #define GLADE_TAG_CHILD_ACTION_ACTIVATE_FUNCTION  "child-action-activate-function"
+#define GLADE_TAG_READ_WIDGET_FUNCTION            "read-widget-function"
+#define GLADE_TAG_WRITE_WIDGET_FUNCTION           "write-widget-function"
+#define GLADE_TAG_READ_CHILD_FUNCTION             "read-child-function"
+#define GLADE_TAG_WRITE_CHILD_FUNCTION            "write-child-function"
+#define GLADE_TAG_CREATE_EPROP_FUNCTION           "create-editor-property-function"
+#define GLADE_TAG_STRING_FROM_VALUE_FUNCTION      "string-from-value-function"
 #define GLADE_TAG_PROPERTIES                      "properties"
 #define GLADE_TAG_PACKING_PROPERTIES              "packing-properties"
 #define GLADE_TAG_PROPERTY                        "property"
@@ -86,6 +135,8 @@ typedef struct _GladeXmlDoc     GladeXmlDoc;
 #define GLADE_TAG_KEY                             "key"
 #define GLADE_TAG_VALUE                           "value"
 #define GLADE_TAG_TRANSLATABLE                    "translatable"
+#define GLADE_TAG_HAS_CONTEXT                     "context"
+#define GLADE_TAG_COMMENT                         "comments"
 #define GLADE_TAG_PACKING_DEFAULTS                "packing-defaults"
 #define GLADE_TAG_PARENT_CLASS                    "parent-class"
 #define GLADE_TAG_CHILD_PROPERTY                  "child-property"
@@ -100,7 +151,6 @@ typedef struct _GladeXmlDoc     GladeXmlDoc;
 #define GLADE_TAG_RESOURCE                        "resource"
 #define GLADE_TAG_THEMED_ICON                     "themed-icon"
 #define GLADE_TAG_INIT_FUNCTION                   "init-function"
-#define GLADE_TAG_ATK_ACTION                      "atk-action"
 #define GLADE_TAG_ATK_PROPERTY                    "atk-property"
 #define GLADE_TAG_FIXED                           "fixed"
 #define GLADE_TAG_TRANSFER_ON_PASTE               "transfer-on-paste"
@@ -149,12 +199,16 @@ gchar *  glade_xml_get_property_string (GladeXmlNode *node_in, const gchar *name
 gboolean glade_xml_get_property_boolean (GladeXmlNode *node_in, const gchar *name, gboolean _default);
 gdouble  glade_xml_get_property_double (GladeXmlNode *node_in, const gchar *name, gdouble _default);
 gint     glade_xml_get_property_int (GladeXmlNode *node_in, const gchar *name, gint _default);
+gboolean glade_xml_get_property_version (GladeXmlNode *node_in, const gchar *name, gint *major, gint *minor);
+GList   *glade_xml_get_property_targetable_versions (GladeXmlNode *node_in, const gchar *name);
+
 
 void glade_xml_node_set_property_string (GladeXmlNode *node_in, const gchar *name, const gchar *string);
 void glade_xml_node_set_property_boolean (GladeXmlNode *node_in, const gchar *name, gboolean value);
 
 /* Node operations */
 GladeXmlNode * glade_xml_node_new (GladeXmlContext *context, const gchar *name);
+GladeXmlNode * glade_xml_node_new_comment (GladeXmlContext *context, const gchar *comment);
 void           glade_xml_node_delete (GladeXmlNode *node);
 GladeXmlNode * glade_xml_node_get_children (GladeXmlNode *node);
 GladeXmlNode * glade_xml_node_next (GladeXmlNode *node_in);
@@ -162,6 +216,11 @@ gboolean       glade_xml_node_verify (GladeXmlNode * node_in, const gchar *name)
 gboolean       glade_xml_node_verify_silent (GladeXmlNode *node_in, const gchar *name);
 const gchar *  glade_xml_node_get_name (GladeXmlNode *node_in);
 void           glade_xml_node_append_child (GladeXmlNode * node, GladeXmlNode * child);
+void           glade_xml_node_remove (GladeXmlNode *node_in);
+gboolean       glade_xml_node_is_comment (GladeXmlNode *node_in);
+GladeXmlNode * glade_xml_node_next_with_comments (GladeXmlNode *node_in);
+GladeXmlNode * glade_xml_node_get_children_with_comments (GladeXmlNode *node);
+
 
 /* Document Operatons */
 GladeXmlNode * glade_xml_doc_get_root (GladeXmlDoc *doc);
@@ -178,9 +237,6 @@ GladeXmlContext * glade_xml_context_new_from_path (const gchar *full_path,
 						   const gchar *nspace,
 						   const gchar *root_name);
 GladeXmlDoc *     glade_xml_context_get_doc (GladeXmlContext *context);
-
-gchar *		glade_xml_alloc_string   (GladeInterface *interface, const gchar *string);
-gchar *		glade_xml_alloc_propname (GladeInterface *interface, const gchar *string);
 
 gboolean        glade_xml_load_sym_from_node (GladeXmlNode     *node_in,
 					      GModule          *module,
