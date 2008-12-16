@@ -1,3 +1,1203 @@
+2008-12-13  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-inspector.c: Removed old search code.
+	
+	* plugins/gtk+/gtk+.xml.in: Added missing displayable values.
+	
+	* plugins/gtk+/glade-column-types.c: Fixed crashers on empty input, keep focus on
+	current cell when editing is canceled.
+
+	* plugins/gtk+/glade-model-data.c: keep focus on current cell when editing is canceled.
+
+2008-12-10  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-name-context.[ch], gladeui/glade-editable.[ch], 
+	gladeui/glade-displayable-values.c: Relicensed LGPL.
+
+	* plugins/gtk+/glade-image-editor.c, plugins/gtk+/glade-image-item-editor.c,
+	plugins/gtk+/glade-button-editor.c, plugins/gtk+/glade-label-editor.c,
+	plugins/gtk+/glade-cell-renderer-editor.c, plugins/gtk+/glade-tool-button-editor.c,
+	gladeui/glade-editor-table.c, gladeui/glade-base-editor.c: 
+	Now editable portions of properties dont expand in tables, leaving more freedom 
+	for labels to expand in tight spots, no more item_labels in radio buttons (they dont expand).
+
+	* gladeui/glade-widget-adaptor.c: Fixed regression, now disabled classes are not
+	reinstalled in subclasses.
+
+2008-12-09  Tristan Van Berkom <tvb@gnome.org>
+
+	* NEWS, configure.ac: Rolling 3.5.3
+
+2008-12-09  Michael Gratton  <mike@vee.net>
+
+	* gladeui/glade-property-class.c: Change spin button page size to
+	0 for numeric property values editorsm, stops a lot of GTK
+	warnings.
+
+2008-12-09  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+	
+	* plugins/gtk+/icons/22x22/widget-gtk-uimanager.png,
+	plugins/gtk+/icons/22x22/widget-gtk-cellrenderertoggle.png,
+	plugins/gtk+/icons/22x22/widget-gtk-entrycompletion.png,
+	plugins/gtk+/icons/22x22/widget-gtk-cellrendererprogress.png,
+	plugins/gtk+/icons/22x22/widget-gtk-recentaction.png,
+	plugins/gtk+/icons/22x22/widget-gtk-windowgroup.png,
+	plugins/gtk+/icons/22x22/widget-gtk-cellrendereraccel.png,
+	plugins/gtk+/icons/22x22/widget-gtk-volumebutton.png,
+	plugins/gtk+/icons/22x22/widget-gtk-treestore.png,
+	plugins/gtk+/icons/22x22/widget-gtk-cellrendererpixbuf.png,
+	plugins/gtk+/icons/22x22/widget-gtk-liststore.png,
+	plugins/gtk+/icons/22x22/widget-gtk-cellrendererspin.png,
+	plugins/gtk+/icons/22x22/widget-gtk-cellrenderertext.png,
+	plugins/gtk+/icons/22x22/widget-gtk-iconfactory.png,
+	plugins/gtk+/icons/22x22/widget-gtk-scalebutton.png,
+	plugins/gtk+/icons/22x22/widget-gtk-cellrenderercombo.png
+	plugins/gtk+/icons/16x16/widget-gtk-cellrenderertoggle.png,
+	plugins/gtk+/icons/16x16/widget-gtk-treeviewcolumn.png,
+	plugins/gtk+/icons/16x16/widget-gtk-entrycompletion.png,
+	plugins/gtk+/icons/16x16/widget-gtk-cellrendererprogress.png,
+	plugins/gtk+/icons/16x16/widget-gtk-recentaction.png,
+	plugins/gtk+/icons/16x16/widget-gtk-windowgroup.png,
+	plugins/gtk+/icons/16x16/widget-gtk-cellrendereraccel.png,
+	plugins/gtk+/icons/16x16/widget-gtk-volumebutton.png,
+	plugins/gtk+/icons/16x16/widget-gtk-treestore.png,
+	plugins/gtk+/icons/16x16/widget-gtk-cellrendererpixbuf.png,
+	plugins/gtk+/icons/16x16/widget-gtk-liststore.png,
+	plugins/gtk+/icons/16x16/widget-gtk-cellrendererspin.png,
+	plugins/gtk+/icons/16x16/widget-gtk-cellrenderertext.png,
+	plugins/gtk+/icons/16x16/widget-gtk-iconfactory.png,
+	plugins/gtk+/icons/16x16/widget-gtk-scalebutton.png,
+	plugins/gtk+/icons/16x16/widget-gtk-cellrenderercombo.png:
+	Added new icon files, most of them are a combination of other icons.
+
+	* plugins/gtk+/icons/22x22/widget-gtk-action.png,
+	  plugins/gtk+/icons/22x22/widget-gtk-actiongroup.png,
+	  plugins/gtk+/icons/22x22/widget-gtk-radioaction.png,
+	  plugins/gtk+/icons/22x22/widget-gtk-toggleaction.png,
+	  plugins/gtk+/icons/16x16/widget-gtk-action.png,
+	  plugins/gtk+/icons/16x16/widget-gtk-actiongroup.png,
+	  plugins/gtk+/icons/16x16/widget-gtk-radioaction.png,
+	  plugins/gtk+/icons/16x16/widget-gtk-toggleaction.png:
+	  new icons by Mike Gratton <mike@vee.net> bug #561979
+
+2008-12-09  Tristan Van Berkom <tvb@gnome.org>
+
+	* COPYING: Updated to reflect current temporary dual licensing scheme, package is to be LGPL, with
+	code portions that are still marked as GPL until they can be relicensed, both licenses are included
+	in the package already.
+
+	* plugins/gtk+/glade-store-editor.h plugins/gtk+/glade-icon-factory-editor.h
+	plugins/gtk+/glade-image-item-editor.c plugins/gtk+/glade-image-editor.c plugins/gtk+/glade-image-item-editor.h
+	plugins/gtk+/glade-model-data.c plugins/gtk+/glade-icon-sources.c plugins/gtk+/glade-tool-button-editor.c
+	plugins/gtk+/glade-image-editor.h plugins/gtk+/glade-model-data.h plugins/gtk+/glade-icon-sources.h
+	plugins/gtk+/glade-tool-button-editor.h plugins/gtk+/glade-text-button.c plugins/gtk+/glade-button-editor.c
+	plugins/gtk+/glade-column-types.c plugins/gtk+/glade-text-button.h plugins/gtk+/glade-label-editor.c
+	plugins/gtk+/glade-column-types.h plugins/gtk+/glade-button-editor.h plugins/gtk+/glade-cell-renderer-editor.c
+	plugins/gtk+/glade-label-editor.h plugins/gtk+/glade-cell-renderer-editor.h plugins/gtk+/glade-treeview-editor.c
+	plugins/gtk+/glade-convert.c plugins/gtk+/glade-store-editor.c plugins/gtk+/glade-icon-factory-editor.c
+	plugins/gtk+/glade-treeview-editor.h: First files to safely be completely relicensed under LGPL.
+
+2008-12-09  Tristan Van Berkom <tvb@gnome.org>
+
+	* configure.ac: Bumping gtk+ required version to 2.14
+
+	* gladeui/glade-xml-utils.c, gladeui/glade-widget-adaptor.[ch],
+	gladeui/glade-property-class.[ch], gladeui/glade-project.c: Added support
+	for "builder-since" versioning (since builder supported this property/widget).
+
+	* plugins/gtk+/gtk+.xml.in: Marked appropriate properties and objects "builder-since"
+	and brought up to date new properties and signals introduced in 2.14.
+
+	* gladeui/glade-base-editor.c: Plugged resource leak in finalize().
+
+2008-11-28  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* gladeui/glade-inspector.c: added explanation string in the search entry.
+	"< search widgets >" with italic style and insensitive color.
+
+2008-11-28  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-inspector.c: Added GCompletion/GtkTreeModelFilter to the inspector with
+	a new search entry.
+
+	* gladeui/glade-widget-adaptor.c: Fixed bug with iface props, they were getting listed
+	once per implementing subclass (subclasses of implementors had it listed > 2 times).
+
+2008-11-25  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-utils.c: Hijack the cntl-n accelerator too now.
+
+	* plugins/gtk+/glade-column-types.c, plugins/gtk+/glade-model-data.c, plugins/gtk+/glade-store-editor.c:
+	Enhanced model editing, now there is completion in type names, and column types are defined inline
+	with no add or delete keys, model data can be edited and navigated without using the pointer either.
+
+	* gladeui/glade-command.c: Fixed check for wrapperless objects returned by adaptor_get_children().
+
+	* plugins/gtk+/glade-gtk.c, plugins/gtk+/gtk+.xml.in: 
+	  - Added editor support for Icon View.
+	  - Added editor support for Combo Box
+	  - Renderers watch project format changes and now sync attributes in an idle
+	    when moving into builder format (fixes renderer appearance after undo of project
+	    conversions).
+
+	* plugins/gtk+/glade-cell-renderer-editor.c: Export a new function to get the model from
+	the renderer regardless of the layout type.
+
+	* plugins/gtk+/glade-treeview-editor.c: Now supports editing any view that can have a model,
+	and pops up the store editor automatically on the right of the normal widget editor.
+
+	* plugins/gtk+/glade-convert.c: Fixed conversions for combo boxes.
+
+	* gladeui/glade-base-editor.c: Now include signal editor outside notebook, update signal
+	editor on page changes.
+
+2008-11-23  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-widget.c: 
+	  - glade_widget_build_object() now calls glade_widget_set_object() internally and then 
+	    uses glade_widget_adaptor_set_property() for non construct properties.
+	  - glade_widget_dup_properties/glade_widget_copy_properties take 2 new args, whether copy
+	    parentless widget properties or not, and whether to copy them exactly or not.
+	  - added glade_widget_get_parentless_reffed_widgets() to return a list of reffed parentless
+	    widgets.
+
+	* gladeui/glade-command.c: Now add/remove parentless widget props from the project in 
+	  command_add/remove.
+	
+	* plugins/gtk+/glade-gtk.c, plugins/gtk+/gtk+.xml.in: 
+	  - Made GtkTreeView:model property query user at create time.
+	  - Fixed to never sync properties when in attribute mode, to sync attributes
+	    after adding cells to cell layouts, and to not set attributes to orphan cells
+	    (net result: copy/paste of treeviews now result in a nice runtime replica).
+	  - Did some reordering in glade-gtk.c
+	  - Added load/save support for <action-widgets> of GtkDialog (response ids).
+	  - Fixed gtk_image_menu_item_set_stock() to not override the label value if not
+	    in use_stock mode (fixes missing labels in pasted imagemenuitems).
+	
+2008-11-22  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-base-editor.c: 
+	  - Removed apis to add popups, now they are autogenerated
+	  - Added glade_base_editor_append_types(), glade_base_editor_new() now
+	    only adds types supported by the container object, use _append_types() to
+	    define hierarcic type relations for children.
+	  - Added "main_editable" optional argument to glade_base_editor_new(), the editor
+	    now contains a main page with the provided editable, or creates a general editable
+	    for the container for the general page.
+
+	* gladeui/glade-editor-table.c: 
+	  - Fixed a warning hiding a never built label
+	  - Load propertes up a realize time (some sizes need negotiation when loaded editables
+	    are going into dialogs that are not yet on screen).
+
+	* plugins/gtk+/gtk+.xml.in, plugins/gtk+/glade-gtk.c: 
+	  - Now the toolbar editor can add menus and edit menus inside the gtkmenutoolbutton
+	    (fixed bug 429438).
+	  - First itteration on the treeview editor, removed annoying actions for column/cell
+	    hierarchy and do it all in the editor, added position packing property to treeview
+	    column for this (treeview column still implemented generically as a cell layout).
+
+	* plugins/gtk+/Makefile.am, plugins/gtk+/glade-treeview-editor.[ch]: New editor to group
+	  the treeview and model together in the base editor treeview editor
+
+2008-11-20  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/gtk+.xml.in: Added all remaining metadatas for cell renderers
+	  (all cell renderers and attributes now implemented).
+
+	* plugins/gtk+/glade-column-types.c: Fixed to populate enums/flags only
+	after all catalogs parsed, now they are listed in alphabetical order too.
+
+	* plugins/gtk+/glade-cell-renderer-editor.c: Added GladeEPropCellAttribute
+
+	* plugins/gtk+/glade-gtk.c, plugins/gtk+/gtk+.xml.in: Integrated new eprop
+	  for cell renderer attributes, avoid setting attributes for columns that
+	  exceed model bounds (except on load).
+
+2008-11-19  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/Makefile.am, plugins/gtk+/glade-cell-renderer-editor.c:
+	Added a new editor for cell renderers
+
+	* plugins/gtk+/gtk+.xml.in, plugins/gtk+/glade-gtk.c: Added metadata for
+	all attributes and auxilary properties in the catalog, and added hooks
+	to manipulate, load and save cell renderers, reused most of Juan Pablo's
+	work for this, and also for treeview column child renderer support.
+
+2008-11-15  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-editor-property.[ch]: Fixed recursion in the eprops when
+	updating values (due to exterior callers calling ->load() when the project
+	changes for thier custom editors), this fixes glitches when editing multiline
+	text entries.
+
+	* src/glade-window.c: Update glade-app accel group.
+
+	* gladeui/glade-widget-adaptor.[ch], gladeui/glade-xml-utils.h: Added
+	new backend ->depends() vfunc to determine toplevel dependancies (for
+	glade file output ordering).
+	
+	* gladeui/glade-project.[ch], gladeui/glade-app.c: 
+	  - Remove accel group notion from projects
+	  - Sort dependancies using glade_widget_adaptor_depends()
+
+	* gladeui/glade-base-editor.c:
+	  - Use global accel group (with keypress editor hijack in place)
+	  - No longer modal
+	  - added "container" property on the editor
+	  - dedicated dialogs self destruct if their container changes
+
+	* gladeui/glade-utils.c: added glade_utils_hijack_key_press ()
+
+	* src/glade-window.c: Moved hijack_key_press to glade_utils
+
+	* gladeui/glade-editor.[ch]:
+	  - Added "widget" property
+	  - added glade_editor_dialog_for_widget()
+
+	* plugins/gtk+/gtk+.xml.in, plugins/gtk+/glade-gtk.c: 
+	  - Added "Edit Separately" action
+	  - Added ->depends() func for GtkWidget and GtkSizeGroup
+
+2008-11-12  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-utils.c: Refixed use of uninitialized variable (bug 559678).
+
+	* gladeui/glade-app.c: Fixed win32 api for deprecated api usage (bug 559678).
+
+	* plugins/gnome/glade-gnome.c: Fixed build breakage (bug 560668).
+
+	* plugins/gtk+/glade-gtk.c: Delete dangling submenus when moving children
+	  around in the menu editor (bug 560145).
+
+2008-11-12  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/glade-gtk.c: Fixed loading of images and only set image
+	data when in the correct edit mode.
+
+	* plugins/gtk+/glade-convert.c: Fixed toolbutton conversions to search
+	icon factories from the beginning of the object list and not the current
+	list position.
+
+	* gladeui/glade-project.c: When changing resource paths, reload all pixbuf
+	properties automagically (this wont work for custom pixbufs like icon factory
+	has).
+
+2008-11-08  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* gladeui/glade-utils.c: (glade_utils_get_pspec_from_funcname),
+	(glade_util_ui_message), (glade_util_gtk_combo_find):
+	* src/glade-window.c: (confirm_close_project):
+	Try to avoid using deprecated glib api. Bug #559678.
+
+2008-11-07  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+	
+	* gladeui/glade-widget.c, gladeui/glade-widget-adaptor.c: moved signal and
+	children serialization from glade_widget_adaptor_object_write_widget() to
+	glade_widget_write() (bug #559531)
+
+2008-11-07  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/gtk+.xml.in: Faked the accel-group property and added
+	accel-groups object list to GtkWindow... work in progress.
+
+	* plugins/gtk+/glade-image-item-editor.c: Adjusted for accel-group property
+	which is only avaiable for stock items.
+
+	* plugins/gtk+/glade-gtk.c: Fixed sensitivity for accel-group/stock at load time.
+
+	* plugins/gtk+/glade-convert.c: Set the toplevel window accel-groups property when
+	converting.
+
+	* gladeui/glade-editor-property.c: Labels dont go insensitive anymore, I think that
+	was a general usability problem, the inputs still go insensitive and there are always 
+	useful tooltips, the insensitivity message still gets across.
+
+	* gladeui/glade-editor-table.c: Fixed breaking weak refs from dispose.
+
+	* gladeui/glade-project.c: Now save project resource directory in glade file
+	comments if user specified a relative or absolute path in the prefs dialog,
+	otherwise resources are loaded from the project's directory.
+
+2008-11-05  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-xml-utils.c, gladeui/glade-property-class.c: Added 
+	parameter-spec parsing, need to updated docs still (fixes bug 382701).
+
+	* plugins/gtk+/glade-gtk.c, plugins/gtk+/gtk+.xml.in, plugins/gtk+/glade-attributes.c,
+	plugins/gtk+/glade-icon-sources.c, plugins/gtk+/glade-accels.c, plugins/gtk+/glade-model-data.c,
+	plugins/gtk+/glade-column-types.c:
+	- Removed all custom parameter spec implementations in the plugin and replaced them
+	  with automatically generated ones parsed by the xml.
+	- Fixed hierarchy bugs, some classes were not saving.
+
+2008-10-31  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/glade-image-item-editor.[ch], plugins/gtk+/glade-gtk.c:
+	making menu conversions seemless
+
+	* gladeui/glade-widget.c: Remove widgets from layout on hide,
+	hide widgets when adding parentless prop refs.
+
+2008-10-30  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-widget.[ch], gladeui/glade-command.[ch]: Added
+	glade_widget_[un]lock() and glade_command_[un]lock_widget().
+
+	* plugins/gtk+/glade-gtk.c, plugins/gtk+/gtk+.xml.in, plugins/gtk+/glade-convert.c,
+	plugins/gtk+/glade-image-item-editor.c: Dual format menu editing support
+	depending on my gtk+ patch on bug 527672, TODO: still need to add accel-groups
+	to GtkWindow on the glade side of things.
+
+2008-10-28  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/gtk+.xml.in, plugins/gtk+/glade-gtk.c: 
+	Reimplemented GtkMenuItem and subclasses from top to bottom
+
+	* plugins/gtk+/glade-image-item-editor.[ch], plugins/gtk+/Makefile.am:
+	New GtkImageMenuItem editor (that embeds the child image editor when needed)
+
+	* gladeui/glade-command.[ch]: Added glade_command_[un]protect_widget()
+
+	* gladeui/glade-widget.[ch]: Added glade_widget_[un]protect()
+	protected widgets come with a message and cannot be manually deleted
+	from the project.
+
+	* plugins/gtk+/glade-image-editor.c, plugins/gtk+/glade-button-editor.c,
+	plugins/gtk+/glade-tool-button-editor.c, gladeui/glade-editor-table.c:
+	Fixed to:
+	- not reffer to child editables in finalize
+	- always removed external signals and weak references from finalize
+
+	* gladeui/glade-base-editor.c: Fixed to allow properties expand/fill
+	in both label and entry.
+
+	* src/glade-window.c: Clear toolbar actions when closing projects.
+
+	* gladeui/glade-gtk.c: Fixed bugs around load/save of button/imagemenuitem
+	label (stock driven) properties.
+
+	* plugins/gtk+/glade-image-item-editor.c: Fixed a null dereference, glade_command_create()
+	sometimes ends up changeing the selection, so the editable may be reloaded in the
+	midst of its flow.
+
+	* gladeui/glade-property.c, gladeui/glade-widget-adaptor.c: Now check for pclass->save
+	and pclass->enabled *before* calling glade_property_write(), this allows plugins to
+	mark props as save="False" and save those properties with custom values, still allowing
+	them to use the GladeProperty api.
+
+	* plugins/gtk+/glade-icon-factory-editor.[ch], plugins/gtk+/Makefile.am,
+	plugins/gtk+/gtk+.xml.in, plugins/gtk+/glade-gtk.c:
+	Added icon factory editor widget (only to better format the "sources" property
+	so that it takes the whole width with the treeview.
+	
+	* plugins/gtk+/glade-store-editor.[ch], plugins/gtk+/Makefile.am,
+	plugins/gtk+/gtk+.xml.in, plugins/gtk+/glade-gtk.c:
+	Added liststore/treestore editor widget (only to better format the "columns"
+	and "data" properties so that it takes the whole width with the treeview.
+
+	* plugins/gtk+/glade-label-editor.[ch], plugins/gtk+/Makefile.am,
+	plugins/gtk+/gtk+.xml.in, plugins/gtk+/glade-gtk.c: Rewrote GtkLabel implementation from 
+	top to bottom with custom editor (now all those conflicting properties are dummy proofed) 
+
+	* plugins/gtk+/glade-attributes.c: Fixed some glitches, now its usable, closing case
+	for now, we have attributes, they are global for the label but better that way for i18n'ing.
+
+2008-10-27  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/gtk+.xml.in, plugins/gtk+/glade-gtk.c: 
+	- Reimplemented GtkImage from ground up.
+	- Reimplemented stock on GtkButton.
+	- Made toolbutton editables show up in the toolbar editor
+
+	* gladeui/glade-base-editor.[ch]: Added glade_base_editor_add_editable()
+
+	* plugins/gtk+/glade-button-editor.c, plugins/gtk+/glade-tool-bar-editor.c:
+	Implement new Editable vfunc set_show_name()
+
+	* gladeui/glade-editor-table.c, gladeui/glade-editable.c, gladeui/glade-editor.c:
+	Added new vfunc set_show_name()
+
+	* plugins/gtk+/Makefile.am, plugins/gtk+/glade-image-editor.[ch]: New editor
+	widget for GtkImage
+
+	* gladeui/glade-property-class.[ch]: string props can now be "stock" or "stock-icon"
+
+	* gladeui/glade-widget-adaptor.c: No more stock enum eprops
+
+	* gladeui/glade-editor-property.c: Handle string types with "stock" or "stock-icon"
+
+	* plugins/gtk+/glade-image-editor.[ch], plugins/gtk+/gtk+.xml.in, plugins/gtk+/glade-gtk.c,
+	gladeui/glade-property-class.c: Override type of GtkImage::icon-size to use real
+	GTK_TYPE_ICON_SIZE for editing purposes (needed to fix the core a bit for this), also
+	improved image editor to keep sizes contextual to image edit mode.
+
+2008-10-26  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/Makefile.am, plugins/gtk+/glade-tool-button-editor.[ch]:
+	Added GtkToolButtonEditor editable implementation.
+
+	* plugins/gtk+/gtk+.xml.in, plugins/gtk+/glade-gtk.c: Reimplemented toolbuttons
+	from ground up.
+
+	* gladeui/glade-editor-property.c: object dialog now doesnt do "new" for unmentioned
+	abstract or uninstantiatable types, also enhanced dialog title.
+
+	* gladeui/glade-project.c: Moved "parse-finished" emission to /after/ resolving
+	object properties (doh !).
+
+2008-10-25  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-property-class.c: Fixed glade_property_class_make_adjustment()
+	for floating and double values (page inc and size were not properly set) (bug 553200)
+
+	* gladeui/glade-app.c: Fixed a warning
+
+	* gladeui/glade-editor-table.c: Was loading invisible properties, oops.
+	
+	* doc/properties.sgml: Documented custom-layout property.
+
+	* plugins/gtk+/gtk+.xml.in: mark some props save-always for overridden
+	defaults in children (this one is bug 555726)
+
+	* plugins/gtk+/glade-cell-renderer-button.c: Fixed a warning.
+
+	* plugins/gtk+/glade-column-types.c, plugins/gtk+/glade-model-data.c,
+	plugins/gtk+/glade-icon-sources.c: Made sure add/remove works when
+	deleting unedited icon sources, all add buttons result in focus and
+	start-editing of an important cell in the underlying treeview.
+
+	* gladeui/glade-utils.c: Fixed generic enum types to use enum_class->minimum
+	as the default value.
+
+	* plugins/gtk+/glade-gtk.c: Ignore parent-changes on internal widgets (that
+	causes problems when internal widgets get destroyed at project close time).
+
+	* plugins/gtk+/glade-button-editor.c: Fixed custom/standard commands,
+	now standard mode sets up a default label etc also.
+
+	* gladeui/glade-project.c, gladeui/glade-property.c, gladeui/glade-widget.c,
+	gladeui/glade-property-class.[ch], gladeui/glade-xml-utils.h:
+	Removed hack for GtkToolButton:icon --> iconfactory (will do in glade-convert.c
+	properly).
+
+	* gladeui/glade-convert.c: Properly convert toolbutton:icon both ways.
+
+	* plugins/gtk+/glade-gtk.c: Undid a little toolbutton support so that
+	stock-id remains untouched and is accessible in builder format, TODO
+	rework toolbars and menus (will be simpler) with GladeEditable.
+
+	* gladeui/glade-command.c: Fixed a crasher in project conversions.
+
+2008-10-24  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/Makefile.am, plugins/gtk+/glade-button-editor.[ch]:
+	Added new #GladeEditable implementation for GtkButton general page.
+
+	* plugins/gtk+/glade-gtk.c, plugins/gtk+/gtk+.xml.in: Completely reworked GtkButton, 
+	much cleaner and less code now.
+
+	* gladeui/glade-property-class.c: string_from_enum, now returns the nick and not the
+	name (generally all around nicer menus when no displayable values and also smaller
+	nicer glade files). Displayable values are now consequently indexed by nick and not name.
+
+	* gladeui/glade-displayable-values.[ch]: Added reverse lookup glade_get_value_from_displayable()
+
+	* gladeui/glade-utils.[ch]: When doing glade_utils_enum/flag_value_from_string(), allow
+	displayable values (also added glade_utils_enum/flag_string_from_value_displayable()).
+
+	* plugins/gtk+/glade-icon-sources.c: Use all around displayable values for items
+	in the treeview.
+
+2008-10-23  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/Makefile.am, gladeui/glade-editable.[ch], gladeui/glade-editor-table.[ch]:
+	- Added GladeEditable interface used as pages by GladeEditor
+	- Added GladeEditorTable widget to implmenemt the editable as the traditional table
+	  with sorted properties
+
+	* gladeui/glade-editor.[ch]: Removed lots of code, now uses GladeEditables returned
+	  by thier adaptors.
+
+	* gladeui/glade-editor-property.c: Removed obsolete doc-search signal.
+
+	* gladeui/glade-widget-adaptor.[ch]: Added GladeCreateEditableFunc to allow backends
+	  to define layouts of pages in the editor.
+
+	* src/glade-window.c: Fixed a warning.
+
+2008-10-22  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* plugins/gtk+/glade-gtk.c: fixed bug in glade_gtk_assistant_verify_property()
+	  new value should be >= that current
+
+	* plugins/gtk+/gtk+.xml.in: renamed virtual property GtkAssistant::size to n-pages
+
+2008-10-22  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/Makefile.am, gladeui/glade-displayable-values.[ch]: Rewrote displayable
+	values so no need for redundancies anymore (bug 556452). Also now displayable values
+	are more accessible for the plugin.
+
+	* plugins/gtk+/gtk+.xml.in, plugins/gnome/*.xml.in: Removed redundant displayable value
+	declarations (alot of them !).
+	
+	* plugins/gtk+/Makefile.am, plugins/gtk+/glade-icon-sources.[ch]:
+	new pspec and eprop for GtkIconSources in GtkIconFactories.
+
+	* plugins/gtk+/glade-gtk.c, plugins/gtk+/gtk+.xml.in: Added load/save/set_property/string_from_value
+	support for icon sources in icon factories.
+
+2008-10-21  Tristan Van Berkom <tvb@gnome.org>
+
+	* src/glade-window.c, gladeui/glade-editor.c, gladeui/glade-editor-property.[ch],
+	gladeui/glade-popup.[ch]: Abolished "View->Context Help" and added a context menu
+	to editor properties.
+
+	* gladeui/glade-editor.c, gladeui/glade-editor-property.c: Implemented something
+	based on Pavel's patch, wordwrapping in the editor works better now.
+
+	* gladeui/glade-project.c: Fixed regression, now the inspector updates on widget
+	name changes.
+
+	* gladeui/glade-widget.c: Implement property lookups with a hash table, fixed mem leaks
+
+	* gladeui/glade-property.c: Read properties from the passed node directly, fixed mem leaks
+
+	* gladeui/glade-widget-adaptor.c: Read properties in the order they are listed in the file, 
+	not by the order of the properties in the object (helps load performance).
+
+	* gladeui/glade-project.c: Fixed mem leaks, release widget property references before
+	destroying all the glade widgets.
+
+	* plugins/gtk+/glade-attributes.c: Use glade-cell-renderer-button for color attributes.
+
+	* plugins/gtk+/glade-cell-renderer-button.c: no more button-text property
+
+	* plugins/gtk+/glade-text-button.c: Now use a GTK_STOCK_EDIT icon in the cell renderer button
+
+2008-10-20  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/glade-cell-renderer-button.[ch], plugins/gtk+/glade-text-button.[ch]:
+	Now can optionally make the entry non editable.
+
+	* plugins/gtk+/glade-model-data.c: Added pixbuf editing support.
+
+	* doc/widgetclasses.sgml, doc/properties.sgml: Clarified docs.
+
+	* gladeui/glade-editor-property.[ch]: Removed resource editor, edit pixbuf with
+	string editor.
+
+	* gladeui/glade-widget-adaptor.c, gladeui/glade-property-class.c,
+	gladeui/glade-project.[ch]: Completely removed concept of resources, glade
+	no longer copies along pixbufs, pixbuf properties can include full paths
+	or relative paths, in the glade runtime; any pixbufs are only ever loaded
+	from the glade project directory (only the basename is used).
+	
+2008-10-19  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/glade-cell-renderer-button.[ch], plugins/gtk+/glade-text-button.[ch],
+	plugins/gtk+/glade-model-data.c: Added i18n support to string values in datastores.
+	
+2008-10-18  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/glade-model-data.c: Now support editing enum types
+
+	* plugins/gtk+/glade-column-types.c: Generate a list of enum and flag column types to select from.
+
+2008-10-18  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-command.c: Fixed property commands to not unify across separate groups,
+	and also to unify when they are not lists.
+
+	* plugins/gtk+/glade-gtk.c, plugins/gtk+/gtk+.xml.in, plugins/gtk+/glade-model-data.c:
+	  - Data properties now have DnD working
+	  - Adding TreeViewColumn support
+	  - Fixing liststore support to work for treestore
+	  - Added lots of actions on the treeview column
+	  - Marked GtkNotebook::pages as invisible
+
+	* gladeui/glade-editor.c: Allow query dialogs on invisible properties
+	  if requested.
+	
+2008-10-16  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* plugins/gtk+/glade-attributes.c: applied proposed patch for bug #547431
+	  '"Scale" ambiguous for translation' <Theppitak Karoonboonyanan>
+
+2008-10-16  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/Makefile.am, gladeui/glade-name-context.[ch]: Encapsulated name tracking mechanism
+
+	* gladeui/glade-project.c, gladeui/glade-command.c: Now added a naming policy to the project
+	with prefs and load/save support + a glade command to set it - also revamped the prefs dialog,
+	it also pops up automatically for new projects.
+
+	* gladeui/glade-editor.c, gladeui/glade-editor-property.c, gladeui/glade-property-class.c,
+	gladeui/glade-property.c, gladeui/glade-widget.c: All effected since now 
+	glade_property_class_make_gvalue_from_string () needs a GladeWidget argument to do
+	hierachic context sensitive searches... that and naming is much cleaner now.
+	
+	* src/glade-window.c: remember to pass ownership of the project to the app.
+
+	* plugins/gtk+/glade-gtk.c, plugins/gtk+/glade-column-types.c, plugins/gtk+/glade-model-data.c:
+	Cleaned up code, now data will dynamically reorder itself upon column changes, data is mostly
+	all editable save for some glitches, and all columns have unique names to which the data is
+	directly related.
+	
+2008-10-10  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-xml-utils.c, gladeui/glade-property-class.[ch]: Added
+	new "needs-sync" property
+
+	* gladeui/glade-widget.c: glade_widget_sync_custom_props(): also sync
+	props marked as needs-sync.
+
+	* plugins/gtk+/gtk+.xml.in: GtkTable:n-rows/n-columns marked as "needs-sync"
+
+2008-09-30  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-property.[ch], gladeui/glade-command.[ch], 
+	gladeui/glade-editor-property.c: Implemented new "context" i18n
+	metadata.
+
+	* gladeui/glade-widget.c: Fixed to hide non-window widgets in glade_widget_hide()
+2008-09-29  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/glade-column-types.[ch]: Exported glade_column_list_copy/free()
+
+	* plugins/gtk+/glade-model-data.[ch], plugins/gtk+/Makefile.am: Added model data
+	  pspec, editor not complete yet...
+	
+	* plugins/gtk+/glade-gtk.c, plugins/gtk+/gtk+.xml.in: Implemented new pspec as
+	  list/treestore's "data" property with load/save support.
+
+	* plugins/gtk+/glade-convert.c: Made combos convert correctly with new modeldata
+	  pspec.
+
+	* gladeui/glade-utils.[ch]: Added glade_utils_liststore_from_enum_type()
+
+	* gladeui/glade-widget.c: glade_widget_rebuild() updates prop_refs now
+
+	* gladeui/glade-property-class.c, gladeui/glade-xml-utils.h, gladeui/glade-property.c: 
+	  now you can set construct-only on virtual properties, they will rebuild the object
+	  and give you a chance to sync (you MUST handle set_property in a construct-only case)
+
+2008-09-29  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* plugins/gtk+/glade-column-types.[ch]: added missing files.
+	  close bug #554258 "glade-column-types.h missing"
+
+2008-09-28  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/glade-gtk.c, plugins/gtk+/glade-column-types.[ch],	
+	  plugins/gtk+/Makefile.am, plugins/gtk+/gtk+.xml.in: Added load/save/edit
+	  support for GtkTreeStore/GtkListStore basic columns and data definitions
+	  (store data still not translatable...) - Juan Pablo Ugarte
+
+	* gladeui/glade-utils.c: Added convenience funcs glade_utils_string_from_value()
+	  and glade_utils_value_from_string(), these actually use glade-property-class api.
+	
+2008-09-22  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* plugins/gtk+/glade-gtk.c: fixed bug #543314 
+	  "Crash when adding an Input DIalog"
+	  added glade_gtk_dialog_stop_offending_signals()
+	  to stop "hierarchy-changed" and "screen-changed"
+	  default handlers in GtkInputDialog and GtkFileChooserWidget
+
+2008-09-22  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-editor-property.c: Fixed adjustments when values are null in
+	libglade mode
+
+	* plugins/gtk+/gtk+.xml.in: Reorganized groups, added some more metadatas
+
+	* plugins/gtk+/glade-convert.c: 
+	  - Convert "text" property of TextView to a textbuffer and text property 
+	    in builder format.
+	  - Convert "tooltip" <--> "tooltip-text"
+	
+	* gladeui/glade-popup.c, gladeui/glade-inspector.c: enhanced menu for 
+	inspector empty spots (paste toplevels)
+
+	* gladeui/glade-editor-property.c: Adjustments in libglade had bugs, hardcoded
+	default values here and made sure object is NULL on default.
+
+	* gladeui/glade-widget.[ch]: Removed glade_widget_project_notify()
+
+	* gladeui/glade-command.c: 
+	  - glade_command_remove() implicitly makes commands to unset any properties 
+	    reffering to the object being removed from the project.
+	  - project conversions now cleanup unsupported widgets/properties
+
+	* gladeui/glade-palette.c, gladeui/glade-app.c: Moved toplevel widget creation
+	code from gladeapp to gladepalette.
+
+2008-09-21  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/glade-gtk.c: Set sizegroup_add action sensitive/insensitive
+	  depending on project format
+
+	* plugins/gtk+/gtk+.xml.in: Set libglade-unsupported && create-type on alot of properties
+
+	* gladeui/glade-editor-property.c: Set eprop insensitive also if its in an unsupported
+	  format
+
+	* gladeui/glade-xml-utils.h, gladeui/glade-property-class.c: Added "create-type"
+
+	* gladeui/glade-property.[ch]: Now property states can be flagged and
+	  also include format_disabled state.
+
+	* gladeui/glade-widget.c, gladeui/glade-widget-adaptor.[ch],
+	gladeui/glade-xml-utils.c: New "construct-object-function" used to construct
+	object instances by way of the plugin (glade_widget_adaptor_construct_object ()).
+
+2008-09-20  Tristan Van Berkom <tvb@gnome.org>
+
+	* TODO: Updated.
+
+	* gladeui/glade-utils.c: Improved error messages in load_module() routine.
+
+	* plugins/gtk+/gtk+.xml.in: 
+	  - Enabled object properties all over.
+	  - Added sizegroup support stuff
+
+	* plugins/gtk+/glade-gtk.c: 
+	  - Added GtkWidgetClass support for add to size group
+	    action with dynamic submenu
+	  - added sizegroup virtual "widgets" property
+	  - added custom load/save support for "widgets" property
+
+	* gladeui/glade-popup.c: Added support for dynamic action submenus
+
+	* gladeui/glade-widget-adaptor.[ch], gladeui/glade-xml-utils.h: Added
+	  GladeActionSubmenuFunc backend support for creation of dynamic
+	  action submenus.
+
+	* gladeui/glade-widget.[ch] removed deadcode glade_widget_create_action_menu()
+
+	* gladeui/glade-project.c: Added readonly "format" property
+
+	* src/glade-window.c, gladeui/glade-inspector.c, gladeui/glade-utils.c,
+	gladeui/glade-app.c:
+	  - Made sure that the first toplevel in the project is selected and visible 
+	    at load time in both the workspace and inspector
+	  - Sorted objects from widgets in the inspector view.
+
+	* gladeui/glade-xml-utils.h, gladeui/glade-catalog.[ch], 
+	gladeui/glade-widget-adaptor.[ch], gladeui/glade-property-class.[ch],
+	gladeui/glade-project.c, glade-palette-item.c: Added "supports" catalog element
+	to supply supported formats, added libglade-only and libglade-unsupported properties
+	for widget classes and property classes, those metadata will show up in the editor
+	like versioning info, in the verify logs as well, and the palette will adjust
+	sensitivity according to the new properties.
+
+	* plugins/gtk+/gtk+.xml.in, plugins/gnome/gnome.xml.in: Added supports
+	elements and marked widgets/properties as libglade-only/libglade-unsupported in
+	the gtk+ catalog, added ALL objects, with no extra support.
+
+2008-09-19  Tristan Van Berkom <tvb@gnome.org>
+
+	Now we have a conversion routine that is run in the plugin to
+	convert some data for one format to another (builder on the way...)
+	In this patch we use it to handle GtkAdjustment property conversions.
+	(NOTE: Completely undoable)
+	
+	* gladeui/glade-editor-property.c: Made adjustment eprop fallback on
+	  object dialog in builder cases.
+
+	* gladeui/glade-command.[ch]: Added glade_command_set_project_format()
+
+	* gladeui/gldae-catalog.c, gladeui/glade-xml-utils.h: Added GladeProjectConvertFunc
+
+	* plugins/gtk+/Makefile.am, plugins/gtk+/glade-convert.c,
+	plugins/gtk+/gtk+.xml.in: New file to handle conversion routines, 
+	added some objects.
+
+2008-09-18  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* plugins/gtk+/gtk+.xml.in:
+	  o set packing GtkBox::position as save-always (bug #551060)
+	  o set packing GtkToolbar::expand as save-always (bug #544654)
+
+2008-09-18  Tristan Van Berkom <tvb@gnome.org>
+
+	* src/glade-window.c: 
+	  - Show glade widgets in the workspace on selection changes in the project 
+	    and not on item-activated.
+	  - Rename "Dock Editor" -> "Dock Properties" as per bug 487613.
+	
+	* gladeui/glade-design-layout.c: Fixed expose event to chain to parent class
+	  after drawing an orange box (non window widgets are usualy GTK_NO_WINDOW).
+
+	* gladeui/glade-widget.c: Made glade_widget_show() show the toplevel of any
+	  GtkWidget object, also now shows toplevel non window glade widgets in the
+	  workspace, if the widget is referenced by a property that as a result parents
+	  the widget (i.e. bears a "parentless-widget" property reference), then the
+	  referencing widget is shown instead.
+
+	* gladeui/glade-popup.c: Added devhelp icon to documentation menu item, added
+	  docs icon to normal menu.
+
+	* plugins/gtk+/glade-gtk.c: 
+	  - insert before/after in box is working now (bug 550636).
+	  - take into account cancelation of query dialog in add_parent action 
+	    code (bug 549685)
+	  - switch notebook pages to display the selected widget (bug 392045).
+
+	* TODO: Updated.
+
+2008-09-18  Christian Persch  <chpe@gnome.org>
+
+	* gladeui/glade-app.c: (glade_app_show_properties),
+	(glade_app_hide_properties):
+	* gladeui/glade-command.c: (glade_command_pop_group): Replace the
+	deprecated G_GNUC_PRETTY_FUNCTION with G_STRFUNC. Bug #512559.
+
+2008-09-18  Christian Persch  <chpe@gnome.org>
+
+	* plugins/Makefile.am: Install the catalogue DTD. Bug #552767.
+
+2008-09-17  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-editor.[ch]: Exposed doc_search() command for palette popup
+
+	* gladeui/glade-popup.[ch]: Added glade_popup_palette_pop(), with add
+	  widget as toplevel feature & doc search feature.
+
+	* gladeui/glade-palette-item.c: Handle right-click for popup
+
+	* gladeui/glade-inspector.c: Make inspector list widgets in natural order
+
+	* gladeui/glade-project.c: Fixed widget order list (bug 422823)
+
+	* gladeui/glade-gtk.c: Fixed widget order inside GtkTable
+	  (bug 422823 - patch by Pavel Kostyuchenko)
+
+2008-09-16  Pavel Kostyuchenko <ShprotX@gmail.com>
+
+	Patch adds support for non GtkWindow toplevel project widgets and handles
+	carefully properties that reffer to parentless gtkwidgets (bug 532636).
+	(also fixes GtkMessageDialog ...)
+	
+        * gladeui/glade-app.c:
+          Creating toplevel widget through unified glade-palette interface.
+          Removed error message when pasting non-toplevel widgets without
+          a parent.
+
+        * gladeui/glade-command.h: A new function for getting depth of command recursion
+
+        * gladeui/glade-command.c:
+          A new function for getting depth of command recursion.
+          A return value of glade_command_set_property_execute function is valid
+          and is respected by glade_command_set_properties_list.
+          indicate success/failure of their execution.
+          Glade-command can be unified to null.
+          Setting property command is always executed as a group, so if there is
+          any recursive command, they will be added to that group.
+          Removed parentless widget message level lowered from critical to
+          message.
+          Widget is treated as toplevel only if it has no parent.
+          Removed an assertion from glade_command_create that doesn't allow
+          creation of non-GtkWindow parentless widgets
+
+        * gladeui/glade-editor-property.c:
+          Object selection dialog will be optionally filled by parentless
+          non-GtkWindow widgets only
+          Unparenting root widgets before setting another property to them
+
+        * gladeui/glade-inspector.c:
+          Popup for clicking even on empty part of widget list
+
+        * gladeui/glade-palette.h:
+          A unified function for creating root widgets
+
+        * gladeui/glade-palette.c:
+          A unified function for creating root widgets
+          A new button for creating root widgets
+
+        * gladeui/glade-placeholder.[ch]:
+          glade_placeholder_get_project has been made public for using in
+          glade-popup
+
+        * gladeui/glade-popup.c:
+          A new function glade_popup_simple_pop for creating a context menu on
+          an empty space of glade-inspector
+          New context menu items for adding widgets
+
+        * gladeui/glade-popup.h:
+          A new function glade_popup_simple_pop for creating a context menu on
+          an empty space of glade-inspector
+
+        * gladeui/glade-project.c:
+          Unifying command even if there's redo items.
+          Unifying atomic commands only.
+          Unifying to null
+
+        * gladeui/glade-property-class.[ch]:
+          A new field for making properties that points to parentless widgets
+
+        * gladeui/glade-property.h:
+          Added a return value to glade_property_set* functions to indicate
+          success/failure that is used in glade-command
+
+        * gladeui/glade-property.c:
+          Ignoring parentless_widget properties while duplicating properties.
+          Additional check while adding/removing property reference
+          Added a return value to glade_property_set* functions to indicate
+          success/failure that is used in glade-command.
+          Determining that property is changed using glade-proproperty method
+          instead of direct comparing GValue.
+          Loading properties through glade-widget-adaptor interface instead of
+          getting them directly.
+          remove_object method now unsets referencing property instead of
+          setting it.
+          Removed dummy duplicated setting of property while unsetting
+          referencing property.
+
+        * gladeui/glade-property.h:
+          Added a return value to glade_property_set* functions to indicate
+          success/failure that is used in glade-command.
+
+        * gladeui/glade-widget.c:
+          Removed setting widget properties to template/default values while
+          building a new object, because they will be set later in constructor.
+          Reloading properties after duplicating a widget.
+          A new function for removing parent reference, that was made by setting
+          parentless_widget property to the widget.
+          Saving and loading parentless_widget properties while rebuilding,
+          because they cannot be duplicated.
+          Corrected destroying of an old widget while rebuilding. Seems like
+          it's not fully correct still.
+
+        * gladeui/glade-widget.h:
+          A new function for removing parent reference, that was made by setting
+          parentless_widget property to the widget.
+
+        * gladeui/glade-xml-utils.h:
+          A new tag "parentless-widget" as a property attribute
+
+        * plugins/gtk+/glade-gtk.c, plugins/gtk+/gtk+.xml.in:
+          Removed an old hack for "image" property of GtkMessageDialog.
+          A new implementation of "image" property using parentless_widget
+          kind of property.
+          Added an ability of working with parentless widgets using
+          "remove parent" and "add parent" items of context menu
+
+2008-09-16  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-design-layout.c: Fixed calculation to get deepest
+	  wrapped glade widget (bug 539924 - fix by Pavel Kostyuchenko).
+
+	* plugins/gtk+/glade-gtk.c: Made insert/remove column/row on gtktable
+	  take packing property order into account (bug 503355 fix by Eli Collins).
+
+	* src/glade-window.c: Fixed projects menu bug (bug 532156, fix by 
+	  Pavel Kostyuchenko).
+
+	* gladeui/glade-xml-utils.h: Added version macros
+
+	* plugins/gtk+/gtk+.xml.in: Added version 2.14
+
+	* gladeui/glade-project.c: Now glade loads and saves requires
+	  metadata as comments at the toplevel in libglade and older versions
+	  of gtk+ that dont recognize versioning (i.e. gtk+ < 2.14) (bug 536310)
+
+	* gladeui/glade-widget.c: Reverted the above patch portion where built
+	  objects only had thier construct props set, this caused errors, fixed.
+
+2008-09-15  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* plugins/gtk+/glade-gtk.c, plugins/gtk+/gtk+.xml.in:
+	  added glade_gtk_label_string_from_value() to avoid
+	  param spec warnings
+
+2008-09-02  Claude Paroz  <claude@2xlibre.net>
+
+	* gladeui/glade-utils.c: (glade_util_copy_file):
+	  Trivial change in a string to remove duplicate (io -> I/O).
+
+2008-09-01  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/glade-gtk.c, plugins/gtk+/gtk+.xml.in:
+	  response-id now only available for buttons that are in the
+	  action area of dialogs (bug 464502)
+
+2008-08-09  Vincent Geddes <vgeddes@gnome.org>
+
+	* gladeui/glade-base-editor.h: Don't include the
+	  private header file `glade-marshallers.h'. Rather
+          include it in `glade-base-editor.c'.
+
+2008-08-09  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/glade-gtk.c, plugins/gtk+/gtk+.xml.in:
+	  Worked around special child type naming discrepencies between
+	  formats from the plugin side (bug 533217 - fix by Pavel Kostyuchenko).
+
+	* gladeui/glade-project.c: Silently ignore unrecognized signals in glade file
+	  instead of aborting (bug 533728 - fix by Pavel Kostyuchenko).
+
+2008-08-06  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/Makefile.am, plugins/gtk+/glade-attributes.[ch]: 
+	  New internal pspec type for attributes and new editor widget for them.
+
+	* plugins/gtk+/glade-gtk.c, plugins/gtk+/gtk+.xml.in: 
+	  Load/Save/Edit pango attributes on GtkLabel
+
+	* gladeui/glade-utils.[ch]: Added enum value <--> string converters.
+
+	* plugins/gtk+/gtk+.xml.in: 
+	  - Made checkbutton::draw-indicator save-always (bug 543008)
+	  - Update loaded assistant pages properly (bug 540531 - fix by Antti Kaijanmäki)
+
+	* gladeui/glade-editor-property.c: Now objects and resource property fields are updated
+	  correctly (bug 542335 - fix by Pavel Kostyuchenko).
+
+2008-08-02  Tristan Van Berkom <tvb@gnome.org>
+
+	* doc/widgetclasses.sgml, doc/catalogintro.sgml: Ammended docs regarding
+	  widget icon installations.
+
+2008-07-18  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* src/glade-window.c: save main window paned positions.
+
+2008-05-27  Richard Hult  <richard@imendio.com>
+
+	* gladeui/glade-xml-utils.h: Remove copy-and-paste mistake (by the
+	looks of it). Fixes issue with duplicate symbols when linking on
+	Mac.
+
+2008-05-13  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/glade-accels.c: Fixed bold/grey/italics in treeview.
+
+	* gladeui/glade-editor.c: Fixed boldness in reset dialog treeview.
+
+2008-05-11  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-widget.c: Applied patch from Pavel Kostyuchenko to prevent
+	  hangs in anjuta (bug 531585).
+
+	* gladeui/glade-property.c, gladeui/glade-property-class.c: Applied patch from 
+	  Pavel Kostyuchenko to unify duplicate implementation property comparisons (bug 532013)
+
+	* gladeui/glade-project.c: Applied patch from Pavel Kostyuchenko to fix project
+	  modified state flag glitches (bug 532017).
+
+	* gladeui/glade.h: Applied patch from Andreas Henriksson to fix some compile errors
+	  on ia64 platform (bug 530143).
+
+2008-05-05  Tristan Van Berkom <tvb@gnome.org>
+	
+	* gladeui/glade-editor-property.c: Avoid feedback loops when committing properties,
+	  fixes bug 527896.
+
+	* src/glade-window.c: Updated copyright dates.
+
+2008-05-01  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/Makefile.am, plugins/gtk+/glade-keysyms.c: Removed generated keysyms file.
+
+	* plugins/gtk+/glade-accels.c: Removed old modifier and handbuilt keycode
+	  menus and obnoxious comboboxrenderers in favour of one simple accelrenderer.
+
+	* gladeui/glade-utils.h, gladeui/glade-builtins.h: Removed unused prototypes
+
+	* gladeui/glade-editor.c: Added safety check.
+
+	* gladeui/glade-property.c: Dont load virtual properties.
+
+	* gladeui/glade-property-class.c: Fixed bug where G_PARAM_SPEC_BOXED was
+	  used to check if the value held a boxed type.
+
+2008-04-17  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* gladeui/glade-property-class.[ch]: added glade_property_class_compare()
+	
+	* gladeui/glade-editor-property.c: use new compare function in
+	  glade_editor_property_commit() instead of g_param_values_cmp()
+	  since GBoxed comparison is not well defined.
+	  Fixes bug #528511.
+
+2008-04-16  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* gladeui/glade-widget.c: make glade_widget_build_object() do not apply
+	  catalog defaults if the object we are creating is for loading purposes.
+
+2008-04-12  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-editor-property.c: Fixed invisible labels in
+	the menu editor.
+
+	* gladeui/glade-widget.c, gladeui/glade-widget.h, gladeui/glade-xml-utils.c,
+	gladeui/glade-utils.c, gladeui/glade-xml-utils.h, gladeui/glade-utils.h,
+	gladeui/glade-property.c, gladeui/glade-property-class.c,
+	gladeui/glade-property-class.h, gladeui/glade-project.c, gladeui/glade-project.h:
+	implemented "factory-stock-id" in the catalog, this allows you to take a resource
+	image file property formerly hacked as a custom property in libglade, and glade
+	will generate a hidden icon factory in builder files so that it will be loaded
+	through the stock system instead, "factory-stock-id" depicts the name of the
+	stock property of the property-class in question.
+
+2008-04-11  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-property.c: 
+	  - Fixed bold modified state for disabled properties.
+	  - Added construct "class" property so that dupping doesnt crash.
+
+	* plugins/gtk+/gtk+.xml.in: Made default width/height match
+	the default-width default-height set for each dialog as reasonable
+	default values.
+
+2008-04-10  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-palette-item.c, gladeui/glade-palette.c,
+	gladeui/glade-palette-item.h, gladeui/glade-palette.h:
+	Now load insensitive when widgets are unsupported, and use
+	a warning icon when they are deprecated, use tooltips from
+	glade_project_verify_adaptor ().
+
+	* gladeui/glade-app.[ch]: Added glade_app_check_get_project ()
+
+	* gladeui/glade-project.c, gladeui/glade-project.h: fix some mistakes,
+	added translator comments to new strings
+	
+	* src/glade-window.c: Added padding on top of undocked tools, removed
+	custom label handling of widget name.
+
+	* gladeui/glade-editor-property.c: Adapted and applied Thomas Rydzynski's patch
+	so that text wraps in property editor (bug 351902)
+
+	* gladeui/glade-editor.c: Trash the class entry and put a class header
+	on the whole editor widget, fixed a bug on my signal disconnections.
+
+2008-04-10  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-editor.c, gladeui/glade-editor.h:
+	Loaded and watched the new support_warning on GladeWidget
+
+	* gladeui/glade-editor-property.c, gladeui/glade-editor-property.h:
+	Loaded and watched the new support_warning on GladeProperty
+	
+	* gladeui/glade-widget.c, gladeui/glade-widget.h: Keep a support-warning
+	property around as metadata updated by GladeProject.
+
+	* gladeui/glade-property.c, gladeui/glade-property.h:
+	Added new support_warning and state properties.
+
+	* gladeui/glade-project.c, gladeui/glade-project.h:
+	Now GladeProject generates strings to show in the normal
+	UI along with longer style reports, always updates widgets
+	warning message metadata when they come into the project 
+	or when the format or target versions change.
+	Preferences dialog is not modal anymore ;-)
+
+	* gladeui/glade-signal.c: Removed a bogus return.
+	
 2008-04-09  Tristan Van Berkom <tvb@gnome.org>
 
 	* NEWS, configure.ac: Rolling 3.5.2. quick bugfix release

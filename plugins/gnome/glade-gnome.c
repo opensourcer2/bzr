@@ -41,7 +41,7 @@ empty (GObject *container, GladeCreateReason reason)
 
 /* Catalog init function */
 void
-glade_gnomeui_init (void)
+glade_gnomeui_init (const gchar *name)
 {
 	gchar *argv[2] = {"glade-3", NULL};
 	GtkStockItem items [] = {
@@ -597,7 +597,7 @@ glade_gnome_dps_set_color_common (GObject      *object,
 					  property_name);
 	
 	color = glade_property_class_make_gvalue_from_string (prop->klass,
-							      color_str, NULL);
+							      color_str, NULL, NULL);
 	if (color) glade_property_set_value (prop, color);
 }
 
@@ -824,7 +824,7 @@ glade_gnome_dialog_add_button (GladeWidget *gaction_area,
 	eclass = g_type_class_ref (glade_standard_stock_get_type ());
 	if ((eval = g_enum_get_value_by_nick (eclass, stock)) != NULL)
 	{
-		glade_widget_property_set (gbutton, "glade-type", GLADEGTK_BUTTON_STOCK);
+		glade_widget_property_set (gbutton, "use-stock", TRUE);
 		glade_widget_property_set (gbutton, "stock", eval->value);
 	}
 	g_type_class_unref (eclass);
@@ -1352,8 +1352,11 @@ glade_gnome_pixmap_set_filename_common (GObject *object)
 	if (width && height)
 	{
 		GladeProperty *property = glade_widget_get_property (gp, "filename");
-		gchar *file = glade_property_class_make_string_from_gvalue
-					     (property->klass, property->value);
+		gchar *file = 
+			glade_property_class_make_string_from_gvalue
+			(property->klass, property->value,
+			 glade_project_get_format (gp->project));
+
 		if (file)
 		{
 			gnome_pixmap_load_file_at_size (GNOME_PIXMAP (object),

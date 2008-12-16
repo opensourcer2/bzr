@@ -87,6 +87,15 @@
 /* Define to the version of this package. */
 #undef PACKAGE_VERSION
 
+/* Pygtk mayor version required */
+#undef PYGTK_REQUIRED_MAJOR
+
+/* Pygtk micro version required */
+#undef PYGTK_REQUIRED_MICRO
+
+/* Pygtk minor version required */
+#undef PYGTK_REQUIRED_MINOR
+
 /* Define to 1 if you have the ANSI C header files. */
 #undef STDC_HEADERS
 
