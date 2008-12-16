@@ -5,6 +5,8 @@
 #include <gladeui/glade-widget.h>
 #include <gladeui/glade-command.h>
 #include <gladeui/glade-utils.h>
+#include <gladeui/glade-xml-utils.h>
+
 
 G_BEGIN_DECLS
 
@@ -18,12 +20,14 @@ G_BEGIN_DECLS
 typedef struct _GladeProjectPrivate  GladeProjectPrivate;
 typedef struct _GladeProjectClass    GladeProjectClass;
 
-
 typedef enum
 {
-	GLADE_PROJECT_FORMAT_LIBGLADE,
-	GLADE_PROJECT_FORMAT_GTKBUILDER
-} GladeProjectFormat;
+	GLADE_SUPPORT_OK                   = 0,
+	GLADE_SUPPORT_DEPRECATED           = (0x01 << 0),
+	GLADE_SUPPORT_MISMATCH             = (0x01 << 1),
+	GLADE_SUPPORT_LIBGLADE_UNSUPPORTED = (0x01 << 2),
+	GLADE_SUPPORT_LIBGLADE_ONLY        = (0x01 << 3)
+} GladeSupportMask;
 
 struct _GladeProject
 {
@@ -57,10 +61,6 @@ struct _GladeProjectClass
 	void          (*selection_changed)   (GladeProject *project); 
 	void          (*close)               (GladeProject *project);
 
-	void          (*resource_added)      (GladeProject *project,
-					      const gchar  *resource);
-	void          (*resource_removed)    (GladeProject *project,
-					      const gchar  *resource);
 	void          (*parse_finished)      (GladeProject *project);
 };
 
@@ -68,8 +68,6 @@ struct _GladeProjectClass
 GType          glade_project_get_type            (void) G_GNUC_CONST;
 
 GladeProject  *glade_project_new                 (void);
-
-gboolean       glade_project_load_from_file      (GladeProject *project, const gchar *path);
 
 GladeProject  *glade_project_load                (const gchar  *path);
 
@@ -107,16 +105,26 @@ void           glade_project_add_object          (GladeProject *project,
 						  GladeProject *old_project,
 						  GObject      *object);
 
-void           glade_project_remove_object       (GladeProject *project, GObject     *object);
+void           glade_project_remove_object       (GladeProject *project, 
+						  GObject      *object);
 
-gboolean       glade_project_has_object          (GladeProject *project, GObject     *object);
+gboolean       glade_project_has_object          (GladeProject *project, 
+						  GObject      *object);
 
-GladeWidget   *glade_project_get_widget_by_name  (GladeProject *project, const char  *name);
+GladeWidget   *glade_project_get_widget_by_name  (GladeProject *project, 
+						  GladeWidget  *ancestor,
+						  const gchar  *name);
 
-char          *glade_project_new_widget_name     (GladeProject *project, const char  *base_name);
+void           glade_project_set_widget_name     (GladeProject *project, 
+						  GladeWidget  *widget, 
+						  const gchar  *name);
 
-void           glade_project_widget_name_changed (GladeProject *project, GladeWidget *widget,
-						 const char   *old_name);
+gchar         *glade_project_new_widget_name     (GladeProject *project, 
+						  GladeWidget  *widget, 
+						  const gchar  *base_name);
+
+gboolean       glade_project_available_widget_name (GladeProject *project, GladeWidget  *widget,
+						    const gchar  *name);
 
 /* Selection */
 
@@ -144,15 +152,6 @@ GList         *glade_project_selection_get       (GladeProject *project);
 
 gboolean       glade_project_get_has_selection   (GladeProject *project);
 
-void           glade_project_set_accel_group     (GladeProject  *project, 
-						  GtkAccelGroup *accel_group);
-
-void           glade_project_set_resource         (GladeProject  *project, 
-						   GladeProperty *property,
-						   const gchar   *resource);
-
-GList         *glade_project_list_resources       (GladeProject  *project);
-
 gchar         *glade_project_resource_fullpath    (GladeProject  *project,
 						   const gchar   *resource);
  
@@ -171,6 +170,25 @@ void           glade_project_set_format      	  (GladeProject *project, GladePro
 GladeProjectFormat glade_project_get_format  	  (GladeProject *project);
 
 void           glade_project_preferences          (GladeProject *project);
+
+void           glade_project_verify_properties    (GladeWidget  *widget);
+
+gchar         *glade_project_verify_widget_adaptor (GladeProject       *project,
+						    GladeWidgetAdaptor *adaptor,
+						    GladeSupportMask   *mask);
+
+void          glade_project_verify_project_for_ui (GladeProject  *project);
+
+gboolean      glade_project_is_loaded_factory_file (GladeProject       *project, 
+						    const gchar        *stock_id);
+
+GList        *glade_project_required_libs          (GladeProject       *project);
+
+void          glade_project_set_naming_policy      (GladeProject       *project,
+						    GladeNamingPolicy   policy,
+						    gboolean            use_command);
+
+GladeNamingPolicy glade_project_get_naming_policy  (GladeProject       *project);
 
 G_END_DECLS
 

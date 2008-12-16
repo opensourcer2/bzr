@@ -274,12 +274,16 @@ glade_design_layout_deepest_gwidget_at_position (GtkContainer *toplevel,
 	gtk_container_forall (container, (GtkCallback)
 			      glade_design_layout_find_inside_container, &data);
 
-	if (data.found && GTK_IS_CONTAINER (data.found))
-		ret_widget = glade_design_layout_deepest_gwidget_at_position
-			(toplevel, GTK_CONTAINER (data.found), top_x, top_y);
-	else if (data.found)
-		ret_widget = glade_widget_get_from_gobject (data.found);
-	else
+	if (data.found)
+	{
+		if (GTK_IS_CONTAINER (data.found))
+			ret_widget = glade_design_layout_deepest_gwidget_at_position
+				(toplevel, GTK_CONTAINER (data.found), top_x, top_y);
+		else
+			ret_widget = glade_widget_get_from_gobject (data.found);
+	}
+
+	if (!ret_widget)
 		ret_widget = glade_widget_get_from_gobject (container);
 
 	return ret_widget;
@@ -783,10 +787,12 @@ glade_design_layout_expose_event (GtkWidget *widget, GdkEventExpose *ev)
 		/* draw a filled rectangle in case child does not draw 
 		 * it's own background (a GTK_WIDGET_NO_WINDOW child). */
 		gdk_draw_rectangle (widget->window,
-				    widget->style->fg_gc[GTK_STATE_NORMAL],
+				    widget->style->bg_gc[GTK_STATE_NORMAL],
 				    TRUE,
-				    x + OUTLINE_WIDTH / 2, y + OUTLINE_WIDTH / 2, 
+				    x + OUTLINE_WIDTH / 2, y + OUTLINE_WIDTH / 2,
 				    w - OUTLINE_WIDTH, h - OUTLINE_WIDTH);
+
+		GTK_WIDGET_CLASS (glade_design_layout_parent_class)->expose_event (widget, ev);
 	}	
 
 	return TRUE;

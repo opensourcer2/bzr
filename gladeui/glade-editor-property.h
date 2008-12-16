@@ -85,33 +85,37 @@ struct _GladeEditorProperty
 	GladeProperty      *property;       /* The currently loaded property
 					     */
 
-	GtkWidget          *item_label;     /* Name of property (need a handle to set visual insensitive state)
+	GtkWidget          *item_label;     /* The property name portion of the eprop
 					     */
+
+	GtkWidget          *label;          /* The actual property name label
+					     */
+
+	GtkWidget          *warning;        /* Icon to show warnings
+					     */
+
 	GtkWidget          *input;          /* Input part of property (need to set sensitivity seperately)
 					     */
 
 	GtkWidget          *check;          /* Check button for optional properties.
 					     */
 
-	GtkWidget          *info;           /* Informational button
-					     */
-
 	gulong              tooltip_id;     /* signal connection id for tooltip changes        */
 	gulong              sensitive_id;   /* signal connection id for sensitivity changes    */
 	gulong              changed_id;     /* signal connection id for value changes          */
 	gulong              enabled_id;     /* signal connection id for enable/disable changes */
+	gulong              state_id;       /* signal connection id for state changes          */
 	
 	gboolean            loading;        /* True during glade_editor_property_load calls, this
 					     * is used to avoid feedback from input widgets.
+					     */
+	gboolean            committing;     /* True while the editor property itself is applying
+					     * the property with glade_editor_property_commit_no_callback ().
 					     */
 
 	gboolean            use_command;    /* Whether we should use the glade command interface
 					     * or skip directly to GladeProperty interface.
 					     * (used for query dialogs).
-					     */
-
-	gboolean            show_info;      /* Whether we should show an informational button
-					     * for this property
 					     */
 };
 
@@ -122,11 +126,7 @@ struct _GladeEditorPropertyClass {
 
 	GtkWidget  *(* create_input)  (GladeEditorProperty *);
 
-	void        (* gtk_doc_search)(GladeEditorProperty *, 
-				       const gchar *,
-				       const gchar *,
-				       const gchar *);
-
+	void       *(* changed)       (GladeEditorProperty *, GladeProperty *);
 };
 
 
@@ -139,13 +139,19 @@ void                 glade_editor_property_load           (GladeEditorProperty *
 void                 glade_editor_property_load_by_widget (GladeEditorProperty *eprop,
 							   GladeWidget         *widget);
 
-void                 glade_editor_property_show_info      (GladeEditorProperty *eprop);
-
-void                 glade_editor_property_hide_info      (GladeEditorProperty *eprop);
-
 void                 glade_editor_property_commit         (GladeEditorProperty *eprop,
 							   GValue              *value);
 
+void                 glade_editor_property_commit_no_callback (GladeEditorProperty *eprop,
+							       GValue              *value);
+
+gboolean             glade_editor_property_show_i18n_dialog (GtkWidget            *parent,
+							     GladeProjectFormat    fmt,
+							     gchar               **text,
+							     gchar               **context,
+							     gchar               **comment,
+							     gboolean             *has_context,
+							     gboolean             *translatable);
 
 /* Generic eprops */
 #define GLADE_TYPE_EPROP_NUMERIC         (glade_eprop_numeric_get_type())
@@ -156,7 +162,6 @@ void                 glade_editor_property_commit         (GladeEditorProperty *
 #define GLADE_TYPE_EPROP_TEXT            (glade_eprop_text_get_type())
 #define GLADE_TYPE_EPROP_BOOL            (glade_eprop_bool_get_type())
 #define GLADE_TYPE_EPROP_UNICHAR         (glade_eprop_unichar_get_type())
-#define GLADE_TYPE_EPROP_RESOURCE        (glade_eprop_resource_get_type())
 #define GLADE_TYPE_EPROP_OBJECT          (glade_eprop_object_get_type())
 #define GLADE_TYPE_EPROP_OBJECTS         (glade_eprop_objects_get_type())
 #define GLADE_TYPE_EPROP_ADJUSTMENT      (glade_eprop_adjustment_get_type())
@@ -168,7 +173,6 @@ GType     glade_eprop_named_icon_get_type  (void) G_GNUC_CONST;
 GType     glade_eprop_text_get_type        (void) G_GNUC_CONST;
 GType     glade_eprop_bool_get_type        (void) G_GNUC_CONST;
 GType     glade_eprop_unichar_get_type     (void) G_GNUC_CONST;
-GType     glade_eprop_resource_get_type    (void) G_GNUC_CONST;
 GType     glade_eprop_object_get_type      (void) G_GNUC_CONST;
 GType     glade_eprop_objects_get_type     (void) G_GNUC_CONST;
 GType     glade_eprop_adjustment_get_type  (void) G_GNUC_CONST;

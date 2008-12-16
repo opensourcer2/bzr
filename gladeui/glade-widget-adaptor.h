@@ -5,6 +5,8 @@
 #include <gladeui/glade-xml-utils.h>
 #include <gladeui/glade-property-class.h>
 #include <gladeui/glade-editor-property.h>
+#include <gladeui/glade-catalog.h>
+#include <gladeui/glade-editable.h>
 #include <glib-object.h>
 #include <gmodule.h>
 #include <gtk/gtk.h>
@@ -42,13 +44,22 @@ typedef struct _GladeWidgetAdaptorClass   GladeWidgetAdaptorClass;
         ((obj) ? GLADE_WIDGET_ADAPTOR_GET_CLASS(obj)->deprecated : FALSE)
 
 /**
- * GWA_BUILDER_UNSUPPORTED:
+ * GWA_LIBGLADE_UNSUPPORTED:
  * @obj: A #GladeWidgetAdaptor
  *
- * Checks whether this widget class unsupported by GtkBuilder
+ * Checks whether this widget class is unsupported by Libglade
  */
-#define GWA_BUILDER_UNSUPPORTED(obj) \
-        ((obj) ? GLADE_WIDGET_ADAPTOR_GET_CLASS(obj)->builder_unsupported : FALSE)
+#define GWA_LIBGLADE_UNSUPPORTED(obj) \
+        ((obj) ? GLADE_WIDGET_ADAPTOR_GET_CLASS(obj)->libglade_unsupported : FALSE)
+
+/**
+ * GWA_LIBGLADE_ONLY:
+ * @obj: A #GladeWidgetAdaptor
+ *
+ * Checks whether this widget class is only supported by libglade
+ */
+#define GWA_LIBGLADE_ONLY(obj) \
+        ((obj) ? GLADE_WIDGET_ADAPTOR_GET_CLASS(obj)->libglade_only : FALSE)
 
 /**
  * GWA_VERSION_SINCE_MAJOR:
@@ -56,8 +67,8 @@ typedef struct _GladeWidgetAdaptorClass   GladeWidgetAdaptorClass;
  *
  * Checks major version in which this widget was introduced
  */
-#define GWA_VERSION_SINCE_MAJOR(obj)						\
-        ((obj) ? GLADE_WIDGET_ADAPTOR_GET_CLASS(obj)->version_since_major : FALSE)
+#define GWA_VERSION_SINCE_MAJOR(obj) \
+        ((obj) ? GLADE_WIDGET_ADAPTOR_GET_CLASS(obj)->version_since_major : 0)
 
 /**
  * GWA_VERSION_SINCE_MINOR:
@@ -65,8 +76,27 @@ typedef struct _GladeWidgetAdaptorClass   GladeWidgetAdaptorClass;
  *
  * Checks minor version in which this widget was introduced
  */
-#define GWA_VERSION_SINCE_MINOR(obj)						\
-        ((obj) ? GLADE_WIDGET_ADAPTOR_GET_CLASS(obj)->version_since_minor : FALSE)
+#define GWA_VERSION_SINCE_MINOR(obj) \
+        ((obj) ? GLADE_WIDGET_ADAPTOR_GET_CLASS(obj)->version_since_minor : 0)
+
+/**
+ * GWA_BUILDER_SINCE_MAJOR:
+ * @obj: A #GladeWidgetAdaptor
+ *
+ * Checks major version in which this widget introduced gtkbuilder support
+ */
+#define GWA_BUILDER_SINCE_MAJOR(obj) \
+        ((obj) ? GLADE_WIDGET_ADAPTOR_GET_CLASS(obj)->builder_since_major : 0)
+
+/**
+ * GWA_BUILDER_SINCE_MINOR:
+ * @obj: A #GladeWidgetAdaptor
+ *
+ * Checks minor version in which this widget introduced gtkbuilder support
+ */
+#define GWA_BUILDER_SINCE_MINOR(obj) \
+        ((obj) ? GLADE_WIDGET_ADAPTOR_GET_CLASS(obj)->builder_since_minor : 0)
+
 
 /**
  * GWA_IS_TOPLEVEL:
@@ -317,6 +347,26 @@ typedef void     (* GladeReplaceChildFunc)        (GladeWidgetAdaptor *adaptor,
 						   GObject            *old_obj,
 						   GObject            *new_obj);
 
+
+/**
+ * GladeConstructObjectFunc:
+ * @adaptor: A #GladeWidgetAdaptor
+ * @n_parameters: amount of construct parameters
+ * @parameters: array of construct #GParameter args to create 
+ *              the new object with.
+ *
+ * This function is called to construct a GObject instance.
+ * (for language bindings that may need to construct a wrapper
+ * object).
+ *
+ * Returns: A newly created #GObject
+ */
+typedef GObject *(* GladeConstructObjectFunc)     (GladeWidgetAdaptor *adaptor,
+						   guint               n_parameters,
+						   GParameter         *parameters);
+
+
+
 /**
  * GladePostCreateFunc:
  * @object: a #GObject
@@ -370,6 +420,40 @@ typedef void     (* GladeChildActionActivateFunc) (GladeWidgetAdaptor *adaptor,
 						   GObject            *object,
 						   const gchar        *action_path);
 
+
+/**
+ * GladeActionSubmenuFunc:
+ * @adaptor: A #GladeWidgetAdaptor
+ * @object: The #GObject
+ * @action_path: The action path
+ *
+ * This delagate function is used to create dynamically customized
+ * submenus. Called only for actions that dont have children.
+ *
+ */
+typedef GtkWidget  *(* GladeActionSubmenuFunc)  (GladeWidgetAdaptor *adaptor,
+						 GObject            *object,
+						 const gchar        *action_path);
+
+
+/**
+ * GladeDependsFunc:
+ * @adaptor: A #GladeWidgetAdaptor
+ * @widget: A #GladeWidget of the adaptor
+ * @another: another #GladeWidget
+ *
+ * Checks whether @widget depends on @another to be placed earlier in
+ * the glade file.
+ *
+ * Returns: whether @widget depends on @another being parsed first in
+ * the resulting glade file.
+ */
+typedef gboolean (* GladeDependsFunc) (GladeWidgetAdaptor *adaptor,
+				       GladeWidget        *widget,
+				       GladeWidget        *another);
+
+
+
 /**
  * GladeReadWidgetFunc:
  * @adaptor: A #GladeWidgetAdaptor
@@ -418,16 +502,35 @@ typedef GladeEditorProperty *(* GladeCreateEPropFunc) (GladeWidgetAdaptor *adapt
  * @adaptor: A #GladeWidgetAdaptor
  * @klass: The #GladePropertyClass 
  * @value: The #GValue to convert to a string
+ * @fmt: The #GladeProjectFormat the string should conform to
  * 
  * For normal properties this is used to serialize
- * property values, for custom properties its still
- * needed to update the UI for undo/redo items etc.
+ * property values, for custom properties (only when new pspecs are 
+ * introduced) its needed for value comparisons in boxed pspecs 
+ * and also to update the UI for undo/redo items etc.
  *
  * Returns: A newly allocated string representation of @value
  */
 typedef gchar   *(* GladeStringFromValueFunc) (GladeWidgetAdaptor *adaptor,
 					       GladePropertyClass *klass,
-					       const GValue       *value);
+					       const GValue       *value,
+					       GladeProjectFormat  fmt);
+
+
+
+/**
+ * GladeCreateEditableFunc:
+ * @adaptor: A #GladeWidgetAdaptor
+ * @type: The #GladeEditorPageType
+ * 
+ * This is used to allow the backend to override the way an
+ * editor page is layed out (note that editor widgets are created
+ * on demand and not at startup).
+ *
+ * Returns: A new #GladeEditable widget
+ */
+typedef GladeEditable *(* GladeCreateEditableFunc) (GladeWidgetAdaptor   *adaptor,
+						    GladeEditorPageType   type);
 
 
 /* GladeSignalClass contains all the info we need for a given signal, such as
@@ -441,10 +544,10 @@ struct _GladeSignalClass
 
 	GSignalQuery query;
 
-	gint         version_since_major; /* Version in which this signal was
+	guint16      version_since_major; /* Version in which this signal was
 					   * introduced
 					   */
-	gint         version_since_minor;
+	guint16      version_since_minor;
 
 	const gchar *name;         /* Name of the signal, eg clicked */
 	gchar       *type;         /* Name of the object class that this signal belongs to
@@ -506,29 +609,37 @@ struct _GladeWidgetAdaptorClass
 {
 	GObjectClass               parent_class;
 
-	gint                       version_since_major; /* Version in which this widget was
-							 * introduced
-							 */
-	gint                       version_since_minor;
+	guint16                    version_since_major; /* Version in which this widget was */
+	guint16                    version_since_minor; /* introduced.                      */
 
-	gboolean                   deprecated;     /* If this widget is currently
-						    * deprecated
-						    */
-	gboolean                   builder_unsupported; /* If this widget is not supported
-							 * by gtkbuilder
-							 */
+	guint16                    builder_since_major; /* Version in which this widget became */
+	guint16                    builder_since_minor; /* available in GtkBuilder format      */
 
-	gboolean                   fixed;      /* If this is a GtkContainer, use free-form
-						* placement with drag/resize/paste at mouse...
-						*/
-	gboolean                   toplevel;   /* If this class is toplevel */
 
-	gboolean                   use_placeholders; /* Whether or not to use placeholders
-						      * to interface with child widgets.
-						      */
+	guint                      deprecated : 1;          /* If this widget is currently
+							     * deprecated
+							     */
+	guint                      libglade_unsupported : 1; /* If this widget is not supported
+							      * by libglade
+							      */
+	guint                      libglade_only : 1;        /* If this widget is only supported
+							      * by libglade
+							      */
+
+	guint                      fixed : 1;                /* If this is a Container, use free-form
+							      * placement with drag/resize/paste at mouse...
+							      */
+	guint                      toplevel : 1;             /* If this class is toplevel */
+
+	guint                      use_placeholders : 1;     /* Whether or not to use placeholders
+							      * to interface with child widgets.
+							      */
 
 	gint                       default_width;  /* Default width in GladeDesignLayout */
 	gint                       default_height; /* Default height in GladeDesignLayout */
+
+	GladeConstructObjectFunc   construct_object;  /* Object constructor
+						       */
 
 	GladePostCreateFunc        deep_post_create;   /* Executed after widget creation: 
 							* plugins use this to setup various
@@ -583,16 +694,20 @@ struct _GladeWidgetAdaptorClass
 	GladeChildSetPropertyFunc    child_set_property; /* Sets/Gets a packing property */
 	GladeChildGetPropertyFunc    child_get_property; /* for this child */
 	
-	GladeReplaceChildFunc      replace_child;  /* This method replaces a 
-						    * child widget with
-						    * another one: it's used to
-						    * replace a placeholder with
-						    * a widget and viceversa.
-						    */
+	GladeReplaceChildFunc        replace_child;  /* This method replaces a 
+						      * child widget with
+						      * another one: it's used to
+						      * replace a placeholder with
+						      * a widget and viceversa.
+						      */
 	
 	GladeActionActivateFunc      action_activate;       /* This method is used to catch actions */
 	GladeChildActionActivateFunc child_action_activate; /* This method is used to catch packing actions */
 
+	GladeActionSubmenuFunc       action_submenu;       /* Delagate function to create dynamic submenus */
+	                                                   /* in action menus. */
+	
+	GladeDependsFunc             depends; /* Periodically sort widgets in the project */
 
 	GladeReadWidgetFunc          read_widget; /* Reads widget attributes from xml */
 	
@@ -602,11 +717,11 @@ struct _GladeWidgetAdaptorClass
 	
 	GladeWriteWidgetFunc         write_child; /* Writes widget attributes to the xml */
 
-
-
 	GladeCreateEPropFunc         create_eprop; /* Creates a GladeEditorProperty */
 
 	GladeStringFromValueFunc     string_from_value; /* Creates a string for a value */
+
+	GladeCreateEditableFunc      create_editable; /* Creates a page for the editor */
 };
 
 #define glade_widget_adaptor_create_widget(adaptor, query, ...) \
@@ -615,21 +730,17 @@ struct _GladeWidgetAdaptorClass
 #define glade_widget_adaptor_from_pclass(pclass) \
     ((pclass) ? (GladeWidgetAdaptor *)((GladePropertyClass *)(pclass))->handle : NULL)
 
-#define glade_widget_adaptor_from_pspec(pspec) \
-    ((pspec) ? glade_widget_adaptor_get_by_type (((GParamSpec *)(pspec))->owner_type) : NULL)
 
 GType                glade_widget_adaptor_get_type         (void) G_GNUC_CONST;
  
 
 GType                glade_create_reason_get_type          (void) G_GNUC_CONST;
 
+GList               *glade_widget_adaptor_list_adaptors    (void);
 
-GladeWidgetAdaptor  *glade_widget_adaptor_from_catalog     (GladeXmlNode         *class_node,
-							    const gchar          *catname,
-							    const gchar          *icon_prefix,
-							    GModule              *module,
-							    const gchar          *domain,
-							    const gchar          *book);
+GladeWidgetAdaptor  *glade_widget_adaptor_from_catalog     (GladeCatalog         *catalog,
+							    GladeXmlNode         *class_node,
+							    GModule              *module);
 
 void                 glade_widget_adaptor_register         (GladeWidgetAdaptor   *adaptor);
  
@@ -649,6 +760,9 @@ GladeWidgetAdaptor  *glade_widget_adaptor_get_by_name        (const gchar       
 
 GladeWidgetAdaptor  *glade_widget_adaptor_get_by_type        (GType               type);
 
+GladeWidgetAdaptor  *glade_widget_adaptor_from_pspec         (GladeWidgetAdaptor *adaptor,
+							      GParamSpec         *spec);
+
 GladePropertyClass  *glade_widget_adaptor_get_property_class (GladeWidgetAdaptor *adaptor,
 							      const gchar        *name);
 
@@ -658,6 +772,10 @@ GladePropertyClass  *glade_widget_adaptor_get_pack_property_class (GladeWidgetAd
 GParameter          *glade_widget_adaptor_default_params     (GladeWidgetAdaptor *adaptor,
 							      gboolean            construct,
 							      guint              *n_params);
+
+GObject             *glade_widget_adaptor_construct_object   (GladeWidgetAdaptor *adaptor,
+							      guint               n_parameters,
+							      GParameter         *parameters);
 
 void                 glade_widget_adaptor_post_create        (GladeWidgetAdaptor *adaptor,
 							      GObject            *object,
@@ -758,6 +876,15 @@ void                 glade_widget_adaptor_child_action_activate (GladeWidgetAdap
 								 GObject            *object,
 								 const gchar        *action_path);
 
+GtkWidget           *glade_widget_adaptor_action_submenu        (GladeWidgetAdaptor *adaptor,
+								 GObject            *object,
+								 const gchar        *action_path);
+
+gboolean             glade_widget_adaptor_depends            (GladeWidgetAdaptor *adaptor,
+							      GladeWidget        *widget,
+							      GladeWidget        *another);
+
+
 void                 glade_widget_adaptor_read_widget        (GladeWidgetAdaptor *adaptor,
 							      GladeWidget        *widget,
 							      GladeXmlNode       *node);
@@ -780,9 +907,18 @@ GladeEditorProperty *glade_widget_adaptor_create_eprop       (GladeWidgetAdaptor
 							      GladePropertyClass *klass,
 							      gboolean            use_command);
 
+GladeEditorProperty *glade_widget_adaptor_create_eprop_by_name (GladeWidgetAdaptor *adaptor,
+								const gchar        *property_id,
+								gboolean            packing,
+								gboolean            use_command);
+
 gchar               *glade_widget_adaptor_string_from_value  (GladeWidgetAdaptor *adaptor,
 							      GladePropertyClass *klass,
-							      const GValue       *value);
+							      const GValue       *value,
+							      GladeProjectFormat  fmt);
+
+GladeEditable       *glade_widget_adaptor_create_editable    (GladeWidgetAdaptor *adaptor,
+							      GladeEditorPageType type);
 
 GladeSignalClass    *glade_widget_adaptor_get_signal_class   (GladeWidgetAdaptor *adaptor,
 							      const gchar        *name);

@@ -1,3 +1,12 @@
+glade-3 (3.5.4-0ubuntu1) jaunty; urgency=low
+
+  * New upstream version
+  * Changes due to the new soname change
+  * debian/patches/02_rename_crash.patch:
+    - the change is in the new version
+
+ -- Sebastien Bacher <seb128@ubuntu.com>  Tue, 16 Dec 2008 14:48:36 +0100
+
 glade-3 (3.5.2-4ubuntu1) jaunty; urgency=low
 
   * Sync on debian

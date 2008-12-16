@@ -28,11 +28,9 @@
 #ifndef __GLADE_INSPECTOR_H__
 #define __GLADE_INSPECTOR_H__
 
-#include <gtk/gtkvbox.h>
+#include <gtk/gtk.h>
 
-/* forward declaration */
-/* btw, this makes gtkdoc list GladeProject twice in gladeui-sections.txt wich gives a warning. */
-struct GladeProject;
+#include <gladeui/glade-xml-utils.h>
 
 G_BEGIN_DECLS
 

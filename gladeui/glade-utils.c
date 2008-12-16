@@ -174,7 +174,7 @@ glade_utils_get_pspec_from_funcname (const gchar *funcname)
 			      (gpointer) &get_pspec)) {
 		g_warning (_("We could not find the symbol \"%s\""),
 			   funcname);
-		return FALSE;
+		return NULL;
 	}
 
 	g_assert (get_pspec);
@@ -254,6 +254,7 @@ glade_util_ui_message (GtkWidget           *parent,
 					 GTK_DIALOG_DESTROY_WITH_PARENT,
 					 message_type,
 					 buttons_type,
+					 "%s",
 					 string);
 
 	gtk_window_set_resizable (GTK_WINDOW (dialog), TRUE);
@@ -447,21 +448,24 @@ glade_util_gtk_combo_find (GtkCombo * combo)
 	gchar *text;
 	gchar *ltext;
 	GList *clist;
-	int (*string_compare) (const char *, const char *);
+	gsize len;
+
+	int (*string_compare) (const char *, const char *, gsize);
 
 	if (combo->case_sensitive)
-		string_compare = strcmp;
+		string_compare = strncmp;
 	else
-		string_compare = g_strcasecmp;
+		string_compare = g_ascii_strncasecmp;
 
-	text = (gchar*) gtk_entry_get_text (GTK_ENTRY (combo->entry));
+	text  = (gchar*) gtk_entry_get_text (GTK_ENTRY (combo->entry));
+	len   = text ? strlen (text) : 0;
 	clist = GTK_LIST (combo->list)->children;
 
 	while (clist && clist->data) {
 		ltext = glade_util_gtk_combo_func (GTK_LIST_ITEM (clist->data));
 		if (!ltext)
 			continue;
-		if (!(*string_compare) (ltext, text))
+		if (!(*string_compare) (ltext, text, len))
 			return (GtkListItem *) clist->data;
 		clist = clist->next;
 	}
@@ -1074,11 +1078,7 @@ glade_util_find_iter (GtkTreeModel *model,
 	while (retval == NULL)
 	{
 		gtk_tree_model_get (model, next, column, &widget, -1);
-		if (widget == NULL) {
-			g_warning ("Could not get the glade widget from the model");
-			break;
-		}
-		else if (widget == findme)
+		if (widget == findme)
 		{
 			retval = gtk_tree_iter_copy (next);
 			break;
@@ -1395,7 +1395,7 @@ glade_util_copy_file (const gchar  *src_path,
 		{
 			glade_util_ui_message (glade_app_get_window(),
 					       GLADE_UI_ERROR, NULL,
-					       _("Error shutting down io channel %s: %s"),
+					       _("Error shutting down I/O channel %s: %s"),
 					       src_path, error->message);
 			success = FALSE;
 		}
@@ -1439,16 +1439,19 @@ glade_util_class_implements_interface (GType class_type,
 	return implemented;
 }
 
-
 static GModule *
 try_load_library (const gchar *library_path,
 		  const gchar *library_name)
 {
-	GModule *module;
+	GModule *module = NULL;
 	gchar   *path;
 
 	path = g_module_build_path (library_path, library_name);
-	module = g_module_open (path, G_MODULE_BIND_LAZY);
+	if (g_file_test (path, G_FILE_TEST_EXISTS))
+	{
+		if (!(module = g_module_open (path, G_MODULE_BIND_LAZY)))
+			g_warning ("Failed to load %s: %s", path, g_module_error ());
+	}
 	g_free (path);
 
 	return module;
@@ -1906,3 +1909,396 @@ glade_util_get_file_mtime (const gchar *filename, GError **error)
 	}
 }
 
+gchar *
+glade_util_filename_to_icon_name (const gchar *value)
+{
+	gchar *icon_name, *p;
+	g_return_val_if_fail (value && value[0], NULL);
+
+	icon_name = g_strdup_printf ("glade-generated-%s", value);
+
+	if ((p = strrchr (icon_name, '.')) != NULL)
+		*p = '-';
+	
+	return icon_name;
+}
+
+gchar *
+glade_util_icon_name_to_filename (const gchar *value)
+{
+	/* sscanf makes us allocate a buffer */
+	gchar filename[FILENAME_MAX], *p;
+	g_return_val_if_fail (value && value[0], NULL);
+
+	sscanf (value, "glade-generated-%s", filename);
+
+	/* XXX: Filenames without an extention will evidently
+	 * break here
+	 */
+	if ((p = strrchr (filename, '-')) != NULL)
+		*p = '.';
+	
+	return g_strdup (filename);
+}
+
+gint
+glade_utils_enum_value_from_string (GType enum_type, const gchar *strval)
+{
+	gint          value = 0;
+	const gchar  *displayable;
+	GValue       *gvalue;
+
+	g_return_val_if_fail (strval && strval[0], 0);
+
+	if (((displayable = glade_get_value_from_displayable (enum_type, strval)) != NULL &&
+	     (gvalue = glade_utils_value_from_string (enum_type, displayable, NULL, NULL)) != NULL) ||
+	    (gvalue = glade_utils_value_from_string (enum_type, strval, NULL, NULL)) != NULL)
+	{
+		value = g_value_get_enum (gvalue);
+		g_value_unset (gvalue);
+		g_free (gvalue);
+	}
+	return value;
+}
+
+static gchar *
+glade_utils_enum_string_from_value_real (GType enum_type, gint value, gboolean displayable)
+{
+	GValue gvalue = { 0, };
+	gchar *string;
+
+	g_value_init (&gvalue, enum_type);
+	g_value_set_enum (&gvalue, value);
+
+	string = glade_utils_string_from_value (&gvalue, GLADE_PROJECT_FORMAT_GTKBUILDER);
+	g_value_unset (&gvalue);
+
+	if (displayable && string)
+	{
+		const gchar *dstring = glade_get_displayable_value (enum_type, string);
+		if (dstring)
+		{
+			g_free (string);
+			return g_strdup (dstring);
+		}
+	}
+
+	return string;
+}
+
+gchar *
+glade_utils_enum_string_from_value (GType enum_type, gint value)
+{
+	return glade_utils_enum_string_from_value_real (enum_type, value, FALSE);
+}
+
+gchar *
+glade_utils_enum_string_from_value_displayable (GType enum_type, gint value)
+{
+	return glade_utils_enum_string_from_value_real (enum_type, value, TRUE);
+}
+
+
+gint
+glade_utils_flags_value_from_string (GType flags_type, const gchar *strval)
+{
+	gint          value = 0;
+	const gchar  *displayable;
+	GValue       *gvalue;
+
+	g_return_val_if_fail (strval && strval[0], 0);
+
+	if (((displayable = glade_get_value_from_displayable (flags_type, strval)) != NULL &&
+	     (gvalue = glade_utils_value_from_string (flags_type, displayable, NULL, NULL)) != NULL) ||
+	    (gvalue = glade_utils_value_from_string (flags_type, strval, NULL, NULL)) != NULL)
+	{
+		value = g_value_get_flags (gvalue);
+		g_value_unset (gvalue);
+		g_free (gvalue);
+	}
+	return value;
+}
+
+static gchar *
+glade_utils_flags_string_from_value_real (GType flags_type, gint value, gboolean displayable)
+{
+	GValue gvalue = { 0, };
+	gchar *string;
+
+	g_value_init (&gvalue, flags_type);
+	g_value_set_flags (&gvalue, value);
+
+	string = glade_utils_string_from_value (&gvalue, GLADE_PROJECT_FORMAT_GTKBUILDER);
+	g_value_unset (&gvalue);
+
+	if (displayable && string)
+	{
+		const gchar *dstring = glade_get_displayable_value (flags_type, string);
+		if (dstring)
+		{
+			g_free (string);
+			return g_strdup (dstring);
+		}
+	}
+
+	return string;
+}
+
+gchar *
+glade_utils_flags_string_from_value (GType flags_type, gint value)
+{
+	return glade_utils_flags_string_from_value_real (flags_type, value, FALSE);
+
+}
+
+
+gchar *
+glade_utils_flags_string_from_value_displayable (GType flags_type, gint value)
+{
+	return glade_utils_flags_string_from_value_real (flags_type, value, TRUE);
+}
+
+
+/* A hash table of generically created property classes for
+ * fundamental types, so we can easily use glade's conversion
+ * system without using properties (only GTypes)
+ */
+static GHashTable *generic_property_classes = NULL;
+
+
+static gboolean
+utils_gtype_equal (gconstpointer v1,
+		 gconstpointer v2)
+{
+  return *((const GType*) v1) == *((const GType*) v2);
+}
+
+static guint
+utils_gtype_hash (gconstpointer v)
+{
+  return *(const GType*) v;
+}
+
+
+static GladePropertyClass *
+pclass_from_gtype (GType type)
+{
+	GladePropertyClass *property_class = NULL;
+	GParamSpec         *pspec = NULL;
+
+	if (!generic_property_classes)
+		generic_property_classes = g_hash_table_new_full (utils_gtype_hash, utils_gtype_equal,
+								  g_free, (GDestroyNotify)glade_property_class_free);
+	
+	property_class = g_hash_table_lookup (generic_property_classes, &type);
+
+	if (!property_class)
+	{
+		/* Support enum and flag types, and a hardcoded list of fundamental types */
+		if (type == G_TYPE_CHAR)
+			pspec = g_param_spec_char ("dummy", "dummy", "dummy",
+						   G_MININT8, G_MAXINT8, 0, G_PARAM_READABLE|G_PARAM_WRITABLE);
+		else if (type == G_TYPE_UCHAR)
+			pspec = g_param_spec_char ("dummy", "dummy", "dummy",
+						   0, G_MAXUINT8, 0, G_PARAM_READABLE|G_PARAM_WRITABLE);
+		else if (type == G_TYPE_BOOLEAN)
+			pspec = g_param_spec_boolean ("dummy", "dummy", "dummy",
+						      FALSE, G_PARAM_READABLE|G_PARAM_WRITABLE);
+		else if (type == G_TYPE_INT)
+			pspec = g_param_spec_int ("dummy", "dummy", "dummy",
+						  G_MININT, G_MAXINT, 0, G_PARAM_READABLE|G_PARAM_WRITABLE);
+		else if (type == G_TYPE_UINT)
+			pspec = g_param_spec_uint ("dummy", "dummy", "dummy",
+						   0, G_MAXUINT, 0, G_PARAM_READABLE|G_PARAM_WRITABLE);
+		else if (type == G_TYPE_LONG)
+			pspec = g_param_spec_long ("dummy", "dummy", "dummy",
+						    G_MINLONG, G_MAXLONG, 0, G_PARAM_READABLE|G_PARAM_WRITABLE);
+		else if (type == G_TYPE_ULONG)
+			pspec = g_param_spec_ulong ("dummy", "dummy", "dummy",
+						    0, G_MAXULONG, 0, G_PARAM_READABLE|G_PARAM_WRITABLE);
+		else if (type == G_TYPE_INT64)
+			pspec = g_param_spec_int64 ("dummy", "dummy", "dummy",
+						    G_MININT64, G_MAXINT64, 0, G_PARAM_READABLE|G_PARAM_WRITABLE);
+		else if (type == G_TYPE_UINT64)
+			pspec = g_param_spec_uint64 ("dummy", "dummy", "dummy",
+						     0, G_MAXUINT64, 0, G_PARAM_READABLE|G_PARAM_WRITABLE);
+		else if (type == G_TYPE_FLOAT)
+			pspec = g_param_spec_float ("dummy", "dummy", "dummy",
+						    G_MINFLOAT, G_MAXFLOAT, 1.0F, G_PARAM_READABLE|G_PARAM_WRITABLE);
+		else if (type == G_TYPE_DOUBLE)
+			pspec = g_param_spec_double ("dummy", "dummy", "dummy",
+						     G_MINDOUBLE, G_MAXDOUBLE, 1.0F, G_PARAM_READABLE|G_PARAM_WRITABLE);
+		else if (type == G_TYPE_STRING)
+			pspec = g_param_spec_string ("dummy", "dummy", "dummy",
+						     NULL, G_PARAM_READABLE|G_PARAM_WRITABLE);
+		else if (type == G_TYPE_OBJECT || g_type_is_a (type, G_TYPE_OBJECT))
+			pspec = g_param_spec_object ("dummy", "dummy", "dummy",
+						     type, G_PARAM_READABLE|G_PARAM_WRITABLE);
+		else if (G_TYPE_IS_ENUM (type))
+		{
+			GEnumClass *eclass = g_type_class_ref (type);
+			pspec = g_param_spec_enum ("dummy", "dummy", "dummy",
+						   type, eclass->minimum, G_PARAM_READABLE|G_PARAM_WRITABLE);
+			g_type_class_unref (eclass);
+		}
+		else if (G_TYPE_IS_FLAGS (type))
+			pspec = g_param_spec_flags ("dummy", "dummy", "dummy",
+						    type, 0, G_PARAM_READABLE|G_PARAM_WRITABLE);
+
+		if (pspec)
+		{
+			if ((property_class = 
+			     glade_property_class_new_from_spec_full (NULL, pspec, FALSE)) != NULL)
+			{
+				/* XXX If we ever free the hash table, property classes wont touch
+				 * the allocated pspecs, so they would theoretically be leaked.
+				 */
+				g_hash_table_insert (generic_property_classes, 
+						     g_memdup (&type, sizeof (GType)), property_class);
+			}
+			else
+				g_warning ("Unable to create property class for type %s", g_type_name (type));
+		}
+		else
+			g_warning ("No generic conversion support for type %s", g_type_name (type));
+	}
+	return property_class;
+}
+
+/**
+ * glade_utils_value_from_string:
+ * @type: a #GType to convert with
+ * @string: the string to convert
+ * @project: the #GladeProject to look for formats of object names when needed
+ * @widget: if the value is a gobject, this #GladeWidget will be used to look
+ *          for an object in the same widget tree.
+ *
+ * Allocates and sets a #GValue of type @type
+ * set to @string (using glade conversion routines) 
+ *
+ * Returns: A newly allocated and set #GValue
+ */
+GValue *
+glade_utils_value_from_string (GType               type,
+			       const gchar        *string,
+			       GladeProject       *project,
+			       GladeWidget        *widget)
+{
+	GladePropertyClass *pclass;
+
+	g_return_val_if_fail (type != G_TYPE_INVALID, NULL);
+	g_return_val_if_fail (string != NULL, NULL);
+
+	if ((pclass = pclass_from_gtype (type)) != NULL)
+		return glade_property_class_make_gvalue_from_string (pclass, string, project, widget);
+
+	return NULL;
+}
+
+
+/**
+ * glade_utils_string_from_value:
+ * @value: a #GValue to convert
+ * @fmt: the #GladeProjectFormat to honor
+ *
+ * Serializes #GValue into a string 
+ * (using glade conversion routines) 
+ *
+ * Returns: A newly allocated string
+ */
+gchar *
+glade_utils_string_from_value (const GValue       *value,
+			       GladeProjectFormat  fmt)
+{
+	GladePropertyClass *pclass;
+
+	g_return_val_if_fail (value != NULL, NULL);
+
+	if ((pclass = pclass_from_gtype (G_VALUE_TYPE (value))) != NULL)
+		return glade_property_class_make_string_from_gvalue (pclass, value, fmt);
+
+	return NULL;
+}
+
+
+/**
+ * glade_utils_liststore_from_enum_type:
+ * @enum_type: A #GType
+ * @include_empty: wheather to prepend an "Unset" slot
+ *
+ * Creates a liststore suitable for comboboxes and such to 
+ * chose from a variety of types.
+ *
+ * Returns: A new #GtkListStore
+ */
+GtkListStore *
+glade_utils_liststore_from_enum_type (GType    enum_type,
+				      gboolean include_empty)
+{
+	GtkListStore        *store;
+	GtkTreeIter          iter;
+	GEnumClass          *eclass;
+	guint                i;
+
+	eclass = g_type_class_ref (enum_type);
+
+	store = gtk_list_store_new (1, G_TYPE_STRING);
+
+	if (include_empty)
+	{
+		gtk_list_store_append (store, &iter);
+		gtk_list_store_set (store, &iter, 
+				    0, _("None"),
+				    -1);
+	}
+	
+	for (i = 0; i < eclass->n_values; i++)
+	{
+		const gchar *displayable = glade_get_displayable_value (enum_type, eclass->values[i].value_nick);
+
+		gtk_list_store_append (store, &iter);
+		gtk_list_store_set (store, &iter, 
+				    0, displayable ? displayable : eclass->values[i].value_nick,
+				    -1);
+	}
+
+	g_type_class_unref (eclass);
+
+	return store;
+}
+
+
+
+/**
+ * glade_utils_hijack_key_press:
+ * @win: a #GtkWindow
+ * event: the GdkEventKey 
+ * user_data: unused
+ *
+ * This function is meant to be attached to key-press-event of a toplevel,
+ * it simply allows the window contents to treat key events /before/ 
+ * accelerator keys come into play (this way widgets dont get deleted
+ * when cutting text in an entry etc.).
+ * Creates a liststore suitable for comboboxes and such to 
+ * chose from a variety of types.
+ *
+ * Returns: whether the event was handled
+ */
+gint
+glade_utils_hijack_key_press (GtkWindow          *win, 
+			      GdkEventKey        *event, 
+			      gpointer            user_data)
+{
+	if (win->focus_widget &&
+	    (event->keyval == GDK_Delete || /* Filter Delete from accelerator keys */
+	     ((event->state & GDK_CONTROL_MASK) && /* CNTL keys... */
+	      ((event->keyval == GDK_c || event->keyval == GDK_C) || /* CNTL-C (copy)  */
+	       (event->keyval == GDK_x || event->keyval == GDK_X) || /* CNTL-X (cut)   */
+	       (event->keyval == GDK_v || event->keyval == GDK_V) || /* CNTL-V (paste) */
+	       (event->keyval == GDK_n || event->keyval == GDK_N))))) /* CNTL-N (new project) */
+	{
+		return gtk_widget_event (win->focus_widget, 
+					 (GdkEvent *)event);
+	}
+	return FALSE;
+}

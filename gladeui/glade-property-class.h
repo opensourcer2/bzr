@@ -6,6 +6,8 @@
 #include <glib-object.h>
 #include <gtk/gtkadjustment.h>
 
+#include <gladeui/glade-xml-utils.h>
+
 G_BEGIN_DECLS
 
 /* The GladePropertyClass structure parameters of a GladeProperty.
@@ -14,6 +16,23 @@ G_BEGIN_DECLS
  */
 #define GLADE_PROPERTY_CLASS(gpc)     ((GladePropertyClass *) gpc)
 #define GLADE_IS_PROPERTY_CLASS(gpc)  (gpc != NULL)
+
+
+/**
+ * GLADE_PROPERTY_CLASS_IS_TYPE:
+ * gpc: A #GladePropertyClass
+ * type: The #GladeEditorPageType to query
+ *
+ * Checks if @gpc is good to be loaded as @type
+ */
+#define GLADE_PROPERTY_CLASS_IS_TYPE(gpc, type)	                \
+	(((type) == GLADE_PAGE_GENERAL &&                       \
+	  !(gpc)->common && !(gpc)->packing && !(gpc)->atk) ||	\
+	 ((type) == GLADE_PAGE_COMMON  && (gpc)->common)    ||  \
+	 ((type) == GLADE_PAGE_PACKING && (gpc)->packing)   ||  \
+	 ((type) == GLADE_PAGE_ATK     && (gpc)->atk)       ||  \
+	 ((type) == GLADE_PAGE_QUERY   && (gpc)->query))
+
 
 #define GPC_OBJECT_DELIMITER ", "
 #define GPC_PROPERTY_NAMELEN 512  /* Enough space for a property name I think */
@@ -26,14 +45,17 @@ struct _GladePropertyClass
 	gpointer    handle; /* The GladeWidgetAdaptor that this property class
 			     * was created for.
 			     */
-	gpointer    origin_handle; /* The GladeWidgetAdaptor that this property class
-				    * was introduced in.
-				    */
 
-	gint        version_since_major; /* Version in which this property was
-					  * introduced
-					  */
-	gint        version_since_minor; 
+
+	guint16     version_since_major; /* Version in which this property was */
+	guint16     version_since_minor; /* introduced.                       */
+
+	guint16     builder_since_major; /* Version in which this property became */
+	guint16     builder_since_minor; /* available in GtkBuilder format        */
+
+	/* For catalogs that support libglade: */
+	gboolean    libglade_only;       /* Mark special libglade virtual properties */
+	gboolean    libglade_unsupported;/* Mark properties that are not available in libglade */
 
 	GParamSpec *pspec; /* The Parameter Specification for this property.
 			    */
@@ -72,16 +94,6 @@ struct _GladePropertyClass
 			    * to be of possible use in plugin code.
 			    */
 
-	GArray *displayable_values; /* If this property's value is an enumeration/flags and 
-				     * there is some value name overridden in a catalog
-				     * then it will point to a GEnumValue array with the
-				     * modified names, otherwise NULL.
-				     */
-
-	gboolean query; /* Whether we should explicitly ask the user about this property
-			 * when instantiating a widget with this property (through a popup
-			 * dialog).
-			 */
 
 	gboolean optional; /* Some properties are optional by nature like
 			    * default width. It can be set or not set. A
@@ -96,6 +108,10 @@ struct _GladePropertyClass
 	gboolean common;  /* Common properties go in the common tab */
 	gboolean atk;     /* Atk properties go in the atk tab */
 	gboolean packing; /* Packing properties go in the packing tab */
+	gboolean query;   /* Whether we should explicitly ask the user about this property
+			   * when instantiating a widget with this property (through a popup
+			   * dialog).
+			   */
 
 	
 	gboolean translatable; /* The property should be translatable, which
@@ -121,27 +137,39 @@ struct _GladePropertyClass
 			       * that are assigned initial values in composite widgets
 			       * or derived widget code).
 			       */
-	gboolean visible;   /* Whether or not to show this property in the editor
+	gboolean visible;   /* Whether or not to show this property in the editor &
+			     * reset dialog.
 			     */
+
+	gboolean custom_layout; /* Properties marked as custom_layout will not be included
+				 * in a base #GladeEditorTable implementation (use this
+				 * for properties you want to layout in custom ways in
+				 * a #GladeEditable widget
+				 */
+
 	gboolean ignore;    /* When true, we will not sync the object when the property
 			     * changes, or load values from the object.
 			     */
 
+	gboolean needs_sync; /* Virtual properties need to be synchronized after object
+			      * creation, some properties that are not virtual also need
+			      * handling from the backend, if "needs-sync" is true then
+			      * this property will by synced with virtual properties.
+			      */
+
 	gboolean is_modified; /* If true, this property_class has been "modified" from the
 			       * the standard property by a xml file. */
-
-	gboolean resource;  /* Some property types; such as some file specifying
-			     * string properties or GDK_TYPE_PIXBUF properties; are
-			     * resource files and are treated specialy (a filechooser
-			     * popup is used and the resource is copied to the project
-			     * directory).
-			     */
 
 	gboolean themed_icon; /* Some GParamSpecString properties reffer to icon names
 			       * in the icon theme... these need to be specified in the
 			       * property class definition if proper editing tools are to
 			       * be used.
 			       */
+	gboolean stock_icon; /* String properties can also denote stock icons, including
+			      * icons from icon factories...
+			      */
+	gboolean stock;      /* ... or a narrower list of "items" from gtk builtin stock items.
+			      */
 	
 	gboolean transfer_on_paste; /* If this is a packing prop, 
 				     * wether we should transfer it on paste.
@@ -151,6 +179,14 @@ struct _GladePropertyClass
 			 * the editor.
 			 */
 	
+	gboolean parentless_widget;  /* True if this property should point to a parentless widget
+				      * in the project
+				      */
+
+	gchar *create_type; /* If this is an object property and you want the option to create
+			     * one from the object selection dialog, then set the name of the
+			     * concrete type here.
+			     */
 };
 
 
@@ -159,20 +195,27 @@ GladePropertyClass *glade_property_class_new                     (gpointer      
 GladePropertyClass *glade_property_class_new_from_spec           (gpointer             handle,
 								  GParamSpec          *spec);
 
+GladePropertyClass *glade_property_class_new_from_spec_full      (gpointer             handle,
+								  GParamSpec          *spec,
+								  gboolean             need_handle);
+
 GladePropertyClass *glade_property_class_clone                   (GladePropertyClass  *property_class);
 
 void                glade_property_class_free                    (GladePropertyClass  *property_class);
 
 gboolean            glade_property_class_is_visible              (GladePropertyClass  *property_class);
 
-gboolean            glade_property_class_is_object               (GladePropertyClass  *property_class);
+gboolean            glade_property_class_is_object               (GladePropertyClass  *property_class,
+								  GladeProjectFormat   fmt);
 
 GValue             *glade_property_class_make_gvalue_from_string (GladePropertyClass  *property_class,
 								  const gchar         *string,
-								  GladeProject        *project);
+								  GladeProject        *project,
+								  GladeWidget         *widget);
 
 gchar              *glade_property_class_make_string_from_gvalue (GladePropertyClass  *property_class,
-								  const GValue        *value);
+								  const GValue        *value,
+								  GladeProjectFormat   fmt);
 
 GValue             *glade_property_class_make_gvalue_from_vl     (GladePropertyClass  *property_class,
 								  va_list              vl);
@@ -194,9 +237,6 @@ gboolean            glade_property_class_update_from_node        (GladeXmlNode  
 								  GladePropertyClass **property_class,
 								  const gchar         *domain);
 
-G_CONST_RETURN gchar *glade_property_class_get_displayable_value   (GladePropertyClass *klass, 
-								    gint                value);
-
 GtkAdjustment      *glade_property_class_make_adjustment         (GladePropertyClass *property_class);
 
 gboolean            glade_property_class_match                   (GladePropertyClass *klass,
@@ -204,6 +244,11 @@ gboolean            glade_property_class_match                   (GladePropertyC
 
 gboolean            glade_property_class_void_value              (GladePropertyClass *klass,
 								  GValue             *value);
+
+gint                glade_property_class_compare                 (GladePropertyClass *klass,
+								  const GValue       *value1,
+								  const GValue       *value2,
+								  GladeProjectFormat  fmt);
 
 G_END_DECLS
 

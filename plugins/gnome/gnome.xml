@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<glade-catalog name="gnome" library="gladegnome" domain="glade3" depends="gtk+" book="libgnomeui">
+<glade-catalog supports="libglade" name="gnome" library="gladegnome" domain="glade3" depends="gtk+" book="libgnomeui">
   <init-function>glade_gnomeui_init</init-function>
   <glade-widget-classes>
     <glade-widget-class name="GnomeApp" generic-name="app" default-width="440" default-height="250" title="GNOME App">
@@ -35,10 +35,6 @@
 	</property>
         <property id="pack-type">
 	  <spec>glade_gnome_gtk_pack_type_spec</spec>
-          <displayable-values>
-            <value id="GTK_PACK_START" name="Start"></value>
-            <value id="GTK_PACK_END" name="End"></value>
-          </displayable-values>
 	</property>
       </packing-properties>
     </glade-widget-class>
@@ -256,14 +252,6 @@
 	  <tooltip>The maximum number of history entries saved</tooltip>
 	</property>
         <property visible="False" query="False" ignore="True" id="size"/>
-	<property id="filechooser-action">
-	  <displayable-values>
-	    <value id="GTK_FILE_CHOOSER_ACTION_OPEN" name="Open"></value>
-	    <value id="GTK_FILE_CHOOSER_ACTION_SAVE" name="Save"></value>
-	    <value id="GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER" name="Select Folder"></value>
-	    <value id="GTK_FILE_CHOOSER_ACTION_CREATE_FOLDER" name="Create Folder"></value>
-	  </displayable-values>
-	</property>
       </properties>
       <packing-properties>
         <property id="expand" disabled="True"/>
