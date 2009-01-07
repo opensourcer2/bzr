@@ -293,15 +293,15 @@
     <function name="The &quot;tooltip-changed&quot; signal" link="gladeui-glade-property.html#GladeProperty-tooltip-changed"/>
     <function name="The &quot;value-changed&quot; signal" link="gladeui-glade-property.html#GladeProperty-value-changed"/>
     <function name="enum GladeCreateReason" link="gladeui-GladeWidgetAdaptor.html#GladeCreateReason"/>
-    <function name="GWA_IS_FIXED()" link="gladeui-GladeWidgetAdaptor.html#GWA-IS-FIXED:CAPS"/>
-    <function name="GWA_IS_TOPLEVEL()" link="gladeui-GladeWidgetAdaptor.html#GWA-IS-TOPLEVEL:CAPS"/>
-    <function name="GWA_USE_PLACEHOLDERS()" link="gladeui-GladeWidgetAdaptor.html#GWA-USE-PLACEHOLDERS:CAPS"/>
-    <function name="GWA_DEFAULT_WIDTH()" link="gladeui-GladeWidgetAdaptor.html#GWA-DEFAULT-WIDTH:CAPS"/>
-    <function name="GWA_DEFAULT_HEIGHT()" link="gladeui-GladeWidgetAdaptor.html#GWA-DEFAULT-HEIGHT:CAPS"/>
-    <function name="GWA_GET_CLASS()" link="gladeui-GladeWidgetAdaptor.html#GWA-GET-CLASS:CAPS"/>
-    <function name="GWA_GET_OCLASS()" link="gladeui-GladeWidgetAdaptor.html#GWA-GET-OCLASS:CAPS"/>
-    <function name="GLADE_VALID_CREATE_REASON()" link="gladeui-GladeWidgetAdaptor.html#GLADE-VALID-CREATE-REASON:CAPS"/>
-    <function name="GLADE_TYPE_CREATE_REASON" link="gladeui-GladeWidgetAdaptor.html#GLADE-TYPE-CREATE-REASON:CAPS"/>
+    <function name="GWA_IS_FIXED()" link="gladeui-GladeWidgetAdaptor.html#GWA-IS-FIXED--CAPS"/>
+    <function name="GWA_IS_TOPLEVEL()" link="gladeui-GladeWidgetAdaptor.html#GWA-IS-TOPLEVEL--CAPS"/>
+    <function name="GWA_USE_PLACEHOLDERS()" link="gladeui-GladeWidgetAdaptor.html#GWA-USE-PLACEHOLDERS--CAPS"/>
+    <function name="GWA_DEFAULT_WIDTH()" link="gladeui-GladeWidgetAdaptor.html#GWA-DEFAULT-WIDTH--CAPS"/>
+    <function name="GWA_DEFAULT_HEIGHT()" link="gladeui-GladeWidgetAdaptor.html#GWA-DEFAULT-HEIGHT--CAPS"/>
+    <function name="GWA_GET_CLASS()" link="gladeui-GladeWidgetAdaptor.html#GWA-GET-CLASS--CAPS"/>
+    <function name="GWA_GET_OCLASS()" link="gladeui-GladeWidgetAdaptor.html#GWA-GET-OCLASS--CAPS"/>
+    <function name="GLADE_VALID_CREATE_REASON()" link="gladeui-GladeWidgetAdaptor.html#GLADE-VALID-CREATE-REASON--CAPS"/>
+    <function name="GLADE_TYPE_CREATE_REASON" link="gladeui-GladeWidgetAdaptor.html#GLADE-TYPE-CREATE-REASON--CAPS"/>
     <function name="GladeSetPropertyFunc ()" link="gladeui-GladeWidgetAdaptor.html#GladeSetPropertyFunc"/>
     <function name="GladeGetPropertyFunc ()" link="gladeui-GladeWidgetAdaptor.html#GladeGetPropertyFunc"/>
     <function name="GladeVerifyPropertyFunc ()" link="gladeui-GladeWidgetAdaptor.html#GladeVerifyPropertyFunc"/>
@@ -362,8 +362,8 @@
     <function name="glade_widget_adaptor_action_activate ()" link="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-action-activate"/>
     <function name="glade_widget_adaptor_child_action_activate ()" link="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-child-action-activate"/>
     <function name="glade_widget_adaptor_string_from_value ()" link="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-string-from-value"/>
-    <function name="GPC_OBJECT_DELIMITER" link="gladeui-GladePropertyClass.html#GPC-OBJECT-DELIMITER:CAPS"/>
-    <function name="GPC_PROPERTY_NAMELEN" link="gladeui-GladePropertyClass.html#GPC-PROPERTY-NAMELEN:CAPS"/>
+    <function name="GPC_OBJECT_DELIMITER" link="gladeui-GladePropertyClass.html#GPC-OBJECT-DELIMITER--CAPS"/>
+    <function name="GPC_PROPERTY_NAMELEN" link="gladeui-GladePropertyClass.html#GPC-PROPERTY-NAMELEN--CAPS"/>
     <function name="GladePropertyClass" link="gladeui-GladePropertyClass.html#GladePropertyClass"/>
     <function name="glade_property_class_new ()" link="gladeui-GladePropertyClass.html#glade-property-class-new"/>
     <function name="glade_property_class_new_from_spec ()" link="gladeui-GladePropertyClass.html#glade-property-class-new-from-spec"/>
@@ -479,8 +479,8 @@
     <function name="glade_xml_context_new_from_path ()" link="gladeui-glade-xml-utils.html#glade-xml-context-new-from-path"/>
     <function name="glade_xml_context_get_doc ()" link="gladeui-glade-xml-utils.html#glade-xml-context-get-doc"/>
     <function name="glade_xml_load_sym_from_node ()" link="gladeui-glade-xml-utils.html#glade-xml-load-sym-from-node"/>
-    <function name="GLADE_EDITOR_TABLE()" link="GladeEditor.html#GLADE-EDITOR-TABLE:CAPS"/>
-    <function name="GLADE_IS_EDITOR_TABLE()" link="GladeEditor.html#GLADE-IS-EDITOR-TABLE:CAPS"/>
+    <function name="GLADE_EDITOR_TABLE()" link="GladeEditor.html#GLADE-EDITOR-TABLE--CAPS"/>
+    <function name="GLADE_IS_EDITOR_TABLE()" link="GladeEditor.html#GLADE-IS-EDITOR-TABLE--CAPS"/>
     <function name="GladeEditorTable" link="GladeEditor.html#GladeEditorTable"/>
     <function name="GladeEditor" link="GladeEditor.html#GladeEditor-struct"/>
     <function name="glade_editor_new ()" link="GladeEditor.html#glade-editor-new"/>
@@ -495,7 +495,7 @@
     <function name="The &quot;widget&quot; property" link="GladeEditor.html#GladeEditor--widget"/>
     <function name="The &quot;gtk-doc-search&quot; signal" link="GladeEditor.html#GladeEditor-gtk-doc-search"/>
     <function name="GladeEditorProperty" link="GladeEditorProperty.html#GladeEditorProperty-struct"/>
-    <function name="GLADE_MAKE_EPROP_TYPE()" link="GladeEditorProperty.html#GLADE-MAKE-EPROP-TYPE:CAPS"/>
+    <function name="GLADE_MAKE_EPROP_TYPE()" link="GladeEditorProperty.html#GLADE-MAKE-EPROP-TYPE--CAPS"/>
     <function name="glade_editor_property_load ()" link="GladeEditorProperty.html#glade-editor-property-load"/>
     <function name="glade_editor_property_load_by_widget ()" link="GladeEditorProperty.html#glade-editor-property-load-by-widget"/>
     <function name="glade_editor_property_commit ()" link="GladeEditorProperty.html#glade-editor-property-commit"/>

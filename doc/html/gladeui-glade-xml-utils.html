@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Xml Utils</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
-<link rel="start" href="index.html" title="Glade User Interface Designer Reference Manual">
+<meta name="generator" content="DocBook XSL Stylesheets V1.74.0">
+<link rel="home" href="index.html" title="Glade User Interface Designer Reference Manual">
 <link rel="up" href="core.html" title="Part II. Glade Core">
 <link rel="prev" href="GladePlaceholder.html" title="GladePlaceholder">
 <link rel="next" href="dockables.html" title="Part III. Dockable Glade UI Widgets">
-<meta name="generator" content="GTK-Doc V1.10 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 <link rel="part" href="catalog.html" title="Part I. Adding your custom widgets">
 <link rel="part" href="core.html" title="Part II. Glade Core">
@@ -25,9 +25,11 @@
 <th width="100%" align="center">Glade User Interface Designer Reference Manual</th>
 <td><a accesskey="n" href="dockables.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr>
-<tr><td colspan="5" class="shortcuts"><nobr><a href="#gladeui-glade-xml-utils.synopsis" class="shortcut">Top</a>
-                   | 
-                  <a href="#gladeui-glade-xml-utils.description" class="shortcut">Description</a></nobr></td></tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#gladeui-glade-xml-utils.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#gladeui-glade-xml-utils.description" class="shortcut">Description</a>
+</td></tr>
 </table>
 <div class="refentry" lang="en">
 <a name="gladeui-glade-xml-utils"></a><div class="titlepage"></div>
@@ -41,11 +43,11 @@
 <div class="refsynopsisdiv">
 <a name="gladeui-glade-xml-utils.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">
-GladeXmlNode*       <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-search-child" title="glade_xml_search_child ()">glade_xml_search_child</a>              (GladeXmlNode *node,
+GladeXmlNode *      <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-search-child" title="glade_xml_search_child ()">glade_xml_search_child</a>              (GladeXmlNode *node,
                                                          const gchar *name);
-GladeXmlNode*       <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-search-child-required" title="glade_xml_search_child_required ()">glade_xml_search_child_required</a>     (GladeXmlNode *tree,
+GladeXmlNode *      <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-search-child-required" title="glade_xml_search_child_required ()">glade_xml_search_child_required</a>     (GladeXmlNode *tree,
                                                          const gchar *name);
-gchar*              <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-get-content" title="glade_xml_get_content ()">glade_xml_get_content</a>               (GladeXmlNode *node_in);
+gchar *             <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-get-content" title="glade_xml_get_content ()">glade_xml_get_content</a>               (GladeXmlNode *node_in);
 void                <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-set-content" title="glade_xml_set_content ()">glade_xml_set_content</a>               (GladeXmlNode *node_in,
                                                          const gchar *content);
 gboolean            <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-get-value-int" title="glade_xml_get_value_int ()">glade_xml_get_value_int</a>             (GladeXmlNode *node_in,
@@ -54,9 +56,9 @@ gboolean            <a class="link" href="gladeui-glade-xml-utils.html#glade-xml
 gboolean            <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-get-value-int-required" title="glade_xml_get_value_int_required ()">glade_xml_get_value_int_required</a>    (GladeXmlNode *node,
                                                          const gchar *name,
                                                          int *val);
-gchar*              <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-get-value-string" title="glade_xml_get_value_string ()">glade_xml_get_value_string</a>          (GladeXmlNode *node,
+gchar *             <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-get-value-string" title="glade_xml_get_value_string ()">glade_xml_get_value_string</a>          (GladeXmlNode *node,
                                                          const gchar *name);
-gchar*              <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-get-value-string-required" title="glade_xml_get_value_string_required ()">glade_xml_get_value_string_required</a> (GladeXmlNode *node,
+gchar *             <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-get-value-string-required" title="glade_xml_get_value_string_required ()">glade_xml_get_value_string_required</a> (GladeXmlNode *node,
                                                          const gchar *name,
                                                          const gchar *xtra_info);
 gboolean            <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-get-boolean" title="glade_xml_get_boolean ()">glade_xml_get_boolean</a>               (GladeXmlNode *node,
@@ -65,11 +67,11 @@ gboolean            <a class="link" href="gladeui-glade-xml-utils.html#glade-xml
 void                <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-set-value" title="glade_xml_set_value ()">glade_xml_set_value</a>                 (GladeXmlNode *node_in,
                                                          const gchar *name,
                                                          const gchar *val);
-gchar*              <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-get-property-string-required" title="glade_xml_get_property_string_required ()">glade_xml_get_property_string_required</a>
+gchar *             <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-get-property-string-required" title="glade_xml_get_property_string_required ()">glade_xml_get_property_string_required</a>
                                                         (GladeXmlNode *node_in,
                                                          const gchar *name,
                                                          const gchar *xtra);
-gchar*              <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-get-property-string" title="glade_xml_get_property_string ()">glade_xml_get_property_string</a>       (GladeXmlNode *node_in,
+gchar *             <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-get-property-string" title="glade_xml_get_property_string ()">glade_xml_get_property_string</a>       (GladeXmlNode *node_in,
                                                          const gchar *name);
 gboolean            <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-get-property-boolean" title="glade_xml_get_property_boolean ()">glade_xml_get_property_boolean</a>      (GladeXmlNode *node_in,
                                                          const gchar *name,
@@ -86,40 +88,40 @@ void                <a class="link" href="gladeui-glade-xml-utils.html#glade-xml
 void                <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-node-set-property-boolean" title="glade_xml_node_set_property_boolean ()">glade_xml_node_set_property_boolean</a> (GladeXmlNode *node_in,
                                                          const gchar *name,
                                                          gboolean value);
-GladeXmlNode*       <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-node-new" title="glade_xml_node_new ()">glade_xml_node_new</a>                  (GladeXmlContext *context,
+GladeXmlNode *      <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-node-new" title="glade_xml_node_new ()">glade_xml_node_new</a>                  (GladeXmlContext *context,
                                                          const gchar *name);
-GladeXmlNode*       <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-node-new-comment" title="glade_xml_node_new_comment ()">glade_xml_node_new_comment</a>          (GladeXmlContext *context,
+GladeXmlNode *      <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-node-new-comment" title="glade_xml_node_new_comment ()">glade_xml_node_new_comment</a>          (GladeXmlContext *context,
                                                          const gchar *comment);
 void                <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-node-delete" title="glade_xml_node_delete ()">glade_xml_node_delete</a>               (GladeXmlNode *node);
-GladeXmlNode*       <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-node-get-children" title="glade_xml_node_get_children ()">glade_xml_node_get_children</a>         (GladeXmlNode *node);
-GladeXmlNode*       <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-node-next" title="glade_xml_node_next ()">glade_xml_node_next</a>                 (GladeXmlNode *node_in);
+GladeXmlNode *      <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-node-get-children" title="glade_xml_node_get_children ()">glade_xml_node_get_children</a>         (GladeXmlNode *node);
+GladeXmlNode *      <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-node-next" title="glade_xml_node_next ()">glade_xml_node_next</a>                 (GladeXmlNode *node_in);
 gboolean            <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-node-verify" title="glade_xml_node_verify ()">glade_xml_node_verify</a>               (GladeXmlNode *node_in,
                                                          const gchar *name);
 gboolean            <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-node-verify-silent" title="glade_xml_node_verify_silent ()">glade_xml_node_verify_silent</a>        (GladeXmlNode *node_in,
                                                          const gchar *name);
-const gchar*        <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-node-get-name" title="glade_xml_node_get_name ()">glade_xml_node_get_name</a>             (GladeXmlNode *node_in);
+const gchar *       <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-node-get-name" title="glade_xml_node_get_name ()">glade_xml_node_get_name</a>             (GladeXmlNode *node_in);
 void                <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-node-append-child" title="glade_xml_node_append_child ()">glade_xml_node_append_child</a>         (GladeXmlNode *node,
                                                          GladeXmlNode *child);
 void                <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-node-remove" title="glade_xml_node_remove ()">glade_xml_node_remove</a>               (GladeXmlNode *node_in);
 gboolean            <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-node-is-comment" title="glade_xml_node_is_comment ()">glade_xml_node_is_comment</a>           (GladeXmlNode *node_in);
-GladeXmlNode*       <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-node-next-with-comments" title="glade_xml_node_next_with_comments ()">glade_xml_node_next_with_comments</a>   (GladeXmlNode *node_in);
-GladeXmlNode*       <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-node-get-children-with-comments" title="glade_xml_node_get_children_with_comments ()">glade_xml_node_get_children_with_comments</a>
+GladeXmlNode *      <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-node-next-with-comments" title="glade_xml_node_next_with_comments ()">glade_xml_node_next_with_comments</a>   (GladeXmlNode *node_in);
+GladeXmlNode *      <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-node-get-children-with-comments" title="glade_xml_node_get_children_with_comments ()">glade_xml_node_get_children_with_comments</a>
                                                         (GladeXmlNode *node);
-GladeXmlNode*       <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-doc-get-root" title="glade_xml_doc_get_root ()">glade_xml_doc_get_root</a>              (GladeXmlDoc *doc);
-GladeXmlDoc*        <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-doc-new" title="glade_xml_doc_new ()">glade_xml_doc_new</a>                   (void);
+GladeXmlNode *      <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-doc-get-root" title="glade_xml_doc_get_root ()">glade_xml_doc_get_root</a>              (GladeXmlDoc *doc);
+GladeXmlDoc *       <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-doc-new" title="glade_xml_doc_new ()">glade_xml_doc_new</a>                   (void);
 void                <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-doc-set-root" title="glade_xml_doc_set_root ()">glade_xml_doc_set_root</a>              (GladeXmlDoc *doc,
                                                          GladeXmlNode *node);
 void                <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-doc-free" title="glade_xml_doc_free ()">glade_xml_doc_free</a>                  (GladeXmlDoc *doc_in);
 gint                <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-doc-save" title="glade_xml_doc_save ()">glade_xml_doc_save</a>                  (GladeXmlDoc *doc_in,
                                                          const gchar *full_path);
-GladeXmlContext*    <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-context-new" title="glade_xml_context_new ()">glade_xml_context_new</a>               (GladeXmlDoc *doc,
+GladeXmlContext *   <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-context-new" title="glade_xml_context_new ()">glade_xml_context_new</a>               (GladeXmlDoc *doc,
                                                          const gchar *name_space);
 void                <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-context-destroy" title="glade_xml_context_destroy ()">glade_xml_context_destroy</a>           (GladeXmlContext *context);
 void                <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-context-free" title="glade_xml_context_free ()">glade_xml_context_free</a>              (GladeXmlContext *context);
-GladeXmlContext*    <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-context-new-from-path" title="glade_xml_context_new_from_path ()">glade_xml_context_new_from_path</a>     (const gchar *full_path,
+GladeXmlContext *   <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-context-new-from-path" title="glade_xml_context_new_from_path ()">glade_xml_context_new_from_path</a>     (const gchar *full_path,
                                                          const gchar *nspace,
                                                          const gchar *root_name);
-GladeXmlDoc*        <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-context-get-doc" title="glade_xml_context_get_doc ()">glade_xml_context_get_doc</a>           (GladeXmlContext *context);
+GladeXmlDoc *       <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-context-get-doc" title="glade_xml_context_get_doc ()">glade_xml_context_get_doc</a>           (GladeXmlContext *context);
 gboolean            <a class="link" href="gladeui-glade-xml-utils.html#glade-xml-load-sym-from-node" title="glade_xml_load_sym_from_node ()">glade_xml_load_sym_from_node</a>        (GladeXmlNode *node_in,
                                                          GModule *module,
                                                          gchar *tagname,
@@ -137,13 +139,13 @@ and write widgets in custom ways</p>
 <a name="gladeui-glade-xml-utils.details"></a><h2>Details</h2>
 <div class="refsect2" lang="en">
 <a name="glade-xml-search-child"></a><h3>glade_xml_search_child ()</h3>
-<pre class="programlisting">GladeXmlNode*       glade_xml_search_child              (GladeXmlNode *node,
+<pre class="programlisting">GladeXmlNode *      glade_xml_search_child              (GladeXmlNode *node,
                                                          const gchar *name);</pre>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-xml-search-child-required"></a><h3>glade_xml_search_child_required ()</h3>
-<pre class="programlisting">GladeXmlNode*       glade_xml_search_child_required     (GladeXmlNode *tree,
+<pre class="programlisting">GladeXmlNode *      glade_xml_search_child_required     (GladeXmlNode *tree,
                                                          const gchar *name);</pre>
 <p>
 just a small wrapper arround glade_xml_search_child that displays
@@ -172,7 +174,7 @@ an error if the child was not found</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-xml-get-content"></a><h3>glade_xml_get_content ()</h3>
-<pre class="programlisting">gchar*              glade_xml_get_content               (GladeXmlNode *node_in);</pre>
+<pre class="programlisting">gchar *             glade_xml_get_content               (GladeXmlNode *node_in);</pre>
 <p>
 Gets a string containing the content of <em class="parameter"><code>node_in</code></em>.</p>
 <div class="variablelist"><table border="0">
@@ -287,13 +289,13 @@ a <code class="function">g_warning()</code> if <em class="parameter"><code>node_
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-xml-get-value-string"></a><h3>glade_xml_get_value_string ()</h3>
-<pre class="programlisting">gchar*              glade_xml_get_value_string          (GladeXmlNode *node,
+<pre class="programlisting">gchar *             glade_xml_get_value_string          (GladeXmlNode *node,
                                                          const gchar *name);</pre>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-xml-get-value-string-required"></a><h3>glade_xml_get_value_string_required ()</h3>
-<pre class="programlisting">gchar*              glade_xml_get_value_string_required (GladeXmlNode *node,
+<pre class="programlisting">gchar *             glade_xml_get_value_string_required (GladeXmlNode *node,
                                                          const gchar *name,
                                                          const gchar *xtra_info);</pre>
 </div>
@@ -336,7 +338,7 @@ Sets the property <em class="parameter"><code>name</code></em> in <em class="par
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-xml-get-property-string-required"></a><h3>glade_xml_get_property_string_required ()</h3>
-<pre class="programlisting">gchar*              glade_xml_get_property_string_required
+<pre class="programlisting">gchar *             glade_xml_get_property_string_required
                                                         (GladeXmlNode *node_in,
                                                          const gchar *name,
                                                          const gchar *xtra);</pre>
@@ -344,7 +346,7 @@ Sets the property <em class="parameter"><code>name</code></em> in <em class="par
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-xml-get-property-string"></a><h3>glade_xml_get_property_string ()</h3>
-<pre class="programlisting">gchar*              glade_xml_get_property_string       (GladeXmlNode *node_in,
+<pre class="programlisting">gchar *             glade_xml_get_property_string       (GladeXmlNode *node_in,
                                                          const gchar *name);</pre>
 </div>
 <hr>
@@ -385,13 +387,13 @@ Sets the property <em class="parameter"><code>name</code></em> in <em class="par
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-xml-node-new"></a><h3>glade_xml_node_new ()</h3>
-<pre class="programlisting">GladeXmlNode*       glade_xml_node_new                  (GladeXmlContext *context,
+<pre class="programlisting">GladeXmlNode *      glade_xml_node_new                  (GladeXmlContext *context,
                                                          const gchar *name);</pre>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-xml-node-new-comment"></a><h3>glade_xml_node_new_comment ()</h3>
-<pre class="programlisting">GladeXmlNode*       glade_xml_node_new_comment          (GladeXmlContext *context,
+<pre class="programlisting">GladeXmlNode *      glade_xml_node_new_comment          (GladeXmlContext *context,
                                                          const gchar *comment);</pre>
 </div>
 <hr>
@@ -402,12 +404,12 @@ Sets the property <em class="parameter"><code>name</code></em> in <em class="par
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-xml-node-get-children"></a><h3>glade_xml_node_get_children ()</h3>
-<pre class="programlisting">GladeXmlNode*       glade_xml_node_get_children         (GladeXmlNode *node);</pre>
+<pre class="programlisting">GladeXmlNode *      glade_xml_node_get_children         (GladeXmlNode *node);</pre>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-xml-node-next"></a><h3>glade_xml_node_next ()</h3>
-<pre class="programlisting">GladeXmlNode*       glade_xml_node_next                 (GladeXmlNode *node_in);</pre>
+<pre class="programlisting">GladeXmlNode *      glade_xml_node_next                 (GladeXmlNode *node_in);</pre>
 </div>
 <hr>
 <div class="refsect2" lang="en">
@@ -469,7 +471,7 @@ a <code class="function">g_warning()</code> if <em class="parameter"><code>node_
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-xml-node-get-name"></a><h3>glade_xml_node_get_name ()</h3>
-<pre class="programlisting">const gchar*        glade_xml_node_get_name             (GladeXmlNode *node_in);</pre>
+<pre class="programlisting">const gchar *       glade_xml_node_get_name             (GladeXmlNode *node_in);</pre>
 </div>
 <hr>
 <div class="refsect2" lang="en">
@@ -490,18 +492,18 @@ a <code class="function">g_warning()</code> if <em class="parameter"><code>node_
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-xml-node-next-with-comments"></a><h3>glade_xml_node_next_with_comments ()</h3>
-<pre class="programlisting">GladeXmlNode*       glade_xml_node_next_with_comments   (GladeXmlNode *node_in);</pre>
+<pre class="programlisting">GladeXmlNode *      glade_xml_node_next_with_comments   (GladeXmlNode *node_in);</pre>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-xml-node-get-children-with-comments"></a><h3>glade_xml_node_get_children_with_comments ()</h3>
-<pre class="programlisting">GladeXmlNode*       glade_xml_node_get_children_with_comments
+<pre class="programlisting">GladeXmlNode *      glade_xml_node_get_children_with_comments
                                                         (GladeXmlNode *node);</pre>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-xml-doc-get-root"></a><h3>glade_xml_doc_get_root ()</h3>
-<pre class="programlisting">GladeXmlNode*       glade_xml_doc_get_root              (GladeXmlDoc *doc);</pre>
+<pre class="programlisting">GladeXmlNode *      glade_xml_doc_get_root              (GladeXmlDoc *doc);</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
@@ -523,7 +525,7 @@ a <code class="function">g_warning()</code> if <em class="parameter"><code>node_
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-xml-doc-new"></a><h3>glade_xml_doc_new ()</h3>
-<pre class="programlisting">GladeXmlDoc*        glade_xml_doc_new                   (void);</pre>
+<pre class="programlisting">GladeXmlDoc *       glade_xml_doc_new                   (void);</pre>
 </div>
 <hr>
 <div class="refsect2" lang="en">
@@ -545,7 +547,7 @@ a <code class="function">g_warning()</code> if <em class="parameter"><code>node_
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-xml-context-new"></a><h3>glade_xml_context_new ()</h3>
-<pre class="programlisting">GladeXmlContext*    glade_xml_context_new               (GladeXmlDoc *doc,
+<pre class="programlisting">GladeXmlContext *   glade_xml_context_new               (GladeXmlDoc *doc,
                                                          const gchar *name_space);</pre>
 </div>
 <hr>
@@ -571,14 +573,14 @@ Similar to glade_xml_context_destroy but it also frees the document set in the c
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-xml-context-new-from-path"></a><h3>glade_xml_context_new_from_path ()</h3>
-<pre class="programlisting">GladeXmlContext*    glade_xml_context_new_from_path     (const gchar *full_path,
+<pre class="programlisting">GladeXmlContext *   glade_xml_context_new_from_path     (const gchar *full_path,
                                                          const gchar *nspace,
                                                          const gchar *root_name);</pre>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-xml-context-get-doc"></a><h3>glade_xml_context_get_doc ()</h3>
-<pre class="programlisting">GladeXmlDoc*        glade_xml_context_get_doc           (GladeXmlContext *context);</pre>
+<pre class="programlisting">GladeXmlDoc *       glade_xml_context_get_doc           (GladeXmlContext *context);</pre>
 </div>
 <hr>
 <div class="refsect2" lang="en">
@@ -592,6 +594,6 @@ Similar to glade_xml_context_destroy but it also frees the document set in the c
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.10</div>
+          Generated by GTK-Doc V1.12</div>
 </body>
 </html>

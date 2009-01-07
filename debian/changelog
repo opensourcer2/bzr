@@ -1,3 +1,14 @@
+glade-3 (3.5.5-0ubuntu1) jaunty; urgency=low
+
+  * New upstream version:
+    - Model data editor improvments 
+    - Treeview editor revamp, few crashers fixed
+    - Few crashers fixed #525839, #522542
+    - Expand inspector treeview by default
+    - Many more bug fixes including #533471
+
+ -- Sebastien Bacher <seb128@ubuntu.com>  Wed, 07 Jan 2009 12:18:29 +0100
+
 glade-3 (3.5.4-0ubuntu1) jaunty; urgency=low
 
   * New upstream version

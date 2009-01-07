@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GladeEditor</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
-<link rel="start" href="index.html" title="Glade User Interface Designer Reference Manual">
+<meta name="generator" content="DocBook XSL Stylesheets V1.74.0">
+<link rel="home" href="index.html" title="Glade User Interface Designer Reference Manual">
 <link rel="up" href="dockables.html" title="Part III. Dockable Glade UI Widgets">
 <link rel="prev" href="dockables.html" title="Part III. Dockable Glade UI Widgets">
 <link rel="next" href="GladeEditorProperty.html" title="GladeEditorProperty">
-<meta name="generator" content="GTK-Doc V1.10 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 <link rel="part" href="catalog.html" title="Part I. Adding your custom widgets">
 <link rel="part" href="core.html" title="Part II. Glade Core">
@@ -25,17 +25,19 @@
 <th width="100%" align="center">Glade User Interface Designer Reference Manual</th>
 <td><a accesskey="n" href="GladeEditorProperty.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr>
-<tr><td colspan="5" class="shortcuts"><nobr><a href="#GladeEditor.synopsis" class="shortcut">Top</a>
-                   | 
-                  <a href="#GladeEditor.description" class="shortcut">Description</a>
-                   | 
-                  <a href="#GladeEditor.object-hierarchy" class="shortcut">Object Hierarchy</a>
-                   | 
-                  <a href="#GladeEditor.implemented-interfaces" class="shortcut">Implemented Interfaces</a>
-                   | 
-                  <a href="#GladeEditor.properties" class="shortcut">Properties</a>
-                   | 
-                  <a href="#GladeEditor.signals" class="shortcut">Signals</a></nobr></td></tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#GladeEditor.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#GladeEditor.description" class="shortcut">Description</a>
+                 | 
+                <a href="#GladeEditor.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                 | 
+                <a href="#GladeEditor.implemented-interfaces" class="shortcut">Implemented Interfaces</a>
+                 | 
+                <a href="#GladeEditor.properties" class="shortcut">Properties</a>
+                 | 
+                <a href="#GladeEditor.signals" class="shortcut">Signals</a>
+</td></tr>
 </table>
 <div class="refentry" lang="en">
 <a name="GladeEditor"></a><div class="titlepage"></div>
@@ -49,11 +51,11 @@
 <div class="refsynopsisdiv">
 <a name="GladeEditor.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">
-#define             <a class="link" href="GladeEditor.html#GLADE-EDITOR-TABLE:CAPS" title="GLADE_EDITOR_TABLE()">GLADE_EDITOR_TABLE</a>                  (obj)
-#define             <a class="link" href="GladeEditor.html#GLADE-IS-EDITOR-TABLE:CAPS" title="GLADE_IS_EDITOR_TABLE()">GLADE_IS_EDITOR_TABLE</a>               (obj)
+#define             <a class="link" href="GladeEditor.html#GLADE-EDITOR-TABLE--CAPS" title="GLADE_EDITOR_TABLE()">GLADE_EDITOR_TABLE</a>                  (obj)
+#define             <a class="link" href="GladeEditor.html#GLADE-IS-EDITOR-TABLE--CAPS" title="GLADE_IS_EDITOR_TABLE()">GLADE_IS_EDITOR_TABLE</a>               (obj)
                     <a class="link" href="GladeEditor.html#GladeEditorTable" title="GladeEditorTable">GladeEditorTable</a>;
                     <a class="link" href="GladeEditor.html#GladeEditor-struct" title="GladeEditor">GladeEditor</a>;
-<a class="link" href="GladeEditor.html" title="GladeEditor">GladeEditor</a>*        <a class="link" href="GladeEditor.html#glade-editor-new" title="glade_editor_new ()">glade_editor_new</a>                    (void);
+<a class="link" href="GladeEditor.html" title="GladeEditor">GladeEditor</a> *       <a class="link" href="GladeEditor.html#glade-editor-new" title="glade_editor_new ()">glade_editor_new</a>                    (void);
 void                <a class="link" href="GladeEditor.html#glade-editor-load-widget" title="glade_editor_load_widget ()">glade_editor_load_widget</a>            (<a class="link" href="GladeEditor.html" title="GladeEditor">GladeEditor</a> *editor,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);
 void                <a class="link" href="GladeEditor.html#glade-editor-refresh" title="glade_editor_refresh ()">glade_editor_refresh</a>                (<a class="link" href="GladeEditor.html" title="GladeEditor">GladeEditor</a> *editor);
@@ -105,13 +107,13 @@ This is the Glade Notebook containing all the controls needed to configure a <a 
 <div class="refsect1" lang="en">
 <a name="GladeEditor.details"></a><h2>Details</h2>
 <div class="refsect2" lang="en">
-<a name="GLADE-EDITOR-TABLE:CAPS"></a><h3>GLADE_EDITOR_TABLE()</h3>
+<a name="GLADE-EDITOR-TABLE--CAPS"></a><h3>GLADE_EDITOR_TABLE()</h3>
 <pre class="programlisting">#define GLADE_EDITOR_TABLE(obj)		    (G_TYPE_CHECK_INSTANCE_CAST ((obj), GLADE_TYPE_EDITOR_TABLE, GladeEditorTable))
 </pre>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="GLADE-IS-EDITOR-TABLE:CAPS"></a><h3>GLADE_IS_EDITOR_TABLE()</h3>
+<a name="GLADE-IS-EDITOR-TABLE--CAPS"></a><h3>GLADE_IS_EDITOR_TABLE()</h3>
 <pre class="programlisting">#define GLADE_IS_EDITOR_TABLE(obj)	    (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GLADE_TYPE_EDITOR_TABLE))
 </pre>
 </div>
@@ -163,7 +165,7 @@ This is the Glade Notebook containing all the controls needed to configure a <a 
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-editor-new"></a><h3>glade_editor_new ()</h3>
-<pre class="programlisting"><a class="link" href="GladeEditor.html" title="GladeEditor">GladeEditor</a>*        glade_editor_new                    (void);</pre>
+<pre class="programlisting"><a class="link" href="GladeEditor.html" title="GladeEditor">GladeEditor</a> *       glade_editor_new                    (void);</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
@@ -300,6 +302,6 @@ Emitted when the editor requests that a doc-search be performed.</p>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.10</div>
+          Generated by GTK-Doc V1.12</div>
 </body>
 </html>

@@ -1,3 +1,62 @@
+2009-01-05  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* NEWS, configure.ac: Rolling 3.5.5
+
+2009-01-05  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* gladeui/glade-inspector.c: call gtk_tree_view_expand_all() in
+	  glade_inspector_set_project() 
+
+	* gladeui/glade-widget.c: fixed Bug #525839 "Glade hangs in toolbar editor"
+	  replaced assert with if statement in glade_widget_copy_properties()
+
+	* gladeui/glade-signal-editor.c: fixed Bug #522542 "glade-3 crashes when
+	  pressing Enter in signal handler entry field"
+	  removed unnecessary treeview row-activated handler.
+
+2009-01-05  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-base-editor.c: s/glade_widget_set_name()/glade_command_set_name()
+	(Pavel Kostyuchenko - bug 533471).
+
+	Treeview editor revamp, few crashers fixed, need to come back and note...
+
+2008-12-29  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/glade-cell-renderer-button.c: Made it possible
+	to tab into the i18n button.
+
+	* plugins/gtk+/glade-model-data.c: Added sequential editing mode option
+	(TODO: maybe add this to session data ?)
+
+	* gladeui/glade-widget-adator.c, gladeui/glade-property-class.[ch]:
+	Converted pclass booleans to bitfields, now disabled property classes
+	are kept around so that we dont screw up inheritance.
+
+	* gladeui/glade-catalog.[ch]: Fixed version types to guint16.
+
+2008-12-15  Tristan Van Berkom <tvb@gnome.org>
+
+	* NEWS, configure.ac: Rolling 3.5.4
+
+2008-12-15  Przemysław Grzegorczyk  <pgrzegorczyk@gmail.com>
+
+	* src/glade-window.c:
+	* src/glade-window.h:
+	* gladeui/glade-palette-box.h:
+	* gladeui/glade-design-view.h:
+	* gladeui/glade-design-layout.h:
+	* gladeui/glade-palette-expander.c:
+	* gladeui/glade-palette-expander.h:
+	* gladeui/glade-widget-adaptor.c:
+	* gladeui/glade-palette-item.c:
+	* gladeui/glade-palette-item.h:
+	* gladeui/glade-palette.h:
+	* gladeui/glade-named-icon-chooser-dialog.h:
+	* gladeui/glade-app.c:
+	* gladeui/glade-property-class.h: Cleaned up gtk and glib includes
+	to use only toplevel headers. Patch from Maxim Ermilov. Bug #561260.
+
 2008-12-13  Tristan Van Berkom <tvb@gnome.org>
 
 	* gladeui/glade-inspector.c: Removed old search code.

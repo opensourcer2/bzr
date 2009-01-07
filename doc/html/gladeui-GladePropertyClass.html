@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GladePropertyClass</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
-<link rel="start" href="index.html" title="Glade User Interface Designer Reference Manual">
+<meta name="generator" content="DocBook XSL Stylesheets V1.74.0">
+<link rel="home" href="index.html" title="Glade User Interface Designer Reference Manual">
 <link rel="up" href="core.html" title="Part II. Glade Core">
 <link rel="prev" href="gladeui-GladeWidgetAdaptor.html" title="GladeWidgetAdaptor">
 <link rel="next" href="GladeWidgetAction.html" title="GladeWidgetAction">
-<meta name="generator" content="GTK-Doc V1.10 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 <link rel="part" href="catalog.html" title="Part I. Adding your custom widgets">
 <link rel="part" href="core.html" title="Part II. Glade Core">
@@ -25,9 +25,11 @@
 <th width="100%" align="center">Glade User Interface Designer Reference Manual</th>
 <td><a accesskey="n" href="GladeWidgetAction.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr>
-<tr><td colspan="5" class="shortcuts"><nobr><a href="#gladeui-GladePropertyClass.synopsis" class="shortcut">Top</a>
-                   | 
-                  <a href="#gladeui-GladePropertyClass.description" class="shortcut">Description</a></nobr></td></tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#gladeui-GladePropertyClass.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#gladeui-GladePropertyClass.description" class="shortcut">Description</a>
+</td></tr>
 </table>
 <div class="refentry" lang="en">
 <a name="gladeui-GladePropertyClass"></a><div class="titlepage"></div>
@@ -41,34 +43,34 @@
 <div class="refsynopsisdiv">
 <a name="gladeui-GladePropertyClass.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">
-#define             <a class="link" href="gladeui-GladePropertyClass.html#GPC-OBJECT-DELIMITER:CAPS" title="GPC_OBJECT_DELIMITER">GPC_OBJECT_DELIMITER</a>
-#define             <a class="link" href="gladeui-GladePropertyClass.html#GPC-PROPERTY-NAMELEN:CAPS" title="GPC_PROPERTY_NAMELEN">GPC_PROPERTY_NAMELEN</a>
+#define             <a class="link" href="gladeui-GladePropertyClass.html#GPC-OBJECT-DELIMITER--CAPS" title="GPC_OBJECT_DELIMITER">GPC_OBJECT_DELIMITER</a>
+#define             <a class="link" href="gladeui-GladePropertyClass.html#GPC-PROPERTY-NAMELEN--CAPS" title="GPC_PROPERTY_NAMELEN">GPC_PROPERTY_NAMELEN</a>
                     <a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a>;
-<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a>* <a class="link" href="gladeui-GladePropertyClass.html#glade-property-class-new" title="glade_property_class_new ()">glade_property_class_new</a>            (gpointer handle);
-<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a>* <a class="link" href="gladeui-GladePropertyClass.html#glade-property-class-new-from-spec" title="glade_property_class_new_from_spec ()">glade_property_class_new_from_spec</a>  (gpointer handle,
+<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> * <a class="link" href="gladeui-GladePropertyClass.html#glade-property-class-new" title="glade_property_class_new ()">glade_property_class_new</a>           (gpointer handle);
+<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> * <a class="link" href="gladeui-GladePropertyClass.html#glade-property-class-new-from-spec" title="glade_property_class_new_from_spec ()">glade_property_class_new_from_spec</a> (gpointer handle,
                                                          GParamSpec *spec);
-<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a>* <a class="link" href="gladeui-GladePropertyClass.html#glade-property-class-clone" title="glade_property_class_clone ()">glade_property_class_clone</a>          (<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *property_class);
+<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> * <a class="link" href="gladeui-GladePropertyClass.html#glade-property-class-clone" title="glade_property_class_clone ()">glade_property_class_clone</a>         (<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *property_class);
 void                <a class="link" href="gladeui-GladePropertyClass.html#glade-property-class-free" title="glade_property_class_free ()">glade_property_class_free</a>           (<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *property_class);
 gboolean            <a class="link" href="gladeui-GladePropertyClass.html#glade-property-class-is-visible" title="glade_property_class_is_visible ()">glade_property_class_is_visible</a>     (<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *property_class);
 gboolean            <a class="link" href="gladeui-GladePropertyClass.html#glade-property-class-is-object" title="glade_property_class_is_object ()">glade_property_class_is_object</a>      (<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *property_class,
                                                          <a class="link" href="GladeProject.html#GladeProjectFormat" title="enum GladeProjectFormat">GladeProjectFormat</a> fmt);
-GValue*             <a class="link" href="gladeui-GladePropertyClass.html#glade-property-class-make-gvalue-from-string" title="glade_property_class_make_gvalue_from_string ()">glade_property_class_make_gvalue_from_string</a>
+GValue *            <a class="link" href="gladeui-GladePropertyClass.html#glade-property-class-make-gvalue-from-string" title="glade_property_class_make_gvalue_from_string ()">glade_property_class_make_gvalue_from_string</a>
                                                         (<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *property_class,
                                                          const gchar *string,
                                                          <a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);
-gchar*              <a class="link" href="gladeui-GladePropertyClass.html#glade-property-class-make-string-from-gvalue" title="glade_property_class_make_string_from_gvalue ()">glade_property_class_make_string_from_gvalue</a>
+gchar *             <a class="link" href="gladeui-GladePropertyClass.html#glade-property-class-make-string-from-gvalue" title="glade_property_class_make_string_from_gvalue ()">glade_property_class_make_string_from_gvalue</a>
                                                         (<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *property_class,
                                                          const GValue *value,
                                                          <a class="link" href="GladeProject.html#GladeProjectFormat" title="enum GladeProjectFormat">GladeProjectFormat</a> fmt);
-GValue*             <a class="link" href="gladeui-GladePropertyClass.html#glade-property-class-make-gvalue-from-vl" title="glade_property_class_make_gvalue_from_vl ()">glade_property_class_make_gvalue_from_vl</a>
+GValue *            <a class="link" href="gladeui-GladePropertyClass.html#glade-property-class-make-gvalue-from-vl" title="glade_property_class_make_gvalue_from_vl ()">glade_property_class_make_gvalue_from_vl</a>
                                                         (<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *property_class,
                                                          va_list vl);
 void                <a class="link" href="gladeui-GladePropertyClass.html#glade-property-class-set-vl-from-gvalue" title="glade_property_class_set_vl_from_gvalue ()">glade_property_class_set_vl_from_gvalue</a>
                                                         (<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *klass,
                                                          GValue *value,
                                                          va_list vl);
-GValue*             <a class="link" href="gladeui-GladePropertyClass.html#glade-property-class-make-gvalue" title="glade_property_class_make_gvalue ()">glade_property_class_make_gvalue</a>    (<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *klass,
+GValue *            <a class="link" href="gladeui-GladePropertyClass.html#glade-property-class-make-gvalue" title="glade_property_class_make_gvalue ()">glade_property_class_make_gvalue</a>    (<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *klass,
                                                          ...);
 void                <a class="link" href="gladeui-GladePropertyClass.html#glade-property-class-get-from-gvalue" title="glade_property_class_get_from_gvalue ()">glade_property_class_get_from_gvalue</a>
                                                         (<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *klass,
@@ -80,7 +82,7 @@ gboolean            <a class="link" href="gladeui-GladePropertyClass.html#glade-
                                                          GType object_type,
                                                          <a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> **property_class,
                                                          const gchar *domain);
-GtkAdjustment*      <a class="link" href="gladeui-GladePropertyClass.html#glade-property-class-make-adjustment" title="glade_property_class_make_adjustment ()">glade_property_class_make_adjustment</a>
+GtkAdjustment *     <a class="link" href="gladeui-GladePropertyClass.html#glade-property-class-make-adjustment" title="glade_property_class_make_adjustment ()">glade_property_class_make_adjustment</a>
                                                         (<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *property_class);
 gboolean            <a class="link" href="gladeui-GladePropertyClass.html#glade-property-class-match" title="glade_property_class_match ()">glade_property_class_match</a>          (<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *klass,
                                                          <a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *comp);
@@ -99,13 +101,13 @@ va_lists etc (back and forth).</p>
 <div class="refsect1" lang="en">
 <a name="gladeui-GladePropertyClass.details"></a><h2>Details</h2>
 <div class="refsect2" lang="en">
-<a name="GPC-OBJECT-DELIMITER:CAPS"></a><h3>GPC_OBJECT_DELIMITER</h3>
+<a name="GPC-OBJECT-DELIMITER--CAPS"></a><h3>GPC_OBJECT_DELIMITER</h3>
 <pre class="programlisting">#define GPC_OBJECT_DELIMITER ", "
 </pre>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="GPC-PROPERTY-NAMELEN:CAPS"></a><h3>GPC_PROPERTY_NAMELEN</h3>
+<a name="GPC-PROPERTY-NAMELEN--CAPS"></a><h3>GPC_PROPERTY_NAMELEN</h3>
 <pre class="programlisting">#define GPC_PROPERTY_NAMELEN 512  /* Enough space for a property name I think */
 </pre>
 </div>
@@ -117,16 +119,11 @@ va_lists etc (back and forth).</p>
 			     * was created for.
 			     */
 
-
 	guint16     version_since_major; /* Version in which this property was */
 	guint16     version_since_minor; /* introduced.                       */
 
 	guint16     builder_since_major; /* Version in which this property became */
 	guint16     builder_since_minor; /* available in GtkBuilder format        */
-
-	/* For catalogs that support libglade: */
-	gboolean    libglade_only;       /* Mark special libglade virtual properties */
-	gboolean    libglade_unsupported;/* Mark properties that are not available in libglade */
 
 	GParamSpec *pspec; /* The Parameter Specification for this property.
 			    */
@@ -141,11 +138,6 @@ va_lists etc (back and forth).</p>
 
 	gchar *tooltip; /* The default tooltip for the property editor rows.
 			 */
-
-	gboolean virt; /* Whether this is a virtual property with its pspec supplied
-			* via the catalog (or hard code-paths); or FALSE if its a real
-			* GObject introspected property
-			*/
 
 	GValue *def;      /* The default value for this property (this will exist
 			   * as a copy of orig_def if not specified by the catalog)
@@ -165,95 +157,103 @@ va_lists etc (back and forth).</p>
 			    * to be of possible use in plugin code.
 			    */
 
-
-	gboolean optional; /* Some properties are optional by nature like
-			    * default width. It can be set or not set. A
-			    * default property has a check box in the
-			    * left that enables/disables the input
-			    */
-
-	gboolean optional_default; /* For optional values, what the default is */
-
-	gboolean construct_only; /* Whether this property is G_PARAM_CONSTRUCT_ONLY or not */
-	
-	gboolean common;  /* Common properties go in the common tab */
-	gboolean atk;     /* Atk properties go in the atk tab */
-	gboolean packing; /* Packing properties go in the packing tab */
-	gboolean query;   /* Whether we should explicitly ask the user about this property
-			   * when instantiating a widget with this property (through a popup
-			   * dialog).
-			   */
-
-	
-	gboolean translatable; /* The property should be translatable, which
-				* means that it needs extra parameters in the
-				* UI.
-				*/
-
 	gint  visible_lines; /* When this pspec calls for a text editor, how many
 			      * lines should be visible in the editor.
 			      */
 
+	/* For catalogs that support libglade: */
+	guint    libglade_only : 1;       /* Mark special libglade virtual properties */
+	guint    libglade_unsupported : 1;/* Mark properties that are not available in libglade */
+
+	guint virt : 1; /* Whether this is a virtual property with its pspec supplied
+			 * via the catalog (or hard code-paths); or FALSE if its a real
+			 * GObject introspected property
+			 */
+
+	guint optional : 1; /* Some properties are optional by nature like
+			     * default width. It can be set or not set. A
+			     * default property has a check box in the
+			     * left that enables/disables the input
+			     */
+
+	guint optional_default : 1; /* For optional values, what the default is */
+
+	guint construct_only : 1; /* Whether this property is G_PARAM_CONSTRUCT_ONLY or not */
+	
+	guint common : 1;  /* Common properties go in the common tab */
+	guint atk : 1;     /* Atk properties go in the atk tab */
+	guint packing : 1; /* Packing properties go in the packing tab */
+	guint query : 1;   /* Whether we should explicitly ask the user about this property
+			    * when instantiating a widget with this property (through a popup
+			    * dialog).
+			    */
+
+	
+	guint translatable : 1; /* The property should be translatable, which
+				 * means that it needs extra parameters in the
+				 * UI.
+				 */
+	
 	/* These three are the master switches for the glade-file output,
 	 * property editor availability &amp; live object updates in the glade environment.
 	 */
-	gboolean save;      /* Whether we should save to the glade file or not
-			     * (mostly just for virtual internal glade properties,
-			     * also used for properties with generic pspecs that
-			     * are saved in custom ways by the plugin)
-			     */
-	gboolean save_always; /* Used to make a special case exception and always
-			       * save this property regardless of what the default
-			       * value is (used for some special cases like properties
-			       * that are assigned initial values in composite widgets
-			       * or derived widget code).
-			       */
-	gboolean visible;   /* Whether or not to show this property in the editor &amp;
-			     * reset dialog.
-			     */
-
-	gboolean custom_layout; /* Properties marked as custom_layout will not be included
-				 * in a base #GladeEditorTable implementation (use this
-				 * for properties you want to layout in custom ways in
-				 * a #GladeEditable widget
-				 */
-
-	gboolean ignore;    /* When true, we will not sync the object when the property
-			     * changes, or load values from the object.
-			     */
-
-	gboolean needs_sync; /* Virtual properties need to be synchronized after object
-			      * creation, some properties that are not virtual also need
-			      * handling from the backend, if "needs-sync" is true then
-			      * this property will by synced with virtual properties.
+	guint save : 1;      /* Whether we should save to the glade file or not
+			      * (mostly just for virtual internal glade properties,
+			      * also used for properties with generic pspecs that
+			      * are saved in custom ways by the plugin)
+			      */
+	guint save_always : 1; /* Used to make a special case exception and always
+				* save this property regardless of what the default
+				* value is (used for some special cases like properties
+				* that are assigned initial values in composite widgets
+				* or derived widget code).
+				*/
+	guint visible : 1;   /* Whether or not to show this property in the editor &amp;
+			      * reset dialog.
 			      */
 
-	gboolean is_modified; /* If true, this property_class has been "modified" from the
-			       * the standard property by a xml file. */
-
-	gboolean themed_icon; /* Some GParamSpecString properties reffer to icon names
-			       * in the icon theme... these need to be specified in the
-			       * property class definition if proper editing tools are to
-			       * be used.
-			       */
-	gboolean stock_icon; /* String properties can also denote stock icons, including
-			      * icons from icon factories...
-			      */
-	gboolean stock;      /* ... or a narrower list of "items" from gtk builtin stock items.
-			      */
+	guint custom_layout : 1; /* Properties marked as custom_layout will not be included
+				  * in a base #GladeEditorTable implementation (use this
+				  * for properties you want to layout in custom ways in
+				  * a #GladeEditable widget
+				  */
 	
-	gboolean transfer_on_paste; /* If this is a packing prop, 
-				     * wether we should transfer it on paste.
-				     */
+	guint ignore : 1;    /* When true, we will not sync the object when the property
+			      * changes, or load values from the object.
+			      */
+
+	guint needs_sync : 1; /* Virtual properties need to be synchronized after object
+			       * creation, some properties that are not virtual also need
+			       * handling from the backend, if "needs-sync" is true then
+			       * this property will by synced with virtual properties.
+			       */
+
+	guint is_modified : 1; /* If true, this property_class has been "modified" from the
+				* the standard property by a xml file. */
+
+	guint themed_icon : 1; /* Some GParamSpecString properties reffer to icon names
+				* in the icon theme... these need to be specified in the
+				* property class definition if proper editing tools are to
+				* be used.
+				*/
+	guint stock_icon : 1; /* String properties can also denote stock icons, including
+			       * icons from icon factories...
+			      */
+	guint stock : 1;      /* ... or a narrower list of "items" from gtk builtin stock items.
+			       */
 	
+	guint transfer_on_paste : 1; /* If this is a packing prop, 
+				      * wether we should transfer it on paste.
+				      */
+	
+	guint parentless_widget : 1;  /* True if this property should point to a parentless widget
+				       * in the project
+				       */
+
 	gdouble weight;	/* This will determine the position of this property in 
 			 * the editor.
 			 */
 	
-	gboolean parentless_widget;  /* True if this property should point to a parentless widget
-				      * in the project
-				      */
-
 	gchar *create_type; /* If this is an object property and you want the option to create
 			     * one from the object selection dialog, then set the name of the
 			     * concrete type here.
@@ -264,7 +264,7 @@ va_lists etc (back and forth).</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-property-class-new"></a><h3>glade_property_class_new ()</h3>
-<pre class="programlisting"><a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a>* glade_property_class_new            (gpointer handle);</pre>
+<pre class="programlisting"><a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> * glade_property_class_new           (gpointer handle);</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
@@ -286,7 +286,7 @@ va_lists etc (back and forth).</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-property-class-new-from-spec"></a><h3>glade_property_class_new_from_spec ()</h3>
-<pre class="programlisting"><a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a>* glade_property_class_new_from_spec  (gpointer handle,
+<pre class="programlisting"><a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> * glade_property_class_new_from_spec (gpointer handle,
                                                          GParamSpec *spec);</pre>
 <p>
 </p>
@@ -315,7 +315,7 @@ va_lists etc (back and forth).</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-property-class-clone"></a><h3>glade_property_class_clone ()</h3>
-<pre class="programlisting"><a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a>* glade_property_class_clone          (<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *property_class);</pre>
+<pre class="programlisting"><a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> * glade_property_class_clone         (<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *property_class);</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
@@ -403,7 +403,7 @@ that refers to another object in this project.
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-property-class-make-gvalue-from-string"></a><h3>glade_property_class_make_gvalue_from_string ()</h3>
-<pre class="programlisting">GValue*             glade_property_class_make_gvalue_from_string
+<pre class="programlisting">GValue *            glade_property_class_make_gvalue_from_string
                                                         (<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *property_class,
                                                          const gchar *string,
                                                          <a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
@@ -440,7 +440,7 @@ that refers to another object in this project.
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-property-class-make-string-from-gvalue"></a><h3>glade_property_class_make_string_from_gvalue ()</h3>
-<pre class="programlisting">gchar*              glade_property_class_make_string_from_gvalue
+<pre class="programlisting">gchar *             glade_property_class_make_string_from_gvalue
                                                         (<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *property_class,
                                                          const GValue *value,
                                                          <a class="link" href="GladeProject.html#GladeProjectFormat" title="enum GladeProjectFormat">GladeProjectFormat</a> fmt);</pre>
@@ -475,7 +475,7 @@ that refers to another object in this project.
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-property-class-make-gvalue-from-vl"></a><h3>glade_property_class_make_gvalue_from_vl ()</h3>
-<pre class="programlisting">GValue*             glade_property_class_make_gvalue_from_vl
+<pre class="programlisting">GValue *            glade_property_class_make_gvalue_from_vl
                                                         (<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *property_class,
                                                          va_list vl);</pre>
 <p>
@@ -537,7 +537,7 @@ Sets <em class="parameter"><code>vl</code></em> from <em class="parameter"><code
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-property-class-make-gvalue"></a><h3>glade_property_class_make_gvalue ()</h3>
-<pre class="programlisting">GValue*             glade_property_class_make_gvalue    (<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *klass,
+<pre class="programlisting">GValue *            glade_property_class_make_gvalue    (<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *klass,
                                                          ...);</pre>
 <p>
 </p>
@@ -645,7 +645,7 @@ file. Only the values found in the xml file are overridden.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-property-class-make-adjustment"></a><h3>glade_property_class_make_adjustment ()</h3>
-<pre class="programlisting">GtkAdjustment*      glade_property_class_make_adjustment
+<pre class="programlisting">GtkAdjustment *     glade_property_class_make_adjustment
                                                         (<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *property_class);</pre>
 <p>
 Creates and appropriate GtkAdjustment for use in the editor</p>
@@ -723,6 +723,6 @@ Creates and appropriate GtkAdjustment for use in the editor</p>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.10</div>
+          Generated by GTK-Doc V1.12</div>
 </body>
 </html>
