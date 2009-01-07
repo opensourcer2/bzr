@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Glade Parameter</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
-<link rel="start" href="index.html" title="Glade User Interface Designer Reference Manual">
+<meta name="generator" content="DocBook XSL Stylesheets V1.74.0">
+<link rel="home" href="index.html" title="Glade User Interface Designer Reference Manual">
 <link rel="up" href="misc.html" title="Part IV. Miscellaneous utilities">
 <link rel="prev" href="misc.html" title="Part IV. Miscellaneous utilities">
 <link rel="next" href="gladeui-glade-utils.html" title="Glade Utils">
-<meta name="generator" content="GTK-Doc V1.10 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 <link rel="part" href="catalog.html" title="Part I. Adding your custom widgets">
 <link rel="part" href="core.html" title="Part II. Glade Core">
@@ -25,9 +25,11 @@
 <th width="100%" align="center">Glade User Interface Designer Reference Manual</th>
 <td><a accesskey="n" href="gladeui-glade-utils.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr>
-<tr><td colspan="5" class="shortcuts"><nobr><a href="#gladeui-glade-parameter.synopsis" class="shortcut">Top</a>
-                   | 
-                  <a href="#gladeui-glade-parameter.description" class="shortcut">Description</a></nobr></td></tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#gladeui-glade-parameter.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#gladeui-glade-parameter.description" class="shortcut">Description</a>
+</td></tr>
 </table>
 <div class="refentry" lang="en">
 <a name="gladeui-glade-parameter"></a><div class="titlepage"></div>
@@ -42,8 +44,8 @@
 <a name="gladeui-glade-parameter.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">
                     <a class="link" href="gladeui-glade-parameter.html#GladeParameter" title="GladeParameter">GladeParameter</a>;
-<a class="link" href="gladeui-glade-parameter.html#GladeParameter" title="GladeParameter">GladeParameter</a>*     <a class="link" href="gladeui-glade-parameter.html#glade-parameter-new" title="glade_parameter_new ()">glade_parameter_new</a>                 (void);
-<a class="link" href="gladeui-glade-parameter.html#GladeParameter" title="GladeParameter">GladeParameter</a>*     <a class="link" href="gladeui-glade-parameter.html#glade-parameter-clone" title="glade_parameter_clone ()">glade_parameter_clone</a>               (<a class="link" href="gladeui-glade-parameter.html#GladeParameter" title="GladeParameter">GladeParameter</a> *parameter);
+<a class="link" href="gladeui-glade-parameter.html#GladeParameter" title="GladeParameter">GladeParameter</a> *    <a class="link" href="gladeui-glade-parameter.html#glade-parameter-new" title="glade_parameter_new ()">glade_parameter_new</a>                 (void);
+<a class="link" href="gladeui-glade-parameter.html#GladeParameter" title="GladeParameter">GladeParameter</a> *    <a class="link" href="gladeui-glade-parameter.html#glade-parameter-clone" title="glade_parameter_clone ()">glade_parameter_clone</a>               (<a class="link" href="gladeui-glade-parameter.html#GladeParameter" title="GladeParameter">GladeParameter</a> *parameter);
 void                <a class="link" href="gladeui-glade-parameter.html#glade-parameter-free" title="glade_parameter_free ()">glade_parameter_free</a>                (<a class="link" href="gladeui-glade-parameter.html#GladeParameter" title="GladeParameter">GladeParameter</a> *parameter);
 void                <a class="link" href="gladeui-glade-parameter.html#glade-parameter-get-float" title="glade_parameter_get_float ()">glade_parameter_get_float</a>           (GList *parameters,
                                                          const gchar *key,
@@ -57,7 +59,7 @@ void                <a class="link" href="gladeui-glade-parameter.html#glade-par
 void                <a class="link" href="gladeui-glade-parameter.html#glade-parameter-get-string" title="glade_parameter_get_string ()">glade_parameter_get_string</a>          (GList *parameters,
                                                          const gchar *key,
                                                          gchar **value);
-GList*              <a class="link" href="gladeui-glade-parameter.html#glade-parameter-list-new-from-node" title="glade_parameter_list_new_from_node ()">glade_parameter_list_new_from_node</a>  (GList *list,
+GList *             <a class="link" href="gladeui-glade-parameter.html#glade-parameter-list-new-from-node" title="glade_parameter_list_new_from_node ()">glade_parameter_list_new_from_node</a>  (GList *list,
                                                          GladeXmlNode *node);
 </pre>
 </div>
@@ -80,7 +82,7 @@ your plugin will treat certain widget classes.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-parameter-new"></a><h3>glade_parameter_new ()</h3>
-<pre class="programlisting"><a class="link" href="gladeui-glade-parameter.html#GladeParameter" title="GladeParameter">GladeParameter</a>*     glade_parameter_new                 (void);</pre>
+<pre class="programlisting"><a class="link" href="gladeui-glade-parameter.html#GladeParameter" title="GladeParameter">GladeParameter</a> *    glade_parameter_new                 (void);</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
@@ -95,7 +97,7 @@ your plugin will treat certain widget classes.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-parameter-clone"></a><h3>glade_parameter_clone ()</h3>
-<pre class="programlisting"><a class="link" href="gladeui-glade-parameter.html#GladeParameter" title="GladeParameter">GladeParameter</a>*     glade_parameter_clone               (<a class="link" href="gladeui-glade-parameter.html#GladeParameter" title="GladeParameter">GladeParameter</a> *parameter);</pre>
+<pre class="programlisting"><a class="link" href="gladeui-glade-parameter.html#GladeParameter" title="GladeParameter">GladeParameter</a> *    glade_parameter_clone               (<a class="link" href="gladeui-glade-parameter.html#GladeParameter" title="GladeParameter">GladeParameter</a> *parameter);</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
@@ -253,7 +255,7 @@ found, it stores a newly copied string representation of its value into
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-parameter-list-new-from-node"></a><h3>glade_parameter_list_new_from_node ()</h3>
-<pre class="programlisting">GList*              glade_parameter_list_new_from_node  (GList *list,
+<pre class="programlisting">GList *             glade_parameter_list_new_from_node  (GList *list,
                                                          GladeXmlNode *node);</pre>
 <p>
 TODO: write me</p>
@@ -282,6 +284,6 @@ TODO: write me</p>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.10</div>
+          Generated by GTK-Doc V1.12</div>
 </body>
 </html>

@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GladeWidgetAdaptor</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
-<link rel="start" href="index.html" title="Glade User Interface Designer Reference Manual">
+<meta name="generator" content="DocBook XSL Stylesheets V1.74.0">
+<link rel="home" href="index.html" title="Glade User Interface Designer Reference Manual">
 <link rel="up" href="core.html" title="Part II. Glade Core">
 <link rel="prev" href="gladeui-glade-property.html" title="GladeProperty">
 <link rel="next" href="gladeui-GladePropertyClass.html" title="GladePropertyClass">
-<meta name="generator" content="GTK-Doc V1.10 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 <link rel="part" href="catalog.html" title="Part I. Adding your custom widgets">
 <link rel="part" href="core.html" title="Part II. Glade Core">
@@ -25,9 +25,11 @@
 <th width="100%" align="center">Glade User Interface Designer Reference Manual</th>
 <td><a accesskey="n" href="gladeui-GladePropertyClass.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr>
-<tr><td colspan="5" class="shortcuts"><nobr><a href="#gladeui-GladeWidgetAdaptor.synopsis" class="shortcut">Top</a>
-                   | 
-                  <a href="#gladeui-GladeWidgetAdaptor.description" class="shortcut">Description</a></nobr></td></tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#gladeui-GladeWidgetAdaptor.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#gladeui-GladeWidgetAdaptor.description" class="shortcut">Description</a>
+</td></tr>
 </table>
 <div class="refentry" lang="en">
 <a name="gladeui-GladeWidgetAdaptor"></a><div class="titlepage"></div>
@@ -42,15 +44,15 @@
 <a name="gladeui-GladeWidgetAdaptor.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">
 enum                <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeCreateReason" title="enum GladeCreateReason">GladeCreateReason</a>;
-#define             <a class="link" href="gladeui-GladeWidgetAdaptor.html#GWA-IS-FIXED:CAPS" title="GWA_IS_FIXED()">GWA_IS_FIXED</a>                        (obj)
-#define             <a class="link" href="gladeui-GladeWidgetAdaptor.html#GWA-IS-TOPLEVEL:CAPS" title="GWA_IS_TOPLEVEL()">GWA_IS_TOPLEVEL</a>                     (obj)
-#define             <a class="link" href="gladeui-GladeWidgetAdaptor.html#GWA-USE-PLACEHOLDERS:CAPS" title="GWA_USE_PLACEHOLDERS()">GWA_USE_PLACEHOLDERS</a>                (obj)
-#define             <a class="link" href="gladeui-GladeWidgetAdaptor.html#GWA-DEFAULT-WIDTH:CAPS" title="GWA_DEFAULT_WIDTH()">GWA_DEFAULT_WIDTH</a>                   (obj)
-#define             <a class="link" href="gladeui-GladeWidgetAdaptor.html#GWA-DEFAULT-HEIGHT:CAPS" title="GWA_DEFAULT_HEIGHT()">GWA_DEFAULT_HEIGHT</a>                  (obj)
-#define             <a class="link" href="gladeui-GladeWidgetAdaptor.html#GWA-GET-CLASS:CAPS" title="GWA_GET_CLASS()">GWA_GET_CLASS</a>                       (type)
-#define             <a class="link" href="gladeui-GladeWidgetAdaptor.html#GWA-GET-OCLASS:CAPS" title="GWA_GET_OCLASS()">GWA_GET_OCLASS</a>                      (type)
-#define             <a class="link" href="gladeui-GladeWidgetAdaptor.html#GLADE-VALID-CREATE-REASON:CAPS" title="GLADE_VALID_CREATE_REASON()">GLADE_VALID_CREATE_REASON</a>           (reason)
-#define             <a class="link" href="gladeui-GladeWidgetAdaptor.html#GLADE-TYPE-CREATE-REASON:CAPS" title="GLADE_TYPE_CREATE_REASON">GLADE_TYPE_CREATE_REASON</a>
+#define             <a class="link" href="gladeui-GladeWidgetAdaptor.html#GWA-IS-FIXED--CAPS" title="GWA_IS_FIXED()">GWA_IS_FIXED</a>                        (obj)
+#define             <a class="link" href="gladeui-GladeWidgetAdaptor.html#GWA-IS-TOPLEVEL--CAPS" title="GWA_IS_TOPLEVEL()">GWA_IS_TOPLEVEL</a>                     (obj)
+#define             <a class="link" href="gladeui-GladeWidgetAdaptor.html#GWA-USE-PLACEHOLDERS--CAPS" title="GWA_USE_PLACEHOLDERS()">GWA_USE_PLACEHOLDERS</a>                (obj)
+#define             <a class="link" href="gladeui-GladeWidgetAdaptor.html#GWA-DEFAULT-WIDTH--CAPS" title="GWA_DEFAULT_WIDTH()">GWA_DEFAULT_WIDTH</a>                   (obj)
+#define             <a class="link" href="gladeui-GladeWidgetAdaptor.html#GWA-DEFAULT-HEIGHT--CAPS" title="GWA_DEFAULT_HEIGHT()">GWA_DEFAULT_HEIGHT</a>                  (obj)
+#define             <a class="link" href="gladeui-GladeWidgetAdaptor.html#GWA-GET-CLASS--CAPS" title="GWA_GET_CLASS()">GWA_GET_CLASS</a>                       (type)
+#define             <a class="link" href="gladeui-GladeWidgetAdaptor.html#GWA-GET-OCLASS--CAPS" title="GWA_GET_OCLASS()">GWA_GET_OCLASS</a>                      (type)
+#define             <a class="link" href="gladeui-GladeWidgetAdaptor.html#GLADE-VALID-CREATE-REASON--CAPS" title="GLADE_VALID_CREATE_REASON()">GLADE_VALID_CREATE_REASON</a>           (reason)
+#define             <a class="link" href="gladeui-GladeWidgetAdaptor.html#GLADE-TYPE-CREATE-REASON--CAPS" title="GLADE_TYPE_CREATE_REASON">GLADE_TYPE_CREATE_REASON</a>
 void                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeSetPropertyFunc" title="GladeSetPropertyFunc ()">*GladeSetPropertyFunc</a>)             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          GObject *object,
                                                          const gchar *property_name,
@@ -78,7 +80,7 @@ gboolean            (<a class="link" href="gladeui-GladeWidgetAdaptor.html#Glade
                                                          GObject *child,
                                                          const gchar *property_name,
                                                          const GValue *value);
-GList*              (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeGetChildrenFunc" title="GladeGetChildrenFunc ()">*GladeGetChildrenFunc</a>)             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+GList *             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeGetChildrenFunc" title="GladeGetChildrenFunc ()">*GladeGetChildrenFunc</a>)             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          GObject *container);
 void                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeAddChildFunc" title="GladeAddChildFunc ()">*GladeAddChildFunc</a>)                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          GObject *parent,
@@ -93,7 +95,7 @@ void                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#Glade
 void                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladePostCreateFunc" title="GladePostCreateFunc ()">*GladePostCreateFunc</a>)              (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          GObject *object,
                                                          <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeCreateReason" title="enum GladeCreateReason">GladeCreateReason</a> reason);
-GObject*            (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeGetInternalFunc" title="GladeGetInternalFunc ()">*GladeGetInternalFunc</a>)             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+GObject *           (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeGetInternalFunc" title="GladeGetInternalFunc ()">*GladeGetInternalFunc</a>)             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          GObject *parent,
                                                          const gchar *name);
 void                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeActionActivateFunc" title="GladeActionActivateFunc ()">*GladeActionActivateFunc</a>)          (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
@@ -110,51 +112,51 @@ void                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#Glade
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                                          GladeXmlContext *context,
                                                          GladeXmlNode *node);
-<a class="link" href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a>* (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeCreateEPropFunc" title="GladeCreateEPropFunc ()">*GladeCreateEPropFunc</a>)            (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+<a class="link" href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> * (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeCreateEPropFunc" title="GladeCreateEPropFunc ()">*GladeCreateEPropFunc</a>)           (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          <a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *klass,
                                                          gboolean use_command);
-gchar*              (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeStringFromValueFunc" title="GladeStringFromValueFunc ()">*GladeStringFromValueFunc</a>)         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+gchar *             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeStringFromValueFunc" title="GladeStringFromValueFunc ()">*GladeStringFromValueFunc</a>)         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          <a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *klass,
                                                          const GValue *value,
                                                          <a class="link" href="GladeProject.html#GladeProjectFormat" title="enum GladeProjectFormat">GladeProjectFormat</a> fmt);
                     <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a>;
 #define             <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-create-widget" title="glade_widget_adaptor_create_widget()">glade_widget_adaptor_create_widget</a>  (adaptor, query, ...)
-<a class="link" href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a>* <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-create-eprop" title="glade_widget_adaptor_create_eprop ()">glade_widget_adaptor_create_eprop</a>  (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+<a class="link" href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> * <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-create-eprop" title="glade_widget_adaptor_create_eprop ()">glade_widget_adaptor_create_eprop</a> (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          <a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *klass,
                                                          gboolean use_command);
 #define             <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-from-pclass" title="glade_widget_adaptor_from_pclass()">glade_widget_adaptor_from_pclass</a>    (pclass)
-<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a>* <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-from-pspec" title="glade_widget_adaptor_from_pspec ()">glade_widget_adaptor_from_pspec</a>     (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> * <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-from-pspec" title="glade_widget_adaptor_from_pspec ()">glade_widget_adaptor_from_pspec</a>    (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          GParamSpec *spec);
-<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a>* <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-from-catalog" title="glade_widget_adaptor_from_catalog ()">glade_widget_adaptor_from_catalog</a>   (GladeCatalog *catalog,
+<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> * <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-from-catalog" title="glade_widget_adaptor_from_catalog ()">glade_widget_adaptor_from_catalog</a>  (GladeCatalog *catalog,
                                                          GladeXmlNode *class_node,
                                                          GModule *module);
 void                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-register" title="glade_widget_adaptor_register ()">glade_widget_adaptor_register</a>       (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor);
-<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a>*        <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-create-internal" title="glade_widget_adaptor_create_internal ()">glade_widget_adaptor_create_internal</a>
+<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *       <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-create-internal" title="glade_widget_adaptor_create_internal ()">glade_widget_adaptor_create_internal</a>
                                                         (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
                                                          GObject *internal_object,
                                                          const gchar *internal_name,
                                                          const gchar *parent_name,
                                                          gboolean anarchist,
                                                          <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeCreateReason" title="enum GladeCreateReason">GladeCreateReason</a> reason);
-<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a>*        <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-create-widget-real" title="glade_widget_adaptor_create_widget_real ()">glade_widget_adaptor_create_widget_real</a>
+<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *       <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-create-widget-real" title="glade_widget_adaptor_create_widget_real ()">glade_widget_adaptor_create_widget_real</a>
                                                         (gboolean query,
                                                          const gchar *first_property,
                                                          ...);
-<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a>* <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-by-name" title="glade_widget_adaptor_get_by_name ()">glade_widget_adaptor_get_by_name</a>    (const gchar *name);
-<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a>* <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-by-type" title="glade_widget_adaptor_get_by_type ()">glade_widget_adaptor_get_by_type</a>    (GType type);
-<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a>* <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-property-class" title="glade_widget_adaptor_get_property_class ()">glade_widget_adaptor_get_property_class</a>
+<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> * <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-by-name" title="glade_widget_adaptor_get_by_name ()">glade_widget_adaptor_get_by_name</a>   (const gchar *name);
+<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> * <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-by-type" title="glade_widget_adaptor_get_by_type ()">glade_widget_adaptor_get_by_type</a>   (GType type);
+<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> * <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-property-class" title="glade_widget_adaptor_get_property_class ()">glade_widget_adaptor_get_property_class</a>
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          const gchar *name);
-<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a>* <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-pack-property-class" title="glade_widget_adaptor_get_pack_property_class ()">glade_widget_adaptor_get_pack_property_class</a>
+<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> * <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-pack-property-class" title="glade_widget_adaptor_get_pack_property_class ()">glade_widget_adaptor_get_pack_property_class</a>
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          const gchar *name);
-GParameter*         <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-default-params" title="glade_widget_adaptor_default_params ()">glade_widget_adaptor_default_params</a> (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+GParameter *        <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-default-params" title="glade_widget_adaptor_default_params ()">glade_widget_adaptor_default_params</a> (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          gboolean construct,
                                                          guint *n_params);
 void                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-post-create" title="glade_widget_adaptor_post_create ()">glade_widget_adaptor_post_create</a>    (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          GObject *object,
                                                          <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeCreateReason" title="enum GladeCreateReason">GladeCreateReason</a> reason);
-GObject*            <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-internal-child" title="glade_widget_adaptor_get_internal_child ()">glade_widget_adaptor_get_internal_child</a>
+GObject *           <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-internal-child" title="glade_widget_adaptor_get_internal_child ()">glade_widget_adaptor_get_internal_child</a>
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          GObject *object,
                                                          const gchar *internal_name);
@@ -177,7 +179,7 @@ void                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-
 void                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-remove" title="glade_widget_adaptor_remove ()">glade_widget_adaptor_remove</a>         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          GObject *container,
                                                          GObject *child);
-GList*              <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-children" title="glade_widget_adaptor_get_children ()">glade_widget_adaptor_get_children</a>   (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+GList *             <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-children" title="glade_widget_adaptor_get_children ()">glade_widget_adaptor_get_children</a>   (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          GObject *container);
 gboolean            <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-has-child" title="glade_widget_adaptor_has_child ()">glade_widget_adaptor_has_child</a>      (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          GObject *container,
@@ -219,7 +221,7 @@ void                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-
                                                          GladeXmlContext *context,
                                                          GladeXmlNode *node);
 gboolean            <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-query" title="glade_widget_adaptor_query ()">glade_widget_adaptor_query</a>          (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor);
-gchar*              <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-packing-default" title="glade_widget_adaptor_get_packing_default ()">glade_widget_adaptor_get_packing_default</a>
+gchar *             <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-packing-default" title="glade_widget_adaptor_get_packing_default ()">glade_widget_adaptor_get_packing_default</a>
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *child_adaptor,
                                                          <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *container_adaptor,
                                                          const gchar *id);
@@ -240,7 +242,7 @@ gboolean            <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-
 gboolean            <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-pack-action-remove" title="glade_widget_adaptor_pack_action_remove ()">glade_widget_adaptor_pack_action_remove</a>
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          const gchar *action_path);
-GList*              <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-pack-actions-new" title="glade_widget_adaptor_pack_actions_new ()">glade_widget_adaptor_pack_actions_new</a>
+GList *             <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-pack-actions-new" title="glade_widget_adaptor_pack_actions_new ()">glade_widget_adaptor_pack_actions_new</a>
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor);
 void                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-action-activate" title="glade_widget_adaptor_action_activate ()">glade_widget_adaptor_action_activate</a>
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
@@ -251,7 +253,7 @@ void                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-
                                                          GObject *container,
                                                          GObject *object,
                                                          const gchar *action_path);
-gchar*              <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-string-from-value" title="glade_widget_adaptor_string_from_value ()">glade_widget_adaptor_string_from_value</a>
+gchar *             <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-string-from-value" title="glade_widget_adaptor_string_from_value ()">glade_widget_adaptor_string_from_value</a>
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          <a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *klass,
                                                          const GValue *value,
@@ -285,7 +287,7 @@ These are the reasons your <a class="link" href="gladeui-GladeWidgetAdaptor.html
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><a name="GLADE-CREATE-USER:CAPS"></a><span class="term"><code class="literal">GLADE_CREATE_USER</code></span></p></td>
+<td><p><a name="GLADE-CREATE-USER--CAPS"></a><span class="term"><code class="literal">GLADE_CREATE_USER</code></span></p></td>
 <td> Was created at the user's request
                     (this is a good time to set any properties
                     or add children to the project; like GtkFrame's 
@@ -293,7 +295,7 @@ These are the reasons your <a class="link" href="gladeui-GladeWidgetAdaptor.html
 </td>
 </tr>
 <tr>
-<td><p><a name="GLADE-CREATE-COPY:CAPS"></a><span class="term"><code class="literal">GLADE_CREATE_COPY</code></span></p></td>
+<td><p><a name="GLADE-CREATE-COPY--CAPS"></a><span class="term"><code class="literal">GLADE_CREATE_COPY</code></span></p></td>
 <td> Was created as a result of the copy/paste 
                     mechanism, at this point you can count on glade
                     to follow up with properties and children on 
@@ -301,12 +303,12 @@ These are the reasons your <a class="link" href="gladeui-GladeWidgetAdaptor.html
 </td>
 </tr>
 <tr>
-<td><p><a name="GLADE-CREATE-LOAD:CAPS"></a><span class="term"><code class="literal">GLADE_CREATE_LOAD</code></span></p></td>
+<td><p><a name="GLADE-CREATE-LOAD--CAPS"></a><span class="term"><code class="literal">GLADE_CREATE_LOAD</code></span></p></td>
 <td> Was created during the load process.
 </td>
 </tr>
 <tr>
-<td><p><a name="GLADE-CREATE-REBUILD:CAPS"></a><span class="term"><code class="literal">GLADE_CREATE_REBUILD</code></span></p></td>
+<td><p><a name="GLADE-CREATE-REBUILD--CAPS"></a><span class="term"><code class="literal">GLADE_CREATE_REBUILD</code></span></p></td>
 <td> Was created as a replacement for another project 
                        object; this only happens when the user is 
                        changing a property that is marked by the type 
@@ -314,7 +316,7 @@ These are the reasons your <a class="link" href="gladeui-GladeWidgetAdaptor.html
 </td>
 </tr>
 <tr>
-<td><p><a name="GLADE-CREATE-REASONS:CAPS"></a><span class="term"><code class="literal">GLADE_CREATE_REASONS</code></span></p></td>
+<td><p><a name="GLADE-CREATE-REASONS--CAPS"></a><span class="term"><code class="literal">GLADE_CREATE_REASONS</code></span></p></td>
 <td> Never used.
 </td>
 </tr>
@@ -323,7 +325,7 @@ These are the reasons your <a class="link" href="gladeui-GladeWidgetAdaptor.html
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="GWA-IS-FIXED:CAPS"></a><h3>GWA_IS_FIXED()</h3>
+<a name="GWA-IS-FIXED--CAPS"></a><h3>GWA_IS_FIXED()</h3>
 <pre class="programlisting">#define             GWA_IS_FIXED(obj)</pre>
 <p>
 Checks whether this widget adaptor should be handled 
@@ -339,7 +341,7 @@ as a free-form container</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="GWA-IS-TOPLEVEL:CAPS"></a><h3>GWA_IS_TOPLEVEL()</h3>
+<a name="GWA-IS-TOPLEVEL--CAPS"></a><h3>GWA_IS_TOPLEVEL()</h3>
 <pre class="programlisting">#define             GWA_IS_TOPLEVEL(obj)</pre>
 <p>
 Checks whether this widget class has been marked as
@@ -355,7 +357,7 @@ a toplevel one.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="GWA-USE-PLACEHOLDERS:CAPS"></a><h3>GWA_USE_PLACEHOLDERS()</h3>
+<a name="GWA-USE-PLACEHOLDERS--CAPS"></a><h3>GWA_USE_PLACEHOLDERS()</h3>
 <pre class="programlisting">#define             GWA_USE_PLACEHOLDERS(obj)</pre>
 <p>
 Checks whether this widget class has been marked to
@@ -371,7 +373,7 @@ use placeholders in child widget operations</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="GWA-DEFAULT-WIDTH:CAPS"></a><h3>GWA_DEFAULT_WIDTH()</h3>
+<a name="GWA-DEFAULT-WIDTH--CAPS"></a><h3>GWA_DEFAULT_WIDTH()</h3>
 <pre class="programlisting">#define             GWA_DEFAULT_WIDTH(obj)</pre>
 <p>
 </p>
@@ -394,7 +396,7 @@ is toplevel in the GladeDesignLayout
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="GWA-DEFAULT-HEIGHT:CAPS"></a><h3>GWA_DEFAULT_HEIGHT()</h3>
+<a name="GWA-DEFAULT-HEIGHT--CAPS"></a><h3>GWA_DEFAULT_HEIGHT()</h3>
 <pre class="programlisting">#define             GWA_DEFAULT_HEIGHT(obj)</pre>
 <p>
 </p>
@@ -417,7 +419,7 @@ is toplevel in the GladeDesignLayout
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="GWA-GET-CLASS:CAPS"></a><h3>GWA_GET_CLASS()</h3>
+<a name="GWA-GET-CLASS--CAPS"></a><h3>GWA_GET_CLASS()</h3>
 <pre class="programlisting">#define             GWA_GET_CLASS(type)</pre>
 <p>
 Shorthand for referencing glade adaptor classes from
@@ -433,7 +435,7 @@ the plugin eg. GWA_GET_CLASS (GTK_TYPE_CONTAINER)-&gt;post_create (adaptor...</p
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="GWA-GET-OCLASS:CAPS"></a><h3>GWA_GET_OCLASS()</h3>
+<a name="GWA-GET-OCLASS--CAPS"></a><h3>GWA_GET_OCLASS()</h3>
 <pre class="programlisting">#define GWA_GET_OCLASS(type) ((GObjectClass*)GWA_GET_CLASS(type))
 </pre>
 <p>
@@ -449,13 +451,13 @@ Same as GWA_GET_CLASS but casted to GObjectClass</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="GLADE-VALID-CREATE-REASON:CAPS"></a><h3>GLADE_VALID_CREATE_REASON()</h3>
+<a name="GLADE-VALID-CREATE-REASON--CAPS"></a><h3>GLADE_VALID_CREATE_REASON()</h3>
 <pre class="programlisting">#define GLADE_VALID_CREATE_REASON(reason) (reason &gt;= 0 &amp;&amp; reason &lt; GLADE_CREATE_REASONS)
 </pre>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="GLADE-TYPE-CREATE-REASON:CAPS"></a><h3>GLADE_TYPE_CREATE_REASON</h3>
+<a name="GLADE-TYPE-CREATE-REASON--CAPS"></a><h3>GLADE_TYPE_CREATE_REASON</h3>
 <pre class="programlisting">#define GLADE_TYPE_CREATE_REASON (glade_create_reason_get_type())
 </pre>
 </div>
@@ -714,7 +716,7 @@ boundry checker for properties.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeGetChildrenFunc"></a><h3>GladeGetChildrenFunc ()</h3>
-<pre class="programlisting">GList*              (*GladeGetChildrenFunc)             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+<pre class="programlisting">GList *             (*GladeGetChildrenFunc)             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          GObject *container);</pre>
 <p>
 A function called to get <em class="parameter"><code>containers</code></em> children.</p>
@@ -841,7 +843,7 @@ instance and can be for any <a class="link" href="gladeui-GladeWidgetAdaptor.htm
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeGetInternalFunc"></a><h3>GladeGetInternalFunc ()</h3>
-<pre class="programlisting">GObject*            (*GladeGetInternalFunc)             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+<pre class="programlisting">GObject *           (*GladeGetInternalFunc)             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          GObject *parent,
                                                          const gchar *name);</pre>
 <p>
@@ -993,7 +995,7 @@ This function is called to fill in <em class="parameter"><code>node</code></em> 
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeCreateEPropFunc"></a><h3>GladeCreateEPropFunc ()</h3>
-<pre class="programlisting"><a class="link" href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a>* (*GladeCreateEPropFunc)            (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+<pre class="programlisting"><a class="link" href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> * (*GladeCreateEPropFunc)           (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          <a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *klass,
                                                          gboolean use_command);</pre>
 <p>
@@ -1028,7 +1030,7 @@ to commit property changes
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeStringFromValueFunc"></a><h3>GladeStringFromValueFunc ()</h3>
-<pre class="programlisting">gchar*              (*GladeStringFromValueFunc)         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+<pre class="programlisting">gchar *             (*GladeStringFromValueFunc)         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          <a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *klass,
                                                          const GValue *value,
                                                          <a class="link" href="GladeProject.html#GladeProjectFormat" title="enum GladeProjectFormat">GladeProjectFormat</a> fmt);</pre>
@@ -1160,7 +1162,7 @@ this macro returns the newly created <a class="link" href="GladeWidget.html" tit
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-create-eprop"></a><h3>glade_widget_adaptor_create_eprop ()</h3>
-<pre class="programlisting"><a class="link" href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a>* glade_widget_adaptor_create_eprop  (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+<pre class="programlisting"><a class="link" href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> * glade_widget_adaptor_create_eprop (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          <a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *klass,
                                                          gboolean use_command);</pre>
 <p>
@@ -1200,7 +1202,7 @@ to commit property changes
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-from-pspec"></a><h3>glade_widget_adaptor_from_pspec ()</h3>
-<pre class="programlisting"><a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a>* glade_widget_adaptor_from_pspec     (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+<pre class="programlisting"><a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> * glade_widget_adaptor_from_pspec    (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          GParamSpec *spec);</pre>
 <p>
 Assumes <em class="parameter"><code>pspec</code></em> is a property in an object class wrapped by <em class="parameter"><code>adaptor</code></em>,
@@ -1231,7 +1233,7 @@ originally introduced <em class="parameter"><code>pspec</code></em>.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-from-catalog"></a><h3>glade_widget_adaptor_from_catalog ()</h3>
-<pre class="programlisting"><a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a>* glade_widget_adaptor_from_catalog   (GladeCatalog *catalog,
+<pre class="programlisting"><a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> * glade_widget_adaptor_from_catalog  (GladeCatalog *catalog,
                                                          GladeXmlNode *class_node,
                                                          GModule *module);</pre>
 <p>
@@ -1279,7 +1281,7 @@ object type must have a registered adaptor).</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-create-internal"></a><h3>glade_widget_adaptor_create_internal ()</h3>
-<pre class="programlisting"><a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a>*        glade_widget_adaptor_create_internal
+<pre class="programlisting"><a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *       glade_widget_adaptor_create_internal
                                                         (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
                                                          GObject *internal_object,
                                                          const gchar *internal_name,
@@ -1339,7 +1341,7 @@ for internal widgets.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-create-widget-real"></a><h3>glade_widget_adaptor_create_widget_real ()</h3>
-<pre class="programlisting"><a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a>*        glade_widget_adaptor_create_widget_real
+<pre class="programlisting"><a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *       glade_widget_adaptor_create_widget_real
                                                         (gboolean query,
                                                          const gchar *first_property,
                                                          ...);</pre>
@@ -1347,7 +1349,7 @@ for internal widgets.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-get-by-name"></a><h3>glade_widget_adaptor_get_by_name ()</h3>
-<pre class="programlisting"><a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a>* glade_widget_adaptor_get_by_name    (const gchar *name);</pre>
+<pre class="programlisting"><a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> * glade_widget_adaptor_get_by_name   (const gchar *name);</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
@@ -1370,7 +1372,7 @@ for internal widgets.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-get-by-type"></a><h3>glade_widget_adaptor_get_by_type ()</h3>
-<pre class="programlisting"><a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a>* glade_widget_adaptor_get_by_type    (GType type);</pre>
+<pre class="programlisting"><a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> * glade_widget_adaptor_get_by_type   (GType type);</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
@@ -1393,7 +1395,7 @@ for internal widgets.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-get-property-class"></a><h3>glade_widget_adaptor_get_property_class ()</h3>
-<pre class="programlisting"><a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a>* glade_widget_adaptor_get_property_class
+<pre class="programlisting"><a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> * glade_widget_adaptor_get_property_class
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          const gchar *name);</pre>
 <p>
@@ -1422,7 +1424,7 @@ Retrieves the <a class="link" href="gladeui-GladePropertyClass.html#GladePropert
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-get-pack-property-class"></a><h3>glade_widget_adaptor_get_pack_property_class ()</h3>
-<pre class="programlisting"><a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a>* glade_widget_adaptor_get_pack_property_class
+<pre class="programlisting"><a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> * glade_widget_adaptor_get_pack_property_class
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          const gchar *name);</pre>
 <p>
@@ -1452,7 +1454,7 @@ Retrieves the <a class="link" href="gladeui-GladePropertyClass.html#GladePropert
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-default-params"></a><h3>glade_widget_adaptor_default_params ()</h3>
-<pre class="programlisting">GParameter*         glade_widget_adaptor_default_params (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+<pre class="programlisting">GParameter *        glade_widget_adaptor_default_params (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          gboolean construct,
                                                          guint *n_params);</pre>
 </div>
@@ -1488,7 +1490,7 @@ An adaptor function to be called after the object is created</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-get-internal-child"></a><h3>glade_widget_adaptor_get_internal_child ()</h3>
-<pre class="programlisting">GObject*            glade_widget_adaptor_get_internal_child
+<pre class="programlisting">GObject *           glade_widget_adaptor_get_internal_child
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          GObject *object,
                                                          const gchar *internal_name);</pre>
@@ -1698,7 +1700,7 @@ Removes <em class="parameter"><code>child</code></em> from <em class="parameter"
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-get-children"></a><h3>glade_widget_adaptor_get_children ()</h3>
-<pre class="programlisting">GList*              glade_widget_adaptor_get_children   (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+<pre class="programlisting">GList *             glade_widget_adaptor_get_children   (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          GObject *container);</pre>
 <p>
 Lists the children of <em class="parameter"><code>container</code></em>.</p>
@@ -2090,7 +2092,7 @@ certain properties upon creation of this class.
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-get-packing-default"></a><h3>glade_widget_adaptor_get_packing_default ()</h3>
-<pre class="programlisting">gchar*              glade_widget_adaptor_get_packing_default
+<pre class="programlisting">gchar *             glade_widget_adaptor_get_packing_default
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *child_adaptor,
                                                          <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *container_adaptor,
                                                          const gchar *id);</pre>
@@ -2301,7 +2303,7 @@ Remove an <em class="parameter"><code>adaptor</code></em>'s packing action.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-pack-actions-new"></a><h3>glade_widget_adaptor_pack_actions_new ()</h3>
-<pre class="programlisting">GList*              glade_widget_adaptor_pack_actions_new
+<pre class="programlisting">GList *             glade_widget_adaptor_pack_actions_new
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor);</pre>
 <p>
 Create a list of packing actions.</p>
@@ -2385,7 +2387,7 @@ An adaptor function to be called on widget actions.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-string-from-value"></a><h3>glade_widget_adaptor_string_from_value ()</h3>
-<pre class="programlisting">gchar*              glade_widget_adaptor_string_from_value
+<pre class="programlisting">gchar *             glade_widget_adaptor_string_from_value
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          <a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *klass,
                                                          const GValue *value,
@@ -2429,6 +2431,6 @@ needed to update the UI for undo/redo items etc.</p>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.10</div>
+          Generated by GTK-Doc V1.12</div>
 </body>
 </html>
