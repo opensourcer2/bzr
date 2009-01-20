@@ -762,11 +762,41 @@
 
     <glade-widget-class name="GtkEntry" generic-name="entry" title="Text Entry">
       <post-create-function>glade_gtk_entry_post_create</post-create-function>
+      <create-editable-function>glade_gtk_entry_create_editable</create-editable-function>
+      <set-property-function>glade_gtk_entry_set_property</set-property-function>
+      <read-widget-function>glade_gtk_entry_read_widget</read-widget-function>
       <properties>
 	<property translatable="True" id="text"/>
         <property since="2.10" id="inner-border"/>
         <property since="2.10" id="truncate-multiline"/>
 	<property since="2.12" id="shadow-type"/>
+	<property id="gicon-primary" disabled="True"/>
+	<property id="gicon-secondary" disabled="True"/>
+	<property stock-icon="True" since="2.16" id="stock-primary" custom-layout="True"/>
+	<property stock-icon="True" since="2.16" id="stock-secondary" custom-layout="True"/>
+	<property since="2.16" id="pixbuf-primary" custom-layout="True"/>
+	<property since="2.16" id="pixbuf-secondary" custom-layout="True"/>
+	<property themed-icon="True" since="2.16" id="icon-name-primary" custom-layout="True"/>
+	<property themed-icon="True" since="2.16" id="icon-name-secondary" custom-layout="True"/>
+	<property since="2.16" id="activatable-primary" custom-layout="True"/>
+	<property since="2.16" id="activatable-secondary" custom-layout="True"/>
+	<property since="2.16" id="sensitive-primary" custom-layout="True"/>
+	<property since="2.16" id="sensitive-secondary" custom-layout="True"/>
+	<property since="2.16" id="progress-fraction" custom-layout="True"/>
+	<property since="2.16" id="progress-pulse-step" custom-layout="True"/>
+
+	
+        <property visible="False" save="False" id="primary-icon-mode">
+	  <parameter-spec>
+	    <type>GParamInt</type>
+	  </parameter-spec>
+        </property>
+        <property visible="False" save="False" id="secondary-icon-mode">
+	  <parameter-spec>
+	    <type>GParamInt</type>
+	  </parameter-spec>
+        </property>
+
 	
 	<property save="False" ignore="True" id="atk-activate" atk-property="True" name="Activate">
 	  <parameter-spec>

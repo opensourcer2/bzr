@@ -56,18 +56,11 @@
   {
     color: #770000;
     font-size: 80%;
-    white-space: nowrap;
   }
-  div.refentry, div.chapter, div.reference, div.part, div.book, div.glossary, div.sect1, div.appendix, div.preface
+  div.refentry, div.chapter, div.reference, div.part, div.book, div.index, div.glossary, div.sect1, div.appendix, div.preface
   {
     position: relative;
     top: 3em;
-    z-index: 0;
-  }
-  div.glossary, div.index
-  {
-    position: relative;
-    top: 2em;
     z-index: 0;
   }
   div.refnamediv
@@ -164,20 +157,4 @@ hr
   color: #777777;
   text-align: center;
   font-size: 80%;
-}
-
-.warning
-{
-  border: solid 1px #cccc33;
-  background: #ffffee;
-  padding: 0.5em;
-  border-width: 1px;
-}
-.warning h3
-{
-  margin-top: 0.0em
-}
-.warning p
-{
-  margin-bottom: 0.0em
 }

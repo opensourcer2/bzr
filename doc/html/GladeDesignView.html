@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GladeDesignView</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.74.0">
-<link rel="home" href="index.html" title="Glade User Interface Designer Reference Manual">
+<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
+<link rel="start" href="index.html" title="Glade User Interface Designer Reference Manual">
 <link rel="up" href="dockables.html" title="Part III. Dockable Glade UI Widgets">
 <link rel="prev" href="gladeui-glade-signal-editor.html" title="GladeSignalEditor">
 <link rel="next" href="misc.html" title="Part IV. Miscellaneous utilities">
-<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.10 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 <link rel="part" href="catalog.html" title="Part I. Adding your custom widgets">
 <link rel="part" href="core.html" title="Part II. Glade Core">
@@ -25,17 +25,15 @@
 <th width="100%" align="center">Glade User Interface Designer Reference Manual</th>
 <td><a accesskey="n" href="misc.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr>
-<tr><td colspan="5" class="shortcuts">
-<a href="#GladeDesignView.synopsis" class="shortcut">Top</a>
-                 | 
-                <a href="#GladeDesignView.description" class="shortcut">Description</a>
-                 | 
-                <a href="#GladeDesignView.object-hierarchy" class="shortcut">Object Hierarchy</a>
-                 | 
-                <a href="#GladeDesignView.implemented-interfaces" class="shortcut">Implemented Interfaces</a>
-                 | 
-                <a href="#GladeDesignView.properties" class="shortcut">Properties</a>
-</td></tr>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#GladeDesignView.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#GladeDesignView.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#GladeDesignView.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                   | 
+                  <a href="#GladeDesignView.implemented-interfaces" class="shortcut">Implemented Interfaces</a>
+                   | 
+                  <a href="#GladeDesignView.properties" class="shortcut">Properties</a></nobr></td></tr>
 </table>
 <div class="refentry" lang="en">
 <a name="GladeDesignView"></a><div class="titlepage"></div>
@@ -50,10 +48,10 @@
 <a name="GladeDesignView.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">
                     <a class="link" href="GladeDesignView.html#GladeDesignView-struct" title="GladeDesignView">GladeDesignView</a>;
-GtkWidget *         <a class="link" href="GladeDesignView.html#glade-design-view-new" title="glade_design_view_new ()">glade_design_view_new</a>               (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);
-<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *      <a class="link" href="GladeDesignView.html#glade-design-view-get-project" title="glade_design_view_get_project ()">glade_design_view_get_project</a>       (<a class="link" href="GladeDesignView.html" title="GladeDesignView">GladeDesignView</a> *view);
-<a class="link" href="GladeDesignView.html" title="GladeDesignView">GladeDesignView</a> *   <a class="link" href="GladeDesignView.html#glade-design-view-get-from-project" title="glade_design_view_get_from_project ()">glade_design_view_get_from_project</a>  (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);
-GladeDesignLayout * <a class="link" href="GladeDesignView.html#glade-design-view-get-layout" title="glade_design_view_get_layout ()">glade_design_view_get_layout</a>        (<a class="link" href="GladeDesignView.html" title="GladeDesignView">GladeDesignView</a> *view);
+GtkWidget*          <a class="link" href="GladeDesignView.html#glade-design-view-new" title="glade_design_view_new ()">glade_design_view_new</a>               (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);
+<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a>*       <a class="link" href="GladeDesignView.html#glade-design-view-get-project" title="glade_design_view_get_project ()">glade_design_view_get_project</a>       (<a class="link" href="GladeDesignView.html" title="GladeDesignView">GladeDesignView</a> *view);
+<a class="link" href="GladeDesignView.html" title="GladeDesignView">GladeDesignView</a>*    <a class="link" href="GladeDesignView.html#glade-design-view-get-from-project" title="glade_design_view_get_from_project ()">glade_design_view_get_from_project</a>  (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);
+GladeDesignLayout*  <a class="link" href="GladeDesignView.html#glade-design-view-get-layout" title="glade_design_view_get_layout ()">glade_design_view_get_layout</a>        (<a class="link" href="GladeDesignView.html" title="GladeDesignView">GladeDesignView</a> *view);
 </pre>
 </div>
 <div class="refsect1" lang="en">
@@ -96,22 +94,22 @@ in a given <a class="link" href="GladeProject.html" title="GladeProject"><span c
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-design-view-new"></a><h3>glade_design_view_new ()</h3>
-<pre class="programlisting">GtkWidget *         glade_design_view_new               (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
+<pre class="programlisting">GtkWidget*          glade_design_view_new               (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-design-view-get-project"></a><h3>glade_design_view_get_project ()</h3>
-<pre class="programlisting"><a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *      glade_design_view_get_project       (<a class="link" href="GladeDesignView.html" title="GladeDesignView">GladeDesignView</a> *view);</pre>
+<pre class="programlisting"><a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a>*       glade_design_view_get_project       (<a class="link" href="GladeDesignView.html" title="GladeDesignView">GladeDesignView</a> *view);</pre>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-design-view-get-from-project"></a><h3>glade_design_view_get_from_project ()</h3>
-<pre class="programlisting"><a class="link" href="GladeDesignView.html" title="GladeDesignView">GladeDesignView</a> *   glade_design_view_get_from_project  (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
+<pre class="programlisting"><a class="link" href="GladeDesignView.html" title="GladeDesignView">GladeDesignView</a>*    glade_design_view_get_from_project  (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-design-view-get-layout"></a><h3>glade_design_view_get_layout ()</h3>
-<pre class="programlisting">GladeDesignLayout * glade_design_view_get_layout        (<a class="link" href="GladeDesignView.html" title="GladeDesignView">GladeDesignView</a> *view);</pre>
+<pre class="programlisting">GladeDesignLayout*  glade_design_view_get_layout        (<a class="link" href="GladeDesignView.html" title="GladeDesignView">GladeDesignView</a> *view);</pre>
 </div>
 </div>
 <div class="refsect1" lang="en">
@@ -125,6 +123,6 @@ in a given <a class="link" href="GladeProject.html" title="GladeProject"><span c
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.12</div>
+          Generated by GTK-Doc V1.10</div>
 </body>
 </html>
