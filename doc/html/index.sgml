@@ -61,6 +61,7 @@
 <ANCHOR id="GladeApp--active-project" href="gladeui/GladeApp.html#GladeApp--active-project">
 <ANCHOR id="GladeApp--pointer-mode" href="gladeui/GladeApp.html#GladeApp--pointer-mode">
 <ANCHOR id="GladeApp.signal-details" href="gladeui/GladeApp.html#GladeApp.signal-details">
+<ANCHOR id="GladeApp-signal-editor-created" href="gladeui/GladeApp.html#GladeApp-signal-editor-created">
 <ANCHOR id="GladeApp-update-ui" href="gladeui/GladeApp.html#GladeApp-update-ui">
 <ANCHOR id="GladeProject" href="gladeui/GladeProject.html">
 <ANCHOR id="GladeProject.synopsis" href="gladeui/GladeProject.html#GladeProject.synopsis">
@@ -577,6 +578,7 @@
 <ANCHOR id="GladeEditorProperty--property-class" href="gladeui/GladeEditorProperty.html#GladeEditorProperty--property-class">
 <ANCHOR id="GladeEditorProperty--use-command" href="gladeui/GladeEditorProperty.html#GladeEditorProperty--use-command">
 <ANCHOR id="GladeEditorProperty.signal-details" href="gladeui/GladeEditorProperty.html#GladeEditorProperty.signal-details">
+<ANCHOR id="GladeEditorProperty-commit" href="gladeui/GladeEditorProperty.html#GladeEditorProperty-commit">
 <ANCHOR id="GladeEditorProperty-value-changed" href="gladeui/GladeEditorProperty.html#GladeEditorProperty-value-changed">
 <ANCHOR id="GladePalette" href="gladeui/GladePalette.html">
 <ANCHOR id="GladePalette.synopsis" href="gladeui/GladePalette.html#GladePalette.synopsis">

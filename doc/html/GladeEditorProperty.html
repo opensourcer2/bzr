@@ -8,7 +8,7 @@
 <link rel="up" href="dockables.html" title="Part III. Dockable Glade UI Widgets">
 <link rel="prev" href="GladeEditor.html" title="GladeEditor">
 <link rel="next" href="GladePalette.html" title="GladePalette">
-<meta name="generator" content="GTK-Doc V1.10 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 <link rel="part" href="catalog.html" title="Part I. Adding your custom widgets">
 <link rel="part" href="core.html" title="Part II. Glade Core">
@@ -25,7 +25,8 @@
 <th width="100%" align="center">Glade User Interface Designer Reference Manual</th>
 <td><a accesskey="n" href="GladePalette.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr>
-<tr><td colspan="5" class="shortcuts"><nobr><a href="#GladeEditorProperty.synopsis" class="shortcut">Top</a>
+<tr><td colspan="5" class="shortcuts">
+<a href="#GladeEditorProperty.synopsis" class="shortcut">Top</a>
                    | 
                   <a href="#GladeEditorProperty.description" class="shortcut">Description</a>
                    | 
@@ -35,7 +36,8 @@
                    | 
                   <a href="#GladeEditorProperty.properties" class="shortcut">Properties</a>
                    | 
-                  <a href="#GladeEditorProperty.signals" class="shortcut">Signals</a></nobr></td></tr>
+                  <a href="#GladeEditorProperty.signals" class="shortcut">Signals</a>
+</td></tr>
 </table>
 <div class="refentry" lang="en">
 <a name="GladeEditorProperty"></a><div class="titlepage"></div>
@@ -89,6 +91,7 @@ GladeEditorProperty implements
 <div class="refsect1" lang="en">
 <a name="GladeEditorProperty.signals"></a><h2>Signals</h2>
 <pre class="synopsis">
+  "<a class="link" href="GladeEditorProperty.html#GladeEditorProperty-commit" title='The "commit" signal'>commit</a>"                                         : Run Last
   "<a class="link" href="GladeEditorProperty.html#GladeEditorProperty-value-changed" title='The "value-changed" signal'>value-changed</a>"                                  : Run Last
 </pre>
 </div>
@@ -166,8 +169,7 @@ Convenience function to load the appropriate <a class="link" href="gladeui-glade
 <pre class="programlisting">void                glade_editor_property_commit        (<a class="link" href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> *eprop,
                                                          GValue *value);</pre>
 <p>
-Commits the value onto the widget and glade-command interface
-(for use in GladeEditorProperty implementations)</p>
+Commits <em class="parameter"><code>value</code></em> to the property currently being edited by <em class="parameter"><code>eprop</code></em>.</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -178,7 +180,7 @@ Commits the value onto the widget and glade-command interface
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td> The <span class="type">GValue</span>
+<td> The <span class="type">GValue</span> to commit
 </td>
 </tr>
 </tbody>
@@ -202,6 +204,35 @@ Commits the value onto the widget and glade-command interface
 </div>
 <div class="refsect1" lang="en">
 <a name="GladeEditorProperty.signal-details"></a><h2>Signal Details</h2>
+<div class="refsect2" lang="en">
+<a name="GladeEditorProperty-commit"></a><h3>The <code class="literal">"commit"</code> signal</h3>
+<pre class="programlisting">void                user_function                      (<a class="link" href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> *gladeeditorproperty,
+                                                        gpointer             arg1,
+                                                        gpointer             user_data)                : Run Last</pre>
+<p>
+Emitted when a property's value is committed, can be useful to serialize
+commands before and after the property's commit command from custom editors.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gladeeditorproperty</code></em> :</span></p></td>
+<td> the <a class="link" href="GladeEditorProperty.html" title="GladeEditorProperty"><span class="type">GladeEditorProperty</span></a> which changed value
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>arg1</code></em> :</span></p></td>
+<td> the new <span class="type">GValue</span> to commit.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
 <div class="refsect2" lang="en">
 <a name="GladeEditorProperty-value-changed"></a><h3>The <code class="literal">"value-changed"</code> signal</h3>
 <pre class="programlisting">void                user_function                      (<a class="link" href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> *gladeeditorproperty,
@@ -233,6 +264,6 @@ Emitted when a contained property changes value</p>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.10</div>
+          Generated by GTK-Doc V1.12</div>
 </body>
 </html>

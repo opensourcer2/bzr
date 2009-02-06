@@ -8,7 +8,7 @@
 <link rel="up" href="core.html" title="Part II. Glade Core">
 <link rel="prev" href="GladeClipboard.html" title="GladeClipboard">
 <link rel="next" href="GladePlaceholder.html" title="GladePlaceholder">
-<meta name="generator" content="GTK-Doc V1.10 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 <link rel="part" href="catalog.html" title="Part I. Adding your custom widgets">
 <link rel="part" href="core.html" title="Part II. Glade Core">
@@ -25,7 +25,8 @@
 <th width="100%" align="center">Glade User Interface Designer Reference Manual</th>
 <td><a accesskey="n" href="GladePlaceholder.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr>
-<tr><td colspan="5" class="shortcuts"><nobr><a href="#GladeBaseEditor.synopsis" class="shortcut">Top</a>
+<tr><td colspan="5" class="shortcuts">
+<a href="#GladeBaseEditor.synopsis" class="shortcut">Top</a>
                    | 
                   <a href="#GladeBaseEditor.description" class="shortcut">Description</a>
                    | 
@@ -35,7 +36,8 @@
                    | 
                   <a href="#GladeBaseEditor.properties" class="shortcut">Properties</a>
                    | 
-                  <a href="#GladeBaseEditor.signals" class="shortcut">Signals</a></nobr></td></tr>
+                  <a href="#GladeBaseEditor.signals" class="shortcut">Signals</a>
+</td></tr>
 </table>
 <div class="refentry" lang="en">
 <a name="GladeBaseEditor"></a><div class="titlepage"></div>
@@ -50,7 +52,7 @@
 <a name="GladeBaseEditor.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">
                     <a class="link" href="GladeBaseEditor.html#GladeBaseEditor-struct" title="GladeBaseEditor">GladeBaseEditor</a>;
-<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a>*    <a class="link" href="GladeBaseEditor.html#glade-base-editor-new" title="glade_base_editor_new ()">glade_base_editor_new</a>               (GObject *container,
+<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *   <a class="link" href="GladeBaseEditor.html#glade-base-editor-new" title="glade_base_editor_new ()">glade_base_editor_new</a>               (GObject *container,
                                                          GladeEditable *main_editable,
                                                          ...);
 void                <a class="link" href="GladeBaseEditor.html#glade-base-editor-add-default-properties" title="glade_base_editor_add_default_properties ()">glade_base_editor_add_default_properties</a>
@@ -65,7 +67,7 @@ void                <a class="link" href="GladeBaseEditor.html#glade-base-editor
 void                <a class="link" href="GladeBaseEditor.html#glade-base-editor-set-show-signal-editor" title="glade_base_editor_set_show_signal_editor ()">glade_base_editor_set_show_signal_editor</a>
                                                         (<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *editor,
                                                          gboolean val);
-GtkWidget*          <a class="link" href="GladeBaseEditor.html#glade-base-editor-pack-new-window" title="glade_base_editor_pack_new_window ()">glade_base_editor_pack_new_window</a>   (<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *editor,
+GtkWidget *         <a class="link" href="GladeBaseEditor.html#glade-base-editor-pack-new-window" title="glade_base_editor_pack_new_window ()">glade_base_editor_pack_new_window</a>   (<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *editor,
                                                          gchar *title,
                                                          gchar *help_markup);
 </pre>
@@ -120,7 +122,7 @@ Convenience object to edit containers where placeholders do not make sense, like
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-base-editor-new"></a><h3>glade_base_editor_new ()</h3>
-<pre class="programlisting"><a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a>*    glade_base_editor_new               (GObject *container,
+<pre class="programlisting"><a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *   glade_base_editor_new               (GObject *container,
                                                          GladeEditable *main_editable,
                                                          ...);</pre>
 <p>
@@ -269,7 +271,7 @@ Shows/hide <em class="parameter"><code>editor</code></em> 's signal editor</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-base-editor-pack-new-window"></a><h3>glade_base_editor_pack_new_window ()</h3>
-<pre class="programlisting">GtkWidget*          glade_base_editor_pack_new_window   (<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *editor,
+<pre class="programlisting">GtkWidget *         glade_base_editor_pack_new_window   (<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *editor,
                                                          gchar *title,
                                                          gchar *help_markup);</pre>
 <p>
@@ -366,7 +368,7 @@ calling <a class="link" href="GladeCommand.html#glade-command-create" title="gla
                                                         gpointer         user_data)            : Run Last</pre>
 <p>
 Emited when the user selects a child in the editor's treeview.
-You can add the relevant child properties here using 
+You can add the relevant child properties here using
 <a class="link" href="GladeBaseEditor.html#glade-base-editor-add-default-properties" title="glade_base_editor_add_default_properties ()"><code class="function">glade_base_editor_add_default_properties()</code></a> and <a class="link" href="GladeBaseEditor.html#glade-base-editor-add-properties" title="glade_base_editor_add_properties ()"><code class="function">glade_base_editor_add_properties()</code></a> 
 You can also add labels with glade_base_editor_add_label to make the
 editor look pretty.</p>
@@ -501,6 +503,6 @@ Move child here if something else must be done other than cut &amp; paste.</p>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.10</div>
+          Generated by GTK-Doc V1.12</div>
 </body>
 </html>

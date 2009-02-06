@@ -1,3 +1,59 @@
+2009-02-05  Tristan Van Berkom <tvb@gnome.org>
+
+	* NEWS: Rolling Glade 3.5.7
+	
+	* gladeui/glade-editor-property.c: Added "commit" signal to allow custom editors to do
+	command group/macros serialized around property changes.
+
+	* plugins/gtk+/glade-activatable-editor.[ch], plugins/gtk+/Makefile.am, po/POTFILES.in:
+	New activatable editor to handle activatable properties in smart ways.
+
+	* plugins/gtk+/glade-gtk.c: Made various properties insensitive when activatable
+	properties are in effect.
+
+	* plugins/gtk+/glade-tool-button-editor.c: Made tables insensitive when activatable
+	properties are in effect.
+
+	* plugins/gtk+/glade-button-editor.c: Allow use of use-stock choice while activatable
+	properties are in effect.
+
+	* src/glade-window.c: Fix markup in confirm close dialog, patch by Felix Riemann (bug 567450).
+
+	* plugins/gtk+/gtk+.xml.in: Marked use-stock property from imagemenuitem to be save-always (bug 568064).
+	
+2009-01-27  Tristan Van Berkom <tvb@gnome.org>
+
+	* configure.ac: Bumping version for Anjuta dependancy
+
+	* plugins/gtk+/gtk+.xml.in: Added some metadata about GtkAction
+
+	* plugins/gtk+/gtk+.xml.in, plugins/gtk+/glade-gtk.c: Updated and virtualized properties from gtk+ 2.16
+	
+2009-01-23  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/glade-entry-editor.c, plugins/gtk+/glade-gtk.c, plugins/gtk+/gtk+.xml.in: 
+	updated for new GtkEntry property name changes.
+
+2009-01-20  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* gladeui/glade-design-layout.[ch]: added GladeDesignLayout::widget-event
+	  signal. Patch by Pavel Kostyuchenko (bug 542337).
+
+	* gladeui/glade-accumulators.[ch]: added glade_integer_handled_accumulator()
+
+	* gladeui/glade-signal-editor.[ch], gladeui/glade-signal-editor.[ch],
+	  gladeui/glade-app.[ch], src/glade-window.c: 
+	  "Improvement of GladeSignalEditor" Bug 540691 by Pavel Kostyuchenko.
+
+	* plugins/gnome/glade-gnome.c: Fixed compiler warnings in
+	  glade_gnome_bonobodockitem_get_props()
+
+2009-01-19  Tristan Van Berkom <tvb@gnome.org>
+
+	* NEWS, configure.ac: Rolling Glade 3.5.6
+
+	* po/POTFILES.in: Added glade-entry-editor.c
+
 2009-01-05  Tristan Van Berkom <tvb@gnome.org>
 
 	* plugins/gtk+/Makefile.am, plugins/gtk+/gtk+.xml.in, 

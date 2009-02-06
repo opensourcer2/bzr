@@ -89,6 +89,7 @@
     <function name="glade_app_get_locale_dir ()" link="GladeApp.html#glade-app-get-locale-dir"/>
     <function name="The &quot;active-project&quot; property" link="GladeApp.html#GladeApp--active-project"/>
     <function name="The &quot;pointer-mode&quot; property" link="GladeApp.html#GladeApp--pointer-mode"/>
+    <function name="The &quot;signal-editor-created&quot; signal" link="GladeApp.html#GladeApp-signal-editor-created"/>
     <function name="The &quot;update-ui&quot; signal" link="GladeApp.html#GladeApp-update-ui"/>
     <function name="GladeProject" link="GladeProject.html#GladeProject-struct"/>
     <function name="enum GladeProjectFormat" link="GladeProject.html#GladeProjectFormat"/>
@@ -501,6 +502,7 @@
     <function name="glade_editor_property_commit ()" link="GladeEditorProperty.html#glade-editor-property-commit"/>
     <function name="The &quot;property-class&quot; property" link="GladeEditorProperty.html#GladeEditorProperty--property-class"/>
     <function name="The &quot;use-command&quot; property" link="GladeEditorProperty.html#GladeEditorProperty--use-command"/>
+    <function name="The &quot;commit&quot; signal" link="GladeEditorProperty.html#GladeEditorProperty-commit"/>
     <function name="The &quot;value-changed&quot; signal" link="GladeEditorProperty.html#GladeEditorProperty-value-changed"/>
     <function name="GladePalette" link="GladePalette.html#GladePalette-struct"/>
     <function name="enum GladeItemAppearance" link="GladePalette.html#GladeItemAppearance"/>

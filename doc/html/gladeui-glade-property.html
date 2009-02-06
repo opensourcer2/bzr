@@ -8,7 +8,7 @@
 <link rel="up" href="core.html" title="Part II. Glade Core">
 <link rel="prev" href="GladeFixed.html" title="GladeFixed">
 <link rel="next" href="gladeui-GladeWidgetAdaptor.html" title="GladeWidgetAdaptor">
-<meta name="generator" content="GTK-Doc V1.10 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 <link rel="part" href="catalog.html" title="Part I. Adding your custom widgets">
 <link rel="part" href="core.html" title="Part II. Glade Core">
@@ -25,7 +25,8 @@
 <th width="100%" align="center">Glade User Interface Designer Reference Manual</th>
 <td><a accesskey="n" href="gladeui-GladeWidgetAdaptor.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr>
-<tr><td colspan="5" class="shortcuts"><nobr><a href="#gladeui-glade-property.synopsis" class="shortcut">Top</a>
+<tr><td colspan="5" class="shortcuts">
+<a href="#gladeui-glade-property.synopsis" class="shortcut">Top</a>
                    | 
                   <a href="#gladeui-glade-property.description" class="shortcut">Description</a>
                    | 
@@ -33,7 +34,8 @@
                    | 
                   <a href="#gladeui-glade-property.properties" class="shortcut">Properties</a>
                    | 
-                  <a href="#gladeui-glade-property.signals" class="shortcut">Signals</a></nobr></td></tr>
+                  <a href="#gladeui-glade-property.signals" class="shortcut">Signals</a>
+</td></tr>
 </table>
 <div class="refentry" lang="en">
 <a name="gladeui-glade-property"></a><div class="titlepage"></div>
@@ -48,10 +50,10 @@
 <a name="gladeui-glade-property.synopsis"></a><h2>Synopsis</h2>
 <a name="GladeProperty"></a><pre class="synopsis">
                     <a class="link" href="gladeui-glade-property.html#GladeProperty-struct" title="GladeProperty">GladeProperty</a>;
-<a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a>*      <a class="link" href="gladeui-glade-property.html#glade-property-new" title="glade_property_new ()">glade_property_new</a>                  (<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *klass,
+<a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a> *     <a class="link" href="gladeui-glade-property.html#glade-property-new" title="glade_property_new ()">glade_property_new</a>                  (<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *klass,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                                          GValue *value);
-<a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a>*      <a class="link" href="gladeui-glade-property.html#glade-property-dup" title="glade_property_dup ()">glade_property_dup</a>                  (<a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a> *template_prop,
+<a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a> *     <a class="link" href="gladeui-glade-property.html#glade-property-dup" title="glade_property_dup ()">glade_property_dup</a>                  (<a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a> *template_prop,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);
 void                <a class="link" href="gladeui-glade-property.html#glade-property-reset" title="glade_property_reset ()">glade_property_reset</a>                (<a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a> *property);
 void                <a class="link" href="gladeui-glade-property.html#glade-property-original-reset" title="glade_property_original_reset ()">glade_property_original_reset</a>       (<a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a> *property);
@@ -99,7 +101,7 @@ void                <a class="link" href="gladeui-glade-property.html#glade-prop
 gboolean            <a class="link" href="gladeui-glade-property.html#glade-property-get-enabled" title="glade_property_get_enabled ()">glade_property_get_enabled</a>          (<a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a> *property);
 void                <a class="link" href="gladeui-glade-property.html#glade-property-i18n-set-comment" title="glade_property_i18n_set_comment ()">glade_property_i18n_set_comment</a>     (<a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a> *property,
                                                          const gchar *str);
-const gchar*        <a class="link" href="gladeui-glade-property.html#glade-property-i18n-get-comment" title="glade_property_i18n_get_comment ()">glade_property_i18n_get_comment</a>     (<a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a> *property);
+const gchar *       <a class="link" href="gladeui-glade-property.html#glade-property-i18n-get-comment" title="glade_property_i18n_get_comment ()">glade_property_i18n_get_comment</a>     (<a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a> *property);
 void                <a class="link" href="gladeui-glade-property.html#glade-property-i18n-set-translatable" title="glade_property_i18n_set_translatable ()">glade_property_i18n_set_translatable</a>
                                                         (<a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a> *property,
                                                          gboolean translatable);
@@ -160,7 +162,7 @@ the <a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" ti
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-property-new"></a><h3>glade_property_new ()</h3>
-<pre class="programlisting"><a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a>*      glade_property_new                  (<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *klass,
+<pre class="programlisting"><a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a> *     glade_property_new                  (<a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *klass,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                                          GValue *value);</pre>
 <p>
@@ -197,7 +199,7 @@ will be used.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-property-dup"></a><h3>glade_property_dup ()</h3>
-<pre class="programlisting"><a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a>*      glade_property_dup                  (<a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a> *template_prop,
+<pre class="programlisting"><a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a> *     glade_property_dup                  (<a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a> *template_prop,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
 <p>
 </p>
@@ -743,7 +745,7 @@ to always be saved regardless of its default value.
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-property-i18n-get-comment"></a><h3>glade_property_i18n_get_comment ()</h3>
-<pre class="programlisting">const gchar*        glade_property_i18n_get_comment     (<a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a> *property);</pre>
+<pre class="programlisting">const gchar *       glade_property_i18n_get_comment     (<a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a> *property);</pre>
 </div>
 <hr>
 <div class="refsect2" lang="en">
@@ -865,6 +867,6 @@ to always be saved regardless of its default value.
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.10</div>
+          Generated by GTK-Doc V1.12</div>
 </body>
 </html>
