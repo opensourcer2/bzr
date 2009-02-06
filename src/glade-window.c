@@ -1348,16 +1348,18 @@ confirm_close_project (GladeWindow *window, GladeProject *project)
 
 	project_name = glade_project_get_name (project);
 
-	msg = g_strdup_printf (_("<span weight=\"bold\" size=\"larger\">Save changes " 
-				 "to project \"%s\" before closing?</span>\n\n"
-				 "Your changes will be lost if you don't save them."), project_name);
+	msg = g_strdup_printf (_("Save changes to project \"%s\" before closing?"),
+			       project_name);
 
-	dialog = gtk_message_dialog_new_with_markup (GTK_WINDOW (window),
-					             GTK_DIALOG_MODAL,
-					             GTK_MESSAGE_WARNING,
-					             GTK_BUTTONS_NONE,
-						     "%s",
-					             msg);
+	dialog = gtk_message_dialog_new (GTK_WINDOW (window),
+					 GTK_DIALOG_MODAL,
+					 GTK_MESSAGE_WARNING,
+					 GTK_BUTTONS_NONE,
+					 "%s",
+					 msg);
+	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+						  "%s",
+						  _("Your changes will be lost if you don't save them."));
 	gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
 
 	gtk_dialog_add_buttons (GTK_DIALOG (dialog),
@@ -3044,6 +3046,16 @@ glade_window_init (GladeWindow *window)
 	show_dock_first_time (window, DOCK_PALETTE, "DockPalette");
 	show_dock_first_time (window, DOCK_INSPECTOR, "DockInspector");
 	show_dock_first_time (window, DOCK_EDITOR, "DockEditor");
+
+	/* signal editor */
+	g_signal_connect (G_OBJECT (glade_app_get_editor()->signal_editor),
+	                  "handler-editing-started",
+	                  G_CALLBACK (glade_signal_editor_handler_editing_started_default_impl),
+	                  NULL);
+	g_signal_connect (G_OBJECT (glade_app_get_editor()->signal_editor),
+	                  "userdata-editing-started",
+	                  G_CALLBACK (glade_signal_editor_userdata_editing_started_default_impl),
+	                  NULL);
 
 	/* status bar */
 	priv->statusbar = gtk_statusbar_new ();
