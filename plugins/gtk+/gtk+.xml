@@ -1121,6 +1121,7 @@
     </glade-widget-class>
 
     <glade-widget-class name="GtkColorButton" generic-name="colorbutton" title="Color Button">
+      <create-editable-function>glade_gtk_container_create_editable</create-editable-function>
       <properties>
 	<property translatable="True" id="title"/>
 	<property id="color" default="Black"/>
@@ -1134,6 +1135,7 @@
     </glade-widget-class>
 
     <glade-widget-class name="GtkFontButton" generic-name="fontbutton" title="Font Button">
+      <create-editable-function>glade_gtk_container_create_editable</create-editable-function>
       <properties>
 	<property translatable="True" id="title"/>
 
@@ -3324,7 +3326,7 @@
     <glade-widget-class-ref name="GtkFileChooserWidget"/>
   </glade-widget-group>
 
-  <glade-widget-group title="Tree Model" name="gtk-model">
+  <glade-widget-group name="gtk-model" title="Tree Model">
 
     <default-palette-state expanded="False"/>
 
@@ -3345,7 +3347,7 @@
   </glade-widget-group>
 
 
-  <glade-widget-group title="Miscellaneous" name="gtk-objects">
+  <glade-widget-group name="gtk-objects" title="Miscellaneous">
 
     <default-palette-state expanded="False"/>
 
@@ -3359,7 +3361,7 @@
     <glade-widget-class-ref name="GtkFileFilter"/>
   </glade-widget-group>
 
-  <glade-widget-group title="Specialized Widgets" name="gtk-specialized">
+  <glade-widget-group name="gtk-specialized" title="Specialized Widgets">
 
     <default-palette-state expanded="False"/>
 
@@ -3370,7 +3372,7 @@
     <glade-widget-class-ref name="GtkGammaCurve"/>
   </glade-widget-group>
 
-  <glade-widget-group title="Gtk+ Obsolete" name="gtk-obsolete">
+  <glade-widget-group name="gtk-obsolete" title="Gtk+ Obsolete">
 
     <default-palette-state expanded="False"/>
 
