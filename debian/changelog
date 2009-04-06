@@ -1,3 +1,22 @@
+glade-3 (3.6.1-0ubuntu1) jaunty; urgency=low
+
+  * New upstream version (LP: #356614)
+    - Fixed win32 crasher (bug 575206)
+    - Fixed crasher on internal widget selection
+    - Fixed libglade regression (libglade needs specific
+      ordering of properties, atk props, signals and accelerators)
+      (LP: #325959)
+    - Fixed MSYS/MinGW build (Bug 576851 – Damon Register)
+    - Disable loading and displaying of 'data' property on GtkTreeStore
+      (only GtkListStore understands the 'data' construct).
+    - Properly initialize a GValue on stack (bug 577822 - Felix Riemann)
+    - New and updated translations
+  * debian/rules
+    - updated to have shlibdeps point to new version as a new symbol was
+      added
+
+ -- Andreas Moog <andreas.moog@warperbbs.de>  Mon, 06 Apr 2009 23:12:12 +0200
+
 glade-3 (3.6.0-0ubuntu1) jaunty; urgency=low
 
   * New upstream version (LP: #343976)
