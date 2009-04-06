@@ -489,9 +489,7 @@
     <function name="glade_editor_refresh ()" link="GladeEditor.html#glade-editor-refresh"/>
     <function name="glade_editor_query_dialog ()" link="GladeEditor.html#glade-editor-query-dialog"/>
     <function name="glade_editor_show_info ()" link="GladeEditor.html#glade-editor-show-info"/>
-    <function name="glade_editor_show_context_info ()" link="GladeEditor.html#glade-editor-show-context-info"/>
     <function name="glade_editor_hide_info ()" link="GladeEditor.html#glade-editor-hide-info"/>
-    <function name="glade_editor_hide_context_info ()" link="GladeEditor.html#glade-editor-hide-context-info"/>
     <function name="The &quot;show-info&quot; property" link="GladeEditor.html#GladeEditor--show-info"/>
     <function name="The &quot;widget&quot; property" link="GladeEditor.html#GladeEditor--widget"/>
     <function name="The &quot;gtk-doc-search&quot; signal" link="GladeEditor.html#GladeEditor-gtk-doc-search"/>

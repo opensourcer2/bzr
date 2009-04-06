@@ -603,6 +603,9 @@ glade_command_set_property_description (GladeCommandSetProperty *me,
 			(GLADE_WIDGET_ADAPTOR (sdata->property->klass->handle),
 			 sdata->property->klass, sdata->new_value, fmt);
 
+		g_assert (sdata->property->klass->name);
+		g_assert (sdata->property->widget->name);
+
 		if (!value_name || strlen (value_name) > MAX_UNDO_MENU_ITEM_VALUE_LEN
 		    || strchr (value_name, '_')) {
 			description = g_strdup_printf (_("Setting %s of %s"),
@@ -611,7 +614,8 @@ glade_command_set_property_description (GladeCommandSetProperty *me,
 		} else {
 			description = g_strdup_printf (_("Setting %s of %s to %s"),
 						       sdata->property->klass->name,
-						       sdata->property->widget->name, value_name);
+						       sdata->property->widget->name,
+						       value_name);
 		}
 		g_free (value_name);
 	}
