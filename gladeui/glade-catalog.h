@@ -23,6 +23,7 @@
 #define __GLADE_CATALOG_H__
 
 #include <glib.h>
+#include <gladeui/glade-xml-utils.h>
 
 G_BEGIN_DECLS
 
@@ -36,6 +37,33 @@ G_BEGIN_DECLS
 typedef struct _GladeCatalog     GladeCatalog;
 typedef struct _GladeWidgetGroup GladeWidgetGroup;
 
+
+/**
+ * GladeCatalogInitFunc:
+ * @name: The name of the catalog
+ *
+ * Called once at glade startup time for every catalog, catalogs
+ * are initialized in order of dependancies.
+ */
+typedef void      (*GladeCatalogInitFunc)    (const gchar *name);
+
+/**
+ * GladeProjectConvertFunc:
+ * @project: A #GladeProject
+ * @new_format: The format to convert @project to
+ *
+ * Generally format transperency is implemented at load/save time,
+ * but if some objects need to be setup differently, or some new
+ * objects created (like real GtkAdjustment objects for old inline
+ * property values) this is the place to do those things, be careful
+ * to use the GladeCommand api because conversions are undoable.
+ *
+ * Returns: FALSE if any errors occurred during the conversion.
+ */
+typedef gboolean  (*GladeProjectConvertFunc) (GladeProject        *project, 
+					      GladeProjectFormat   new_format);
+
+
 typedef struct {
 	gint major;
 	gint minor;
@@ -44,12 +72,15 @@ typedef struct {
 
 const GList  *glade_catalog_load_all                (void);
 
-const gchar  *glade_catalog_get_name                (GladeCatalog     *catalog);
+G_CONST_RETURN gchar  *glade_catalog_get_name       (GladeCatalog     *catalog);
+G_CONST_RETURN gchar  *glade_catalog_get_icon_prefix(GladeCatalog     *catalog);
+G_CONST_RETURN gchar  *glade_catalog_get_domain     (GladeCatalog     *catalog);
+G_CONST_RETURN gchar  *glade_catalog_get_book       (GladeCatalog     *catalog);
 
 GList        *glade_catalog_get_targets             (GladeCatalog     *catalog);
 
-gint          glade_catalog_get_major_version       (GladeCatalog     *catalog);
-gint          glade_catalog_get_minor_version       (GladeCatalog     *catalog);
+guint16       glade_catalog_get_major_version       (GladeCatalog     *catalog);
+guint16       glade_catalog_get_minor_version       (GladeCatalog     *catalog);
 
 GList        *glade_catalog_get_widget_groups       (GladeCatalog     *catalog);
 
@@ -67,6 +98,14 @@ const gchar  *glade_widget_group_get_title          (GladeWidgetGroup *group);
 gboolean      glade_widget_group_get_expanded       (GladeWidgetGroup *group);
 
 const GList  *glade_widget_group_get_adaptors       (GladeWidgetGroup *group);
+
+gboolean      glade_catalog_convert_project         (GladeCatalog     *catalog,
+						     GladeProject     *project,
+						     GladeProjectFormat  new_format);
+
+
+gboolean      glade_catalog_supports_libglade       (GladeCatalog     *catalog);
+gboolean      glade_catalog_supports_gtkbuilder     (GladeCatalog     *catalog);
 
 G_END_DECLS
 

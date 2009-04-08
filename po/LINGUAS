@@ -6,6 +6,7 @@ bg
 bn
 bn_IN
 ca
+cs
 da
 de
 el
@@ -13,9 +14,11 @@ en_CA
 en_GB
 es
 et
+eu
 fi
 fr
 gl
+gu
 he
 hi
 hu
@@ -23,10 +26,14 @@ it
 ja
 ko
 lt
+lv
+mai
 mk
 ml
+mr
 ms
 nb
+nl
 nn
 oc
 or
@@ -40,6 +47,8 @@ sk
 sl
 sv
 sq
+sr
+sr@latin
 ta 
 te
 th

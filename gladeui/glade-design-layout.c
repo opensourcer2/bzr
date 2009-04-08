@@ -27,6 +27,8 @@
 
 #include "glade.h"
 #include "glade-design-layout.h"
+#include "glade-accumulators.h"
+#include "glade-marshallers.h"
 
 #include <gtk/gtk.h>
 
@@ -56,6 +58,12 @@ typedef enum
 	REGION_OUTSIDE
 } PointerRegion;
 
+enum
+{
+	WIDGET_EVENT,
+	LAST_SIGNAL
+};
+
 struct _GladeDesignLayoutPrivate
 {
 	GdkWindow *event_window;
@@ -72,6 +80,8 @@ struct _GladeDesignLayoutPrivate
 	gint new_width;             /* user's new requested width */
 	gint new_height;            /* user's new requested height */
 };
+
+static guint              glade_design_layout_signals[LAST_SIGNAL] = {0};
 
 G_DEFINE_TYPE (GladeDesignLayout, glade_design_layout, GTK_TYPE_BIN)
 
@@ -274,12 +284,16 @@ glade_design_layout_deepest_gwidget_at_position (GtkContainer *toplevel,
 	gtk_container_forall (container, (GtkCallback)
 			      glade_design_layout_find_inside_container, &data);
 
-	if (data.found && GTK_IS_CONTAINER (data.found))
-		ret_widget = glade_design_layout_deepest_gwidget_at_position
-			(toplevel, GTK_CONTAINER (data.found), top_x, top_y);
-	else if (data.found)
-		ret_widget = glade_widget_get_from_gobject (data.found);
-	else
+	if (data.found)
+	{
+		if (GTK_IS_CONTAINER (data.found))
+			ret_widget = glade_design_layout_deepest_gwidget_at_position
+				(toplevel, GTK_CONTAINER (data.found), top_x, top_y);
+		else
+			ret_widget = glade_widget_get_from_gobject (data.found);
+	}
+
+	if (!ret_widget)
 		ret_widget = glade_widget_get_from_gobject (container);
 
 	return ret_widget;
@@ -783,10 +797,12 @@ glade_design_layout_expose_event (GtkWidget *widget, GdkEventExpose *ev)
 		/* draw a filled rectangle in case child does not draw 
 		 * it's own background (a GTK_WIDGET_NO_WINDOW child). */
 		gdk_draw_rectangle (widget->window,
-				    widget->style->fg_gc[GTK_STATE_NORMAL],
+				    widget->style->bg_gc[GTK_STATE_NORMAL],
 				    TRUE,
-				    x + OUTLINE_WIDTH / 2, y + OUTLINE_WIDTH / 2, 
+				    x + OUTLINE_WIDTH / 2, y + OUTLINE_WIDTH / 2,
 				    w - OUTLINE_WIDTH, h - OUTLINE_WIDTH);
+
+		GTK_WIDGET_CLASS (glade_design_layout_parent_class)->expose_event (widget, ev);
 	}	
 
 	return TRUE;
@@ -833,13 +849,27 @@ glade_design_layout_widget_event (GladeDesignLayout *layout,
 	/* Then we try a GladeWidget */
 	if (gwidget) 
 	{
-		retval = glade_widget_event (gwidget, event);
+		g_signal_emit_by_name (layout, "widget-event",
+				       gwidget, event, &retval);
 
 		if (retval)
 			return retval;
 	}
 
 	return FALSE;
+}
+
+static gboolean
+glade_design_layout_widget_event_impl (GladeProject *project,
+				       GladeWidget *gwidget,
+				       GdkEvent *event)
+{
+
+	if (glade_widget_event (gwidget, event))
+		return GLADE_WIDGET_EVENT_STOP_EMISSION |
+			GLADE_WIDGET_EVENT_RETURN_TRUE;
+	else
+		return 0;
 }
 
 static void
@@ -892,6 +922,36 @@ glade_design_layout_class_init (GladeDesignLayoutClass *klass)
 	widget_class->expose_event          = glade_design_layout_expose_event;
 	widget_class->size_request          = glade_design_layout_size_request;
 	widget_class->size_allocate         = glade_design_layout_size_allocate;
+
+	klass->widget_event          = glade_design_layout_widget_event_impl;
+
+	/**
+	 * GladeDesignLayout::widget-event:
+	 * @glade_design_layout: the #GladeDesignLayout containing the #GladeWidget.
+	 * @signal_editor: the #GladeWidget which received the signal.
+	 * @event: the #GdkEvent
+	 *
+	 * Emitted when a widget event received.
+	 * Connect before the default handler to block glade logic,
+	 * such as selecting or resizing, by returning #GLADE_WIDGET_EVENT_STOP_EMISSION.
+	 * If you want to handle the event after it passed the glade logic,
+	 * but before it reaches the widget, you should connect after the default handler.
+	 *
+	 * Returns: #GLADE_WIDGET_EVENT_STOP_EMISSION flag to abort futher emission of the signal.
+	 * #GLADE_WIDGET_EVENT_RETURN_TRUE flag in the last handler
+	 * to stop propagating of the event to the appropriate widget.
+	 */
+	glade_design_layout_signals[WIDGET_EVENT] =
+		g_signal_new ("widget-event",
+			      G_TYPE_FROM_CLASS (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GladeDesignLayoutClass, widget_event),
+			      glade_integer_handled_accumulator, NULL,
+			      glade_marshal_INT__OBJECT_BOXED,
+			      G_TYPE_INT,
+			      2,
+			      GLADE_TYPE_WIDGET,
+			      GDK_TYPE_EVENT | G_SIGNAL_TYPE_STATIC_SCOPE);
 
 	g_type_class_add_private (object_class, sizeof (GladeDesignLayoutPrivate));
 }

@@ -26,6 +26,7 @@
 #include <gladeui/glade-editor.h>
 #include <gladeui/glade-palette.h>
 #include <gladeui/glade-clipboard.h>
+#include <gladeui/glade-catalog.h>
 
 G_BEGIN_DECLS
 
@@ -44,8 +45,6 @@ G_BEGIN_DECLS
 typedef struct _GladeApp         GladeApp;
 typedef struct _GladeAppPrivate  GladeAppPrivate;
 typedef struct _GladeAppClass    GladeAppClass;
-typedef enum   _GladePointerMode GladePointerMode;
-
 
 /**
  * GladePointerMode:
@@ -62,6 +61,8 @@ enum _GladePointerMode
 	GLADE_POINTER_ADD_WIDGET,
 	GLADE_POINTER_DRAG_RESIZE
 };
+typedef enum _GladePointerMode GladePointerMode;
+
 
 struct _GladeApp
 {
@@ -81,6 +82,7 @@ struct _GladeAppClass
 
 	/* signals */
 	void   (* update_ui_signal) (GladeApp    *app);
+	void   (* signal_editor_created) (GladeApp *app, GladeSignalEditor *signal_editor);
 };
 
  
@@ -98,9 +100,11 @@ void               glade_app_set_window (GtkWidget *window);
  
 GtkWidget*         glade_app_get_window (void);
 
-void               glade_app_get_catalog_version (const gchar *name, gint *major, gint *minor);
+gboolean           glade_app_get_catalog_version (const gchar *name, gint *major, gint *minor);
 
 GList             *glade_app_get_catalogs (void);
+
+GladeCatalog      *glade_app_get_catalog (const gchar *name);
  
 GladeEditor*       glade_app_get_editor (void);
  
@@ -111,6 +115,8 @@ GladeClipboard*    glade_app_get_clipboard (void);
 GtkWidget*         glade_app_get_clipboard_view (void);
 
 GladeProject*      glade_app_get_project (void);
+
+GladeProject*      glade_app_check_get_project (void);
  
 void               glade_app_set_project (GladeProject *project);
 
@@ -157,6 +163,8 @@ void               glade_app_set_transient_parent (GtkWindow *parent);
 GtkWindow         *glade_app_get_transient_parent (void);
  
 void               glade_app_set_accel_group (GtkAccelGroup *accel_group);
+
+GtkAccelGroup     *glade_app_get_accel_group (void);
  
 void               glade_app_update_instance_count  (GladeProject *project);
 

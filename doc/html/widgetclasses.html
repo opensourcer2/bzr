@@ -1,19 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Widget Adaptor Definitions</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.72.0">
+<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
 <link rel="start" href="index.html" title="Glade User Interface Designer Reference Manual">
-<link rel="up" href="catalog.html" title="Part&#160;I.&#160;Adding your custom widgets">
+<link rel="up" href="catalog.html" title="Part I. Adding your custom widgets">
 <link rel="prev" href="catalogintro.html" title="Introducing the Glade Catalog">
 <link rel="next" href="properties.html" title="Property Class Definitions">
-<meta name="generator" content="GTK-Doc V1.9 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="part" href="catalog.html" title="Part&#160;I.&#160;Adding your custom widgets">
-<link rel="part" href="core.html" title="Part&#160;II.&#160;Glade Core">
-<link rel="part" href="dockables.html" title="Part&#160;III.&#160;Dockable Glade UI Widgets">
-<link rel="part" href="misc.html" title="Part&#160;IV.&#160;Miscellaneous utilities">
+<link rel="part" href="catalog.html" title="Part I. Adding your custom widgets">
+<link rel="part" href="core.html" title="Part II. Glade Core">
+<link rel="part" href="dockables.html" title="Part III. Dockable Glade UI Widgets">
+<link rel="part" href="misc.html" title="Part IV. Miscellaneous utilities">
 <link rel="index" href="ix01.html" title="Index">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -29,16 +29,16 @@
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
 <h2><span class="refentrytitle">Widget Adaptor Definitions</span></h2>
-<p>Widget Classes &#8212; 
+<p>Widget Classes — 
 Adding support for custom widgets 
     </p>
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
 <div class="refsect1" lang="en">
-<a name="id325931"></a><h2>Forward</h2>
+<a name="id316711"></a><h2>Forward</h2>
 <p>
-Widget support in Glade is provided by the <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a> object, each
+Widget support in Glade is provided by the <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a> object, each
 `glade-widget-class' definition in the catalog will result in the creation
 of an adaptor, which inherits the funcionality of the adaptor created for its
 parent, or the closest adaptor available in the ancestry. Adaptor methods can
@@ -114,7 +114,7 @@ Here is the complete example of the form of the `glade-widget-class' definition:
     </p>
 </div>
 <div class="refsect1" lang="en">
-<a name="id326389"></a><h2>Widget Class Properties</h2>
+<a name="id317158"></a><h2>Widget Class Properties</h2>
 <p>
 The following are all properies of the `glade-widget-class' tag
     </p>
@@ -122,7 +122,7 @@ The following are all properies of the `glade-widget-class' tag
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><span class="term">name</span></td>
+<td><p><span class="term">name</span></p></td>
 <td><p>
 The class name of the widget; unless the 'get-type-function' property is present, 
 this will essentially be used to instantiate the actual class by deriving 
@@ -131,26 +131,26 @@ support library.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">since</span></td>
+<td><p><span class="term">since</span></p></td>
 <td><p>
 A 'major.minor' formed version describing the version of the owning catalog in which this 
 object class was introduced; example: <code class="literal">since="1.0"</code>.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">deprecated</span></td>
+<td><p><span class="term">deprecated</span></p></td>
 <td><p>
 A boolean property depicting that this widget is currently deprecated.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">builder-unsupported</span></td>
+<td><p><span class="term">builder-unsupported</span></p></td>
 <td><p>
 A boolean property depicting that this widget is not supported by <span class="type">GtkBuilder</span>.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">get-type-function</span></td>
+<td><p><span class="term">get-type-function</span></p></td>
 <td><p>
 Used to explicitly specify the name of the function used to get the type of the widget.  
 It is optional, but if it is not present, the 'name' property will be used to guess the
@@ -158,7 +158,7 @@ name of the function, a process that could lead to unexpected results.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">generic-name</span></td>
+<td><p><span class="term">generic-name</span></p></td>
 <td><p>
 Used to generate a default name for instances of the
 widget in the UI editor. It is also used in conjunction with the 'icon-prefix'
@@ -166,7 +166,7 @@ to form an icon name for the widget.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">icon-name</span></td>
+<td><p><span class="term">icon-name</span></p></td>
 <td><p>
 Used to explicitly set an icon name for this widget.
 These icon names are looked up in the current icon theme to retrieve an icon for
@@ -174,14 +174,14 @@ the widget.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">title</span></td>
+<td><p><span class="term">title</span></p></td>
 <td><p>
 Used to display the name of the class in the palette and widget 
 tree and will be translated before use in the interface.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">parent</span></td>
+<td><p><span class="term">parent</span></p></td>
 <td><p>
 Use this to specify the name of the parent your widget derives from, you
 can use this option instead of loading a real widget type (this allows you
@@ -190,38 +190,38 @@ of any plugins or libraries).
           </p></td>
 </tr>
 <tr>
-<td><span class="term">toplevel</span></td>
+<td><p><span class="term">toplevel</span></p></td>
 <td><p>
 Used to know whether this widget class is toplevel or not
 in Glade context. This property will be inherited from the adaptors parent.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">fixed</span></td>
+<td><p><span class="term">fixed</span></p></td>
 <td><p>
 Used to mark a <span class="type">GladeWidgetClass</span> for free form placement capacities
-to be handled with a <a href="GladeFixed.html" title="GladeFixed"><span class="type">GladeFixed</span></a>. This property will be inherited from the adaptors parent.
+to be handled with a <a class="link" href="GladeFixed.html" title="GladeFixed"><span class="type">GladeFixed</span></a>. This property will be inherited from the adaptors parent.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">use-placeholders</span></td>
+<td><p><span class="term">use-placeholders</span></p></td>
 <td><p>
 Used to inform the core about adaptors that implement
-<span class="type">GtkContainer</span> editing, and whether or not they use <a href="GladePlaceholder.html" title="GladePlaceholder"><span class="type">GladePlaceholder</span></a>. This property will 
+<span class="type">GtkContainer</span> editing, and whether or not they use <a class="link" href="GladePlaceholder.html" title="GladePlaceholder"><span class="type">GladePlaceholder</span></a>. This property will 
 be inherited from the adaptors parent.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">default-width</span></td>
+<td><p><span class="term">default-width</span></p></td>
 <td><p>
-The default width to load a <span class="type">GtkWindow</span> derived widget in the <a href="GladeDesignView.html" title="GladeDesignView"><span class="type">GladeDesignView</span></a>.
+The default width to load a <span class="type">GtkWindow</span> derived widget in the <a class="link" href="GladeDesignView.html" title="GladeDesignView"><span class="type">GladeDesignView</span></a>.
 This property will be inherited from the adaptors parent.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">default-height</span></td>
+<td><p><span class="term">default-height</span></p></td>
 <td><p>
-The default height to load a <span class="type">GtkWindow</span> derived widget in the <a href="GladeDesignView.html" title="GladeDesignView"><span class="type">GladeDesignView</span></a>.
+The default height to load a <span class="type">GtkWindow</span> derived widget in the <a class="link" href="GladeDesignView.html" title="GladeDesignView"><span class="type">GladeDesignView</span></a>.
 This property will be inherited from the adaptors parent.
           </p></td>
 </tr>
@@ -229,7 +229,7 @@ This property will be inherited from the adaptors parent.
 </table></div>
 </div>
 <div class="refsect1" lang="en">
-<a name="id326704"></a><h2>Adapter Methods</h2>
+<a name="id317446"></a><h2>Adapter Methods</h2>
 <p>
 The following are all child tags of the `glade-widget-class' tag
     </p>
@@ -237,146 +237,147 @@ The following are all child tags of the `glade-widget-class' tag
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><span class="term">constructor-function</span></td>
+<td><p><span class="term">constructor-function</span></p></td>
 <td><p>
-Used to override the actual <span class="type">GObject</span> constructor of the said <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
+Used to override the actual <span class="type">GObject</span> constructor of the said <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a>
           </p></td>
 </tr>
 <tr>
-<td><span class="term">post-create-function</span></td>
+<td><p><span class="term">post-create-function</span></p></td>
 <td><p>
-A <a href="gladeui-GladeWidgetAdaptor.html#GladePostCreateFunc"><span class="type">GladePostCreateFunc</span></a> support function that gets called whenever a widget of the said class is instantiated.
+A <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladePostCreateFunc" title="GladePostCreateFunc ()"><span class="type">GladePostCreateFunc</span></a> support function that gets called whenever a widget of the said class is instantiated.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">deep-post-create-function</span></td>
+<td><p><span class="term">deep-post-create-function</span></p></td>
 <td><p>
 Same as `post-create-function' except in that you must always chain up
 to the super class definition as a rule.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">get-property-function</span></td>
+<td><p><span class="term">get-property-function</span></p></td>
 <td><p>
-A <a href="gladeui-GladeWidgetAdaptor.html#GladeGetPropertyFunc"><span class="type">GladeGetPropertyFunc</span></a> to get values of properties on an instance in the
+A <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeGetPropertyFunc" title="GladeGetPropertyFunc ()"><span class="type">GladeGetPropertyFunc</span></a> to get values of properties on an instance in the
 runtime.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">set-property-function</span></td>
+<td><p><span class="term">set-property-function</span></p></td>
 <td><p>
-A <a href="gladeui-GladeWidgetAdaptor.html#GladeSetPropertyFunc"><span class="type">GladeSetPropertyFunc</span></a> to set values of properties on an instance in the
+A <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeSetPropertyFunc" title="GladeSetPropertyFunc ()"><span class="type">GladeSetPropertyFunc</span></a> to set values of properties on an instance in the
 runtime.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">verify-function</span></td>
+<td><p><span class="term">verify-function</span></p></td>
 <td><p>
-A <a href="gladeui-GladeWidgetAdaptor.html#GladeVerifyPropertyFunc"><span class="type">GladeVerifyPropertyFunc</span></a> to set values of properties on an instance in the
+A <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeVerifyPropertyFunc" title="GladeVerifyPropertyFunc ()"><span class="type">GladeVerifyPropertyFunc</span></a> to set values of properties on an instance in the
 runtime.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">add-child-function</span></td>
+<td><p><span class="term">add-child-function</span></p></td>
 <td><p>
-A <a href="gladeui-GladeWidgetAdaptor.html#GladeAddChildFunc"><span class="type">GladeAddChildFunc</span></a> to add children to instances in the runtime.
+A <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeAddChildFunc" title="GladeAddChildFunc ()"><span class="type">GladeAddChildFunc</span></a> to add children to instances in the runtime.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">remove-child-function</span></td>
+<td><p><span class="term">remove-child-function</span></p></td>
 <td><p>
-A <a href="gladeui-GladeWidgetAdaptor.html#GladeRemoveChildFunc"><span class="type">GladeRemoveChildFunc</span></a> to remove children from instances in the runtime.
+A <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeRemoveChildFunc" title="GladeRemoveChildFunc ()"><span class="type">GladeRemoveChildFunc</span></a> to remove children from instances in the runtime.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">replace-child-function</span></td>
+<td><p><span class="term">replace-child-function</span></p></td>
 <td><p>
-A <a href="gladeui-GladeWidgetAdaptor.html#GladeReplaceChildFunc"><span class="type">GladeReplaceChildFunc</span></a> to replace children inside instances in the runtime.
+A <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeReplaceChildFunc" title="GladeReplaceChildFunc ()"><span class="type">GladeReplaceChildFunc</span></a> to replace children inside instances in the runtime.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">get-children-function</span></td>
+<td><p><span class="term">get-children-function</span></p></td>
 <td><p>
-A <a href="gladeui-GladeWidgetAdaptor.html#GladeGetChildrenFunc"><span class="type">GladeGetChildrenFunc</span></a> to get a list of children inside instances in the runtime.
+A <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeGetChildrenFunc" title="GladeGetChildrenFunc ()"><span class="type">GladeGetChildrenFunc</span></a> to get a list of children inside instances in the runtime.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">child-get-property-function</span></td>
+<td><p><span class="term">child-get-property-function</span></p></td>
 <td><p>
-A <a href="gladeui-GladeWidgetAdaptor.html#GladeChildGetPropertyFunc"><span class="type">GladeChildGetPropertyFunc</span></a> to get packing properties from instances in the runtime.
+A <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeChildGetPropertyFunc" title="GladeChildGetPropertyFunc ()"><span class="type">GladeChildGetPropertyFunc</span></a> to get packing properties from instances in the runtime.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">child-set-property-function</span></td>
+<td><p><span class="term">child-set-property-function</span></p></td>
 <td><p>
-A <a href="gladeui-GladeWidgetAdaptor.html#GladeChildSetPropertyFunc"><span class="type">GladeChildSetPropertyFunc</span></a> to set packing properties on instances in the runtime.
+A <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeChildSetPropertyFunc" title="GladeChildSetPropertyFunc ()"><span class="type">GladeChildSetPropertyFunc</span></a> to set packing properties on instances in the runtime.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">child-verify-function</span></td>
+<td><p><span class="term">child-verify-function</span></p></td>
 <td><p>
-A <a href="gladeui-GladeWidgetAdaptor.html#GladeChildVerifyPropertyFunc"><span class="type">GladeChildVerifyPropertyFunc</span></a> to verify packing properties on instances in the runtime.
+A <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeChildVerifyPropertyFunc" title="GladeChildVerifyPropertyFunc ()"><span class="type">GladeChildVerifyPropertyFunc</span></a> to verify packing properties on instances in the runtime.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">get-internal-child-function</span></td>
+<td><p><span class="term">get-internal-child-function</span></p></td>
 <td><p>
-A <a href="gladeui-GladeWidgetAdaptor.html#GladeGetInternalFunc"><span class="type">GladeGetInternalFunc</span></a> to retrieve an internal child of a composite object in the runtime.
+A <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeGetInternalFunc" title="GladeGetInternalFunc ()"><span class="type">GladeGetInternalFunc</span></a> to retrieve an internal child of a composite object in the runtime.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">action-activate-function</span></td>
+<td><p><span class="term">action-activate-function</span></p></td>
 <td><p>
-A <a href="gladeui-GladeWidgetAdaptor.html#GladeActionActivateFunc"><span class="type">GladeActionActivateFunc</span></a> to run a routine for a plugin defined <a href="GladeWidgetAction.html" title="GladeWidgetAction"><span class="type">GladeWidgetAction</span></a>.
+A <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeActionActivateFunc" title="GladeActionActivateFunc ()"><span class="type">GladeActionActivateFunc</span></a> to run a routine for a plugin defined <a class="link" href="GladeWidgetAction.html" title="GladeWidgetAction"><span class="type">GladeWidgetAction</span></a>.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">child-action-activate-function</span></td>
+<td><p><span class="term">child-action-activate-function</span></p></td>
 <td><p>
-A <a href="gladeui-GladeWidgetAdaptor.html#GladeChildActionActivateFunc"><span class="type">GladeChildActionActivateFunc</span></a> to run a routine for a plugin defined packing <a href="GladeWidgetAction.html" title="GladeWidgetAction"><span class="type">GladeWidgetAction</span></a>.
+A <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeChildActionActivateFunc" title="GladeChildActionActivateFunc ()"><span class="type">GladeChildActionActivateFunc</span></a> to run a routine for a plugin defined packing <a class="link" href="GladeWidgetAction.html" title="GladeWidgetAction"><span class="type">GladeWidgetAction</span></a>.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">read-widget-function</span></td>
+<td><p><span class="term">read-widget-function</span></p></td>
 <td><p>
-A <a href="gladeui-GladeWidgetAdaptor.html#GladeReadWidgetFunc"><span class="type">GladeReadWidgetFunc</span></a> to load a widget from the xml.
+A <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeReadWidgetFunc" title="GladeReadWidgetFunc ()"><span class="type">GladeReadWidgetFunc</span></a> to load a widget from the xml.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">write-widget-function</span></td>
+<td><p><span class="term">write-widget-function</span></p></td>
 <td><p>
-A <a href="gladeui-GladeWidgetAdaptor.html#GladeWriteWidgetFunc"><span class="type">GladeWriteWidgetFunc</span></a> to write a widget from the xml.
+A <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWriteWidgetFunc" title="GladeWriteWidgetFunc ()"><span class="type">GladeWriteWidgetFunc</span></a> to write a widget from the xml.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">read-child-function</span></td>
+<td><p><span class="term">read-child-function</span></p></td>
 <td><p>
-A <a href="gladeui-GladeWidgetAdaptor.html#GladeReadWidgetFunc"><span class="type">GladeReadWidgetFunc</span></a> to read a child to the xml.
+A <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeReadWidgetFunc" title="GladeReadWidgetFunc ()"><span class="type">GladeReadWidgetFunc</span></a> to read a child to the xml.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">write-child-function</span></td>
+<td><p><span class="term">write-child-function</span></p></td>
 <td><p>
-A <a href="gladeui-GladeWidgetAdaptor.html#GladeWriteWidgetFunc"><span class="type">GladeWriteWidgetFunc</span></a> to write a child to the xml.
+A <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWriteWidgetFunc" title="GladeWriteWidgetFunc ()"><span class="type">GladeWriteWidgetFunc</span></a> to write a child to the xml.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">create-editor-property-function</span></td>
+<td><p><span class="term">create-editor-property-function</span></p></td>
 <td><p>
-A <a href="gladeui-GladeWidgetAdaptor.html#GladeCreateEPropFunc"><span class="type">GladeCreateEPropFunc</span></a> to create widgets to be used in Glade's property editor.
+A <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeCreateEPropFunc" title="GladeCreateEPropFunc ()"><span class="type">GladeCreateEPropFunc</span></a> to create widgets to be used in Glade's property editor.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">string-from-value-function</span></td>
+<td><p><span class="term">string-from-value-function</span></p></td>
 <td><p>
-A <a href="gladeui-GladeWidgetAdaptor.html#GladeStringFromValueFunc"><span class="type">GladeStringFromValueFunc</span></a> to create a string from a <span class="type">GValue</span>.
+A <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeStringFromValueFunc" title="GladeStringFromValueFunc ()"><span class="type">GladeStringFromValueFunc</span></a> to create a string from a <span class="type">GValue</span>, these strings must
+be unique and comparable for undo/redo to work properly.
           </p></td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <div class="refsect1" lang="en">
-<a name="id327231"></a><h2>Action Definitions</h2>
+<a name="id317909"></a><h2>Action Definitions</h2>
 <p>
 Actions are added under the `actions' and `packing-actions' tags, actions can also
 be nested so as to allow grouping in context menus, example:
@@ -399,27 +400,27 @@ Here are the meanings of the `action' tag's properties:
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><span class="term">id</span></td>
+<td><p><span class="term">id</span></p></td>
 <td><p>
-The string identifier for this action, the action_path argument to your <a href="gladeui-GladeWidgetAdaptor.html#GladeActionActivateFunc"><span class="type">GladeActionActivateFunc</span></a>
+The string identifier for this action, the action_path argument to your <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeActionActivateFunc" title="GladeActionActivateFunc ()"><span class="type">GladeActionActivateFunc</span></a>
 will be a combination if this id and any parents, for the above example: 
 <code class="literal">"manage_frobs/add_frob"</code>.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">name</span></td>
+<td><p><span class="term">name</span></p></td>
 <td><p>
 A string to be displayed in the UI for this action.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">stock</span></td>
+<td><p><span class="term">stock</span></p></td>
 <td><p>
 An optional Gtk stock icon to represent this action.
           </p></td>
 </tr>
 <tr>
-<td><span class="term">important</span></td>
+<td><p><span class="term">important</span></p></td>
 <td><p>
 A boolean option to add emphasis to this action; currently actions marked as `important' 
 are added to the toolbar.
@@ -429,7 +430,7 @@ are added to the toolbar.
 </table></div>
 </div>
 <div class="refsect1" lang="en">
-<a name="id327328"></a><h2>Packing Defaults</h2>
+<a name="id318003"></a><h2>Packing Defaults</h2>
 <p>
 Default values can be specified for packing properties on your widget when added
 to a said type of parent, as the example shows above; use the `parent-class' to 
@@ -439,16 +440,16 @@ specify the property name and the `default' property for the value.
     </p>
 </div>
 <div class="refsect1" lang="en">
-<a name="id327341"></a><h2>Signals</h2>
+<a name="id318016"></a><h2>Signals</h2>
 <p>
 The signal elements are currently only needed for versioning support, use
 the `signal' child tag as described above and set signal `id' to be supported
 since version `since'. Signals are initialized to be supported since the
-introducing <a href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a> was supported.
+introducing <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a> was supported.
     </p>
 </div>
 <div class="refsect1" lang="en">
-<a name="id327361"></a><h2>Icons</h2>
+<a name="id318034"></a><h2>Icons</h2>
 <p>
 The Glade palette and other components use icons to represent the various widget classes. 
 It is a good idea to provide icons for your widget classes, as this
@@ -469,10 +470,12 @@ To explicity set an icon name for a widget class, the "icon-name" attribute of t
 name assigned to the widget class.
     </p>
 <p>
-Icon files can be installed under any system icon theme folder, but we recommend
-that you install them in Glade's icon theme as previosly described.
+Icon files can be installed under any system icon theme folder.
     </p>
 </div>
 </div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.12</div>
 </body>
 </html>

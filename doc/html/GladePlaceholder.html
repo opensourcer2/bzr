@@ -1,19 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GladePlaceholder</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.72.0">
+<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
 <link rel="start" href="index.html" title="Glade User Interface Designer Reference Manual">
-<link rel="up" href="core.html" title="Part&#160;II.&#160;Glade Core">
+<link rel="up" href="core.html" title="Part II. Glade Core">
 <link rel="prev" href="GladeBaseEditor.html" title="GladeBaseEditor">
 <link rel="next" href="gladeui-glade-xml-utils.html" title="Xml Utils">
-<meta name="generator" content="GTK-Doc V1.9 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="part" href="catalog.html" title="Part&#160;I.&#160;Adding your custom widgets">
-<link rel="part" href="core.html" title="Part&#160;II.&#160;Glade Core">
-<link rel="part" href="dockables.html" title="Part&#160;III.&#160;Dockable Glade UI Widgets">
-<link rel="part" href="misc.html" title="Part&#160;IV.&#160;Miscellaneous utilities">
+<link rel="part" href="catalog.html" title="Part I. Adding your custom widgets">
+<link rel="part" href="core.html" title="Part II. Glade Core">
+<link rel="part" href="dockables.html" title="Part III. Dockable Glade UI Widgets">
+<link rel="part" href="misc.html" title="Part IV. Miscellaneous utilities">
 <link rel="index" href="ix01.html" title="Index">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -25,41 +25,36 @@
 <th width="100%" align="center">Glade User Interface Designer Reference Manual</th>
 <td><a accesskey="n" href="gladeui-glade-xml-utils.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr>
-<tr><td colspan="5" class="shortcuts"><nobr><a href="#id422571" class="shortcut">Top</a>
-                  &#160;|&#160;
-                  <a href="#id423052" class="shortcut">Description</a>
-                  &#160;|&#160;
-                  <a href="#id422979" class="shortcut">Object Hierarchy</a>
-                  &#160;|&#160;
-                  <a href="#id423023" class="shortcut">Implemented Interfaces</a></nobr></td></tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#GladePlaceholder.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#GladePlaceholder.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#GladePlaceholder.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                   | 
+                  <a href="#GladePlaceholder.implemented-interfaces" class="shortcut">Implemented Interfaces</a>
+</td></tr>
 </table>
 <div class="refentry" lang="en">
 <a name="GladePlaceholder"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
-<h2>
-<a name="id422571"></a><span class="refentrytitle">GladePlaceholder</span>
-</h2>
-<p>GladePlaceholder &#8212; A <span class="type">GtkWidget</span> to fill empty places.</p>
+<h2><span class="refentrytitle"><a name="GladePlaceholder.top_of_page"></a>GladePlaceholder</span></h2>
+<p>GladePlaceholder — A <span class="type">GtkWidget</span> to fill empty places.</p>
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
 <div class="refsynopsisdiv">
-<h2>Synopsis</h2>
+<a name="GladePlaceholder.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">
-
-
-
-                    <a href="GladePlaceholder.html#GladePlaceholder-struct">GladePlaceholder</a>;
-GtkWidget*          <a href="GladePlaceholder.html#glade-placeholder-new">glade_placeholder_new</a>               (void);
-<a href="GladeWidget.html" title="GladeWidget">GladeWidget</a>*        <a href="GladePlaceholder.html#glade-placeholder-get-parent">glade_placeholder_get_parent</a>        (<a href="GladePlaceholder.html" title="GladePlaceholder">GladePlaceholder</a> *placeholder);
-
+                    <a class="link" href="GladePlaceholder.html#GladePlaceholder-struct" title="GladePlaceholder">GladePlaceholder</a>;
+GtkWidget *         <a class="link" href="GladePlaceholder.html#glade-placeholder-new" title="glade_placeholder_new ()">glade_placeholder_new</a>               (void);
+<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *       <a class="link" href="GladePlaceholder.html#glade-placeholder-get-parent" title="glade_placeholder_get_parent ()">glade_placeholder_get_parent</a>        (<a class="link" href="GladePlaceholder.html" title="GladePlaceholder">GladePlaceholder</a> *placeholder);
 </pre>
 </div>
 <div class="refsect1" lang="en">
-<a name="id422979"></a><h2>Object Hierarchy</h2>
+<a name="GladePlaceholder.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
-
   GObject
    +----GInitiallyUnowned
          +----GtkObject
@@ -68,55 +63,50 @@ GtkWidget*          <a href="GladePlaceholder.html#glade-placeholder-new">glade_
 </pre>
 </div>
 <div class="refsect1" lang="en">
-<a name="id423023"></a><h2>Implemented Interfaces</h2>
+<a name="GladePlaceholder.implemented-interfaces"></a><h2>Implemented Interfaces</h2>
 <p>
 GladePlaceholder implements
  AtkImplementorIface and  GtkBuildable.</p>
 </div>
 <div class="refsect1" lang="en">
-<a name="id423052"></a><h2>Description</h2>
+<a name="GladePlaceholder.description"></a><h2>Description</h2>
 <p>
-Generally in Glade, container widgets are implemented with <a href="GladePlaceholder.html" title="GladePlaceholder"><span class="type">GladePlaceholder</span></a> 
+Generally in Glade, container widgets are implemented with <a class="link" href="GladePlaceholder.html" title="GladePlaceholder"><span class="type">GladePlaceholder</span></a> 
 children to allow users to 'click' and add thier widgets to a container. 
 It is the responsability of the plugin writer to create placeholders for 
-container widgets where appropriate; usually in <a href="gladeui-GladeWidgetAdaptor.html#GladePostCreateFunc"><span class="type">GladePostCreateFunc</span></a> 
-when the <a href="gladeui-GladeWidgetAdaptor.html#GladeCreateReason"><span class="type">GladeCreateReason</span></a> is <a href="gladeui-GladeWidgetAdaptor.html#GLADE-CREATE-USER:CAPS"><code class="literal">GLADE_CREATE_USER</code></a>.</p>
+container widgets where appropriate; usually in <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladePostCreateFunc" title="GladePostCreateFunc ()"><span class="type">GladePostCreateFunc</span></a> 
+when the <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeCreateReason" title="enum GladeCreateReason"><span class="type">GladeCreateReason</span></a> is <a class="link" href="gladeui-GladeWidgetAdaptor.html#GLADE-CREATE-USER:CAPS"><code class="literal">GLADE_CREATE_USER</code></a>.</p>
 </div>
 <div class="refsect1" lang="en">
-<a name="id423103"></a><h2>Details</h2>
+<a name="GladePlaceholder.details"></a><h2>Details</h2>
 <div class="refsect2" lang="en">
-<a name="id423114"></a><h3>
-<a name="GladePlaceholder-struct"></a>GladePlaceholder</h3>
-<a class="indexterm" name="id423126"></a><pre class="programlisting">typedef struct _GladePlaceholder GladePlaceholder;</pre>
+<a name="GladePlaceholder-struct"></a><h3>GladePlaceholder</h3>
+<pre class="programlisting">typedef struct _GladePlaceholder GladePlaceholder;</pre>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id423139"></a><h3>
-<a name="glade-placeholder-new"></a>glade_placeholder_new ()</h3>
-<a class="indexterm" name="id423152"></a><pre class="programlisting">GtkWidget*          glade_placeholder_new               (void);</pre>
+<a name="glade-placeholder-new"></a><h3>glade_placeholder_new ()</h3>
+<pre class="programlisting">GtkWidget *         glade_placeholder_new               (void);</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
-<td><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
-<td> a new <a href="GladePlaceholder.html" title="GladePlaceholder"><span class="type">GladePlaceholder</span></a> cast as a <span class="type">GtkWidget</span>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a new <a class="link" href="GladePlaceholder.html" title="GladePlaceholder"><span class="type">GladePlaceholder</span></a> cast as a <span class="type">GtkWidget</span>
 </td>
 </tr></tbody>
 </table></div>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id423204"></a><h3>
-<a name="glade-placeholder-get-parent"></a>glade_placeholder_get_parent ()</h3>
-<a class="indexterm" name="id423217"></a><pre class="programlisting"><a href="GladeWidget.html" title="GladeWidget">GladeWidget</a>*        glade_placeholder_get_parent        (<a href="GladePlaceholder.html" title="GladePlaceholder">GladePlaceholder</a> *placeholder);</pre>
+<a name="glade-placeholder-get-parent"></a><h3>glade_placeholder_get_parent ()</h3>
+<pre class="programlisting"><a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *       glade_placeholder_get_parent        (<a class="link" href="GladePlaceholder.html" title="GladePlaceholder">GladePlaceholder</a> *placeholder);</pre>
 </div>
 </div>
-<div class="refsect1" lang="en">
-<a name="id423243"></a><div class="refsect2" lang="en"><a name="id423244"></a></div>
+</div>
+<div class="footer">
 <hr>
-<div class="refsect2" lang="en"><a name="id423245"></a></div>
-</div>
-</div>
+          Generated by GTK-Doc V1.12</div>
 </body>
 </html>
