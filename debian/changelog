@@ -1,3 +1,41 @@
+glade-3 (3.6.2-1) experimental; urgency=low
+
+  [ Loic Minier ]
+  * Use binary/ rather than binary- for inter-package CDBS dependencies;
+    thanks Fabian Greffrath.
+
+  [ Deng Xiyue ]
+  * Use POSIX standard regex classes in sed trick in debian/rules.
+
+  [ Loic Minier ]
+  * Drop buildcore.mk include (included via makefile.mk / autotools.mk) and
+    include gnome.mk instead of autotools.mk; incidentally fixes calling of
+    intltool-update -p under Ubuntu; closes: #313520.
+
+  [ Deng Xiyue ]
+  * New upstream development release. Closes: #524367
+    + Bump libgtk2.0-dev requirement to >= 2.14.0.
+    + Let glade Recommends libgtk2.0-dev >= 2.14.0 as well.
+    + Bump SONAME to libgladeui-1-9.  Update package name accordingly, and
+      provide Conflicts/Replaces with older version.
+    + Ship python plugin in libgladeui-1-9, now that it is official and
+      stable.  Add python-gtk2-dev (>= 2.10.0) to Build-Depends and Recommends
+      in libgladeui-1-9.
+    + debian/patches/02_rename_crash.patch: dropped, merged upstream.
+    + debian/patches/99_ltmain_as-needed.patch: refreshed to apply cleanly.
+  * Add Vcs-* links to debian/control*.
+  * Target stable releases in debian/watch.
+  * Drop commented --enable-python configure option in debian/rules, which is
+    not available any more.
+  * Update Standard-Version to 3.8.1.  No change needed.
+  * Point to versioned GPL-2 in debian/copyright as per lintian.
+
+  [ Josselin Mouette ]
+  * Add libglib2.0-doc and libgtk2.0-doc to b-d-i to ensure proper
+    xrefs.
+
+ -- Deng Xiyue <manphiz-guest@users.alioth.debian.org>  Wed, 08 Apr 2009 18:14:04 +0800
+
 glade-3 (3.5.2-4) experimental; urgency=low
 
   [ Loic Minier ]

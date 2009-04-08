@@ -21,8 +21,6 @@ typedef enum
 	GLADE_UI_YES_OR_NO
 } GladeUIMessageType;
 
-void		glade_util_widget_set_tooltip	(GtkWidget *widget, const gchar *str);
-
 GType		glade_util_get_type_from_name	(const gchar *name, gboolean have_func);
 
 GParamSpec      *glade_utils_get_pspec_from_funcname (const gchar *funcname);
@@ -127,8 +125,32 @@ gboolean          glade_util_url_show              (const gchar *url);
 
 time_t            glade_util_get_file_mtime        (const gchar *filename, GError **error);
 
+gchar            *glade_util_filename_to_icon_name (const gchar *value);
 
-gboolean        glade_util_version_lesser_than     (gdouble a, gdouble b);            
+gchar            *glade_util_icon_name_to_filename (const gchar *value);
+
+gint              glade_utils_enum_value_from_string  (GType enum_type, const gchar *strval);
+gchar            *glade_utils_enum_string_from_value  (GType enum_type, gint value);
+gint              glade_utils_flags_value_from_string (GType enum_type, const gchar *strval);
+gchar            *glade_utils_flags_string_from_value (GType enum_type, gint value);
+gchar            *glade_utils_flags_string_from_value_displayable (GType flags_type, gint value);
+gchar            *glade_utils_enum_string_from_value_displayable (GType flags_type, gint value);
+
+
+GValue           *glade_utils_value_from_string   (GType               type,
+						   const gchar        *string,
+						   GladeProject       *project,
+						   GladeWidget        *widget);
+
+gchar            *glade_utils_string_from_value   (const GValue       *value,
+						   GladeProjectFormat  fmt);
+
+GtkListStore     *glade_utils_liststore_from_enum_type  (GType enum_type, gboolean include_empty);
+
+gint              glade_utils_hijack_key_press (GtkWindow          *win, 
+						GdkEventKey        *event, 
+						gpointer            user_data);
+	
 
 G_END_DECLS
 

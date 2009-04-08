@@ -1,5 +1,6 @@
 debian/tmp/usr/share/locale
 debian/tmp/usr/lib/libgladeui-1.so.*
 debian/tmp/usr/lib/glade3/modules/libgladegtk.so
+debian/tmp/usr/lib/glade3/modules/libgladepython.so
 debian/tmp/usr/share/glade3/pixmaps
 debian/tmp/usr/share/glade3/catalogs/gtk+.xml
