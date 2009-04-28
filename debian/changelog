@@ -1,3 +1,15 @@
+glade-3 (3.6.3-0ubuntu1) jaunty-proposed; urgency=low
+
+  * New upstream version (LP: #368390)
+    - Fixed crash configuring button content (LP: #356013)
+    - Fixed crash adding related action to button (LP: #358467)
+    - Fixed allowing invalid data for GtkTreeStore (LP: #345989)
+  * debian/patches/02_spinbutton-adjustment.patch:
+    - Fix default generation of GtkSpinButtons. Patch by Adam Buchbinder.
+      (LP: #323228)
+
+ -- Robert Ancell <robert.ancell@canonical.com>  Tue, 28 Apr 2009 15:29:16 +1000
+
 glade-3 (3.6.1-0ubuntu1) jaunty; urgency=low
 
   * New upstream version (LP: #356614)

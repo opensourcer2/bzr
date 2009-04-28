@@ -1,3 +1,29 @@
+
+===========
+Glade 3.6.3
+===========
+	- Maintain current widget selection during commits of related-action
+	  (was causing crashes when the selection changed as a result of a commit, bug 578869)
+	- GtkButton only accepts real stock *items* and not icons (to use an icon, use a GtkImage
+	  with an unrestricted stock icon)
+	- Added documentation on integrating Python widgets (Juan Pablo Ugarte)
+	- Fixed output format for GtkLabel attributes (bug 579793, patch by Davyd Madeley).
+	- Removed hard coded size request to palette (Bug 579624).
+	- Made Atk proxy objects always have unique names (bug 579565).
+	- Removed buggy query dialog from notebook creation (bug 578727).
+
+===========
+Glade 3.6.2
+===========
+	- Fixed missing properties/attributes when serializing GtkWindows (bug 578211)
+	- Fixed loading state of cellrenderer attributes (whether to use attribute or property
+	  directly, bug 566928).
+
+New and updated translations
+============================
+	- Goran Rakic (sr, sr@latin)
+	- Jorge Gonzalez (es)
+
 ===========
 Glade 3.6.1
 ===========

@@ -53,25 +53,25 @@
 <pre class="synopsis">
                     <a class="link" href="GladeEditorProperty.html#GladeEditorProperty-struct" title="GladeEditorProperty">GladeEditorProperty</a>;
 #define             <a class="link" href="GladeEditorProperty.html#GLADE-MAKE-EPROP-TYPE:CAPS" title="GLADE_MAKE_EPROP_TYPE()">GLADE_MAKE_EPROP_TYPE</a>               (func, type, parent)
-void                <a class="link" href="GladeEditorProperty.html#glade-editor-property-load" title="glade_editor_property_load ()">glade_editor_property_load</a>          (<a class="link" href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> *eprop,
+<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeEditorProperty.html#glade-editor-property-load" title="glade_editor_property_load ()">glade_editor_property_load</a>          (<a class="link" href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> *eprop,
                                                          <a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a> *property);
-void                <a class="link" href="GladeEditorProperty.html#glade-editor-property-load-by-widget" title="glade_editor_property_load_by_widget ()">glade_editor_property_load_by_widget</a>
+<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeEditorProperty.html#glade-editor-property-load-by-widget" title="glade_editor_property_load_by_widget ()">glade_editor_property_load_by_widget</a>
                                                         (<a class="link" href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> *eprop,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);
-void                <a class="link" href="GladeEditorProperty.html#glade-editor-property-commit" title="glade_editor_property_commit ()">glade_editor_property_commit</a>        (<a class="link" href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> *eprop,
-                                                         GValue *value);
+<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeEditorProperty.html#glade-editor-property-commit" title="glade_editor_property_commit ()">glade_editor_property_commit</a>        (<a class="link" href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> *eprop,
+                                                         <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);
 </pre>
 </div>
 <div class="refsect1" lang="en">
 <a name="GladeEditorProperty.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
-  GObject
-   +----GInitiallyUnowned
-         +----GtkObject
-               +----GtkWidget
-                     +----GtkContainer
-                           +----GtkBox
-                                 +----GtkHBox
+  <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK>
+   +----<GTKDOCLINK HREF="GInitiallyUnowned">GInitiallyUnowned</GTKDOCLINK>
+         +----<GTKDOCLINK HREF="GtkObject">GtkObject</GTKDOCLINK>
+               +----<GTKDOCLINK HREF="GtkWidget">GtkWidget</GTKDOCLINK>
+                     +----<GTKDOCLINK HREF="GtkContainer">GtkContainer</GTKDOCLINK>
+                           +----<GTKDOCLINK HREF="GtkBox">GtkBox</GTKDOCLINK>
+                                 +----<GTKDOCLINK HREF="GtkHBox">GtkHBox</GTKDOCLINK>
                                        +----GladeEditorProperty
 </pre>
 </div>
@@ -79,13 +79,13 @@ void                <a class="link" href="GladeEditorProperty.html#glade-editor-
 <a name="GladeEditorProperty.implemented-interfaces"></a><h2>Implemented Interfaces</h2>
 <p>
 GladeEditorProperty implements
- AtkImplementorIface,  GtkBuildable and  GtkOrientable.</p>
+ <GTKDOCLINK HREF="AtkImplementorIface">AtkImplementorIface</GTKDOCLINK>,  <GTKDOCLINK HREF="GtkBuildable">GtkBuildable</GTKDOCLINK> and  <GTKDOCLINK HREF="GtkOrientable">GtkOrientable</GTKDOCLINK>.</p>
 </div>
 <div class="refsect1" lang="en">
 <a name="GladeEditorProperty.properties"></a><h2>Properties</h2>
 <pre class="synopsis">
-  "<a class="link" href="GladeEditorProperty.html#GladeEditorProperty--property-class" title='The "property-class" property'>property-class</a>"           gpointer              : Read / Write / Construct Only
-  "<a class="link" href="GladeEditorProperty.html#GladeEditorProperty--use-command" title='The "use-command" property'>use-command</a>"              gboolean              : Read / Write
+  "<a class="link" href="GladeEditorProperty.html#GladeEditorProperty--property-class" title='The "property-class" property'>property-class</a>"           <GTKDOCLINK HREF="gpointer">gpointer</GTKDOCLINK>              : Read / Write / Construct Only
+  "<a class="link" href="GladeEditorProperty.html#GladeEditorProperty--use-command" title='The "use-command" property'>use-command</a>"              <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>              : Read / Write
 </pre>
 </div>
 <div class="refsect1" lang="en">
@@ -116,12 +116,12 @@ a simple unified api to them.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-editor-property-load"></a><h3>glade_editor_property_load ()</h3>
-<pre class="programlisting">void                glade_editor_property_load          (<a class="link" href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> *eprop,
+<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_editor_property_load          (<a class="link" href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> *eprop,
                                                          <a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a> *property);</pre>
 <p>
 Loads <em class="parameter"><code>property</code></em> values into <em class="parameter"><code>eprop</code></em> and connects.
 (the editor property will watch the property's value
-until its loaded with another property or <code class="literal">NULL</code>)</p>
+until its loaded with another property or <GTKDOCLINK HREF="NULL:CAPS"><code class="literal">NULL</code></GTKDOCLINK>)</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -141,7 +141,7 @@ until its loaded with another property or <code class="literal">NULL</code>)</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-editor-property-load-by-widget"></a><h3>glade_editor_property_load_by_widget ()</h3>
-<pre class="programlisting">void                glade_editor_property_load_by_widget
+<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_editor_property_load_by_widget
                                                         (<a class="link" href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> *eprop,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
 <p>
@@ -166,8 +166,8 @@ Convenience function to load the appropriate <a class="link" href="gladeui-glade
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-editor-property-commit"></a><h3>glade_editor_property_commit ()</h3>
-<pre class="programlisting">void                glade_editor_property_commit        (<a class="link" href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> *eprop,
-                                                         GValue *value);</pre>
+<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_editor_property_commit        (<a class="link" href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> *eprop,
+                                                         <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);</pre>
 <p>
 Commits <em class="parameter"><code>value</code></em> to the property currently being edited by <em class="parameter"><code>eprop</code></em>.</p>
 <div class="variablelist"><table border="0">
@@ -180,7 +180,7 @@ Commits <em class="parameter"><code>value</code></em> to the property currently 
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td> The <span class="type">GValue</span> to commit
+<td> The <GTKDOCLINK HREF="GValue"><span class="type">GValue</span></GTKDOCLINK> to commit
 </td>
 </tr>
 </tbody>
@@ -191,13 +191,13 @@ Commits <em class="parameter"><code>value</code></em> to the property currently 
 <a name="GladeEditorProperty.property-details"></a><h2>Property Details</h2>
 <div class="refsect2" lang="en">
 <a name="GladeEditorProperty--property-class"></a><h3>The <code class="literal">"property-class"</code> property</h3>
-<pre class="programlisting">  "property-class"           gpointer              : Read / Write / Construct Only</pre>
+<pre class="programlisting">  "property-class"           <GTKDOCLINK HREF="gpointer">gpointer</GTKDOCLINK>              : Read / Write / Construct Only</pre>
 <p>The GladePropertyClass this GladeEditorProperty was created for.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeEditorProperty--use-command"></a><h3>The <code class="literal">"use-command"</code> property</h3>
-<pre class="programlisting">  "use-command"              gboolean              : Read / Write</pre>
+<pre class="programlisting">  "use-command"              <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>              : Read / Write</pre>
 <p>Whether we should use the command API for the undo/redo stack.</p>
 <p>Default value: FALSE</p>
 </div>
@@ -206,9 +206,9 @@ Commits <em class="parameter"><code>value</code></em> to the property currently 
 <a name="GladeEditorProperty.signal-details"></a><h2>Signal Details</h2>
 <div class="refsect2" lang="en">
 <a name="GladeEditorProperty-commit"></a><h3>The <code class="literal">"commit"</code> signal</h3>
-<pre class="programlisting">void                user_function                      (<a class="link" href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> *gladeeditorproperty,
-                                                        gpointer             arg1,
-                                                        gpointer             user_data)                : Run Last</pre>
+<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                user_function                      (<a class="link" href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> *gladeeditorproperty,
+                                                        <GTKDOCLINK HREF="gpointer">gpointer</GTKDOCLINK>             arg1,
+                                                        <GTKDOCLINK HREF="gpointer">gpointer</GTKDOCLINK>             user_data)                : Run Last</pre>
 <p>
 Emitted when a property's value is committed, can be useful to serialize
 commands before and after the property's commit command from custom editors.</p>
@@ -222,7 +222,7 @@ commands before and after the property's commit command from custom editors.</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>arg1</code></em> :</span></p></td>
-<td> the new <span class="type">GValue</span> to commit.
+<td> the new <GTKDOCLINK HREF="GValue"><span class="type">GValue</span></GTKDOCLINK> to commit.
 </td>
 </tr>
 <tr>
@@ -235,9 +235,9 @@ commands before and after the property's commit command from custom editors.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeEditorProperty-value-changed"></a><h3>The <code class="literal">"value-changed"</code> signal</h3>
-<pre class="programlisting">void                user_function                      (<a class="link" href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> *gladeeditorproperty,
+<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                user_function                      (<a class="link" href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> *gladeeditorproperty,
                                                         <a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a>       *arg1,
-                                                        gpointer             user_data)                : Run Last</pre>
+                                                        <GTKDOCLINK HREF="gpointer">gpointer</GTKDOCLINK>             user_data)                : Run Last</pre>
 <p>
 Emitted when a contained property changes value</p>
 <div class="variablelist"><table border="0">
