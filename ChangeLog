@@ -1,3 +1,52 @@
+2009-04-22  Tristan Van Berkom <tvb@gnome.org>
+
+	* NEWS, configure.ac: Rolling 3.6.3
+	
+	* plugins/gtk+/gtk+.xml.in: Removed buggy query dialog from notebook (closing bug 578727).
+	
+	* plugins/gtk+/glade-gtk.c: Made Atk proxy objects always have unique names (at
+	least as unique as the widget they are created for) (bug 579565).
+
+	* src/glade-window.c: Removed hard coded size request to palette (Bug 579624)
+	(added some default pane positions).
+
+2009-04-22  Davyd Madeley <davyd@madeley.id.au>
+
+	* plugins/gtk+/glade-gtk.c: Fixed output format for GtkLabel attributes (bug 579793).
+
+2009-04-21  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* doc/gladepython.sgml: added Glade Python plugin documentation.
+	
+	* doc/gladeui-docs.sgml, doc/Makefile.am: added reference to the new docs.
+
+2009-04-18  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/gtk+.xml.in: Fixed GtkButton to only allow real stock items,
+	gave GtkImage a default icon-size of GTK_ICON_SIZE_BUTTON (better than invalid).
+
+	* plugins/gtk+/glade-activatable-editor.c, 
+	gladeui/glade-editor-property.c: Maintain current widget selection
+	during commits of related-action (was causing crashes when the
+	selection changed as a result of a commit, bug 578869).
+
+2009-04-15  Tristan Van Berkom <tvb@gnome.org>
+
+	* configure.ac, NEWS, data/gladeui.pc.in: Bumping
+	required GTK+ version in the .pc and rolling 3.6.2.
+	
+	* plugins/gtk+/glade-gtk.c, plugins/gtk+/gtk+.xml.in: 
+	Added glade_gtk_cell_renderer_read_widget() and now
+	glade_gtk_cell_layout_read_child() doesnt load attributes
+	if the object property has been explicitly specified in
+	the Glade file (fixes bug 566928).
+
+2009-04-07  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/glade-gtk.c: GtkWindow adaptor was skipping GtkWidget
+	adaptor when chaining up in ->write_widget() (causeing atk props,
+	accelerators and signals in libglade to be missed - bug 578211).
+
 2009-04-06  Tristan Van Berkom <tvb@gnome.org>
 
 	* plugins/gtk+/glade-button-editor.c: Properly initialize GValue on 
@@ -23,6 +72,7 @@
 	in libglade format, leave signals to core when in builder format.
 
 2009-03-21  Tristan Van Berkom <tvb@gnome.org>
+	
 	* NEWS, configure.ac: Rolling 3.6.1
 	
 	* gladeui/glade-command.c: Fix win32 crasher (bug 575206) again (seems

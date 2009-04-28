@@ -966,7 +966,7 @@
             <visible-lines>2</visible-lines>
 	</property>
 	<property id="use-underline" custom-layout="True"/>
-	<property stock-icon="True" save="False" id="stock" custom-layout="True" name="Stock Button">
+	<property stock="True" save="False" id="stock" custom-layout="True" name="Stock Button">
 	  <parameter-spec>
 	    <type>GParamString</type>
 	  </parameter-spec>
@@ -1250,7 +1250,7 @@
 	<property id="pixbuf" custom-layout="True" name="File Name"></property>
 	<property id="pixel-size" custom-layout="True"/>
 	
-	<property save="False" id="icon-size" custom-layout="True" name="Icon Size">
+	<property save="False" id="icon-size" default="GTK_ICON_SIZE_BUTTON" custom-layout="True" name="Icon Size">
 	  <parameter-spec>
 	    <type>GParamEnum</type>
 	    <value-type>GtkIconSize</value-type>
@@ -1384,7 +1384,7 @@
 	  <tooltip>Set the current page (strictly for editing purposes)</tooltip>
 	</property>
 
-	<property visible="False" save="False" query="True" id="pages" default="3" name="Number of pages">
+	<property visible="False" save="False" id="pages" default="3" name="Number of pages">
 	  <parameter-spec>
 	    <type>GParamInt</type>
 	    <min>1</min>
@@ -2129,6 +2129,7 @@
       <create-editable-function>glade_gtk_cell_renderer_create_editable</create-editable-function>
       <set-property-function>glade_gtk_cell_renderer_set_property</set-property-function>
       <write-widget-function>glade_gtk_cell_renderer_write_widget</write-widget-function>
+      <read-widget-function>glade_gtk_cell_renderer_read_widget</read-widget-function>
       <action-activate-function>glade_gtk_cell_renderer_action_activate</action-activate-function>
 
       <actions>

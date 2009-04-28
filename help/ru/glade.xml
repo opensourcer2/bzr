@@ -178,7 +178,7 @@
     </sect2>
 
     <sect2 id="glade-when-start">
-    <title>Когда вы запускайте <application>Glade</application></title>
+    <title>Когда вы запускаете <application>Glade</application></title>
     <para>При запуске <application>Glade</application> появляется следующее окно.</para>
 
         <figure id="main-window-fig"> 

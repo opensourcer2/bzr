@@ -989,7 +989,7 @@ embedded in another object</_tooltip>
             <visible-lines>2</visible-lines>
 	</property>
 	<property id="use-underline" custom-layout="True"/>
-	<property id="stock" _name="Stock Button" stock-icon="True" save="False" custom-layout="True">
+	<property id="stock" _name="Stock Button" stock="True" save="False" custom-layout="True">
 	  <parameter-spec>
 	    <type>GParamString</type>
 	  </parameter-spec>
@@ -1273,7 +1273,8 @@ embedded in another object</_tooltip>
 	<property id="pixbuf" _name="File Name" custom-layout="True"/>
 	<property id="pixel-size" custom-layout="True"/>
 	<!-- We have to save/load icon-size as int, and fake the enum -->
-	<property id="icon-size" _name="Icon Size" custom-layout="True" save="False">
+	<property id="icon-size" _name="Icon Size" custom-layout="True" 
+		  default="GTK_ICON_SIZE_BUTTON" save="False">
 	  <parameter-spec>
 	    <type>GParamEnum</type>
 	    <value-type>GtkIconSize</value-type>
@@ -1411,7 +1412,7 @@ embedded in another object</_tooltip>
 	  <_tooltip>Set the current page (strictly for editing purposes)</_tooltip>
 	</property>
 
-	<property id="pages" _name="Number of pages" visible="False" save="False" default="3" query="True">
+	<property id="pages" _name="Number of pages" visible="False" save="False" default="3">
 	  <parameter-spec>
 	    <type>GParamInt</type>
 	    <min>1</min>
@@ -2177,6 +2178,7 @@ embedded in another object</_tooltip>
       <create-editable-function>glade_gtk_cell_renderer_create_editable</create-editable-function>
       <set-property-function>glade_gtk_cell_renderer_set_property</set-property-function>
       <write-widget-function>glade_gtk_cell_renderer_write_widget</write-widget-function>
+      <read-widget-function>glade_gtk_cell_renderer_read_widget</read-widget-function>
       <action-activate-function>glade_gtk_cell_renderer_action_activate</action-activate-function>
 
       <actions>

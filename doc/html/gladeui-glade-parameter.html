@@ -46,21 +46,21 @@
                     <a class="link" href="gladeui-glade-parameter.html#GladeParameter" title="GladeParameter">GladeParameter</a>;
 <a class="link" href="gladeui-glade-parameter.html#GladeParameter" title="GladeParameter">GladeParameter</a> *    <a class="link" href="gladeui-glade-parameter.html#glade-parameter-new" title="glade_parameter_new ()">glade_parameter_new</a>                 (void);
 <a class="link" href="gladeui-glade-parameter.html#GladeParameter" title="GladeParameter">GladeParameter</a> *    <a class="link" href="gladeui-glade-parameter.html#glade-parameter-clone" title="glade_parameter_clone ()">glade_parameter_clone</a>               (<a class="link" href="gladeui-glade-parameter.html#GladeParameter" title="GladeParameter">GladeParameter</a> *parameter);
-void                <a class="link" href="gladeui-glade-parameter.html#glade-parameter-free" title="glade_parameter_free ()">glade_parameter_free</a>                (<a class="link" href="gladeui-glade-parameter.html#GladeParameter" title="GladeParameter">GladeParameter</a> *parameter);
-void                <a class="link" href="gladeui-glade-parameter.html#glade-parameter-get-float" title="glade_parameter_get_float ()">glade_parameter_get_float</a>           (GList *parameters,
-                                                         const gchar *key,
-                                                         gfloat *value);
-void                <a class="link" href="gladeui-glade-parameter.html#glade-parameter-get-integer" title="glade_parameter_get_integer ()">glade_parameter_get_integer</a>         (GList *parameters,
-                                                         const gchar *key,
-                                                         gint *value);
-void                <a class="link" href="gladeui-glade-parameter.html#glade-parameter-get-boolean" title="glade_parameter_get_boolean ()">glade_parameter_get_boolean</a>         (GList *parameters,
-                                                         const gchar *key,
-                                                         gboolean *value);
-void                <a class="link" href="gladeui-glade-parameter.html#glade-parameter-get-string" title="glade_parameter_get_string ()">glade_parameter_get_string</a>          (GList *parameters,
-                                                         const gchar *key,
-                                                         gchar **value);
-GList *             <a class="link" href="gladeui-glade-parameter.html#glade-parameter-list-new-from-node" title="glade_parameter_list_new_from_node ()">glade_parameter_list_new_from_node</a>  (GList *list,
-                                                         GladeXmlNode *node);
+<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="gladeui-glade-parameter.html#glade-parameter-free" title="glade_parameter_free ()">glade_parameter_free</a>                (<a class="link" href="gladeui-glade-parameter.html#GladeParameter" title="GladeParameter">GladeParameter</a> *parameter);
+<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="gladeui-glade-parameter.html#glade-parameter-get-float" title="glade_parameter_get_float ()">glade_parameter_get_float</a>           (<GTKDOCLINK HREF="GList">GList</GTKDOCLINK> *parameters,
+                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *key,
+                                                         <GTKDOCLINK HREF="gfloat">gfloat</GTKDOCLINK> *value);
+<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="gladeui-glade-parameter.html#glade-parameter-get-integer" title="glade_parameter_get_integer ()">glade_parameter_get_integer</a>         (<GTKDOCLINK HREF="GList">GList</GTKDOCLINK> *parameters,
+                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *key,
+                                                         <GTKDOCLINK HREF="gint">gint</GTKDOCLINK> *value);
+<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="gladeui-glade-parameter.html#glade-parameter-get-boolean" title="glade_parameter_get_boolean ()">glade_parameter_get_boolean</a>         (<GTKDOCLINK HREF="GList">GList</GTKDOCLINK> *parameters,
+                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *key,
+                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> *value);
+<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="gladeui-glade-parameter.html#glade-parameter-get-string" title="glade_parameter_get_string ()">glade_parameter_get_string</a>          (<GTKDOCLINK HREF="GList">GList</GTKDOCLINK> *parameters,
+                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *key,
+                                                         <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> **value);
+<GTKDOCLINK HREF="GList">GList</GTKDOCLINK> *             <a class="link" href="gladeui-glade-parameter.html#glade-parameter-list-new-from-node" title="glade_parameter_list_new_from_node ()">glade_parameter_list_new_from_node</a>  (<GTKDOCLINK HREF="GList">GList</GTKDOCLINK> *list,
+                                                         <GTKDOCLINK HREF="GladeXmlNode">GladeXmlNode</GTKDOCLINK> *node);
 </pre>
 </div>
 <div class="refsect1" lang="en">
@@ -119,7 +119,7 @@ your plugin will treat certain widget classes.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-parameter-free"></a><h3>glade_parameter_free ()</h3>
-<pre class="programlisting">void                glade_parameter_free                (<a class="link" href="gladeui-glade-parameter.html#GladeParameter" title="GladeParameter">GladeParameter</a> *parameter);</pre>
+<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_parameter_free                (<a class="link" href="gladeui-glade-parameter.html#GladeParameter" title="GladeParameter">GladeParameter</a> *parameter);</pre>
 <p>
 Frees <em class="parameter"><code>parameter</code></em> and its associated memory.</p>
 <div class="variablelist"><table border="0">
@@ -134,18 +134,18 @@ Frees <em class="parameter"><code>parameter</code></em> and its associated memor
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-parameter-get-float"></a><h3>glade_parameter_get_float ()</h3>
-<pre class="programlisting">void                glade_parameter_get_float           (GList *parameters,
-                                                         const gchar *key,
-                                                         gfloat *value);</pre>
+<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_parameter_get_float           (<GTKDOCLINK HREF="GList">GList</GTKDOCLINK> *parameters,
+                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *key,
+                                                         <GTKDOCLINK HREF="gfloat">gfloat</GTKDOCLINK> *value);</pre>
 <p>
 Searches through <em class="parameter"><code>parameters</code></em> looking for a <a class="link" href="gladeui-glade-parameter.html#GladeParameter" title="GladeParameter"><span class="type">GladeParameter</span></a> named <em class="parameter"><code>key</code></em>. If
-found, it stores a <span class="type">gfloat</span> representation of its value into <em class="parameter"><code>value</code></em>.</p>
+found, it stores a <GTKDOCLINK HREF="gfloat"><span class="type">gfloat</span></GTKDOCLINK> representation of its value into <em class="parameter"><code>value</code></em>.</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>parameters</code></em> :</span></p></td>
-<td> a <span class="type">GList</span> of <span class="type">GladeParameters</span>
+<td> a <GTKDOCLINK HREF="GList"><span class="type">GList</span></GTKDOCLINK> of <GTKDOCLINK HREF="GladeParameters"><span class="type">GladeParameters</span></GTKDOCLINK>
 </td>
 </tr>
 <tr>
@@ -155,7 +155,7 @@ found, it stores a <span class="type">gfloat</span> representation of its value 
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td> a pointer to a <span class="type">gfloat</span>
+<td> a pointer to a <GTKDOCLINK HREF="gfloat"><span class="type">gfloat</span></GTKDOCLINK>
 </td>
 </tr>
 </tbody>
@@ -164,18 +164,18 @@ found, it stores a <span class="type">gfloat</span> representation of its value 
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-parameter-get-integer"></a><h3>glade_parameter_get_integer ()</h3>
-<pre class="programlisting">void                glade_parameter_get_integer         (GList *parameters,
-                                                         const gchar *key,
-                                                         gint *value);</pre>
+<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_parameter_get_integer         (<GTKDOCLINK HREF="GList">GList</GTKDOCLINK> *parameters,
+                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *key,
+                                                         <GTKDOCLINK HREF="gint">gint</GTKDOCLINK> *value);</pre>
 <p>
 Searches through <em class="parameter"><code>parameters</code></em> looking for a <a class="link" href="gladeui-glade-parameter.html#GladeParameter" title="GladeParameter"><span class="type">GladeParameter</span></a> named <em class="parameter"><code>key</code></em>. If
-found, it stores a <span class="type">gint</span> representation of its value into <em class="parameter"><code>value</code></em>.</p>
+found, it stores a <GTKDOCLINK HREF="gint"><span class="type">gint</span></GTKDOCLINK> representation of its value into <em class="parameter"><code>value</code></em>.</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>parameters</code></em> :</span></p></td>
-<td> a <span class="type">GList</span> of <span class="type">GladeParameters</span>
+<td> a <GTKDOCLINK HREF="GList"><span class="type">GList</span></GTKDOCLINK> of <GTKDOCLINK HREF="GladeParameters"><span class="type">GladeParameters</span></GTKDOCLINK>
 </td>
 </tr>
 <tr>
@@ -185,7 +185,7 @@ found, it stores a <span class="type">gint</span> representation of its value in
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td> a pointer to a <span class="type">gint</span>
+<td> a pointer to a <GTKDOCLINK HREF="gint"><span class="type">gint</span></GTKDOCLINK>
 </td>
 </tr>
 </tbody>
@@ -194,18 +194,18 @@ found, it stores a <span class="type">gint</span> representation of its value in
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-parameter-get-boolean"></a><h3>glade_parameter_get_boolean ()</h3>
-<pre class="programlisting">void                glade_parameter_get_boolean         (GList *parameters,
-                                                         const gchar *key,
-                                                         gboolean *value);</pre>
+<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_parameter_get_boolean         (<GTKDOCLINK HREF="GList">GList</GTKDOCLINK> *parameters,
+                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *key,
+                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> *value);</pre>
 <p>
 Searches through <em class="parameter"><code>parameters</code></em> looking for a <a class="link" href="gladeui-glade-parameter.html#GladeParameter" title="GladeParameter"><span class="type">GladeParameter</span></a> named <em class="parameter"><code>key</code></em>. If
-found, it stores a <span class="type">gboolean</span> representation of its value into <em class="parameter"><code>value</code></em>.</p>
+found, it stores a <GTKDOCLINK HREF="gboolean"><span class="type">gboolean</span></GTKDOCLINK> representation of its value into <em class="parameter"><code>value</code></em>.</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>parameters</code></em> :</span></p></td>
-<td> a <span class="type">GList</span> of <span class="type">GladeParameters</span>
+<td> a <GTKDOCLINK HREF="GList"><span class="type">GList</span></GTKDOCLINK> of <GTKDOCLINK HREF="GladeParameters"><span class="type">GladeParameters</span></GTKDOCLINK>
 </td>
 </tr>
 <tr>
@@ -215,7 +215,7 @@ found, it stores a <span class="type">gboolean</span> representation of its valu
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td> a pointer to a <span class="type">gboolean</span>
+<td> a pointer to a <GTKDOCLINK HREF="gboolean"><span class="type">gboolean</span></GTKDOCLINK>
 </td>
 </tr>
 </tbody>
@@ -224,9 +224,9 @@ found, it stores a <span class="type">gboolean</span> representation of its valu
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-parameter-get-string"></a><h3>glade_parameter_get_string ()</h3>
-<pre class="programlisting">void                glade_parameter_get_string          (GList *parameters,
-                                                         const gchar *key,
-                                                         gchar **value);</pre>
+<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_parameter_get_string          (<GTKDOCLINK HREF="GList">GList</GTKDOCLINK> *parameters,
+                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *key,
+                                                         <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> **value);</pre>
 <p>
 Searches through <em class="parameter"><code>parameters</code></em> looking for a <a class="link" href="gladeui-glade-parameter.html#GladeParameter" title="GladeParameter"><span class="type">GladeParameter</span></a> named <em class="parameter"><code>key</code></em>. If
 found, it stores a newly copied string representation of its value into 
@@ -236,7 +236,7 @@ found, it stores a newly copied string representation of its value into
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>parameters</code></em> :</span></p></td>
-<td> a <span class="type">GList</span> of <span class="type">GladeParameters</span>
+<td> a <GTKDOCLINK HREF="GList"><span class="type">GList</span></GTKDOCLINK> of <GTKDOCLINK HREF="GladeParameters"><span class="type">GladeParameters</span></GTKDOCLINK>
 </td>
 </tr>
 <tr>
@@ -255,8 +255,8 @@ found, it stores a newly copied string representation of its value into
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-parameter-list-new-from-node"></a><h3>glade_parameter_list_new_from_node ()</h3>
-<pre class="programlisting">GList *             glade_parameter_list_new_from_node  (GList *list,
-                                                         GladeXmlNode *node);</pre>
+<pre class="programlisting"><GTKDOCLINK HREF="GList">GList</GTKDOCLINK> *             glade_parameter_list_new_from_node  (<GTKDOCLINK HREF="GList">GList</GTKDOCLINK> *list,
+                                                         <GTKDOCLINK HREF="GladeXmlNode">GladeXmlNode</GTKDOCLINK> *node);</pre>
 <p>
 TODO: write me</p>
 <div class="variablelist"><table border="0">
@@ -264,12 +264,12 @@ TODO: write me</p>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
-<td> a <span class="type">GList</span> node
+<td> a <GTKDOCLINK HREF="GList"><span class="type">GList</span></GTKDOCLINK> node
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>node</code></em> :</span></p></td>
-<td> a <span class="type">GladeXmlNode</span>
+<td> a <GTKDOCLINK HREF="GladeXmlNode"><span class="type">GladeXmlNode</span></GTKDOCLINK>
 </td>
 </tr>
 <tr>

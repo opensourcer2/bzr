@@ -705,7 +705,6 @@ glade_gtk_widget_write_atk_properties_gtkbuilder (GladeWidget        *widget,
 {
 	GladeXmlNode  *child_node, *object_node;
 	GladeProperty *name_prop, *desc_prop;
-	
 
 	name_prop = glade_widget_get_property (widget, "AtkObject::accessible-name");
 	desc_prop = glade_widget_get_property (widget, "AtkObject::accessible-description");
@@ -714,6 +713,8 @@ glade_gtk_widget_write_atk_properties_gtkbuilder (GladeWidget        *widget,
 	if (!glade_property_default (name_prop) || 
 	    !glade_property_default (desc_prop))
 	{
+		gchar *atkname = g_strdup_printf ("%s-atkobject", widget->name);
+
 		child_node = glade_xml_node_new (context, GLADE_XML_TAG_CHILD);
 		glade_xml_node_append_child (node, child_node);
 
@@ -730,13 +731,14 @@ glade_gtk_widget_write_atk_properties_gtkbuilder (GladeWidget        *widget,
 
 		glade_xml_node_set_property_string (object_node, 
 						    GLADE_XML_TAG_ID, 
-						    "dummy");
+						    atkname);
 	
 		if (!glade_property_default (name_prop))
 			glade_gtk_widget_write_atk_property (name_prop, context, object_node);
 		if (!glade_property_default (desc_prop))
 			glade_gtk_widget_write_atk_property (desc_prop, context, object_node);
 
+		g_free (atkname);
 	}
 
 }
@@ -4332,8 +4334,8 @@ glade_gtk_box_notebook_child_insert_remove_action (GladeWidgetAdaptor *adaptor,
 	parent = glade_widget_get_from_gobject (container);
 	glade_command_push_group (group_format, glade_widget_get_name (parent));
 	
-	children = glade_widget_adaptor_get_children (adaptor, container);
 	/* Make sure widgets does not get destroyed */
+	children = glade_widget_adaptor_get_children (adaptor, container);
 	g_list_foreach (children, (GFunc) g_object_ref, NULL);
 	
 	glade_widget_property_get (parent, size_prop, &size);
@@ -5003,7 +5005,7 @@ glade_gtk_window_read_widget (GladeWidgetAdaptor *adaptor,
 		return;
 
 	/* First chain up and read in all the normal properties.. */
-        GWA_GET_CLASS (G_TYPE_OBJECT)->read_widget (adaptor, widget, node);
+        GWA_GET_CLASS (GTK_TYPE_WIDGET)->read_widget (adaptor, widget, node);
 
 	glade_gtk_window_read_accel_groups (widget, node);
 }
@@ -5050,7 +5052,7 @@ glade_gtk_window_write_widget (GladeWidgetAdaptor *adaptor,
 		return;
 
 	/* First chain up and read in all the normal properties.. */
-        GWA_GET_CLASS (G_TYPE_OBJECT)->write_widget (adaptor, widget, context, node);
+        GWA_GET_CLASS (GTK_TYPE_WIDGET)->write_widget (adaptor, widget, context, node);
 
 	glade_gtk_window_write_accel_groups (widget, context, node);
 }
@@ -8168,10 +8170,16 @@ glade_gtk_parse_attributes (GladeWidget  *widget,
 		      (prop, GLADE_XML_TAG_NAME, NULL)))
 			continue;
 
-		if (!(value = glade_xml_get_content (prop)))
+		if (!(value = glade_xml_get_property_string_required
+		      (prop, GLADE_TAG_VALUE, NULL)))
 		{
-			g_free (name);
-			continue;
+			/* for a while, Glade was broken and was storing
+			 * attributes in the node contents */
+			if (!(value = glade_xml_get_content (prop)))
+			{
+				g_free (name);
+				continue;
+			}
 		}
 
 		if ((attr_type = 
@@ -8277,8 +8285,8 @@ glade_gtk_label_write_attributes (GladeWidget        *widget,
 		attr_node = glade_xml_node_new (context, GLADE_TAG_ATTRIBUTE);
 		glade_xml_node_append_child (node, attr_node);
 
-		glade_xml_set_content (attr_node, attr_value);
 		glade_xml_node_set_property_string (attr_node, GLADE_TAG_NAME, attr_type);
+		glade_xml_node_set_property_string (attr_node, GLADE_TAG_VALUE, attr_value);
 	}
 }
 
@@ -10410,22 +10418,34 @@ glade_gtk_cell_renderer_set_use_attribute (GObject      *object,
 	g_free (attr_prop_name);
 }
 
+static GladeProperty *
+glade_gtk_cell_renderer_attribute_switch (GladeWidget *gwidget,
+					  const gchar *property_name)
+{
+	GladeProperty *property;
+	gchar         *use_attr_name = g_strdup_printf ("use-attr-%s", property_name);
+
+	property = glade_widget_get_property (gwidget, use_attr_name);
+	g_free (use_attr_name);
+
+	return property;
+}
+
 static gboolean
 glade_gtk_cell_renderer_property_enabled (GObject     *object,
 					  const gchar *property_name)
 {
-	GladeWidget   *gwidget = glade_widget_get_from_gobject (object);
-	gchar         *use_attr_name = g_strdup_printf ("use-attr-%s", property_name);
 	GladeProperty *property;
+	GladeWidget   *gwidget = glade_widget_get_from_gobject (object);
 	gboolean       use_attr = TRUE;
 
-	if ((property = glade_widget_get_property (gwidget, use_attr_name)) != NULL)
+	if ((property = 
+	     glade_gtk_cell_renderer_attribute_switch (gwidget, property_name)) != NULL)
 		glade_property_get (property, &use_attr);
-
-	g_free (use_attr_name);
 
 	return !use_attr;
 }
+
 
 void
 glade_gtk_cell_renderer_set_property (GladeWidgetAdaptor *adaptor,
@@ -10506,6 +10526,49 @@ glade_gtk_cell_renderer_write_widget (GladeWidgetAdaptor *adaptor,
 	glade_gtk_cell_renderer_write_properties (widget, context, node);
 
         GWA_GET_CLASS (G_TYPE_OBJECT)->write_widget (adaptor, widget, context, node);
+}
+
+void
+glade_gtk_cell_renderer_read_widget (GladeWidgetAdaptor *adaptor,
+				     GladeWidget        *widget,
+				     GladeXmlNode       *node)
+{
+	GladeProperty *property;
+	GList *l;
+	static gint attr_len = 0, use_attr_len = 0;
+
+	if (!glade_xml_node_verify 
+	    (node, GLADE_XML_TAG_WIDGET (glade_project_get_format (widget->project))))
+		return;
+
+	/* First chain up and read in all the properties... */
+        GWA_GET_CLASS (G_TYPE_OBJECT)->read_widget (adaptor, widget, node);
+
+
+	/* Now set "use-attr-*" everywhere that the object property is non-default */
+	if (!attr_len)
+       	{
+		attr_len = strlen ("attr-");
+		use_attr_len = strlen ("use-attr-");
+       	}
+
+	for (l = widget->properties; l; l = l->next)
+	{
+		GladeProperty *switch_prop;
+		property = l->data;
+
+		if (strncmp (property->klass->id, "attr-", attr_len) != 0 &&
+		    strncmp (property->klass->id, "use-attr-", use_attr_len) != 0 &&
+		    (switch_prop = 
+		     glade_gtk_cell_renderer_attribute_switch (widget, property->klass->id)) != NULL)
+	       	{
+			if (glade_property_original_default (property))
+				glade_property_set (switch_prop, TRUE);
+			else	
+				glade_property_set (switch_prop, FALSE);
+		}
+	}
+
 }
 
 /*--------------------------- GtkCellLayout ---------------------------------*/
@@ -10642,8 +10705,11 @@ glade_gtk_cell_renderer_read_attributes (GladeWidget *widget, GladeXmlNode *node
 
 		if (attr_prop && use_attr_prop)
 		{	
-			glade_property_set (use_attr_prop, TRUE);	
-			glade_property_set (attr_prop, g_ascii_strtoll (column_str, NULL, 10));
+			gboolean use_attribute = FALSE;
+			glade_property_get (use_attr_prop, &use_attribute);
+
+			if (use_attribute)
+				glade_property_set (attr_prop, g_ascii_strtoll (column_str, NULL, 10));
 		}
 
 		g_free (name);
