@@ -18,6 +18,7 @@
  *
  * Authors:
  *   Chema Celorio <chema@celorio.com>
+ *   Tristan Van Berkom <tvb@gnome.org>
  */
 
 
@@ -35,6 +36,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <glib/gi18n-lib.h>
+
+#include <gtk/gtk.h>
 
 #include "glade.h"
 #include "glade-widget.h"
@@ -55,7 +58,7 @@ enum
 {
 	PROP_0,
 	PROP_SHOW_INFO,
-	PROP_SHOW_CONTEXT_INFO
+	PROP_WIDGET
 };
 
 enum {
@@ -68,17 +71,19 @@ static guint         glade_editor_signals[LAST_SIGNAL] = { 0 };
 
 static void glade_editor_reset_dialog (GladeEditor *editor);
 
-static void
-glade_editor_gtk_doc_search_cb (GladeEditorProperty *eprop,
-				const gchar         *book,
-				const gchar         *page,
-				const gchar         *search,
-				GladeEditor         *editor)
+
+void
+glade_editor_search_doc_search (GladeEditor *editor,
+				const gchar *book,
+				const gchar *page,
+				const gchar *search)
 {
-	/* Just act as a hub for search signals here */
+	g_return_if_fail (GLADE_IS_EDITOR (editor));
+
 	g_signal_emit (G_OBJECT (editor),
 		       glade_editor_signals[GTK_DOC_SEARCH],
 		       0, book, page, search);
+
 }
 
 static void
@@ -97,11 +102,8 @@ glade_editor_set_property (GObject      *object,
 		else
 			glade_editor_hide_info (editor);
 		break;
-	case PROP_SHOW_CONTEXT_INFO:
-		if (g_value_get_boolean (value))
-			glade_editor_show_context_info (editor);
-		else
-			glade_editor_hide_context_info (editor);
+	case PROP_WIDGET:
+		glade_editor_load_widget (editor, (GladeWidget *)g_value_get_object (value));
 		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -122,8 +124,8 @@ glade_editor_get_property (GObject    *object,
 	case PROP_SHOW_INFO:
 		g_value_set_boolean (value, editor->show_info);
 		break;
-	case PROP_SHOW_CONTEXT_INFO:
-		g_value_set_boolean (value, editor->show_context_info);
+	case PROP_WIDGET:
+		g_value_set_object (value, editor->loaded_widget);
 		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -155,12 +157,11 @@ glade_editor_class_init (GladeEditorClass *klass)
 				       FALSE, G_PARAM_READABLE));
 
 	g_object_class_install_property
-		(object_class, PROP_SHOW_CONTEXT_INFO,
-		 g_param_spec_boolean ("show-context-info",
-				       _("Show context info"),
-				       _("Whether to show an informational button for "
-					 "each property and signal in the editor"),
-				       FALSE, G_PARAM_READABLE));
+		(object_class, PROP_WIDGET,
+		 g_param_spec_object ("widget",
+				      _("Widget"),
+				      _("The currently loaded widget in this editor"),
+				      GLADE_TYPE_WIDGET, G_PARAM_READWRITE));
 
 	
 	/**
@@ -259,13 +260,12 @@ glade_editor_on_docs_click (GtkButton *button,
 	if (editor->loaded_widget)
 	{
 		g_object_get (editor->loaded_widget->adaptor, "book", &book, NULL);
-		g_signal_emit (G_OBJECT (editor),
-			       glade_editor_signals[GTK_DOC_SEARCH],
-			       0, book, editor->loaded_widget->adaptor->name, NULL);
+		glade_editor_search_doc_search (editor, book,
+						editor->loaded_widget->adaptor->name,
+						NULL);
 		g_free (book);
 	}
 }
-
 
 static GtkWidget *
 glade_editor_create_info_button (GladeEditor *editor)
@@ -287,7 +287,6 @@ glade_editor_create_info_button (GladeEditor *editor)
 	return button;
 }
 
-
 static GtkWidget *
 glade_editor_create_reset_button (GladeEditor *editor)
 {
@@ -307,6 +306,88 @@ glade_editor_create_reset_button (GladeEditor *editor)
 	return button;
 }
 
+
+static void
+glade_editor_update_class_warning_cb (GladeWidget  *widget,
+				      GParamSpec   *pspec,
+				      GladeEditor  *editor)
+{
+	if (widget->support_warning)
+		gtk_widget_show (editor->warning);
+	else
+ 		gtk_widget_hide (editor->warning);
+
+	gtk_widget_set_tooltip_text (editor->warning, widget->support_warning);
+}
+
+
+static void
+glade_editor_update_class_field (GladeEditor *editor)
+{
+	if (editor->loaded_widget)
+	{
+		GladeWidget *widget = editor->loaded_widget;
+		gchar       *text;
+
+		gtk_image_set_from_icon_name (GTK_IMAGE (editor->class_icon),
+					      widget->adaptor->icon_name, 
+					      GTK_ICON_SIZE_BUTTON);
+		gtk_widget_show (editor->class_icon);
+
+		/* translators: referring to the properties of a widget named '%s [%s]' */
+		text = g_strdup_printf (_("%s Properties - %s [%s]"),
+					widget->adaptor->title,
+					widget->adaptor->name,
+					widget->name);
+		gtk_label_set_text (GTK_LABEL (editor->class_label), text);
+		g_free (text);
+
+		glade_editor_update_class_warning_cb (editor->loaded_widget, NULL, editor);
+	}
+	else
+	{
+		gtk_widget_hide (editor->warning);
+		gtk_label_set_text (GTK_LABEL (editor->class_label), _("Properties"));
+	}
+}
+
+static void
+glade_editor_update_widget_name_cb (GladeWidget  *widget,
+				    GParamSpec   *pspec,
+				    GladeEditor  *editor)
+{
+	glade_editor_update_class_field (editor);
+}
+
+static GtkWidget *
+glade_editor_setup_class_field (GladeEditor *editor)
+{
+	GtkWidget      *hbox;
+	
+	hbox = gtk_hbox_new (FALSE, 4);
+
+	editor->class_icon   = gtk_image_new ();
+	editor->class_label  = gtk_label_new (NULL);
+	editor->warning      = gtk_image_new_from_stock (GTK_STOCK_DIALOG_WARNING, 
+							 GTK_ICON_SIZE_MENU);
+
+	gtk_widget_set_no_show_all (editor->warning, TRUE);
+	gtk_widget_set_no_show_all (editor->class_icon, TRUE);
+
+	gtk_misc_set_alignment (GTK_MISC (editor->class_label), 0.0, 0.5);
+	gtk_label_set_ellipsize (GTK_LABEL (editor->class_label), 
+				 PANGO_ELLIPSIZE_END);
+
+	gtk_box_pack_start (GTK_BOX (hbox), editor->class_icon, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), editor->warning, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), editor->class_label, TRUE, TRUE, 0);
+
+	glade_editor_update_class_field (editor);
+	gtk_widget_show_all (hbox);
+
+	return hbox;
+}
+
 static void
 glade_editor_init (GladeEditor *editor)
 {
@@ -319,12 +400,14 @@ glade_editor_init (GladeEditor *editor)
 	editor->page_common  = glade_editor_notebook_page (editor, _("_Common"));
 	editor->page_signals = glade_editor_notebook_page (editor, _("_Signals"));
 	editor->page_atk     = glade_editor_notebook_page (editor, _("Accessibility"));
-	editor->widget_tables = NULL;
-	editor->packing_etable = NULL;
-	editor->loading = FALSE;
+	editor->editables    = NULL;
+	editor->loading      = FALSE;
+
+	editor->class_field = glade_editor_setup_class_field (editor);
 
 	gtk_container_set_border_width (GTK_CONTAINER (editor->notebook), 0);
 
+	gtk_box_pack_start (GTK_BOX (editor), editor->class_field, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (editor), editor->notebook, TRUE, TRUE, 0);
 
 	hbox = gtk_hbox_new (FALSE, 6);
@@ -395,369 +478,118 @@ glade_editor_new (void)
 	return editor;
 }
 
-/*
- * We call this function when the user changes the widget name using the
- * entry on the properties editor.
- */
-static void
-glade_editor_widget_name_changed (GtkWidget *editable, GladeEditor *editor)
+static GtkWidget *
+glade_editor_get_editable_by_adaptor (GladeEditor *editor,
+				      GladeWidgetAdaptor *adaptor,
+				      GladeEditorPageType type)
 {
-	GladeWidget *widget;
-	gchar *new_name;
-	
-	g_return_if_fail (GTK_IS_EDITABLE (editable));
-	g_return_if_fail (GLADE_IS_EDITOR (editor));
-	
-	if (editor->loading) return;
-
-	widget = editor->loaded_widget;
-	new_name = gtk_editable_get_chars (GTK_EDITABLE (editable), 0, -1);
-	if (!glade_project_get_widget_by_name (widget->project, new_name))
-		glade_command_set_name (widget, new_name);
-	g_free (new_name);
-}
-
-static void
-glade_editor_table_attach (GtkWidget *table, GtkWidget *child, gint pos, gint row)
-{
-	gtk_table_attach (GTK_TABLE (table), child,
-			  pos, pos+1, row, row +1,
-			  pos ? GTK_EXPAND | GTK_FILL : GTK_FILL,
-			  GTK_EXPAND | GTK_FILL,
-			  3, 1);
-}
-
-static GladeEditorProperty *
-glade_editor_table_append_item (GladeEditorTable *table,
-				GladePropertyClass *klass,
-				gboolean from_query_dialog)
-{
-	GladeEditorProperty *property;
-
-	property = glade_editor_property_new (klass, from_query_dialog == FALSE);
-	gtk_widget_show (GTK_WIDGET (property));
-	gtk_widget_show_all (property->item_label);
-
-	if (table->editor->show_context_info && from_query_dialog == FALSE)
-		glade_editor_property_show_info (property);
-	else
-		glade_editor_property_hide_info (property);
-
-	g_signal_connect (G_OBJECT (property), "gtk-doc-search",
-			  G_CALLBACK (glade_editor_gtk_doc_search_cb), 
-			  table->editor);
-
-	glade_editor_table_attach (table->table_widget, property->item_label, 0, table->rows);
-	glade_editor_table_attach (table->table_widget, GTK_WIDGET (property), 1, table->rows);
-
-	table->rows++;
-
-	return property;
-}
-
-static void
-glade_editor_table_append_name_field (GladeEditorTable *table)
-{
-	GtkWidget *label;
-	
-	/* Name */
-	label = gtk_label_new (_("Name:"));
-	gtk_misc_set_alignment (GTK_MISC (label), 1.0, 0.5);
-	gtk_widget_show (label);
-
-	table->name_entry = gtk_entry_new ();
-	gtk_widget_show (table->name_entry);
-
-	g_signal_connect (G_OBJECT (table->name_entry), "activate",
-			  G_CALLBACK (glade_editor_widget_name_changed),
-			  table->editor);
-	
-	g_signal_connect (G_OBJECT (table->name_entry), "changed",
-			  G_CALLBACK (glade_editor_widget_name_changed),
-			  table->editor);
-
-	glade_editor_table_attach (table->table_widget, label, 0, table->rows);
-	glade_editor_table_attach (table->table_widget, table->name_entry, 1, table->rows);
-
-	table->rows++;
-}
-
-static void
-glade_editor_table_append_class_field (GladeEditorTable *table)
-{
-	GtkWidget *label;
-	GtkWidget *class_entry;
-
-	/* Class */
-	label = gtk_label_new (_("Class:"));
-	gtk_misc_set_alignment (GTK_MISC (label), 1.0, 0.5);
-	gtk_widget_show (label);
-	
-	class_entry = gtk_entry_new ();
-	gtk_entry_set_text (GTK_ENTRY (class_entry), table->adaptor->name);
-	gtk_editable_set_editable (GTK_EDITABLE (class_entry), FALSE);
-	gtk_widget_show (class_entry);
-
-	glade_editor_table_attach (table->table_widget, label, 0, table->rows);
-	glade_editor_table_attach (table->table_widget, class_entry, 1, table->rows);
-
-	table->rows++;
-}
-
-static gint
-glade_editor_property_class_comp (gconstpointer a, gconstpointer b)
-{
-	const GladePropertyClass *ca = a, *cb = b;
-	
-	if (ca->pspec->owner_type == cb->pspec->owner_type)
-	{
-		gdouble result = ca->weight - cb->weight;
-		/* Avoid cast to int */
-		if (result < 0.0) return -1;
-		else if (result > 0.0) return 1;
-		else return 0;
-	}
-	else
-	{
-		if (g_type_is_a (ca->pspec->owner_type, cb->pspec->owner_type))
-			return (ca->common || ca->packing) ? 1 : -1;
-		else
-			return (ca->common || ca->packing) ? -1 : 1;
-	}
-}
-
-static GList *
-glade_editor_get_sorted_properties (GladeWidgetAdaptor *adaptor)
-{
-	GList *l, *a = NULL, *b = NULL;
-	
-	for (l = adaptor->properties; l && l->data; l = g_list_next (l))
-	{
-		GladePropertyClass *klass = l->data;
-		
-		if (klass->common || klass->packing)
-			a = g_list_prepend (a, klass);
-		else
-			b = g_list_prepend (b, klass);
-	}
-	
-	a = g_list_sort (a, glade_editor_property_class_comp);
-	b = g_list_sort (b, glade_editor_property_class_comp);
-
-	return g_list_concat (a, b);
-}
-
-static gboolean
-glade_editor_table_append_items (GladeEditorTable     *table,
-				 GladeWidgetAdaptor   *adaptor,
-				 GladeEditorTableType  type)
-{
-	GladeEditorProperty *property;
-	GladePropertyClass  *property_class;
-	GList *list, *sorted_list;
-
-	sorted_list = glade_editor_get_sorted_properties (adaptor);
-	
-	for (list = sorted_list; list != NULL; list = list->next)
-	{
-		property_class = (GladePropertyClass *) list->data;
-
-		if (!glade_property_class_is_visible (property_class))
-			continue;
-		if (type == TABLE_TYPE_QUERY && !property_class->query)
-			continue;
-		else if (type == TABLE_TYPE_COMMON && !property_class->common)
-			continue;
-		else if (type == TABLE_TYPE_GENERAL && property_class->common)
-			continue;
-		else if (type == TABLE_TYPE_ATK && 
-			 (property_class->type == GPC_NORMAL ||
-			  property_class->type == GPC_ACCEL_PROPERTY))
-			 continue;
-		else if (type != TABLE_TYPE_ATK && 
-			 (property_class->type != GPC_NORMAL &&
-			  property_class->type != GPC_ACCEL_PROPERTY))
-			 continue;
-
-		property = glade_editor_table_append_item (table, property_class, 
-							   type == TABLE_TYPE_QUERY);
-		table->properties = g_list_prepend (table->properties, property);
-	}
-	
-	g_list_free (sorted_list);
-	
-	return TRUE;
-}
-
-static GladeEditorTable *
-glade_editor_table_new (void)
-{
-	GladeEditorTable *table;
-
-	table = g_new0 (GladeEditorTable, 1);
-
-	table->table_widget = gtk_table_new (0, 0, FALSE);
-
-	g_object_ref (G_OBJECT(table->table_widget));
-
-	return table;
-}
-
-static void
-glade_editor_table_free (GladeEditorTable *etable)
-{
-	g_object_unref (G_OBJECT(etable->table_widget));
-	g_free (etable);
-}
-
-static GladeEditorTable *
-glade_editor_table_create (GladeEditor          *editor,
-			   GladeWidgetAdaptor   *adaptor,
-			   GladeEditorTableType  type)
-{
-	GladeEditorTable *table;
-
-	g_return_val_if_fail (GLADE_IS_EDITOR (editor), NULL);
-	g_return_val_if_fail (GLADE_IS_WIDGET_ADAPTOR (adaptor), NULL);
-
-	table = glade_editor_table_new ();
-	table->editor = editor;
-	table->adaptor = adaptor;
-	table->type = type;
-
-	if (type == TABLE_TYPE_GENERAL)
-	{
-		glade_editor_table_append_class_field (table);
-		glade_editor_table_append_name_field (table);
-	}
-
-	if (!glade_editor_table_append_items (table, adaptor, type))
-		return NULL;
-
-	gtk_widget_show (table->table_widget);
-
-	return table;
-}
-
-static GladeEditorTable *
-glade_editor_get_table_from_class (GladeEditor *editor,
-				   GladeWidgetAdaptor *adaptor,
-				   GladeEditorTableType type)
-{
-	GladeEditorTable *table;
+	GtkWidget *editable;
 	GList *list;
 
 	g_return_val_if_fail (GLADE_IS_WIDGET_ADAPTOR (adaptor), NULL);
 
-	for (list = editor->widget_tables; list; list = list->next)
+	for (list = editor->editables; list; list = list->next)
 	{
-		table = list->data;
-		if (type != table->type)
+		editable = list->data;
+		if (type != GPOINTER_TO_INT (g_object_get_data (G_OBJECT (editable), "glade-editor-page-type")))
 			continue;
-		if (table->adaptor == adaptor)
-			return table;
+		if (g_object_get_data (G_OBJECT (editable), "glade-widget-adaptor") == adaptor)
+			return editable;
 	}
 
-	table = glade_editor_table_create (editor, adaptor, type);
-	g_return_val_if_fail (table != NULL, NULL);
+	editable = (GtkWidget *)glade_widget_adaptor_create_editable (adaptor, type);
+	g_return_val_if_fail (editable != NULL, NULL);
 
-	editor->widget_tables = g_list_prepend (editor->widget_tables, table);
+	g_object_set_data (G_OBJECT (editable), "glade-editor-page-type", GINT_TO_POINTER (type));
+	g_object_set_data (G_OBJECT (editable), "glade-widget-adaptor", adaptor);
 
-	return table;
+	if (type != GLADE_PAGE_PACKING)
+	{
+		editor->editables = g_list_prepend (editor->editables, editable);
+		g_object_ref_sink (editable);
+	}
+
+	return editable;
 }
 
-static void
-glade_editor_load_page (GladeEditor          *editor, 
-			GladeWidgetAdaptor   *adaptor,
-			GladeEditorTableType  type)
+static GtkWidget *
+glade_editor_load_editable_in_page (GladeEditor          *editor, 
+				    GladeWidgetAdaptor   *adaptor,
+				    GladeEditorPageType   type)
 {
-	GladeEditorTable *table;
-	GtkContainer *container = NULL;
-	GtkWidget *scrolled_window;
-	GList *list, *children;
+	GtkContainer  *container = NULL;
+	GtkWidget     *scrolled_window, *editable;
 	GtkAdjustment *adj;
 
 	/* Remove the old table that was in this container */
 	switch (type)
 	{
-	case TABLE_TYPE_GENERAL:
+	case GLADE_PAGE_GENERAL:
 		container = GTK_CONTAINER (editor->page_widget);
 		break;
-	case TABLE_TYPE_COMMON:
+	case GLADE_PAGE_COMMON:
 		container = GTK_CONTAINER (editor->page_common);
 		break;
-	case TABLE_TYPE_ATK:
+	case GLADE_PAGE_PACKING:
+		container = GTK_CONTAINER (editor->page_packing);
+		break;
+	case GLADE_PAGE_ATK:
 		container = GTK_CONTAINER (editor->page_atk);
 		break;
-	case TABLE_TYPE_PACKING:
-	case TABLE_TYPE_QUERY:
+	case GLADE_PAGE_QUERY:
 	default:
 		g_critical ("Unreachable code reached !");
 		break;
 	}
-
-	children = gtk_container_get_children (container);
-	for (list = children; list; list = list->next) {
-		GtkWidget *widget = list->data;
-		g_return_if_fail (GTK_IS_WIDGET (widget));
-		gtk_widget_ref (widget);
-		gtk_container_remove (container, widget);
+	
+	/* Remove the editable (this will destroy on packing pages) */
+	if (GTK_BIN (container)->child)
+	{
+		gtk_widget_hide (GTK_BIN (container)->child);
+		gtk_container_remove (container, GTK_BIN (container)->child);
 	}
-	g_list_free (children);
 
 	if (!adaptor)
-		return;
+		return NULL;
 
-	table = glade_editor_get_table_from_class (editor, adaptor, type);
-
-	/* Attach the new table */
-	gtk_container_add (GTK_CONTAINER (container), table->table_widget);
+	if ((editable = glade_editor_get_editable_by_adaptor (editor, adaptor, type)) == NULL)
+		return NULL;
+	
+	/* Attach the new page */
+	gtk_container_add (GTK_CONTAINER (container), editable);
+	gtk_widget_show (editable);
 
 	/* Enable tabbed keynav in the editor */
-	if (table)
-	{
-		scrolled_window = gtk_widget_get_parent (GTK_WIDGET (container));
-		scrolled_window = gtk_widget_get_parent (scrolled_window);
+	scrolled_window = gtk_widget_get_parent (GTK_WIDGET (container));
+	scrolled_window = gtk_widget_get_parent (scrolled_window);
+	
+	/* FIXME: Save pointer to the scrolled window (or just the
+	   adjustments) before hand. */
+	g_assert (GTK_IS_SCROLLED_WINDOW (scrolled_window));
+	
+	adj = gtk_scrolled_window_get_vadjustment
+		(GTK_SCROLLED_WINDOW (scrolled_window));
+	gtk_container_set_focus_vadjustment
+		(GTK_CONTAINER (editable), adj);
+	
+	adj = gtk_scrolled_window_get_hadjustment
+		(GTK_SCROLLED_WINDOW (scrolled_window));
+	gtk_container_set_focus_hadjustment
+		(GTK_CONTAINER (editable), adj);
 
-		/* FIXME: Save pointer to the scrolled window (or just the
-		   adjustments) before hand. */
-		g_assert (GTK_IS_SCROLLED_WINDOW (scrolled_window));
-				
-		adj = gtk_scrolled_window_get_vadjustment
-			(GTK_SCROLLED_WINDOW (scrolled_window));
-		gtk_container_set_focus_vadjustment
-			(GTK_CONTAINER (table->table_widget), adj);
-		
-		adj = gtk_scrolled_window_get_hadjustment
-			(GTK_SCROLLED_WINDOW (scrolled_window));
-		gtk_container_set_focus_hadjustment
-			(GTK_CONTAINER (table->table_widget), adj);
-	}
+	return editable;
 }
 
-/**
- * glade_editor_update_widget_name:
- * @editor: a #GladeEditor
- *
- * TODO: write me
- */
 void
-glade_editor_update_widget_name (GladeEditor *editor)
+glade_editor_set_signal_editor (GladeEditor *editor, GladeSignalEditor *signal_editor)
 {
-	GladeEditorTable *table;
-
-	/* it can happen that a widget name is changing that is only
-	 * available in a custom editor so we have no table
-	 */
-	if (!editor->loaded_adaptor)
-		return;
-
-	table = glade_editor_get_table_from_class
-		(editor, editor->loaded_adaptor, TABLE_TYPE_GENERAL);
-
-	g_signal_handlers_block_by_func (G_OBJECT (table->name_entry), glade_editor_widget_name_changed, editor);
-	gtk_entry_set_text (GTK_ENTRY (table->name_entry), editor->loaded_widget->name);
-	g_signal_handlers_unblock_by_func (G_OBJECT (table->name_entry), glade_editor_widget_name_changed, editor);
+	if (editor->signal_editor) {
+		gtk_container_remove (GTK_CONTAINER (editor->page_signals),
+		                      glade_signal_editor_get_widget (editor->signal_editor));
+	}
+	editor->signal_editor = signal_editor;
+	gtk_container_add (GTK_CONTAINER (editor->page_signals),
+			    glade_signal_editor_get_widget (editor->signal_editor));
 }
 
 static void
@@ -773,108 +605,78 @@ glade_editor_load_signal_page (GladeEditor *editor)
 static void
 glade_editor_load_widget_class (GladeEditor *editor, GladeWidgetAdaptor *adaptor)
 {
-	glade_editor_load_page (editor, adaptor, TABLE_TYPE_GENERAL);
-	glade_editor_load_page (editor, adaptor, TABLE_TYPE_COMMON);
-	glade_editor_load_page (editor, adaptor, TABLE_TYPE_ATK);
+
+	glade_editor_load_editable_in_page (editor, adaptor, GLADE_PAGE_GENERAL);
+	glade_editor_load_editable_in_page (editor, adaptor, GLADE_PAGE_COMMON);
+	glade_editor_load_editable_in_page (editor, adaptor, GLADE_PAGE_ATK);
 
 	glade_editor_load_signal_page  (editor);
 	
 	editor->loaded_adaptor = adaptor;
 }
 
-static gint
-glade_editor_property_comp (gconstpointer a, gconstpointer b)
-{
-	const GladeProperty *prop_a = a, *prop_b = b;
-	return glade_editor_property_class_comp (prop_a->klass, prop_b->klass);
-}
-
-static void
-glade_editor_load_packing_page (GladeEditor *editor, GladeWidget *widget)
-{
-	GladeEditorProperty *editor_property;
-	GladeProperty       *property;
-	GladeWidget         *parent;
-	GList               *list, *sorted_list;
-	GtkWidget           *child;
-
-	/* Remove the old properties */
-	if ((child = gtk_bin_get_child (GTK_BIN (editor->page_packing))) != NULL)
-		gtk_container_remove (GTK_CONTAINER (editor->page_packing), child);
-
-	/* Free the packing editor table */
-	if (editor->packing_etable)
-		editor->packing_etable =
-			(glade_editor_table_free (editor->packing_etable), NULL);
-
-	/* Free the packing editor properties (we gave ownership to 
-	 * packing_etable->table_widget, so no need to unref them here).
-	 */
-	editor->packing_eprops = (g_list_free (editor->packing_eprops), NULL);
-
-
-	/* if the widget is a toplevel there are no packing properties */
-	if (widget == NULL || (parent = glade_widget_get_parent (widget)) == NULL)
-		return;
-
-	/* Now add the new properties */
-	editor->packing_etable         = glade_editor_table_new ();
-	editor->packing_etable->editor = editor;
-	editor->packing_etable->type   = TABLE_TYPE_PACKING;
-
-	/* Sort packing properties by weight */
-	sorted_list = g_list_copy (widget->packing_properties);
-	sorted_list = g_list_sort (sorted_list, glade_editor_property_comp);
-	
-	for (list = sorted_list; list && list->data; list = list->next)
-	{
-		property               = GLADE_PROPERTY (list->data);
-		
-		if (glade_property_class_is_visible (property->klass) == FALSE)
-			continue;
-		
-		editor_property        = glade_editor_table_append_item (editor->packing_etable, 
-									 property->klass, FALSE);
-		editor->packing_eprops = g_list_prepend (editor->packing_eprops, editor_property);
-		glade_editor_property_load (editor_property, property);
-	}
-
-	g_list_free (sorted_list);
-	
-	gtk_widget_show (editor->packing_etable->table_widget);
-
-	gtk_container_add (GTK_CONTAINER (editor->page_packing), 
-			   editor->packing_etable->table_widget);
-}
-
 static void
 glade_editor_close_cb (GladeProject *project,
 		       GladeEditor  *editor)
 {
-	/* Detected project we are viewing was closed,
+	/* project we are viewing was closed,
 	 * detatch from editor.
 	 */
 	glade_editor_load_widget (editor, NULL);
 }
 
 static void
-glade_editor_load_table (GladeEditor         *editor, 
-			 GladeWidget         *widget,
-			 GladeEditorTableType type)
+glade_editor_removed_cb (GladeProject *project,
+			 GladeWidget  *widget,
+			 GladeEditor  *editor)
 {
-	GladeEditorProperty *property;
-	GladeEditorTable    *table;
-	GList               *list;
+	/* Widget we were viewing was removed from project,
+	 * detatch from editor.
+	 */
+	if (widget == editor->loaded_widget)
+		glade_editor_load_widget (editor, NULL);
 
-	table = glade_editor_get_table_from_class
-		(editor, widget->adaptor, type);
-	if (table->name_entry)
-		gtk_entry_set_text (GTK_ENTRY (table->name_entry), widget->name);
+}
 
-	for (list = table->properties; list; list = list->next)
+
+static void
+glade_editor_load_editable (GladeEditor         *editor, 
+			    GladeWidget         *widget,
+			    GladeEditorPageType  type)
+{
+	GtkWidget *editable;
+
+	/* Use the parenting adaptor for packing pages... so deffer creating the widgets
+	 * until load time.
+	 */
+	if (type == GLADE_PAGE_PACKING && widget->parent)
 	{
-		property = list->data;
-		glade_editor_property_load_by_widget (property, widget);
+		GladeWidgetAdaptor *adaptor = widget->parent->adaptor;
+		editable = glade_editor_load_editable_in_page (editor, adaptor, GLADE_PAGE_PACKING);
+	}
+	else
+		editable = glade_editor_get_editable_by_adaptor
+			(editor, widget->adaptor, type);
+	
+	g_assert (editable);
+
+	if (!widget) gtk_widget_hide (editable);
+
+	glade_editable_load (GLADE_EDITABLE (editable), widget);
+
+	if (widget) gtk_widget_show (editable);
+}
+
+static void
+clear_editables (GladeEditor *editor)
+{
+	GladeEditable *editable;
+	GList *l;
+
+	for (l = editor->editables; l; l = l->next)
+	{
+		editable = l->data;
+		glade_editable_load (editable, NULL);
 	}
 }
 
@@ -888,16 +690,27 @@ glade_editor_load_widget_real (GladeEditor *editor, GladeWidget *widget)
 	/* Disconnect from last widget */
 	if (editor->loaded_widget != NULL)
 	{
+		/* better pay a small price now and avoid unseen editables
+		 * waking up on project metadata changes.
+		 */
+		clear_editables (editor);
+
 		project = glade_widget_get_project (editor->loaded_widget);
 		g_signal_handler_disconnect (G_OBJECT (project),
 					     editor->project_closed_signal_id);
+		g_signal_handler_disconnect (G_OBJECT (project),
+					     editor->project_removed_signal_id);
+		g_signal_handler_disconnect (G_OBJECT (editor->loaded_widget),
+					     editor->widget_warning_id);
+		g_signal_handler_disconnect (G_OBJECT (editor->loaded_widget),
+					     editor->widget_name_id);
 	}	
+
 	/* Load the GladeWidgetClass */
 	adaptor = widget ? widget->adaptor : NULL;
 	if (editor->loaded_adaptor != adaptor || adaptor == NULL)
 		glade_editor_load_widget_class (editor, adaptor);
 
-	glade_editor_load_packing_page (editor, widget);
 	glade_signal_editor_load_widget (editor->signal_editor, widget);
 
 	/* we are just clearing, we are done */
@@ -907,6 +720,8 @@ glade_editor_load_widget_real (GladeEditor *editor, GladeWidget *widget)
 		gtk_widget_set_sensitive (editor->info_button, FALSE);
 
 		editor->loaded_widget = NULL;
+
+		g_object_notify (G_OBJECT (editor), "widget");
 		return;
 	}
 	gtk_widget_set_sensitive (editor->reset_button, TRUE);
@@ -918,18 +733,37 @@ glade_editor_load_widget_real (GladeEditor *editor, GladeWidget *widget)
 	editor->loading = TRUE;
 
 	/* Load each GladeEditorProperty from 'widget' */
-	glade_editor_load_table (editor, widget, TABLE_TYPE_GENERAL);
-	glade_editor_load_table (editor, widget, TABLE_TYPE_COMMON);
-	glade_editor_load_table (editor, widget, TABLE_TYPE_ATK);
+	glade_editor_load_editable (editor, widget, GLADE_PAGE_GENERAL);
+	glade_editor_load_editable (editor, widget, GLADE_PAGE_COMMON);
+	glade_editor_load_editable (editor, widget, GLADE_PAGE_ATK);
+	glade_editor_load_editable (editor, widget, GLADE_PAGE_PACKING);
 
 	editor->loaded_widget = widget;
 	editor->loading = FALSE;
+
+	/* Update class header */
+	glade_editor_update_class_field (editor);
 
 	/* Connect to new widget */
 	project = glade_widget_get_project (editor->loaded_widget);
 	editor->project_closed_signal_id =
 		g_signal_connect (G_OBJECT (project), "close",
 				  G_CALLBACK (glade_editor_close_cb), editor);
+	editor->project_removed_signal_id =
+		g_signal_connect (G_OBJECT (project), "remove-widget",
+				  G_CALLBACK (glade_editor_removed_cb), editor);
+	editor->widget_warning_id =
+		g_signal_connect (G_OBJECT (widget), "notify::support-warning",
+				  G_CALLBACK (glade_editor_update_class_warning_cb),
+				  editor);
+	editor->widget_name_id =
+		g_signal_connect (G_OBJECT (widget), "notify::name",
+				  G_CALLBACK (glade_editor_update_widget_name_cb),
+				  editor);
+
+	gtk_container_check_resize (GTK_CONTAINER (editor));
+
+	g_object_notify (G_OBJECT (editor), "widget");
 }
 
 /**
@@ -979,11 +813,8 @@ query_dialog_style_set_cb (GtkWidget *dialog,
 gboolean
 glade_editor_query_dialog (GladeEditor *editor, GladeWidget *widget)
 {
-	GtkWidget           *dialog;
-	GladeEditorTable    *table;
+	GtkWidget           *dialog, *editable;
 	gchar               *title;
-	GList               *list;
-	GladeEditorProperty *property;
 	gint		     answer;
 	gboolean	     retval = TRUE;
 
@@ -1004,19 +835,14 @@ glade_editor_query_dialog (GladeEditor *editor, GladeWidget *widget)
 						 -1);
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 
-	table = glade_editor_get_table_from_class (editor,
-						   widget->adaptor,
-						   TABLE_TYPE_QUERY);
-
+	editable = glade_editor_get_editable_by_adaptor (editor,
+							 widget->adaptor,
+							 GLADE_PAGE_QUERY);
 
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox),
-			    table->table_widget,
-			    FALSE, FALSE, 6);
-	for (list = table->properties; list; list = list->next)
-	{
-		property = list->data;
-		glade_editor_property_load_by_widget (property, widget);
-	}
+			    editable, FALSE, FALSE, 6);
+
+	glade_editable_load (GLADE_EDITABLE (editable), widget);
 
 	g_signal_connect (dialog, "style-set", 
 			  G_CALLBACK (query_dialog_style_set_cb),
@@ -1032,8 +858,7 @@ glade_editor_query_dialog (GladeEditor *editor, GladeWidget *widget)
 	if (answer == GTK_RESPONSE_CANCEL)
 		retval = FALSE;
 
-	gtk_container_remove (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox),
-			      table->table_widget);
+	gtk_container_remove (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox), editable);
 	
 	gtk_widget_destroy (dialog);
 	return retval;
@@ -1043,7 +868,7 @@ enum {
 	COLUMN_ENABLED = 0,
 	COLUMN_PROP_NAME,
 	COLUMN_PROPERTY,
-	COLUMN_PARENT,
+	COLUMN_WEIGHT,
 	COLUMN_CHILD,
 	COLUMN_DEFAULT,
 	COLUMN_NDEFAULT,
@@ -1083,7 +908,7 @@ glade_editor_reset_view (GladeEditor *editor)
 		 G_TYPE_BOOLEAN,       /* Enabled  value      */
 		 G_TYPE_STRING,        /* Property name       */
 		 GLADE_TYPE_PROPERTY,  /* The property        */
-		 G_TYPE_BOOLEAN,       /* Parent node ?       */
+		 G_TYPE_INT,           /* Parent node ?       */
 		 G_TYPE_BOOLEAN,       /* Child node ?        */
 		 G_TYPE_BOOLEAN,       /* Has default value   */
 		 G_TYPE_BOOLEAN,       /* Doesn't have defaut */
@@ -1123,12 +948,13 @@ glade_editor_reset_view (GladeEditor *editor)
  	renderer = gtk_cell_renderer_text_new ();
 	g_object_set (G_OBJECT (renderer), 
 		      "editable", FALSE, 
-		      "weight", PANGO_WEIGHT_BOLD, NULL);
+		      NULL);
+
 	gtk_tree_view_insert_column_with_attributes
 		(GTK_TREE_VIEW (view_widget), COLUMN_PROP_NAME,
 		 _("Property"), renderer, 
 		 "text",       COLUMN_PROP_NAME, 
-		 "weight-set", COLUMN_PARENT,
+		 "weight",     COLUMN_WEIGHT,
 		 NULL);
 
 	/******************* default indicator column *******************/
@@ -1137,6 +963,7 @@ glade_editor_reset_view (GladeEditor *editor)
 		      "editable", FALSE, 
 		      "style", PANGO_STYLE_ITALIC,
 		      "foreground", "Gray", NULL);
+
 	gtk_tree_view_insert_column_with_attributes
 		(GTK_TREE_VIEW (view_widget), COLUMN_DEFSTRING,
 		 NULL, renderer, 
@@ -1163,7 +990,7 @@ glade_editor_populate_reset_view (GladeEditor *editor,
 	gtk_tree_store_set    (model, &general_iter,
 			       COLUMN_PROP_NAME, _("General"),
 			       COLUMN_PROPERTY,  NULL,
-			       COLUMN_PARENT,    TRUE,
+			       COLUMN_WEIGHT,    PANGO_WEIGHT_BOLD,
 			       COLUMN_CHILD,     FALSE,
 			       COLUMN_DEFAULT,   FALSE,
 			       COLUMN_NDEFAULT,  FALSE,
@@ -1173,7 +1000,7 @@ glade_editor_populate_reset_view (GladeEditor *editor,
 	gtk_tree_store_set    (model, &common_iter,
 			       COLUMN_PROP_NAME, _("Common"),
 			       COLUMN_PROPERTY,  NULL,
-			       COLUMN_PARENT,    TRUE,
+			       COLUMN_WEIGHT,    PANGO_WEIGHT_BOLD,
 			       COLUMN_CHILD,     FALSE,
 			       COLUMN_DEFAULT,   FALSE,
 			       COLUMN_NDEFAULT,  FALSE,
@@ -1183,7 +1010,7 @@ glade_editor_populate_reset_view (GladeEditor *editor,
 	gtk_tree_store_set    (model, &atk_iter,
 			       COLUMN_PROP_NAME, _("Accessibility"),
 			       COLUMN_PROPERTY,  NULL,
-			       COLUMN_PARENT,    TRUE,
+			       COLUMN_WEIGHT,    PANGO_WEIGHT_BOLD,
 			       COLUMN_CHILD,     FALSE,
 			       COLUMN_DEFAULT,   FALSE,
 			       COLUMN_NDEFAULT,  FALSE,
@@ -1197,8 +1024,7 @@ glade_editor_populate_reset_view (GladeEditor *editor,
 		if (glade_property_class_is_visible (property->klass) == FALSE)
 			continue;
 		
-		if (property->klass->type != GPC_NORMAL && 
-		    property->klass->type != GPC_ACCEL_PROPERTY)
+		if (property->klass->atk)
 			iter = &atk_iter;
 		else if (property->klass->common)
 			iter = &common_iter;
@@ -1212,7 +1038,7 @@ glade_editor_populate_reset_view (GladeEditor *editor,
 				       COLUMN_ENABLED,   !def,
 				       COLUMN_PROP_NAME, property->klass->name,
 				       COLUMN_PROPERTY,  property,
-				       COLUMN_PARENT,    FALSE,
+				       COLUMN_WEIGHT,    PANGO_WEIGHT_NORMAL,
 				       COLUMN_CHILD,     TRUE,
 				       COLUMN_DEFAULT,   def,
 				       COLUMN_NDEFAULT,  !def,
@@ -1239,7 +1065,7 @@ glade_editor_reset_selection_changed_cb (GtkTreeSelection *selection,
 		text_buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (desc_view));
 		gtk_tree_model_get (model, &iter, COLUMN_PROPERTY, &property, -1);
 		gtk_text_buffer_set_text (text_buffer,
-					  property ? glade_property_get_tooltip (property) : message,
+					  property ? property->klass->tooltip : message,
 					  -1);
 		if (property)
 			g_object_unref (G_OBJECT (property));
@@ -1497,66 +1323,59 @@ glade_editor_hide_info (GladeEditor *editor)
 	}
 }
 
-void
-glade_editor_show_context_info (GladeEditor *editor)
+/**
+ * glade_editor_dialog_for_widget:
+ * @widget: a #GladeWidget
+ *
+ * This convenience function creates a new dialog window to edit @widget
+ * specifically.
+ *
+ * Returns: the newly created dialog window
+ */ 
+GtkWidget *
+glade_editor_dialog_for_widget (GladeWidget *widget)
 {
-	GList               *list, *props;
-	GladeEditorTable    *etable;
+	GtkWidget *window, *editor;
+	gchar *title, *prj_name;
 
-	g_return_if_fail (GLADE_IS_EDITOR (editor));
+	
+	g_return_val_if_fail (GLADE_IS_WIDGET (widget), NULL);
+	
+	/* Window */
+	window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_type_hint (GTK_WINDOW (window), GDK_WINDOW_TYPE_HINT_DIALOG);
 
-	if (editor->show_context_info != TRUE)
+	prj_name = glade_project_get_name (widget->project);
+	title = g_strdup_printf ("%s - %s Properties", prj_name, 
+				 glade_widget_get_name (widget));
+	gtk_window_set_title (GTK_WINDOW (window), title);
+	g_free (title);
+	g_free (prj_name);
+	
+
+	if (glade_app_get_accel_group ())
 	{
-		editor->show_context_info = TRUE;
-		
-		for (list = editor->widget_tables; list; list = list->next)
-		{
-			etable = list->data;
-			for (props = etable->properties; props; props = props->next)
-				glade_editor_property_show_info
-					(GLADE_EDITOR_PROPERTY (props->data));
-		}	
-
-		if (editor->packing_etable)
-		{
-			etable = editor->packing_etable;
-			for (props = etable->properties; props; props = props->next)
-				glade_editor_property_show_info
-					(GLADE_EDITOR_PROPERTY (props->data));
-		
-		}
-		g_object_notify (G_OBJECT (editor), "show-context-info");
+		gtk_window_add_accel_group (GTK_WINDOW (window), 
+					    glade_app_get_accel_group ());
+		g_signal_connect (G_OBJECT (window), "key-press-event",
+				  G_CALLBACK (glade_utils_hijack_key_press), NULL);
 	}
-}
 
-void
-glade_editor_hide_context_info (GladeEditor *editor)
-{
-	GList               *list, *props;
-	GladeEditorTable    *etable;
+	editor = g_object_new (GLADE_TYPE_EDITOR, 
+			       "spacing", 6,
+			       NULL);
+	glade_editor_load_widget (GLADE_EDITOR (editor), widget);
 
-	g_return_if_fail (GLADE_IS_EDITOR (editor));
 
-	if (editor->show_context_info != FALSE)
-	{
-		editor->show_context_info = FALSE;
-		
-		for (list = editor->widget_tables; list; list = list->next)
-		{
-			etable = list->data;
-			for (props = etable->properties; props; props = props->next)
-				glade_editor_property_hide_info
-					(GLADE_EDITOR_PROPERTY (props->data));
-		}	
+	g_signal_connect_swapped (G_OBJECT (editor), "notify::widget",
+				  G_CALLBACK (gtk_widget_destroy), window);
 
-		if (editor->packing_etable)
-		{
-			etable = editor->packing_etable;
-			for (props = etable->properties; props; props = props->next)
-				glade_editor_property_hide_info
-					(GLADE_EDITOR_PROPERTY (props->data));
-		
-		}
-		g_object_notify (G_OBJECT (editor), "show-context-info");
-	}
+
+	gtk_container_set_border_width (GTK_CONTAINER (editor), 6);
+	gtk_container_add (GTK_CONTAINER (window), GTK_WIDGET (editor));
+	
+	gtk_window_set_default_size (GTK_WINDOW (window), 400, 480);
+
+	gtk_widget_show_all (editor);
+	return window;
 }

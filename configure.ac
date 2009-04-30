@@ -3,8 +3,8 @@ dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.52)
 
 m4_define(glade_major_version, 3)
-m4_define(glade_minor_version, 4)
-m4_define(glade_micro_version, 5)
+m4_define(glade_minor_version, 6)
+m4_define(glade_micro_version, 3)
 m4_define(glade_version, glade_major_version.glade_minor_version.glade_micro_version)
 
 AC_INIT([glade3], [glade_version],
@@ -47,8 +47,8 @@ AM_PROG_LIBTOOL
 # If any interfaces have been added since the last public release, then increment GLADE_AGE.
 # If any interfaces have been removed since the last public release, then set GLADE_AGE to 0.
 # Reference: http://www.gnu.org/software/libtool/manual.html#Versioning
-GLADE_REVISION=4
-GLADE_CURRENT=7
+GLADE_REVISION=3
+GLADE_CURRENT=9
 GLADE_AGE=0
 GLADE_CURRENT_MINUS_AGE=`expr $GLADE_CURRENT - $GLADE_AGE`
 AC_SUBST(GLADE_REVISION)
@@ -111,12 +111,12 @@ AC_TRY_LINK([#include <stdarg.h>], [va_list ap1, ap2; va_copy(ap1, ap2);],
 dnl ================================================================
 dnl Check for gtk-doc
 dnl ================================================================
-GTK_DOC_CHECK(1.4)
+GTK_DOC_CHECK(1.9)
 
 dnl ================================================================
 dnl Check for gtk+
 dnl ================================================================
-PKG_CHECK_MODULES(GTK, [gtk+-2.0 >= 2.12.0  gthread-2.0 libxml-2.0 >= 2.4.0])
+PKG_CHECK_MODULES(GTK, [gtk+-2.0 >= 2.14.0 gthread-2.0 libxml-2.0 >= 2.4.0])
 AC_SUBST(GTK_LIBS)
 AC_SUBST(GTK_CFLAGS)
 
@@ -144,6 +144,43 @@ else
 fi
 
 AM_CONDITIONAL(BUILD_GNOME, test x"$have_gnome" = "xyes")
+
+dnl ================================================================
+dnl Python for optional python dev libs
+dnl ================================================================
+AC_ARG_ENABLE(python,
+    AS_HELP_STRING([--disable-python], [disable python catalog]),
+    check_python=$enableval, check_python=yes)
+
+if test x"$check_python" = x"yes"; then
+  PYGTK_REQUIRED_MAJOR=2
+  PYGTK_REQUIRED_MINOR=10
+  PYGTK_REQUIRED_MICRO=0
+  PKG_CHECK_MODULES(PYGTK, [pygtk-2.0 >= 2.10.0], [have_python=yes],[have_python=no])
+
+  AM_CHECK_PYTHON_HEADERS(, [have_python_headers=no])
+  AM_CHECK_PYTHON_LIBS(, [have_python_lib=no])
+
+  if test x"$have_python_headers" = x"no"; then
+    have_python=no
+  fi
+
+  if test x"$have_python_lib" = x"no"; then
+    have_python=no
+  fi
+
+
+  AC_DEFINE_UNQUOTED(PYGTK_REQUIRED_MAJOR, $PYGTK_REQUIRED_MAJOR, Pygtk mayor version required)
+  AC_DEFINE_UNQUOTED(PYGTK_REQUIRED_MINOR, $PYGTK_REQUIRED_MINOR, Pygtk minor version required)
+  AC_DEFINE_UNQUOTED(PYGTK_REQUIRED_MICRO, $PYGTK_REQUIRED_MICRO, Pygtk micro version required)
+
+  AC_SUBST(PYGTK_LIBS)
+  AC_SUBST(PYGTK_CFLAGS)
+else
+  have_python=no
+fi
+
+AM_CONDITIONAL(BUILD_PYTHON, test x"$have_python" = "xyes")
 
 # ==================================================================
 # Glade User Manual (requires gnome-doc-utils)
@@ -218,6 +255,7 @@ plugins/gnome/Makefile
 plugins/gnome/icons/Makefile
 plugins/gnome/icons/16x16/Makefile
 plugins/gnome/icons/22x22/Makefile
+plugins/python/Makefile
 po/Makefile.in
 doc/Makefile
 doc/version.xml
@@ -234,4 +272,5 @@ Configuration:
 	Compiler:		 ${CC}
 	GTK+ UNIX Print Widgets: ${have_unix_print}
 	GNOME UI Widgets:	 ${have_gnome}
+	PYTHON Widgets support:	 ${have_python}
 "

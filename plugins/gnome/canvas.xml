@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<glade-catalog name="canvas" library="gladegnome" icon-prefix="gnome" domain="glade3" depends="gnome">
+<glade-catalog supports="libglade" name="canvas" library="gladegnome" icon-prefix="gnome" domain="glade3" depends="gnome">
   <glade-widget-classes>
     <glade-widget-class name="GnomeCanvas" generic-name="canvas" title="GNOME Canvas">
       <set-property-function>glade_gnome_canvas_set_property</set-property-function>
@@ -40,11 +40,6 @@
         <property id="selection-mode" name="Selection Mode">
 	  <tooltip>The selection mode</tooltip>
 	  <spec>glade_gnome_icon_list_selection_mode_spec</spec>
-	  <displayable-values>
-	    <value id="GTK_SELECTION_SINGLE" name="Single"></value>
-	    <value id="GTK_SELECTION_BROWSE" name="Browse"></value>
-	    <value id="GTK_SELECTION_MULTIPLE" name="Multiple"></value>
-	  </displayable-values>
 	</property>
         <property id="icon-width" default="78" name="Icon Width">
           <tooltip>The width of each icon</tooltip>

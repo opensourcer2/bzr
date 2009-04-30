@@ -1,27 +1,277 @@
-===========
-Glade 3.4.5
-===========
-	- Fixed annoying text editing bug (527896).
 
 ===========
-Glade 3.4.4
+Glade 3.6.3
 ===========
-	- Now first toplevel in project automatically shows up in
-	  the workspace
-	- Project no longer allows duplicate widget names
-	- Fixed bugs 528511, and 528552.
+	- Maintain current widget selection during commits of related-action
+	  (was causing crashes when the selection changed as a result of a commit, bug 578869)
+	- GtkButton only accepts real stock *items* and not icons (to use an icon, use a GtkImage
+	  with an unrestricted stock icon)
+	- Added documentation on integrating Python widgets (Juan Pablo Ugarte)
+	- Fixed output format for GtkLabel attributes (bug 579793, patch by Davyd Madeley).
+	- Removed hard coded size request to palette (Bug 579624).
+	- Made Atk proxy objects always have unique names (bug 579565).
+	- Removed buggy query dialog from notebook creation (bug 578727).
+
+===========
+Glade 3.6.2
+===========
+	- Fixed missing properties/attributes when serializing GtkWindows (bug 578211)
+	- Fixed loading state of cellrenderer attributes (whether to use attribute or property
+	  directly, bug 566928).
 
 New and updated translations
 ============================
+	- Goran Rakic (sr, sr@latin)
+	- Jorge Gonzalez (es)
+
+===========
+Glade 3.6.1
+===========
+	- Fixed win32 crasher (bug 575206)
+	- Fixed crasher on internal widget selection
+	- Fixed libglade regression (libglade needs specific
+	  ordering of properties, atk props, signals and accelerators)
+	- Fixed MSYS/MinGW build (Bug 576851 – Damon Register)
+	- Disable loading and displaying of 'data' property on GtkTreeStore
+	  (only GtkListStore understands the 'data' construct).
+	- Properly initialize a GValue on stack (bug 577822 - Felix Riemann)
+
+New and updated translations
+============================
+	-  Petr Kovar, Andre Klapper (cs)
+	-  Djihed Afifi (ar)
+
+===========
+Glade 3.6.0
+===========
+	- Fixed bugs 574260, 573513, 573453, 574706, 567809 (Juan Pablo Ugarte, Ryu Jinno, myself)
+
+New and updated translations
+============================
+	- Kostas Papadimas (el)
+	- Claude Paroz (fr)
+	- Kenneth Nielsen (da)
+	- Ani Peter (ml)
+	- Ignacio Casal Quinteiro (gl)
+	- Krishnababu K (te)
+	- Gintautas Miliauskas (lt)
+	- Duarte Loreto (pt)
+	- Manoj Kumar Giri (or)
+	- Petr Kovar (cs)
+	- Milo Casagrande (it)
+	- Theppitak Karoonboonyanan (th)
+	- Philip Withnall (en_GB)
+	- Daniel Nylander (sv)
+	- Nickolay V. Shmyrev (ru)
+	- Ilkka Tuohela (fi)
+	- Christian Kirbach, Hendrik Richter (de)
+	- Baris Cicek (tr)
+	- Philip Withnall (en_GB)
+	- Raivis Dejus (lv)
+	- Changwoo Ryu (ko)
+	- Jorge Gonzalez (es)
+	- Daniel Nylander (sv)
+	- Kenneth Nielsen (da)
+	- Gabor Kelemen (hu)
+	- Inaki Larranaga Murgoitio (eu)
+ 	- Clytie Siddall (vi)
+	- Og Maciel, Jonh Wendell (pt_BR)
+	- Claude Paroz (fr)
+
+===========
+Glade 3.5.7
+===========
+	- Added GladeDesignLayout::widget-event signal. Patch by Pavel Kostyuchenko (bug 542337).
+	- GObjectify signal editor and allow custom signal editors. by Pavel Kostyuchenko (bug 540691).
+	- Make virtual properties in GTK+ 2.16 in order to support running from GTK+ 2.14 and targetting 2.16
+	- New activatable editor to handle activatable properties in smart ways.
+	- Fix markup in confirm close dialog, patch by Felix Riemann (bug 567450).
+	- Marked use-stock property from imagemenuitem to be save-always (bug 568064).
+
+New and updated translations
+============================
+	- Updated de: Andre Klapper, Hendrik Richter
+	- Updated es: Jorge Gonzalez, Jorge González
+	- Updated fi: Ilkka Tuohela
+	- Updated he: Yair Hershkovitz, yairhr@gmail.com
+	- Updated ko: Changwoo Ryu
+	- Updated pt_BR: Jonh Wendell
+
+===========
+Glade 3.5.6
+===========
+	- Handling of new entry properties (bug 567454)
+	- Added filechooser dialog to pixbuf properties
+
+New and updated translations
+============================
+	- Updated es: Jorge Gonzalez, Jorge González
+	- Updated nb: Kjartan Maraas
+	- Updated pt_BR: Og Maciel, Igor Pires Soares
+
+===========
+Glade 3.5.5
+===========
+
+	- Model data editor improvments (sequential editing mode, better key navigation)
+	- Treeview editor revamp, few crashers fixed
+	- Few crashers fixed #525839, #522542
+	- Expand inspector treeview by default
+	- Many more bug fixes including #533471
+
+New and updated translations
+============================
+	- Updated es: Jorge González, Jorge Gonzalez  <jorgegonz@svn.gnome.org>
+
+===========
+Glade 3.5.4
+===========
+	- Added short readable versions of new enum/flag values
+	- Fixed a crasher in the store editor
+	- Focus always stays in the store editor when editing cells get cancelled
+	- Better resizing in editors (property names/warnings expand, inputs dont)
+	- Cleaned up gtk+ includes (Maxim Ermilov - bug 561260)
+	- Some code now available under LGPL
+
+===========
+Glade 3.5.3
+===========
+	- Support for GtkIconFactory
+	- Support for GtkAccelGroup
+	- Support for GtkSizeGroup
+	- Support for GtkListStore/GtkTreeStore (some code by Juan Pablo Ugarte)
+	- Support for GtkTreeViewColumn, GtkTreeView, GtkIconView and GtkComboBox as GtkCellLayout.
+	- Support for GtkCellRenderer derivatives
+	- GtkBuilder support for GtkMenu hierarchies
+	- New all in one treeview editor, for treeviews combo boxes and icon views
+	- Properties and widgets now show warnings in the editor when they have mismatched versions
+	- Palette items are insensitive when widgets are unavailable and show warnings when they are deprecated.
+	- Text wrapping in property labels (Pavel Kostyuchenko)
+	- Editor widget beefed up with icon and class header.
+	- Simplified accelerator editor
+	- Save window pane positions in session (Juan Pablo Ugarte)
+	- New pango attributes editor for GtkLabel:attributes
+	- All widgets/properties in glade files are now saved in the same order
+	  (GtkTable part: bug 422823 - Pavel Kostyuchenko, and bug 422823)
+	- Fixed core to permit working with non GtkWindow toplevel objects/widgets (bug 532636 - Pavel Kostyuchenko)
+	- Palette now allows doc searches
+	- Notebooks switch pages to display the selected widget
+	- Added undoable project conversion routines implemented by catalog plugins
+	- Object selection dialogs can now create widgets when a type is specified by the catalog
+	- Support GtkBuilder "context" attribute for i18n data (translatable properties)
+	- Support for naming your widgets unique across the project or unique across toplevels.
+	- Now you can add menus inline inside the toolbar editor.
+	- No more copying resource files around, now you can set your local resource path in
+	  project preferences and use relative/fullpaths in resource properties (i.e. GdkPixbuf properties
+	  and the like). 
+	- No more context help mode with buttons, you can get property level help (and clear value) with a context menu  
+	- Optimized load routine significantly.
+	- Added GladeEditable interface to layout custom pages for property editors, implemented many
+	  custom editor layouts.
+	- Now you can edit widgets separately from the rest of the project
+	- menu/toolbar/treeview editor no longer a modal dialog.
+	- Added <search widgets> entry with completion/filter to the inspector widget.
+	- Added most of the new needed icons (Mike Gratton - bug 561979, Juan Pablo Ugarte).
+	- Simplified and improved stock-id properties to allow use of custom icons from factories.	
+	- Fixed input dialog crasher (Juan Pablo Ugarte - bug 543314)
+	- Commands now collapse to nothing - Pavel Kostyuchenko
+	- Fixed boxed value comparisons by way of comparing unique strings
+	  from the plugin (Juan Pablo Ugarte - bug 528511)
+	- Fixed project modified state flag glitches (Pavel Kostyuchenko - bug 532017).
+	- Prevent hangs in anjuta (Pavel Kostyuchenko - bug 531585).
+	- Fixed boldness/italicness in varios treeviews
+	- Objects and resource property fields are updated correctly (bug 542335 - fix by Pavel Kostyuchenko)
+	- Update loaded assistant pages properly (bug 540531 - fix by Antti Kaijanmäki)
+	- Silently ignore unrecognized signals in glade file instead of aborting 
+	  (bug 533728 - fix by Pavel Kostyuchenko)
+	- Worked around special child type naming discrepencies between formats from the plugin side 
+	  (bug 533217 - fix by Pavel Kostyuchenko)
+	- response-id now only available for buttons that are in the action area of dialogs (bug 464502)
+	- Fixed displayable values (bug 556452), now they are available in the plugin too.
+	- Misc bugfixed by Richard Hult, Andreas Henriksson, Vincent Geddes, Claude Paroz, Pavel Kostyuchenko, 
+	  Eli Collins, Christian Persch, Theppitak Karoonboonyanan, Kjartan Maraas, Michael Gratton and me.
+
+New and updated translations
+============================
+	- ar: Anas Afif Emad, Djihed Afifi
+	- bg: Yavor Doganov, Alexander Shopov
+	- da: Ask Hjorth Larsen
+	- de: Christian Kirbach
+	- en_GB: David Lodge, Philip Withnall
+	- es: Jorge González, Jorge Gonzalez
+	- et: Ivar Smolin
+	- fi: Ilkka Tuohela
+	- fr: Robert-André Mauchin
+	- gl: Ignacio Casal Quinteiro
+	- gu: Sweta Kothari
+	- he: yairhr@gmail.com, Yair Hershkovitz
+	- hi: Rajesh Ranjan
+	- hu: Gabor Kelemen
+	- it: Andrea Zagli
+	- ko: Changwoo Ryu
+	- ml: Hari Vishnu
+	- mr: Sandeep Shedmake
+	- nl: Vincent van Adrighem
+	- oc: Yannig Marchegay, Yannig Marchegay (Kokoyaya)
+	- pl: Tomasz Dominikowski
+	- pt: Duarte Loreto
+	- pt_BR: Igor Pires Soares, Fabrício Godoy
+	- ru: Yuriy Penkin
+	- sr.po, sr@latin: Goran Rakić
+	- sv: Daniel Nylander
+	- th: Theppitak Karoonboonyanan
+	- tr: Baris Cicek
+	- vi: Clytie Siddall
+	- zh_HK: Chao-Hsiung Liao
+	- zh_TW: Chao-Hsiung Liao, Abel Cheung
+
+===========
+Glade 3.5.2
+===========
+	- oops, was parsing booleans as doubles, fixed bugs with 
+	  builder-unsupported and deprecated.
+
+===========
+Glade 3.5.1
+===========
+	- Added versioning support, you can always chose the target version of
+	  your project starting with gtk+ 2.8 - a project preferences dialog has
+	  been added where you can switch your format, switch your target version
+	  and test for incompatabilities. incompatability error dialogs are also
+	  launched on save as. Target versions are saved to the glade file; 
+	  TODO: patch GtkBuilder to test the required gtk+ version from
+	  <requires lib="gtk+" version="2.8"> and at least warn, also let
+	  third party widget developers test thier own versions using builder
+	  (all new catalog tags and properties are also documented).
+
+===========
+Glade 3.5.0
+===========
+	- Resurrected GtkScaleButton and GtkVolumeButton
+	- We finally have Vincent Geddes's icon choser dialog 
+	  (was skipped before because of string changes)
+	- Not allowed to have duplicate widget names anymore (bug 442860)
+	- Now the first widget in a project shows up automatically
+	  when opening the project.
+	- Old parser was trashed and rewritten from the ground up.
+	- New plugin support for read_widget() and write_widget(), also
+	  create_eprop() which allows the plugin to create widgets to
+	  edit properties in the editor (accelerators are edited from
+	  the plugin now for instance).
+	- Dual file format support available, its a beginning, you dont
+	  get any of the GObjects that GtkBuilder supports but all widgets
+	  you were formerly using with glade can now be loaded/saved in 
+	  builder format.
+	- Api reference docs for embedders and widget authors ressurected
+	  after 2 years, concerning integrating widgets, the docs are
+	  practically rewritten.
+
+New and updated translations
+============================
+	- Priit Laes (et)
 	- Laurent Dhima (sq)
 	- Baris Cicek (tr)
 	- Alexander Shopov (bg)
-	- Kenneth Nielsen (da)
-	- Jorge Gonzalez (es)
-	- Philip Withnall (en_GB)
-	- Ani Peter (ml)
-	- Leonardo Ferreira Fontenelle (pt_BR)
-	- Rajesh Ranjan (hi)
 
 ===========
 Glade 3.4.3

@@ -31,7 +31,7 @@
 
 #include <gladeui/glade.h>
 
-#include <gtk/gtkvbox.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
@@ -91,6 +91,11 @@ void		     glade_palette_set_show_selector_button (GladePalette *palette,
 							     gboolean      show_selector_button);
 							     
 gboolean             glade_palette_get_show_selector_button (GladePalette *palette);
+
+void                 glade_palette_refresh                  (GladePalette *palette);
+
+GladeWidget         *glade_palette_create_root_widget       (GladePalette *palette,
+							     GladeWidgetAdaptor *adaptor);
 
 G_END_DECLS
 

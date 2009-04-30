@@ -4,11 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GladeFixed</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
-<link rel="start" href="index.html" title="Glade UI Builder Reference Manual">
+<link rel="start" href="index.html" title="Glade User Interface Designer Reference Manual">
 <link rel="up" href="core.html" title="Part II. Glade Core">
 <link rel="prev" href="GladeWidget.html" title="GladeWidget">
 <link rel="next" href="gladeui-glade-property.html" title="GladeProperty">
-<meta name="generator" content="GTK-Doc V1.10 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 <link rel="part" href="catalog.html" title="Part I. Adding your custom widgets">
 <link rel="part" href="core.html" title="Part II. Glade Core">
@@ -22,10 +22,11 @@
 <td><a accesskey="p" href="GladeWidget.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
 <td><a accesskey="u" href="core.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
-<th width="100%" align="center">Glade UI Builder Reference Manual</th>
+<th width="100%" align="center">Glade User Interface Designer Reference Manual</th>
 <td><a accesskey="n" href="gladeui-glade-property.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr>
-<tr><td colspan="5" class="shortcuts"><nobr><a href="#GladeFixed.synopsis" class="shortcut">Top</a>
+<tr><td colspan="5" class="shortcuts">
+<a href="#GladeFixed.synopsis" class="shortcut">Top</a>
                    | 
                   <a href="#GladeFixed.description" class="shortcut">Description</a>
                    | 
@@ -33,7 +34,8 @@
                    | 
                   <a href="#GladeFixed.properties" class="shortcut">Properties</a>
                    | 
-                  <a href="#GladeFixed.signals" class="shortcut">Signals</a></nobr></td></tr>
+                  <a href="#GladeFixed.signals" class="shortcut">Signals</a>
+</td></tr>
 </table>
 <div class="refentry" lang="en">
 <a name="GladeFixed"></a><div class="titlepage"></div>
@@ -47,17 +49,13 @@
 <div class="refsynopsisdiv">
 <a name="GladeFixed.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">
-#define             <a class="link" href="GladeFixed.html#GLADE-FIXED-CURSOR-TOP:CAPS" title="GLADE_FIXED_CURSOR_TOP()">GLADE_FIXED_CURSOR_TOP</a>              (type)
-#define             <a class="link" href="GladeFixed.html#GLADE-FIXED-CURSOR-BOTTOM:CAPS" title="GLADE_FIXED_CURSOR_BOTTOM()">GLADE_FIXED_CURSOR_BOTTOM</a>           (type)
-#define             <a class="link" href="GladeFixed.html#GLADE-FIXED-CURSOR-RIGHT:CAPS" title="GLADE_FIXED_CURSOR_RIGHT()">GLADE_FIXED_CURSOR_RIGHT</a>            (type)
-#define             <a class="link" href="GladeFixed.html#GLADE-FIXED-CURSOR-LEFT:CAPS" title="GLADE_FIXED_CURSOR_LEFT()">GLADE_FIXED_CURSOR_LEFT</a>             (type)
                     <a class="link" href="GladeFixed.html#GladeFixed-struct" title="GladeFixed">GladeFixed</a>;
 </pre>
 </div>
 <div class="refsect1" lang="en">
 <a name="GladeFixed.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
-  GObject
+  <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK>
    +----<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a>
          +----GladeFixed
 </pre>
@@ -65,11 +63,11 @@
 <div class="refsect1" lang="en">
 <a name="GladeFixed.properties"></a><h2>Properties</h2>
 <pre class="synopsis">
-  "<a class="link" href="GladeFixed.html#GladeFixed--can-resize" title='The "can-resize" property'>can-resize</a>"               gboolean              : Read / Write / Construct
-  "<a class="link" href="GladeFixed.html#GladeFixed--height-prop" title='The "height-prop" property'>height-prop</a>"              gchar*                : Read / Write / Construct
-  "<a class="link" href="GladeFixed.html#GladeFixed--width-prop" title='The "width-prop" property'>width-prop</a>"               gchar*                : Read / Write / Construct
-  "<a class="link" href="GladeFixed.html#GladeFixed--x-prop" title='The "x-prop" property'>x-prop</a>"                   gchar*                : Read / Write / Construct
-  "<a class="link" href="GladeFixed.html#GladeFixed--y-prop" title='The "y-prop" property'>y-prop</a>"                   gchar*                : Read / Write / Construct
+  "<a class="link" href="GladeFixed.html#GladeFixed--can-resize" title='The "can-resize" property'>can-resize</a>"               <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>              : Read / Write / Construct
+  "<a class="link" href="GladeFixed.html#GladeFixed--height-prop" title='The "height-prop" property'>height-prop</a>"              <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK>*                : Read / Write / Construct
+  "<a class="link" href="GladeFixed.html#GladeFixed--width-prop" title='The "width-prop" property'>width-prop</a>"               <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK>*                : Read / Write / Construct
+  "<a class="link" href="GladeFixed.html#GladeFixed--x-prop" title='The "x-prop" property'>x-prop</a>"                   <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK>*                : Read / Write / Construct
+  "<a class="link" href="GladeFixed.html#GladeFixed--y-prop" title='The "y-prop" property'>y-prop</a>"                   <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK>*                : Read / Write / Construct
 </pre>
 </div>
 <div class="refsect1" lang="en">
@@ -98,126 +96,48 @@ If you handle the configure-child/configure-end[/configure-begin] signals
 and dont let them propagate to the GladeFixed, then the x-prop/y-prop/width-prop/height-prop
 properties will be completely ignored and it is up to the implementor to play
 with whatever child packing properties are available to make a closest match
-for the values passed to configure-child via the <span class="type">GdkRectangle</span>.</p>
-<p>
-
-</p>
+for the values passed to configure-child via the <GTKDOCLINK HREF="GdkRectangle"><span class="type">GdkRectangle</span></GTKDOCLINK>.</p>
 </div>
 <div class="refsect1" lang="en">
 <a name="GladeFixed.details"></a><h2>Details</h2>
 <div class="refsect2" lang="en">
-<a name="GLADE-FIXED-CURSOR-TOP:CAPS"></a><h3>GLADE_FIXED_CURSOR_TOP()</h3>
-<pre class="programlisting">#define             GLADE_FIXED_CURSOR_TOP(type)</pre>
-<p>
-
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody><tr>
-<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
-<td>
-
-
-</td>
-</tr></tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2" lang="en">
-<a name="GLADE-FIXED-CURSOR-BOTTOM:CAPS"></a><h3>GLADE_FIXED_CURSOR_BOTTOM()</h3>
-<pre class="programlisting">#define             GLADE_FIXED_CURSOR_BOTTOM(type)</pre>
-<p>
-
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody><tr>
-<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
-<td>
-
-
-</td>
-</tr></tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2" lang="en">
-<a name="GLADE-FIXED-CURSOR-RIGHT:CAPS"></a><h3>GLADE_FIXED_CURSOR_RIGHT()</h3>
-<pre class="programlisting">#define             GLADE_FIXED_CURSOR_RIGHT(type)</pre>
-<p>
-
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody><tr>
-<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
-<td>
-
-
-</td>
-</tr></tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2" lang="en">
-<a name="GLADE-FIXED-CURSOR-LEFT:CAPS"></a><h3>GLADE_FIXED_CURSOR_LEFT()</h3>
-<pre class="programlisting">#define             GLADE_FIXED_CURSOR_LEFT(type)</pre>
-<p>
-
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody><tr>
-<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
-<td>
-
-
-</td>
-</tr></tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2" lang="en">
 <a name="GladeFixed-struct"></a><h3>GladeFixed</h3>
 <pre class="programlisting">typedef struct _GladeFixed GladeFixed;</pre>
-<p>
-
-</p>
 </div>
 </div>
 <div class="refsect1" lang="en">
 <a name="GladeFixed.property-details"></a><h2>Property Details</h2>
 <div class="refsect2" lang="en">
 <a name="GladeFixed--can-resize"></a><h3>The <code class="literal">"can-resize"</code> property</h3>
-<pre class="programlisting">  "can-resize"               gboolean              : Read / Write / Construct</pre>
+<pre class="programlisting">  "can-resize"               <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>              : Read / Write / Construct</pre>
 <p>Whether this container supports resizes of child widgets.</p>
 <p>Default value: TRUE</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeFixed--height-prop"></a><h3>The <code class="literal">"height-prop"</code> property</h3>
-<pre class="programlisting">  "height-prop"              gchar*                : Read / Write / Construct</pre>
+<pre class="programlisting">  "height-prop"              <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK>*                : Read / Write / Construct</pre>
 <p>The property used to set the height of a child object.</p>
 <p>Default value: "height-request"</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeFixed--width-prop"></a><h3>The <code class="literal">"width-prop"</code> property</h3>
-<pre class="programlisting">  "width-prop"               gchar*                : Read / Write / Construct</pre>
+<pre class="programlisting">  "width-prop"               <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK>*                : Read / Write / Construct</pre>
 <p>The property used to set the width of a child object.</p>
 <p>Default value: "width-request"</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeFixed--x-prop"></a><h3>The <code class="literal">"x-prop"</code> property</h3>
-<pre class="programlisting">  "x-prop"                   gchar*                : Read / Write / Construct</pre>
+<pre class="programlisting">  "x-prop"                   <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK>*                : Read / Write / Construct</pre>
 <p>The property used to set the X position of a child object.</p>
 <p>Default value: "x"</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeFixed--y-prop"></a><h3>The <code class="literal">"y-prop"</code> property</h3>
-<pre class="programlisting">  "y-prop"                   gchar*                : Read / Write / Construct</pre>
+<pre class="programlisting">  "y-prop"                   <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK>*                : Read / Write / Construct</pre>
 <p>The property used to set the Y position of a child object.</p>
 <p>Default value: "y"</p>
 </div>
@@ -226,14 +146,11 @@ for the values passed to configure-child via the <span class="type">GdkRectangle
 <a name="GladeFixed.signal-details"></a><h2>Signal Details</h2>
 <div class="refsect2" lang="en">
 <a name="GladeFixed-configure-begin"></a><h3>The <code class="literal">"configure-begin"</code> signal</h3>
-<pre class="programlisting">gboolean            user_function                      (<a class="link" href="GladeFixed.html" title="GladeFixed">GladeFixed</a> *gladewidget,
-                                                        GObject    *arg1,
-                                                        gpointer    user_data)        : Run Last</pre>
+<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            user_function                      (<a class="link" href="GladeFixed.html" title="GladeFixed">GladeFixed</a> *gladewidget,
+                                                        <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK>    *arg1,
+                                                        <GTKDOCLINK HREF="gpointer">gpointer</GTKDOCLINK>    user_data)        : Run Last</pre>
 <p>
 Signals the beginning of a Drag/Resize</p>
-<p>
-
-</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -253,7 +170,7 @@ Signals the beginning of a Drag/Resize</p>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <code class="literal">TRUE</code> means you have handled the event and cancels the
+<td> <GTKDOCLINK HREF="TRUE:CAPS"><code class="literal">TRUE</code></GTKDOCLINK> means you have handled the event and cancels the
          default handler from being triggered.
 </td>
 </tr>
@@ -263,15 +180,12 @@ Signals the beginning of a Drag/Resize</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeFixed-configure-child"></a><h3>The <code class="literal">"configure-child"</code> signal</h3>
-<pre class="programlisting">gboolean            user_function                      (<a class="link" href="GladeFixed.html" title="GladeFixed">GladeFixed</a> *gladewidget,
-                                                        GObject    *arg1,
-                                                        gpointer    arg2,
-                                                        gpointer    user_data)        : Run Last</pre>
+<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            user_function                      (<a class="link" href="GladeFixed.html" title="GladeFixed">GladeFixed</a> *gladewidget,
+                                                        <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK>    *arg1,
+                                                        <GTKDOCLINK HREF="gpointer">gpointer</GTKDOCLINK>    arg2,
+                                                        <GTKDOCLINK HREF="gpointer">gpointer</GTKDOCLINK>    user_data)        : Run Last</pre>
 <p>
 Delegates the Drag/Resize job.</p>
-<p>
-
-</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -287,7 +201,7 @@ Delegates the Drag/Resize job.</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>arg2</code></em> :</span></p></td>
-<td> a pointer to a <span class="type">GdkRectange</span> describing the new size.
+<td> a pointer to a <GTKDOCLINK HREF="GdkRectange"><span class="type">GdkRectange</span></GTKDOCLINK> describing the new size.
 </td>
 </tr>
 <tr>
@@ -296,7 +210,7 @@ Delegates the Drag/Resize job.</p>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <code class="literal">TRUE</code> means you have handled the event and cancels the
+<td> <GTKDOCLINK HREF="TRUE:CAPS"><code class="literal">TRUE</code></GTKDOCLINK> means you have handled the event and cancels the
          default handler from being triggered.
 </td>
 </tr>
@@ -306,14 +220,11 @@ Delegates the Drag/Resize job.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeFixed-configure-end"></a><h3>The <code class="literal">"configure-end"</code> signal</h3>
-<pre class="programlisting">gboolean            user_function                      (<a class="link" href="GladeFixed.html" title="GladeFixed">GladeFixed</a> *gladewidget,
-                                                        GObject    *arg1,
-                                                        gpointer    user_data)        : Run Last</pre>
+<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            user_function                      (<a class="link" href="GladeFixed.html" title="GladeFixed">GladeFixed</a> *gladewidget,
+                                                        <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK>    *arg1,
+                                                        <GTKDOCLINK HREF="gpointer">gpointer</GTKDOCLINK>    user_data)        : Run Last</pre>
 <p>
 Signals the end of a Drag/Resize</p>
-<p>
-
-</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -333,7 +244,7 @@ Signals the end of a Drag/Resize</p>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <code class="literal">TRUE</code> means you have handled the event and cancels the
+<td> <GTKDOCLINK HREF="TRUE:CAPS"><code class="literal">TRUE</code></GTKDOCLINK> means you have handled the event and cancels the
          default handler from being triggered.
 </td>
 </tr>
@@ -344,6 +255,6 @@ Signals the end of a Drag/Resize</p>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.10</div>
+          Generated by GTK-Doc V1.12</div>
 </body>
 </html>

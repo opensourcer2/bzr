@@ -41,7 +41,7 @@ empty (GObject *container, GladeCreateReason reason)
 
 /* Catalog init function */
 void
-glade_gnomeui_init (void)
+glade_gnomeui_init (const gchar *name)
 {
 	gchar *argv[2] = {"glade-3", NULL};
 	GtkStockItem items [] = {
@@ -597,7 +597,7 @@ glade_gnome_dps_set_color_common (GObject      *object,
 					  property_name);
 	
 	color = glade_property_class_make_gvalue_from_string (prop->klass,
-							      color_str, NULL);
+							      color_str, NULL, NULL);
 	if (color) glade_property_set_value (prop, color);
 }
 
@@ -824,7 +824,7 @@ glade_gnome_dialog_add_button (GladeWidget *gaction_area,
 	eclass = g_type_class_ref (glade_standard_stock_get_type ());
 	if ((eval = g_enum_get_value_by_nick (eclass, stock)) != NULL)
 	{
-		glade_widget_property_set (gbutton, "glade-type", GLADEGTK_BUTTON_STOCK);
+		glade_widget_property_set (gbutton, "use-stock", TRUE);
 		glade_widget_property_set (gbutton, "stock", eval->value);
 	}
 	g_type_class_unref (eclass);
@@ -1352,8 +1352,11 @@ glade_gnome_pixmap_set_filename_common (GObject *object)
 	if (width && height)
 	{
 		GladeProperty *property = glade_widget_get_property (gp, "filename");
-		gchar *file = glade_property_class_make_string_from_gvalue
-					     (property->klass, property->value);
+		gchar *file = 
+			glade_property_class_make_string_from_gvalue
+			(property->klass, property->value,
+			 glade_project_get_format (gp->project));
+
 		if (file)
 		{
 			gnome_pixmap_load_file_at_size (GNOME_PIXMAP (object),
@@ -1602,7 +1605,9 @@ glade_gnome_bonobodockitem_get_props (BonoboDock *doc,
 			return TRUE;
 		}
         }
-        
+
+	g_warning ("Item not found in BonoboDock");
+	
         return FALSE;
 }
 
@@ -1635,41 +1640,44 @@ glade_gnome_bonobodock_set_child_property (GladeWidgetAdaptor  *adaptor,
 	}
 	
 	wchild = GTK_WIDGET (child);
-	glade_gnome_bonobodockitem_get_props (dock, item, &placement, &band_num,
-					      &band_position, &offset);
 	
-	if (strcmp ("placement", property_name) == 0)
-		placement = g_value_get_enum (value);
-	else if (strcmp ("position", property_name) == 0)
-		band_position = g_value_get_int (value);
-	else if (strcmp ("band", property_name) == 0)
-		band_num = g_value_get_int (value);
-	else if (strcmp ("offset", property_name) == 0)
-		offset = g_value_get_int (value);
-	else
+	if (glade_gnome_bonobodockitem_get_props (dock, item, &placement, &band_num,
+						  &band_position, &offset))
 	{
-		g_warning ("No BonoboDock set packing property support for '%s'.", property_name);
-		return;
-	}
-	
-	if ((band = glade_gnome_bd_get_band (dock, wchild)))
-	{		
-		g_object_ref (child);
-		gtk_container_remove (GTK_CONTAINER (band), wchild);
-		
-		if (band->num_children == 0)
+		if (strcmp ("placement", property_name) == 0)
+			placement = g_value_get_enum (value);
+		else if (strcmp ("position", property_name) == 0)
+			band_position = g_value_get_int (value);
+		else if (strcmp ("band", property_name) == 0)
+			band_num = g_value_get_int (value);
+		else if (strcmp ("offset", property_name) == 0)
+			offset = g_value_get_int (value);
+		else
 		{
-			new_band = TRUE;
-			gtk_container_remove (GTK_CONTAINER (container), GTK_WIDGET(band));
+			g_warning ("No BonoboDock set packing property support for '%s'.", property_name);
+			return;
 		}
+	
+		if ((band = glade_gnome_bd_get_band (dock, wchild)))
+		{
+			g_object_ref (child);
+			gtk_container_remove (GTK_CONTAINER (band), wchild);
 		
-		bonobo_dock_add_item (dock, item, placement, band_num, 
-				      band_position, offset, new_band);
-		bonobo_dock_item_set_behavior (item, item->behavior);
-		g_object_unref (child);
+			if (band->num_children == 0)
+			{
+				new_band = TRUE;
+				gtk_container_remove (GTK_CONTAINER (container),
+						      GTK_WIDGET(band));
+			}
+		
+			bonobo_dock_add_item (dock, item, placement, band_num, 
+					      band_position, offset, new_band);
+			bonobo_dock_item_set_behavior (item, item->behavior);
+			g_object_unref (child);
+		}
+		else
+			g_warning ("BonoboDockItem's band not found.\n");
 	}
-	else
-		g_warning ("BonoboDockItem's band not found.\n");
 }
 
 void
@@ -1696,19 +1704,20 @@ glade_gnome_bonobodock_get_child_property (GladeWidgetAdaptor  *adaptor,
 		return;
 	}
 	
-	glade_gnome_bonobodockitem_get_props (BONOBO_DOCK (container),
-					      BONOBO_DOCK_ITEM (child),
-					      &placement, &band_num,
-					      &band_position, &offset);
-	
-	if (strcmp ("placement", property_name) == 0)
-		g_value_set_enum (value, placement);
-	else if (strcmp ("position", property_name) == 0)
-		g_value_set_int (value, band_position);
-	else if (strcmp ("band", property_name) == 0)
-		g_value_set_int (value, band_num);
-	else if (strcmp ("offset", property_name) == 0)
-		g_value_set_int (value, offset);
+	if (glade_gnome_bonobodockitem_get_props (BONOBO_DOCK (container),
+						  BONOBO_DOCK_ITEM (child),
+						  &placement, &band_num,
+						  &band_position, &offset))
+	{	
+		if (strcmp ("placement", property_name) == 0)
+			g_value_set_enum (value, placement);
+		else if (strcmp ("position", property_name) == 0)
+			g_value_set_int (value, band_position);
+		else if (strcmp ("band", property_name) == 0)
+			g_value_set_int (value, band_num);
+		else if (strcmp ("offset", property_name) == 0)
+			g_value_set_int (value, offset);
+	}
 }
 
 void

@@ -51,10 +51,8 @@ libgladeui_1_la_SOURCES = \
 	glade-id-allocator.h \
 	glade-marshallers.c \
 	glade-accumulators.c \
-	glade-parser.c \
 	glade-builtins.c \
 	glade-app.c \
-	glade-keysyms.c \
 	glade-fixed.c \
 	glade-base-editor.c \
 	glade-palette-item.h \
@@ -64,7 +62,11 @@ libgladeui_1_la_SOURCES = \
 	glade-catalog.h \
 	glade-marshallers.h \
 	glade-accumulators.h \
-	glade-widget-action.c
+	glade-widget-action.c \
+	glade-name-context.c \
+	glade-displayable-values.c \
+	glade-editable.c \
+	glade-editor-table.c
 
 libgladeui_1_la_CPPFLAGS =  \
 	$(common_defines)   \
@@ -110,11 +112,15 @@ libgladeuiinclude_HEADERS = \
 	glade-fixed.h \
 	glade-base-editor.h \
 	glade-xml-utils.h \
-	glade-parser.h \
 	glade-signal.h \
 	glade-cursor.h \
-	glade-widget-action.h
-	
+	glade-catalog.h \
+	glade-widget-action.h \
+	glade-name-context.h \
+	glade-displayable-values.h \
+	glade-editable.h \
+	glade-editor-table.h
+
 
 if PLATFORM_WIN32
 libgladeui_1_la_LDFLAGS += -no-undefined
