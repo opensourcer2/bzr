@@ -3,4 +3,4 @@ debian/tmp/usr/share/icons/hicolor
 debian/tmp/usr/share/applications
 debian/tmp/usr/share/omf
 debian/tmp/usr/share/gnome
-debian/glade-3.xpm usr/share/pixmaps/
+debian/glade.xpm usr/share/pixmaps/

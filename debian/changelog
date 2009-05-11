@@ -1,4 +1,14 @@
-glade-3 (3.6.3-0ubuntu1) jaunty-proposed; urgency=low
+glade-3 (3.6.3-1ubuntu2) karmic; urgency=low
+
+  * Merge from Debian experimental, remaining changes: LP: #372580
+    - debian/patches/02_spinbutton-adjustment.patch:
+    - debian/rules: Updated to have shlibdeps point to new version as a new
+      symbol was added
+    - debian/control: Conflict and replace glade-3 and glade-gnome-3
+
+ -- Robert Ancell <robert.ancell@canonical.com>  Mon, 11 May 2009 14:51:26 +1000
+
+glade-3 (3.6.3-1ubuntu1) jaunty-proposed; urgency=low
 
   * New upstream version (LP: #368390)
     - Fixed crash configuring button content (LP: #356013)
@@ -9,6 +19,54 @@ glade-3 (3.6.3-0ubuntu1) jaunty-proposed; urgency=low
       (LP: #323228)
 
  -- Robert Ancell <robert.ancell@canonical.com>  Tue, 28 Apr 2009 15:29:16 +1000
+
+glade-3 (3.6.3-1) unstable; urgency=low
+
+  * New upstream stable release.
+  * Add python-support to handle python module.
+  * Upload to unstable.
+    + Allow distribution unstable in debian/rules.
+    + Track unstable branch in VCS-* URLs.
+
+ -- Deng Xiyue <manphiz-guest@users.alioth.debian.org>  Thu, 30 Apr 2009 13:07:35 +0800
+
+glade-3 (3.6.2-1) experimental; urgency=low
+
+  [ Loic Minier ]
+  * Use binary/ rather than binary- for inter-package CDBS dependencies;
+    thanks Fabian Greffrath.
+
+  [ Deng Xiyue ]
+  * Use POSIX standard regex classes in sed trick in debian/rules.
+
+  [ Loic Minier ]
+  * Drop buildcore.mk include (included via makefile.mk / autotools.mk) and
+    include gnome.mk instead of autotools.mk; incidentally fixes calling of
+    intltool-update -p under Ubuntu; closes: #313520.
+
+  [ Deng Xiyue ]
+  * New upstream development release. Closes: #524367
+    + Bump libgtk2.0-dev requirement to >= 2.14.0.
+    + Let glade Recommends libgtk2.0-dev >= 2.14.0 as well.
+    + Bump SONAME to libgladeui-1-9.  Update package name accordingly, and
+      provide Conflicts/Replaces with older version.
+    + Ship python plugin in libgladeui-1-9, now that it is official and
+      stable.  Add python-gtk2-dev (>= 2.10.0) to Build-Depends and Recommends
+      in libgladeui-1-9.
+    + debian/patches/02_rename_crash.patch: dropped, merged upstream.
+    + debian/patches/99_ltmain_as-needed.patch: refreshed to apply cleanly.
+  * Add Vcs-* links to debian/control*.
+  * Target stable releases in debian/watch.
+  * Drop commented --enable-python configure option in debian/rules, which is
+    not available any more.
+  * Update Standard-Version to 3.8.1.  No change needed.
+  * Point to versioned GPL-2 in debian/copyright as per lintian.
+
+  [ Josselin Mouette ]
+  * Add libglib2.0-doc and libgtk2.0-doc to b-d-i to ensure proper
+    xrefs.
+
+ -- Deng Xiyue <manphiz-guest@users.alioth.debian.org>  Wed, 08 Apr 2009 18:14:04 +0800
 
 glade-3 (3.6.1-0ubuntu1) jaunty; urgency=low
 
