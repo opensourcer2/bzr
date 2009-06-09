@@ -50,196 +50,196 @@
 <a name="GladeWidget.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">
                     <a class="link" href="GladeWidget.html#GladeWidget-struct" title="GladeWidget">GladeWidget</a>;
-<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *       <a class="link" href="GladeWidget.html#glade-widget-get-from-gobject" title="glade_widget_get_from_gobject ()">glade_widget_get_from_gobject</a>       (<GTKDOCLINK HREF="gpointer">gpointer</GTKDOCLINK> object);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-add-child" title="glade_widget_add_child ()">glade_widget_add_child</a>              (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
+<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *       <a class="link" href="GladeWidget.html#glade-widget-get-from-gobject" title="glade_widget_get_from_gobject ()">glade_widget_get_from_gobject</a>       (gpointer object);
+void                <a class="link" href="GladeWidget.html#glade-widget-add-child" title="glade_widget_add_child ()">glade_widget_add_child</a>              (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *child,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> at_mouse);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-remove-child" title="glade_widget_remove_child ()">glade_widget_remove_child</a>           (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
+                                                         gboolean at_mouse);
+void                <a class="link" href="GladeWidget.html#glade-widget-remove-child" title="glade_widget_remove_child ()">glade_widget_remove_child</a>           (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *child);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-replace" title="glade_widget_replace ()">glade_widget_replace</a>                (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *old_object,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *new_object);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-rebuild" title="glade_widget_rebuild ()">glade_widget_rebuild</a>                (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gwidget);
+void                <a class="link" href="GladeWidget.html#glade-widget-replace" title="glade_widget_replace ()">glade_widget_replace</a>                (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
+                                                         GObject *old_object,
+                                                         GObject *new_object);
+void                <a class="link" href="GladeWidget.html#glade-widget-rebuild" title="glade_widget_rebuild ()">glade_widget_rebuild</a>                (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gwidget);
 <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *       <a class="link" href="GladeWidget.html#glade-widget-read" title="glade_widget_read ()">glade_widget_read</a>                   (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
-                                                         <GTKDOCLINK HREF="GladeXmlNode">GladeXmlNode</GTKDOCLINK> *node,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *internal);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-write" title="glade_widget_write ()">glade_widget_write</a>                  (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         <GTKDOCLINK HREF="GladeXmlContext">GladeXmlContext</GTKDOCLINK> *context,
-                                                         <GTKDOCLINK HREF="GladeXmlNode">GladeXmlNode</GTKDOCLINK> *node);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-read-child" title="glade_widget_read_child ()">glade_widget_read_child</a>             (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         <GTKDOCLINK HREF="GladeXmlNode">GladeXmlNode</GTKDOCLINK> *node);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-write-child" title="glade_widget_write_child ()">glade_widget_write_child</a>            (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         GladeXmlNode *node,
+                                                         const gchar *internal);
+void                <a class="link" href="GladeWidget.html#glade-widget-write" title="glade_widget_write ()">glade_widget_write</a>                  (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         GladeXmlContext *context,
+                                                         GladeXmlNode *node);
+void                <a class="link" href="GladeWidget.html#glade-widget-read-child" title="glade_widget_read_child ()">glade_widget_read_child</a>             (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         GladeXmlNode *node);
+void                <a class="link" href="GladeWidget.html#glade-widget-write-child" title="glade_widget_write_child ()">glade_widget_write_child</a>            (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *child,
-                                                         <GTKDOCLINK HREF="GladeXmlContext">GladeXmlContext</GTKDOCLINK> *context,
-                                                         <GTKDOCLINK HREF="GladeXmlNode">GladeXmlNode</GTKDOCLINK> *node);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-write-placeholder" title="glade_widget_write_placeholder ()">glade_widget_write_placeholder</a>      (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *object,
-                                                         <GTKDOCLINK HREF="GladeXmlContext">GladeXmlContext</GTKDOCLINK> *context,
-                                                         <GTKDOCLINK HREF="GladeXmlNode">GladeXmlNode</GTKDOCLINK> *node);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-write-special-child-prop" title="glade_widget_write_special_child_prop ()">glade_widget_write_special_child_prop</a>
+                                                         GladeXmlContext *context,
+                                                         GladeXmlNode *node);
+void                <a class="link" href="GladeWidget.html#glade-widget-write-placeholder" title="glade_widget_write_placeholder ()">glade_widget_write_placeholder</a>      (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
+                                                         GObject *object,
+                                                         GladeXmlContext *context,
+                                                         GladeXmlNode *node);
+void                <a class="link" href="GladeWidget.html#glade-widget-write-special-child-prop" title="glade_widget_write_special_child_prop ()">glade_widget_write_special_child_prop</a>
                                                         (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *object,
-                                                         <GTKDOCLINK HREF="GladeXmlContext">GladeXmlContext</GTKDOCLINK> *context,
-                                                         <GTKDOCLINK HREF="GladeXmlNode">GladeXmlNode</GTKDOCLINK> *node);
+                                                         GObject *object,
+                                                         GladeXmlContext *context,
+                                                         GladeXmlNode *node);
 <a class="link" href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> * <a class="link" href="GladeWidget.html#glade-widget-create-editor-property" title="glade_widget_create_editor_property ()">glade_widget_create_editor_property</a>
                                                         (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> packing,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> use_command);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-set-child-type-from-node" title="glade_widget_set_child_type_from_node ()">glade_widget_set_child_type_from_node</a>
+                                                         const gchar *property,
+                                                         gboolean packing,
+                                                         gboolean use_command);
+void                <a class="link" href="GladeWidget.html#glade-widget-set-child-type-from-node" title="glade_widget_set_child_type_from_node ()">glade_widget_set_child_type_from_node</a>
                                                         (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *child,
-                                                         <GTKDOCLINK HREF="GladeXmlNode">GladeXmlNode</GTKDOCLINK> *node);
+                                                         GObject *child,
+                                                         GladeXmlNode *node);
 <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *       <a class="link" href="GladeWidget.html#glade-widget-dup" title="glade_widget_dup ()">glade_widget_dup</a>                    (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *template_widget,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> exact);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-copy-signals" title="glade_widget_copy_signals ()">glade_widget_copy_signals</a>           (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         gboolean exact);
+void                <a class="link" href="GladeWidget.html#glade-widget-copy-signals" title="glade_widget_copy_signals ()">glade_widget_copy_signals</a>           (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *template_widget);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-copy-properties" title="glade_widget_copy_properties ()">glade_widget_copy_properties</a>        (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+void                <a class="link" href="GladeWidget.html#glade-widget-copy-properties" title="glade_widget_copy_properties ()">glade_widget_copy_properties</a>        (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *template_widget,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> copy_parentless,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> exact);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-set-packing-properties" title="glade_widget_set_packing_properties ()">glade_widget_set_packing_properties</a> (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         gboolean copy_parentless,
+                                                         gboolean exact);
+void                <a class="link" href="GladeWidget.html#glade-widget-set-packing-properties" title="glade_widget_set_packing_properties ()">glade_widget_set_packing_properties</a> (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *container);
 <a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a> *     <a class="link" href="GladeWidget.html#glade-widget-get-property" title="glade_widget_get_property ()">glade_widget_get_property</a>           (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property);
+                                                         const gchar *id_property);
 <a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a> *     <a class="link" href="GladeWidget.html#glade-widget-get-pack-property" title="glade_widget_get_pack_property ()">glade_widget_get_pack_property</a>      (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property);
-<GTKDOCLINK HREF="GList">GList</GTKDOCLINK> *             <a class="link" href="GladeWidget.html#glade-widget-dup-properties" title="glade_widget_dup_properties ()">glade_widget_dup_properties</a>         (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *dest_widget,
-                                                         <GTKDOCLINK HREF="GList">GList</GTKDOCLINK> *template_props,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> as_load,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> copy_parentless,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> exact);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-remove-property" title="glade_widget_remove_property ()">glade_widget_remove_property</a>        (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-show" title="glade_widget_show ()">glade_widget_show</a>                   (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-hide" title="glade_widget_hide ()">glade_widget_hide</a>                   (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-add-signal-handler" title="glade_widget_add_signal_handler ()">glade_widget_add_signal_handler</a>     (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         <GTKDOCLINK HREF="GladeSignal">GladeSignal</GTKDOCLINK> *signal_handler);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-remove-signal-handler" title="glade_widget_remove_signal_handler ()">glade_widget_remove_signal_handler</a>  (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         <GTKDOCLINK HREF="GladeSignal">GladeSignal</GTKDOCLINK> *signal_handler);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-change-signal-handler" title="glade_widget_change_signal_handler ()">glade_widget_change_signal_handler</a>  (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         <GTKDOCLINK HREF="GladeSignal">GladeSignal</GTKDOCLINK> *old_signal_handler,
-                                                         <GTKDOCLINK HREF="GladeSignal">GladeSignal</GTKDOCLINK> *new_signal_handler);
-<GTKDOCLINK HREF="GPtrArray">GPtrArray</GTKDOCLINK> *         <a class="link" href="GladeWidget.html#glade-widget-list-signal-handlers" title="glade_widget_list_signal_handlers ()">glade_widget_list_signal_handlers</a>   (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *signal_name);
-<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            <a class="link" href="GladeWidget.html#glade-widget-has-decendant" title="glade_widget_has_decendant ()">glade_widget_has_decendant</a>          (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         <GTKDOCLINK HREF="GType">GType</GTKDOCLINK> type);
-<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            <a class="link" href="GladeWidget.html#glade-widget-event" title="glade_widget_event ()">glade_widget_event</a>                  (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gwidget,
-                                                         <GTKDOCLINK HREF="GdkEvent">GdkEvent</GTKDOCLINK> *event);
-<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            <a class="link" href="GladeWidget.html#glade-widget-placeholder-relation" title="glade_widget_placeholder_relation ()">glade_widget_placeholder_relation</a>   (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
+                                                         const gchar *id_property);
+GList *             <a class="link" href="GladeWidget.html#glade-widget-dup-properties" title="glade_widget_dup_properties ()">glade_widget_dup_properties</a>         (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *dest_widget,
+                                                         GList *template_props,
+                                                         gboolean as_load,
+                                                         gboolean copy_parentless,
+                                                         gboolean exact);
+void                <a class="link" href="GladeWidget.html#glade-widget-remove-property" title="glade_widget_remove_property ()">glade_widget_remove_property</a>        (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *id_property);
+void                <a class="link" href="GladeWidget.html#glade-widget-show" title="glade_widget_show ()">glade_widget_show</a>                   (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);
+void                <a class="link" href="GladeWidget.html#glade-widget-hide" title="glade_widget_hide ()">glade_widget_hide</a>                   (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);
+void                <a class="link" href="GladeWidget.html#glade-widget-add-signal-handler" title="glade_widget_add_signal_handler ()">glade_widget_add_signal_handler</a>     (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         GladeSignal *signal_handler);
+void                <a class="link" href="GladeWidget.html#glade-widget-remove-signal-handler" title="glade_widget_remove_signal_handler ()">glade_widget_remove_signal_handler</a>  (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         GladeSignal *signal_handler);
+void                <a class="link" href="GladeWidget.html#glade-widget-change-signal-handler" title="glade_widget_change_signal_handler ()">glade_widget_change_signal_handler</a>  (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         GladeSignal *old_signal_handler,
+                                                         GladeSignal *new_signal_handler);
+GPtrArray *         <a class="link" href="GladeWidget.html#glade-widget-list-signal-handlers" title="glade_widget_list_signal_handlers ()">glade_widget_list_signal_handlers</a>   (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *signal_name);
+gboolean            <a class="link" href="GladeWidget.html#glade-widget-has-decendant" title="glade_widget_has_decendant ()">glade_widget_has_decendant</a>          (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         GType type);
+gboolean            <a class="link" href="GladeWidget.html#glade-widget-event" title="glade_widget_event ()">glade_widget_event</a>                  (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gwidget,
+                                                         <a href="/opt/share/gtk-doc/html/gdk/gdk-Event-Structures.html#GdkEvent">GdkEvent</a> *event);
+gboolean            <a class="link" href="GladeWidget.html#glade-widget-placeholder-relation" title="glade_widget_placeholder_relation ()">glade_widget_placeholder_relation</a>   (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);
 <a class="link" href="GladeWidgetAction.html" title="GladeWidgetAction">GladeWidgetAction</a> * <a class="link" href="GladeWidget.html#glade-widget-get-action" title="glade_widget_get_action ()">glade_widget_get_action</a>             (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *action_path);
+                                                         const gchar *action_path);
 <a class="link" href="GladeWidgetAction.html" title="GladeWidgetAction">GladeWidgetAction</a> * <a class="link" href="GladeWidget.html#glade-widget-get-pack-action" title="glade_widget_get_pack_action ()">glade_widget_get_pack_action</a>        (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *action_path);
-<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            <a class="link" href="GladeWidget.html#glade-widget-set-action-sensitive" title="glade_widget_set_action_sensitive ()">glade_widget_set_action_sensitive</a>   (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *action_path,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> sensitive);
-<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            <a class="link" href="GladeWidget.html#glade-widget-set-pack-action-sensitive" title="glade_widget_set_pack_action_sensitive ()">glade_widget_set_pack_action_sensitive</a>
+                                                         const gchar *action_path);
+gboolean            <a class="link" href="GladeWidget.html#glade-widget-set-action-sensitive" title="glade_widget_set_action_sensitive ()">glade_widget_set_action_sensitive</a>   (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *action_path,
+                                                         gboolean sensitive);
+gboolean            <a class="link" href="GladeWidget.html#glade-widget-set-pack-action-sensitive" title="glade_widget_set_pack_action_sensitive ()">glade_widget_set_pack_action_sensitive</a>
                                                         (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *action_path,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> sensitive);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-remove-action" title="glade_widget_remove_action ()">glade_widget_remove_action</a>          (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *action_path);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-remove-pack-action" title="glade_widget_remove_pack_action ()">glade_widget_remove_pack_action</a>     (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *action_path);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-add-prop-ref" title="glade_widget_add_prop_ref ()">glade_widget_add_prop_ref</a>           (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *action_path,
+                                                         gboolean sensitive);
+void                <a class="link" href="GladeWidget.html#glade-widget-remove-action" title="glade_widget_remove_action ()">glade_widget_remove_action</a>          (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *action_path);
+void                <a class="link" href="GladeWidget.html#glade-widget-remove-pack-action" title="glade_widget_remove_pack_action ()">glade_widget_remove_pack_action</a>     (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *action_path);
+void                <a class="link" href="GladeWidget.html#glade-widget-add-prop-ref" title="glade_widget_add_prop_ref ()">glade_widget_add_prop_ref</a>           (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                                          <a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a> *property);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-remove-prop-ref" title="glade_widget_remove_prop_ref ()">glade_widget_remove_prop_ref</a>        (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+void                <a class="link" href="GladeWidget.html#glade-widget-remove-prop-ref" title="glade_widget_remove_prop_ref ()">glade_widget_remove_prop_ref</a>        (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                                          <a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a> *property);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-object-set-property" title="glade_widget_object_set_property ()">glade_widget_object_set_property</a>    (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property_name,
-                                                         const <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-object-get-property" title="glade_widget_object_get_property ()">glade_widget_object_get_property</a>    (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property_name,
-                                                         <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-child-set-property" title="glade_widget_child_set_property ()">glade_widget_child_set_property</a>     (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+void                <a class="link" href="GladeWidget.html#glade-widget-object-set-property" title="glade_widget_object_set_property ()">glade_widget_object_set_property</a>    (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *property_name,
+                                                         const GValue *value);
+void                <a class="link" href="GladeWidget.html#glade-widget-object-get-property" title="glade_widget_object_get_property ()">glade_widget_object_get_property</a>    (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *property_name,
+                                                         GValue *value);
+void                <a class="link" href="GladeWidget.html#glade-widget-child-set-property" title="glade_widget_child_set_property ()">glade_widget_child_set_property</a>     (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *child,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property_name,
-                                                         const <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-child-get-property" title="glade_widget_child_get_property ()">glade_widget_child_get_property</a>     (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *property_name,
+                                                         const GValue *value);
+void                <a class="link" href="GladeWidget.html#glade-widget-child-get-property" title="glade_widget_child_get_property ()">glade_widget_child_get_property</a>     (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *child,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property_name,
-                                                         <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);
-<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            <a class="link" href="GladeWidget.html#glade-widget-property-get" title="glade_widget_property_get ()">glade_widget_property_get</a>           (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property,
+                                                         const gchar *property_name,
+                                                         GValue *value);
+gboolean            <a class="link" href="GladeWidget.html#glade-widget-property-get" title="glade_widget_property_get ()">glade_widget_property_get</a>           (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *id_property,
                                                          ...);
-<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            <a class="link" href="GladeWidget.html#glade-widget-property-set" title="glade_widget_property_set ()">glade_widget_property_set</a>           (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property,
+gboolean            <a class="link" href="GladeWidget.html#glade-widget-property-set" title="glade_widget_property_set ()">glade_widget_property_set</a>           (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *id_property,
                                                          ...);
-<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            <a class="link" href="GladeWidget.html#glade-widget-pack-property-get" title="glade_widget_pack_property_get ()">glade_widget_pack_property_get</a>      (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property,
+gboolean            <a class="link" href="GladeWidget.html#glade-widget-pack-property-get" title="glade_widget_pack_property_get ()">glade_widget_pack_property_get</a>      (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *id_property,
                                                          ...);
-<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            <a class="link" href="GladeWidget.html#glade-widget-pack-property-set" title="glade_widget_pack_property_set ()">glade_widget_pack_property_set</a>      (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property,
+gboolean            <a class="link" href="GladeWidget.html#glade-widget-pack-property-set" title="glade_widget_pack_property_set ()">glade_widget_pack_property_set</a>      (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *id_property,
                                                          ...);
-<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            <a class="link" href="GladeWidget.html#glade-widget-property-reset" title="glade_widget_property_reset ()">glade_widget_property_reset</a>         (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property);
-<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            <a class="link" href="GladeWidget.html#glade-widget-pack-property-reset" title="glade_widget_pack_property_reset ()">glade_widget_pack_property_reset</a>    (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property);
-<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            <a class="link" href="GladeWidget.html#glade-widget-property-default" title="glade_widget_property_default ()">glade_widget_property_default</a>       (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property);
-<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            <a class="link" href="GladeWidget.html#glade-widget-property-original-default" title="glade_widget_property_original_default ()">glade_widget_property_original_default</a>
+gboolean            <a class="link" href="GladeWidget.html#glade-widget-property-reset" title="glade_widget_property_reset ()">glade_widget_property_reset</a>         (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *id_property);
+gboolean            <a class="link" href="GladeWidget.html#glade-widget-pack-property-reset" title="glade_widget_pack_property_reset ()">glade_widget_pack_property_reset</a>    (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *id_property);
+gboolean            <a class="link" href="GladeWidget.html#glade-widget-property-default" title="glade_widget_property_default ()">glade_widget_property_default</a>       (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *id_property);
+gboolean            <a class="link" href="GladeWidget.html#glade-widget-property-original-default" title="glade_widget_property_original_default ()">glade_widget_property_original_default</a>
                                                         (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property);
-<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            <a class="link" href="GladeWidget.html#glade-widget-pack-property-default" title="glade_widget_pack_property_default ()">glade_widget_pack_property_default</a>  (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property);
-<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            <a class="link" href="GladeWidget.html#glade-widget-property-set-sensitive" title="glade_widget_property_set_sensitive ()">glade_widget_property_set_sensitive</a> (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> sensitive,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *reason);
-<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            <a class="link" href="GladeWidget.html#glade-widget-pack-property-set-sensitive" title="glade_widget_pack_property_set_sensitive ()">glade_widget_pack_property_set_sensitive</a>
+                                                         const gchar *id_property);
+gboolean            <a class="link" href="GladeWidget.html#glade-widget-pack-property-default" title="glade_widget_pack_property_default ()">glade_widget_pack_property_default</a>  (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *id_property);
+gboolean            <a class="link" href="GladeWidget.html#glade-widget-property-set-sensitive" title="glade_widget_property_set_sensitive ()">glade_widget_property_set_sensitive</a> (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *id_property,
+                                                         gboolean sensitive,
+                                                         const gchar *reason);
+gboolean            <a class="link" href="GladeWidget.html#glade-widget-pack-property-set-sensitive" title="glade_widget_pack_property_set_sensitive ()">glade_widget_pack_property_set_sensitive</a>
                                                         (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> sensitive,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *reason);
-<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            <a class="link" href="GladeWidget.html#glade-widget-property-set-enabled" title="glade_widget_property_set_enabled ()">glade_widget_property_set_enabled</a>   (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> enabled);
-<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            <a class="link" href="GladeWidget.html#glade-widget-pack-property-set-enabled" title="glade_widget_pack_property_set_enabled ()">glade_widget_pack_property_set_enabled</a>
+                                                         const gchar *id_property,
+                                                         gboolean sensitive,
+                                                         const gchar *reason);
+gboolean            <a class="link" href="GladeWidget.html#glade-widget-property-set-enabled" title="glade_widget_property_set_enabled ()">glade_widget_property_set_enabled</a>   (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *id_property,
+                                                         gboolean enabled);
+gboolean            <a class="link" href="GladeWidget.html#glade-widget-pack-property-set-enabled" title="glade_widget_pack_property_set_enabled ()">glade_widget_pack_property_set_enabled</a>
                                                         (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> enabled);
-<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            <a class="link" href="GladeWidget.html#glade-widget-property-set-save-always" title="glade_widget_property_set_save_always ()">glade_widget_property_set_save_always</a>
+                                                         const gchar *id_property,
+                                                         gboolean enabled);
+gboolean            <a class="link" href="GladeWidget.html#glade-widget-property-set-save-always" title="glade_widget_property_set_save_always ()">glade_widget_property_set_save_always</a>
                                                         (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> setting);
-<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            <a class="link" href="GladeWidget.html#glade-widget-pack-property-set-save-always" title="glade_widget_pack_property_set_save_always ()">glade_widget_pack_property_set_save_always</a>
+                                                         const gchar *id_property,
+                                                         gboolean setting);
+gboolean            <a class="link" href="GladeWidget.html#glade-widget-pack-property-set-save-always" title="glade_widget_pack_property_set_save_always ()">glade_widget_pack_property_set_save_always</a>
                                                         (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> setting);
-<GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *             <a class="link" href="GladeWidget.html#glade-widget-property-string" title="glade_widget_property_string ()">glade_widget_property_string</a>        (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property,
-                                                         const <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);
-<GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *             <a class="link" href="GladeWidget.html#glade-widget-pack-property-string" title="glade_widget_pack_property_string ()">glade_widget_pack_property_string</a>   (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property,
-                                                         const <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-set-name" title="glade_widget_set_name ()">glade_widget_set_name</a>               (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *name);
-const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *       <a class="link" href="GladeWidget.html#glade-widget-get-name" title="glade_widget_get_name ()">glade_widget_get_name</a>               (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-set-internal" title="glade_widget_set_internal ()">glade_widget_set_internal</a>           (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *internal);
-const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *       <a class="link" href="GladeWidget.html#glade-widget-get-internal" title="glade_widget_get_internal ()">glade_widget_get_internal</a>           (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-set-object" title="glade_widget_set_object ()">glade_widget_set_object</a>             (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gwidget,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *new_object);
-<GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *           <a class="link" href="GladeWidget.html#glade-widget-get-object" title="glade_widget_get_object ()">glade_widget_get_object</a>             (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-set-project" title="glade_widget_set_project ()">glade_widget_set_project</a>            (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *id_property,
+                                                         gboolean setting);
+gchar *             <a class="link" href="GladeWidget.html#glade-widget-property-string" title="glade_widget_property_string ()">glade_widget_property_string</a>        (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *id_property,
+                                                         const GValue *value);
+gchar *             <a class="link" href="GladeWidget.html#glade-widget-pack-property-string" title="glade_widget_pack_property_string ()">glade_widget_pack_property_string</a>   (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *id_property,
+                                                         const GValue *value);
+void                <a class="link" href="GladeWidget.html#glade-widget-set-name" title="glade_widget_set_name ()">glade_widget_set_name</a>               (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *name);
+const gchar *       <a class="link" href="GladeWidget.html#glade-widget-get-name" title="glade_widget_get_name ()">glade_widget_get_name</a>               (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);
+void                <a class="link" href="GladeWidget.html#glade-widget-set-internal" title="glade_widget_set_internal ()">glade_widget_set_internal</a>           (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *internal);
+const gchar *       <a class="link" href="GladeWidget.html#glade-widget-get-internal" title="glade_widget_get_internal ()">glade_widget_get_internal</a>           (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);
+void                <a class="link" href="GladeWidget.html#glade-widget-set-object" title="glade_widget_set_object ()">glade_widget_set_object</a>             (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gwidget,
+                                                         GObject *new_object);
+GObject *           <a class="link" href="GladeWidget.html#glade-widget-get-object" title="glade_widget_get_object ()">glade_widget_get_object</a>             (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);
+void                <a class="link" href="GladeWidget.html#glade-widget-set-project" title="glade_widget_set_project ()">glade_widget_set_project</a>            (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                                          <a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);
 <a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *      <a class="link" href="GladeWidget.html#glade-widget-get-project" title="glade_widget_get_project ()">glade_widget_get_project</a>            (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);
 <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> * <a class="link" href="GladeWidget.html#glade-widget-get-adaptor" title="glade_widget_get_adaptor ()">glade_widget_get_adaptor</a>           (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);
 <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *       <a class="link" href="GladeWidget.html#glade-widget-get-parent" title="glade_widget_get_parent ()">glade_widget_get_parent</a>             (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-set-parent" title="glade_widget_set_parent ()">glade_widget_set_parent</a>             (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+void                <a class="link" href="GladeWidget.html#glade-widget-set-parent" title="glade_widget_set_parent ()">glade_widget_set_parent</a>             (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent);
-<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            <a class="link" href="GladeWidget.html#glade-widget-superuser" title="glade_widget_superuser ()">glade_widget_superuser</a>              (void);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-push-superuser" title="glade_widget_push_superuser ()">glade_widget_push_superuser</a>         (void);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeWidget.html#glade-widget-pop-superuser" title="glade_widget_pop_superuser ()">glade_widget_pop_superuser</a>          (void);
+gboolean            <a class="link" href="GladeWidget.html#glade-widget-superuser" title="glade_widget_superuser ()">glade_widget_superuser</a>              (void);
+void                <a class="link" href="GladeWidget.html#glade-widget-push-superuser" title="glade_widget_push_superuser ()">glade_widget_push_superuser</a>         (void);
+void                <a class="link" href="GladeWidget.html#glade-widget-pop-superuser" title="glade_widget_pop_superuser ()">glade_widget_pop_superuser</a>          (void);
 </pre>
 </div>
 <div class="refsect1" lang="en">
 <a name="GladeWidget.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
-  <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK>
+  GObject
    +----GladeWidget
          +----<a class="link" href="GladeFixed.html" title="GladeFixed">GladeFixed</a>
 </pre>
@@ -247,21 +247,21 @@ const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *       <a class="link" href="
 <div class="refsect1" lang="en">
 <a name="GladeWidget.properties"></a><h2>Properties</h2>
 <pre class="synopsis">
-  "<a class="link" href="GladeWidget.html#GladeWidget--adaptor" title='The "adaptor" property'>adaptor</a>"                  <GTKDOCLINK HREF="GladeGObjectAdaptor">GladeGObjectAdaptor</GTKDOCLINK>*  : Read / Write / Construct Only
-  "<a class="link" href="GladeWidget.html#GladeWidget--anarchist" title='The "anarchist" property'>anarchist</a>"                <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>              : Read / Write / Construct Only
-  "<a class="link" href="GladeWidget.html#GladeWidget--internal" title='The "internal" property'>internal</a>"                 <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK>*                : Read / Write / Construct
-  "<a class="link" href="GladeWidget.html#GladeWidget--internal-name" title='The "internal-name" property'>internal-name</a>"            <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK>*                : Write / Construct Only
-  "<a class="link" href="GladeWidget.html#GladeWidget--name" title='The "name" property'>name</a>"                     <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK>*                : Read / Write / Construct
-  "<a class="link" href="GladeWidget.html#GladeWidget--object" title='The "object" property'>object</a>"                   <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK>*              : Read / Write / Construct
+  "<a class="link" href="GladeWidget.html#GladeWidget--adaptor" title='The "adaptor" property'>adaptor</a>"                  GladeGObjectAdaptor*  : Read / Write / Construct Only
+  "<a class="link" href="GladeWidget.html#GladeWidget--anarchist" title='The "anarchist" property'>anarchist</a>"                gboolean              : Read / Write / Construct Only
+  "<a class="link" href="GladeWidget.html#GladeWidget--internal" title='The "internal" property'>internal</a>"                 gchar*                : Read / Write / Construct
+  "<a class="link" href="GladeWidget.html#GladeWidget--internal-name" title='The "internal-name" property'>internal-name</a>"            gchar*                : Write / Construct Only
+  "<a class="link" href="GladeWidget.html#GladeWidget--name" title='The "name" property'>name</a>"                     gchar*                : Read / Write / Construct
+  "<a class="link" href="GladeWidget.html#GladeWidget--object" title='The "object" property'>object</a>"                   GObject*              : Read / Write / Construct
   "<a class="link" href="GladeWidget.html#GladeWidget--parent" title='The "parent" property'>parent</a>"                   <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a>*          : Read / Write / Construct
   "<a class="link" href="GladeWidget.html#GladeWidget--project" title='The "project" property'>project</a>"                  <a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a>*         : Read / Write / Construct
-  "<a class="link" href="GladeWidget.html#GladeWidget--properties" title='The "properties" property'>properties</a>"               <GTKDOCLINK HREF="gpointer">gpointer</GTKDOCLINK>              : Read / Write / Construct Only
-  "<a class="link" href="GladeWidget.html#GladeWidget--reason" title='The "reason" property'>reason</a>"                   <GTKDOCLINK HREF="gint">gint</GTKDOCLINK>                  : Write / Construct Only
-  "<a class="link" href="GladeWidget.html#GladeWidget--support-warning" title='The "support-warning" property'>support-warning</a>"          <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK>*                : Read
+  "<a class="link" href="GladeWidget.html#GladeWidget--properties" title='The "properties" property'>properties</a>"               gpointer              : Read / Write / Construct Only
+  "<a class="link" href="GladeWidget.html#GladeWidget--reason" title='The "reason" property'>reason</a>"                   gint                  : Write / Construct Only
+  "<a class="link" href="GladeWidget.html#GladeWidget--support-warning" title='The "support-warning" property'>support-warning</a>"          gchar*                : Read
   "<a class="link" href="GladeWidget.html#GladeWidget--template" title='The "template" property'>template</a>"                 <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a>*          : Write / Construct Only
-  "<a class="link" href="GladeWidget.html#GladeWidget--template-exact" title='The "template-exact" property'>template-exact</a>"           <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>              : Write / Construct Only
-  "<a class="link" href="GladeWidget.html#GladeWidget--toplevel-height" title='The "toplevel-height" property'>toplevel-height</a>"          <GTKDOCLINK HREF="gint">gint</GTKDOCLINK>                  : Read / Write
-  "<a class="link" href="GladeWidget.html#GladeWidget--toplevel-width" title='The "toplevel-width" property'>toplevel-width</a>"           <GTKDOCLINK HREF="gint">gint</GTKDOCLINK>                  : Read / Write
+  "<a class="link" href="GladeWidget.html#GladeWidget--template-exact" title='The "template-exact" property'>template-exact</a>"           gboolean              : Write / Construct Only
+  "<a class="link" href="GladeWidget.html#GladeWidget--toplevel-height" title='The "toplevel-height" property'>toplevel-height</a>"          gint                  : Read / Write
+  "<a class="link" href="GladeWidget.html#GladeWidget--toplevel-width" title='The "toplevel-width" property'>toplevel-width</a>"           gint                  : Read / Write
 </pre>
 </div>
 <div class="refsect1" lang="en">
@@ -291,14 +291,14 @@ convenience api for getting and setting properties (mostly from the plugin).</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-get-from-gobject"></a><h3>glade_widget_get_from_gobject ()</h3>
-<pre class="programlisting"><a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *       glade_widget_get_from_gobject       (<GTKDOCLINK HREF="gpointer">gpointer</GTKDOCLINK> object);</pre>
+<pre class="programlisting"><a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *       glade_widget_get_from_gobject       (gpointer object);</pre>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-add-child"></a><h3>glade_widget_add_child ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_add_child              (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
+<pre class="programlisting">void                glade_widget_add_child              (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *child,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> at_mouse);</pre>
+                                                         gboolean at_mouse);</pre>
 <p>
 Adds <em class="parameter"><code>child</code></em> to <em class="parameter"><code>parent</code></em> in a generic way for this <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> parent.</p>
 <div class="variablelist"><table border="0">
@@ -326,7 +326,7 @@ Adds <em class="parameter"><code>child</code></em> to <em class="parameter"><cod
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-remove-child"></a><h3>glade_widget_remove_child ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_remove_child           (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
+<pre class="programlisting">void                glade_widget_remove_child           (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *child);</pre>
 <p>
 Removes <em class="parameter"><code>child</code></em> from <em class="parameter"><code>parent</code></em> in a generic way for this <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> parent.</p>
@@ -349,9 +349,9 @@ Removes <em class="parameter"><code>child</code></em> from <em class="parameter"
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-replace"></a><h3>glade_widget_replace ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_replace                (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *old_object,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *new_object);</pre>
+<pre class="programlisting">void                glade_widget_replace                (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
+                                                         GObject *old_object,
+                                                         GObject *new_object);</pre>
 <p>
 Replaces a GObject with another GObject inside a GObject which
 behaves as a container.
@@ -363,12 +363,12 @@ Note that both GObjects must be owned by a GladeWidget.</p>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>old_object</code></em> :</span></p></td>
-<td> a <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK>
+<td> a <span class="type">GObject</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>new_object</code></em> :</span></p></td>
-<td> a <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK>
+<td> a <span class="type">GObject</span>
 </td>
 </tr>
 </tbody>
@@ -377,7 +377,7 @@ Note that both GObjects must be owned by a GladeWidget.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-rebuild"></a><h3>glade_widget_rebuild ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_rebuild                (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gwidget);</pre>
+<pre class="programlisting">void                glade_widget_rebuild                (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gwidget);</pre>
 <p>
 Replaces the current widget instance with
 a new one while preserving all properties children and
@@ -396,8 +396,8 @@ takes care of reparenting.</p>
 <a name="glade-widget-read"></a><h3>glade_widget_read ()</h3>
 <pre class="programlisting"><a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *       glade_widget_read                   (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
-                                                         <GTKDOCLINK HREF="GladeXmlNode">GladeXmlNode</GTKDOCLINK> *node,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *internal);</pre>
+                                                         GladeXmlNode *node,
+                                                         const gchar *internal);</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
@@ -410,12 +410,12 @@ takes care of reparenting.</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>parent</code></em> :</span></p></td>
-<td> The parent <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> or <GTKDOCLINK HREF="NULL:CAPS"><code class="literal">NULL</code></GTKDOCLINK>
+<td> The parent <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> or <code class="literal">NULL</code>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>node</code></em> :</span></p></td>
-<td> a <GTKDOCLINK HREF="GladeXmlNode"><span class="type">GladeXmlNode</span></GTKDOCLINK>
+<td> a <span class="type">GladeXmlNode</span>
 </td>
 </tr>
 <tr>
@@ -429,12 +429,12 @@ takes care of reparenting.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-write"></a><h3>glade_widget_write ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_write                  (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         <GTKDOCLINK HREF="GladeXmlContext">GladeXmlContext</GTKDOCLINK> *context,
-                                                         <GTKDOCLINK HREF="GladeXmlNode">GladeXmlNode</GTKDOCLINK> *node);</pre>
+<pre class="programlisting">void                glade_widget_write                  (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         GladeXmlContext *context,
+                                                         GladeXmlNode *node);</pre>
 <p>
 Recursively writes out <em class="parameter"><code>widget</code></em> and its children
-and appends the created <GTKDOCLINK HREF="GladeXmlNode"><span class="type">GladeXmlNode</span></GTKDOCLINK> to <em class="parameter"><code>node</code></em>.</p>
+and appends the created <span class="type">GladeXmlNode</span> to <em class="parameter"><code>node</code></em>.</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -445,12 +445,12 @@ and appends the created <GTKDOCLINK HREF="GladeXmlNode"><span class="type">Glade
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>context</code></em> :</span></p></td>
-<td> A <GTKDOCLINK HREF="GladeXmlContext"><span class="type">GladeXmlContext</span></GTKDOCLINK>
+<td> A <span class="type">GladeXmlContext</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>node</code></em> :</span></p></td>
-<td> A <GTKDOCLINK HREF="GladeXmlNode"><span class="type">GladeXmlNode</span></GTKDOCLINK>
+<td> A <span class="type">GladeXmlNode</span>
 </td>
 </tr>
 </tbody>
@@ -459,8 +459,8 @@ and appends the created <GTKDOCLINK HREF="GladeXmlNode"><span class="type">Glade
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-read-child"></a><h3>glade_widget_read_child ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_read_child             (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         <GTKDOCLINK HREF="GladeXmlNode">GladeXmlNode</GTKDOCLINK> *node);</pre>
+<pre class="programlisting">void                glade_widget_read_child             (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         GladeXmlNode *node);</pre>
 <p>
 Reads in a child widget from the xml (handles 'child' tag)</p>
 <div class="variablelist"><table border="0">
@@ -473,7 +473,7 @@ Reads in a child widget from the xml (handles 'child' tag)</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>node</code></em> :</span></p></td>
-<td> a <GTKDOCLINK HREF="GladeXmlNode"><span class="type">GladeXmlNode</span></GTKDOCLINK>
+<td> a <span class="type">GladeXmlNode</span>
 </td>
 </tr>
 </tbody>
@@ -482,10 +482,10 @@ Reads in a child widget from the xml (handles 'child' tag)</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-write-child"></a><h3>glade_widget_write_child ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_write_child            (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+<pre class="programlisting">void                glade_widget_write_child            (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *child,
-                                                         <GTKDOCLINK HREF="GladeXmlContext">GladeXmlContext</GTKDOCLINK> *context,
-                                                         <GTKDOCLINK HREF="GladeXmlNode">GladeXmlNode</GTKDOCLINK> *node);</pre>
+                                                         GladeXmlContext *context,
+                                                         GladeXmlNode *node);</pre>
 <p>
 Writes out a widget to the xml, takes care
 of packing properties and special child types.</p>
@@ -504,12 +504,12 @@ of packing properties and special child types.</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>context</code></em> :</span></p></td>
-<td> A <GTKDOCLINK HREF="GladeXmlContext"><span class="type">GladeXmlContext</span></GTKDOCLINK>
+<td> A <span class="type">GladeXmlContext</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>node</code></em> :</span></p></td>
-<td> A <GTKDOCLINK HREF="GladeXmlNode"><span class="type">GladeXmlNode</span></GTKDOCLINK>
+<td> A <span class="type">GladeXmlNode</span>
 </td>
 </tr>
 </tbody>
@@ -518,10 +518,10 @@ of packing properties and special child types.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-write-placeholder"></a><h3>glade_widget_write_placeholder ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_write_placeholder      (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *object,
-                                                         <GTKDOCLINK HREF="GladeXmlContext">GladeXmlContext</GTKDOCLINK> *context,
-                                                         <GTKDOCLINK HREF="GladeXmlNode">GladeXmlNode</GTKDOCLINK> *node);</pre>
+<pre class="programlisting">void                glade_widget_write_placeholder      (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
+                                                         GObject *object,
+                                                         GladeXmlContext *context,
+                                                         GladeXmlNode *node);</pre>
 <p>
 Writes out a placeholder to the xml</p>
 <div class="variablelist"><table border="0">
@@ -534,17 +534,17 @@ Writes out a placeholder to the xml</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
-<td> A <GTKDOCLINK HREF="GladePlaceHolder"><span class="type">GladePlaceHolder</span></GTKDOCLINK>
+<td> A <span class="type">GladePlaceHolder</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>context</code></em> :</span></p></td>
-<td> A <GTKDOCLINK HREF="GladeXmlContext"><span class="type">GladeXmlContext</span></GTKDOCLINK>
+<td> A <span class="type">GladeXmlContext</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>node</code></em> :</span></p></td>
-<td> A <GTKDOCLINK HREF="GladeXmlNode"><span class="type">GladeXmlNode</span></GTKDOCLINK>
+<td> A <span class="type">GladeXmlNode</span>
 </td>
 </tr>
 </tbody>
@@ -553,20 +553,20 @@ Writes out a placeholder to the xml</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-write-special-child-prop"></a><h3>glade_widget_write_special_child_prop ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_write_special_child_prop
+<pre class="programlisting">void                glade_widget_write_special_child_prop
                                                         (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *object,
-                                                         <GTKDOCLINK HREF="GladeXmlContext">GladeXmlContext</GTKDOCLINK> *context,
-                                                         <GTKDOCLINK HREF="GladeXmlNode">GladeXmlNode</GTKDOCLINK> *node);</pre>
+                                                         GObject *object,
+                                                         GladeXmlContext *context,
+                                                         GladeXmlNode *node);</pre>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-create-editor-property"></a><h3>glade_widget_create_editor_property ()</h3>
 <pre class="programlisting"><a class="link" href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> * glade_widget_create_editor_property
                                                         (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> packing,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> use_command);</pre>
+                                                         const gchar *property,
+                                                         gboolean packing,
+                                                         gboolean use_command);</pre>
 <p>
 This is a convenience function to create a GladeEditorProperty corresponding
 to <em class="parameter"><code>property</code></em></p>
@@ -604,16 +604,16 @@ to <em class="parameter"><code>property</code></em></p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-set-child-type-from-node"></a><h3>glade_widget_set_child_type_from_node ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_set_child_type_from_node
+<pre class="programlisting">void                glade_widget_set_child_type_from_node
                                                         (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *child,
-                                                         <GTKDOCLINK HREF="GladeXmlNode">GladeXmlNode</GTKDOCLINK> *node);</pre>
+                                                         GObject *child,
+                                                         GladeXmlNode *node);</pre>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-dup"></a><h3>glade_widget_dup ()</h3>
 <pre class="programlisting"><a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *       glade_widget_dup                    (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *template_widget,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> exact);</pre>
+                                                         gboolean exact);</pre>
 <p>
 Creates a deep copy of <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>. if <em class="parameter"><code>exact</code></em> is specified,
 the widget name is preserved and signals are carried over
@@ -643,7 +643,7 @@ as opposed to Copy/Paste contexts).</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-copy-signals"></a><h3>glade_widget_copy_signals ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_copy_signals           (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+<pre class="programlisting">void                glade_widget_copy_signals           (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *template_widget);</pre>
 <p>
 Sets signals in <em class="parameter"><code>widget</code></em> based on the values of
@@ -667,10 +667,10 @@ matching signals in <em class="parameter"><code>template_widget</code></em></p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-copy-properties"></a><h3>glade_widget_copy_properties ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_copy_properties        (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+<pre class="programlisting">void                glade_widget_copy_properties        (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *template_widget,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> copy_parentless,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> exact);</pre>
+                                                         gboolean copy_parentless,
+                                                         gboolean exact);</pre>
 <p>
 Sets properties in <em class="parameter"><code>widget</code></em> based on the values of
 matching properties in <em class="parameter"><code>template_widget</code></em></p>
@@ -703,7 +703,7 @@ matching properties in <em class="parameter"><code>template_widget</code></em></
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-set-packing-properties"></a><h3>glade_widget_set_packing_properties ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_set_packing_properties (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+<pre class="programlisting">void                glade_widget_set_packing_properties (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *container);</pre>
 <p>
 Generates the packing_properties list of the widget, given
@@ -730,7 +730,7 @@ has changed, the current list is freed and replaced.</p>
 <div class="refsect2" lang="en">
 <a name="glade-widget-get-property"></a><h3>glade_widget_get_property ()</h3>
 <pre class="programlisting"><a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a> *     glade_widget_get_property           (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property);</pre>
+                                                         const gchar *id_property);</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
@@ -758,7 +758,7 @@ has changed, the current list is freed and replaced.</p>
 <div class="refsect2" lang="en">
 <a name="glade-widget-get-pack-property"></a><h3>glade_widget_get_pack_property ()</h3>
 <pre class="programlisting"><a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a> *     glade_widget_get_pack_property      (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property);</pre>
+                                                         const gchar *id_property);</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
@@ -785,11 +785,11 @@ has changed, the current list is freed and replaced.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-dup-properties"></a><h3>glade_widget_dup_properties ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="GList">GList</GTKDOCLINK> *             glade_widget_dup_properties         (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *dest_widget,
-                                                         <GTKDOCLINK HREF="GList">GList</GTKDOCLINK> *template_props,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> as_load,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> copy_parentless,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> exact);</pre>
+<pre class="programlisting">GList *             glade_widget_dup_properties         (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *dest_widget,
+                                                         GList *template_props,
+                                                         gboolean as_load,
+                                                         gboolean copy_parentless,
+                                                         gboolean exact);</pre>
 <p>
 Copies a list of properties, if <em class="parameter"><code>as_load</code></em> is specified, then
 properties that are not saved to the glade file are ignored.</p>
@@ -823,7 +823,7 @@ properties that are not saved to the glade file are ignored.</p>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> A newly allocated <GTKDOCLINK HREF="GList"><span class="type">GList</span></GTKDOCLINK> of new <a class="link" href="gladeui-glade-property.html#GladeProperty"><span class="type">GladeProperty</span></a> objects.
+<td> A newly allocated <span class="type">GList</span> of new <a class="link" href="gladeui-glade-property.html#GladeProperty"><span class="type">GladeProperty</span></a> objects.
 </td>
 </tr>
 </tbody>
@@ -832,8 +832,8 @@ properties that are not saved to the glade file are ignored.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-remove-property"></a><h3>glade_widget_remove_property ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_remove_property        (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property);</pre>
+<pre class="programlisting">void                glade_widget_remove_property        (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *id_property);</pre>
 <p>
 Removes the <a class="link" href="gladeui-glade-property.html#GladeProperty"><span class="type">GladeProperty</span></a> indicated by <em class="parameter"><code>id_property</code></em>
 from <em class="parameter"><code>widget</code></em> (this is intended for use in the plugin, to
@@ -860,7 +860,7 @@ style properties).</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-show"></a><h3>glade_widget_show ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_show                   (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
+<pre class="programlisting">void                glade_widget_show                   (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
 <p>
 Display <em class="parameter"><code>widget</code></em> in it's project's GladeDesignView</p>
 <div class="variablelist"><table border="0">
@@ -875,7 +875,7 @@ Display <em class="parameter"><code>widget</code></em> in it's project's GladeDe
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-hide"></a><h3>glade_widget_hide ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_hide                   (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
+<pre class="programlisting">void                glade_widget_hide                   (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
 <p>
 Hide <em class="parameter"><code>widget</code></em></p>
 <div class="variablelist"><table border="0">
@@ -890,8 +890,8 @@ Hide <em class="parameter"><code>widget</code></em></p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-add-signal-handler"></a><h3>glade_widget_add_signal_handler ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_add_signal_handler     (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         <GTKDOCLINK HREF="GladeSignal">GladeSignal</GTKDOCLINK> *signal_handler);</pre>
+<pre class="programlisting">void                glade_widget_add_signal_handler     (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         GladeSignal *signal_handler);</pre>
 <p>
 Adds a signal handler for <em class="parameter"><code>widget</code></em></p>
 <div class="variablelist"><table border="0">
@@ -904,7 +904,7 @@ Adds a signal handler for <em class="parameter"><code>widget</code></em></p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>signal_handler</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GladeSignal"><span class="type">GladeSignal</span></GTKDOCLINK>
+<td> The <span class="type">GladeSignal</span>
 </td>
 </tr>
 </tbody>
@@ -913,8 +913,8 @@ Adds a signal handler for <em class="parameter"><code>widget</code></em></p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-remove-signal-handler"></a><h3>glade_widget_remove_signal_handler ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_remove_signal_handler  (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         <GTKDOCLINK HREF="GladeSignal">GladeSignal</GTKDOCLINK> *signal_handler);</pre>
+<pre class="programlisting">void                glade_widget_remove_signal_handler  (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         GladeSignal *signal_handler);</pre>
 <p>
 Removes a signal handler from <em class="parameter"><code>widget</code></em></p>
 <div class="variablelist"><table border="0">
@@ -927,7 +927,7 @@ Removes a signal handler from <em class="parameter"><code>widget</code></em></p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>signal_handler</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GladeSignal"><span class="type">GladeSignal</span></GTKDOCLINK>
+<td> The <span class="type">GladeSignal</span>
 </td>
 </tr>
 </tbody>
@@ -936,11 +936,11 @@ Removes a signal handler from <em class="parameter"><code>widget</code></em></p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-change-signal-handler"></a><h3>glade_widget_change_signal_handler ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_change_signal_handler  (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         <GTKDOCLINK HREF="GladeSignal">GladeSignal</GTKDOCLINK> *old_signal_handler,
-                                                         <GTKDOCLINK HREF="GladeSignal">GladeSignal</GTKDOCLINK> *new_signal_handler);</pre>
+<pre class="programlisting">void                glade_widget_change_signal_handler  (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         GladeSignal *old_signal_handler,
+                                                         GladeSignal *new_signal_handler);</pre>
 <p>
-Changes a <GTKDOCLINK HREF="GladeSignal"><span class="type">GladeSignal</span></GTKDOCLINK> on <em class="parameter"><code>widget</code></em></p>
+Changes a <span class="type">GladeSignal</span> on <em class="parameter"><code>widget</code></em></p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -951,12 +951,12 @@ Changes a <GTKDOCLINK HREF="GladeSignal"><span class="type">GladeSignal</span></
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>old_signal_handler</code></em> :</span></p></td>
-<td> the old <GTKDOCLINK HREF="GladeSignal"><span class="type">GladeSignal</span></GTKDOCLINK>
+<td> the old <span class="type">GladeSignal</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>new_signal_handler</code></em> :</span></p></td>
-<td> the new <GTKDOCLINK HREF="GladeSignal"><span class="type">GladeSignal</span></GTKDOCLINK>
+<td> the new <span class="type">GladeSignal</span>
 </td>
 </tr>
 </tbody>
@@ -965,8 +965,8 @@ Changes a <GTKDOCLINK HREF="GladeSignal"><span class="type">GladeSignal</span></
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-list-signal-handlers"></a><h3>glade_widget_list_signal_handlers ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="GPtrArray">GPtrArray</GTKDOCLINK> *         glade_widget_list_signal_handlers   (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *signal_name);</pre>
+<pre class="programlisting">GPtrArray *         glade_widget_list_signal_handlers   (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *signal_name);</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
@@ -984,7 +984,7 @@ Changes a <GTKDOCLINK HREF="GladeSignal"><span class="type">GladeSignal</span></
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> A <GTKDOCLINK HREF="GPtrArray"><span class="type">GPtrArray</span></GTKDOCLINK> of <GTKDOCLINK HREF="GladeSignal"><span class="type">GladeSignal</span></GTKDOCLINK> for <em class="parameter"><code>signal_name</code></em>
+<td> A <span class="type">GPtrArray</span> of <span class="type">GladeSignal</span> for <em class="parameter"><code>signal_name</code></em>
 </td>
 </tr>
 </tbody>
@@ -993,8 +993,8 @@ Changes a <GTKDOCLINK HREF="GladeSignal"><span class="type">GladeSignal</span></
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-has-decendant"></a><h3>glade_widget_has_decendant ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            glade_widget_has_decendant          (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         <GTKDOCLINK HREF="GType">GType</GTKDOCLINK> type);</pre>
+<pre class="programlisting">gboolean            glade_widget_has_decendant          (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         GType type);</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
@@ -1007,7 +1007,7 @@ Changes a <GTKDOCLINK HREF="GladeSignal"><span class="type">GladeSignal</span></
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
-<td> a  <GTKDOCLINK HREF="GType"><span class="type">GType</span></GTKDOCLINK>
+<td> a  <span class="type">GType</span>
 </td>
 </tr>
 <tr>
@@ -1022,8 +1022,8 @@ Changes a <GTKDOCLINK HREF="GladeSignal"><span class="type">GladeSignal</span></
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-event"></a><h3>glade_widget_event ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            glade_widget_event                  (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gwidget,
-                                                         <GTKDOCLINK HREF="GdkEvent">GdkEvent</GTKDOCLINK> *event);</pre>
+<pre class="programlisting">gboolean            glade_widget_event                  (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gwidget,
+                                                         <a href="/opt/share/gtk-doc/html/gdk/gdk-Event-Structures.html#GdkEvent">GdkEvent</a> *event);</pre>
 <p>
 Feed an event to be handled on the project GladeWidget
 hierarchy.</p>
@@ -1032,7 +1032,7 @@ hierarchy.</p>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>event</code></em> :</span></p></td>
-<td> A <GTKDOCLINK HREF="GdkEvent"><span class="type">GdkEvent</span></GTKDOCLINK>
+<td> A <a href="/opt/share/gtk-doc/html/gdk/gdk-Event-Structures.html#GdkEvent"><span class="type">GdkEvent</span></a>
 </td>
 </tr>
 <tr>
@@ -1046,7 +1046,7 @@ hierarchy.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-placeholder-relation"></a><h3>glade_widget_placeholder_relation ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            glade_widget_placeholder_relation   (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
+<pre class="programlisting">gboolean            glade_widget_placeholder_relation   (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
 <p>
 Returns whether placeholders should be used
@@ -1081,7 +1081,7 @@ adaptor has been marked to use placeholders.</p>
 <div class="refsect2" lang="en">
 <a name="glade-widget-get-action"></a><h3>glade_widget_get_action ()</h3>
 <pre class="programlisting"><a class="link" href="GladeWidgetAction.html" title="GladeWidgetAction">GladeWidgetAction</a> * glade_widget_get_action             (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *action_path);</pre>
+                                                         const gchar *action_path);</pre>
 <p>
 Returns a <a class="link" href="GladeWidgetAction.html" title="GladeWidgetAction"><span class="type">GladeWidgetAction</span></a> object indentified by <em class="parameter"><code>action_path</code></em>.</p>
 <div class="variablelist"><table border="0">
@@ -1109,7 +1109,7 @@ Returns a <a class="link" href="GladeWidgetAction.html" title="GladeWidgetAction
 <div class="refsect2" lang="en">
 <a name="glade-widget-get-pack-action"></a><h3>glade_widget_get_pack_action ()</h3>
 <pre class="programlisting"><a class="link" href="GladeWidgetAction.html" title="GladeWidgetAction">GladeWidgetAction</a> * glade_widget_get_pack_action        (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *action_path);</pre>
+                                                         const gchar *action_path);</pre>
 <p>
 Returns a <a class="link" href="GladeWidgetAction.html" title="GladeWidgetAction"><span class="type">GladeWidgetAction</span></a> object indentified by <em class="parameter"><code>action_path</code></em>.</p>
 <div class="variablelist"><table border="0">
@@ -1136,9 +1136,9 @@ Returns a <a class="link" href="GladeWidgetAction.html" title="GladeWidgetAction
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-set-action-sensitive"></a><h3>glade_widget_set_action_sensitive ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            glade_widget_set_action_sensitive   (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *action_path,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> sensitive);</pre>
+<pre class="programlisting">gboolean            glade_widget_set_action_sensitive   (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *action_path,
+                                                         gboolean sensitive);</pre>
 <p>
 Sets the sensitivity of <em class="parameter"><code>action_path</code></em> in <em class="parameter"><code>widget</code></em></p>
 <div class="variablelist"><table border="0">
@@ -1170,10 +1170,10 @@ Sets the sensitivity of <em class="parameter"><code>action_path</code></em> in <
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-set-pack-action-sensitive"></a><h3>glade_widget_set_pack_action_sensitive ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            glade_widget_set_pack_action_sensitive
+<pre class="programlisting">gboolean            glade_widget_set_pack_action_sensitive
                                                         (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *action_path,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> sensitive);</pre>
+                                                         const gchar *action_path,
+                                                         gboolean sensitive);</pre>
 <p>
 Sets the sensitivity of <em class="parameter"><code>action_path</code></em> in <em class="parameter"><code>widget</code></em></p>
 <div class="variablelist"><table border="0">
@@ -1205,8 +1205,8 @@ Sets the sensitivity of <em class="parameter"><code>action_path</code></em> in <
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-remove-action"></a><h3>glade_widget_remove_action ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_remove_action          (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *action_path);</pre>
+<pre class="programlisting">void                glade_widget_remove_action          (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *action_path);</pre>
 <p>
 Remove an action.</p>
 <div class="variablelist"><table border="0">
@@ -1228,8 +1228,8 @@ Remove an action.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-remove-pack-action"></a><h3>glade_widget_remove_pack_action ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_remove_pack_action     (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *action_path);</pre>
+<pre class="programlisting">void                glade_widget_remove_pack_action     (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *action_path);</pre>
 <p>
 Remove a packing action.</p>
 <div class="variablelist"><table border="0">
@@ -1251,7 +1251,7 @@ Remove a packing action.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-add-prop-ref"></a><h3>glade_widget_add_prop_ref ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_add_prop_ref           (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+<pre class="programlisting">void                glade_widget_add_prop_ref           (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                                          <a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a> *property);</pre>
 <p>
 Adds <em class="parameter"><code>property</code></em> to <em class="parameter"><code>widget</code></em> 's list of referenced properties.
@@ -1278,7 +1278,7 @@ Note: this is used to track properties on other objects that
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-remove-prop-ref"></a><h3>glade_widget_remove_prop_ref ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_remove_prop_ref        (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+<pre class="programlisting">void                glade_widget_remove_prop_ref        (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                                          <a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a> *property);</pre>
 <p>
 Removes <em class="parameter"><code>property</code></em> from <em class="parameter"><code>widget</code></em> 's list of referenced properties.
@@ -1305,9 +1305,9 @@ Note: this is used to track properties on other objects that
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-object-set-property"></a><h3>glade_widget_object_set_property ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_object_set_property    (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property_name,
-                                                         const <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);</pre>
+<pre class="programlisting">void                glade_widget_object_set_property    (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *property_name,
+                                                         const GValue *value);</pre>
 <p>
 This function applies <em class="parameter"><code>value</code></em> to the property <em class="parameter"><code>property_name</code></em> on
 the runtime object of <em class="parameter"><code>widget</code></em>.</p>
@@ -1326,7 +1326,7 @@ the runtime object of <em class="parameter"><code>widget</code></em>.</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>         The <GTKDOCLINK HREF="GValue"><span class="type">GValue</span></GTKDOCLINK>
+<td>         The <span class="type">GValue</span>
 </td>
 </tr>
 </tbody>
@@ -1335,9 +1335,9 @@ the runtime object of <em class="parameter"><code>widget</code></em>.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-object-get-property"></a><h3>glade_widget_object_get_property ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_object_get_property    (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property_name,
-                                                         <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);</pre>
+<pre class="programlisting">void                glade_widget_object_get_property    (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *property_name,
+                                                         GValue *value);</pre>
 <p>
 This function retrieves the value of the property <em class="parameter"><code>property_name</code></em> on
 the runtime object of <em class="parameter"><code>widget</code></em> and sets it in <em class="parameter"><code>value</code></em>.</p>
@@ -1356,7 +1356,7 @@ the runtime object of <em class="parameter"><code>widget</code></em> and sets it
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>         The <GTKDOCLINK HREF="GValue"><span class="type">GValue</span></GTKDOCLINK>
+<td>         The <span class="type">GValue</span>
 </td>
 </tr>
 </tbody>
@@ -1365,10 +1365,10 @@ the runtime object of <em class="parameter"><code>widget</code></em> and sets it
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-child-set-property"></a><h3>glade_widget_child_set_property ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_child_set_property     (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+<pre class="programlisting">void                glade_widget_child_set_property     (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *child,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property_name,
-                                                         const <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);</pre>
+                                                         const gchar *property_name,
+                                                         const GValue *value);</pre>
 <p>
 Sets <em class="parameter"><code>child</code></em>'s packing property identified by <em class="parameter"><code>property_name</code></em> to <em class="parameter"><code>value</code></em>.</p>
 <div class="variablelist"><table border="0">
@@ -1400,10 +1400,10 @@ Sets <em class="parameter"><code>child</code></em>'s packing property identified
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-child-get-property"></a><h3>glade_widget_child_get_property ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_child_get_property     (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+<pre class="programlisting">void                glade_widget_child_get_property     (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *child,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property_name,
-                                                         <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);</pre>
+                                                         const gchar *property_name,
+                                                         GValue *value);</pre>
 <p>
 Gets <em class="parameter"><code>child</code></em>'s packing property identified by <em class="parameter"><code>property_name</code></em>.</p>
 <div class="variablelist"><table border="0">
@@ -1435,8 +1435,8 @@ Gets <em class="parameter"><code>child</code></em>'s packing property identified
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-property-get"></a><h3>glade_widget_property_get ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            glade_widget_property_get           (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property,
+<pre class="programlisting">gboolean            glade_widget_property_get           (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *id_property,
                                                          ...);</pre>
 <p>
 Gets the value of <em class="parameter"><code>id_property</code></em> in <em class="parameter"><code>widget</code></em></p>
@@ -1470,8 +1470,8 @@ Gets the value of <em class="parameter"><code>id_property</code></em> in <em cla
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-property-set"></a><h3>glade_widget_property_set ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            glade_widget_property_set           (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property,
+<pre class="programlisting">gboolean            glade_widget_property_set           (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *id_property,
                                                          ...);</pre>
 <p>
 Sets the value of <em class="parameter"><code>id_property</code></em> in <em class="parameter"><code>widget</code></em></p>
@@ -1504,8 +1504,8 @@ Sets the value of <em class="parameter"><code>id_property</code></em> in <em cla
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-pack-property-get"></a><h3>glade_widget_pack_property_get ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            glade_widget_pack_property_get      (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property,
+<pre class="programlisting">gboolean            glade_widget_pack_property_get      (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *id_property,
                                                          ...);</pre>
 <p>
 Gets the value of <em class="parameter"><code>id_property</code></em> in <em class="parameter"><code>widget</code></em> packing properties</p>
@@ -1538,8 +1538,8 @@ Gets the value of <em class="parameter"><code>id_property</code></em> in <em cla
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-pack-property-set"></a><h3>glade_widget_pack_property_set ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            glade_widget_pack_property_set      (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property,
+<pre class="programlisting">gboolean            glade_widget_pack_property_set      (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *id_property,
                                                          ...);</pre>
 <p>
 Sets the value of <em class="parameter"><code>id_property</code></em> in <em class="parameter"><code>widget</code></em> packing properties</p>
@@ -1572,8 +1572,8 @@ Sets the value of <em class="parameter"><code>id_property</code></em> in <em cla
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-property-reset"></a><h3>glade_widget_property_reset ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            glade_widget_property_reset         (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property);</pre>
+<pre class="programlisting">gboolean            glade_widget_property_reset         (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *id_property);</pre>
 <p>
 Resets <em class="parameter"><code>id_property</code></em> in <em class="parameter"><code>widget</code></em> to it's default value</p>
 <div class="variablelist"><table border="0">
@@ -1600,8 +1600,8 @@ Resets <em class="parameter"><code>id_property</code></em> in <em class="paramet
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-pack-property-reset"></a><h3>glade_widget_pack_property_reset ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            glade_widget_pack_property_reset    (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property);</pre>
+<pre class="programlisting">gboolean            glade_widget_pack_property_reset    (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *id_property);</pre>
 <p>
 Resets <em class="parameter"><code>id_property</code></em> in <em class="parameter"><code>widget</code></em>'s packing properties to it's default value</p>
 <div class="variablelist"><table border="0">
@@ -1628,8 +1628,8 @@ Resets <em class="parameter"><code>id_property</code></em> in <em class="paramet
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-property-default"></a><h3>glade_widget_property_default ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            glade_widget_property_default       (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property);</pre>
+<pre class="programlisting">gboolean            glade_widget_property_default       (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *id_property);</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
@@ -1657,9 +1657,9 @@ currently set to it's default value.
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-property-original-default"></a><h3>glade_widget_property_original_default ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            glade_widget_property_original_default
+<pre class="programlisting">gboolean            glade_widget_property_original_default
                                                         (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property);</pre>
+                                                         const gchar *id_property);</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
@@ -1687,8 +1687,8 @@ currently set to it's original default value.
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-pack-property-default"></a><h3>glade_widget_pack_property_default ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            glade_widget_pack_property_default  (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property);</pre>
+<pre class="programlisting">gboolean            glade_widget_pack_property_default  (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *id_property);</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
@@ -1716,10 +1716,10 @@ currently set to it's default value.
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-property-set-sensitive"></a><h3>glade_widget_property_set_sensitive ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            glade_widget_property_set_sensitive (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> sensitive,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *reason);</pre>
+<pre class="programlisting">gboolean            glade_widget_property_set_sensitive (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *id_property,
+                                                         gboolean sensitive,
+                                                         const gchar *reason);</pre>
 <p>
 Sets the sensitivity of <em class="parameter"><code>id_property</code></em> in <em class="parameter"><code>widget</code></em></p>
 <div class="variablelist"><table border="0">
@@ -1757,11 +1757,11 @@ Sets the sensitivity of <em class="parameter"><code>id_property</code></em> in <
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-pack-property-set-sensitive"></a><h3>glade_widget_pack_property_set_sensitive ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            glade_widget_pack_property_set_sensitive
+<pre class="programlisting">gboolean            glade_widget_pack_property_set_sensitive
                                                         (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> sensitive,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *reason);</pre>
+                                                         const gchar *id_property,
+                                                         gboolean sensitive,
+                                                         const gchar *reason);</pre>
 <p>
 Sets the sensitivity of <em class="parameter"><code>id_property</code></em> in <em class="parameter"><code>widget</code></em>'s packing properties.</p>
 <div class="variablelist"><table border="0">
@@ -1799,9 +1799,9 @@ Sets the sensitivity of <em class="parameter"><code>id_property</code></em> in <
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-property-set-enabled"></a><h3>glade_widget_property_set_enabled ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            glade_widget_property_set_enabled   (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> enabled);</pre>
+<pre class="programlisting">gboolean            glade_widget_property_set_enabled   (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *id_property,
+                                                         gboolean enabled);</pre>
 <p>
 Sets the enabled state of <em class="parameter"><code>id_property</code></em> in <em class="parameter"><code>widget</code></em>; this is
 used for optional properties.</p>
@@ -1834,10 +1834,10 @@ used for optional properties.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-pack-property-set-enabled"></a><h3>glade_widget_pack_property_set_enabled ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            glade_widget_pack_property_set_enabled
+<pre class="programlisting">gboolean            glade_widget_pack_property_set_enabled
                                                         (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> enabled);</pre>
+                                                         const gchar *id_property,
+                                                         gboolean enabled);</pre>
 <p>
 Sets the enabled state of <em class="parameter"><code>id_property</code></em> in <em class="parameter"><code>widget</code></em>'s packing 
 properties; this is used for optional properties.</p>
@@ -1870,10 +1870,10 @@ properties; this is used for optional properties.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-property-set-save-always"></a><h3>glade_widget_property_set_save_always ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            glade_widget_property_set_save_always
+<pre class="programlisting">gboolean            glade_widget_property_set_save_always
                                                         (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> setting);</pre>
+                                                         const gchar *id_property,
+                                                         gboolean setting);</pre>
 <p>
 Sets whether <em class="parameter"><code>id_property</code></em> in <em class="parameter"><code>widget</code></em> should be special cased
 to always be saved regardless of its default value.
@@ -1909,10 +1909,10 @@ or derived widget code).</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-pack-property-set-save-always"></a><h3>glade_widget_pack_property_set_save_always ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            glade_widget_pack_property_set_save_always
+<pre class="programlisting">gboolean            glade_widget_pack_property_set_save_always
                                                         (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> setting);</pre>
+                                                         const gchar *id_property,
+                                                         gboolean setting);</pre>
 <p>
 Sets whether <em class="parameter"><code>id_property</code></em> in <em class="parameter"><code>widget</code></em> should be special cased
 to always be saved regardless of its default value.
@@ -1948,9 +1948,9 @@ or derived widget code).</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-property-string"></a><h3>glade_widget_property_string ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *             glade_widget_property_string        (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property,
-                                                         const <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);</pre>
+<pre class="programlisting">gchar *             glade_widget_property_string        (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *id_property,
+                                                         const GValue *value);</pre>
 <p>
 Creates a printable string representing <em class="parameter"><code>id_property</code></em> in
 <em class="parameter"><code>widget</code></em>, if <em class="parameter"><code>value</code></em> is specified it will be used in place
@@ -1972,7 +1972,7 @@ backends).</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td> the <GTKDOCLINK HREF="GValue"><span class="type">GValue</span></GTKDOCLINK> to print or <GTKDOCLINK HREF="NULL:CAPS"><code class="literal">NULL</code></GTKDOCLINK>
+<td> the <span class="type">GValue</span> to print or <code class="literal">NULL</code>
 </td>
 </tr>
 <tr>
@@ -1986,9 +1986,9 @@ backends).</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-pack-property-string"></a><h3>glade_widget_pack_property_string ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *             glade_widget_pack_property_string   (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id_property,
-                                                         const <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);</pre>
+<pre class="programlisting">gchar *             glade_widget_pack_property_string   (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *id_property,
+                                                         const GValue *value);</pre>
 <p>
 Same as <a class="link" href="GladeWidget.html#glade-widget-property-string" title="glade_widget_property_string ()"><code class="function">glade_widget_property_string()</code></a> but for packing
 properties.</p>
@@ -2007,7 +2007,7 @@ properties.</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td> the <GTKDOCLINK HREF="GValue"><span class="type">GValue</span></GTKDOCLINK> to print or <GTKDOCLINK HREF="NULL:CAPS"><code class="literal">NULL</code></GTKDOCLINK>
+<td> the <span class="type">GValue</span> to print or <code class="literal">NULL</code>
 </td>
 </tr>
 <tr>
@@ -2021,8 +2021,8 @@ properties.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-set-name"></a><h3>glade_widget_set_name ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_set_name               (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *name);</pre>
+<pre class="programlisting">void                glade_widget_set_name               (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *name);</pre>
 <p>
 Sets <em class="parameter"><code>widget</code></em>'s name to <em class="parameter"><code>name</code></em>.</p>
 <div class="variablelist"><table border="0">
@@ -2044,7 +2044,7 @@ Sets <em class="parameter"><code>widget</code></em>'s name to <em class="paramet
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-get-name"></a><h3>glade_widget_get_name ()</h3>
-<pre class="programlisting">const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *       glade_widget_get_name               (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
+<pre class="programlisting">const gchar *       glade_widget_get_name               (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
@@ -2066,8 +2066,8 @@ Sets <em class="parameter"><code>widget</code></em>'s name to <em class="paramet
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-set-internal"></a><h3>glade_widget_set_internal ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_set_internal           (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *internal);</pre>
+<pre class="programlisting">void                glade_widget_set_internal           (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+                                                         const gchar *internal);</pre>
 <p>
 Sets the internal name of <em class="parameter"><code>widget</code></em> to <em class="parameter"><code>internal</code></em></p>
 <div class="variablelist"><table border="0">
@@ -2089,7 +2089,7 @@ Sets the internal name of <em class="parameter"><code>widget</code></em> to <em 
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-get-internal"></a><h3>glade_widget_get_internal ()</h3>
-<pre class="programlisting">const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *       glade_widget_get_internal           (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
+<pre class="programlisting">const gchar *       glade_widget_get_internal           (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
@@ -2111,8 +2111,8 @@ Sets the internal name of <em class="parameter"><code>widget</code></em> to <em 
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-set-object"></a><h3>glade_widget_set_object ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_set_object             (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gwidget,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *new_object);</pre>
+<pre class="programlisting">void                glade_widget_set_object             (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gwidget,
+                                                         GObject *new_object);</pre>
 <p>
 Set the runtime object for this GladeWidget wrapper
 (this is used deep in the core and is probably unsafe
@@ -2127,7 +2127,7 @@ to use elsewhere).</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>new_object</code></em> :</span></p></td>
-<td> the new <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> for <em class="parameter"><code>gwidget</code></em>
+<td> the new <span class="type">GObject</span> for <em class="parameter"><code>gwidget</code></em>
 </td>
 </tr>
 </tbody>
@@ -2136,7 +2136,7 @@ to use elsewhere).</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-get-object"></a><h3>glade_widget_get_object ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *           glade_widget_get_object             (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
+<pre class="programlisting">GObject *           glade_widget_get_object             (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
@@ -2149,7 +2149,7 @@ to use elsewhere).</p>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> associated with <em class="parameter"><code>widget</code></em>
+<td> the <span class="type">GObject</span> associated with <em class="parameter"><code>widget</code></em>
 </td>
 </tr>
 </tbody>
@@ -2158,7 +2158,7 @@ to use elsewhere).</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-set-project"></a><h3>glade_widget_set_project ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_set_project            (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+<pre class="programlisting">void                glade_widget_set_project            (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                                          <a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
 <p>
 Makes <em class="parameter"><code>widget</code></em> belong to <em class="parameter"><code>project</code></em>.</p>
@@ -2247,7 +2247,7 @@ Makes <em class="parameter"><code>widget</code></em> belong to <em class="parame
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-set-parent"></a><h3>glade_widget_set_parent ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_set_parent             (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
+<pre class="programlisting">void                glade_widget_set_parent             (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent);</pre>
 <p>
 sets the parenting <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a></p>
@@ -2261,7 +2261,7 @@ sets the parenting <a class="link" href="GladeWidget.html" title="GladeWidget"><
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>parent</code></em> :</span></p></td>
-<td> the parenting <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> (or <GTKDOCLINK HREF="NULL:CAPS"><code class="literal">NULL</code></GTKDOCLINK>)
+<td> the parenting <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> (or <code class="literal">NULL</code>)
 </td>
 </tr>
 </tbody>
@@ -2270,7 +2270,7 @@ sets the parenting <a class="link" href="GladeWidget.html" title="GladeWidget"><
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-superuser"></a><h3>glade_widget_superuser ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            glade_widget_superuser              (void);</pre>
+<pre class="programlisting">gboolean            glade_widget_superuser              (void);</pre>
 <p>
 Checks if we are in superuser mode.
 </p>
@@ -2289,14 +2289,14 @@ size when widgets are added/removed.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-push-superuser"></a><h3>glade_widget_push_superuser ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_push_superuser         (void);</pre>
+<pre class="programlisting">void                glade_widget_push_superuser         (void);</pre>
 <p>
 Sets superuser mode</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-pop-superuser"></a><h3>glade_widget_pop_superuser ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_pop_superuser          (void);</pre>
+<pre class="programlisting">void                glade_widget_pop_superuser          (void);</pre>
 <p>
 Unsets superuser mode</p>
 </div>
@@ -2305,41 +2305,41 @@ Unsets superuser mode</p>
 <a name="GladeWidget.property-details"></a><h2>Property Details</h2>
 <div class="refsect2" lang="en">
 <a name="GladeWidget--adaptor"></a><h3>The <code class="literal">"adaptor"</code> property</h3>
-<pre class="programlisting">  "adaptor"                  <GTKDOCLINK HREF="GladeGObjectAdaptor">GladeGObjectAdaptor</GTKDOCLINK>*  : Read / Write / Construct Only</pre>
+<pre class="programlisting">  "adaptor"                  GladeGObjectAdaptor*  : Read / Write / Construct Only</pre>
 <p>The class adaptor for the associated widget.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeWidget--anarchist"></a><h3>The <code class="literal">"anarchist"</code> property</h3>
-<pre class="programlisting">  "anarchist"                <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>              : Read / Write / Construct Only</pre>
+<pre class="programlisting">  "anarchist"                gboolean              : Read / Write / Construct Only</pre>
 <p>Whether this composite child is an ancestral child or an anarchist child.</p>
 <p>Default value: FALSE</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeWidget--internal"></a><h3>The <code class="literal">"internal"</code> property</h3>
-<pre class="programlisting">  "internal"                 <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK>*                : Read / Write / Construct</pre>
+<pre class="programlisting">  "internal"                 gchar*                : Read / Write / Construct</pre>
 <p>The internal name of the widget.</p>
 <p>Default value: NULL</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeWidget--internal-name"></a><h3>The <code class="literal">"internal-name"</code> property</h3>
-<pre class="programlisting">  "internal-name"            <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK>*                : Write / Construct Only</pre>
+<pre class="programlisting">  "internal-name"            gchar*                : Write / Construct Only</pre>
 <p>A generic name prefix for internal widgets.</p>
 <p>Default value: NULL</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeWidget--name"></a><h3>The <code class="literal">"name"</code> property</h3>
-<pre class="programlisting">  "name"                     <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK>*                : Read / Write / Construct</pre>
+<pre class="programlisting">  "name"                     gchar*                : Read / Write / Construct</pre>
 <p>The name of the widget.</p>
 <p>Default value: NULL</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeWidget--object"></a><h3>The <code class="literal">"object"</code> property</h3>
-<pre class="programlisting">  "object"                   <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK>*              : Read / Write / Construct</pre>
+<pre class="programlisting">  "object"                   GObject*              : Read / Write / Construct</pre>
 <p>The object associated.</p>
 </div>
 <hr>
@@ -2357,13 +2357,13 @@ Unsets superuser mode</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeWidget--properties"></a><h3>The <code class="literal">"properties"</code> property</h3>
-<pre class="programlisting">  "properties"               <GTKDOCLINK HREF="gpointer">gpointer</GTKDOCLINK>              : Read / Write / Construct Only</pre>
+<pre class="programlisting">  "properties"               gpointer              : Read / Write / Construct Only</pre>
 <p>A list of GladeProperties.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeWidget--reason"></a><h3>The <code class="literal">"reason"</code> property</h3>
-<pre class="programlisting">  "reason"                   <GTKDOCLINK HREF="gint">gint</GTKDOCLINK>                  : Write / Construct Only</pre>
+<pre class="programlisting">  "reason"                   gint                  : Write / Construct Only</pre>
 <p>A GladeCreateReason for this creation.</p>
 <p>Allowed values: [0,3]</p>
 <p>Default value: 0</p>
@@ -2371,7 +2371,7 @@ Unsets superuser mode</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeWidget--support-warning"></a><h3>The <code class="literal">"support-warning"</code> property</h3>
-<pre class="programlisting">  "support-warning"          <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK>*                : Read</pre>
+<pre class="programlisting">  "support-warning"          gchar*                : Read</pre>
 <p>A warning string about version mismatches.</p>
 <p>Default value: NULL</p>
 </div>
@@ -2384,14 +2384,14 @@ Unsets superuser mode</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeWidget--template-exact"></a><h3>The <code class="literal">"template-exact"</code> property</h3>
-<pre class="programlisting">  "template-exact"           <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>              : Write / Construct Only</pre>
+<pre class="programlisting">  "template-exact"           gboolean              : Write / Construct Only</pre>
 <p>Whether we are creating an exact duplicate when using a template.</p>
 <p>Default value: FALSE</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeWidget--toplevel-height"></a><h3>The <code class="literal">"toplevel-height"</code> property</h3>
-<pre class="programlisting">  "toplevel-height"          <GTKDOCLINK HREF="gint">gint</GTKDOCLINK>                  : Read / Write</pre>
+<pre class="programlisting">  "toplevel-height"          gint                  : Read / Write</pre>
 <p>The height of the widget when toplevel in the GladeDesignLayout.</p>
 <p>Allowed values: &gt;= G_MAXULONG</p>
 <p>Default value: -1</p>
@@ -2399,7 +2399,7 @@ Unsets superuser mode</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeWidget--toplevel-width"></a><h3>The <code class="literal">"toplevel-width"</code> property</h3>
-<pre class="programlisting">  "toplevel-width"           <GTKDOCLINK HREF="gint">gint</GTKDOCLINK>                  : Read / Write</pre>
+<pre class="programlisting">  "toplevel-width"           gint                  : Read / Write</pre>
 <p>The width of the widget when toplevel in the GladeDesignLayout.</p>
 <p>Allowed values: &gt;= G_MAXULONG</p>
 <p>Default value: -1</p>
@@ -2409,9 +2409,9 @@ Unsets superuser mode</p>
 <a name="GladeWidget.signal-details"></a><h2>Signal Details</h2>
 <div class="refsect2" lang="en">
 <a name="GladeWidget-add-signal-handler"></a><h3>The <code class="literal">"add-signal-handler"</code> signal</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                user_function                      (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gladewidget,
-                                                        <GTKDOCLINK HREF="gpointer">gpointer</GTKDOCLINK>     arg1,
-                                                        <GTKDOCLINK HREF="gpointer">gpointer</GTKDOCLINK>     user_data)        : Run Last</pre>
+<pre class="programlisting">void                user_function                      (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gladewidget,
+                                                        gpointer     arg1,
+                                                        gpointer     user_data)        : Run Last</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
@@ -2424,7 +2424,7 @@ Unsets superuser mode</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>arg1</code></em> :</span></p></td>
-<td> the <GTKDOCLINK HREF="GladeSignal"><span class="type">GladeSignal</span></GTKDOCLINK> that was added to <em class="parameter"><code>gladewidget</code></em>.
+<td> the <span class="type">GladeSignal</span> that was added to <em class="parameter"><code>gladewidget</code></em>.
 </td>
 </tr>
 <tr>
@@ -2437,9 +2437,9 @@ Unsets superuser mode</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeWidget-button-press-event"></a><h3>The <code class="literal">"button-press-event"</code> signal</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            user_function                      (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a>    *gladewidget,
-                                                        <GTKDOCLINK HREF="GdkEventButton">GdkEventButton</GTKDOCLINK> *arg1,
-                                                        <GTKDOCLINK HREF="gpointer">gpointer</GTKDOCLINK>        user_data)        : Run Last</pre>
+<pre class="programlisting">gboolean            user_function                      (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a>    *gladewidget,
+                                                        <a href="/opt/share/gtk-doc/html/gdk/gdk-Event-Structures.html#GdkEventButton">GdkEventButton</a> *arg1,
+                                                        gpointer        user_data)        : Run Last</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
@@ -2452,7 +2452,7 @@ Unsets superuser mode</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>arg1</code></em> :</span></p></td>
-<td> the <GTKDOCLINK HREF="GdkEvent"><span class="type">GdkEvent</span></GTKDOCLINK>
+<td> the <a href="/opt/share/gtk-doc/html/gdk/gdk-Event-Structures.html#GdkEvent"><span class="type">GdkEvent</span></a>
 </td>
 </tr>
 <tr>
@@ -2465,17 +2465,17 @@ Unsets superuser mode</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeWidget-button-release-event"></a><h3>The <code class="literal">"button-release-event"</code> signal</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            user_function                      (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a>    *gladewidget,
-                                                        <GTKDOCLINK HREF="GdkEventButton">GdkEventButton</GTKDOCLINK> *event,
-                                                        <GTKDOCLINK HREF="gpointer">gpointer</GTKDOCLINK>        user_data)        : Run Last</pre>
+<pre class="programlisting">gboolean            user_function                      (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a>    *gladewidget,
+                                                        <a href="/opt/share/gtk-doc/html/gdk/gdk-Event-Structures.html#GdkEventButton">GdkEventButton</a> *event,
+                                                        gpointer        user_data)        : Run Last</pre>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeWidget-change-signal-handler"></a><h3>The <code class="literal">"change-signal-handler"</code> signal</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                user_function                      (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gladewidget,
-                                                        <GTKDOCLINK HREF="gpointer">gpointer</GTKDOCLINK>     arg1,
-                                                        <GTKDOCLINK HREF="gpointer">gpointer</GTKDOCLINK>     arg2,
-                                                        <GTKDOCLINK HREF="gpointer">gpointer</GTKDOCLINK>     user_data)        : Run Last</pre>
+<pre class="programlisting">void                user_function                      (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gladewidget,
+                                                        gpointer     arg1,
+                                                        gpointer     arg2,
+                                                        gpointer     user_data)        : Run Last</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
@@ -2488,12 +2488,12 @@ Unsets superuser mode</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>arg1</code></em> :</span></p></td>
-<td> the old <GTKDOCLINK HREF="GladeSignal"><span class="type">GladeSignal</span></GTKDOCLINK>
+<td> the old <span class="type">GladeSignal</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>arg2</code></em> :</span></p></td>
-<td> the new <GTKDOCLINK HREF="GladeSignal"><span class="type">GladeSignal</span></GTKDOCLINK>
+<td> the new <span class="type">GladeSignal</span>
 </td>
 </tr>
 <tr>
@@ -2506,9 +2506,9 @@ Unsets superuser mode</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeWidget-motion-notify-event"></a><h3>The <code class="literal">"motion-notify-event"</code> signal</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            user_function                      (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a>    *gladewidget,
-                                                        <GTKDOCLINK HREF="GdkEventMotion">GdkEventMotion</GTKDOCLINK> *arg1,
-                                                        <GTKDOCLINK HREF="gpointer">gpointer</GTKDOCLINK>        user_data)        : Run Last</pre>
+<pre class="programlisting">gboolean            user_function                      (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a>    *gladewidget,
+                                                        <a href="/opt/share/gtk-doc/html/gdk/gdk-Event-Structures.html#GdkEventMotion">GdkEventMotion</a> *arg1,
+                                                        gpointer        user_data)        : Run Last</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
@@ -2521,7 +2521,7 @@ Unsets superuser mode</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>arg1</code></em> :</span></p></td>
-<td> the <GTKDOCLINK HREF="GdkEvent"><span class="type">GdkEvent</span></GTKDOCLINK>
+<td> the <a href="/opt/share/gtk-doc/html/gdk/gdk-Event-Structures.html#GdkEvent"><span class="type">GdkEvent</span></a>
 </td>
 </tr>
 <tr>
@@ -2534,9 +2534,9 @@ Unsets superuser mode</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeWidget-remove-signal-handler"></a><h3>The <code class="literal">"remove-signal-handler"</code> signal</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                user_function                      (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gladewidget,
-                                                        <GTKDOCLINK HREF="gpointer">gpointer</GTKDOCLINK>     arg1,
-                                                        <GTKDOCLINK HREF="gpointer">gpointer</GTKDOCLINK>     user_data)        : Run Last</pre>
+<pre class="programlisting">void                user_function                      (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gladewidget,
+                                                        gpointer     arg1,
+                                                        gpointer     user_data)        : Run Last</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
@@ -2549,7 +2549,7 @@ Unsets superuser mode</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>arg1</code></em> :</span></p></td>
-<td> the <GTKDOCLINK HREF="GladeSignal"><span class="type">GladeSignal</span></GTKDOCLINK> that was removed from <em class="parameter"><code>gladewidget</code></em>.
+<td> the <span class="type">GladeSignal</span> that was removed from <em class="parameter"><code>gladewidget</code></em>.
 </td>
 </tr>
 <tr>

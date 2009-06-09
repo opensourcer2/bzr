@@ -1,4 +1,4 @@
 version=3
 
-http://download.gnome.org/sources/glade3/([\d\.]+)[24680]/ \
+http://download.gnome.org/sources/glade3/([\d\.]+)[\d]/ \
         glade3-([\d\.]+)\.tar\.gz

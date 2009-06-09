@@ -4,8 +4,7 @@ Priority: optional
 Maintainer: Ubuntu Desktop Team <ubuntu-desktop@lists.ubuntu.com>
 XSBC-Original-Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
 Uploaders: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>, Deng Xiyue <manphiz-guest@users.alioth.debian.org>
-Vcs-Browser: http://svn.debian.org/viewsvn/pkg-gnome/desktop/unstable/glade-3
-Vcs-Svn: svn://svn.debian.org/svn/pkg-gnome/desktop/unstable/glade-3
+Vcs-Bzr: https://code.launchpad.net/~ubuntu-desktop/glade-3/ubuntu
 Build-Depends: cdbs (>= 0.4.41),
                debhelper (>= 5),
                gettext (>= 0.10.40),

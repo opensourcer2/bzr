@@ -1,3 +1,14 @@
+glade-3 (3.6.4-0ubuntu1) karmic; urgency=low
+
+  * New upstream version (LP: #385062)
+    - Check project naming policy at add_object() time (bug 580745).
+    - Fixed bug loading and saving icon sources (Juan Pablo Ugarte)
+    - Fixed sizes of fixed/layout children at load time (bug 584334).
+  * debian/control.in: Add BZR link
+  * debian/watch: Watch for unstable versions
+
+ -- Robert Ancell <robert.ancell@canonical.com>  Tue, 09 Jun 2009 14:52:02 +1000
+
 glade-3 (3.6.3-1ubuntu2) karmic; urgency=low
 
   * Merge from Debian experimental, remaining changes: LP: #372580

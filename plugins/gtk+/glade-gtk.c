@@ -4884,10 +4884,37 @@ glade_gtk_fixed_layout_realize (GtkWidget *widget)
 	else
 		gdk_window_set_back_pixmap (widget->window, backing, FALSE);
 
+
 	/* For cleanup later
 	 */
 	g_object_weak_ref(G_OBJECT(widget), 
 			  (GWeakNotify)glade_gtk_fixed_layout_finalize, backing);
+}
+
+static void
+glade_gtk_fixed_layout_sync_size_requests (GtkWidget   *widget)
+{
+	GList *children, *l;
+
+	if ((children = gtk_container_get_children (GTK_CONTAINER (widget))) != NULL)
+       	{
+		for (l = children; l; l = l->next)
+	       	{
+			GtkWidget *child = l->data;
+			GladeWidget *gchild = glade_widget_get_from_gobject (child);
+			gint width = -1, height = -1;
+
+			if (!gchild)
+				continue;
+
+			glade_widget_property_get (gchild, "width-request", &width);
+			glade_widget_property_get (gchild, "height-request", &height);
+	
+			gtk_widget_set_size_request (child, width, height);
+			
+		}
+		g_list_free (children);
+	}
 }
 
 void
@@ -4902,6 +4929,13 @@ glade_gtk_fixed_layout_post_create (GladeWidgetAdaptor *adaptor,
 	 */
 	g_signal_connect_after(object, "realize",
 			       G_CALLBACK(glade_gtk_fixed_layout_realize), NULL);
+
+
+	/* Sync up size request at project load time */
+	if (reason == GLADE_CREATE_LOAD)
+		g_signal_connect_after(object, "realize",
+				       G_CALLBACK(glade_gtk_fixed_layout_sync_size_requests), NULL);
+
 }
 
 void
@@ -9382,7 +9416,24 @@ glade_gtk_icon_factory_read_sources (GladeWidget  *widget,
 		}
 
 		if ((list = g_hash_table_lookup (sources->sources, g_strdup (current_icon_name))) != NULL)
-			list = g_list_prepend (list, source);
+		{
+			GList *new_list = g_list_append (list, source);
+			
+			/* Warning: if we use g_list_prepend() the returned pointer will be different
+			 * so we would have to replace the list pointer in the hash table.
+			 * But before doing that we have to steal the old list pointer otherwise
+			 * we would have to make a copy then add the new icon to finally replace the hash table
+			 * value.
+			 * Anyways if we choose to prepend we would have to reverse the list outside this loop
+			 * so its better to append.
+			 */
+			if (new_list != list)
+			{
+				/* current g_list_append() returns the same pointer so this is not needed */
+				g_hash_table_steal (sources->sources, current_icon_name);
+				g_hash_table_insert (sources->sources, g_strdup (current_icon_name), new_list);
+			}
+		}
 		else
 		{
 			list = g_list_append (NULL, source);
@@ -9455,7 +9506,7 @@ write_icon_sources (gchar          *icon_name,
 
 		if (!gtk_icon_source_get_state_wildcarded (source))
 		{
-			GtkStateType state = gtk_icon_source_get_size (source);
+			GtkStateType state = gtk_icon_source_get_state (source);
 			string = glade_utils_enum_string_from_value (GTK_TYPE_STATE_TYPE, state);
 			glade_xml_node_set_property_string (source_node, GLADE_TAG_STATE, string);
 			g_free (string);

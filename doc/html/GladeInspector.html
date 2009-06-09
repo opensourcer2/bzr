@@ -52,24 +52,24 @@
 <a name="GladeInspector.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">
                     <a class="link" href="GladeInspector.html#GladeInspector-struct" title="GladeInspector">GladeInspector</a>;
-<GTKDOCLINK HREF="GtkWidget">GtkWidget</GTKDOCLINK> *         <a class="link" href="GladeInspector.html#glade-inspector-new" title="glade_inspector_new ()">glade_inspector_new</a>                 (void);
-<GTKDOCLINK HREF="GtkWidget">GtkWidget</GTKDOCLINK> *         <a class="link" href="GladeInspector.html#glade-inspector-new-with-project" title="glade_inspector_new_with_project ()">glade_inspector_new_with_project</a>    (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeInspector.html#glade-inspector-set-project" title="glade_inspector_set_project ()">glade_inspector_set_project</a>         (<a class="link" href="GladeInspector.html" title="GladeInspector">GladeInspector</a> *inspector,
+GtkWidget *         <a class="link" href="GladeInspector.html#glade-inspector-new" title="glade_inspector_new ()">glade_inspector_new</a>                 (void);
+GtkWidget *         <a class="link" href="GladeInspector.html#glade-inspector-new-with-project" title="glade_inspector_new_with_project ()">glade_inspector_new_with_project</a>    (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);
+void                <a class="link" href="GladeInspector.html#glade-inspector-set-project" title="glade_inspector_set_project ()">glade_inspector_set_project</a>         (<a class="link" href="GladeInspector.html" title="GladeInspector">GladeInspector</a> *inspector,
                                                          <a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);
 <a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *      <a class="link" href="GladeInspector.html#glade-inspector-get-project" title="glade_inspector_get_project ()">glade_inspector_get_project</a>         (<a class="link" href="GladeInspector.html" title="GladeInspector">GladeInspector</a> *inspector);
-<GTKDOCLINK HREF="GList">GList</GTKDOCLINK> *             <a class="link" href="GladeInspector.html#glade-inspector-get-selected-items" title="glade_inspector_get_selected_items ()">glade_inspector_get_selected_items</a>  (<a class="link" href="GladeInspector.html" title="GladeInspector">GladeInspector</a> *inspector);
+GList *             <a class="link" href="GladeInspector.html#glade-inspector-get-selected-items" title="glade_inspector_get_selected_items ()">glade_inspector_get_selected_items</a>  (<a class="link" href="GladeInspector.html" title="GladeInspector">GladeInspector</a> *inspector);
 </pre>
 </div>
 <div class="refsect1" lang="en">
 <a name="GladeInspector.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
-  <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK>
-   +----<GTKDOCLINK HREF="GInitiallyUnowned">GInitiallyUnowned</GTKDOCLINK>
-         +----<GTKDOCLINK HREF="GtkObject">GtkObject</GTKDOCLINK>
-               +----<GTKDOCLINK HREF="GtkWidget">GtkWidget</GTKDOCLINK>
-                     +----<GTKDOCLINK HREF="GtkContainer">GtkContainer</GTKDOCLINK>
-                           +----<GTKDOCLINK HREF="GtkBox">GtkBox</GTKDOCLINK>
-                                 +----<GTKDOCLINK HREF="GtkVBox">GtkVBox</GTKDOCLINK>
+  GObject
+   +----GInitiallyUnowned
+         +----GtkObject
+               +----GtkWidget
+                     +----GtkContainer
+                           +----GtkBox
+                                 +----GtkVBox
                                        +----GladeInspector
 </pre>
 </div>
@@ -77,7 +77,7 @@
 <a name="GladeInspector.implemented-interfaces"></a><h2>Implemented Interfaces</h2>
 <p>
 GladeInspector implements
- <GTKDOCLINK HREF="AtkImplementorIface">AtkImplementorIface</GTKDOCLINK>,  <GTKDOCLINK HREF="GtkBuildable">GtkBuildable</GTKDOCLINK> and  <GTKDOCLINK HREF="GtkOrientable">GtkOrientable</GTKDOCLINK>.</p>
+ AtkImplementorIface,  GtkBuildable and  GtkOrientable.</p>
 </div>
 <div class="refsect1" lang="en">
 <a name="GladeInspector.properties"></a><h2>Properties</h2>
@@ -112,7 +112,7 @@ The <a class="link" href="GladeInspector.html" title="GladeInspector"><span clas
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-inspector-new"></a><h3>glade_inspector_new ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="GtkWidget">GtkWidget</GTKDOCLINK> *         glade_inspector_new                 (void);</pre>
+<pre class="programlisting">GtkWidget *         glade_inspector_new                 (void);</pre>
 <p>
 Creates a new <a class="link" href="GladeInspector.html" title="GladeInspector"><span class="type">GladeInspector</span></a></p>
 <div class="variablelist"><table border="0">
@@ -127,7 +127,7 @@ Creates a new <a class="link" href="GladeInspector.html" title="GladeInspector">
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-inspector-new-with-project"></a><h3>glade_inspector_new_with_project ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="GtkWidget">GtkWidget</GTKDOCLINK> *         glade_inspector_new_with_project    (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
+<pre class="programlisting">GtkWidget *         glade_inspector_new_with_project    (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
 <p>
 Creates a new <a class="link" href="GladeInspector.html" title="GladeInspector"><span class="type">GladeInspector</span></a> with <em class="parameter"><code>project</code></em></p>
 <div class="variablelist"><table border="0">
@@ -149,11 +149,11 @@ Creates a new <a class="link" href="GladeInspector.html" title="GladeInspector">
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-inspector-set-project"></a><h3>glade_inspector_set_project ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_inspector_set_project         (<a class="link" href="GladeInspector.html" title="GladeInspector">GladeInspector</a> *inspector,
+<pre class="programlisting">void                glade_inspector_set_project         (<a class="link" href="GladeInspector.html" title="GladeInspector">GladeInspector</a> *inspector,
                                                          <a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
 <p>
 Sets the current project of <em class="parameter"><code>inspector</code></em> to <em class="parameter"><code>project</code></em>. To unset the current
-project, pass <GTKDOCLINK HREF="NULL:CAPS"><code class="literal">NULL</code></GTKDOCLINK> for <em class="parameter"><code>project</code></em>.</p>
+project, pass <code class="literal">NULL</code> for <em class="parameter"><code>project</code></em>.</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -195,7 +195,7 @@ Note that the method does not ref the returned <a class="link" href="GladeProjec
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-inspector-get-selected-items"></a><h3>glade_inspector_get_selected_items ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="GList">GList</GTKDOCLINK> *             glade_inspector_get_selected_items  (<a class="link" href="GladeInspector.html" title="GladeInspector">GladeInspector</a> *inspector);</pre>
+<pre class="programlisting">GList *             glade_inspector_get_selected_items  (<a class="link" href="GladeInspector.html" title="GladeInspector">GladeInspector</a> *inspector);</pre>
 <p>
 Returns the selected items in the inspector.</p>
 <div class="variablelist"><table border="0">
@@ -208,7 +208,7 @@ Returns the selected items in the inspector.</p>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> A <GTKDOCLINK HREF="GList"><span class="type">GList</span></GTKDOCLINK>
+<td> A <span class="type">GList</span>
 </td>
 </tr>
 </tbody>
@@ -227,8 +227,8 @@ Returns the selected items in the inspector.</p>
 <a name="GladeInspector.signal-details"></a><h2>Signal Details</h2>
 <div class="refsect2" lang="en">
 <a name="GladeInspector-item-activated"></a><h3>The <code class="literal">"item-activated"</code> signal</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                user_function                      (<a class="link" href="GladeInspector.html" title="GladeInspector">GladeInspector</a> *inspector,
-                                                        <GTKDOCLINK HREF="gpointer">gpointer</GTKDOCLINK>        user_data)      : Run Last</pre>
+<pre class="programlisting">void                user_function                      (<a class="link" href="GladeInspector.html" title="GladeInspector">GladeInspector</a> *inspector,
+                                                        gpointer        user_data)      : Run Last</pre>
 <p>
 Emitted when a item is activated in the GladeInspector.</p>
 <div class="variablelist"><table border="0">
@@ -249,8 +249,8 @@ Emitted when a item is activated in the GladeInspector.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeInspector-selection-changed"></a><h3>The <code class="literal">"selection-changed"</code> signal</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                user_function                      (<a class="link" href="GladeInspector.html" title="GladeInspector">GladeInspector</a> *inspector,
-                                                        <GTKDOCLINK HREF="gpointer">gpointer</GTKDOCLINK>        user_data)      : Run Last</pre>
+<pre class="programlisting">void                user_function                      (<a class="link" href="GladeInspector.html" title="GladeInspector">GladeInspector</a> *inspector,
+                                                        gpointer        user_data)      : Run Last</pre>
 <p>
 Emitted when the selection changes in the GladeInspector.</p>
 <div class="variablelist"><table border="0">

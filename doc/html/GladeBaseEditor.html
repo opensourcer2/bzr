@@ -52,36 +52,36 @@
 <a name="GladeBaseEditor.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">
                     <a class="link" href="GladeBaseEditor.html#GladeBaseEditor-struct" title="GladeBaseEditor">GladeBaseEditor</a>;
-<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *   <a class="link" href="GladeBaseEditor.html#glade-base-editor-new" title="glade_base_editor_new ()">glade_base_editor_new</a>               (<GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *container,
-                                                         <GTKDOCLINK HREF="GladeEditable">GladeEditable</GTKDOCLINK> *main_editable,
+<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *   <a class="link" href="GladeBaseEditor.html#glade-base-editor-new" title="glade_base_editor_new ()">glade_base_editor_new</a>               (GObject *container,
+                                                         GladeEditable *main_editable,
                                                          ...);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeBaseEditor.html#glade-base-editor-add-default-properties" title="glade_base_editor_add_default_properties ()">glade_base_editor_add_default_properties</a>
+void                <a class="link" href="GladeBaseEditor.html#glade-base-editor-add-default-properties" title="glade_base_editor_add_default_properties ()">glade_base_editor_add_default_properties</a>
                                                         (<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *editor,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gchild);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeBaseEditor.html#glade-base-editor-add-properties" title="glade_base_editor_add_properties ()">glade_base_editor_add_properties</a>    (<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *editor,
+void                <a class="link" href="GladeBaseEditor.html#glade-base-editor-add-properties" title="glade_base_editor_add_properties ()">glade_base_editor_add_properties</a>    (<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *editor,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gchild,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> packing,
+                                                         gboolean packing,
                                                          ...);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeBaseEditor.html#glade-base-editor-add-label" title="glade_base_editor_add_label ()">glade_base_editor_add_label</a>         (<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *editor,
-                                                         <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *str);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="GladeBaseEditor.html#glade-base-editor-set-show-signal-editor" title="glade_base_editor_set_show_signal_editor ()">glade_base_editor_set_show_signal_editor</a>
+void                <a class="link" href="GladeBaseEditor.html#glade-base-editor-add-label" title="glade_base_editor_add_label ()">glade_base_editor_add_label</a>         (<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *editor,
+                                                         gchar *str);
+void                <a class="link" href="GladeBaseEditor.html#glade-base-editor-set-show-signal-editor" title="glade_base_editor_set_show_signal_editor ()">glade_base_editor_set_show_signal_editor</a>
                                                         (<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *editor,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> val);
-<GTKDOCLINK HREF="GtkWidget">GtkWidget</GTKDOCLINK> *         <a class="link" href="GladeBaseEditor.html#glade-base-editor-pack-new-window" title="glade_base_editor_pack_new_window ()">glade_base_editor_pack_new_window</a>   (<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *editor,
-                                                         <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *title,
-                                                         <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *help_markup);
+                                                         gboolean val);
+GtkWidget *         <a class="link" href="GladeBaseEditor.html#glade-base-editor-pack-new-window" title="glade_base_editor_pack_new_window ()">glade_base_editor_pack_new_window</a>   (<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *editor,
+                                                         gchar *title,
+                                                         gchar *help_markup);
 </pre>
 </div>
 <div class="refsect1" lang="en">
 <a name="GladeBaseEditor.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
-  <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK>
-   +----<GTKDOCLINK HREF="GInitiallyUnowned">GInitiallyUnowned</GTKDOCLINK>
-         +----<GTKDOCLINK HREF="GtkObject">GtkObject</GTKDOCLINK>
-               +----<GTKDOCLINK HREF="GtkWidget">GtkWidget</GTKDOCLINK>
-                     +----<GTKDOCLINK HREF="GtkContainer">GtkContainer</GTKDOCLINK>
-                           +----<GTKDOCLINK HREF="GtkBox">GtkBox</GTKDOCLINK>
-                                 +----<GTKDOCLINK HREF="GtkVBox">GtkVBox</GTKDOCLINK>
+  GObject
+   +----GInitiallyUnowned
+         +----GtkObject
+               +----GtkWidget
+                     +----GtkContainer
+                           +----GtkBox
+                                 +----GtkVBox
                                        +----GladeBaseEditor
 </pre>
 </div>
@@ -89,12 +89,12 @@
 <a name="GladeBaseEditor.implemented-interfaces"></a><h2>Implemented Interfaces</h2>
 <p>
 GladeBaseEditor implements
- <GTKDOCLINK HREF="AtkImplementorIface">AtkImplementorIface</GTKDOCLINK>,  <GTKDOCLINK HREF="GtkBuildable">GtkBuildable</GTKDOCLINK> and  <GTKDOCLINK HREF="GtkOrientable">GtkOrientable</GTKDOCLINK>.</p>
+ AtkImplementorIface,  GtkBuildable and  GtkOrientable.</p>
 </div>
 <div class="refsect1" lang="en">
 <a name="GladeBaseEditor.properties"></a><h2>Properties</h2>
 <pre class="synopsis">
-  "<a class="link" href="GladeBaseEditor.html#GladeBaseEditor--container" title='The "container" property'>container</a>"                <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK>*              : Read / Write
+  "<a class="link" href="GladeBaseEditor.html#GladeBaseEditor--container" title='The "container" property'>container</a>"                GObject*              : Read / Write
 </pre>
 </div>
 <div class="refsect1" lang="en">
@@ -122,8 +122,8 @@ Convenience object to edit containers where placeholders do not make sense, like
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-base-editor-new"></a><h3>glade_base_editor_new ()</h3>
-<pre class="programlisting"><a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *   glade_base_editor_new               (<GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *container,
-                                                         <GTKDOCLINK HREF="GladeEditable">GladeEditable</GTKDOCLINK> *main_editable,
+<pre class="programlisting"><a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *   glade_base_editor_new               (GObject *container,
+                                                         GladeEditable *main_editable,
                                                          ...);</pre>
 <p>
 Creates a new GladeBaseEditor with <em class="parameter"><code>container</code></em> toplevel 
@@ -141,7 +141,7 @@ Argument List:
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>main_editable</code></em> :</span></p></td>
-<td> the custom <GTKDOCLINK HREF="GladeEditable"><span class="type">GladeEditable</span></GTKDOCLINK> for <em class="parameter"><code>container</code></em>, or <GTKDOCLINK HREF="NULL:CAPS"><code class="literal">NULL</code></GTKDOCLINK>
+<td> the custom <span class="type">GladeEditable</span> for <em class="parameter"><code>container</code></em>, or <code class="literal">NULL</code>
 @... A NULL terminated list of gchar *, GType
 </td>
 </tr>
@@ -156,7 +156,7 @@ Argument List:
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-base-editor-add-default-properties"></a><h3>glade_base_editor_add_default_properties ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_base_editor_add_default_properties
+<pre class="programlisting">void                glade_base_editor_add_default_properties
                                                         (<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *editor,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gchild);</pre>
 <p>
@@ -183,9 +183,9 @@ NOTE: This function is intended to be used in "child-selected" callbacks</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-base-editor-add-properties"></a><h3>glade_base_editor_add_properties ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_base_editor_add_properties    (<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *editor,
+<pre class="programlisting">void                glade_base_editor_add_properties    (<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *editor,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *gchild,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> packing,
+                                                         gboolean packing,
                                                          ...);</pre>
 <p>
 Add <em class="parameter"><code>gchild</code></em> properties to <em class="parameter"><code>editor</code></em>
@@ -221,8 +221,8 @@ NOTE: This function is intended to be used in "child-selected" callbacks</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-base-editor-add-label"></a><h3>glade_base_editor_add_label ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_base_editor_add_label         (<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *editor,
-                                                         <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *str);</pre>
+<pre class="programlisting">void                glade_base_editor_add_label         (<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *editor,
+                                                         gchar *str);</pre>
 <p>
 Adds a new label to <em class="parameter"><code>editor</code></em>
 </p>
@@ -247,9 +247,9 @@ NOTE: This function is intended to be used in "child-selected" callbacks</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-base-editor-set-show-signal-editor"></a><h3>glade_base_editor_set_show_signal_editor ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_base_editor_set_show_signal_editor
+<pre class="programlisting">void                glade_base_editor_set_show_signal_editor
                                                         (<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *editor,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> val);</pre>
+                                                         gboolean val);</pre>
 <p>
 Shows/hide <em class="parameter"><code>editor</code></em> 's signal editor</p>
 <div class="variablelist"><table border="0">
@@ -271,9 +271,9 @@ Shows/hide <em class="parameter"><code>editor</code></em> 's signal editor</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-base-editor-pack-new-window"></a><h3>glade_base_editor_pack_new_window ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="GtkWidget">GtkWidget</GTKDOCLINK> *         glade_base_editor_pack_new_window   (<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *editor,
-                                                         <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *title,
-                                                         <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *help_markup);</pre>
+<pre class="programlisting">GtkWidget *         glade_base_editor_pack_new_window   (<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *editor,
+                                                         gchar *title,
+                                                         gchar *help_markup);</pre>
 <p>
 This convenience function create a new dialog window and packs <em class="parameter"><code>editor</code></em> in it.</p>
 <div class="variablelist"><table border="0">
@@ -307,7 +307,7 @@ This convenience function create a new dialog window and packs <em class="parame
 <a name="GladeBaseEditor.property-details"></a><h2>Property Details</h2>
 <div class="refsect2" lang="en">
 <a name="GladeBaseEditor--container"></a><h3>The <code class="literal">"container"</code> property</h3>
-<pre class="programlisting">  "container"                <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK>*              : Read / Write</pre>
+<pre class="programlisting">  "container"                GObject*              : Read / Write</pre>
 <p>The container object this editor is currently editing.</p>
 </div>
 </div>
@@ -315,10 +315,10 @@ This convenience function create a new dialog window and packs <em class="parame
 <a name="GladeBaseEditor.signal-details"></a><h2>Signal Details</h2>
 <div class="refsect2" lang="en">
 <a name="GladeBaseEditor-build-child"></a><h3>The <code class="literal">"build-child"</code> signal</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK>*            user_function                      (<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *gladebaseeditor,
-                                                        <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK>         *gparent,
-                                                        <GTKDOCLINK HREF="guint">guint</GTKDOCLINK>            type,
-                                                        <GTKDOCLINK HREF="gpointer">gpointer</GTKDOCLINK>         user_data)            : Run Last</pre>
+<pre class="programlisting">GObject*            user_function                      (<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *gladebaseeditor,
+                                                        GObject         *gparent,
+                                                        guint            type,
+                                                        gpointer         user_data)            : Run Last</pre>
 <p>
 Create a child widget here if something else must be done other than
 calling <a class="link" href="GladeCommand.html#glade-command-create" title="glade_command_create ()"><code class="function">glade_command_create()</code></a> such as creating an intermediate parent.</p>
@@ -337,7 +337,7 @@ calling <a class="link" href="GladeCommand.html#glade-command-create" title="gla
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
-<td> the <GTKDOCLINK HREF="GType"><span class="type">GType</span></GTKDOCLINK> of the child
+<td> the <span class="type">GType</span> of the child
 </td>
 </tr>
 <tr>
@@ -355,17 +355,17 @@ calling <a class="link" href="GladeCommand.html#glade-command-create" title="gla
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeBaseEditor-change-type"></a><h3>The <code class="literal">"change-type"</code> signal</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            user_function                      (<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *gladebaseeditor,
-                                                        <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK>         *arg1,
-                                                        <GTKDOCLINK HREF="guint">guint</GTKDOCLINK>            arg2,
-                                                        <GTKDOCLINK HREF="gpointer">gpointer</GTKDOCLINK>         user_data)            : Run Last</pre>
+<pre class="programlisting">gboolean            user_function                      (<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *gladebaseeditor,
+                                                        GObject         *arg1,
+                                                        guint            arg2,
+                                                        gpointer         user_data)            : Run Last</pre>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeBaseEditor-child-selected"></a><h3>The <code class="literal">"child-selected"</code> signal</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                user_function                      (<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *gladebaseeditor,
-                                                        <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK>         *gchild,
-                                                        <GTKDOCLINK HREF="gpointer">gpointer</GTKDOCLINK>         user_data)            : Run Last</pre>
+<pre class="programlisting">void                user_function                      (<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *gladebaseeditor,
+                                                        GObject         *gchild,
+                                                        gpointer         user_data)            : Run Last</pre>
 <p>
 Emited when the user selects a child in the editor's treeview.
 You can add the relevant child properties here using
@@ -395,10 +395,10 @@ editor look pretty.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeBaseEditor-delete-child"></a><h3>The <code class="literal">"delete-child"</code> signal</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            user_function                      (<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *gladebaseeditor,
-                                                        <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK>         *gparent,
-                                                        <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK>         *gchild,
-                                                        <GTKDOCLINK HREF="gpointer">gpointer</GTKDOCLINK>         user_data)            : Run Last</pre>
+<pre class="programlisting">gboolean            user_function                      (<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *gladebaseeditor,
+                                                        GObject         *gparent,
+                                                        GObject         *gchild,
+                                                        gpointer         user_data)            : Run Last</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
@@ -429,9 +429,9 @@ editor look pretty.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeBaseEditor-get-display-name"></a><h3>The <code class="literal">"get-display-name"</code> signal</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK>*              user_function                      (<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *gladebaseeditor,
-                                                        <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK>         *gchild,
-                                                        <GTKDOCLINK HREF="gpointer">gpointer</GTKDOCLINK>         user_data)            : Run Last</pre>
+<pre class="programlisting">gchar*              user_function                      (<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *gladebaseeditor,
+                                                        GObject         *gchild,
+                                                        gpointer         user_data)            : Run Last</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
@@ -463,10 +463,10 @@ treeview.
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeBaseEditor-move-child"></a><h3>The <code class="literal">"move-child"</code> signal</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            user_function                      (<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *gladebaseeditor,
-                                                        <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK>         *gparent,
-                                                        <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK>         *gchild,
-                                                        <GTKDOCLINK HREF="gpointer">gpointer</GTKDOCLINK>         user_data)            : Run Last</pre>
+<pre class="programlisting">gboolean            user_function                      (<a class="link" href="GladeBaseEditor.html" title="GladeBaseEditor">GladeBaseEditor</a> *gladebaseeditor,
+                                                        GObject         *gparent,
+                                                        GObject         *gchild,
+                                                        gpointer         user_data)            : Run Last</pre>
 <p>
 Move child here if something else must be done other than cut &amp; paste.</p>
 <div class="variablelist"><table border="0">
