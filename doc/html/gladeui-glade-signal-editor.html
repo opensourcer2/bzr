@@ -44,9 +44,9 @@
 <a name="gladeui-glade-signal-editor.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">
                     <a class="link" href="gladeui-glade-signal-editor.html#GladeSignalEditor" title="GladeSignalEditor">GladeSignalEditor</a>;
-<GTKDOCLINK HREF="GtkWidget">GtkWidget</GTKDOCLINK> *         <a class="link" href="gladeui-glade-signal-editor.html#glade-signal-editor-get-widget" title="glade_signal_editor_get_widget ()">glade_signal_editor_get_widget</a>      (<a class="link" href="gladeui-glade-signal-editor.html#GladeSignalEditor" title="GladeSignalEditor">GladeSignalEditor</a> *editor);
-<a class="link" href="gladeui-glade-signal-editor.html#GladeSignalEditor" title="GladeSignalEditor">GladeSignalEditor</a> * <a class="link" href="gladeui-glade-signal-editor.html#glade-signal-editor-new" title="glade_signal_editor_new ()">glade_signal_editor_new</a>             (<GTKDOCLINK HREF="gpointer">gpointer</GTKDOCLINK> *editor);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="gladeui-glade-signal-editor.html#glade-signal-editor-load-widget" title="glade_signal_editor_load_widget ()">glade_signal_editor_load_widget</a>     (<a class="link" href="gladeui-glade-signal-editor.html#GladeSignalEditor" title="GladeSignalEditor">GladeSignalEditor</a> *editor,
+GtkWidget *         <a class="link" href="gladeui-glade-signal-editor.html#glade-signal-editor-get-widget" title="glade_signal_editor_get_widget ()">glade_signal_editor_get_widget</a>      (<a class="link" href="gladeui-glade-signal-editor.html#GladeSignalEditor" title="GladeSignalEditor">GladeSignalEditor</a> *editor);
+<a class="link" href="gladeui-glade-signal-editor.html#GladeSignalEditor" title="GladeSignalEditor">GladeSignalEditor</a> * <a class="link" href="gladeui-glade-signal-editor.html#glade-signal-editor-new" title="glade_signal_editor_new ()">glade_signal_editor_new</a>             (gpointer *editor);
+void                <a class="link" href="gladeui-glade-signal-editor.html#glade-signal-editor-load-widget" title="glade_signal_editor_load_widget ()">glade_signal_editor_load_widget</a>     (<a class="link" href="gladeui-glade-signal-editor.html#GladeSignalEditor" title="GladeSignalEditor">GladeSignalEditor</a> *editor,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);
 </pre>
 </div>
@@ -85,7 +85,7 @@ is mostly of interest when implementing a custom object editor.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-signal-editor-get-widget"></a><h3>glade_signal_editor_get_widget ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="GtkWidget">GtkWidget</GTKDOCLINK> *         glade_signal_editor_get_widget      (<a class="link" href="gladeui-glade-signal-editor.html#GladeSignalEditor" title="GladeSignalEditor">GladeSignalEditor</a> *editor);</pre>
+<pre class="programlisting">GtkWidget *         glade_signal_editor_get_widget      (<a class="link" href="gladeui-glade-signal-editor.html#GladeSignalEditor" title="GladeSignalEditor">GladeSignalEditor</a> *editor);</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
@@ -98,7 +98,7 @@ is mostly of interest when implementing a custom object editor.</p>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the <GTKDOCLINK HREF="GtkWidget"><span class="type">GtkWidget</span></GTKDOCLINK> that is the main window for <em class="parameter"><code>editor</code></em>, or <GTKDOCLINK HREF="NULL:CAPS"><code class="literal">NULL</code></GTKDOCLINK> if
+<td> the <span class="type">GtkWidget</span> that is the main window for <em class="parameter"><code>editor</code></em>, or <code class="literal">NULL</code> if
          it does not exist
 </td>
 </tr>
@@ -108,7 +108,7 @@ is mostly of interest when implementing a custom object editor.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-signal-editor-new"></a><h3>glade_signal_editor_new ()</h3>
-<pre class="programlisting"><a class="link" href="gladeui-glade-signal-editor.html#GladeSignalEditor" title="GladeSignalEditor">GladeSignalEditor</a> * glade_signal_editor_new             (<GTKDOCLINK HREF="gpointer">gpointer</GTKDOCLINK> *editor);</pre>
+<pre class="programlisting"><a class="link" href="gladeui-glade-signal-editor.html#GladeSignalEditor" title="GladeSignalEditor">GladeSignalEditor</a> * glade_signal_editor_new             (gpointer *editor);</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
@@ -130,7 +130,7 @@ is mostly of interest when implementing a custom object editor.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-signal-editor-load-widget"></a><h3>glade_signal_editor_load_widget ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_signal_editor_load_widget     (<a class="link" href="gladeui-glade-signal-editor.html#GladeSignalEditor" title="GladeSignalEditor">GladeSignalEditor</a> *editor,
+<pre class="programlisting">void                glade_signal_editor_load_widget     (<a class="link" href="gladeui-glade-signal-editor.html#GladeSignalEditor" title="GladeSignalEditor">GladeSignalEditor</a> *editor,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
 <p>
 TODO: write me</p>

@@ -53,210 +53,210 @@ enum                <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeC
 #define             <a class="link" href="gladeui-GladeWidgetAdaptor.html#GWA-GET-OCLASS:CAPS" title="GWA_GET_OCLASS()">GWA_GET_OCLASS</a>                      (type)
 #define             <a class="link" href="gladeui-GladeWidgetAdaptor.html#GLADE-VALID-CREATE-REASON:CAPS" title="GLADE_VALID_CREATE_REASON()">GLADE_VALID_CREATE_REASON</a>           (reason)
 #define             <a class="link" href="gladeui-GladeWidgetAdaptor.html#GLADE-TYPE-CREATE-REASON:CAPS" title="GLADE_TYPE_CREATE_REASON">GLADE_TYPE_CREATE_REASON</a>
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeSetPropertyFunc" title="GladeSetPropertyFunc ()">*GladeSetPropertyFunc</a>)             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *object,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property_name,
-                                                         const <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeGetPropertyFunc" title="GladeGetPropertyFunc ()">*GladeGetPropertyFunc</a>)             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *object,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property_name,
-                                                         <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);
-<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeVerifyPropertyFunc" title="GladeVerifyPropertyFunc ()">*GladeVerifyPropertyFunc</a>)          (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *object,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property_name,
-                                                         const <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeChildSetPropertyFunc" title="GladeChildSetPropertyFunc ()">*GladeChildSetPropertyFunc</a>)        (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *container,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *child,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property_name,
-                                                         const <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeChildGetPropertyFunc" title="GladeChildGetPropertyFunc ()">*GladeChildGetPropertyFunc</a>)        (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *container,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *child,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property_name,
-                                                         <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);
-<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeChildVerifyPropertyFunc" title="GladeChildVerifyPropertyFunc ()">*GladeChildVerifyPropertyFunc</a>)     (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *container,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *child,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property_name,
-                                                         const <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);
-<GTKDOCLINK HREF="GList">GList</GTKDOCLINK> *             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeGetChildrenFunc" title="GladeGetChildrenFunc ()">*GladeGetChildrenFunc</a>)             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *container);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeAddChildFunc" title="GladeAddChildFunc ()">*GladeAddChildFunc</a>)                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *parent,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *child);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeRemoveChildFunc" title="GladeRemoveChildFunc ()">*GladeRemoveChildFunc</a>)             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *parent,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *child);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeReplaceChildFunc" title="GladeReplaceChildFunc ()">*GladeReplaceChildFunc</a>)            (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *container,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *old_obj,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *new_obj);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladePostCreateFunc" title="GladePostCreateFunc ()">*GladePostCreateFunc</a>)              (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *object,
+void                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeSetPropertyFunc" title="GladeSetPropertyFunc ()">*GladeSetPropertyFunc</a>)             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         const gchar *property_name,
+                                                         const GValue *value);
+void                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeGetPropertyFunc" title="GladeGetPropertyFunc ()">*GladeGetPropertyFunc</a>)             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         const gchar *property_name,
+                                                         GValue *value);
+gboolean            (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeVerifyPropertyFunc" title="GladeVerifyPropertyFunc ()">*GladeVerifyPropertyFunc</a>)          (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         const gchar *property_name,
+                                                         const GValue *value);
+void                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeChildSetPropertyFunc" title="GladeChildSetPropertyFunc ()">*GladeChildSetPropertyFunc</a>)        (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *child,
+                                                         const gchar *property_name,
+                                                         const GValue *value);
+void                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeChildGetPropertyFunc" title="GladeChildGetPropertyFunc ()">*GladeChildGetPropertyFunc</a>)        (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *child,
+                                                         const gchar *property_name,
+                                                         GValue *value);
+gboolean            (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeChildVerifyPropertyFunc" title="GladeChildVerifyPropertyFunc ()">*GladeChildVerifyPropertyFunc</a>)     (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *child,
+                                                         const gchar *property_name,
+                                                         const GValue *value);
+GList *             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeGetChildrenFunc" title="GladeGetChildrenFunc ()">*GladeGetChildrenFunc</a>)             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container);
+void                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeAddChildFunc" title="GladeAddChildFunc ()">*GladeAddChildFunc</a>)                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *parent,
+                                                         GObject *child);
+void                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeRemoveChildFunc" title="GladeRemoveChildFunc ()">*GladeRemoveChildFunc</a>)             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *parent,
+                                                         GObject *child);
+void                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeReplaceChildFunc" title="GladeReplaceChildFunc ()">*GladeReplaceChildFunc</a>)            (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *old_obj,
+                                                         GObject *new_obj);
+void                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladePostCreateFunc" title="GladePostCreateFunc ()">*GladePostCreateFunc</a>)              (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
                                                          <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeCreateReason" title="enum GladeCreateReason">GladeCreateReason</a> reason);
-<GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *           (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeGetInternalFunc" title="GladeGetInternalFunc ()">*GladeGetInternalFunc</a>)             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *parent,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *name);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeActionActivateFunc" title="GladeActionActivateFunc ()">*GladeActionActivateFunc</a>)          (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *object,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *action_path);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeChildActionActivateFunc" title="GladeChildActionActivateFunc ()">*GladeChildActionActivateFunc</a>)     (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *container,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *object,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *action_path);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeReadWidgetFunc" title="GladeReadWidgetFunc ()">*GladeReadWidgetFunc</a>)              (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+GObject *           (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeGetInternalFunc" title="GladeGetInternalFunc ()">*GladeGetInternalFunc</a>)             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *parent,
+                                                         const gchar *name);
+void                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeActionActivateFunc" title="GladeActionActivateFunc ()">*GladeActionActivateFunc</a>)          (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         const gchar *action_path);
+void                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeChildActionActivateFunc" title="GladeChildActionActivateFunc ()">*GladeChildActionActivateFunc</a>)     (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *object,
+                                                         const gchar *action_path);
+void                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeReadWidgetFunc" title="GladeReadWidgetFunc ()">*GladeReadWidgetFunc</a>)              (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         <GTKDOCLINK HREF="GladeXmlNode">GladeXmlNode</GTKDOCLINK> *node);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWriteWidgetFunc" title="GladeWriteWidgetFunc ()">*GladeWriteWidgetFunc</a>)             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GladeXmlNode *node);
+void                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWriteWidgetFunc" title="GladeWriteWidgetFunc ()">*GladeWriteWidgetFunc</a>)             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         <GTKDOCLINK HREF="GladeXmlContext">GladeXmlContext</GTKDOCLINK> *context,
-                                                         <GTKDOCLINK HREF="GladeXmlNode">GladeXmlNode</GTKDOCLINK> *node);
+                                                         GladeXmlContext *context,
+                                                         GladeXmlNode *node);
 <a class="link" href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> * (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeCreateEPropFunc" title="GladeCreateEPropFunc ()">*GladeCreateEPropFunc</a>)           (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          <a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *klass,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> use_command);
-<GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeStringFromValueFunc" title="GladeStringFromValueFunc ()">*GladeStringFromValueFunc</a>)         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         gboolean use_command);
+gchar *             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeStringFromValueFunc" title="GladeStringFromValueFunc ()">*GladeStringFromValueFunc</a>)         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          <a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *klass,
-                                                         const <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value,
+                                                         const GValue *value,
                                                          <a class="link" href="GladeProject.html#GladeProjectFormat" title="enum GladeProjectFormat">GladeProjectFormat</a> fmt);
                     <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a>;
 #define             <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-create-widget" title="glade_widget_adaptor_create_widget()">glade_widget_adaptor_create_widget</a>  (adaptor, query, ...)
 <a class="link" href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> * <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-create-eprop" title="glade_widget_adaptor_create_eprop ()">glade_widget_adaptor_create_eprop</a> (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          <a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *klass,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> use_command);
+                                                         gboolean use_command);
 #define             <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-from-pclass" title="glade_widget_adaptor_from_pclass()">glade_widget_adaptor_from_pclass</a>    (pclass)
 <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> * <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-from-pspec" title="glade_widget_adaptor_from_pspec ()">glade_widget_adaptor_from_pspec</a>    (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GParamSpec">GParamSpec</GTKDOCLINK> *spec);
-<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> * <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-from-catalog" title="glade_widget_adaptor_from_catalog ()">glade_widget_adaptor_from_catalog</a>  (<GTKDOCLINK HREF="GladeCatalog">GladeCatalog</GTKDOCLINK> *catalog,
-                                                         <GTKDOCLINK HREF="GladeXmlNode">GladeXmlNode</GTKDOCLINK> *class_node,
-                                                         <GTKDOCLINK HREF="GModule">GModule</GTKDOCLINK> *module);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-register" title="glade_widget_adaptor_register ()">glade_widget_adaptor_register</a>       (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor);
+                                                         GParamSpec *spec);
+<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> * <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-from-catalog" title="glade_widget_adaptor_from_catalog ()">glade_widget_adaptor_from_catalog</a>  (GladeCatalog *catalog,
+                                                         GladeXmlNode *class_node,
+                                                         GModule *module);
+void                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-register" title="glade_widget_adaptor_register ()">glade_widget_adaptor_register</a>       (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor);
 <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *       <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-create-internal" title="glade_widget_adaptor_create_internal ()">glade_widget_adaptor_create_internal</a>
                                                         (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *internal_object,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *internal_name,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *parent_name,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> anarchist,
+                                                         GObject *internal_object,
+                                                         const gchar *internal_name,
+                                                         const gchar *parent_name,
+                                                         gboolean anarchist,
                                                          <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeCreateReason" title="enum GladeCreateReason">GladeCreateReason</a> reason);
 <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *       <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-create-widget-real" title="glade_widget_adaptor_create_widget_real ()">glade_widget_adaptor_create_widget_real</a>
-                                                        (<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> query,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *first_property,
+                                                        (gboolean query,
+                                                         const gchar *first_property,
                                                          ...);
-<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> * <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-by-name" title="glade_widget_adaptor_get_by_name ()">glade_widget_adaptor_get_by_name</a>   (const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *name);
-<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> * <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-by-type" title="glade_widget_adaptor_get_by_type ()">glade_widget_adaptor_get_by_type</a>   (<GTKDOCLINK HREF="GType">GType</GTKDOCLINK> type);
+<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> * <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-by-name" title="glade_widget_adaptor_get_by_name ()">glade_widget_adaptor_get_by_name</a>   (const gchar *name);
+<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> * <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-by-type" title="glade_widget_adaptor_get_by_type ()">glade_widget_adaptor_get_by_type</a>   (GType type);
 <a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> * <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-property-class" title="glade_widget_adaptor_get_property_class ()">glade_widget_adaptor_get_property_class</a>
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *name);
+                                                         const gchar *name);
 <a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> * <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-pack-property-class" title="glade_widget_adaptor_get_pack_property_class ()">glade_widget_adaptor_get_pack_property_class</a>
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *name);
-<GTKDOCLINK HREF="GParameter">GParameter</GTKDOCLINK> *        <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-default-params" title="glade_widget_adaptor_default_params ()">glade_widget_adaptor_default_params</a> (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> construct,
-                                                         <GTKDOCLINK HREF="guint">guint</GTKDOCLINK> *n_params);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-post-create" title="glade_widget_adaptor_post_create ()">glade_widget_adaptor_post_create</a>    (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *object,
+                                                         const gchar *name);
+GParameter *        <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-default-params" title="glade_widget_adaptor_default_params ()">glade_widget_adaptor_default_params</a> (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         gboolean construct,
+                                                         guint *n_params);
+void                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-post-create" title="glade_widget_adaptor_post_create ()">glade_widget_adaptor_post_create</a>    (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
                                                          <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeCreateReason" title="enum GladeCreateReason">GladeCreateReason</a> reason);
-<GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *           <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-internal-child" title="glade_widget_adaptor_get_internal_child ()">glade_widget_adaptor_get_internal_child</a>
+GObject *           <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-internal-child" title="glade_widget_adaptor_get_internal_child ()">glade_widget_adaptor_get_internal_child</a>
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *object,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *internal_name);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-set-property" title="glade_widget_adaptor_set_property ()">glade_widget_adaptor_set_property</a>   (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *object,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property_name,
-                                                         const <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-property" title="glade_widget_adaptor_get_property ()">glade_widget_adaptor_get_property</a>   (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *object,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property_name,
-                                                         <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);
-<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-verify-property" title="glade_widget_adaptor_verify_property ()">glade_widget_adaptor_verify_property</a>
+                                                         GObject *object,
+                                                         const gchar *internal_name);
+void                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-set-property" title="glade_widget_adaptor_set_property ()">glade_widget_adaptor_set_property</a>   (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         const gchar *property_name,
+                                                         const GValue *value);
+void                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-property" title="glade_widget_adaptor_get_property ()">glade_widget_adaptor_get_property</a>   (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         const gchar *property_name,
+                                                         GValue *value);
+gboolean            <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-verify-property" title="glade_widget_adaptor_verify_property ()">glade_widget_adaptor_verify_property</a>
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *object,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property_name,
-                                                         const <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-add" title="glade_widget_adaptor_add ()">glade_widget_adaptor_add</a>            (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *container,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *child);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-remove" title="glade_widget_adaptor_remove ()">glade_widget_adaptor_remove</a>         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *container,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *child);
-<GTKDOCLINK HREF="GList">GList</GTKDOCLINK> *             <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-children" title="glade_widget_adaptor_get_children ()">glade_widget_adaptor_get_children</a>   (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *container);
-<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-has-child" title="glade_widget_adaptor_has_child ()">glade_widget_adaptor_has_child</a>      (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *container,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *child);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-child-set-property" title="glade_widget_adaptor_child_set_property ()">glade_widget_adaptor_child_set_property</a>
+                                                         GObject *object,
+                                                         const gchar *property_name,
+                                                         const GValue *value);
+void                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-add" title="glade_widget_adaptor_add ()">glade_widget_adaptor_add</a>            (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *child);
+void                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-remove" title="glade_widget_adaptor_remove ()">glade_widget_adaptor_remove</a>         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *child);
+GList *             <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-children" title="glade_widget_adaptor_get_children ()">glade_widget_adaptor_get_children</a>   (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container);
+gboolean            <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-has-child" title="glade_widget_adaptor_has_child ()">glade_widget_adaptor_has_child</a>      (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *child);
+void                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-child-set-property" title="glade_widget_adaptor_child_set_property ()">glade_widget_adaptor_child_set_property</a>
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *container,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *child,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property_name,
-                                                         const <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-child-get-property" title="glade_widget_adaptor_child_get_property ()">glade_widget_adaptor_child_get_property</a>
+                                                         GObject *container,
+                                                         GObject *child,
+                                                         const gchar *property_name,
+                                                         const GValue *value);
+void                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-child-get-property" title="glade_widget_adaptor_child_get_property ()">glade_widget_adaptor_child_get_property</a>
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *container,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *child,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property_name,
-                                                         <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);
-<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-child-verify-property" title="glade_widget_adaptor_child_verify_property ()">glade_widget_adaptor_child_verify_property</a>
+                                                         GObject *container,
+                                                         GObject *child,
+                                                         const gchar *property_name,
+                                                         GValue *value);
+gboolean            <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-child-verify-property" title="glade_widget_adaptor_child_verify_property ()">glade_widget_adaptor_child_verify_property</a>
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *container,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *child,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property_name,
-                                                         const <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-replace-child" title="glade_widget_adaptor_replace_child ()">glade_widget_adaptor_replace_child</a>  (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *container,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *old_obj,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *new_obj);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-read-child" title="glade_widget_adaptor_read_child ()">glade_widget_adaptor_read_child</a>     (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *child,
+                                                         const gchar *property_name,
+                                                         const GValue *value);
+void                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-replace-child" title="glade_widget_adaptor_replace_child ()">glade_widget_adaptor_replace_child</a>  (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *old_obj,
+                                                         GObject *new_obj);
+void                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-read-child" title="glade_widget_adaptor_read_child ()">glade_widget_adaptor_read_child</a>     (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         <GTKDOCLINK HREF="GladeXmlNode">GladeXmlNode</GTKDOCLINK> *node);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-read-widget" title="glade_widget_adaptor_read_widget ()">glade_widget_adaptor_read_widget</a>    (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GladeXmlNode *node);
+void                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-read-widget" title="glade_widget_adaptor_read_widget ()">glade_widget_adaptor_read_widget</a>    (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         <GTKDOCLINK HREF="GladeXmlNode">GladeXmlNode</GTKDOCLINK> *node);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-write-child" title="glade_widget_adaptor_write_child ()">glade_widget_adaptor_write_child</a>    (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GladeXmlNode *node);
+void                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-write-child" title="glade_widget_adaptor_write_child ()">glade_widget_adaptor_write_child</a>    (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         <GTKDOCLINK HREF="GladeXmlContext">GladeXmlContext</GTKDOCLINK> *context,
-                                                         <GTKDOCLINK HREF="GladeXmlNode">GladeXmlNode</GTKDOCLINK> *node);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-write-widget" title="glade_widget_adaptor_write_widget ()">glade_widget_adaptor_write_widget</a>   (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GladeXmlContext *context,
+                                                         GladeXmlNode *node);
+void                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-write-widget" title="glade_widget_adaptor_write_widget ()">glade_widget_adaptor_write_widget</a>   (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         <GTKDOCLINK HREF="GladeXmlContext">GladeXmlContext</GTKDOCLINK> *context,
-                                                         <GTKDOCLINK HREF="GladeXmlNode">GladeXmlNode</GTKDOCLINK> *node);
-<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-query" title="glade_widget_adaptor_query ()">glade_widget_adaptor_query</a>          (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor);
-<GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *             <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-packing-default" title="glade_widget_adaptor_get_packing_default ()">glade_widget_adaptor_get_packing_default</a>
+                                                         GladeXmlContext *context,
+                                                         GladeXmlNode *node);
+gboolean            <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-query" title="glade_widget_adaptor_query ()">glade_widget_adaptor_query</a>          (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor);
+gchar *             <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-get-packing-default" title="glade_widget_adaptor_get_packing_default ()">glade_widget_adaptor_get_packing_default</a>
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *child_adaptor,
                                                          <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *container_adaptor,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id);
-<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-is-container" title="glade_widget_adaptor_is_container ()">glade_widget_adaptor_is_container</a>   (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor);
-<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-action-add" title="glade_widget_adaptor_action_add ()">glade_widget_adaptor_action_add</a>     (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *action_path,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *label,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *stock,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> important);
-<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-pack-action-add" title="glade_widget_adaptor_pack_action_add ()">glade_widget_adaptor_pack_action_add</a>
+                                                         const gchar *id);
+gboolean            <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-is-container" title="glade_widget_adaptor_is_container ()">glade_widget_adaptor_is_container</a>   (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor);
+gboolean            <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-action-add" title="glade_widget_adaptor_action_add ()">glade_widget_adaptor_action_add</a>     (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         const gchar *action_path,
+                                                         const gchar *label,
+                                                         const gchar *stock,
+                                                         gboolean important);
+gboolean            <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-pack-action-add" title="glade_widget_adaptor_pack_action_add ()">glade_widget_adaptor_pack_action_add</a>
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *action_path,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *label,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *stock,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> important);
-<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-action-remove" title="glade_widget_adaptor_action_remove ()">glade_widget_adaptor_action_remove</a>  (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *action_path);
-<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-pack-action-remove" title="glade_widget_adaptor_pack_action_remove ()">glade_widget_adaptor_pack_action_remove</a>
+                                                         const gchar *action_path,
+                                                         const gchar *label,
+                                                         const gchar *stock,
+                                                         gboolean important);
+gboolean            <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-action-remove" title="glade_widget_adaptor_action_remove ()">glade_widget_adaptor_action_remove</a>  (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         const gchar *action_path);
+gboolean            <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-pack-action-remove" title="glade_widget_adaptor_pack_action_remove ()">glade_widget_adaptor_pack_action_remove</a>
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *action_path);
-<GTKDOCLINK HREF="GList">GList</GTKDOCLINK> *             <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-pack-actions-new" title="glade_widget_adaptor_pack_actions_new ()">glade_widget_adaptor_pack_actions_new</a>
+                                                         const gchar *action_path);
+GList *             <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-pack-actions-new" title="glade_widget_adaptor_pack_actions_new ()">glade_widget_adaptor_pack_actions_new</a>
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-action-activate" title="glade_widget_adaptor_action_activate ()">glade_widget_adaptor_action_activate</a>
+void                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-action-activate" title="glade_widget_adaptor_action_activate ()">glade_widget_adaptor_action_activate</a>
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *object,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *action_path);
-<GTKDOCLINK HREF="void">void</GTKDOCLINK>                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-child-action-activate" title="glade_widget_adaptor_child_action_activate ()">glade_widget_adaptor_child_action_activate</a>
+                                                         GObject *object,
+                                                         const gchar *action_path);
+void                <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-child-action-activate" title="glade_widget_adaptor_child_action_activate ()">glade_widget_adaptor_child_action_activate</a>
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *container,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *object,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *action_path);
-<GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *             <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-string-from-value" title="glade_widget_adaptor_string_from_value ()">glade_widget_adaptor_string_from_value</a>
+                                                         GObject *container,
+                                                         GObject *object,
+                                                         const gchar *action_path);
+gchar *             <a class="link" href="gladeui-GladeWidgetAdaptor.html#glade-widget-adaptor-string-from-value" title="glade_widget_adaptor_string_from_value ()">glade_widget_adaptor_string_from_value</a>
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          <a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *klass,
-                                                         const <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value,
+                                                         const GValue *value,
                                                          <a class="link" href="GladeProject.html#GladeProjectFormat" title="enum GladeProjectFormat">GladeProjectFormat</a> fmt);
 </pre>
 </div>
@@ -428,7 +428,7 @@ the plugin eg. GWA_GET_CLASS (GTK_TYPE_CONTAINER)-&gt;post_create (adaptor...</p
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
-<td> A <GTKDOCLINK HREF="GType"><span class="type">GType</span></GTKDOCLINK>
+<td> A <span class="type">GType</span>
 </td>
 </tr></tbody>
 </table></div>
@@ -444,7 +444,7 @@ Same as GWA_GET_CLASS but casted to GObjectClass</p>
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
-<td> A <GTKDOCLINK HREF="GType"><span class="type">GType</span></GTKDOCLINK>.
+<td> A <span class="type">GType</span>.
 </td>
 </tr></tbody>
 </table></div>
@@ -464,10 +464,10 @@ Same as GWA_GET_CLASS but casted to GObjectClass</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeSetPropertyFunc"></a><h3>GladeSetPropertyFunc ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                (*GladeSetPropertyFunc)             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *object,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property_name,
-                                                         const <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);</pre>
+<pre class="programlisting">void                (*GladeSetPropertyFunc)             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         const gchar *property_name,
+                                                         const GValue *value);</pre>
 <p>
 This delagate function is used to apply the property value on
 the runtime object.
@@ -484,7 +484,7 @@ Sets <em class="parameter"><code>value</code></em> on <em class="parameter"><cod
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK>
+<td> The <span class="type">GObject</span>
 </td>
 </tr>
 <tr>
@@ -494,7 +494,7 @@ Sets <em class="parameter"><code>value</code></em> on <em class="parameter"><cod
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GValue"><span class="type">GValue</span></GTKDOCLINK>
+<td> The <span class="type">GValue</span>
 </td>
 </tr>
 </tbody>
@@ -503,10 +503,10 @@ Sets <em class="parameter"><code>value</code></em> on <em class="parameter"><cod
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeGetPropertyFunc"></a><h3>GladeGetPropertyFunc ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                (*GladeGetPropertyFunc)             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *object,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property_name,
-                                                         <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);</pre>
+<pre class="programlisting">void                (*GladeGetPropertyFunc)             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         const gchar *property_name,
+                                                         GValue *value);</pre>
 <p>
 Gets <em class="parameter"><code>value</code></em> on <em class="parameter"><code>object</code></em> for a given <a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass"><span class="type">GladePropertyClass</span></a></p>
 <div class="variablelist"><table border="0">
@@ -519,7 +519,7 @@ Gets <em class="parameter"><code>value</code></em> on <em class="parameter"><cod
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK>
+<td> The <span class="type">GObject</span>
 </td>
 </tr>
 <tr>
@@ -529,7 +529,7 @@ Gets <em class="parameter"><code>value</code></em> on <em class="parameter"><cod
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GValue"><span class="type">GValue</span></GTKDOCLINK>
+<td> The <span class="type">GValue</span>
 </td>
 </tr>
 </tbody>
@@ -538,10 +538,10 @@ Gets <em class="parameter"><code>value</code></em> on <em class="parameter"><cod
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeVerifyPropertyFunc"></a><h3>GladeVerifyPropertyFunc ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            (*GladeVerifyPropertyFunc)          (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *object,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property_name,
-                                                         const <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);</pre>
+<pre class="programlisting">gboolean            (*GladeVerifyPropertyFunc)          (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         const gchar *property_name,
+                                                         const GValue *value);</pre>
 <p>
 This delagate function is always called whenever setting any
 properties with the exception of load time, and copy/paste time
@@ -558,7 +558,7 @@ boundry checker for properties.</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK>
+<td> The <span class="type">GObject</span>
 </td>
 </tr>
 <tr>
@@ -568,7 +568,7 @@ boundry checker for properties.</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GValue"><span class="type">GValue</span></GTKDOCLINK>
+<td> The <span class="type">GValue</span>
 </td>
 </tr>
 <tr>
@@ -582,11 +582,11 @@ boundry checker for properties.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeChildSetPropertyFunc"></a><h3>GladeChildSetPropertyFunc ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                (*GladeChildSetPropertyFunc)        (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *container,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *child,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property_name,
-                                                         const <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);</pre>
+<pre class="programlisting">void                (*GladeChildSetPropertyFunc)        (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *child,
+                                                         const gchar *property_name,
+                                                         const GValue *value);</pre>
 <p>
 Called to set the packing property <em class="parameter"><code>property_name</code></em> to <em class="parameter"><code>value</code></em>
 on the <em class="parameter"><code>child</code></em> object of <em class="parameter"><code>container</code></em>.</p>
@@ -600,12 +600,12 @@ on the <em class="parameter"><code>child</code></em> object of <em class="parame
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>container</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> container
+<td> The <span class="type">GObject</span> container
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>child</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> child
+<td> The <span class="type">GObject</span> child
 </td>
 </tr>
 <tr>
@@ -615,7 +615,7 @@ on the <em class="parameter"><code>child</code></em> object of <em class="parame
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GValue"><span class="type">GValue</span></GTKDOCLINK>
+<td> The <span class="type">GValue</span>
 </td>
 </tr>
 </tbody>
@@ -624,11 +624,11 @@ on the <em class="parameter"><code>child</code></em> object of <em class="parame
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeChildGetPropertyFunc"></a><h3>GladeChildGetPropertyFunc ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                (*GladeChildGetPropertyFunc)        (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *container,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *child,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property_name,
-                                                         <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);</pre>
+<pre class="programlisting">void                (*GladeChildGetPropertyFunc)        (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *child,
+                                                         const gchar *property_name,
+                                                         GValue *value);</pre>
 <p>
 Called to get the packing property <em class="parameter"><code>property_name</code></em>
 on the <em class="parameter"><code>child</code></em> object of <em class="parameter"><code>container</code></em> into <em class="parameter"><code>value</code></em>.</p>
@@ -642,12 +642,12 @@ on the <em class="parameter"><code>child</code></em> object of <em class="parame
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>container</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> container
+<td> The <span class="type">GObject</span> container
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>child</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> child
+<td> The <span class="type">GObject</span> child
 </td>
 </tr>
 <tr>
@@ -657,7 +657,7 @@ on the <em class="parameter"><code>child</code></em> object of <em class="parame
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GValue"><span class="type">GValue</span></GTKDOCLINK>
+<td> The <span class="type">GValue</span>
 </td>
 </tr>
 </tbody>
@@ -666,11 +666,11 @@ on the <em class="parameter"><code>child</code></em> object of <em class="parame
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeChildVerifyPropertyFunc"></a><h3>GladeChildVerifyPropertyFunc ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            (*GladeChildVerifyPropertyFunc)     (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *container,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *child,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property_name,
-                                                         const <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);</pre>
+<pre class="programlisting">gboolean            (*GladeChildVerifyPropertyFunc)     (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *child,
+                                                         const gchar *property_name,
+                                                         const GValue *value);</pre>
 <p>
 This delagate function is always called whenever setting any
 properties with the exception of load time, and copy/paste time
@@ -687,12 +687,12 @@ boundry checker for properties.</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>container</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> container
+<td> The <span class="type">GObject</span> container
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>child</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> child
+<td> The <span class="type">GObject</span> child
 </td>
 </tr>
 <tr>
@@ -702,7 +702,7 @@ boundry checker for properties.</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GValue"><span class="type">GValue</span></GTKDOCLINK>
+<td> The <span class="type">GValue</span>
 </td>
 </tr>
 <tr>
@@ -716,8 +716,8 @@ boundry checker for properties.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeGetChildrenFunc"></a><h3>GladeGetChildrenFunc ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="GList">GList</GTKDOCLINK> *             (*GladeGetChildrenFunc)             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *container);</pre>
+<pre class="programlisting">GList *             (*GladeGetChildrenFunc)             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container);</pre>
 <p>
 A function called to get <em class="parameter"><code>containers</code></em> children.</p>
 <div class="variablelist"><table border="0">
@@ -725,12 +725,12 @@ A function called to get <em class="parameter"><code>containers</code></em> chil
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>container</code></em> :</span></p></td>
-<td> A <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> container
+<td> A <span class="type">GObject</span> container
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> A <GTKDOCLINK HREF="GList"><span class="type">GList</span></GTKDOCLINK> of <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> children.
+<td> A <span class="type">GList</span> of <span class="type">GObject</span> children.
 </td>
 </tr>
 </tbody>
@@ -739,9 +739,9 @@ A function called to get <em class="parameter"><code>containers</code></em> chil
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeAddChildFunc"></a><h3>GladeAddChildFunc ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                (*GladeAddChildFunc)                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *parent,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *child);</pre>
+<pre class="programlisting">void                (*GladeAddChildFunc)                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *parent,
+                                                         GObject *child);</pre>
 <p>
 Called to add <em class="parameter"><code>child</code></em> to <em class="parameter"><code>parent</code></em>.</p>
 <div class="variablelist"><table border="0">
@@ -749,12 +749,12 @@ Called to add <em class="parameter"><code>child</code></em> to <em class="parame
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>parent</code></em> :</span></p></td>
-<td> A <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> container
+<td> A <span class="type">GObject</span> container
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>child</code></em> :</span></p></td>
-<td> A <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> child
+<td> A <span class="type">GObject</span> child
 </td>
 </tr>
 </tbody>
@@ -763,9 +763,9 @@ Called to add <em class="parameter"><code>child</code></em> to <em class="parame
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeRemoveChildFunc"></a><h3>GladeRemoveChildFunc ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                (*GladeRemoveChildFunc)             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *parent,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *child);</pre>
+<pre class="programlisting">void                (*GladeRemoveChildFunc)             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *parent,
+                                                         GObject *child);</pre>
 <p>
 Called to remove <em class="parameter"><code>child</code></em> from <em class="parameter"><code>parent</code></em>.</p>
 <div class="variablelist"><table border="0">
@@ -773,12 +773,12 @@ Called to remove <em class="parameter"><code>child</code></em> from <em class="p
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>parent</code></em> :</span></p></td>
-<td> A <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> container
+<td> A <span class="type">GObject</span> container
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>child</code></em> :</span></p></td>
-<td> A <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> child
+<td> A <span class="type">GObject</span> child
 </td>
 </tr>
 </tbody>
@@ -787,10 +787,10 @@ Called to remove <em class="parameter"><code>child</code></em> from <em class="p
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeReplaceChildFunc"></a><h3>GladeReplaceChildFunc ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                (*GladeReplaceChildFunc)            (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *container,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *old_obj,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *new_obj);</pre>
+<pre class="programlisting">void                (*GladeReplaceChildFunc)            (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *old_obj,
+                                                         GObject *new_obj);</pre>
 <p>
 Called to swap placeholders with project objects
 in containers.</p>
@@ -799,17 +799,17 @@ in containers.</p>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>container</code></em> :</span></p></td>
-<td> A <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> container
+<td> A <span class="type">GObject</span> container
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>old_obj</code></em> :</span></p></td>
-<td> The old <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> child
+<td> The old <span class="type">GObject</span> child
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>new_obj</code></em> :</span></p></td>
-<td> The new <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> child to take its place
+<td> The new <span class="type">GObject</span> child to take its place
 </td>
 </tr>
 </tbody>
@@ -818,8 +818,8 @@ in containers.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladePostCreateFunc"></a><h3>GladePostCreateFunc ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                (*GladePostCreateFunc)              (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *object,
+<pre class="programlisting">void                (*GladePostCreateFunc)              (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
                                                          <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeCreateReason" title="enum GladeCreateReason">GladeCreateReason</a> reason);</pre>
 <p>
 This function is called exactly once for any project object
@@ -829,7 +829,7 @@ instance and can be for any <a class="link" href="gladeui-GladeWidgetAdaptor.htm
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
-<td> a <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK>
+<td> a <span class="type">GObject</span>
 </td>
 </tr>
 <tr>
@@ -843,9 +843,9 @@ instance and can be for any <a class="link" href="gladeui-GladeWidgetAdaptor.htm
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeGetInternalFunc"></a><h3>GladeGetInternalFunc ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *           (*GladeGetInternalFunc)             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *parent,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *name);</pre>
+<pre class="programlisting">GObject *           (*GladeGetInternalFunc)             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *parent,
+                                                         const gchar *name);</pre>
 <p>
 Called to lookup <em class="parameter"><code>child</code></em> in composite object <em class="parameter"><code>parent</code></em> by <em class="parameter"><code>name</code></em>.</p>
 <div class="variablelist"><table border="0">
@@ -853,7 +853,7 @@ Called to lookup <em class="parameter"><code>child</code></em> in composite obje
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>parent</code></em> :</span></p></td>
-<td> A <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> composite object
+<td> A <span class="type">GObject</span> composite object
 </td>
 </tr>
 <tr>
@@ -872,9 +872,9 @@ Called to lookup <em class="parameter"><code>child</code></em> in composite obje
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeActionActivateFunc"></a><h3>GladeActionActivateFunc ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                (*GladeActionActivateFunc)          (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *object,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *action_path);</pre>
+<pre class="programlisting">void                (*GladeActionActivateFunc)          (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         const gchar *action_path);</pre>
 <p>
 This delagate function is used to catch actions from the core.</p>
 <div class="variablelist"><table border="0">
@@ -887,7 +887,7 @@ This delagate function is used to catch actions from the core.</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK>
+<td> The <span class="type">GObject</span>
 </td>
 </tr>
 <tr>
@@ -901,10 +901,10 @@ This delagate function is used to catch actions from the core.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeChildActionActivateFunc"></a><h3>GladeChildActionActivateFunc ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                (*GladeChildActionActivateFunc)     (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *container,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *object,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *action_path);</pre>
+<pre class="programlisting">void                (*GladeChildActionActivateFunc)     (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *object,
+                                                         const gchar *action_path);</pre>
 <p>
 This delagate function is used to catch packing actions from the core.</p>
 <div class="variablelist"><table border="0">
@@ -917,12 +917,12 @@ This delagate function is used to catch packing actions from the core.</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>container</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GtkContainer"><span class="type">GtkContainer</span></GTKDOCLINK>
+<td> The <span class="type">GtkContainer</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK>
+<td> The <span class="type">GObject</span>
 </td>
 </tr>
 <tr>
@@ -936,9 +936,9 @@ This delagate function is used to catch packing actions from the core.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeReadWidgetFunc"></a><h3>GladeReadWidgetFunc ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                (*GladeReadWidgetFunc)              (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+<pre class="programlisting">void                (*GladeReadWidgetFunc)              (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         <GTKDOCLINK HREF="GladeXmlNode">GladeXmlNode</GTKDOCLINK> *node);</pre>
+                                                         GladeXmlNode *node);</pre>
 <p>
 This function is called to update <em class="parameter"><code>widget</code></em> from <em class="parameter"><code>node</code></em>.</p>
 <div class="variablelist"><table border="0">
@@ -956,7 +956,7 @@ This function is called to update <em class="parameter"><code>widget</code></em>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>node</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GladeXmlNode"><span class="type">GladeXmlNode</span></GTKDOCLINK>
+<td> The <span class="type">GladeXmlNode</span>
 </td>
 </tr>
 </tbody>
@@ -965,10 +965,10 @@ This function is called to update <em class="parameter"><code>widget</code></em>
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeWriteWidgetFunc"></a><h3>GladeWriteWidgetFunc ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                (*GladeWriteWidgetFunc)             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+<pre class="programlisting">void                (*GladeWriteWidgetFunc)             (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         <GTKDOCLINK HREF="GladeXmlContext">GladeXmlContext</GTKDOCLINK> *context,
-                                                         <GTKDOCLINK HREF="GladeXmlNode">GladeXmlNode</GTKDOCLINK> *node);</pre>
+                                                         GladeXmlContext *context,
+                                                         GladeXmlNode *node);</pre>
 <p>
 This function is called to fill in <em class="parameter"><code>node</code></em> from <em class="parameter"><code>widget</code></em>.</p>
 <div class="variablelist"><table border="0">
@@ -986,7 +986,7 @@ This function is called to fill in <em class="parameter"><code>node</code></em> 
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>node</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GladeXmlNode"><span class="type">GladeXmlNode</span></GTKDOCLINK>
+<td> The <span class="type">GladeXmlNode</span>
 </td>
 </tr>
 </tbody>
@@ -997,7 +997,7 @@ This function is called to fill in <em class="parameter"><code>node</code></em> 
 <a name="GladeCreateEPropFunc"></a><h3>GladeCreateEPropFunc ()</h3>
 <pre class="programlisting"><a class="link" href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> * (*GladeCreateEPropFunc)           (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          <a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *klass,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> use_command);</pre>
+                                                         gboolean use_command);</pre>
 <p>
 Creates a GladeEditorProperty to edit <em class="parameter"><code>klass</code></em></p>
 <div class="variablelist"><table border="0">
@@ -1030,9 +1030,9 @@ to commit property changes
 <hr>
 <div class="refsect2" lang="en">
 <a name="GladeStringFromValueFunc"></a><h3>GladeStringFromValueFunc ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *             (*GladeStringFromValueFunc)         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+<pre class="programlisting">gchar *             (*GladeStringFromValueFunc)         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          <a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *klass,
-                                                         const <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value,
+                                                         const GValue *value,
                                                          <a class="link" href="GladeProject.html#GladeProjectFormat" title="enum GladeProjectFormat">GladeProjectFormat</a> fmt);</pre>
 <p>
 For normal properties this is used to serialize
@@ -1054,7 +1054,7 @@ and also to update the UI for undo/redo items etc.</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GValue"><span class="type">GValue</span></GTKDOCLINK> to convert to a string
+<td> The <span class="type">GValue</span> to convert to a string
 </td>
 </tr>
 <tr>
@@ -1152,7 +1152,7 @@ this macro returns the newly created <a class="link" href="GladeWidget.html" tit
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
-<td>     a <GTKDOCLINK HREF="NULL:CAPS"><code class="literal">NULL</code></GTKDOCLINK> terminated list of string/value pairs of <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> 
+<td>     a <code class="literal">NULL</code> terminated list of string/value pairs of <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> 
           properties
 </td>
 </tr>
@@ -1164,7 +1164,7 @@ this macro returns the newly created <a class="link" href="GladeWidget.html" tit
 <a name="glade-widget-adaptor-create-eprop"></a><h3>glade_widget_adaptor_create_eprop ()</h3>
 <pre class="programlisting"><a class="link" href="GladeEditorProperty.html" title="GladeEditorProperty">GladeEditorProperty</a> * glade_widget_adaptor_create_eprop (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          <a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *klass,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> use_command);</pre>
+                                                         gboolean use_command);</pre>
 <p>
 Creates a GladeEditorProperty to edit <em class="parameter"><code>klass</code></em></p>
 <div class="variablelist"><table border="0">
@@ -1203,7 +1203,7 @@ to commit property changes
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-from-pspec"></a><h3>glade_widget_adaptor_from_pspec ()</h3>
 <pre class="programlisting"><a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> * glade_widget_adaptor_from_pspec    (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GParamSpec">GParamSpec</GTKDOCLINK> *spec);</pre>
+                                                         GParamSpec *spec);</pre>
 <p>
 Assumes <em class="parameter"><code>pspec</code></em> is a property in an object class wrapped by <em class="parameter"><code>adaptor</code></em>,
 this function will search for the specific parent adaptor class which
@@ -1218,7 +1218,7 @@ originally introduced <em class="parameter"><code>pspec</code></em>.</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>pspec</code></em> :</span></p></td>
-<td> a <GTKDOCLINK HREF="GParamSpec"><span class="type">GParamSpec</span></GTKDOCLINK>
+<td> a <span class="type">GParamSpec</span>
 </td>
 </tr>
 <tr>
@@ -1233,9 +1233,9 @@ originally introduced <em class="parameter"><code>pspec</code></em>.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-from-catalog"></a><h3>glade_widget_adaptor_from_catalog ()</h3>
-<pre class="programlisting"><a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> * glade_widget_adaptor_from_catalog  (<GTKDOCLINK HREF="GladeCatalog">GladeCatalog</GTKDOCLINK> *catalog,
-                                                         <GTKDOCLINK HREF="GladeXmlNode">GladeXmlNode</GTKDOCLINK> *class_node,
-                                                         <GTKDOCLINK HREF="GModule">GModule</GTKDOCLINK> *module);</pre>
+<pre class="programlisting"><a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> * glade_widget_adaptor_from_catalog  (GladeCatalog *catalog,
+                                                         GladeXmlNode *class_node,
+                                                         GModule *module);</pre>
 <p>
 Dynamicly creates a subclass of <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a> and subclasses
 the closest parent adaptor (parent class adapters must be creates/registerd
@@ -1246,12 +1246,12 @@ the relevent catalog info.</p>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>catalog</code></em> :</span></p></td>
-<td> A <GTKDOCLINK HREF="GladeCatalog"><span class="type">GladeCatalog</span></GTKDOCLINK>
+<td> A <span class="type">GladeCatalog</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>class_node</code></em> :</span></p></td>
-<td> the <GTKDOCLINK HREF="GladeXmlNode"><span class="type">GladeXmlNode</span></GTKDOCLINK> to load
+<td> the <span class="type">GladeXmlNode</span> to load
 </td>
 </tr>
 <tr>
@@ -1265,7 +1265,7 @@ the relevent catalog info.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-register"></a><h3>glade_widget_adaptor_register ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_adaptor_register       (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor);</pre>
+<pre class="programlisting">void                glade_widget_adaptor_register       (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor);</pre>
 <p>
 Registers <em class="parameter"><code>adaptor</code></em> into the Glade core (every supported
 object type must have a registered adaptor).</p>
@@ -1283,10 +1283,10 @@ object type must have a registered adaptor).</p>
 <a name="glade-widget-adaptor-create-internal"></a><h3>glade_widget_adaptor_create_internal ()</h3>
 <pre class="programlisting"><a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *       glade_widget_adaptor_create_internal
                                                         (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *internal_object,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *internal_name,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *parent_name,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> anarchist,
+                                                         GObject *internal_object,
+                                                         const gchar *internal_name,
+                                                         const gchar *parent_name,
+                                                         gboolean anarchist,
                                                          <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeCreateReason" title="enum GladeCreateReason">GladeCreateReason</a> reason);</pre>
 <p>
 A convenienve function to create a <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> of the prescribed type
@@ -1296,13 +1296,13 @@ for internal widgets.</p>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>parent</code></em> :</span></p></td>
-<td>            The parent <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>, or <GTKDOCLINK HREF="NULL:CAPS"><code class="literal">NULL</code></GTKDOCLINK> for children
+<td>            The parent <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>, or <code class="literal">NULL</code> for children
                     outside of the hierarchy.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>internal_object</code></em> :</span></p></td>
-<td>   the <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK>
+<td>   the <span class="type">GObject</span>
 </td>
 </tr>
 <tr>
@@ -1342,14 +1342,14 @@ for internal widgets.</p>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-create-widget-real"></a><h3>glade_widget_adaptor_create_widget_real ()</h3>
 <pre class="programlisting"><a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *       glade_widget_adaptor_create_widget_real
-                                                        (<GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> query,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *first_property,
+                                                        (gboolean query,
+                                                         const gchar *first_property,
                                                          ...);</pre>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-get-by-name"></a><h3>glade_widget_adaptor_get_by_name ()</h3>
-<pre class="programlisting"><a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> * glade_widget_adaptor_get_by_name   (const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *name);</pre>
+<pre class="programlisting"><a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> * glade_widget_adaptor_get_by_name   (const gchar *name);</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
@@ -1363,7 +1363,7 @@ for internal widgets.</p>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td> an existing <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a> with the name equaling <em class="parameter"><code>name</code></em>,
-         or <GTKDOCLINK HREF="NULL:CAPS"><code class="literal">NULL</code></GTKDOCLINK> if such a class doesn't exist
+         or <code class="literal">NULL</code> if such a class doesn't exist
 </td>
 </tr>
 </tbody>
@@ -1372,7 +1372,7 @@ for internal widgets.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-get-by-type"></a><h3>glade_widget_adaptor_get_by_type ()</h3>
-<pre class="programlisting"><a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> * glade_widget_adaptor_get_by_type   (<GTKDOCLINK HREF="GType">GType</GTKDOCLINK> type);</pre>
+<pre class="programlisting"><a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> * glade_widget_adaptor_get_by_type   (GType type);</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
@@ -1380,13 +1380,13 @@ for internal widgets.</p>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
-<td> the <GTKDOCLINK HREF="GType"><span class="type">GType</span></GTKDOCLINK> of an object class
+<td> the <span class="type">GType</span> of an object class
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td> an existing <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a> with the type equaling <em class="parameter"><code>type</code></em>,
-         or <GTKDOCLINK HREF="NULL:CAPS"><code class="literal">NULL</code></GTKDOCLINK> if such a class doesn't exist
+         or <code class="literal">NULL</code> if such a class doesn't exist
 </td>
 </tr>
 </tbody>
@@ -1397,7 +1397,7 @@ for internal widgets.</p>
 <a name="glade-widget-adaptor-get-property-class"></a><h3>glade_widget_adaptor_get_property_class ()</h3>
 <pre class="programlisting"><a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> * glade_widget_adaptor_get_property_class
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *name);</pre>
+                                                         const gchar *name);</pre>
 <p>
 Retrieves the <a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass"><span class="type">GladePropertyClass</span></a> for <em class="parameter"><code>name</code></em> in <em class="parameter"><code>adaptor</code></em></p>
 <div class="variablelist"><table border="0">
@@ -1426,7 +1426,7 @@ Retrieves the <a class="link" href="gladeui-GladePropertyClass.html#GladePropert
 <a name="glade-widget-adaptor-get-pack-property-class"></a><h3>glade_widget_adaptor_get_pack_property_class ()</h3>
 <pre class="programlisting"><a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> * glade_widget_adaptor_get_pack_property_class
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *name);</pre>
+                                                         const gchar *name);</pre>
 <p>
 Retrieves the <a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass"><span class="type">GladePropertyClass</span></a> for <em class="parameter"><code>name</code></em> in 
 <em class="parameter"><code>adaptor</code></em>'s child properties</p>
@@ -1454,15 +1454,15 @@ Retrieves the <a class="link" href="gladeui-GladePropertyClass.html#GladePropert
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-default-params"></a><h3>glade_widget_adaptor_default_params ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="GParameter">GParameter</GTKDOCLINK> *        glade_widget_adaptor_default_params (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> construct,
-                                                         <GTKDOCLINK HREF="guint">guint</GTKDOCLINK> *n_params);</pre>
+<pre class="programlisting">GParameter *        glade_widget_adaptor_default_params (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         gboolean construct,
+                                                         guint *n_params);</pre>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-post-create"></a><h3>glade_widget_adaptor_post_create ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_adaptor_post_create    (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *object,
+<pre class="programlisting">void                glade_widget_adaptor_post_create    (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
                                                          <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeCreateReason" title="enum GladeCreateReason">GladeCreateReason</a> reason);</pre>
 <p>
 An adaptor function to be called after the object is created</p>
@@ -1476,7 +1476,7 @@ An adaptor function to be called after the object is created</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
-<td>    The <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK>
+<td>    The <span class="type">GObject</span>
 </td>
 </tr>
 <tr>
@@ -1490,10 +1490,10 @@ An adaptor function to be called after the object is created</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-get-internal-child"></a><h3>glade_widget_adaptor_get_internal_child ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *           glade_widget_adaptor_get_internal_child
+<pre class="programlisting">GObject *           glade_widget_adaptor_get_internal_child
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *object,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *internal_name);</pre>
+                                                         GObject *object,
+                                                         const gchar *internal_name);</pre>
 <p>
 Retrieves the internal object <em class="parameter"><code>internal_name</code></em> from <em class="parameter"><code>object</code></em></p>
 <div class="variablelist"><table border="0">
@@ -1506,7 +1506,7 @@ Retrieves the internal object <em class="parameter"><code>internal_name</code></
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
-<td>        The <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK>
+<td>        The <span class="type">GObject</span>
 </td>
 </tr>
 <tr>
@@ -1516,7 +1516,7 @@ Retrieves the internal object <em class="parameter"><code>internal_name</code></
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> The internal <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK>
+<td> The internal <span class="type">GObject</span>
 </td>
 </tr>
 </tbody>
@@ -1525,10 +1525,10 @@ Retrieves the internal object <em class="parameter"><code>internal_name</code></
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-set-property"></a><h3>glade_widget_adaptor_set_property ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_adaptor_set_property   (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *object,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property_name,
-                                                         const <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);</pre>
+<pre class="programlisting">void                glade_widget_adaptor_set_property   (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         const gchar *property_name,
+                                                         const GValue *value);</pre>
 <p>
 This delagate function is used to apply the property value on
 the runtime object.</p>
@@ -1542,7 +1542,7 @@ the runtime object.</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
-<td>        The <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK>
+<td>        The <span class="type">GObject</span>
 </td>
 </tr>
 <tr>
@@ -1552,7 +1552,7 @@ the runtime object.</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>         The <GTKDOCLINK HREF="GValue"><span class="type">GValue</span></GTKDOCLINK>
+<td>         The <span class="type">GValue</span>
 </td>
 </tr>
 </tbody>
@@ -1561,10 +1561,10 @@ the runtime object.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-get-property"></a><h3>glade_widget_adaptor_get_property ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_adaptor_get_property   (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *object,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property_name,
-                                                         <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);</pre>
+<pre class="programlisting">void                glade_widget_adaptor_get_property   (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *object,
+                                                         const gchar *property_name,
+                                                         GValue *value);</pre>
 <p>
 Gets <em class="parameter"><code>value</code></em> of <em class="parameter"><code>property_name</code></em> on <em class="parameter"><code>object</code></em>.</p>
 <div class="variablelist"><table border="0">
@@ -1577,7 +1577,7 @@ Gets <em class="parameter"><code>value</code></em> of <em class="parameter"><cod
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
-<td>        The <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK>
+<td>        The <span class="type">GObject</span>
 </td>
 </tr>
 <tr>
@@ -1587,7 +1587,7 @@ Gets <em class="parameter"><code>value</code></em> of <em class="parameter"><cod
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>         The <GTKDOCLINK HREF="GValue"><span class="type">GValue</span></GTKDOCLINK>
+<td>         The <span class="type">GValue</span>
 </td>
 </tr>
 </tbody>
@@ -1596,11 +1596,11 @@ Gets <em class="parameter"><code>value</code></em> of <em class="parameter"><cod
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-verify-property"></a><h3>glade_widget_adaptor_verify_property ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            glade_widget_adaptor_verify_property
+<pre class="programlisting">gboolean            glade_widget_adaptor_verify_property
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *object,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property_name,
-                                                         const <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);</pre>
+                                                         GObject *object,
+                                                         const gchar *property_name,
+                                                         const GValue *value);</pre>
 <p>
 This delagate function is always called whenever setting any
 properties with the exception of load time, and copy/paste time
@@ -1617,7 +1617,7 @@ boundry checker for properties.</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
-<td>        The <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK>
+<td>        The <span class="type">GObject</span>
 </td>
 </tr>
 <tr>
@@ -1627,7 +1627,7 @@ boundry checker for properties.</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>         The <GTKDOCLINK HREF="GValue"><span class="type">GValue</span></GTKDOCLINK>
+<td>         The <span class="type">GValue</span>
 </td>
 </tr>
 <tr>
@@ -1642,9 +1642,9 @@ will silently return TRUE if the class did not provide a verify function.
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-add"></a><h3>glade_widget_adaptor_add ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_adaptor_add            (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *container,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *child);</pre>
+<pre class="programlisting">void                glade_widget_adaptor_add            (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *child);</pre>
 <p>
 Adds <em class="parameter"><code>child</code></em> to <em class="parameter"><code>container</code></em>.</p>
 <div class="variablelist"><table border="0">
@@ -1657,12 +1657,12 @@ Adds <em class="parameter"><code>child</code></em> to <em class="parameter"><cod
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>container</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> container
+<td> The <span class="type">GObject</span> container
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>child</code></em> :</span></p></td>
-<td>     The <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> child
+<td>     The <span class="type">GObject</span> child
 </td>
 </tr>
 </tbody>
@@ -1671,9 +1671,9 @@ Adds <em class="parameter"><code>child</code></em> to <em class="parameter"><cod
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-remove"></a><h3>glade_widget_adaptor_remove ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_adaptor_remove         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *container,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *child);</pre>
+<pre class="programlisting">void                glade_widget_adaptor_remove         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *child);</pre>
 <p>
 Removes <em class="parameter"><code>child</code></em> from <em class="parameter"><code>container</code></em>.</p>
 <div class="variablelist"><table border="0">
@@ -1686,12 +1686,12 @@ Removes <em class="parameter"><code>child</code></em> from <em class="parameter"
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>container</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> container
+<td> The <span class="type">GObject</span> container
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>child</code></em> :</span></p></td>
-<td>     The <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> child
+<td>     The <span class="type">GObject</span> child
 </td>
 </tr>
 </tbody>
@@ -1700,8 +1700,8 @@ Removes <em class="parameter"><code>child</code></em> from <em class="parameter"
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-get-children"></a><h3>glade_widget_adaptor_get_children ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="GList">GList</GTKDOCLINK> *             glade_widget_adaptor_get_children   (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *container);</pre>
+<pre class="programlisting">GList *             glade_widget_adaptor_get_children   (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container);</pre>
 <p>
 Lists the children of <em class="parameter"><code>container</code></em>.</p>
 <div class="variablelist"><table border="0">
@@ -1714,12 +1714,12 @@ Lists the children of <em class="parameter"><code>container</code></em>.</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>container</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> container
+<td> The <span class="type">GObject</span> container
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> A <GTKDOCLINK HREF="GList"><span class="type">GList</span></GTKDOCLINK> of children
+<td> A <span class="type">GList</span> of children
 </td>
 </tr>
 </tbody>
@@ -1728,9 +1728,9 @@ Lists the children of <em class="parameter"><code>container</code></em>.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-has-child"></a><h3>glade_widget_adaptor_has_child ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            glade_widget_adaptor_has_child      (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *container,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *child);</pre>
+<pre class="programlisting">gboolean            glade_widget_adaptor_has_child      (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *child);</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
@@ -1743,12 +1743,12 @@ Lists the children of <em class="parameter"><code>container</code></em>.</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>container</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> container
+<td> The <span class="type">GObject</span> container
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>child</code></em> :</span></p></td>
-<td>     The <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> child
+<td>     The <span class="type">GObject</span> child
 </td>
 </tr>
 <tr>
@@ -1762,12 +1762,12 @@ Lists the children of <em class="parameter"><code>container</code></em>.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-child-set-property"></a><h3>glade_widget_adaptor_child_set_property ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_adaptor_child_set_property
+<pre class="programlisting">void                glade_widget_adaptor_child_set_property
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *container,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *child,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property_name,
-                                                         const <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);</pre>
+                                                         GObject *container,
+                                                         GObject *child,
+                                                         const gchar *property_name,
+                                                         const GValue *value);</pre>
 <p>
 Sets <em class="parameter"><code>child</code></em>'s packing property identified by <em class="parameter"><code>property_name</code></em> to <em class="parameter"><code>value</code></em>.</p>
 <div class="variablelist"><table border="0">
@@ -1780,12 +1780,12 @@ Sets <em class="parameter"><code>child</code></em>'s packing property identified
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>container</code></em> :</span></p></td>
-<td>     The <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> container
+<td>     The <span class="type">GObject</span> container
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>child</code></em> :</span></p></td>
-<td>         The <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> child
+<td>         The <span class="type">GObject</span> child
 </td>
 </tr>
 <tr>
@@ -1804,12 +1804,12 @@ Sets <em class="parameter"><code>child</code></em>'s packing property identified
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-child-get-property"></a><h3>glade_widget_adaptor_child_get_property ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_adaptor_child_get_property
+<pre class="programlisting">void                glade_widget_adaptor_child_get_property
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *container,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *child,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property_name,
-                                                         <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);</pre>
+                                                         GObject *container,
+                                                         GObject *child,
+                                                         const gchar *property_name,
+                                                         GValue *value);</pre>
 <p>
 Gets <em class="parameter"><code>child</code></em>'s packing property identified by <em class="parameter"><code>property_name</code></em>.</p>
 <div class="variablelist"><table border="0">
@@ -1822,12 +1822,12 @@ Gets <em class="parameter"><code>child</code></em>'s packing property identified
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>container</code></em> :</span></p></td>
-<td>     The <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> container
+<td>     The <span class="type">GObject</span> container
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>child</code></em> :</span></p></td>
-<td>         The <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> child
+<td>         The <span class="type">GObject</span> child
 </td>
 </tr>
 <tr>
@@ -1846,12 +1846,12 @@ Gets <em class="parameter"><code>child</code></em>'s packing property identified
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-child-verify-property"></a><h3>glade_widget_adaptor_child_verify_property ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            glade_widget_adaptor_child_verify_property
+<pre class="programlisting">gboolean            glade_widget_adaptor_child_verify_property
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *container,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *child,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *property_name,
-                                                         const <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value);</pre>
+                                                         GObject *container,
+                                                         GObject *child,
+                                                         const gchar *property_name,
+                                                         const GValue *value);</pre>
 <p>
 This delagate function is always called whenever setting any
 properties with the exception of load time, and copy/paste time
@@ -1868,12 +1868,12 @@ boundry checker for properties.</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>container</code></em> :</span></p></td>
-<td>     The <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> container
+<td>     The <span class="type">GObject</span> container
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>child</code></em> :</span></p></td>
-<td>         The <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> child
+<td>         The <span class="type">GObject</span> child
 </td>
 </tr>
 <tr>
@@ -1898,10 +1898,10 @@ will silently return TRUE if the class did not provide a verify function.
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-replace-child"></a><h3>glade_widget_adaptor_replace_child ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_adaptor_replace_child  (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *container,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *old_obj,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *new_obj);</pre>
+<pre class="programlisting">void                glade_widget_adaptor_replace_child  (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         GObject *container,
+                                                         GObject *old_obj,
+                                                         GObject *new_obj);</pre>
 <p>
 Replaces <em class="parameter"><code>old_obj</code></em> with <em class="parameter"><code>new_obj</code></em> in <em class="parameter"><code>container</code></em> while positioning
 <em class="parameter"><code>new_obj</code></em> where <em class="parameter"><code>old_obj</code></em> was and assigning it appropriate packing 
@@ -1916,17 +1916,17 @@ property values.</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>container</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> container
+<td> The <span class="type">GObject</span> container
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>old_obj</code></em> :</span></p></td>
-<td> The old <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> child
+<td> The old <span class="type">GObject</span> child
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>new_obj</code></em> :</span></p></td>
-<td> The new <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK> child
+<td> The new <span class="type">GObject</span> child
 </td>
 </tr>
 </tbody>
@@ -1935,9 +1935,9 @@ property values.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-read-child"></a><h3>glade_widget_adaptor_read_child ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_adaptor_read_child     (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+<pre class="programlisting">void                glade_widget_adaptor_read_child     (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         <GTKDOCLINK HREF="GladeXmlNode">GladeXmlNode</GTKDOCLINK> *node);</pre>
+                                                         GladeXmlNode *node);</pre>
 <p>
 This function is called to update load a child <em class="parameter"><code>widget</code></em> 
 from <em class="parameter"><code>node</code></em> when loading xml files (will recurse into
@@ -1957,7 +1957,7 @@ from <em class="parameter"><code>node</code></em> when loading xml files (will r
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>node</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GladeXmlNode"><span class="type">GladeXmlNode</span></GTKDOCLINK>
+<td> The <span class="type">GladeXmlNode</span>
 </td>
 </tr>
 </tbody>
@@ -1966,9 +1966,9 @@ from <em class="parameter"><code>node</code></em> when loading xml files (will r
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-read-widget"></a><h3>glade_widget_adaptor_read_widget ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_adaptor_read_widget    (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+<pre class="programlisting">void                glade_widget_adaptor_read_widget    (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         <GTKDOCLINK HREF="GladeXmlNode">GladeXmlNode</GTKDOCLINK> *node);</pre>
+                                                         GladeXmlNode *node);</pre>
 <p>
 This function is called to update <em class="parameter"><code>widget</code></em> from <em class="parameter"><code>node</code></em> 
 when loading xml files.</p>
@@ -1987,7 +1987,7 @@ when loading xml files.</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>node</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GladeXmlNode"><span class="type">GladeXmlNode</span></GTKDOCLINK>
+<td> The <span class="type">GladeXmlNode</span>
 </td>
 </tr>
 </tbody>
@@ -1996,10 +1996,10 @@ when loading xml files.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-write-child"></a><h3>glade_widget_adaptor_write_child ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_adaptor_write_child    (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+<pre class="programlisting">void                glade_widget_adaptor_write_child    (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         <GTKDOCLINK HREF="GladeXmlContext">GladeXmlContext</GTKDOCLINK> *context,
-                                                         <GTKDOCLINK HREF="GladeXmlNode">GladeXmlNode</GTKDOCLINK> *node);</pre>
+                                                         GladeXmlContext *context,
+                                                         GladeXmlNode *node);</pre>
 <p>
 This function is called to write the child <em class="parameter"><code>widget</code></em> to <em class="parameter"><code>node</code></em> 
 when writing xml files (takes care of packing and recurses
@@ -2019,12 +2019,12 @@ into <a class="link" href="GladeWidget.html#glade-widget-write" title="glade_wid
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>context</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GladeXmlContext"><span class="type">GladeXmlContext</span></GTKDOCLINK>
+<td> The <span class="type">GladeXmlContext</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>node</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GladeXmlNode"><span class="type">GladeXmlNode</span></GTKDOCLINK>
+<td> The <span class="type">GladeXmlNode</span>
 </td>
 </tr>
 </tbody>
@@ -2033,10 +2033,10 @@ into <a class="link" href="GladeWidget.html#glade-widget-write" title="glade_wid
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-write-widget"></a><h3>glade_widget_adaptor_write_widget ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_adaptor_write_widget   (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+<pre class="programlisting">void                glade_widget_adaptor_write_widget   (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         <GTKDOCLINK HREF="GladeXmlContext">GladeXmlContext</GTKDOCLINK> *context,
-                                                         <GTKDOCLINK HREF="GladeXmlNode">GladeXmlNode</GTKDOCLINK> *node);</pre>
+                                                         GladeXmlContext *context,
+                                                         GladeXmlNode *node);</pre>
 <p>
 This function is called to write <em class="parameter"><code>widget</code></em> to <em class="parameter"><code>node</code></em> 
 when writing xml files.</p>
@@ -2055,12 +2055,12 @@ when writing xml files.</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>context</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GladeXmlContext"><span class="type">GladeXmlContext</span></GTKDOCLINK>
+<td> The <span class="type">GladeXmlContext</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>node</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GladeXmlNode"><span class="type">GladeXmlNode</span></GTKDOCLINK>
+<td> The <span class="type">GladeXmlNode</span>
 </td>
 </tr>
 </tbody>
@@ -2069,7 +2069,7 @@ when writing xml files.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-query"></a><h3>glade_widget_adaptor_query ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            glade_widget_adaptor_query          (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor);</pre>
+<pre class="programlisting">gboolean            glade_widget_adaptor_query          (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor);</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
@@ -2092,10 +2092,10 @@ certain properties upon creation of this class.
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-get-packing-default"></a><h3>glade_widget_adaptor_get_packing_default ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *             glade_widget_adaptor_get_packing_default
+<pre class="programlisting">gchar *             glade_widget_adaptor_get_packing_default
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *child_adaptor,
                                                          <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *container_adaptor,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *id);</pre>
+                                                         const gchar *id);</pre>
 <p>
 Gets the default value for <em class="parameter"><code>property_id</code></em> on a widget governed by
 <em class="parameter"><code>child_adaptor</code></em> when parented in a widget governed by <em class="parameter"><code>parent_adaptor</code></em></p>
@@ -2128,7 +2128,7 @@ Gets the default value for <em class="parameter"><code>property_id</code></em> o
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-is-container"></a><h3>glade_widget_adaptor_is_container ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            glade_widget_adaptor_is_container   (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor);</pre>
+<pre class="programlisting">gboolean            glade_widget_adaptor_is_container   (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor);</pre>
 <p>
 Checks whether or not this adaptor has support
 to interface with child objects.</p>
@@ -2151,11 +2151,11 @@ to interface with child objects.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-action-add"></a><h3>glade_widget_adaptor_action_add ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            glade_widget_adaptor_action_add     (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *action_path,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *label,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *stock,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> important);</pre>
+<pre class="programlisting">gboolean            glade_widget_adaptor_action_add     (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         const gchar *action_path,
+                                                         const gchar *label,
+                                                         const gchar *stock,
+                                                         gboolean important);</pre>
 <p>
 Add an action to <em class="parameter"><code>adaptor</code></em>.
 If the action is present then it overrides label and stock</p>
@@ -2198,12 +2198,12 @@ If the action is present then it overrides label and stock</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-pack-action-add"></a><h3>glade_widget_adaptor_pack_action_add ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            glade_widget_adaptor_pack_action_add
+<pre class="programlisting">gboolean            glade_widget_adaptor_pack_action_add
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *action_path,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *label,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *stock,
-                                                         <GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK> important);</pre>
+                                                         const gchar *action_path,
+                                                         const gchar *label,
+                                                         const gchar *stock,
+                                                         gboolean important);</pre>
 <p>
 Add a packing action to <em class="parameter"><code>adaptor</code></em>.
 If the action is present then it overrides label and stock</p>
@@ -2246,8 +2246,8 @@ If the action is present then it overrides label and stock</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-action-remove"></a><h3>glade_widget_adaptor_action_remove ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            glade_widget_adaptor_action_remove  (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *action_path);</pre>
+<pre class="programlisting">gboolean            glade_widget_adaptor_action_remove  (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+                                                         const gchar *action_path);</pre>
 <p>
 Remove an <em class="parameter"><code>adaptor</code></em>'s action.</p>
 <div class="variablelist"><table border="0">
@@ -2274,9 +2274,9 @@ Remove an <em class="parameter"><code>adaptor</code></em>'s action.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-pack-action-remove"></a><h3>glade_widget_adaptor_pack_action_remove ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gboolean">gboolean</GTKDOCLINK>            glade_widget_adaptor_pack_action_remove
+<pre class="programlisting">gboolean            glade_widget_adaptor_pack_action_remove
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *action_path);</pre>
+                                                         const gchar *action_path);</pre>
 <p>
 Remove an <em class="parameter"><code>adaptor</code></em>'s packing action.</p>
 <div class="variablelist"><table border="0">
@@ -2303,7 +2303,7 @@ Remove an <em class="parameter"><code>adaptor</code></em>'s packing action.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-pack-actions-new"></a><h3>glade_widget_adaptor_pack_actions_new ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="GList">GList</GTKDOCLINK> *             glade_widget_adaptor_pack_actions_new
+<pre class="programlisting">GList *             glade_widget_adaptor_pack_actions_new
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor);</pre>
 <p>
 Create a list of packing actions.</p>
@@ -2326,10 +2326,10 @@ Create a list of packing actions.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-action-activate"></a><h3>glade_widget_adaptor_action_activate ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_adaptor_action_activate
+<pre class="programlisting">void                glade_widget_adaptor_action_activate
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *object,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *action_path);</pre>
+                                                         GObject *object,
+                                                         const gchar *action_path);</pre>
 <p>
 An adaptor function to be called on widget actions.</p>
 <div class="variablelist"><table border="0">
@@ -2342,7 +2342,7 @@ An adaptor function to be called on widget actions.</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
-<td>    The <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK>
+<td>    The <span class="type">GObject</span>
 </td>
 </tr>
 <tr>
@@ -2356,11 +2356,11 @@ An adaptor function to be called on widget actions.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-child-action-activate"></a><h3>glade_widget_adaptor_child_action_activate ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="void">void</GTKDOCLINK>                glade_widget_adaptor_child_action_activate
+<pre class="programlisting">void                glade_widget_adaptor_child_action_activate
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *container,
-                                                         <GTKDOCLINK HREF="GObject">GObject</GTKDOCLINK> *object,
-                                                         const <GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *action_path);</pre>
+                                                         GObject *container,
+                                                         GObject *object,
+                                                         const gchar *action_path);</pre>
 <p>
 An adaptor function to be called on widget actions.</p>
 <div class="variablelist"><table border="0">
@@ -2373,7 +2373,7 @@ An adaptor function to be called on widget actions.</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
-<td>    The <GTKDOCLINK HREF="GObject"><span class="type">GObject</span></GTKDOCLINK>
+<td>    The <span class="type">GObject</span>
 </td>
 </tr>
 <tr>
@@ -2387,10 +2387,10 @@ An adaptor function to be called on widget actions.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-widget-adaptor-string-from-value"></a><h3>glade_widget_adaptor_string_from_value ()</h3>
-<pre class="programlisting"><GTKDOCLINK HREF="gchar">gchar</GTKDOCLINK> *             glade_widget_adaptor_string_from_value
+<pre class="programlisting">gchar *             glade_widget_adaptor_string_from_value
                                                         (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          <a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass">GladePropertyClass</a> *klass,
-                                                         const <GTKDOCLINK HREF="GValue">GValue</GTKDOCLINK> *value,
+                                                         const GValue *value,
                                                          <a class="link" href="GladeProject.html#GladeProjectFormat" title="enum GladeProjectFormat">GladeProjectFormat</a> fmt);</pre>
 <p>
 For normal properties this is used to serialize
@@ -2411,7 +2411,7 @@ needed to update the UI for undo/redo items etc.</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td> The <GTKDOCLINK HREF="GValue"><span class="type">GValue</span></GTKDOCLINK> to convert to a string
+<td> The <span class="type">GValue</span> to convert to a string
 </td>
 </tr>
 <tr>
