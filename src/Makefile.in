@@ -58,9 +58,10 @@ PROGRAMS = $(bin_PROGRAMS)
 am_glade_3_OBJECTS = glade_3-glade-window.$(OBJEXT) \
 	glade_3-main.$(OBJEXT)
 glade_3_OBJECTS = $(am_glade_3_OBJECTS)
-@NATIVE_WIN32_TRUE@am__DEPENDENCIES_1 = glade-win32-res.o
+am__DEPENDENCIES_1 =
+@NATIVE_WIN32_TRUE@am__DEPENDENCIES_2 = glade-win32-res.o
 glade_3_DEPENDENCIES = $(top_builddir)/gladeui/libgladeui-1.la \
-	$(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -129,6 +130,8 @@ ENABLE_SK_TRUE = @ENABLE_SK_TRUE@
 EXEEXT = @EXEEXT@
 F77 = @F77@
 FFLAGS = @FFLAGS@
+GDK_TARGET_QUARTZ_FALSE = @GDK_TARGET_QUARTZ_FALSE@
+GDK_TARGET_QUARTZ_TRUE = @GDK_TARGET_QUARTZ_TRUE@
 GETTEXT_PACKAGE = @GETTEXT_PACKAGE@
 GLADE_AGE = @GLADE_AGE@
 GLADE_CURRENT = @GLADE_CURRENT@
@@ -160,6 +163,8 @@ HAVE_GTK_UNIX_PRINT_FALSE = @HAVE_GTK_UNIX_PRINT_FALSE@
 HAVE_GTK_UNIX_PRINT_TRUE = @HAVE_GTK_UNIX_PRINT_TRUE@
 HELP_DIR = @HELP_DIR@
 HTML_DIR = @HTML_DIR@
+IGE_MAC_CFLAGS = @IGE_MAC_CFLAGS@
+IGE_MAC_LIBS = @IGE_MAC_LIBS@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
@@ -306,12 +311,13 @@ glade_3_CPPFLAGS = \
 
 glade_3_CFLAGS = \
 	$(GTK_CFLAGS)      \
+	$(IGE_MAC_CFLAGS)  \
 	$(WARN_CFLAGS)     \
 	$(AM_CFLAGS)
 
 glade_3_LDFLAGS = $(AM_LDFLAGS) $(am__append_2)
 glade_3_LDADD = $(top_builddir)/gladeui/libgladeui-1.la \
-	$(am__append_1)
+	$(IGE_MAC_LIBS) $(am__append_1)
 glade_3_SOURCES = \
 	glade-window.c \
 	glade-window.h \

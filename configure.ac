@@ -4,7 +4,7 @@ AC_PREREQ(2.52)
 
 m4_define(glade_major_version, 3)
 m4_define(glade_minor_version, 6)
-m4_define(glade_micro_version, 4)
+m4_define(glade_micro_version, 5)
 m4_define(glade_version, glade_major_version.glade_minor_version.glade_micro_version)
 
 AC_INIT([glade3], [glade_version],
@@ -145,6 +145,7 @@ fi
 
 AM_CONDITIONAL(BUILD_GNOME, test x"$have_gnome" = "xyes")
 
+
 dnl ================================================================
 dnl Python for optional python dev libs
 dnl ================================================================
@@ -218,6 +219,17 @@ if test "$native_win32" = "yes"; then
   fi
 fi
 
+dnl ================================================================
+dnl Check for GDK Quartz and MacOSX integration package 
+dnl ================================================================
+_gdk_tgt=`$PKG_CONFIG --variable=target gdk-2.0`
+AM_CONDITIONAL([GDK_TARGET_QUARTZ], [test x$_gdk_tgt = xquartz])
+if test "x$_gdk_tgt" = xquartz; then 
+   PKG_CHECK_MODULES(IGE_MAC, ige-mac-integration)
+   AC_SUBST(IGE_MAC_LIBS)
+   AC_SUBST(IGE_MAC_CFLAGS)
+fi
+
 AC_SUBST([AM_CPPFLAGS])
 AC_SUBST([AM_CFLAGS])
 AC_SUBST([AM_CXXFLAGS])
@@ -273,4 +285,7 @@ Configuration:
 	GTK+ UNIX Print Widgets: ${have_unix_print}
 	GNOME UI Widgets:	 ${have_gnome}
 	PYTHON Widgets support:	 ${have_python}
+
+	Build Reference Manual:  ${enable_gtk_doc}
+	Build User Manual:       ${gdu_cv_have_gdu}
 "
