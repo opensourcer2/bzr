@@ -1,3 +1,14 @@
+glade-3 (3.6.5-0ubuntu1) karmic; urgency=low
+
+  * New upstream version (LP: #387121)
+    - Quartz build support and use ige-mac-integration to setup the menubar
+      as an optional build dependancy.
+    - Fixed dissapearing dialogs on ESC (bug 582559)
+    - Really fixing widget naming policies again, this time I hope it sticks (bug 580745)
+    - Fixed relocated link problems with python plugin build (bug 582982, patch by Arun Raghavan)
+
+ -- Robert Ancell <robert.ancell@canonical.com>  Mon, 15 Jun 2009 10:27:59 +1000
+
 glade-3 (3.6.4-0ubuntu1) karmic; urgency=low
 
   * New upstream version (LP: #385062)
