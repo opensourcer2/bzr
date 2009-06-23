@@ -4088,12 +4088,7 @@ glade_gtk_notebook_add_child (GladeWidgetAdaptor *adaptor,
 
 		/* Just destroy placeholders */
 		if (GLADE_IS_PLACEHOLDER (child))
-		{
-			if (GTK_OBJECT_FLOATING (child))
-				gtk_object_sink (GTK_OBJECT (child));
-			else
-				g_object_unref (G_OBJECT (child));
-		}
+			gtk_widget_destroy (child);
 		else
 		{
 			gwidget = glade_widget_get_from_gobject (child);
@@ -6730,7 +6725,7 @@ glade_gtk_menu_item_remove_child (GladeWidgetAdaptor *adaptor,
 	g_return_if_fail (GTK_IS_MENU_ITEM (object));
 	g_return_if_fail (GTK_IS_MENU (child));
 	
-	gtk_menu_item_remove_submenu (GTK_MENU_ITEM (object));
+	gtk_menu_item_set_submenu (GTK_MENU_ITEM (object), NULL);
 }
 
 static void

@@ -41,6 +41,7 @@ target_triplet = @target@
 @PLATFORM_WIN32_TRUE@am__append_1 = -no-undefined
 @NATIVE_WIN32_TRUE@am__append_2 = -Wl,gladeui-win32-res.o -export-symbols gladeui.def
 @NATIVE_WIN32_FALSE@libgladeui_1_la_DEPENDENCIES =  \
+@NATIVE_WIN32_FALSE@	$(am__DEPENDENCIES_1) \
 @NATIVE_WIN32_FALSE@	$(am__DEPENDENCIES_1)
 subdir = gladeui
 DIST_COMMON = $(libgladeuiinclude_HEADERS) $(srcdir)/Makefile.am \
@@ -350,6 +351,7 @@ target_os = @target_os@
 target_vendor = @target_vendor@
 common_defines = \
 	-DG_LOG_DOMAIN=\"GladeUI\"                      \
+	-DGLADE_PREFIX="\"$(prefix)\""			\
 	-DGLADE_DATADIR="\"$(pkgdatadir)\""		\
 	-DGLADE_LIBDIR="\"$(pkglibdir)\""		\
 	-DGLADE_CATALOGSDIR="\"$(pkgdatadir)/catalogs\""\
@@ -422,13 +424,14 @@ libgladeui_1_la_CPPFLAGS = \
 
 libgladeui_1_la_CFLAGS = \
 	$(GTK_CFLAGS)       \
+	$(IGE_MAC_CFLAGS)  \
 	$(WARN_CFLAGS)      \
 	$(AM_CFLAGS)
 
 libgladeui_1_la_LDFLAGS = -version-info \
 	$(GLADE_CURRENT):$(GLADE_REVISION):$(GLADE_AGE) $(AM_LDFLAGS) \
 	$(am__append_1) $(am__append_2)
-libgladeui_1_la_LIBADD = $(GTK_LIBS)
+libgladeui_1_la_LIBADD = $(GTK_LIBS) $(IGE_MAC_LIBS)
 libgladeuiincludedir = $(includedir)/libgladeui-1.0/gladeui
 libgladeuiinclude_HEADERS = \
 	glade.h \
