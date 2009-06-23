@@ -341,7 +341,7 @@ embedded in another object</_tooltip>
 
       <properties> 
 	<!-- Virtual accel-groups property to record accel groups -->
-	<property id="accel-groups" name="Accel Groups" ignore="True" save="False" weight="0.5">
+	<property id="accel-groups" name="Accel Groups" ignore="True" since="2.16" save="False" weight="0.5">
 	  <parameter-spec>
 	    <type>GladeParamObjects</type>
 	    <value-type>GtkAccelGroup</value-type>
@@ -1697,9 +1697,9 @@ embedded in another object</_tooltip>
 	<property common="True" id="can-focus"/>
 
 	<property id="image" since="2.10" parentless-widget="True"/>
-	<property id="secondary-text" since="2.10"/>
+	<property id="secondary-text" translatable="True" since="2.10"/>
 	<property id="secondary-use-markup" since="2.10"/>
-	<property id="text" since="2.10"/>
+	<property id="text" translatable="True" since="2.10"/>
 	<property id="use-markup" since="2.10"/>
 
 	<property id="message-type">
@@ -1864,6 +1864,9 @@ embedded in another object</_tooltip>
 	</property>
       </properties>
       <packing-properties>
+	<property id="title" translatable="True" since="2.10"/>
+	<property id="header-image" since="2.10"/>
+	<property id="sidebar-image" since="2.10"/>
         <property id="complete" disabled="True"/>
 	<property id="page-type" ignore="True">
   	  <displayable-values>

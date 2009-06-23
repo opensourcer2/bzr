@@ -327,7 +327,7 @@
 
       <properties> 
 	
-	<property weight="0.5" save="False" name="Accel Groups" ignore="True" id="accel-groups">
+	<property weight="0.5" since="2.16" save="False" name="Accel Groups" ignore="True" id="accel-groups">
 	  <parameter-spec>
 	    <type>GladeParamObjects</type>
 	    <value-type>GtkAccelGroup</value-type>
@@ -1666,9 +1666,9 @@
 	<property id="can-focus" common="True"/>
 
 	<property since="2.10" parentless-widget="True" id="image"/>
-	<property since="2.10" id="secondary-text"/>
+	<property translatable="True" since="2.10" id="secondary-text"/>
 	<property since="2.10" id="secondary-use-markup"/>
-	<property since="2.10" id="text"/>
+	<property translatable="True" since="2.10" id="text"/>
 	<property since="2.10" id="use-markup"/>
 
 	<property id="message-type">
@@ -1833,6 +1833,9 @@
 	</property>
       </properties>
       <packing-properties>
+	<property translatable="True" since="2.10" id="title"/>
+	<property since="2.10" id="header-image"/>
+	<property since="2.10" id="sidebar-image"/>
         <property id="complete" disabled="True"/>
 	<property ignore="True" id="page-type">
   	  <displayable-values>
