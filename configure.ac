@@ -4,7 +4,7 @@ AC_PREREQ(2.52)
 
 m4_define(glade_major_version, 3)
 m4_define(glade_minor_version, 6)
-m4_define(glade_micro_version, 6)
+m4_define(glade_micro_version, 7)
 m4_define(glade_version, glade_major_version.glade_minor_version.glade_micro_version)
 
 AC_INIT([glade3], [glade_version],
@@ -226,6 +226,20 @@ _gdk_tgt=`$PKG_CONFIG --variable=target gdk-2.0`
 AM_CONDITIONAL([GDK_TARGET_QUARTZ], [test x$_gdk_tgt = xquartz])
 if test "x$_gdk_tgt" = xquartz; then 
    PKG_CHECK_MODULES(IGE_MAC, ige-mac-integration)
+
+   IGE_MAC_BUNDLE_FLAG=
+
+   AC_ARG_ENABLE(mac-bundle,
+      AS_HELP_STRING([--enable-mac-bundle], [enable mac bundling]),
+      build_bundle=yes, build_bundle=no)
+
+   if test "x$build_bundle" = xyes; then
+      AC_MSG_NOTICE([enableing mac bundle..])
+
+      IGE_MAC_BUNDLE_FLAG=-DMAC_BUNDLE
+   fi      
+
+   AC_SUBST(IGE_MAC_BUNDLE_FLAG)
    AC_SUBST(IGE_MAC_LIBS)
    AC_SUBST(IGE_MAC_CFLAGS)
 fi
