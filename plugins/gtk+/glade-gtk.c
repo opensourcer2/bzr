@@ -2018,6 +2018,9 @@ glade_gtk_box_set_size (GObject *object, const GValue *value)
 	box = GTK_BOX (object);
 	g_return_if_fail (GTK_IS_BOX (box));
 
+	if (glade_util_object_is_loading (object))
+		return;
+
 	old_size = g_list_length (box->children);
 	new_size = g_value_get_int (value);
 	
@@ -4088,7 +4091,7 @@ glade_gtk_notebook_add_child (GladeWidgetAdaptor *adaptor,
 
 		/* Just destroy placeholders */
 		if (GLADE_IS_PLACEHOLDER (child))
-			gtk_widget_destroy (child);
+			gtk_widget_destroy (GTK_WIDGET (child));
 		else
 		{
 			gwidget = glade_widget_get_from_gobject (child);
@@ -5743,6 +5746,24 @@ glade_gtk_color_button_refresh_color (GtkColorButton  *button,
 
 /* ----------------------------- GtkButton ------------------------------ */
 
+static void 
+sync_use_appearance (GladeWidget *gwidget)
+{
+	GladeProperty *prop = glade_widget_get_property (gwidget, "use-action-appearance");
+	gboolean       use_appearance = FALSE;
+
+	/* This is the kind of thing we avoid doing at project load time ;-) */
+	if (glade_widget_superuser ())
+		return;
+
+	glade_property_get (prop, &use_appearance);
+	if (use_appearance)
+       	{
+		glade_property_set (prop, FALSE);
+		glade_property_set (prop, TRUE);
+       	}
+}
+
 /* shared between menuitems and toolitems too */
 static void
 evaluate_activatable_property_sensitivity (GObject            *object, 
@@ -5878,6 +5899,15 @@ glade_gtk_button_set_property (GladeWidgetAdaptor *adaptor,
 		if (use_stock)
 			gtk_button_set_label (GTK_BUTTON (object), g_value_get_string (value));
 	}
+	else if (strcmp (id, "use-stock") == 0)
+	{
+		/* I guess its my bug in GTK+, we need to resync the appearance property
+		 * on GtkButton when the GtkButton:use-stock property changes.
+		 */
+		GWA_GET_CLASS (GTK_TYPE_CONTAINER)->set_property (adaptor, object,
+								  id, value);
+		sync_use_appearance (widget);
+	}
 	else if (property->klass->version_since_major <= gtk_major_version &&
 		 property->klass->version_since_minor <= (gtk_minor_version + 1))
 		GWA_GET_CLASS (GTK_TYPE_CONTAINER)->set_property (adaptor, object,
@@ -5926,13 +5956,16 @@ glade_gtk_button_write_widget (GladeWidgetAdaptor *adaptor,
 	/* Do not save GtkColorButton and GtkFontButton label property */
 	if (!(GTK_IS_COLOR_BUTTON (widget->object) || GTK_IS_FONT_BUTTON (widget->object)))
 	{
+		/* Make a copy of the GladeProperty, 
+		 * override its value and ensure non-translatable if use-stock is TRUE
+		 */
 		prop = glade_widget_get_property (widget, "label");
-		/* Make a copy of the GladeProperty, override its value if use-stock is TRUE */
 		prop = glade_property_dup (prop, widget);
 		glade_widget_property_get (widget, "use-stock", &use_stock);
 		if (use_stock)
 		{
 			glade_widget_property_get (widget, "stock", &stock);
+			glade_property_i18n_set_translatable (prop, FALSE);
 			glade_property_set (prop, stock);
 		}
 		glade_property_write (prop, context, node);
@@ -6886,6 +6919,12 @@ glade_gtk_image_menu_item_set_use_stock (GObject *object, const GValue *value)
 		glade_widget_property_set_sensitive (widget, "stock", FALSE, NOT_SELECTED_MSG);
 		glade_widget_property_set_sensitive (widget, "accel-group", FALSE, NOT_SELECTED_MSG);
 	}
+
+#if GTK_CHECK_VERSION (2, 16, 0)
+	gtk_image_menu_item_set_use_stock (GTK_IMAGE_MENU_ITEM (object), use_stock);
+
+	sync_use_appearance (widget);
+#endif
 }
 
 static gboolean
@@ -6911,6 +6950,9 @@ glade_gtk_image_menu_item_set_label (GObject *object, const GValue *value)
 
 		image = gtk_image_new_from_stock (g_value_get_string (value), GTK_ICON_SIZE_MENU);
 		gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (object), image);
+
+		if (use_underline)
+			gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
 
 		/* Get the label string... */
 		if (text && gtk_stock_lookup (text, &item))
@@ -8417,22 +8459,65 @@ glade_gtk_label_create_editable (GladeWidgetAdaptor  *adaptor,
 	return editable;
 }
 
+
+
+/* ----------------------------- GtkTextBuffer ------------------------------ */
+static void
+glade_gtk_text_buffer_changed (GtkTextBuffer *buffer, GladeWidget *gbuffy)
+{
+	const gchar *text_prop = NULL;
+	GladeProperty *prop;
+	gchar *text = NULL;
+	
+	g_object_get (buffer, "text", &text, NULL);
+
+	if ((prop = glade_widget_get_property (gbuffy, "text")))
+	{
+		glade_property_get (prop, &text_prop);
+
+		if (text_prop == NULL || text == NULL || strcmp (text, text_prop))
+			glade_command_set_property (prop, text);
+	}
+	g_free (text);
+}
+
+void
+glade_gtk_text_buffer_post_create (GladeWidgetAdaptor *adaptor,
+				   GObject            *object, 
+				   GladeCreateReason   reason)
+{
+	GladeWidget *gbuffy;
+	
+	gbuffy = glade_widget_get_from_gobject (object);
+	
+	g_signal_connect (object, "changed",
+			  G_CALLBACK (glade_gtk_text_buffer_changed),
+			  gbuffy);
+}
+
 /* ----------------------------- GtkTextView ------------------------------ */
 static void
 glade_gtk_text_view_changed (GtkTextBuffer *buffer, GladeWidget *gtext)
 {
-	const gchar *text_prop;
+	const gchar *text_prop = NULL;
+	GladeProject  *project;
 	GladeProperty *prop;
-	gchar *text;
+	gchar *text = NULL;
 	
 	g_object_get (buffer, "text", &text, NULL);
+
+	project = glade_widget_get_project (gtext);
+
+	if (glade_project_get_format (project) == GLADE_PROJECT_FORMAT_LIBGLADE)
+	{
+       		if ((prop = glade_widget_get_property (gtext, "text")))
+		{
+			glade_property_get (prop, &text_prop);
 	
-	glade_widget_property_get (gtext, "text", &text_prop);
-	
-	if (strcmp (text, text_prop))
-		if ((prop = glade_widget_get_property (gtext, "text")))
-			glade_command_set_property (prop, text);
-	
+			if (text_prop == NULL || text == NULL || strcmp (text, text_prop))
+				glade_command_set_property (prop, text);
+		}
+	}
 	g_free (text);
 }
 
@@ -8451,20 +8536,27 @@ glade_gtk_text_view_post_create (GladeWidgetAdaptor *adaptor,
 				 GObject            *object, 
 				 GladeCreateReason   reason)
 {
-	GtkTextBuffer *buffy = gtk_text_buffer_new (NULL);
-	GladeWidget *gtext;
+	GtkTextBuffer *buffy;
+	GladeWidget   *gtext;
+	GladeProject  *project;
 	
 	gtext = glade_widget_get_from_gobject (object);
 	
 	/* This makes gtk_text_view_set_buffer() stop complaing */
 	gtk_drag_dest_set (GTK_WIDGET (object), 0, NULL, 0, 0);
-		
-	gtk_text_view_set_buffer (GTK_TEXT_VIEW (object), buffy);
-	g_signal_connect (buffy, "changed",
-			  G_CALLBACK (glade_gtk_text_view_changed),
-			  gtext);
+
+	project = glade_widget_get_project (gtext);
+
+	if (glade_project_get_format (project) == GLADE_PROJECT_FORMAT_LIBGLADE)
+	{
+		buffy = gtk_text_buffer_new (NULL);		
+		gtk_text_view_set_buffer (GTK_TEXT_VIEW (object), buffy);
+		g_signal_connect (buffy, "changed",
+				  G_CALLBACK (glade_gtk_text_view_changed),
+				  gtext);
 	
-	g_object_unref (G_OBJECT (buffy));
+		g_object_unref (G_OBJECT (buffy));
+	}
 
 	/* Glade3 hangs when a TextView gets a double click. So we stop them */
 	g_signal_connect (object, "button-press-event",

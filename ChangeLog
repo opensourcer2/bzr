@@ -1,9 +1,57 @@
+2009-06-29  Tristan Van Berkom <tvb@gnome.org>
+
+	* configure.ac, NEWS: Rolling Glade 3.6.7
+	
+	* configure.ac, gladeui/glade-app.c: Added --enable-mac-bundle configure option to
+	special case runtime path lookups to bundling builds.
+
+	* gladeui/glade-popup.[ch]: Added glade_popup_is_popup_event () to check the correct
+	GdkEventButton state for a context menu (in a platform independant way).
+
+	* gladeui/glade-base-editor.c, gladeui/glade-editor-property.c, gladeui/glade-palette-item.c,
+	gladeui/glade-placeholder.c, gladeui/glade-widget.c, gladeui/glade-inspector.c: Use new
+	popup function to detect whether to show a context menu or not (bug 587128).
+
+	* gladeui/glade-base-editor.c: Fixed crashes with editable treeview column types (bug 586715).
+
+2009-06-27  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/gtk+.xml.in, glade/gtk+/glade-gtk.c: Fixed GtkTextView crashes when
+	editing the textview in line, now we update the associated GtkTextBuffer:text property
+	if available or the GtkTextView:text virtual property when in libglade mode.
+
+2009-06-25  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-property.c: glade_property_sync_impl(), dont sync properties
+	that are the primary property of that klass for the said widget (properties
+	can float outside of widget->properties in some cases, shouldnt effect the
+	widget though).
+
+	* plugins/gtk+/glade-gtk.c: 
+	  - glade_gtk_button_write_widget (), make stock button labels save as 
+	    non-translatable automatically (bug 352446).
+	  - Added sync_use_appearance() to reset the use-appearance property when local
+	    widget property updates demand that the appearance be resynchronized (this
+	    is actually a bug in GTK+ somewhere).
+	  - Avoid tampering with the virtual GtkBox:size property while loading a project.
+	
+	* plugins/gtk+/gtk+.xml.in: Attributed use-action-appearance property with "needs-sync"
+	for better chances at a good visual result when copy/pasting etc.
+
+	* plugins/gtk+/glade-activatable-editor.c: Reverse order in which the image is
+	removed from GtkImageMenuItems (so that mucking with stock doesnt recreate one
+	2 lines further), now image menu items with controlling actions dont get orphaned images.
+	
+	* gladeui/glade-widget-adaptor.c: Sync remaining properties at load time
+	which were not specified in the glade file (now the use-action-appearance
+	property shows up right even if default and not present in the Glade file).
+
 2009-06-22  Tristan Van Berkom <tvb@gnome.org>
 
 	* configure.ac, NEWS: Rolling Glade 3.6.6
 	
 	* gladeui/glade-app.c, gladeui/Makefile.am: Find quartz specific runtime prefix
-	using ige_mac_bundle_get_path().
+	using ige_mac_bundle_get_path() (bug 586551)
 
 	* gladeui/glade-project.c: Added algorythm to introspect lowest possible
 	version of GTK+ to depend on for a project, this helps cases where the 

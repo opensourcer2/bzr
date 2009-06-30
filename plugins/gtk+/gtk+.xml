@@ -462,7 +462,7 @@
 	    <value-type>GtkAction</value-type>
 	  </parameter-spec>
 	</property>
-      	<property since="2.16" id="use-action-appearance" default="False" custom-layout="True" name="Use Action Appearance">
+      	<property since="2.16" needs-sync="True" id="use-action-appearance" default="False" custom-layout="True" name="Use Action Appearance">
 	  <parameter-spec>
 	    <type>GParamBoolean</type>
 	  </parameter-spec>
@@ -3213,6 +3213,7 @@
     </glade-widget-class>
 
     <glade-widget-class toplevel="True" name="GtkTextBuffer" libglade-unsupported="True" generic-name="textbuffer" title="Text Buffer">
+      <post-create-function>glade_gtk_text_buffer_post_create</post-create-function>
       <signals>
 	<signal since="2.16" id="paste-done"/>
       </signals>
