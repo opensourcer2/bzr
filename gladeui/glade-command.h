@@ -72,6 +72,8 @@ void           glade_command_push_group    (const gchar       *fmt,
 
 void           glade_command_pop_group     (void);
 
+gint           glade_command_get_group_depth (void);
+
 
 gboolean       glade_command_execute       (GladeCommand      *command);
 
@@ -82,6 +84,14 @@ gboolean       glade_command_unifies       (GladeCommand      *command,
 
 void           glade_command_collapse      (GladeCommand      *command,
 					    GladeCommand      *other);
+
+/************************** project *********************************/
+
+void           glade_command_set_project_format  (GladeProject       *project,
+						  GladeProjectFormat  fmt);
+
+void           glade_command_set_project_naming_policy  (GladeProject       *project,
+							 GladeNamingPolicy   policy);
 
 /************************** properties *********************************/
 
@@ -103,6 +113,13 @@ void           glade_command_set_properties_list (GladeProject  *project,
 
 void           glade_command_set_name      (GladeWidget       *glade_widget, const gchar  *name);
 
+
+/************************ protection ******************************/
+
+void           glade_command_lock_widget   (GladeWidget   *widget, 
+					    GladeWidget   *lock);
+
+void           glade_command_unlock_widget (GladeWidget   *widget);
 
 /************************ create/delete ******************************/
 
@@ -142,9 +159,10 @@ void           glade_command_change_signal (GladeWidget       *glade_widget,
 /************************ set i18n ******************************/
 
 void           glade_command_set_i18n      (GladeProperty     *property,
-                        gboolean translatable,
-                        gboolean has_context,
-                        const gchar *comment);
+					    gboolean translatable,
+					    gboolean has_context,
+					    const gchar *context,
+					    const gchar *comment);
 
 
 G_END_DECLS

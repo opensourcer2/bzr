@@ -259,7 +259,7 @@ glade_placeholder_send_configure (GladePlaceholder *placeholder)
 	gdk_event_free (event);
 }
 
-static GladeProject*
+GladeProject*
 glade_placeholder_get_project (GladePlaceholder *placeholder)
 {
 	GladeWidget *parent;
@@ -356,7 +356,8 @@ glade_placeholder_button_press (GtkWidget *widget, GdkEventButton *event)
 			handled = TRUE;
 		}
 	}
-	else if (event->button == 3 && event->type == GDK_BUTTON_PRESS)
+
+	if (!handled && glade_popup_is_popup_event (event))
 	{
 		glade_popup_placeholder_pop (placeholder, event);
 		handled = TRUE;

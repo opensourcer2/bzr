@@ -25,7 +25,7 @@
 #ifndef __GLADE_DESIGN_LAYOUT_H__
 #define __GLADE_DESIGN_LAYOUT_H__
 
-#include <gtk/gtkbin.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
@@ -40,6 +40,12 @@ typedef struct _GladeDesignLayout         GladeDesignLayout;
 typedef struct _GladeDesignLayoutPrivate  GladeDesignLayoutPrivate;
 typedef struct _GladeDesignLayoutClass    GladeDesignLayoutClass;
 
+enum
+{
+	GLADE_WIDGET_EVENT_STOP_EMISSION   = 1 << 0,
+	GLADE_WIDGET_EVENT_RETURN_TRUE     = 1 << 1
+};
+
 struct _GladeDesignLayout
 {
 	GtkBin parent_instance;
@@ -50,6 +56,9 @@ struct _GladeDesignLayout
 struct _GladeDesignLayoutClass
 {
 	GtkBinClass parent_class;
+	gboolean      (*widget_event)        (GladeProject *project,
+					      GladeWidget *gwidget,
+					      GdkEvent *event);
 
 };
 

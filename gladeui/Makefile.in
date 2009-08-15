@@ -41,6 +41,7 @@ target_triplet = @target@
 @PLATFORM_WIN32_TRUE@am__append_1 = -no-undefined
 @NATIVE_WIN32_TRUE@am__append_2 = -Wl,gladeui-win32-res.o -export-symbols gladeui.def
 @NATIVE_WIN32_FALSE@libgladeui_1_la_DEPENDENCIES =  \
+@NATIVE_WIN32_FALSE@	$(am__DEPENDENCIES_1) \
 @NATIVE_WIN32_FALSE@	$(am__DEPENDENCIES_1)
 subdir = gladeui
 DIST_COMMON = $(libgladeuiinclude_HEADERS) $(srcdir)/Makefile.am \
@@ -48,7 +49,7 @@ DIST_COMMON = $(libgladeuiinclude_HEADERS) $(srcdir)/Makefile.am \
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/gnome-doc-utils.m4 \
 	$(top_srcdir)/m4/gtk-doc.m4 $(top_srcdir)/m4/intltool.m4 \
-	$(top_srcdir)/configure.ac
+	$(top_srcdir)/m4/python.m4 $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
@@ -95,12 +96,14 @@ am_libgladeui_1_la_OBJECTS = libgladeui_1_la-glade-widget-adaptor.lo \
 	libgladeui_1_la-glade-id-allocator.lo \
 	libgladeui_1_la-glade-marshallers.lo \
 	libgladeui_1_la-glade-accumulators.lo \
-	libgladeui_1_la-glade-parser.lo \
 	libgladeui_1_la-glade-builtins.lo libgladeui_1_la-glade-app.lo \
-	libgladeui_1_la-glade-keysyms.lo \
 	libgladeui_1_la-glade-fixed.lo \
 	libgladeui_1_la-glade-base-editor.lo \
-	libgladeui_1_la-glade-widget-action.lo
+	libgladeui_1_la-glade-widget-action.lo \
+	libgladeui_1_la-glade-name-context.lo \
+	libgladeui_1_la-glade-displayable-values.lo \
+	libgladeui_1_la-glade-editable.lo \
+	libgladeui_1_la-glade-editor-table.lo
 libgladeui_1_la_OBJECTS = $(am_libgladeui_1_la_OBJECTS)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
@@ -138,6 +141,8 @@ AUTOMAKE = @AUTOMAKE@
 AWK = @AWK@
 BUILD_GNOME_FALSE = @BUILD_GNOME_FALSE@
 BUILD_GNOME_TRUE = @BUILD_GNOME_TRUE@
+BUILD_PYTHON_FALSE = @BUILD_PYTHON_FALSE@
+BUILD_PYTHON_TRUE = @BUILD_PYTHON_TRUE@
 CATALOGS = @CATALOGS@
 CATOBJEXT = @CATOBJEXT@
 CC = @CC@
@@ -170,6 +175,8 @@ ENABLE_SK_TRUE = @ENABLE_SK_TRUE@
 EXEEXT = @EXEEXT@
 F77 = @F77@
 FFLAGS = @FFLAGS@
+GDK_TARGET_QUARTZ_FALSE = @GDK_TARGET_QUARTZ_FALSE@
+GDK_TARGET_QUARTZ_TRUE = @GDK_TARGET_QUARTZ_TRUE@
 GETTEXT_PACKAGE = @GETTEXT_PACKAGE@
 GLADE_AGE = @GLADE_AGE@
 GLADE_CURRENT = @GLADE_CURRENT@
@@ -188,9 +195,12 @@ GNOME_CFLAGS = @GNOME_CFLAGS@
 GNOME_LIBS = @GNOME_LIBS@
 GREP = @GREP@
 GTKDOC_CHECK = @GTKDOC_CHECK@
+GTKDOC_REBASE = @GTKDOC_REBASE@
 GTK_CFLAGS = @GTK_CFLAGS@
 GTK_DOC_USE_LIBTOOL_FALSE = @GTK_DOC_USE_LIBTOOL_FALSE@
 GTK_DOC_USE_LIBTOOL_TRUE = @GTK_DOC_USE_LIBTOOL_TRUE@
+GTK_DOC_USE_REBASE_FALSE = @GTK_DOC_USE_REBASE_FALSE@
+GTK_DOC_USE_REBASE_TRUE = @GTK_DOC_USE_REBASE_TRUE@
 GTK_LIBS = @GTK_LIBS@
 HAVE_GNOME_DOC_UTILS_FALSE = @HAVE_GNOME_DOC_UTILS_FALSE@
 HAVE_GNOME_DOC_UTILS_TRUE = @HAVE_GNOME_DOC_UTILS_TRUE@
@@ -198,6 +208,9 @@ HAVE_GTK_UNIX_PRINT_FALSE = @HAVE_GTK_UNIX_PRINT_FALSE@
 HAVE_GTK_UNIX_PRINT_TRUE = @HAVE_GTK_UNIX_PRINT_TRUE@
 HELP_DIR = @HELP_DIR@
 HTML_DIR = @HTML_DIR@
+IGE_MAC_BUNDLE_FLAG = @IGE_MAC_BUNDLE_FLAG@
+IGE_MAC_CFLAGS = @IGE_MAC_CFLAGS@
+IGE_MAC_LIBS = @IGE_MAC_LIBS@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
@@ -262,6 +275,16 @@ POFILES = @POFILES@
 POSUB = @POSUB@
 PO_IN_DATADIR_FALSE = @PO_IN_DATADIR_FALSE@
 PO_IN_DATADIR_TRUE = @PO_IN_DATADIR_TRUE@
+PYGTK_CFLAGS = @PYGTK_CFLAGS@
+PYGTK_LIBS = @PYGTK_LIBS@
+PYTHON = @PYTHON@
+PYTHON_EXEC_PREFIX = @PYTHON_EXEC_PREFIX@
+PYTHON_INCLUDES = @PYTHON_INCLUDES@
+PYTHON_LIBS = @PYTHON_LIBS@
+PYTHON_LIB_LOC = @PYTHON_LIB_LOC@
+PYTHON_PLATFORM = @PYTHON_PLATFORM@
+PYTHON_PREFIX = @PYTHON_PREFIX@
+PYTHON_VERSION = @PYTHON_VERSION@
 RANLIB = @RANLIB@
 SED = @SED@
 SET_MAKE = @SET_MAKE@
@@ -312,9 +335,13 @@ mandir = @mandir@
 mkdir_p = @mkdir_p@
 oldincludedir = @oldincludedir@
 pdfdir = @pdfdir@
+pkgpyexecdir = @pkgpyexecdir@
+pkgpythondir = @pkgpythondir@
 prefix = @prefix@
 program_transform_name = @program_transform_name@
 psdir = @psdir@
+pyexecdir = @pyexecdir@
+pythondir = @pythondir@
 sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
@@ -373,20 +400,21 @@ libgladeui_1_la_SOURCES = \
 	glade-id-allocator.h \
 	glade-marshallers.c \
 	glade-accumulators.c \
-	glade-parser.c \
 	glade-builtins.c \
 	glade-app.c \
-	glade-keysyms.c \
 	glade-fixed.c \
 	glade-base-editor.c \
 	glade-palette-item.h \
 	glade-palette-box.h \
 	glade-palette-expander.h \
 	glade-popup.h \
-	glade-catalog.h \
 	glade-marshallers.h \
 	glade-accumulators.h \
-	glade-widget-action.c
+	glade-widget-action.c \
+	glade-name-context.c \
+	glade-displayable-values.c \
+	glade-editable.c \
+	glade-editor-table.c
 
 libgladeui_1_la_CPPFLAGS = \
 	$(common_defines)   \
@@ -396,13 +424,15 @@ libgladeui_1_la_CPPFLAGS = \
 
 libgladeui_1_la_CFLAGS = \
 	$(GTK_CFLAGS)       \
+	$(IGE_MAC_BUNDLE_FLAG) \
+	$(IGE_MAC_CFLAGS)  \
 	$(WARN_CFLAGS)      \
 	$(AM_CFLAGS)
 
 libgladeui_1_la_LDFLAGS = -version-info \
 	$(GLADE_CURRENT):$(GLADE_REVISION):$(GLADE_AGE) $(AM_LDFLAGS) \
 	$(am__append_1) $(am__append_2)
-libgladeui_1_la_LIBADD = $(GTK_LIBS)
+libgladeui_1_la_LIBADD = $(GTK_LIBS) $(IGE_MAC_LIBS)
 libgladeuiincludedir = $(includedir)/libgladeui-1.0/gladeui
 libgladeuiinclude_HEADERS = \
 	glade.h \
@@ -432,10 +462,14 @@ libgladeuiinclude_HEADERS = \
 	glade-fixed.h \
 	glade-base-editor.h \
 	glade-xml-utils.h \
-	glade-parser.h \
 	glade-signal.h \
 	glade-cursor.h \
-	glade-widget-action.h
+	glade-catalog.h \
+	glade-widget-action.h \
+	glade-name-context.h \
+	glade-displayable-values.h \
+	glade-editable.h \
+	glade-editor-table.h
 
 @NATIVE_WIN32_TRUE@libgladeui_1_la_DEPENDENCIES = gladeui-win32-res.o gladeui.def
 CLEANFILES = $(BUILT_SOURCES) gladeui.def
@@ -524,20 +558,22 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-debug.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-design-layout.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-design-view.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-displayable-values.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-editable.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-editor-property.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-editor-table.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-editor.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-fixed.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-id-allocator.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-inspector.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-keysyms.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-marshallers.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-name-context.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-named-icon-chooser-dialog.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-palette-box.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-palette-expander.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-palette-item.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-palette.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-parameter.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-parser.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-placeholder.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-popup.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-project.Plo@am__quote@
@@ -796,13 +832,6 @@ libgladeui_1_la-glade-accumulators.lo: glade-accumulators.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladeui_1_la_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-accumulators.lo `test -f 'glade-accumulators.c' || echo '$(srcdir)/'`glade-accumulators.c
 
-libgladeui_1_la-glade-parser.lo: glade-parser.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladeui_1_la_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-parser.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-parser.Tpo" -c -o libgladeui_1_la-glade-parser.lo `test -f 'glade-parser.c' || echo '$(srcdir)/'`glade-parser.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-parser.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-parser.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-parser.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-parser.c' object='libgladeui_1_la-glade-parser.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladeui_1_la_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-parser.lo `test -f 'glade-parser.c' || echo '$(srcdir)/'`glade-parser.c
-
 libgladeui_1_la-glade-builtins.lo: glade-builtins.c
 @am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladeui_1_la_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-builtins.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-builtins.Tpo" -c -o libgladeui_1_la-glade-builtins.lo `test -f 'glade-builtins.c' || echo '$(srcdir)/'`glade-builtins.c; \
 @am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-builtins.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-builtins.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-builtins.Tpo"; exit 1; fi
@@ -816,13 +845,6 @@ libgladeui_1_la-glade-app.lo: glade-app.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-app.c' object='libgladeui_1_la-glade-app.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladeui_1_la_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-app.lo `test -f 'glade-app.c' || echo '$(srcdir)/'`glade-app.c
-
-libgladeui_1_la-glade-keysyms.lo: glade-keysyms.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladeui_1_la_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-keysyms.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-keysyms.Tpo" -c -o libgladeui_1_la-glade-keysyms.lo `test -f 'glade-keysyms.c' || echo '$(srcdir)/'`glade-keysyms.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-keysyms.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-keysyms.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-keysyms.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-keysyms.c' object='libgladeui_1_la-glade-keysyms.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladeui_1_la_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-keysyms.lo `test -f 'glade-keysyms.c' || echo '$(srcdir)/'`glade-keysyms.c
 
 libgladeui_1_la-glade-fixed.lo: glade-fixed.c
 @am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladeui_1_la_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-fixed.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-fixed.Tpo" -c -o libgladeui_1_la-glade-fixed.lo `test -f 'glade-fixed.c' || echo '$(srcdir)/'`glade-fixed.c; \
@@ -844,6 +866,34 @@ libgladeui_1_la-glade-widget-action.lo: glade-widget-action.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-widget-action.c' object='libgladeui_1_la-glade-widget-action.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladeui_1_la_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-widget-action.lo `test -f 'glade-widget-action.c' || echo '$(srcdir)/'`glade-widget-action.c
+
+libgladeui_1_la-glade-name-context.lo: glade-name-context.c
+@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladeui_1_la_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-name-context.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-name-context.Tpo" -c -o libgladeui_1_la-glade-name-context.lo `test -f 'glade-name-context.c' || echo '$(srcdir)/'`glade-name-context.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-name-context.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-name-context.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-name-context.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-name-context.c' object='libgladeui_1_la-glade-name-context.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladeui_1_la_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-name-context.lo `test -f 'glade-name-context.c' || echo '$(srcdir)/'`glade-name-context.c
+
+libgladeui_1_la-glade-displayable-values.lo: glade-displayable-values.c
+@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladeui_1_la_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-displayable-values.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-displayable-values.Tpo" -c -o libgladeui_1_la-glade-displayable-values.lo `test -f 'glade-displayable-values.c' || echo '$(srcdir)/'`glade-displayable-values.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-displayable-values.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-displayable-values.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-displayable-values.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-displayable-values.c' object='libgladeui_1_la-glade-displayable-values.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladeui_1_la_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-displayable-values.lo `test -f 'glade-displayable-values.c' || echo '$(srcdir)/'`glade-displayable-values.c
+
+libgladeui_1_la-glade-editable.lo: glade-editable.c
+@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladeui_1_la_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-editable.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-editable.Tpo" -c -o libgladeui_1_la-glade-editable.lo `test -f 'glade-editable.c' || echo '$(srcdir)/'`glade-editable.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-editable.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-editable.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-editable.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-editable.c' object='libgladeui_1_la-glade-editable.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladeui_1_la_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-editable.lo `test -f 'glade-editable.c' || echo '$(srcdir)/'`glade-editable.c
+
+libgladeui_1_la-glade-editor-table.lo: glade-editor-table.c
+@am__fastdepCC_TRUE@	if $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladeui_1_la_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-editor-table.lo -MD -MP -MF "$(DEPDIR)/libgladeui_1_la-glade-editor-table.Tpo" -c -o libgladeui_1_la-glade-editor-table.lo `test -f 'glade-editor-table.c' || echo '$(srcdir)/'`glade-editor-table.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libgladeui_1_la-glade-editor-table.Tpo" "$(DEPDIR)/libgladeui_1_la-glade-editor-table.Plo"; else rm -f "$(DEPDIR)/libgladeui_1_la-glade-editor-table.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-editor-table.c' object='libgladeui_1_la-glade-editor-table.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladeui_1_la_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-editor-table.lo `test -f 'glade-editor-table.c' || echo '$(srcdir)/'`glade-editor-table.c
 
 mostlyclean-libtool:
 	-rm -f *.lo

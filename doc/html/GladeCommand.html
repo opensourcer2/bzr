@@ -4,11 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GladeCommand</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
-<link rel="start" href="index.html" title="Glade UI Builder Reference Manual">
+<link rel="start" href="index.html" title="Glade User Interface Designer Reference Manual">
 <link rel="up" href="core.html" title="Part II. Glade Core">
-<link rel="prev" href="gladeui-GladePropertyClass.html" title="GladePropertyClass">
+<link rel="prev" href="GladeWidgetAction.html" title="GladeWidgetAction">
 <link rel="next" href="GladeClipboard.html" title="GladeClipboard">
-<meta name="generator" content="GTK-Doc V1.10 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 <link rel="part" href="catalog.html" title="Part I. Adding your custom widgets">
 <link rel="part" href="core.html" title="Part II. Glade Core">
@@ -19,17 +19,19 @@
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
 <tr valign="middle">
-<td><a accesskey="p" href="gladeui-GladePropertyClass.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="p" href="GladeWidgetAction.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
 <td><a accesskey="u" href="core.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
-<th width="100%" align="center">Glade UI Builder Reference Manual</th>
+<th width="100%" align="center">Glade User Interface Designer Reference Manual</th>
 <td><a accesskey="n" href="GladeClipboard.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr>
-<tr><td colspan="5" class="shortcuts"><nobr><a href="#GladeCommand.synopsis" class="shortcut">Top</a>
+<tr><td colspan="5" class="shortcuts">
+<a href="#GladeCommand.synopsis" class="shortcut">Top</a>
                    | 
                   <a href="#GladeCommand.description" class="shortcut">Description</a>
                    | 
-                  <a href="#GladeCommand.object-hierarchy" class="shortcut">Object Hierarchy</a></nobr></td></tr>
+                  <a href="#GladeCommand.object-hierarchy" class="shortcut">Object Hierarchy</a>
+</td></tr>
 </table>
 <div class="refentry" lang="en">
 <a name="GladeCommand"></a><div class="titlepage"></div>
@@ -67,7 +69,7 @@ void                <a class="link" href="GladeCommand.html#glade-command-set-pr
 void                <a class="link" href="GladeCommand.html#glade-command-set-name" title="glade_command_set_name ()">glade_command_set_name</a>              (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *glade_widget,
                                                          const gchar *name);
 void                <a class="link" href="GladeCommand.html#glade-command-delete" title="glade_command_delete ()">glade_command_delete</a>                (GList *widgets);
-<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a>*        <a class="link" href="GladeCommand.html#glade-command-create" title="glade_command_create ()">glade_command_create</a>                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *       <a class="link" href="GladeCommand.html#glade-command-create" title="glade_command_create ()">glade_command_create</a>                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
                                                          <a class="link" href="GladePlaceholder.html" title="GladePlaceholder">GladePlaceholder</a> *placeholder,
                                                          <a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);
@@ -89,6 +91,7 @@ void                <a class="link" href="GladeCommand.html#glade-command-change
 void                <a class="link" href="GladeCommand.html#glade-command-set-i18n" title="glade_command_set_i18n ()">glade_command_set_i18n</a>              (<a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a> *property,
                                                          gboolean translatable,
                                                          gboolean has_context,
+                                                         const gchar *context,
                                                          const gchar *comment);
 </pre>
 </div>
@@ -104,9 +107,6 @@ void                <a class="link" href="GladeCommand.html#glade-command-set-i1
 <p>
 The Glade Command api allows us to view user actions as items and execute 
 and undo those items; each <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> has its own Undo/Redo stack.</p>
-<p>
-
-</p>
 </div>
 <div class="refsect1" lang="en">
 <a name="GladeCommand.details"></a><h2>Details</h2>
@@ -122,9 +122,6 @@ and undo those items; each <a class="link" href="GladeProject.html" title="Glade
 <span class="type">GladeProperties</span> can be set in a list as one command,
 for Undo purposes; we store the list of <a class="link" href="GladeCommand.html#GCSetPropData" title="GCSetPropData"><span class="type">GCSetPropData</span></a> with
 their old and new <span class="type">GValue</span>.</p>
-<p>
-
-</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -150,9 +147,6 @@ their old and new <span class="type">GValue</span>.</p>
 <div class="refsect2" lang="en">
 <a name="GladeCommand-struct"></a><h3>GladeCommand</h3>
 <pre class="programlisting">typedef struct _GladeCommand GladeCommand;</pre>
-<p>
-
-</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
@@ -161,9 +155,6 @@ their old and new <span class="type">GValue</span>.</p>
                                                          ...);</pre>
 <p>
 Marks the begining of a group.</p>
-<p>
-
-</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -188,9 +179,6 @@ Marks the begining of a group.</p>
 <pre class="programlisting">void                glade_command_pop_group             (void);</pre>
 <p>
 Mark the end of a command group.</p>
-<p>
-
-</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
@@ -198,9 +186,6 @@ Mark the end of a command group.</p>
 <pre class="programlisting">gboolean            glade_command_execute               (<a class="link" href="GladeCommand.html" title="GladeCommand">GladeCommand</a> *command);</pre>
 <p>
 Executes <em class="parameter"><code>command</code></em></p>
-<p>
-
-</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -223,9 +208,6 @@ Executes <em class="parameter"><code>command</code></em></p>
 <pre class="programlisting">gboolean            glade_command_undo                  (<a class="link" href="GladeCommand.html" title="GladeCommand">GladeCommand</a> *command);</pre>
 <p>
 Undo the effects of <em class="parameter"><code>command</code></em></p>
-<p>
-
-</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -236,7 +218,7 @@ Undo the effects of <em class="parameter"><code>command</code></em></p>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>whether the command was successfully reversed
+<td> whether the command was successfully reversed
 </td>
 </tr>
 </tbody>
@@ -250,9 +232,6 @@ Undo the effects of <em class="parameter"><code>command</code></em></p>
 <p>
 Checks whether <em class="parameter"><code>command</code></em> and <em class="parameter"><code>other</code></em> can be unified
 to make one single command.</p>
-<p>
-
-</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -282,9 +261,6 @@ to make one single command.</p>
 <p>
 Merges <em class="parameter"><code>other</code></em> into <em class="parameter"><code>command</code></em>, so that <em class="parameter"><code>command</code></em> now
 covers both commands and <em class="parameter"><code>other</code></em> can be dispensed with.</p>
-<p>
-
-</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -306,52 +282,12 @@ covers both commands and <em class="parameter"><code>other</code></em> can be di
 <a name="glade-command-set-property"></a><h3>glade_command_set_property ()</h3>
 <pre class="programlisting">void                glade_command_set_property          (<a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a> *property,
                                                          ...);</pre>
-<p>
-
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>property</code></em> :</span></p></td>
-<td>
-</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
-<td>
-
-
-</td>
-</tr>
-</tbody>
-</table></div>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-command-set-property-value"></a><h3>glade_command_set_property_value ()</h3>
 <pre class="programlisting">void                glade_command_set_property_value    (<a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a> *property,
                                                          const GValue *value);</pre>
-<p>
-
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>property</code></em> :</span></p></td>
-<td>
-</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>
-
-
-</td>
-</tr>
-</tbody>
-</table></div>
 </div>
 <hr>
 <div class="refsect2" lang="en">
@@ -360,88 +296,18 @@ covers both commands and <em class="parameter"><code>other</code></em> can be di
                                                          const GValue *old_value,
                                                          const GValue *new_value,
                                                          ...);</pre>
-<p>
-
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>property</code></em> :</span></p></td>
-<td>
-</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>old_value</code></em> :</span></p></td>
-<td>
-</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>new_value</code></em> :</span></p></td>
-<td>
-</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
-<td>
-
-
-</td>
-</tr>
-</tbody>
-</table></div>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-command-set-properties-list"></a><h3>glade_command_set_properties_list ()</h3>
 <pre class="programlisting">void                glade_command_set_properties_list   (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
                                                          GList *props);</pre>
-<p>
-
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>project</code></em> :</span></p></td>
-<td>
-</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>props</code></em> :</span></p></td>
-<td>
-
-
-</td>
-</tr>
-</tbody>
-</table></div>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-command-set-name"></a><h3>glade_command_set_name ()</h3>
 <pre class="programlisting">void                glade_command_set_name              (<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *glade_widget,
                                                          const gchar *name);</pre>
-<p>
-
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>glade_widget</code></em> :</span></p></td>
-<td>
-</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
-<td>
-
-
-</td>
-</tr>
-</tbody>
-</table></div>
 </div>
 <hr>
 <div class="refsect2" lang="en">
@@ -449,9 +315,6 @@ covers both commands and <em class="parameter"><code>other</code></em> can be di
 <pre class="programlisting">void                glade_command_delete                (GList *widgets);</pre>
 <p>
 Performs a delete command on the list of widgets.</p>
-<p>
-
-</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
@@ -464,16 +327,13 @@ Performs a delete command on the list of widgets.</p>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-command-create"></a><h3>glade_command_create ()</h3>
-<pre class="programlisting"><a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a>*        glade_command_create                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
+<pre class="programlisting"><a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *       glade_command_create                (<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> *adaptor,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *parent,
                                                          <a class="link" href="GladePlaceholder.html" title="GladePlaceholder">GladePlaceholder</a> *placeholder,
                                                          <a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
 <p>
 Creates a new widget using <em class="parameter"><code>adaptor</code></em> and put in place of the <em class="parameter"><code>placeholder</code></em>
 in the <em class="parameter"><code>project</code></em></p>
-<p>
-
-</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -484,7 +344,7 @@ in the <em class="parameter"><code>project</code></em></p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>parent</code></em> :</span></p></td>
-<td>
+<td>             the parent <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> to add the new widget to.
 </td>
 </tr>
 <tr>
@@ -499,7 +359,7 @@ in the <em class="parameter"><code>project</code></em></p>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the newly created widget.
+<td> the newly created widget.
 </td>
 </tr>
 </tbody>
@@ -511,9 +371,6 @@ in the <em class="parameter"><code>project</code></em></p>
 <pre class="programlisting">void                glade_command_cut                   (GList *widgets);</pre>
 <p>
 Removes the list of widgets and adds them to the clipboard.</p>
-<p>
-
-</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
@@ -529,9 +386,6 @@ Removes the list of widgets and adds them to the clipboard.</p>
 <pre class="programlisting">void                glade_command_copy                  (GList *widgets);</pre>
 <p>
 Copies the list of widgets and adds them to the clipboard.</p>
-<p>
-
-</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
@@ -551,9 +405,6 @@ Copies the list of widgets and adds them to the clipboard.</p>
 Performs a paste command on all widgets in <em class="parameter"><code>widgets</code></em> to <em class="parameter"><code>parent</code></em>, possibly
 replacing <em class="parameter"><code>placeholder</code></em> (note toplevels dont need a parent; the active project
 will be used when pasting toplevel objects).</p>
-<p>
-
-</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -585,9 +436,6 @@ will be used when pasting toplevel objects).</p>
 Performs a drag-n-drop command, i.e. removes the list of widgets and adds them 
 to the new parent, possibly replacing <em class="parameter"><code>placeholder</code></em> (note toplevels dont need a 
 parent; the active project will be used when pasting toplevel objects).</p>
-<p>
-
-</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -616,9 +464,6 @@ parent; the active project will be used when pasting toplevel objects).</p>
                                                          const GladeSignal *signal);</pre>
 <p>
 TODO: write me</p>
-<p>
-
-</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -642,9 +487,6 @@ TODO: write me</p>
                                                          const GladeSignal *signal);</pre>
 <p>
 TODO: write me</p>
-<p>
-
-</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -669,9 +511,6 @@ TODO: write me</p>
                                                          const GladeSignal *new_signal);</pre>
 <p>
 TODO: write me</p>
-<p>
-
-</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -699,12 +538,10 @@ TODO: write me</p>
 <pre class="programlisting">void                glade_command_set_i18n              (<a class="link" href="gladeui-glade-property.html#GladeProperty">GladeProperty</a> *property,
                                                          gboolean translatable,
                                                          gboolean has_context,
+                                                         const gchar *context,
                                                          const gchar *comment);</pre>
 <p>
 Sets the i18n data on the property.</p>
-<p>
-
-</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -724,6 +561,11 @@ Sets the i18n data on the property.</p>
 </td>
 </tr>
 <tr>
+<td><p><span class="term"><em class="parameter"><code>context</code></em> :</span></p></td>
+<td> a <span class="type">const</span> gchar *
+</td>
+</tr>
+<tr>
 <td><p><span class="term"><em class="parameter"><code>comment</code></em> :</span></p></td>
 <td> a <span class="type">const</span> gchar *
 </td>
@@ -735,6 +577,6 @@ Sets the i18n data on the property.</p>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.10</div>
+          Generated by GTK-Doc V1.12</div>
 </body>
 </html>

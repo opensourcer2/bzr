@@ -4,11 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GladeClipboard</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
-<link rel="start" href="index.html" title="Glade UI Builder Reference Manual">
+<link rel="start" href="index.html" title="Glade User Interface Designer Reference Manual">
 <link rel="up" href="core.html" title="Part II. Glade Core">
 <link rel="prev" href="GladeCommand.html" title="GladeCommand">
-<link rel="next" href="gladeui-GladeBaseEditor.html" title="GladeBaseEditor">
-<meta name="generator" content="GTK-Doc V1.10 (XML mode)">
+<link rel="next" href="GladeBaseEditor.html" title="GladeBaseEditor">
+<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 <link rel="part" href="catalog.html" title="Part I. Adding your custom widgets">
 <link rel="part" href="core.html" title="Part II. Glade Core">
@@ -22,16 +22,18 @@
 <td><a accesskey="p" href="GladeCommand.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
 <td><a accesskey="u" href="core.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
-<th width="100%" align="center">Glade UI Builder Reference Manual</th>
-<td><a accesskey="n" href="gladeui-GladeBaseEditor.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+<th width="100%" align="center">Glade User Interface Designer Reference Manual</th>
+<td><a accesskey="n" href="GladeBaseEditor.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr>
-<tr><td colspan="5" class="shortcuts"><nobr><a href="#GladeClipboard.synopsis" class="shortcut">Top</a>
+<tr><td colspan="5" class="shortcuts">
+<a href="#GladeClipboard.synopsis" class="shortcut">Top</a>
                    | 
                   <a href="#GladeClipboard.description" class="shortcut">Description</a>
                    | 
                   <a href="#GladeClipboard.object-hierarchy" class="shortcut">Object Hierarchy</a>
                    | 
-                  <a href="#GladeClipboard.properties" class="shortcut">Properties</a></nobr></td></tr>
+                  <a href="#GladeClipboard.properties" class="shortcut">Properties</a>
+</td></tr>
 </table>
 <div class="refentry" lang="en">
 <a name="GladeClipboard"></a><div class="titlepage"></div>
@@ -46,7 +48,7 @@
 <a name="GladeClipboard.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">
                     <a class="link" href="GladeClipboard.html#GladeClipboard-struct" title="GladeClipboard">GladeClipboard</a>;
-<a class="link" href="GladeClipboard.html" title="GladeClipboard">GladeClipboard</a>*     <a class="link" href="GladeClipboard.html#glade-clipboard-new" title="glade_clipboard_new ()">glade_clipboard_new</a>                 (void);
+<a class="link" href="GladeClipboard.html" title="GladeClipboard">GladeClipboard</a> *    <a class="link" href="GladeClipboard.html#glade-clipboard-new" title="glade_clipboard_new ()">glade_clipboard_new</a>                 (void);
 void                <a class="link" href="GladeClipboard.html#glade-clipboard-add" title="glade_clipboard_add ()">glade_clipboard_add</a>                 (<a class="link" href="GladeClipboard.html" title="GladeClipboard">GladeClipboard</a> *clipboard,
                                                          GList *widgets);
 void                <a class="link" href="GladeClipboard.html#glade-clipboard-remove" title="glade_clipboard_remove ()">glade_clipboard_remove</a>              (<a class="link" href="GladeClipboard.html" title="GladeClipboard">GladeClipboard</a> *clipboard,
@@ -78,27 +80,18 @@ gboolean            <a class="link" href="GladeClipboard.html#glade-clipboard-ge
 The <a class="link" href="GladeClipboard.html" title="GladeClipboard"><span class="type">GladeClipboard</span></a> is a singleton and is an accumulative shelf
 of all cut or copied <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> in the application. A <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>
 can be cut from one <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> and pasted to another.</p>
-<p>
-
-</p>
 </div>
 <div class="refsect1" lang="en">
 <a name="GladeClipboard.details"></a><h2>Details</h2>
 <div class="refsect2" lang="en">
 <a name="GladeClipboard-struct"></a><h3>GladeClipboard</h3>
 <pre class="programlisting">typedef struct _GladeClipboard GladeClipboard;</pre>
-<p>
-
-</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-clipboard-new"></a><h3>glade_clipboard_new ()</h3>
-<pre class="programlisting"><a class="link" href="GladeClipboard.html" title="GladeClipboard">GladeClipboard</a>*     glade_clipboard_new                 (void);</pre>
+<pre class="programlisting"><a class="link" href="GladeClipboard.html" title="GladeClipboard">GladeClipboard</a> *    glade_clipboard_new                 (void);</pre>
 <p>
-</p>
-<p>
-
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -117,9 +110,6 @@ can be cut from one <a class="link" href="GladeProject.html" title="GladeProject
 <p>
 Adds <em class="parameter"><code>widgets</code></em> to <em class="parameter"><code>clipboard</code></em>.
 This increases the reference count of each <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> in <em class="parameter"><code>widgets</code></em>.</p>
-<p>
-
-</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -143,9 +133,6 @@ This increases the reference count of each <a class="link" href="GladeWidget.htm
                                                          GList *widgets);</pre>
 <p>
 Removes <em class="parameter"><code>widgets</code></em> from <em class="parameter"><code>clipboard</code></em>.</p>
-<p>
-
-</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -167,79 +154,23 @@ Removes <em class="parameter"><code>widgets</code></em> from <em class="paramete
 <a name="glade-clipboard-selection-add"></a><h3>glade_clipboard_selection_add ()</h3>
 <pre class="programlisting">void                glade_clipboard_selection_add       (<a class="link" href="GladeClipboard.html" title="GladeClipboard">GladeClipboard</a> *clipboard,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
-<p>
-
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>clipboard</code></em> :</span></p></td>
-<td>
-</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>widget</code></em> :</span></p></td>
-<td>
-
-
-</td>
-</tr>
-</tbody>
-</table></div>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-clipboard-selection-remove"></a><h3>glade_clipboard_selection_remove ()</h3>
 <pre class="programlisting">void                glade_clipboard_selection_remove    (<a class="link" href="GladeClipboard.html" title="GladeClipboard">GladeClipboard</a> *clipboard,
                                                          <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
-<p>
-
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>clipboard</code></em> :</span></p></td>
-<td>
-</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>widget</code></em> :</span></p></td>
-<td>
-
-
-</td>
-</tr>
-</tbody>
-</table></div>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-clipboard-selection-clear"></a><h3>glade_clipboard_selection_clear ()</h3>
 <pre class="programlisting">void                glade_clipboard_selection_clear     (<a class="link" href="GladeClipboard.html" title="GladeClipboard">GladeClipboard</a> *clipboard);</pre>
-<p>
-
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody><tr>
-<td><p><span class="term"><em class="parameter"><code>clipboard</code></em> :</span></p></td>
-<td>
-
-
-</td>
-</tr></tbody>
-</table></div>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="glade-clipboard-get-has-selection"></a><h3>glade_clipboard_get_has_selection ()</h3>
 <pre class="programlisting">gboolean            glade_clipboard_get_has_selection   (<a class="link" href="GladeClipboard.html" title="GladeClipboard">GladeClipboard</a> *clipboard);</pre>
 <p>
-</p>
-<p>
-
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -270,6 +201,6 @@ Removes <em class="parameter"><code>widgets</code></em> from <em class="paramete
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.10</div>
+          Generated by GTK-Doc V1.12</div>
 </body>
 </html>

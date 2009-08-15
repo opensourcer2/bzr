@@ -51,20 +51,21 @@ libgladeui_1_la_SOURCES = \
 	glade-id-allocator.h \
 	glade-marshallers.c \
 	glade-accumulators.c \
-	glade-parser.c \
 	glade-builtins.c \
 	glade-app.c \
-	glade-keysyms.c \
 	glade-fixed.c \
 	glade-base-editor.c \
 	glade-palette-item.h \
 	glade-palette-box.h \
 	glade-palette-expander.h \
 	glade-popup.h \
-	glade-catalog.h \
 	glade-marshallers.h \
 	glade-accumulators.h \
-	glade-widget-action.c
+	glade-widget-action.c \
+	glade-name-context.c \
+	glade-displayable-values.c \
+	glade-editable.c \
+	glade-editor-table.c
 
 libgladeui_1_la_CPPFLAGS =  \
 	$(common_defines)   \
@@ -74,11 +75,13 @@ libgladeui_1_la_CPPFLAGS =  \
 
 libgladeui_1_la_CFLAGS =    \
 	$(GTK_CFLAGS)       \
+	$(IGE_MAC_BUNDLE_FLAG) \
+	$(IGE_MAC_CFLAGS)  \
 	$(WARN_CFLAGS)      \
 	$(AM_CFLAGS)
 
 libgladeui_1_la_LDFLAGS = -version-info $(GLADE_CURRENT):$(GLADE_REVISION):$(GLADE_AGE) $(AM_LDFLAGS)
-libgladeui_1_la_LIBADD = $(GTK_LIBS)
+libgladeui_1_la_LIBADD = $(GTK_LIBS) $(IGE_MAC_LIBS)
 
 
 libgladeuiincludedir=$(includedir)/libgladeui-1.0/gladeui
@@ -110,11 +113,15 @@ libgladeuiinclude_HEADERS = \
 	glade-fixed.h \
 	glade-base-editor.h \
 	glade-xml-utils.h \
-	glade-parser.h \
 	glade-signal.h \
 	glade-cursor.h \
-	glade-widget-action.h
-	
+	glade-catalog.h \
+	glade-widget-action.h \
+	glade-name-context.h \
+	glade-displayable-values.h \
+	glade-editable.h \
+	glade-editor-table.h
+
 
 if PLATFORM_WIN32
 libgladeui_1_la_LDFLAGS += -no-undefined

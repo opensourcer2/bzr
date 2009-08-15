@@ -2,12 +2,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Glade UI Builder Reference Manual</title>
+<title>Glade User Interface Designer Reference Manual</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
-<meta name="description" content="This document attempts to describe how to use the Glade UI Builder core library to integrate Glade into your application and how to integrate your custom (GTK+ based) widget toolkit into the Glade UI Builder. You can always get the latest version of this document here (XXX linkme) and you should have received a copy with the glade-3 tarball.">
-<link rel="start" href="index.html" title="Glade UI Builder Reference Manual">
+<meta name="description" content="This document attempts to describe how to use the Glade UI Designer core library to integrate Glade into your application and how to integrate your custom GTK+ derived widgets into the Glade UI Designer. You can always get the latest version of this document here and you should have received a copy with the glade-3 tarball.">
+<link rel="start" href="index.html" title="Glade User Interface Designer Reference Manual">
 <link rel="next" href="catalog.html" title="Part I. Adding your custom widgets">
-<meta name="generator" content="GTK-Doc V1.10 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 <link rel="part" href="catalog.html" title="Part I. Adding your custom widgets">
 <link rel="part" href="core.html" title="Part II. Glade Core">
@@ -19,17 +19,19 @@
 <div class="book" lang="en">
 <div class="titlepage">
 <div>
-<div><table class="navigation" id="top" width="100%" cellpadding="2" cellspacing="0"><tr><th valign="middle"><p class="title">Glade UI Builder Reference Manual</p></th></tr></table></div>
+<div><table class="navigation" id="top" width="100%" cellpadding="2" cellspacing="0"><tr><th valign="middle"><p class="title">Glade User Interface Designer Reference Manual</p></th></tr></table></div>
 <div><div class="authorgroup"><div class="author"><h3 class="author">
 <span class="firstname">Tristan</span> <span class="surname">Van Berkom</span>
 </h3></div></div></div>
-<div><p class="releaseinfo">for glade3 3.4.4</p></div>
+<div><p class="releaseinfo">for glade3 3.6.6</p></div>
 <div><div class="abstract">
 <p class="title"><b>Abstract</b></p>
-<p>This document attempts to describe how to use the Glade UI Builder core
-      library to integrate Glade into your application and how to integrate your
-      custom (GTK+ based) widget toolkit into the Glade UI Builder.</p>
-<p>You can always get the latest version of this document here (XXX linkme) 
+<p>
+This document attempts to describe how to use the Glade UI Designer core
+library to integrate Glade into your application and how to integrate your
+custom GTK+ derived widgets into the Glade UI Designer.
+      </p>
+<p>You can always get the latest version of this document <a class="ulink" href="http://glade.gnome.org/docs/index.html" target="_top">here</a>
       and you should have received a copy with the glade-3 tarball.</p>
 </div></div>
 </div>
@@ -44,19 +46,19 @@ How to write and install a catalog
     </span>
 </dt>
 <dt>
-<span class="refentrytitle"><a href="widgetclasses.html">Widget Class Definitions</a></span><span class="refpurpose"> — 
+<span class="refentrytitle"><a href="widgetclasses.html">Widget Adaptor Definitions</a></span><span class="refpurpose"> — 
 Adding support for custom widgets 
     </span>
 </dt>
 <dt>
 <span class="refentrytitle"><a href="properties.html">Property Class Definitions</a></span><span class="refpurpose"> — 
-How to augment or define a <span class="type">GladePropertyClass</span>
+How to augment or define a <a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass"><span class="type">GladePropertyClass</span></a>
     </span>
 </dt>
 <dt>
-<span class="refentrytitle"><a href="children.html">Container Objects</a></span><span class="refpurpose"> — 
-How to add support for hierarchic widget relationships
-    </span>
+<span class="refentrytitle"><a href="pythonsupport.html">Python Gtk widgets support</a></span><span class="refpurpose"> — 
+How to write and install a catalog for a python widget library
+   </span>
 </dt>
 </dl></dd>
 <dt><span class="part"><a href="core.html">II. Glade Core</a></span></dt>
@@ -83,16 +85,22 @@ How to add support for hierarchic widget relationships
 <span class="refentrytitle"><a href="gladeui-GladePropertyClass.html">GladePropertyClass</a></span><span class="refpurpose"> — Property Class-wide metadata.</span>
 </dt>
 <dt>
+<span class="refentrytitle"><a href="GladeWidgetAction.html">GladeWidgetAction</a></span><span class="refpurpose"> — Context menu and toolbar actions.</span>
+</dt>
+<dt>
 <span class="refentrytitle"><a href="GladeCommand.html">GladeCommand</a></span><span class="refpurpose"> — An event filter to implement the Undo/Redo stack.</span>
 </dt>
 <dt>
 <span class="refentrytitle"><a href="GladeClipboard.html">GladeClipboard</a></span><span class="refpurpose"> — A list of <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> objects not in any <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>.</span>
 </dt>
 <dt>
-<span class="refentrytitle"><a href="gladeui-GladeBaseEditor.html">GladeBaseEditor</a></span><span class="refpurpose"> — A customisable editor</span>
+<span class="refentrytitle"><a href="GladeBaseEditor.html">GladeBaseEditor</a></span><span class="refpurpose"> — A customisable editor</span>
 </dt>
 <dt>
 <span class="refentrytitle"><a href="GladePlaceholder.html">GladePlaceholder</a></span><span class="refpurpose"> — A <span class="type">GtkWidget</span> to fill empty places.</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="gladeui-glade-xml-utils.html">Xml Utils</a></span><span class="refpurpose"> — An api to read and write xml.</span>
 </dt>
 </dl></dd>
 <dt><span class="part"><a href="dockables.html">III. Dockable Glade UI Widgets</a></span></dt>
@@ -115,6 +123,9 @@ How to add support for hierarchic widget relationships
 <dt>
 <span class="refentrytitle"><a href="gladeui-glade-signal-editor.html">GladeSignalEditor</a></span><span class="refpurpose"> — An interface to edit signals for a <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>.</span>
 </dt>
+<dt>
+<span class="refentrytitle"><a href="GladeDesignView.html">GladeDesignView</a></span><span class="refpurpose"> — A widget to embed the workspace.</span>
+</dt>
 </dl></dd>
 <dt><span class="part"><a href="misc.html">IV. Miscellaneous utilities</a></span></dt>
 <dd><dl>
@@ -130,6 +141,6 @@ How to add support for hierarchic widget relationships
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.10</div>
+          Generated by GTK-Doc V1.12</div>
 </body>
 </html>

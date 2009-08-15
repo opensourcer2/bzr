@@ -47,7 +47,11 @@
 #include <glib/gstdio.h>
 #include <glib/gi18n-lib.h>
 #include <gdk/gdkkeysyms.h>
-#include <gtk/gtkstock.h>
+#include <gtk/gtk.h>
+
+#ifdef MAC_INTEGRATION
+#  include <ige-mac-integration.h>
+#endif
 
 #define GLADE_CONFIG_FILENAME "glade-3.conf"
 
@@ -56,6 +60,7 @@
 enum
 {
 	UPDATE_UI,
+	SIGNAL_EDITOR_CREATED,
 	LAST_SIGNAL
 };
 
@@ -289,28 +294,9 @@ glade_app_update_ui_default (GladeApp *app)
 }
 
 static void
-on_palette_button_clicked (GladePalette *palette, GladeApp *app)
+glade_app_signal_editor_created_default (GladeApp *app, GladeSignalEditor *signal_editor)
 {
-	GladeWidgetAdaptor *adaptor;
-	GladeWidget        *widget;
-
-	g_return_if_fail (GLADE_IS_PALETTE (palette));
-	adaptor = glade_palette_get_current_item (palette);
-
-	/* class may be NULL if the selector was pressed */
-	if (adaptor && GWA_IS_TOPLEVEL (adaptor))
-	{
-		widget = glade_command_create (adaptor, NULL, NULL, app->priv->active_project);
-		
-		/* if this is a top level widget set the accel group */
-		if (widget && app->priv->accel_group && GTK_IS_WINDOW (widget->object))
-		{
-			gtk_window_add_accel_group (GTK_WINDOW (widget->object),
-						    app->priv->accel_group);
-		}
-
-		glade_palette_deselect_current_item (palette, FALSE);
-	}
+	glade_signal_editor_construct_signals_list (signal_editor);
 }
 
 static gboolean
@@ -380,14 +366,23 @@ glade_app_get_locale_dir (void)
 static void
 build_package_paths (void)
 {
-#ifdef G_OS_WIN32
+#if defined (G_OS_WIN32) || (defined (MAC_INTEGRATION) && defined (MAC_BUNDLE))
 	gchar *prefix;
-	
-	prefix = g_win32_get_package_installation_directory (NULL, NULL);
+
+# ifdef G_OS_WIN32
+	prefix = g_win32_get_package_installation_directory_of_module (NULL);
+
+# else // defined (MAC_INTEGRATION) && defined (MAC_BUNDLE)
+	IgeMacBundle *bundle = ige_mac_bundle_get_default ();
+
+	prefix = g_build_filename (ige_mac_bundle_get_path (bundle), "Contents", "Resources", NULL);
+# endif 
+
 	pixmaps_dir  = g_build_filename (prefix, "share", PACKAGE, "pixmaps", NULL);
 	catalogs_dir = g_build_filename (prefix, "share", PACKAGE, "catalogs", NULL);
 	modules_dir  = g_build_filename (prefix, "lib", PACKAGE, "modules", NULL);
 	locale_dir   = g_build_filename (prefix, "share", "locale", NULL);
+
 	g_free (prefix);
 #else
 	catalogs_dir = g_strdup (GLADE_CATALOGSDIR);
@@ -407,6 +402,9 @@ glade_init_check (void)
 	if (initialised)
 		return;
 
+	/* Make sure path accessors work on osx */
+	g_type_init ();
+
 	build_package_paths ();
 
 	bindtextdomain (GETTEXT_PACKAGE, locale_dir);
@@ -421,6 +419,8 @@ glade_app_init (GladeApp *app)
 	static gboolean initialized = FALSE;
 	
 	app->priv = GLADE_APP_GET_PRIVATE (app);	
+
+	singleton_app = app;
 	
 	glade_init_check ();	
 	
@@ -443,9 +443,6 @@ glade_app_init (GladeApp *app)
 	app->priv->palette = (GladePalette *) glade_palette_new (app->priv->catalogs);
 	g_object_ref_sink (app->priv->palette);
 	
-	g_signal_connect (G_OBJECT (app->priv->palette), "toggled",
-			  G_CALLBACK (on_palette_button_clicked), app);
-
 	/* Create Editor */
 	app->priv->editor = GLADE_EDITOR (glade_editor_new ());
 	g_object_ref_sink (GTK_OBJECT (app->priv->editor));
@@ -481,6 +478,7 @@ glade_app_class_init (GladeAppClass * klass)
 	object_class->set_property = glade_app_set_property;
 
 	klass->update_ui_signal = glade_app_update_ui_default;
+	klass->signal_editor_created = glade_app_signal_editor_created_default;
 	klass->show_properties  = NULL;
 	klass->hide_properties  = NULL;
 
@@ -499,6 +497,26 @@ glade_app_class_init (GladeAppClass * klass)
 			      NULL, NULL,
 			      g_cclosure_marshal_VOID__VOID,
 			      G_TYPE_NONE, 0);
+
+	/**
+	 * GladeApp::signal-editor-created:
+	 * @gladeapp: the #GladeApp which received the signal.
+	 * @signal_editor: the new #GladeSignalEditor.
+	 *
+	 * Emitted when a new signal editor created.
+	 * A tree view is created in the default handler.
+	 * Connect your handler before the default handler for setting a custom column or renderer
+	 * and after it for connecting to the tree view signals
+	 */
+	glade_app_signals[SIGNAL_EDITOR_CREATED] =
+		g_signal_new ("signal-editor-created",
+			      G_TYPE_FROM_CLASS (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GladeAppClass,
+					       signal_editor_created),
+			      NULL, NULL,
+			      glade_marshal_VOID__OBJECT,
+			      G_TYPE_NONE, 1, G_TYPE_OBJECT);
 
 	g_object_class_install_property 
 		(object_class, PROP_ACTIVE_PROJECT,
@@ -523,14 +541,6 @@ glade_app_class_init (GladeAppClass * klass)
  *                       Public API                              *
  *****************************************************************/
 static void
-on_widget_name_changed_cb (GladeProject *project,
-			   GladeWidget *widget,
-			   GladeEditor *editor)
-{
-	glade_editor_update_widget_name (editor);
-}
-
-static void
 on_project_selection_changed_cb (GladeProject *project, GladeApp *app)
 {
 	GList *list;
@@ -549,8 +559,7 @@ on_project_selection_changed_cb (GladeProject *project, GladeApp *app)
 		num = g_list_length (list);
 		if (num == 1 && !GLADE_IS_PLACEHOLDER (list->data))
 			glade_editor_load_widget (app->priv->editor,
-						  glade_widget_get_from_gobject
-						  (G_OBJECT (list->data)));
+						  glade_widget_get_from_gobject (list->data));
 		else
 			glade_editor_load_widget (app->priv->editor, NULL);
 	}
@@ -589,7 +598,7 @@ glade_app_config_save ()
 			/* Config dir exists but is not a directory */
 			glade_util_ui_message
 				(glade_app_get_window(),
-				 GLADE_UI_ERROR,
+				 GLADE_UI_ERROR, NULL,
 				 _("Trying to save private data to %s directory "
 				   "but it is a regular file.\n"
 				   "No private data will be saved in this session"), 
@@ -602,7 +611,7 @@ glade_app_config_save ()
 			/* Doesnt exist; failed to create */
 			glade_util_ui_message
 				(glade_app_get_window(),
-				 GLADE_UI_ERROR,
+				 GLADE_UI_ERROR, NULL,
 				 _("Failed to create directory %s to save private data.\n"
 				   "No private data will be saved in this session"), config_dir);
 			error_shown = TRUE;
@@ -630,7 +639,7 @@ glade_app_config_save ()
 			{
 				glade_util_ui_message
 					(glade_app_get_window(),
-					 GLADE_UI_ERROR,
+					 GLADE_UI_ERROR, NULL,
 					 _("Error writing private data to %s (%s).\n"
 					   "No private data will be saved in this session"), 
 					 filename, error->message);
@@ -642,7 +651,7 @@ glade_app_config_save ()
 		{
 			glade_util_ui_message
 				(glade_app_get_window(),
-				 GLADE_UI_ERROR,
+				 GLADE_UI_ERROR, NULL,
 				 _("Error serializing configuration data to save (%s).\n"
 				   "No private data will be saved in this session"), 
 				 error->message);
@@ -655,7 +664,7 @@ glade_app_config_save ()
 	{
 		glade_util_ui_message
 			(glade_app_get_window(),
-			 GLADE_UI_ERROR,
+			 GLADE_UI_ERROR, NULL,
 			 _("Error opening %s to write private data (%s).\n"
 			   "No private data will be saved in this session"), 
 			 filename, error->message);
@@ -729,6 +738,48 @@ glade_app_set_window (GtkWidget *window)
 	app->priv->window = window;
 }
 
+GladeCatalog *
+glade_app_get_catalog (const gchar *name)
+{
+	GladeApp     *app = glade_app_get ();
+	GList        *list;
+	GladeCatalog *catalog;
+
+	g_return_val_if_fail (name && name[0], NULL);
+
+	for (list = app->priv->catalogs; list; list = list->next)
+	{
+		catalog = list->data;
+		if (!strcmp (glade_catalog_get_name (catalog), name))
+			return catalog;
+	}
+	return NULL;
+}
+
+gboolean
+glade_app_get_catalog_version (const gchar *name, gint *major, gint *minor)
+{
+	GladeCatalog *catalog = glade_app_get_catalog (name);
+
+	g_return_val_if_fail (catalog != NULL, FALSE);
+
+	if (major)
+		*major = glade_catalog_get_major_version (catalog);
+	if (minor)
+		*minor = glade_catalog_get_minor_version (catalog);
+	
+	return TRUE;
+}
+
+GList *
+glade_app_get_catalogs (void)
+{
+	GladeApp *app = glade_app_get ();
+
+	return app->priv->catalogs; 
+}
+
+
 GtkWidget *
 glade_app_get_window (void)
 {
@@ -769,6 +820,14 @@ glade_app_get_project (void)
 {
 	GladeApp *app = glade_app_get ();
 	return app->priv->active_project;
+}
+
+GladeProject *
+glade_app_check_get_project (void)
+{
+	if (singleton_app)
+		return glade_app_get_project ();
+	return NULL;
 }
 
 GList *
@@ -854,7 +913,7 @@ glade_app_show_properties (gboolean raise)
 	if (GLADE_APP_GET_CLASS (app)->show_properties)
 		GLADE_APP_GET_CLASS (app)->show_properties (app, raise);
 	else 
-		g_critical ("%s not implemented\n", G_GNUC_FUNCTION);
+		g_critical ("%s not implemented\n", G_STRFUNC);
 }
 
 void
@@ -865,7 +924,7 @@ glade_app_hide_properties (void)
 	if (GLADE_APP_GET_CLASS (app)->hide_properties)
 		GLADE_APP_GET_CLASS (app)->hide_properties (app);
 	else 
-		g_critical ("%s not implemented\n", G_GNUC_FUNCTION);
+		g_critical ("%s not implemented\n", G_STRFUNC);
 
 }
 
@@ -919,31 +978,27 @@ glade_app_add_project (GladeProject *project)
 	GladeApp  *app;
 	GladeDesignView *view;
 	GladeDesignLayout *layout;
+
  	g_return_if_fail (GLADE_IS_PROJECT (project));
 
+	app = glade_app_get ();
+
 	/* If the project was previously loaded, don't re-load */
-	if (glade_app_is_project_loaded (glade_project_get_path (project)))
+	if (g_list_find (app->priv->projects, project) != NULL)
 	{
 		glade_app_set_project (project);
 		return;
 	}
 	glade_app_update_instance_count (project);
-
-	app = glade_app_get ();
 	
-	g_object_ref (project);
-	
-	app->priv->projects = g_list_append (app->priv->projects, project);
+	/* Take a reference for GladeApp here... */
+	app->priv->projects = g_list_append (app->priv->projects, 
+					     g_object_ref (project));
 	
 	/* connect to the project signals so that the editor can be updated */
-	g_signal_connect (G_OBJECT (project), "widget_name_changed",
-			  G_CALLBACK (on_widget_name_changed_cb), app->priv->editor);
 	g_signal_connect (G_OBJECT (project), "selection_changed",
 			  G_CALLBACK (on_project_selection_changed_cb), app);
 
-	/* add acceleration groups to every top level widget */
-	if (app->priv->accel_group)
-		glade_project_set_accel_group (project, app->priv->accel_group);
 	
 	glade_app_set_project (project);
 
@@ -959,9 +1014,13 @@ glade_app_add_project (GladeProject *project)
 		     node = g_list_next (node))
 		{
 			GObject *obj = G_OBJECT (node->data);
+
 			if (GTK_IS_WINDOW (obj))
+			{
+				glade_project_selection_set (project, obj, TRUE);
 				glade_widget_show (glade_widget_get_from_gobject (obj));
-			break;
+				break;
+			}
 		}
 	}
 
@@ -1005,7 +1064,6 @@ glade_app_remove_project (GladeProject *project)
 	 * that point.
 	 */
 	g_object_unref (project);
-
 }
 
 
@@ -1041,6 +1099,9 @@ glade_app_set_project (GladeProject *project)
 	/* (XXX really ?) trigger the selection changed signal to update the editor */
 	glade_project_selection_changed (project);
 	
+	/* refresh palette for active project */
+	glade_palette_refresh (glade_app_get_palette ());
+
 	/* Update UI */
 	glade_app_update_ui ();
 
@@ -1105,20 +1166,8 @@ glade_app_command_copy (void)
 	for (list = glade_app_get_selection ();
 	     list && list->data; list = list->next)
 	{
-		widget  = glade_widget_get_from_gobject (GTK_WIDGET (list->data));
+		widget  = glade_widget_get_from_gobject (list->data);
 		widgets = g_list_prepend (widgets, widget);
-		
-		g_assert (widget);
-		if (widget->internal)
-		{
-			glade_util_ui_message
-				(glade_app_get_window(),
-				 GLADE_UI_WARN,
-				 _("You cannot copy a widget "
-				   "internal to a composite widget."));
-			failed = TRUE;
-			break;
-		}
 	}
 
 	if (failed == FALSE && widgets != NULL)
@@ -1128,7 +1177,7 @@ glade_app_command_copy (void)
 	}
 	else if (widgets == NULL)
 		glade_util_ui_message (glade_app_get_window(),
-				       GLADE_UI_INFO,
+				       GLADE_UI_INFO, NULL,
 				       _("No widget selected."));
 
 	if (widgets) g_list_free (widgets);
@@ -1158,20 +1207,8 @@ glade_app_command_cut (void)
 	for (list = glade_app_get_selection ();
 	     list && list->data; list = list->next)
 	{
-		widget  = glade_widget_get_from_gobject (GTK_WIDGET (list->data));
+		widget  = glade_widget_get_from_gobject (list->data);
 		widgets = g_list_prepend (widgets, widget);
-		
-		g_assert (widget);
-		if (widget->internal)
-		{
-			glade_util_ui_message
-				(glade_app_get_window(),
-				 GLADE_UI_WARN,
-				 _("You cannot cut a widget "
-				   "internal to a composite widget."));
-			failed = TRUE;
-			break;
-		}
 	}
 
 	if (failed == FALSE && widgets != NULL)
@@ -1181,7 +1218,7 @@ glade_app_command_cut (void)
 	}
 	else if (widgets == NULL)
 		glade_util_ui_message (glade_app_get_window(),
-				       GLADE_UI_INFO,
+				       GLADE_UI_INFO, NULL,
 				       _("No widget selected."));
 
 	if (widgets) g_list_free (widgets);
@@ -1213,11 +1250,19 @@ glade_app_command_paste (GladePlaceholder *placeholder)
 	clipboard = glade_app_get_clipboard ();
 
 	/* If there is a selection, paste in to the selected widget, otherwise
-	 * paste into the placeholder's parent.
+	 * paste into the placeholder's parent, or at the toplevel
 	 */
 	parent = list ? glade_widget_get_from_gobject (list->data) : 
 		 (placeholder) ? glade_placeholder_get_parent (placeholder) : NULL;
-	
+
+	widget = clipboard->selection ? clipboard->selection->data : NULL;
+
+	/* Ignore parent argument if we are pasting a toplevel
+	 */
+	if (g_list_length (clipboard->selection) == 1 &&
+	    widget && GWA_IS_TOPLEVEL (widget->adaptor))
+		parent = NULL;
+
 	if (parent && GLADE_IS_FIXED (parent)) fixed = GLADE_FIXED (parent);
 
 	/* Check if parent is actually a container of any sort */
@@ -1225,7 +1270,7 @@ glade_app_command_paste (GladePlaceholder *placeholder)
 	    !glade_widget_adaptor_is_container (parent->adaptor))
 	{
 		glade_util_ui_message (glade_app_get_window(),
-				       GLADE_UI_INFO,
+				       GLADE_UI_INFO, NULL,
 				       _("Unable to paste to the selected parent"));
 		return;
 	}
@@ -1236,7 +1281,7 @@ glade_app_command_paste (GladePlaceholder *placeholder)
 		if (g_list_length (list) != 1)
 		{
 			glade_util_ui_message (glade_app_get_window(),
-					       GLADE_UI_INFO,
+					       GLADE_UI_INFO, NULL,
 					       _("Unable to paste to multiple widgets"));
 
 			return;
@@ -1246,7 +1291,7 @@ glade_app_command_paste (GladePlaceholder *placeholder)
 	/* Check if we have anything to paste */
 	if (g_list_length (clipboard->selection) == 0)
 	{
-		glade_util_ui_message (glade_app_get_window (), GLADE_UI_INFO,
+		glade_util_ui_message (glade_app_get_window (), GLADE_UI_INFO, NULL,
 				    _("No widget selected on the clipboard"));
 
 		return;
@@ -1265,18 +1310,6 @@ glade_app_command_paste (GladePlaceholder *placeholder)
 			if (glade_widget_placeholder_relation (parent, widget))
 				placeholder_relations++;
 		}
-
-		/* Check if there is no parent and at least on of the pasted
-		 * widgets is not a toplevel 
-		 */
-		else if (!GWA_IS_TOPLEVEL (widget->adaptor) && !parent)
-		{
-			glade_util_ui_message (glade_app_get_window (),
-					       GLADE_UI_INFO, 
-					       _("Unable to paste widget %s without a parent"),
-					       widget->name);
-			return;
-		}
 	}
 
 	g_assert (widget);
@@ -1284,12 +1317,13 @@ glade_app_command_paste (GladePlaceholder *placeholder)
 	/* A GladeFixed that doesnt use placeholders can only paste one
 	 * at a time
  	 */
-	if (GTK_WIDGET_TOPLEVEL (widget->object) == FALSE &&
+	if (GTK_IS_WIDGET (widget->object) && 
+	    GTK_WIDGET_TOPLEVEL (widget->object) == FALSE &&
 	    parent && fixed && !GWA_USE_PLACEHOLDERS (parent->adaptor) &&
 	    g_list_length (clipboard->selection) != 1) 
 	{
 		glade_util_ui_message (glade_app_get_window (), 
-				       GLADE_UI_INFO,
+				       GLADE_UI_INFO, NULL,
 				       _("Only one widget can be pasted at a "
 					 "time to this container"));
 		return;
@@ -1301,7 +1335,7 @@ glade_app_command_paste (GladePlaceholder *placeholder)
 	    glade_util_count_placeholders (parent) < placeholder_relations)
 	{
 		glade_util_ui_message (glade_app_get_window (), 
-				       GLADE_UI_INFO,
+				       GLADE_UI_INFO, NULL,
 				       _("Insufficient amount of placeholders in "
 					 "target container"));
 		return;
@@ -1332,22 +1366,10 @@ glade_app_command_delete (void)
 	for (list = glade_app_get_selection ();
 	     list && list->data; list = list->next)
 	{
-		widget  = glade_widget_get_from_gobject (GTK_WIDGET (list->data));
+		widget  = glade_widget_get_from_gobject (list->data);
 		widgets = g_list_prepend (widgets, widget);
-		
-		g_assert (widget);
-		if (widget->internal)
-		{
-			glade_util_ui_message
-				(glade_app_get_window(),
-				 GLADE_UI_WARN,
-				 _("You cannot delete a widget "
-				   "internal to a composite widget."));
-			failed = TRUE;
-			break;
-		}
 	}
-
+ 
 	if (failed == FALSE && widgets != NULL)
 	{
 		glade_command_delete (widgets);
@@ -1355,7 +1377,7 @@ glade_app_command_delete (void)
 	}
 	else if (widgets == NULL)
 		glade_util_ui_message (glade_app_get_window(),
-				       GLADE_UI_INFO,
+				       GLADE_UI_INFO, NULL,
 				       _("No widget selected."));
 
 	if (widgets) g_list_free (widgets);
@@ -1370,27 +1392,14 @@ void
 glade_app_command_delete_clipboard (void)
 {
 	GladeClipboard  *clipboard;
-	GladeWidget     *gwidget;
-	GList           *list;
 
 	clipboard = glade_app_get_clipboard ();
 
 	if (clipboard->selection == NULL)
-		glade_util_ui_message (glade_app_get_window (), GLADE_UI_INFO,
-				    _("No widget selected on the clipboard"));
-
-	for (list = clipboard->selection; list; list = list->next)
 	{
-		gwidget = list->data;
-		if (gwidget->internal)
-		{
-			glade_util_ui_message
-				(glade_app_get_window(),
-				 GLADE_UI_WARN,
-				 _("You cannot delete a widget "
-				   "internal to a composite widget."));
-			return;
-		}
+		glade_util_ui_message (glade_app_get_window (), GLADE_UI_INFO, NULL,
+				    _("No widget selected on the clipboard"));
+		return;
 	}
 
 	glade_command_delete (clipboard->selection);
@@ -1428,25 +1437,24 @@ glade_app_command_redo (void)
  * glade_app_set_accel_group:
  *
  * Sets @accel_group to app.
- * The acceleration group will be attached to every toplevel widget in this application.
+ * The acceleration group will made available for editor dialog windows
+ * from the plugin backend.
  */
 void
 glade_app_set_accel_group (GtkAccelGroup *accel_group)
 {
 	GladeApp *app;
-	GList *l;
-	GladeProject *project;
 	g_return_if_fail(GTK_IS_ACCEL_GROUP (accel_group));
 
 	app = glade_app_get ();
-
-	for (l = app->priv->projects; l; l = l->next)
-	{
-		project = l->data;
-		glade_project_set_accel_group (project, accel_group);
-	}
 	
 	app->priv->accel_group = accel_group;
+}
+
+GtkAccelGroup *
+glade_app_get_accel_group (void)
+{
+	return glade_app_get()->priv->accel_group;
 }
 
 static gboolean
