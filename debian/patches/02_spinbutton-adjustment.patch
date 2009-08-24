@@ -1,3 +1,8 @@
+#
+# Description: Set page size to zero for default spinbutton adjustments to avoid warnings
+# Ubuntu: https://bugs.launchpad.net/ubuntu/+source/glade-3/+bug/323228
+# Upstream: http://bugzilla.gnome.org/show_bug.cgi?id=557851
+#
 diff -Nur -x '*.orig' -x '*~' glade-3-3.6.3/plugins/gtk+/gtk+.xml.in glade-3-3.6.3.new/plugins/gtk+/gtk+.xml.in
 --- glade-3-3.6.3/plugins/gtk+/gtk+.xml.in	2009-04-23 00:16:31.000000000 +1000
 +++ glade-3-3.6.3.new/plugins/gtk+/gtk+.xml.in	2009-04-28 15:43:53.000000000 +1000

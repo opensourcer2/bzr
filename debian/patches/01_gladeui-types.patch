@@ -1,3 +1,7 @@
+Description: Fix FTBFS on IA64
+Bug: http://bugzilla.gnome.org/show_bug.cgi?id=530143
+Origin: vendor
+
 --- doc/gladeui.types~	2008-05-12 17:36:54.000000000 +0200
 +++ doc/gladeui.types	2008-05-12 17:38:31.000000000 +0200
 @@ -1,4 +1,7 @@

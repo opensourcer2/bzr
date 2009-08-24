@@ -1,3 +1,33 @@
+glade-3 (3.6.7-1ubuntu1) karmic; urgency=low
+
+  * Merge from Debian unstable (LP: #418019), remaining changes:
+    - debian/patches/02_spinbutton-adjustment.patch:
+    - debian/rules: Updated to have shlibdeps point to new version as a new
+      symbol was added
+    - debian/control: Conflict and replace glade-3 and glade-gnome-3
+    - debian/watch: Watch for unstable versions
+  * debian/patches/02_spinbutton-adjustment.patch:
+    - Add patch headers
+
+ -- Robert Ancell <robert.ancell@canonical.com>  Mon, 24 Aug 2009 17:27:56 +1000
+
+glade-3 (3.6.7-1) unstable; urgency=low
+
+  [ Sam Morris ]
+  * New upstream release.
+
+  [ Josselin Mouette ]
+  * Fix library package section.
+  * Create glade → glade-3 symbolic link.
+
+  [ Emilio Pozuelo Monfort ]
+  * debian/patches/01_gladeui-types.patch: Add headers.
+
+  [ Josselin Mouette ]
+  * New upstream release.
+
+ -- Josselin Mouette <joss@debian.org>  Sat, 15 Aug 2009 10:52:36 +0200
+
 glade-3 (3.6.7-0ubuntu1) karmic; urgency=low
 
   * New upstream release (LP: #393658)
