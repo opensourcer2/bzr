@@ -1,3 +1,10 @@
+glade-3 (3.6.7-1ubuntu2) lucid; urgency=low
+
+  * rebuild rest of main for armel armv7/thumb2 optimization;
+    UbuntuSpec:mobile-lucid-arm-gcc-v7-thumb2
+
+ -- Alexander Sack <asac@ubuntu.com>  Fri, 05 Mar 2010 04:34:55 +0100
+
 glade-3 (3.6.7-1ubuntu1) karmic; urgency=low
 
   * Merge from Debian unstable (LP: #418019), remaining changes:
