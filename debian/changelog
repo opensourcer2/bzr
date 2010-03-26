@@ -1,3 +1,10 @@
+glade-3 (3.6.7-1ubuntu3) lucid; urgency=low
+
+  * debian/patches/03_fix-vbox-orientation.patch:
+    - Ignore orientation property for GtkVBoxes (LP: #425221)
+
+ -- Robert Ancell <robert.ancell@canonical.com>  Fri, 26 Mar 2010 09:17:47 +1100
+
 glade-3 (3.6.7-1ubuntu2) lucid; urgency=low
 
   * rebuild rest of main for armel armv7/thumb2 optimization;
