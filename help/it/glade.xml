@@ -196,7 +196,7 @@
         <variablelist>
           <varlistentry> <term>Barra menù</term>
             <listitem>
-            <para>I menù nella barra dei menù contengono tutti i comandi occorrenti per lavorare con i file in <application>Glade</application></para>
+            <para>I menù nella barra dei menù contengono tutti i comandi occorrenti per lavorare con i file in <application>Glade</application>.</para>
             </listitem>
           </varlistentry>
           <varlistentry> <term>Barra strumenti</term>

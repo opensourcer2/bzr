@@ -77,7 +77,7 @@ project_changed (GladeProject      *project,
 		 GladeCellRendererEditor *renderer_editor)
 {
 	if (renderer_editor->modifying ||
-	    !GTK_WIDGET_MAPPED (renderer_editor))
+	    !gtk_widget_get_mapped (GTK_WIDGET (renderer_editor)))
 		return;
 
 	/* Reload on all commands */
@@ -512,7 +512,7 @@ glade_eprop_cell_attribute_load (GladeEditorProperty *eprop,
 			{
 				GladeColumnType *column = l->data;
 				gchar *str = g_strdup_printf ("%s - %s", column->column_name, 
-							      g_type_name (column->type));
+							      column->type_name);
 
 				gtk_list_store_append (store, &iter);
 				gtk_list_store_set (store, &iter, 0, str, -1);

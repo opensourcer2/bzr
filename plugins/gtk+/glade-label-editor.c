@@ -65,7 +65,7 @@ project_changed (GladeProject      *project,
 		 GladeLabelEditor *label_editor)
 {
 	if (label_editor->modifying ||
-	    !GTK_WIDGET_MAPPED (label_editor))
+	    !gtk_widget_get_mapped (GTK_WIDGET (label_editor)))
 		return;
 
 	/* Reload on all commands */
@@ -283,7 +283,7 @@ markup_toggled (GtkWidget        *widget,
 
 	label_editor->modifying = TRUE;
 
-	glade_command_push_group (_("Setting %s to use a pango markup string"), label_editor->loaded_widget->name);
+	glade_command_push_group (_("Setting %s to use a Pango markup string"), label_editor->loaded_widget->name);
 
 	property = glade_widget_get_property (label_editor->loaded_widget, "pattern");
 	glade_command_set_property (property, NULL);
@@ -354,7 +354,7 @@ width_toggled (GtkWidget        *widget,
 
 	label_editor->modifying = TRUE;
 
-	glade_command_push_group (_("Setting %s to set desired width in charachters"), 
+	glade_command_push_group (_("Setting %s to set desired width in characters"), 
 				  label_editor->loaded_widget->name);
 
 	property = glade_widget_get_property (label_editor->loaded_widget, "max-width-chars");
@@ -385,7 +385,7 @@ max_width_toggled (GtkWidget        *widget,
 
 	label_editor->modifying = TRUE;
 
-	glade_command_push_group (_("Setting %s to set maximum width in charachters"), 
+	glade_command_push_group (_("Setting %s to set maximum width in characters"), 
 				  label_editor->loaded_widget->name);
 
 	property = glade_widget_get_property (label_editor->loaded_widget, "width-chars");
@@ -489,7 +489,7 @@ wrap_mode_toggled (GtkWidget        *widget,
 
 	label_editor->modifying = TRUE;
 
-	glade_command_push_group (_("Setting %s to use specific pango word wrapping"), 
+	glade_command_push_group (_("Setting %s to use specific Pango word wrapping"),
 				  label_editor->loaded_widget->name);
 
 	property = glade_widget_get_property (label_editor->loaded_widget, "single-line-mode");

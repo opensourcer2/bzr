@@ -1,3 +1,36 @@
+glade-3 (3.7.0-0ubuntu1) lucid; urgency=low
+
+  * New upstream release:
+    - Fixed loading state of assigned GtkTreeModels of GtkCellRendererCombo
+      objects (bug 566928).
+    - Fixed crasher while copying internal widgets (bug 595156)
+    - Support silent build when using automake >= 1.11 (Javier Jardón)
+    - Proper ordering of GtkAdjustment properties in glade files (bug 578484)
+    - Refactoring work for GSEAL (Javier Jardón)
+    - Avoid collapsing commands when a project is freshly saved (this fixes
+      a false "unmodified" state after changing the same property before and
+      after project save) (Marco Diego Aurélio Mesquita)
+    - Allow litteral strings as column type definitions in GtkTreeStores
+      (closes bug 597059).
+    - Updated Glade GTK+ catalog info to include deprecations, new
+      properties and signals since 2.18 and 2.20
+    - and some translatable strings (brought to you also in part by Johannes
+      H. Jensen for some translatable strings and Javier Jardón for some
+      deprecations), some new objects this consequently adds:
+      + GtkEntryBuffer
+      + GtkSpinner
+      + GtkCellRendererSpinner
+    - Fixed crasher editing some data types in the liststore data editor
+      (bug 608011).
+    - Enhanced the GtkEntry editor to allow the user to chose between the
+      "text" and the "buffer" exclusively.
+  * debian/control.in:
+    - bump libgtk2.0-dev dep
+  * remove debian/patches/02_spinbutton-adjustment.patch: upstreamed
+  * remove debian/patches/03_fix-vbox-orientation.patch: taken upstream
+
+ -- Didier Roche <didrocks@ubuntu.com>  Tue, 30 Mar 2010 22:03:10 +0200
+
 glade-3 (3.6.7-1ubuntu3) lucid; urgency=low
 
   * debian/patches/03_fix-vbox-orientation.patch:

@@ -517,12 +517,14 @@ glade_project_push_undo_impl (GladeProject *project, GladeCommand *cmd)
 		priv->undo_stack = NULL;
 	}
 
-	/* Try to unify only if group depth is 0 */
+	/* Try to unify only if group depth is 0 and the project has not been recently saved*/
 	if (glade_command_get_group_depth() == 0 &&
-	    priv->prev_redo_item != NULL)
+	    priv->prev_redo_item != NULL &&
+	    project->priv->prev_redo_item != project->priv->first_modification)
 	{
 		GladeCommand *cmd1 = priv->prev_redo_item->data;
 
+		
 		if (glade_command_unifies (cmd1, cmd))
 		{
 			glade_command_collapse (cmd1, cmd);
@@ -832,7 +834,7 @@ glade_project_class_init (GladeProjectClass *klass)
 					 PROP_READ_ONLY,
 					 g_param_spec_boolean ("read-only",
 							       _("Read Only"),
-							       _("Whether project is read only or not"),
+							       _("Whether project is read-only"),
 							       FALSE,
 							       G_PARAM_READABLE));
 
@@ -1591,7 +1593,7 @@ glade_project_write (GladeProject *project)
 {
 	GladeXmlContext *context;
 	GladeXmlDoc     *doc;
-	GladeXmlNode    *root, *comment_node;
+	GladeXmlNode    *root; /* *comment_node; */
 	GList           *list;
 
 	doc     = glade_xml_doc_new ();
@@ -1600,7 +1602,7 @@ glade_project_write (GladeProject *project)
 	glade_xml_doc_set_root (doc, root);
 
 	glade_project_update_comment (project);
-/* 	comment_node = glade_xml_node_new_comment (context, project->priv->comment); */
+	/* comment_node = glade_xml_node_new_comment (context, project->priv->comment); */
 
 	/* XXX Need to append this to the doc ! not the ROOT !
 	   glade_xml_node_append_child (root, comment_node); */
@@ -2021,8 +2023,8 @@ glade_project_verify_dialog (GladeProject *project,
 				     saving ? GLADE_UI_YES_OR_NO : GLADE_UI_INFO,
 				     expander,
 				     saving ? 
-				     _("Project %s has errors, save anyway ?") :
-				     _("Project %s has deprecated widgets "
+				     _("Project \"%s\" has errors. Save anyway?") :
+				     _("Project \"%s\" has deprecated widgets "
 				       "and/or version mismatches."), name);
 	g_free (name);
 
@@ -3948,7 +3950,7 @@ glade_project_build_prefs_box (GladeProject *project)
 			  G_CALLBACK (resource_full_path_set), project);
 
 	/* Target versions */
-	string = g_strdup_printf ("<b>%s</b>", _("Toolkit version(s) required:"));
+	string = g_strdup_printf ("<b>%s</b>", _("Toolkit versions required:"));
 	frame = gtk_frame_new (NULL);
 	vbox = gtk_vbox_new (FALSE, 0);
 	alignment = gtk_alignment_new (0.5F, 0.5F, 1.0F, 1.0F);
@@ -4075,19 +4077,19 @@ glade_project_build_prefs_dialog (GladeProject *project)
 	g_free (name);
 
 	widget = glade_project_build_prefs_box (project);
-	gtk_box_pack_end (GTK_BOX (GTK_DIALOG (dialog)->vbox), 
+	gtk_box_pack_end (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))),
 			  widget, TRUE, TRUE, 2);
 
 	gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
-	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->vbox), 2);
+	gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), 2);
 
 	gtk_dialog_set_has_separator (GTK_DIALOG (dialog), FALSE);
 
 	/* HIG spacings */
 	gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
-	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->vbox), 2); /* 2 * 5 + 2 = 12 */
-	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dialog)->action_area), 5);
-	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->action_area), 6);
+	gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), 2); /* 2 * 5 + 2 = 12 */
+	gtk_container_set_border_width (GTK_CONTAINER (gtk_dialog_get_action_area (GTK_DIALOG (dialog))), 5);
+	gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_action_area (GTK_DIALOG (dialog))), 6);
 
 
 	/* Were explicitly destroying it anyway */

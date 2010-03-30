@@ -267,11 +267,7 @@
          <title>Arbeiten mit Widgets</title>
          <sect2 id="select-widgets-palette">
                 <title>Auswählen von Widgets aus der Palette</title>
-                <para>
-                  You can work with the widgets in the 
-                  <guilabel>Palette</guilabel> window in the following
-ways:
-                </para>
+                <para>Sie können mit den Widgets im <guilabel>Palettenfenster</guilabel> folgendermaßen arbeiten:</para>
                 <variablelist> 
                   <varlistentry> 
                          <term>Auswahlmethode</term> 
