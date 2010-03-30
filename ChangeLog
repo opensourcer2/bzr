@@ -1,3 +1,112 @@
+2010-03-10  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/gtk+.xml.in: Removed alot of virtually defined properties that were not available 
+	  in GTK+ 2.14, now they are available.
+
+	* plugins/gtk+/glade-gtk.c, plugins/gtk+/glade-entry-editor.c: Enhanced the GtkEntry editor
+	  to allow the user to chose between the "text" and the "buffers" exclusively.
+
+2010-03-10  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/glade-model-data.c: Fixed crasher when double freeing the data tree
+	  in some idle handlers (idle handlers needed for advanced focus handling/keynav), fixes crash bug 608011.
+	  Also make sure to create the adjustment with a 0 page size.
+
+	* plugins/gtk+/gtk+.xml.in: Fixed translation details pointed out by Johannes H. Jensen
+	  in bug 607348.
+	
+2010-03-10  Javier Jardón <jjardon@gnome.org>
+
+	* plugins/gtk+/gtk+.xml.in: Deprecated GtkGammaCurve and GtkCurve
+
+2010-03-09  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/gtk+.xml.in: Deprecated input dialog
+
+2010-03-09  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/glade-gtk.c: Fixed GtkBox & GtkTable regressions introduced
+	  by GSEAL patches.
+
+	* plugins/gtk+/gtk+.xml.in: Updated newly added symbols in GTK+ on widgets already
+	  in the catalog; added new objects from GTK+:
+	  - GtkEntryBuffer
+	  - GtkSpinner
+	  - GtkCellRendererSpinner
+
+2010-03-09  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/glade-gtk.c, plugins/gtk+/glade-column-types.[ch], 
+	  plugins/gtk+/glade-model-data.c: Allow litteral string values for 
+	  column types in the tree store editor, Glade will serialize/deserialize
+	  the string litterally and if there is a valid type returned from
+	  g_type_from_name() (i.e. a valid introduced type by that name); then 
+	  that GType will be used to setup the column types of runtime treestores
+	  in the project; otherwise it will use G_TYPE_POINTER for those columns.
+
+	  This closes bug 597095.
+
+2010-03-09  Marco Diego Aurélio Mesquita <marcodiegomesquita@gmail.com>
+
+	* gladeui/glade-project.c: Avoid collapsing commands when a project is freshly saved
+	  (this fixes a false "unmodified" state after changing the same property before and
+	  after project save).
+
+2010-01-28  Javier Jardon <jjardon@gnome.org>
+
+	* README: Glade requires GTK+ >= 2.20
+
+2009-12-18  Javier Jardón <jjardon@gnome.org>
+
+	* doc/gladeui-docs.sgml: Fix doc location link
+
+2009-12-04  Javier Jardón <jjardon@gnome.org>
+
+	Use accessor functions instead direct access. Second patch
+
+	GTK+ 2.19.0 is now the required version
+	I've used all the GTK+ 2.19.1 api available, still missing:
+	GTK_WIDGET_UNSET_FLAGS (widget, GTK_TOPLEVEL);
+	GTK_WIDGET_SET_FLAGS (widget, GTK_REALIZED);
+	GTK_WIDGET_REALIZED ()
+	GTK_WIDGET_MAPPED ()
+
+	https://bugzilla.gnome.org/show_bug.cgi?id=594957
+
+2009-12-04  Javier Jardón <jjardon@gnome.org>
+
+	Use accessor functions instead direct access.
+
+	GTK+ 2.17.10 is now the required version
+	I've used all the GTK+ 2.18.* api available, still missing:
+	GTK_WIDGET_UNSET_FLAGS (widget, GTK_TOPLEVEL);
+	GTK_WIDGET_SET_FLAGS (widget, GTK_REALIZED);
+	GTK_WIDGET_REALIZED ()
+	GTK_WIDGET_MAPPED ()
+	GTK_VIEWPORT ()->bin_window
+	GTK_ENTRY ()->editing_canceled
+
+	https://bugzilla.gnome.org/show_bug.cgi?id=594957
+
+2009-11-09  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/gtk+.xml.in, plugins/gtk+/glade-gtk.c: Disable default saving behaviour of order dependant 
+	GtkAdjustment properties and installed glade_gtk_adjustment_write_widget() to write the properties out
+	in the following order: "lower", "upper", "value" (fixes bug 578484).
+
+2009-10-12  Javier Jardon <jjardon@gnome.org>
+
+	* configure.ac: Support silent build when using automake >= 1.11
+
+2009-09-14  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-widget.c: Fixed crasher while copying internal widgets (bug 595156)
+
+2009-07-01  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/glade-gtk.c: Fixed loading state of assigned GtkTreeModels of GtkCellRendererCombo
+	objects (bug 566928).
+
 2009-06-29  Tristan Van Berkom <tvb@gnome.org>
 
 	* configure.ac, NEWS: Rolling Glade 3.6.7

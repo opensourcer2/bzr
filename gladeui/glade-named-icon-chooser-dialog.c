@@ -442,7 +442,7 @@ set_busy_cursor (GladeNamedIconChooserDialog *dialog,
 	GdkDisplay *display;
 	GdkCursor  *cursor;
 
-	if (!GTK_WIDGET_REALIZED (dialog))
+	if (!gtk_widget_get_realized (GTK_WIDGET (dialog)))
 		return;
 
 	display = gtk_widget_get_display (GTK_WIDGET (dialog));
@@ -452,7 +452,7 @@ set_busy_cursor (GladeNamedIconChooserDialog *dialog,
 	else
 		cursor = NULL;
 
-	gdk_window_set_cursor (GTK_WIDGET (dialog)->window, cursor);
+	gdk_window_set_cursor (gtk_widget_get_window (GTK_WIDGET (dialog)), cursor);
 	gdk_display_flush (display);
 
 	if (cursor)
@@ -820,8 +820,8 @@ centre_selected_row (GladeNamedIconChooserDialog *dialog)
 	l = gtk_tree_selection_get_selected_rows (dialog->priv->selection, NULL);
 	
 	if (l) {
-		g_assert (GTK_WIDGET_MAPPED (dialog));
-		g_assert (GTK_WIDGET_VISIBLE (dialog));
+		g_assert (gtk_widget_get_mapped (GTK_WIDGET (dialog)));
+		g_assert (gtk_widget_get_visible (GTK_WIDGET (dialog)));
 		
 		gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (dialog->priv->icons_view),
 					      (GtkTreePath *) l->data,
@@ -1042,7 +1042,7 @@ glade_named_icon_chooser_dialog_screen_changed (GtkWidget *widget,
 	if (GTK_WIDGET_CLASS (glade_named_icon_chooser_dialog_parent_class)->screen_changed)
 		GTK_WIDGET_CLASS (glade_named_icon_chooser_dialog_parent_class)->screen_changed (widget, previous_screen);
 
-	if (GTK_WIDGET_MAPPED (widget))
+	if (gtk_widget_get_mapped (widget))
 		change_icon_theme (dialog);
 
 }
@@ -1162,7 +1162,7 @@ static void
 glade_named_icon_chooser_dialog_style_set (GtkWidget *widget,
 			                   GtkStyle  *previous_style)
 {
-	if (gtk_widget_has_screen (widget) && GTK_WIDGET_MAPPED (widget))
+	if (gtk_widget_has_screen (widget) && gtk_widget_get_mapped (widget))
 		change_icon_theme (GLADE_NAMED_ICON_CHOOSER_DIALOG (widget));
 }
 
@@ -1277,7 +1277,7 @@ icon_activated_cb (GladeNamedIconChooserDialog *dialog)
 {
 	GList *children, *l;
 
-	children = gtk_container_get_children (GTK_CONTAINER (GTK_DIALOG (dialog)->action_area));
+	children = gtk_container_get_children (GTK_CONTAINER (gtk_dialog_get_action_area (GTK_DIALOG (dialog))));
 
 	for (l = children; l; l = l->next)
 	{
@@ -1311,7 +1311,7 @@ selection_changed_cb (GladeNamedIconChooserDialog *dialog)
 	GList *children, *l;
 	gchar *icon_name;
 
-	children = gtk_container_get_children (GTK_CONTAINER (GTK_DIALOG (dialog)->action_area));
+	children = gtk_container_get_children (GTK_CONTAINER (gtk_dialog_get_action_area (GTK_DIALOG (dialog))));
 
 	for (l = children; l; l = l->next)
 	{
@@ -1348,6 +1348,8 @@ glade_named_icon_chooser_dialog_init (GladeNamedIconChooserDialog *dialog)
 	GtkWidget *sw;
 	GtkWidget *label;
 	GtkWidget *hpaned;
+	GtkWidget *content_area;
+	GtkWidget *action_area;
 	GtkSizeGroup *group;
 	
 	dialog->priv = GLADE_NAMED_ICON_CHOOSER_DIALOG_GET_PRIVATE (dialog);
@@ -1366,10 +1368,12 @@ glade_named_icon_chooser_dialog_init (GladeNamedIconChooserDialog *dialog)
 	
 	gtk_dialog_set_has_separator (GTK_DIALOG (dialog), FALSE);	
 
-	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox), 12);
-	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->vbox), 12);
-	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dialog)->action_area), 0);
-	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->action_area), 6);
+	content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+	gtk_container_set_border_width (GTK_CONTAINER (content_area), 12);
+	gtk_box_set_spacing (GTK_BOX (content_area), 12);
+	action_area = gtk_dialog_get_action_area (GTK_DIALOG (dialog));
+	gtk_container_set_border_width (GTK_CONTAINER (action_area), 0);
+	gtk_box_set_spacing (GTK_BOX (action_area), 6);
 
 	/* We do a signal connection here rather than overriding the method in
 	 * class_init because GtkDialog::response is a RUN_LAST signal.  We want *our*
@@ -1438,7 +1442,7 @@ glade_named_icon_chooser_dialog_init (GladeNamedIconChooserDialog *dialog)
 
 	group = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
 
-	label = gtk_label_new_with_mnemonic ("C_ontexts:");
+	label = gtk_label_new_with_mnemonic (_("C_ontexts:"));
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label), dialog->priv->contexts_view);
 	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
 	gtk_size_group_add_widget (group, label);
@@ -1459,7 +1463,7 @@ glade_named_icon_chooser_dialog_init (GladeNamedIconChooserDialog *dialog)
 	vbox = gtk_vbox_new (FALSE, 6);
 	gtk_widget_show (vbox);	
 	
-	label = gtk_label_new_with_mnemonic ("Icon Na_mes:");
+	label = gtk_label_new_with_mnemonic (_("Icon Na_mes:"));
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label), dialog->priv->icons_view);
 	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
 	gtk_size_group_add_widget (group, label);	
@@ -1489,7 +1493,7 @@ glade_named_icon_chooser_dialog_init (GladeNamedIconChooserDialog *dialog)
 			  dialog);
 	
 	gtk_box_pack_start (GTK_BOX (contents), dialog->priv->button, FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), contents, TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (content_area), contents, TRUE, TRUE, 0);
 					
 	gtk_widget_pop_composite_child ();
 	

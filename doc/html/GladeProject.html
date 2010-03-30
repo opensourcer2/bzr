@@ -3,18 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GladeProject</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
-<link rel="start" href="index.html" title="Glade User Interface Designer Reference Manual">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.1">
+<link rel="home" href="index.html" title="Glade User Interface Designer Reference Manual">
 <link rel="up" href="core.html" title="Part II. Glade Core">
 <link rel="prev" href="GladeApp.html" title="GladeApp">
 <link rel="next" href="GladeWidget.html" title="GladeWidget">
-<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="part" href="catalog.html" title="Part I. Adding your custom widgets">
-<link rel="part" href="core.html" title="Part II. Glade Core">
-<link rel="part" href="dockables.html" title="Part III. Dockable Glade UI Widgets">
-<link rel="part" href="misc.html" title="Part IV. Miscellaneous utilities">
-<link rel="index" href="ix01.html" title="Index">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
@@ -37,7 +32,7 @@
                   <a href="#GladeProject.signals" class="shortcut">Signals</a>
 </td></tr>
 </table>
-<div class="refentry" lang="en">
+<div class="refentry" title="GladeProject">
 <a name="GladeProject"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -46,89 +41,88 @@
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv">
+<div class="refsynopsisdiv" title="Synopsis">
 <a name="GladeProject.synopsis"></a><h2>Synopsis</h2>
-<pre class="synopsis">
-                    <a class="link" href="GladeProject.html#GladeProject-struct" title="GladeProject">GladeProject</a>;
+<pre class="synopsis">                    <a class="link" href="GladeProject.html#GladeProject-struct" title="GladeProject">GladeProject</a>;
 enum                <a class="link" href="GladeProject.html#GladeProjectFormat" title="enum GladeProjectFormat">GladeProjectFormat</a>;
-<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *      <a class="link" href="GladeProject.html#glade-project-new" title="glade_project_new ()">glade_project_new</a>                   (void);
-<a class="link" href="GladeProject.html#GladeProjectFormat" title="enum GladeProjectFormat">GladeProjectFormat</a>  <a class="link" href="GladeProject.html#glade-project-get-format" title="glade_project_get_format ()">glade_project_get_format</a>            (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);
-void                <a class="link" href="GladeProject.html#glade-project-set-format" title="glade_project_set_format ()">glade_project_set_format</a>            (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
-                                                         <a class="link" href="GladeProject.html#GladeProjectFormat" title="enum GladeProjectFormat">GladeProjectFormat</a> format);
-<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *      <a class="link" href="GladeProject.html#glade-project-load" title="glade_project_load ()">glade_project_load</a>                  (const gchar *path);
-gboolean            <a class="link" href="GladeProject.html#glade-project-save" title="glade_project_save ()">glade_project_save</a>                  (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
-                                                         const gchar *path,
-                                                         GError **error);
-const gchar *       <a class="link" href="GladeProject.html#glade-project-get-path" title="glade_project_get_path ()">glade_project_get_path</a>              (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);
-gchar *             <a class="link" href="GladeProject.html#glade-project-get-name" title="glade_project_get_name ()">glade_project_get_name</a>              (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);
-void                <a class="link" href="GladeProject.html#glade-project-undo" title="glade_project_undo ()">glade_project_undo</a>                  (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);
-void                <a class="link" href="GladeProject.html#glade-project-redo" title="glade_project_redo ()">glade_project_redo</a>                  (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);
-<a class="link" href="GladeCommand.html" title="GladeCommand">GladeCommand</a> *      <a class="link" href="GladeProject.html#glade-project-next-undo-item" title="glade_project_next_undo_item ()">glade_project_next_undo_item</a>        (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);
-<a class="link" href="GladeCommand.html" title="GladeCommand">GladeCommand</a> *      <a class="link" href="GladeProject.html#glade-project-next-redo-item" title="glade_project_next_redo_item ()">glade_project_next_redo_item</a>        (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);
-void                <a class="link" href="GladeProject.html#glade-project-push-undo" title="glade_project_push_undo ()">glade_project_push_undo</a>             (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
-                                                         <a class="link" href="GladeCommand.html" title="GladeCommand">GladeCommand</a> *cmd);
-GtkWidget *         <a class="link" href="GladeProject.html#glade-project-undo-items" title="glade_project_undo_items ()">glade_project_undo_items</a>            (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);
-GtkWidget *         <a class="link" href="GladeProject.html#glade-project-redo-items" title="glade_project_redo_items ()">glade_project_redo_items</a>            (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);
-void                <a class="link" href="GladeProject.html#glade-project-reset-path" title="glade_project_reset_path ()">glade_project_reset_path</a>            (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);
-gboolean            <a class="link" href="GladeProject.html#glade-project-get-readonly" title="glade_project_get_readonly ()">glade_project_get_readonly</a>          (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);
-const GList *       <a class="link" href="GladeProject.html#glade-project-get-objects" title="glade_project_get_objects ()">glade_project_get_objects</a>           (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);
-void                <a class="link" href="GladeProject.html#glade-project-add-object" title="glade_project_add_object ()">glade_project_add_object</a>            (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
-                                                         <a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *old_project,
-                                                         GObject *object);
-void                <a class="link" href="GladeProject.html#glade-project-remove-object" title="glade_project_remove_object ()">glade_project_remove_object</a>         (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
-                                                         GObject *object);
-gboolean            <a class="link" href="GladeProject.html#glade-project-has-object" title="glade_project_has_object ()">glade_project_has_object</a>            (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
-                                                         GObject *object);
-<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *       <a class="link" href="GladeProject.html#glade-project-get-widget-by-name" title="glade_project_get_widget_by_name ()">glade_project_get_widget_by_name</a>    (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
-                                                         <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *ancestor,
-                                                         const gchar *name);
-gchar *             <a class="link" href="GladeProject.html#glade-project-new-widget-name" title="glade_project_new_widget_name ()">glade_project_new_widget_name</a>       (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
-                                                         <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const gchar *base_name);
-gboolean            <a class="link" href="GladeProject.html#glade-project-is-selected" title="glade_project_is_selected ()">glade_project_is_selected</a>           (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
-                                                         GObject *object);
-void                <a class="link" href="GladeProject.html#glade-project-selection-set" title="glade_project_selection_set ()">glade_project_selection_set</a>         (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
-                                                         GObject *object,
-                                                         gboolean emit_signal);
-void                <a class="link" href="GladeProject.html#glade-project-selection-add" title="glade_project_selection_add ()">glade_project_selection_add</a>         (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
-                                                         GObject *object,
-                                                         gboolean emit_signal);
-void                <a class="link" href="GladeProject.html#glade-project-selection-remove" title="glade_project_selection_remove ()">glade_project_selection_remove</a>      (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
-                                                         GObject *object,
-                                                         gboolean emit_signal);
-void                <a class="link" href="GladeProject.html#glade-project-selection-clear" title="glade_project_selection_clear ()">glade_project_selection_clear</a>       (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
-                                                         gboolean emit_signal);
-void                <a class="link" href="GladeProject.html#glade-project-selection-changed" title="glade_project_selection_changed ()">glade_project_selection_changed</a>     (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);
-GList *             <a class="link" href="GladeProject.html#glade-project-selection-get" title="glade_project_selection_get ()">glade_project_selection_get</a>         (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);
-gboolean            <a class="link" href="GladeProject.html#glade-project-get-has-selection" title="glade_project_get_has_selection ()">glade_project_get_has_selection</a>     (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);
-gchar *             <a class="link" href="GladeProject.html#glade-project-resource-fullpath" title="glade_project_resource_fullpath ()">glade_project_resource_fullpath</a>     (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
-                                                         const gchar *resource);
-gboolean            <a class="link" href="GladeProject.html#glade-project-is-loading" title="glade_project_is_loading ()">glade_project_is_loading</a>            (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);
-time_t              <a class="link" href="GladeProject.html#glade-project-get-file-mtime" title="glade_project_get_file_mtime ()">glade_project_get_file_mtime</a>        (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);
-guint               <a class="link" href="GladeProject.html#glade-project-get-instance-count" title="glade_project_get_instance_count ()">glade_project_get_instance_count</a>    (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);
-void                <a class="link" href="GladeProject.html#glade-project-set-instance-count" title="glade_project_set_instance_count ()">glade_project_set_instance_count</a>    (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
-                                                         guint instance_count);
-gboolean            <a class="link" href="GladeProject.html#glade-project-get-modified" title="glade_project_get_modified ()">glade_project_get_modified</a>          (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);
+<a class="link" href="GladeProject.html" title="GladeProject"><span class="returnvalue">GladeProject</span></a> *      <a class="link" href="GladeProject.html#glade-project-new" title="glade_project_new ()">glade_project_new</a>                   (<em class="parameter"><code><span class="type">void</span></code></em>);
+<a class="link" href="GladeProject.html#GladeProjectFormat" title="enum GladeProjectFormat"><span class="returnvalue">GladeProjectFormat</span></a>  <a class="link" href="GladeProject.html#glade-project-get-format" title="glade_project_get_format ()">glade_project_get_format</a>            (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GladeProject.html#glade-project-set-format" title="glade_project_set_format ()">glade_project_set_format</a>            (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GladeProject.html#GladeProjectFormat" title="enum GladeProjectFormat"><span class="type">GladeProjectFormat</span></a> format</code></em>);
+<a class="link" href="GladeProject.html" title="GladeProject"><span class="returnvalue">GladeProject</span></a> *      <a class="link" href="GladeProject.html#glade-project-load" title="glade_project_load ()">glade_project_load</a>                  (<em class="parameter"><code>const <span class="type">gchar</span> *path</code></em>);
+<span class="returnvalue">gboolean</span>            <a class="link" href="GladeProject.html#glade-project-save" title="glade_project_save ()">glade_project_save</a>                  (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">gchar</span> *path</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);
+const <span class="returnvalue">gchar</span> *       <a class="link" href="GladeProject.html#glade-project-get-path" title="glade_project_get_path ()">glade_project_get_path</a>              (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);
+<span class="returnvalue">gchar</span> *             <a class="link" href="GladeProject.html#glade-project-get-name" title="glade_project_get_name ()">glade_project_get_name</a>              (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GladeProject.html#glade-project-undo" title="glade_project_undo ()">glade_project_undo</a>                  (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GladeProject.html#glade-project-redo" title="glade_project_redo ()">glade_project_redo</a>                  (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);
+<a class="link" href="gladeui-glade-command.html#GladeCommand"><span class="returnvalue">GladeCommand</span></a> *      <a class="link" href="GladeProject.html#glade-project-next-undo-item" title="glade_project_next_undo_item ()">glade_project_next_undo_item</a>        (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);
+<a class="link" href="gladeui-glade-command.html#GladeCommand"><span class="returnvalue">GladeCommand</span></a> *      <a class="link" href="GladeProject.html#glade-project-next-redo-item" title="glade_project_next_redo_item ()">glade_project_next_redo_item</a>        (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GladeProject.html#glade-project-push-undo" title="glade_project_push_undo ()">glade_project_push_undo</a>             (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="gladeui-glade-command.html#GladeCommand"><span class="type">GladeCommand</span></a> *cmd</code></em>);
+<span class="returnvalue">GtkWidget</span> *         <a class="link" href="GladeProject.html#glade-project-undo-items" title="glade_project_undo_items ()">glade_project_undo_items</a>            (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);
+<span class="returnvalue">GtkWidget</span> *         <a class="link" href="GladeProject.html#glade-project-redo-items" title="glade_project_redo_items ()">glade_project_redo_items</a>            (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GladeProject.html#glade-project-reset-path" title="glade_project_reset_path ()">glade_project_reset_path</a>            (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);
+<span class="returnvalue">gboolean</span>            <a class="link" href="GladeProject.html#glade-project-get-readonly" title="glade_project_get_readonly ()">glade_project_get_readonly</a>          (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);
+const <span class="returnvalue">GList</span> *       <a class="link" href="GladeProject.html#glade-project-get-objects" title="glade_project_get_objects ()">glade_project_get_objects</a>           (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GladeProject.html#glade-project-add-object" title="glade_project_add_object ()">glade_project_add_object</a>            (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *old_project</code></em>,
+                                                         <em class="parameter"><code><span class="type">GObject</span> *object</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GladeProject.html#glade-project-remove-object" title="glade_project_remove_object ()">glade_project_remove_object</a>         (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
+                                                         <em class="parameter"><code><span class="type">GObject</span> *object</code></em>);
+<span class="returnvalue">gboolean</span>            <a class="link" href="GladeProject.html#glade-project-has-object" title="glade_project_has_object ()">glade_project_has_object</a>            (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
+                                                         <em class="parameter"><code><span class="type">GObject</span> *object</code></em>);
+<a class="link" href="GladeWidget.html" title="GladeWidget"><span class="returnvalue">GladeWidget</span></a> *       <a class="link" href="GladeProject.html#glade-project-get-widget-by-name" title="glade_project_get_widget_by_name ()">glade_project_get_widget_by_name</a>    (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> *ancestor</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">gchar</span> *name</code></em>);
+<span class="returnvalue">gchar</span> *             <a class="link" href="GladeProject.html#glade-project-new-widget-name" title="glade_project_new_widget_name ()">glade_project_new_widget_name</a>       (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> *widget</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">gchar</span> *base_name</code></em>);
+<span class="returnvalue">gboolean</span>            <a class="link" href="GladeProject.html#glade-project-is-selected" title="glade_project_is_selected ()">glade_project_is_selected</a>           (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
+                                                         <em class="parameter"><code><span class="type">GObject</span> *object</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GladeProject.html#glade-project-selection-set" title="glade_project_selection_set ()">glade_project_selection_set</a>         (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
+                                                         <em class="parameter"><code><span class="type">GObject</span> *object</code></em>,
+                                                         <em class="parameter"><code><span class="type">gboolean</span> emit_signal</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GladeProject.html#glade-project-selection-add" title="glade_project_selection_add ()">glade_project_selection_add</a>         (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
+                                                         <em class="parameter"><code><span class="type">GObject</span> *object</code></em>,
+                                                         <em class="parameter"><code><span class="type">gboolean</span> emit_signal</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GladeProject.html#glade-project-selection-remove" title="glade_project_selection_remove ()">glade_project_selection_remove</a>      (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
+                                                         <em class="parameter"><code><span class="type">GObject</span> *object</code></em>,
+                                                         <em class="parameter"><code><span class="type">gboolean</span> emit_signal</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GladeProject.html#glade-project-selection-clear" title="glade_project_selection_clear ()">glade_project_selection_clear</a>       (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
+                                                         <em class="parameter"><code><span class="type">gboolean</span> emit_signal</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GladeProject.html#glade-project-selection-changed" title="glade_project_selection_changed ()">glade_project_selection_changed</a>     (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);
+<span class="returnvalue">GList</span> *             <a class="link" href="GladeProject.html#glade-project-selection-get" title="glade_project_selection_get ()">glade_project_selection_get</a>         (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);
+<span class="returnvalue">gboolean</span>            <a class="link" href="GladeProject.html#glade-project-get-has-selection" title="glade_project_get_has_selection ()">glade_project_get_has_selection</a>     (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);
+<span class="returnvalue">gchar</span> *             <a class="link" href="GladeProject.html#glade-project-resource-fullpath" title="glade_project_resource_fullpath ()">glade_project_resource_fullpath</a>     (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">gchar</span> *resource</code></em>);
+<span class="returnvalue">gboolean</span>            <a class="link" href="GladeProject.html#glade-project-is-loading" title="glade_project_is_loading ()">glade_project_is_loading</a>            (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);
+<span class="returnvalue">time_t</span>              <a class="link" href="GladeProject.html#glade-project-get-file-mtime" title="glade_project_get_file_mtime ()">glade_project_get_file_mtime</a>        (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);
+<span class="returnvalue">guint</span>               <a class="link" href="GladeProject.html#glade-project-get-instance-count" title="glade_project_get_instance_count ()">glade_project_get_instance_count</a>    (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GladeProject.html#glade-project-set-instance-count" title="glade_project_set_instance_count ()">glade_project_set_instance_count</a>    (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
+                                                         <em class="parameter"><code><span class="type">guint</span> instance_count</code></em>);
+<span class="returnvalue">gboolean</span>            <a class="link" href="GladeProject.html#glade-project-get-modified" title="glade_project_get_modified ()">glade_project_get_modified</a>          (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);
 </pre>
 </div>
-<div class="refsect1" lang="en">
+<div class="refsect1" title="Object Hierarchy">
 <a name="GladeProject.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
   GObject
    +----GladeProject
 </pre>
 </div>
-<div class="refsect1" lang="en">
+<div class="refsect1" title="Properties">
 <a name="GladeProject.properties"></a><h2>Properties</h2>
 <pre class="synopsis">
-  "<a class="link" href="GladeProject.html#GladeProject--format" title='The "format" property'>format</a>"                   gint                  : Read
-  "<a class="link" href="GladeProject.html#GladeProject--has-selection" title='The "has-selection" property'>has-selection</a>"            gboolean              : Read
-  "<a class="link" href="GladeProject.html#GladeProject--modified" title='The "modified" property'>modified</a>"                 gboolean              : Read
-  "<a class="link" href="GladeProject.html#GladeProject--path" title='The "path" property'>path</a>"                     gchar*                : Read
-  "<a class="link" href="GladeProject.html#GladeProject--read-only" title='The "read-only" property'>read-only</a>"                gboolean              : Read
+  "<a class="link" href="GladeProject.html#GladeProject--format" title='The "format" property'>format</a>"                   <span class="type">gint</span>                  : Read
+  "<a class="link" href="GladeProject.html#GladeProject--has-selection" title='The "has-selection" property'>has-selection</a>"            <span class="type">gboolean</span>              : Read
+  "<a class="link" href="GladeProject.html#GladeProject--modified" title='The "modified" property'>modified</a>"                 <span class="type">gboolean</span>              : Read
+  "<a class="link" href="GladeProject.html#GladeProject--path" title='The "path" property'>path</a>"                     <span class="type">gchar</span>*                : Read
+  "<a class="link" href="GladeProject.html#GladeProject--read-only" title='The "read-only" property'>read-only</a>"                <span class="type">gboolean</span>              : Read
 </pre>
 </div>
-<div class="refsect1" lang="en">
+<div class="refsect1" title="Signals">
 <a name="GladeProject.signals"></a><h2>Signals</h2>
 <pre class="synopsis">
   "<a class="link" href="GladeProject.html#GladeProject-add-widget" title='The "add-widget" signal'>add-widget</a>"                                     : Run Last
@@ -141,21 +135,21 @@ gboolean            <a class="link" href="GladeProject.html#glade-project-get-mo
   "<a class="link" href="GladeProject.html#GladeProject-widget-name-changed" title='The "widget-name-changed" signal'>widget-name-changed</a>"                            : Run Last
 </pre>
 </div>
-<div class="refsect1" lang="en">
+<div class="refsect1" title="Description">
 <a name="GladeProject.description"></a><h2>Description</h2>
 <p>
 This object owns all project objects and is responsable for loading and
 saving the glade document, you can monitor the project state via this
 object and its signals.</p>
 </div>
-<div class="refsect1" lang="en">
+<div class="refsect1" title="Details">
 <a name="GladeProject.details"></a><h2>Details</h2>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="GladeProject">
 <a name="GladeProject-struct"></a><h3>GladeProject</h3>
 <pre class="programlisting">typedef struct _GladeProject GladeProject;</pre>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="enum GladeProjectFormat">
 <a name="GladeProjectFormat"></a><h3>enum GladeProjectFormat</h3>
 <pre class="programlisting">typedef enum
 {
@@ -165,9 +159,9 @@ object and its signals.</p>
 </pre>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_new ()">
 <a name="glade-project-new"></a><h3>glade_project_new ()</h3>
-<pre class="programlisting"><a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *      glade_project_new                   (void);</pre>
+<pre class="programlisting"><a class="link" href="GladeProject.html" title="GladeProject"><span class="returnvalue">GladeProject</span></a> *      glade_project_new                   (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
 Creates a new <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>.</p>
 <div class="variablelist"><table border="0">
@@ -180,15 +174,15 @@ Creates a new <a class="link" href="GladeProject.html" title="GladeProject"><spa
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_get_format ()">
 <a name="glade-project-get-format"></a><h3>glade_project_get_format ()</h3>
-<pre class="programlisting"><a class="link" href="GladeProject.html#GladeProjectFormat" title="enum GladeProjectFormat">GladeProjectFormat</a>  glade_project_get_format            (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
+<pre class="programlisting"><a class="link" href="GladeProject.html#GladeProjectFormat" title="enum GladeProjectFormat"><span class="returnvalue">GladeProjectFormat</span></a>  glade_project_get_format            (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);</pre>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_set_format ()">
 <a name="glade-project-set-format"></a><h3>glade_project_set_format ()</h3>
-<pre class="programlisting">void                glade_project_set_format            (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
-                                                         <a class="link" href="GladeProject.html#GladeProjectFormat" title="enum GladeProjectFormat">GladeProjectFormat</a> format);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                glade_project_set_format            (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GladeProject.html#GladeProjectFormat" title="enum GladeProjectFormat"><span class="type">GladeProjectFormat</span></a> format</code></em>);</pre>
 <p>
 Sets <em class="parameter"><code>project</code></em> format to <em class="parameter"><code>format</code></em>, used internally to set the actual format
 state; note that conversions should be done through the glade-command api.</p>
@@ -197,46 +191,39 @@ state; note that conversions should be done through the glade-command api.</p>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>project</code></em> :</span></p></td>
-<td> a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
+<td>a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>format</code></em> :</span></p></td>
-<td> the <a class="link" href="GladeProject.html#GladeProjectFormat" title="enum GladeProjectFormat"><span class="type">GladeProjectFormat</span></a>
+<td>the <a class="link" href="GladeProject.html#GladeProjectFormat" title="enum GladeProjectFormat"><span class="type">GladeProjectFormat</span></a>
 </td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_load ()">
 <a name="glade-project-load"></a><h3>glade_project_load ()</h3>
-<pre class="programlisting"><a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *      glade_project_load                  (const gchar *path);</pre>
+<pre class="programlisting"><a class="link" href="GladeProject.html" title="GladeProject"><span class="returnvalue">GladeProject</span></a> *      glade_project_load                  (<em class="parameter"><code>const <span class="type">gchar</span> *path</code></em>);</pre>
 <p>
 Opens a project at the given path.</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
-<td>
-</td>
-</tr>
-<tr>
+<tbody><tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td> a new <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> for the opened project on success, <code class="literal">NULL</code> on 
          failure
 </td>
-</tr>
-</tbody>
+</tr></tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_save ()">
 <a name="glade-project-save"></a><h3>glade_project_save ()</h3>
-<pre class="programlisting">gboolean            glade_project_save                  (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
-                                                         const gchar *path,
-                                                         GError **error);</pre>
+<pre class="programlisting"><span class="returnvalue">gboolean</span>            glade_project_save                  (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">gchar</span> *path</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);</pre>
 <p>
 Saves <em class="parameter"><code>project</code></em> to the given path.</p>
 <div class="variablelist"><table border="0">
@@ -244,17 +231,17 @@ Saves <em class="parameter"><code>project</code></em> to the given path.</p>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>project</code></em> :</span></p></td>
-<td> a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
+<td>a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
-<td> location to save glade file
+<td>location to save glade file
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td> an error from the G_FILE_ERROR domain.
+<td>an error from the G_FILE_ERROR domain.
 </td>
 </tr>
 <tr>
@@ -266,39 +253,39 @@ Saves <em class="parameter"><code>project</code></em> to the given path.</p>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_get_path ()">
 <a name="glade-project-get-path"></a><h3>glade_project_get_path ()</h3>
-<pre class="programlisting">const gchar *       glade_project_get_path              (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
+<pre class="programlisting">const <span class="returnvalue">gchar</span> *       glade_project_get_path              (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);</pre>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_get_name ()">
 <a name="glade-project-get-name"></a><h3>glade_project_get_name ()</h3>
-<pre class="programlisting">gchar *             glade_project_get_name              (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
+<pre class="programlisting"><span class="returnvalue">gchar</span> *             glade_project_get_name              (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);</pre>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_undo ()">
 <a name="glade-project-undo"></a><h3>glade_project_undo ()</h3>
-<pre class="programlisting">void                glade_project_undo                  (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                glade_project_undo                  (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);</pre>
 <p>
-Redoes a <a class="link" href="GladeCommand.html" title="GladeCommand"><span class="type">GladeCommand</span></a> in this project.</p>
+Redoes a <a class="link" href="gladeui-glade-command.html#GladeCommand"><span class="type">GladeCommand</span></a> in this project.</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>project</code></em> :</span></p></td>
-<td> a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
+<td>a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
 </td>
 </tr></tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_redo ()">
 <a name="glade-project-redo"></a><h3>glade_project_redo ()</h3>
-<pre class="programlisting">void                glade_project_redo                  (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                glade_project_redo                  (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);</pre>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_next_undo_item ()">
 <a name="glade-project-next-undo-item"></a><h3>glade_project_next_undo_item ()</h3>
-<pre class="programlisting"><a class="link" href="GladeCommand.html" title="GladeCommand">GladeCommand</a> *      glade_project_next_undo_item        (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
+<pre class="programlisting"><a class="link" href="gladeui-glade-command.html#GladeCommand"><span class="returnvalue">GladeCommand</span></a> *      glade_project_next_undo_item        (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);</pre>
 <p>
 Gets the next undo item on <em class="parameter"><code>project</code></em>'s command stack.</p>
 <div class="variablelist"><table border="0">
@@ -306,21 +293,21 @@ Gets the next undo item on <em class="parameter"><code>project</code></em>'s com
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>project</code></em> :</span></p></td>
-<td> a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
+<td>a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the <a class="link" href="GladeCommand.html" title="GladeCommand"><span class="type">GladeCommand</span></a>
+<td> the <a class="link" href="gladeui-glade-command.html#GladeCommand"><span class="type">GladeCommand</span></a>
 </td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_next_redo_item ()">
 <a name="glade-project-next-redo-item"></a><h3>glade_project_next_redo_item ()</h3>
-<pre class="programlisting"><a class="link" href="GladeCommand.html" title="GladeCommand">GladeCommand</a> *      glade_project_next_redo_item        (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
+<pre class="programlisting"><a class="link" href="gladeui-glade-command.html#GladeCommand"><span class="returnvalue">GladeCommand</span></a> *      glade_project_next_redo_item        (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);</pre>
 <p>
 Gets the next redo item on <em class="parameter"><code>project</code></em>'s command stack.</p>
 <div class="variablelist"><table border="0">
@@ -328,44 +315,44 @@ Gets the next redo item on <em class="parameter"><code>project</code></em>'s com
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>project</code></em> :</span></p></td>
-<td> a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
+<td>a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the <a class="link" href="GladeCommand.html" title="GladeCommand"><span class="type">GladeCommand</span></a>
+<td> the <a class="link" href="gladeui-glade-command.html#GladeCommand"><span class="type">GladeCommand</span></a>
 </td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_push_undo ()">
 <a name="glade-project-push-undo"></a><h3>glade_project_push_undo ()</h3>
-<pre class="programlisting">void                glade_project_push_undo             (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
-                                                         <a class="link" href="GladeCommand.html" title="GladeCommand">GladeCommand</a> *cmd);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                glade_project_push_undo             (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="gladeui-glade-command.html#GladeCommand"><span class="type">GladeCommand</span></a> *cmd</code></em>);</pre>
 <p>
-Pushes a newly created <a class="link" href="GladeCommand.html" title="GladeCommand"><span class="type">GladeCommand</span></a> onto <em class="parameter"><code>projects</code></em> stack.</p>
+Pushes a newly created <a class="link" href="gladeui-glade-command.html#GladeCommand"><span class="type">GladeCommand</span></a> onto <em class="parameter"><code>projects</code></em> stack.</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>project</code></em> :</span></p></td>
-<td> a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
+<td>a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cmd</code></em> :</span></p></td>
-<td> the <a class="link" href="GladeCommand.html" title="GladeCommand"><span class="type">GladeCommand</span></a>
+<td>the <a class="link" href="gladeui-glade-command.html#GladeCommand"><span class="type">GladeCommand</span></a>
 </td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_undo_items ()">
 <a name="glade-project-undo-items"></a><h3>glade_project_undo_items ()</h3>
-<pre class="programlisting">GtkWidget *         glade_project_undo_items            (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
+<pre class="programlisting"><span class="returnvalue">GtkWidget</span> *         glade_project_undo_items            (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);</pre>
 <p>
 Creates a menu of the undo items in the project stack</p>
 <div class="variablelist"><table border="0">
@@ -373,7 +360,7 @@ Creates a menu of the undo items in the project stack</p>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>project</code></em> :</span></p></td>
-<td> A <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
+<td>A <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
 </td>
 </tr>
 <tr>
@@ -385,9 +372,9 @@ Creates a menu of the undo items in the project stack</p>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_redo_items ()">
 <a name="glade-project-redo-items"></a><h3>glade_project_redo_items ()</h3>
-<pre class="programlisting">GtkWidget *         glade_project_redo_items            (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
+<pre class="programlisting"><span class="returnvalue">GtkWidget</span> *         glade_project_redo_items            (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);</pre>
 <p>
 Creates a menu of the undo items in the project stack</p>
 <div class="variablelist"><table border="0">
@@ -395,7 +382,7 @@ Creates a menu of the undo items in the project stack</p>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>project</code></em> :</span></p></td>
-<td> A <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
+<td>A <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
 </td>
 </tr>
 <tr>
@@ -407,14 +394,14 @@ Creates a menu of the undo items in the project stack</p>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_reset_path ()">
 <a name="glade-project-reset-path"></a><h3>glade_project_reset_path ()</h3>
-<pre class="programlisting">void                glade_project_reset_path            (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                glade_project_reset_path            (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);</pre>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_get_readonly ()">
 <a name="glade-project-get-readonly"></a><h3>glade_project_get_readonly ()</h3>
-<pre class="programlisting">gboolean            glade_project_get_readonly          (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
+<pre class="programlisting"><span class="returnvalue">gboolean</span>            glade_project_get_readonly          (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);</pre>
 <p>
 Gets whether the project is read only or not</p>
 <div class="variablelist"><table border="0">
@@ -422,7 +409,7 @@ Gets whether the project is read only or not</p>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>project</code></em> :</span></p></td>
-<td> a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
+<td>a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
 </td>
 </tr>
 <tr>
@@ -434,16 +421,16 @@ Gets whether the project is read only or not</p>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_get_objects ()">
 <a name="glade-project-get-objects"></a><h3>glade_project_get_objects ()</h3>
-<pre class="programlisting">const GList *       glade_project_get_objects           (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
+<pre class="programlisting">const <span class="returnvalue">GList</span> *       glade_project_get_objects           (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);</pre>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_add_object ()">
 <a name="glade-project-add-object"></a><h3>glade_project_add_object ()</h3>
-<pre class="programlisting">void                glade_project_add_object            (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
-                                                         <a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *old_project,
-                                                         GObject *object);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                glade_project_add_object            (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *old_project</code></em>,
+                                                         <em class="parameter"><code><span class="type">GObject</span> *object</code></em>);</pre>
 <p>
 Adds an object to the project.</p>
 <div class="variablelist"><table border="0">
@@ -451,28 +438,28 @@ Adds an object to the project.</p>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>project</code></em> :</span></p></td>
-<td> the <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> the widget is added to
+<td>the <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> the widget is added to
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>old_project</code></em> :</span></p></td>
-<td> the <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> the widget was previously in
+<td>the <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> the widget was previously in
               (or <code class="literal">NULL</code> for the clipboard)
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
-<td> the <span class="type">GObject</span> to add
+<td>the <span class="type">GObject</span> to add
 </td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_remove_object ()">
 <a name="glade-project-remove-object"></a><h3>glade_project_remove_object ()</h3>
-<pre class="programlisting">void                glade_project_remove_object         (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
-                                                         GObject *object);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                glade_project_remove_object         (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
+                                                         <em class="parameter"><code><span class="type">GObject</span> *object</code></em>);</pre>
 <p>
 Removes <em class="parameter"><code>object</code></em> from <em class="parameter"><code>project</code></em>.
 </p>
@@ -485,35 +472,33 @@ way UNDO can work.</p>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>project</code></em> :</span></p></td>
-<td> a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
+<td>a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
-<td> the <span class="type">GObject</span> to remove
+<td>the <span class="type">GObject</span> to remove
 </td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_has_object ()">
 <a name="glade-project-has-object"></a><h3>glade_project_has_object ()</h3>
-<pre class="programlisting">gboolean            glade_project_has_object            (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
-                                                         GObject *object);</pre>
-<p>
-</p>
+<pre class="programlisting"><span class="returnvalue">gboolean</span>            glade_project_has_object            (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
+                                                         <em class="parameter"><code><span class="type">GObject</span> *object</code></em>);</pre>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>project</code></em> :</span></p></td>
-<td> the <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> the widget is added to
+<td>the <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> the widget is added to
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
-<td> the <span class="type">GObject</span> to search
+<td>the <span class="type">GObject</span> to search
 </td>
 </tr>
 <tr>
@@ -525,11 +510,11 @@ way UNDO can work.</p>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_get_widget_by_name ()">
 <a name="glade-project-get-widget-by-name"></a><h3>glade_project_get_widget_by_name ()</h3>
-<pre class="programlisting"><a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *       glade_project_get_widget_by_name    (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
-                                                         <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *ancestor,
-                                                         const gchar *name);</pre>
+<pre class="programlisting"><a class="link" href="GladeWidget.html" title="GladeWidget"><span class="returnvalue">GladeWidget</span></a> *       glade_project_get_widget_by_name    (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> *ancestor</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">gchar</span> *name</code></em>);</pre>
 <p>
 Searches under <em class="parameter"><code>ancestor</code></em> in <em class="parameter"><code>project</code></em> looking for a <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> named <em class="parameter"><code>name</code></em>.</p>
 <div class="variablelist"><table border="0">
@@ -537,17 +522,17 @@ Searches under <em class="parameter"><code>ancestor</code></em> in <em class="pa
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>project</code></em> :</span></p></td>
-<td> a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
+<td>a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>ancestor</code></em> :</span></p></td>
-<td> The toplevel project object to search under
+<td>The toplevel project object to search under
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
-<td> The user visible name of the widget we are looking for
+<td>The user visible name of the widget we are looking for
 </td>
 </tr>
 <tr>
@@ -559,11 +544,11 @@ Searches under <em class="parameter"><code>ancestor</code></em> in <em class="pa
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_new_widget_name ()">
 <a name="glade-project-new-widget-name"></a><h3>glade_project_new_widget_name ()</h3>
-<pre class="programlisting">gchar *             glade_project_new_widget_name       (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
-                                                         <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget,
-                                                         const gchar *base_name);</pre>
+<pre class="programlisting"><span class="returnvalue">gchar</span> *             glade_project_new_widget_name       (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> *widget</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">gchar</span> *base_name</code></em>);</pre>
 <p>
 Creates a new name for a widget that doesn't collide with any of the names 
 already in <em class="parameter"><code>project</code></em>. This name will start with <em class="parameter"><code>base_name</code></em>.</p>
@@ -572,17 +557,17 @@ already in <em class="parameter"><code>project</code></em>. This name will start
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>project</code></em> :</span></p></td>
-<td> a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
+<td>a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>widget</code></em> :</span></p></td>
-<td> the <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> intended to recieve a new name
+<td>the <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> intended to recieve a new name
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>base_name</code></em> :</span></p></td>
-<td> base name of the widget to create
+<td>base name of the widget to create
 </td>
 </tr>
 <tr>
@@ -595,23 +580,21 @@ already in <em class="parameter"><code>project</code></em>. This name will start
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_is_selected ()">
 <a name="glade-project-is-selected"></a><h3>glade_project_is_selected ()</h3>
-<pre class="programlisting">gboolean            glade_project_is_selected           (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
-                                                         GObject *object);</pre>
-<p>
-</p>
+<pre class="programlisting"><span class="returnvalue">gboolean</span>            glade_project_is_selected           (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
+                                                         <em class="parameter"><code><span class="type">GObject</span> *object</code></em>);</pre>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>project</code></em> :</span></p></td>
-<td> a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
+<td>a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
-<td> a <span class="type">GObject</span>
+<td>a <span class="type">GObject</span>
 </td>
 </tr>
 <tr>
@@ -623,11 +606,11 @@ already in <em class="parameter"><code>project</code></em>. This name will start
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_selection_set ()">
 <a name="glade-project-selection-set"></a><h3>glade_project_selection_set ()</h3>
-<pre class="programlisting">void                glade_project_selection_set         (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
-                                                         GObject *object,
-                                                         gboolean emit_signal);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                glade_project_selection_set         (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
+                                                         <em class="parameter"><code><span class="type">GObject</span> *object</code></em>,
+                                                         <em class="parameter"><code><span class="type">gboolean</span> emit_signal</code></em>);</pre>
 <p>
 Set the selection in <em class="parameter"><code>project</code></em> to <em class="parameter"><code>object</code></em>
 </p>
@@ -638,17 +621,17 @@ If <em class="parameter"><code>emit_signal</code></em> is <code class="literal">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>project</code></em> :</span></p></td>
-<td> a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
+<td>a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
-<td>  a <span class="type">GObject</span> in <em class="parameter"><code>project</code></em>
+<td>a <span class="type">GObject</span> in <em class="parameter"><code>project</code></em>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>emit_signal</code></em> :</span></p></td>
-<td> whether or not to emit a signal 
+<td>whether or not to emit a signal 
               indicating a selection change
 </td>
 </tr>
@@ -656,11 +639,11 @@ If <em class="parameter"><code>emit_signal</code></em> is <code class="literal">
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_selection_add ()">
 <a name="glade-project-selection-add"></a><h3>glade_project_selection_add ()</h3>
-<pre class="programlisting">void                glade_project_selection_add         (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
-                                                         GObject *object,
-                                                         gboolean emit_signal);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                glade_project_selection_add         (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
+                                                         <em class="parameter"><code><span class="type">GObject</span> *object</code></em>,
+                                                         <em class="parameter"><code><span class="type">gboolean</span> emit_signal</code></em>);</pre>
 <p>
 Adds <em class="parameter"><code>object</code></em> to the selection chain of <em class="parameter"><code>project</code></em>
 </p>
@@ -671,17 +654,17 @@ If <em class="parameter"><code>emit_signal</code></em> is <code class="literal">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>project</code></em> :</span></p></td>
-<td> a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
+<td>a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
-<td>  a <span class="type">GObject</span> in <em class="parameter"><code>project</code></em>
+<td>a <span class="type">GObject</span> in <em class="parameter"><code>project</code></em>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>emit_signal</code></em> :</span></p></td>
-<td> whether or not to emit a signal indicating 
+<td>whether or not to emit a signal indicating 
               a selection change
 </td>
 </tr>
@@ -689,11 +672,11 @@ If <em class="parameter"><code>emit_signal</code></em> is <code class="literal">
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_selection_remove ()">
 <a name="glade-project-selection-remove"></a><h3>glade_project_selection_remove ()</h3>
-<pre class="programlisting">void                glade_project_selection_remove      (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
-                                                         GObject *object,
-                                                         gboolean emit_signal);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                glade_project_selection_remove      (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
+                                                         <em class="parameter"><code><span class="type">GObject</span> *object</code></em>,
+                                                         <em class="parameter"><code><span class="type">gboolean</span> emit_signal</code></em>);</pre>
 <p>
 Removes <em class="parameter"><code>object</code></em> from the selection chain of <em class="parameter"><code>project</code></em>
 </p>
@@ -704,17 +687,17 @@ If <em class="parameter"><code>emit_signal</code></em> is <code class="literal">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>project</code></em> :</span></p></td>
-<td> a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
+<td>a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
-<td>  a <span class="type">GObject</span> in <em class="parameter"><code>project</code></em>
+<td>a <span class="type">GObject</span> in <em class="parameter"><code>project</code></em>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>emit_signal</code></em> :</span></p></td>
-<td> whether or not to emit a signal 
+<td>whether or not to emit a signal 
               indicating a selection change
 </td>
 </tr>
@@ -722,10 +705,10 @@ If <em class="parameter"><code>emit_signal</code></em> is <code class="literal">
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_selection_clear ()">
 <a name="glade-project-selection-clear"></a><h3>glade_project_selection_clear ()</h3>
-<pre class="programlisting">void                glade_project_selection_clear       (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
-                                                         gboolean emit_signal);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                glade_project_selection_clear       (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
+                                                         <em class="parameter"><code><span class="type">gboolean</span> emit_signal</code></em>);</pre>
 <p>
 Clears <em class="parameter"><code>project</code></em>'s selection chain
 </p>
@@ -736,44 +719,42 @@ If <em class="parameter"><code>emit_signal</code></em> is <code class="literal">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>project</code></em> :</span></p></td>
-<td> a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
+<td>a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>emit_signal</code></em> :</span></p></td>
-<td> whether or not to emit a signal indication a selection change
+<td>whether or not to emit a signal indication a selection change
 </td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_selection_changed ()">
 <a name="glade-project-selection-changed"></a><h3>glade_project_selection_changed ()</h3>
-<pre class="programlisting">void                glade_project_selection_changed     (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                glade_project_selection_changed     (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);</pre>
 <p>
 Causes <em class="parameter"><code>project</code></em> to emit a "selection_changed" signal.</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>project</code></em> :</span></p></td>
-<td> a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
+<td>a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
 </td>
 </tr></tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_selection_get ()">
 <a name="glade-project-selection-get"></a><h3>glade_project_selection_get ()</h3>
-<pre class="programlisting">GList *             glade_project_selection_get         (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
-<p>
-</p>
+<pre class="programlisting"><span class="returnvalue">GList</span> *             glade_project_selection_get         (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);</pre>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>project</code></em> :</span></p></td>
-<td> a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
+<td>a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
 </td>
 </tr>
 <tr>
@@ -786,17 +767,15 @@ Causes <em class="parameter"><code>project</code></em> to emit a "selection_chan
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_get_has_selection ()">
 <a name="glade-project-get-has-selection"></a><h3>glade_project_get_has_selection ()</h3>
-<pre class="programlisting">gboolean            glade_project_get_has_selection     (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
-<p>
-</p>
+<pre class="programlisting"><span class="returnvalue">gboolean</span>            glade_project_get_has_selection     (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);</pre>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>project</code></em> :</span></p></td>
-<td> a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
+<td>a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
 </td>
 </tr>
 <tr>
@@ -808,10 +787,10 @@ Causes <em class="parameter"><code>project</code></em> to emit a "selection_chan
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_resource_fullpath ()">
 <a name="glade-project-resource-fullpath"></a><h3>glade_project_resource_fullpath ()</h3>
-<pre class="programlisting">gchar *             glade_project_resource_fullpath     (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
-                                                         const gchar *resource);</pre>
+<pre class="programlisting"><span class="returnvalue">gchar</span> *             glade_project_resource_fullpath     (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">gchar</span> *resource</code></em>);</pre>
 <p>
 Project resource strings may be relative or fullpaths, but glade
 always expects a copy in the glade file directory, this function
@@ -821,12 +800,12 @@ is used to make a local path to the file.</p>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>project</code></em> :</span></p></td>
-<td> The <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>.
+<td>The <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>resource</code></em> :</span></p></td>
-<td> The resource basename
+<td>The resource basename
 </td>
 </tr>
 <tr>
@@ -839,17 +818,15 @@ is used to make a local path to the file.</p>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_is_loading ()">
 <a name="glade-project-is-loading"></a><h3>glade_project_is_loading ()</h3>
-<pre class="programlisting">gboolean            glade_project_is_loading            (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
-<p>
-</p>
+<pre class="programlisting"><span class="returnvalue">gboolean</span>            glade_project_is_loading            (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);</pre>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>project</code></em> :</span></p></td>
-<td> A <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
+<td>A <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
 </td>
 </tr>
 <tr>
@@ -862,25 +839,25 @@ is used to make a local path to the file.</p>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_get_file_mtime ()">
 <a name="glade-project-get-file-mtime"></a><h3>glade_project_get_file_mtime ()</h3>
-<pre class="programlisting">time_t              glade_project_get_file_mtime        (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
+<pre class="programlisting"><span class="returnvalue">time_t</span>              glade_project_get_file_mtime        (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);</pre>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_get_instance_count ()">
 <a name="glade-project-get-instance-count"></a><h3>glade_project_get_instance_count ()</h3>
-<pre class="programlisting">guint               glade_project_get_instance_count    (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
+<pre class="programlisting"><span class="returnvalue">guint</span>               glade_project_get_instance_count    (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);</pre>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_set_instance_count ()">
 <a name="glade-project-set-instance-count"></a><h3>glade_project_set_instance_count ()</h3>
-<pre class="programlisting">void                glade_project_set_instance_count    (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project,
-                                                         guint instance_count);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                glade_project_set_instance_count    (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
+                                                         <em class="parameter"><code><span class="type">guint</span> instance_count</code></em>);</pre>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_project_get_modified ()">
 <a name="glade-project-get-modified"></a><h3>glade_project_get_modified ()</h3>
-<pre class="programlisting">gboolean            glade_project_get_modified          (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *project);</pre>
+<pre class="programlisting"><span class="returnvalue">gboolean</span>            glade_project_get_modified          (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);</pre>
 <p>
 Get's whether the project has been modified since it was last saved.</p>
 <div class="variablelist"><table border="0">
@@ -888,7 +865,7 @@ Get's whether the project has been modified since it was last saved.</p>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>project</code></em> :</span></p></td>
-<td> a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
+<td>a <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a>
 </td>
 </tr>
 <tr>
@@ -900,51 +877,51 @@ Get's whether the project has been modified since it was last saved.</p>
 </table></div>
 </div>
 </div>
-<div class="refsect1" lang="en">
+<div class="refsect1" title="Property Details">
 <a name="GladeProject.property-details"></a><h2>Property Details</h2>
-<div class="refsect2" lang="en">
+<div class="refsect2" title='The "format" property'>
 <a name="GladeProject--format"></a><h3>The <code class="literal">"format"</code> property</h3>
-<pre class="programlisting">  "format"                   gint                  : Read</pre>
+<pre class="programlisting">  "format"                   <span class="type">gint</span>                  : Read</pre>
 <p>The project file format.</p>
 <p>Allowed values: [0,1]</p>
 <p>Default value: 1</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title='The "has-selection" property'>
 <a name="GladeProject--has-selection"></a><h3>The <code class="literal">"has-selection"</code> property</h3>
-<pre class="programlisting">  "has-selection"            gboolean              : Read</pre>
+<pre class="programlisting">  "has-selection"            <span class="type">gboolean</span>              : Read</pre>
 <p>Whether project has a selection.</p>
 <p>Default value: FALSE</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title='The "modified" property'>
 <a name="GladeProject--modified"></a><h3>The <code class="literal">"modified"</code> property</h3>
-<pre class="programlisting">  "modified"                 gboolean              : Read</pre>
+<pre class="programlisting">  "modified"                 <span class="type">gboolean</span>              : Read</pre>
 <p>Whether project has been modified since it was last saved.</p>
 <p>Default value: FALSE</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title='The "path" property'>
 <a name="GladeProject--path"></a><h3>The <code class="literal">"path"</code> property</h3>
-<pre class="programlisting">  "path"                     gchar*                : Read</pre>
+<pre class="programlisting">  "path"                     <span class="type">gchar</span>*                : Read</pre>
 <p>The filesystem path of the project.</p>
 <p>Default value: NULL</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title='The "read-only" property'>
 <a name="GladeProject--read-only"></a><h3>The <code class="literal">"read-only"</code> property</h3>
-<pre class="programlisting">  "read-only"                gboolean              : Read</pre>
-<p>Whether project is read only or not.</p>
+<pre class="programlisting">  "read-only"                <span class="type">gboolean</span>              : Read</pre>
+<p>Whether project is read-only.</p>
 <p>Default value: FALSE</p>
 </div>
 </div>
-<div class="refsect1" lang="en">
+<div class="refsect1" title="Signal Details">
 <a name="GladeProject.signal-details"></a><h2>Signal Details</h2>
-<div class="refsect2" lang="en">
+<div class="refsect2" title='The "add-widget" signal'>
 <a name="GladeProject-add-widget"></a><h3>The <code class="literal">"add-widget"</code> signal</h3>
-<pre class="programlisting">void                user_function                      (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *gladeproject,
-                                                        <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a>  *arg1,
-                                                        gpointer      user_data)         : Run Last</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *gladeproject,
+                                                        <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>  *arg1,
+                                                        <span class="type">gpointer</span>      user_data)         : Run Last</pre>
 <p>
 Emitted when a widget is added to a project.</p>
 <div class="variablelist"><table border="0">
@@ -952,12 +929,12 @@ Emitted when a widget is added to a project.</p>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>gladeproject</code></em> :</span></p></td>
-<td> the <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> which received the signal.
+<td>the <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> which received the signal.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>arg1</code></em> :</span></p></td>
-<td> the <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> that was added to <em class="parameter"><code>gladeproject</code></em>.
+<td>the <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> that was added to <em class="parameter"><code>gladeproject</code></em>.
 </td>
 </tr>
 <tr>
@@ -968,30 +945,30 @@ Emitted when a widget is added to a project.</p>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title='The "changed" signal'>
 <a name="GladeProject-changed"></a><h3>The <code class="literal">"changed"</code> signal</h3>
-<pre class="programlisting">void                user_function                      (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *gladeproject,
-                                                        <a class="link" href="GladeCommand.html" title="GladeCommand">GladeCommand</a> *arg1,
-                                                        gboolean      arg2,
-                                                        gpointer      user_data)         : Run First</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *gladeproject,
+                                                        <a class="link" href="gladeui-glade-command.html#GladeCommand"><span class="type">GladeCommand</span></a> *arg1,
+                                                        <span class="type">gboolean</span>      arg2,
+                                                        <span class="type">gpointer</span>      user_data)         : Run First</pre>
 <p>
-Emitted when a <em class="parameter"><code>gladeproject</code></em>'s state changes via a <a class="link" href="GladeCommand.html" title="GladeCommand"><span class="type">GladeCommand</span></a>.</p>
+Emitted when a <em class="parameter"><code>gladeproject</code></em>'s state changes via a <a class="link" href="gladeui-glade-command.html#GladeCommand"><span class="type">GladeCommand</span></a>.</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>gladeproject</code></em> :</span></p></td>
-<td> the <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> which received the signal.
+<td>the <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> which received the signal.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>arg1</code></em> :</span></p></td>
-<td> the <a class="link" href="GladeCommand.html" title="GladeCommand"><span class="type">GladeCommand</span></a> that was executed
+<td>the <a class="link" href="gladeui-glade-command.html#GladeCommand"><span class="type">GladeCommand</span></a> that was executed
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>arg2</code></em> :</span></p></td>
-<td> whether the command was executed or undone.
+<td>whether the command was executed or undone.
 </td>
 </tr>
 <tr>
@@ -1002,10 +979,10 @@ Emitted when a <em class="parameter"><code>gladeproject</code></em>'s state chan
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title='The "close" signal'>
 <a name="GladeProject-close"></a><h3>The <code class="literal">"close"</code> signal</h3>
-<pre class="programlisting">void                user_function                      (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *gladeproject,
-                                                        gpointer      user_data)         : Run Last</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *gladeproject,
+                                                        <span class="type">gpointer</span>      user_data)         : Run Last</pre>
 <p>
 Emitted when a project is closing (a good time to clean up
 any associated resources).</p>
@@ -1014,7 +991,7 @@ any associated resources).</p>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>gladeproject</code></em> :</span></p></td>
-<td> the <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> which received the signal.
+<td>the <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> which received the signal.
 </td>
 </tr>
 <tr>
@@ -1025,10 +1002,10 @@ any associated resources).</p>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title='The "convert-finished" signal'>
 <a name="GladeProject-convert-finished"></a><h3>The <code class="literal">"convert-finished"</code> signal</h3>
-<pre class="programlisting">void                user_function                      (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *gladeproject,
-                                                        gpointer      user_data)         : Run First</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *gladeproject,
+                                                        <span class="type">gpointer</span>      user_data)         : Run First</pre>
 <p>
 Emitted when <em class="parameter"><code>gladeproject</code></em> format conversion has finished.
 </p>
@@ -1042,7 +1019,7 @@ before and after.</p>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>gladeproject</code></em> :</span></p></td>
-<td> the <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> which received the signal.
+<td>the <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> which received the signal.
 </td>
 </tr>
 <tr>
@@ -1053,10 +1030,10 @@ before and after.</p>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title='The "parse-finished" signal'>
 <a name="GladeProject-parse-finished"></a><h3>The <code class="literal">"parse-finished"</code> signal</h3>
-<pre class="programlisting">void                user_function                      (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *gladeproject,
-                                                        gpointer      user_data)         : Run First</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *gladeproject,
+                                                        <span class="type">gpointer</span>      user_data)         : Run First</pre>
 <p>
 Emitted when <em class="parameter"><code>gladeproject</code></em> parsing has finished.</p>
 <div class="variablelist"><table border="0">
@@ -1064,7 +1041,7 @@ Emitted when <em class="parameter"><code>gladeproject</code></em> parsing has fi
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>gladeproject</code></em> :</span></p></td>
-<td> the <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> which received the signal.
+<td>the <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> which received the signal.
 </td>
 </tr>
 <tr>
@@ -1075,11 +1052,11 @@ Emitted when <em class="parameter"><code>gladeproject</code></em> parsing has fi
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title='The "remove-widget" signal'>
 <a name="GladeProject-remove-widget"></a><h3>The <code class="literal">"remove-widget"</code> signal</h3>
-<pre class="programlisting">void                user_function                      (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *gladeproject,
-                                                        <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a>  *arg1,
-                                                        gpointer      user_data)         : Run Last</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *gladeproject,
+                                                        <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>  *arg1,
+                                                        <span class="type">gpointer</span>      user_data)         : Run Last</pre>
 <p>
 Emitted when a widget is removed from a project.</p>
 <div class="variablelist"><table border="0">
@@ -1087,12 +1064,12 @@ Emitted when a widget is removed from a project.</p>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>gladeproject</code></em> :</span></p></td>
-<td> the <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> which received the signal.
+<td>the <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> which received the signal.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>arg1</code></em> :</span></p></td>
-<td> the <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> that was removed from <em class="parameter"><code>gladeproject</code></em>.
+<td>the <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> that was removed from <em class="parameter"><code>gladeproject</code></em>.
 </td>
 </tr>
 <tr>
@@ -1103,10 +1080,10 @@ Emitted when a widget is removed from a project.</p>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title='The "selection-changed" signal'>
 <a name="GladeProject-selection-changed"></a><h3>The <code class="literal">"selection-changed"</code> signal</h3>
-<pre class="programlisting">void                user_function                      (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *gladeproject,
-                                                        gpointer      user_data)         : Run Last</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *gladeproject,
+                                                        <span class="type">gpointer</span>      user_data)         : Run Last</pre>
 <p>
 Emitted when <em class="parameter"><code>gladeproject</code></em> selection list changes.</p>
 <div class="variablelist"><table border="0">
@@ -1114,7 +1091,7 @@ Emitted when <em class="parameter"><code>gladeproject</code></em> selection list
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>gladeproject</code></em> :</span></p></td>
-<td> the <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> which received the signal.
+<td>the <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> which received the signal.
 </td>
 </tr>
 <tr>
@@ -1125,11 +1102,11 @@ Emitted when <em class="parameter"><code>gladeproject</code></em> selection list
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title='The "widget-name-changed" signal'>
 <a name="GladeProject-widget-name-changed"></a><h3>The <code class="literal">"widget-name-changed"</code> signal</h3>
-<pre class="programlisting">void                user_function                      (<a class="link" href="GladeProject.html" title="GladeProject">GladeProject</a> *gladeproject,
-                                                        <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a>  *arg1,
-                                                        gpointer      user_data)         : Run Last</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *gladeproject,
+                                                        <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>  *arg1,
+                                                        <span class="type">gpointer</span>      user_data)         : Run Last</pre>
 <p>
 Emitted when <em class="parameter"><code>gwidget</code></em>'s name changes.</p>
 <div class="variablelist"><table border="0">
@@ -1137,12 +1114,12 @@ Emitted when <em class="parameter"><code>gwidget</code></em>'s name changes.</p>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>gladeproject</code></em> :</span></p></td>
-<td> the <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> which received the signal.
+<td>the <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> which received the signal.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>arg1</code></em> :</span></p></td>
-<td> the <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> who's name changed.
+<td>the <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> who's name changed.
 </td>
 </tr>
 <tr>
@@ -1156,6 +1133,6 @@ Emitted when <em class="parameter"><code>gwidget</code></em>'s name changes.</p>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.12</div>
+          Generated by GTK-Doc V1.14</div>
 </body>
 </html>

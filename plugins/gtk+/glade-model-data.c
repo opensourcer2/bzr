@@ -36,6 +36,7 @@ GladeModelData *
 glade_model_data_new (GType type, const gchar *column_name)
 {
 	GladeModelData *data = g_new0 (GladeModelData, 1);
+	
 	g_value_init (&data->value, type);
 
 	if (type == G_TYPE_STRING)
@@ -295,7 +296,7 @@ append_row (GNode *node, GList *columns)
 	for (list = columns; list; list = list->next)
        	{
 		column = list->data;
-		data = glade_model_data_new (column->type, column->column_name);
+		data = glade_model_data_new (g_type_from_name (column->type_name), column->column_name);
 		g_node_append_data (row, data);
 	}
 }
@@ -339,15 +340,10 @@ update_and_focus_data_tree_idle (GladeEditorProperty *eprop)
 	eprop_data->want_focus = TRUE;
 	eprop_data->want_next_focus = TRUE;
 	
-	g_value_init (&value, GLADE_TYPE_MODEL_DATA_TREE);
-	g_value_take_boxed (&value, eprop_data->pending_data_tree);
-	glade_editor_property_commit (eprop, &value);
-	g_value_unset (&value);
+	update_data_tree_idle (eprop);
 
 	/* XXX Have to load it regardless if it changed, this is a slow and redundant way... */
 	glade_editor_property_load (eprop, eprop->property);
-
-	eprop_data->pending_data_tree = NULL;
 
 	eprop_data->want_next_focus = FALSE;
 	eprop_data->want_focus = FALSE;
@@ -914,7 +910,7 @@ eprop_model_generate_column (GladeEditorProperty *eprop,
 	{
 		/* Spin renderer */
 		renderer = gtk_cell_renderer_spin_new ();
-		adjustment = (GtkAdjustment *)gtk_adjustment_new (0, -G_MAXDOUBLE, G_MAXDOUBLE, 100, 100, 100);
+		adjustment = (GtkAdjustment *)gtk_adjustment_new (0, -G_MAXDOUBLE, G_MAXDOUBLE, 100, 100, 0);
 		g_object_set (G_OBJECT (renderer), 
 			      "editable", TRUE, 
 			      "adjustment", adjustment, 
@@ -970,16 +966,12 @@ eprop_model_generate_column (GladeEditorProperty *eprop,
 						     NULL);
 
 	}
-	else if (type == G_TYPE_OBJECT || g_type_is_a (type, G_TYPE_OBJECT))
+	else /* All uneditable types at this point (currently we dont do object data here, TODO) */
 	{
-		/* text renderer and object dialog (or raw text for pixbuf) */;
+		/* text renderer and object dialog (or raw text for pixbuf) */
 		renderer = gtk_cell_renderer_text_new ();
 		g_object_set (G_OBJECT (renderer), "editable", FALSE, NULL);
 		gtk_tree_view_column_pack_start (column, renderer, FALSE);
-		gtk_tree_view_column_set_attributes (column, renderer, 
-						     "text", NUM_COLUMNS + colnum,
-						     NULL);
-
 	}
 
 	g_signal_connect (G_OBJECT (renderer), "editing-started",
