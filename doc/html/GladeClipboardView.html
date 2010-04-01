@@ -3,13 +3,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GladeClipboardView</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.1">
-<link rel="home" href="index.html" title="Glade User Interface Designer Reference Manual">
+<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
+<link rel="start" href="index.html" title="Glade User Interface Designer Reference Manual">
 <link rel="up" href="dockables.html" title="Part III. Dockable Glade UI Widgets">
 <link rel="prev" href="GladePalette.html" title="GladePalette">
 <link rel="next" href="GladeInspector.html" title="GladeInspector">
-<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
+<link rel="part" href="catalog.html" title="Part I. Adding your custom widgets">
+<link rel="part" href="core.html" title="Part II. Glade Core">
+<link rel="part" href="dockables.html" title="Part III. Dockable Glade UI Widgets">
+<link rel="part" href="misc.html" title="Part IV. Miscellaneous utilities">
+<link rel="index" href="ix01.html" title="Index">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
@@ -30,7 +35,7 @@
                   <a href="#GladeClipboardView.implemented-interfaces" class="shortcut">Implemented Interfaces</a>
 </td></tr>
 </table>
-<div class="refentry" title="GladeClipboardView">
+<div class="refentry" lang="en">
 <a name="GladeClipboardView"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -39,18 +44,19 @@
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv" title="Synopsis">
+<div class="refsynopsisdiv">
 <a name="GladeClipboardView.synopsis"></a><h2>Synopsis</h2>
-<pre class="synopsis">                    <a class="link" href="GladeClipboardView.html#GladeClipboardView-struct" title="GladeClipboardView">GladeClipboardView</a>;
-<span class="returnvalue">GtkWidget</span> *         <a class="link" href="GladeClipboardView.html#glade-clipboard-view-new" title="glade_clipboard_view_new ()">glade_clipboard_view_new</a>            (<em class="parameter"><code><a class="link" href="GladeClipboard.html" title="GladeClipboard"><span class="type">GladeClipboard</span></a> *clipboard</code></em>);
-<span class="returnvalue">void</span>                <a class="link" href="GladeClipboardView.html#glade-clipboard-view-add" title="glade_clipboard_view_add ()">glade_clipboard_view_add</a>            (<em class="parameter"><code><a class="link" href="GladeClipboardView.html" title="GladeClipboardView"><span class="type">GladeClipboardView</span></a> *view</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> *widget</code></em>);
-<span class="returnvalue">void</span>                <a class="link" href="GladeClipboardView.html#glade-clipboard-view-remove" title="glade_clipboard_view_remove ()">glade_clipboard_view_remove</a>         (<em class="parameter"><code><a class="link" href="GladeClipboardView.html" title="GladeClipboardView"><span class="type">GladeClipboardView</span></a> *view</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> *widget</code></em>);
-<span class="returnvalue">void</span>                <a class="link" href="GladeClipboardView.html#glade-clipboard-view-refresh-sel" title="glade_clipboard_view_refresh_sel ()">glade_clipboard_view_refresh_sel</a>    (<em class="parameter"><code><a class="link" href="GladeClipboardView.html" title="GladeClipboardView"><span class="type">GladeClipboardView</span></a> *view</code></em>);
+<pre class="synopsis">
+                    <a class="link" href="GladeClipboardView.html#GladeClipboardView-struct" title="GladeClipboardView">GladeClipboardView</a>;
+GtkWidget *         <a class="link" href="GladeClipboardView.html#glade-clipboard-view-new" title="glade_clipboard_view_new ()">glade_clipboard_view_new</a>            (<a class="link" href="GladeClipboard.html" title="GladeClipboard">GladeClipboard</a> *clipboard);
+void                <a class="link" href="GladeClipboardView.html#glade-clipboard-view-add" title="glade_clipboard_view_add ()">glade_clipboard_view_add</a>            (<a class="link" href="GladeClipboardView.html" title="GladeClipboardView">GladeClipboardView</a> *view,
+                                                         <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);
+void                <a class="link" href="GladeClipboardView.html#glade-clipboard-view-remove" title="glade_clipboard_view_remove ()">glade_clipboard_view_remove</a>         (<a class="link" href="GladeClipboardView.html" title="GladeClipboardView">GladeClipboardView</a> *view,
+                                                         <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);
+void                <a class="link" href="GladeClipboardView.html#glade-clipboard-view-refresh-sel" title="glade_clipboard_view_refresh_sel ()">glade_clipboard_view_refresh_sel</a>    (<a class="link" href="GladeClipboardView.html" title="GladeClipboardView">GladeClipboardView</a> *view);
 </pre>
 </div>
-<div class="refsect1" title="Object Hierarchy">
+<div class="refsect1" lang="en">
 <a name="GladeClipboardView.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
   GObject
@@ -63,28 +69,28 @@
                                        +----GladeClipboardView
 </pre>
 </div>
-<div class="refsect1" title="Implemented Interfaces">
+<div class="refsect1" lang="en">
 <a name="GladeClipboardView.implemented-interfaces"></a><h2>Implemented Interfaces</h2>
 <p>
 GladeClipboardView implements
  AtkImplementorIface and  GtkBuildable.</p>
 </div>
-<div class="refsect1" title="Description">
+<div class="refsect1" lang="en">
 <a name="GladeClipboardView.description"></a><h2>Description</h2>
 <p>
 The <a class="link" href="GladeClipboardView.html" title="GladeClipboardView"><span class="type">GladeClipboardView</span></a> is a widget to view the <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> objects
 in the <a class="link" href="GladeClipboard.html" title="GladeClipboard"><span class="type">GladeClipboard</span></a>; the user can paste or delete objects on the clipboard.</p>
 </div>
-<div class="refsect1" title="Details">
+<div class="refsect1" lang="en">
 <a name="GladeClipboardView.details"></a><h2>Details</h2>
-<div class="refsect2" title="GladeClipboardView">
+<div class="refsect2" lang="en">
 <a name="GladeClipboardView-struct"></a><h3>GladeClipboardView</h3>
 <pre class="programlisting">typedef struct _GladeClipboardView GladeClipboardView;</pre>
 </div>
 <hr>
-<div class="refsect2" title="glade_clipboard_view_new ()">
+<div class="refsect2" lang="en">
 <a name="glade-clipboard-view-new"></a><h3>glade_clipboard_view_new ()</h3>
-<pre class="programlisting"><span class="returnvalue">GtkWidget</span> *         glade_clipboard_view_new            (<em class="parameter"><code><a class="link" href="GladeClipboard.html" title="GladeClipboard"><span class="type">GladeClipboard</span></a> *clipboard</code></em>);</pre>
+<pre class="programlisting">GtkWidget *         glade_clipboard_view_new            (<a class="link" href="GladeClipboard.html" title="GladeClipboard">GladeClipboard</a> *clipboard);</pre>
 <p>
 Create a new <a class="link" href="GladeClipboardView.html" title="GladeClipboardView"><span class="type">GladeClipboardView</span></a> widget for <em class="parameter"><code>clipboard</code></em>.</p>
 <div class="variablelist"><table border="0">
@@ -92,7 +98,7 @@ Create a new <a class="link" href="GladeClipboardView.html" title="GladeClipboar
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>clipboard</code></em> :</span></p></td>
-<td>a <a class="link" href="GladeClipboard.html" title="GladeClipboard"><span class="type">GladeClipboard</span></a>
+<td> a <a class="link" href="GladeClipboard.html" title="GladeClipboard"><span class="type">GladeClipboard</span></a>
 </td>
 </tr>
 <tr>
@@ -104,10 +110,10 @@ Create a new <a class="link" href="GladeClipboardView.html" title="GladeClipboar
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="glade_clipboard_view_add ()">
+<div class="refsect2" lang="en">
 <a name="glade-clipboard-view-add"></a><h3>glade_clipboard_view_add ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                glade_clipboard_view_add            (<em class="parameter"><code><a class="link" href="GladeClipboardView.html" title="GladeClipboardView"><span class="type">GladeClipboardView</span></a> *view</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> *widget</code></em>);</pre>
+<pre class="programlisting">void                glade_clipboard_view_add            (<a class="link" href="GladeClipboardView.html" title="GladeClipboardView">GladeClipboardView</a> *view,
+                                                         <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
 <p>
 Adds <em class="parameter"><code>widget</code></em> to <em class="parameter"><code>view</code></em>.</p>
 <div class="variablelist"><table border="0">
@@ -115,34 +121,34 @@ Adds <em class="parameter"><code>widget</code></em> to <em class="parameter"><co
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>view</code></em> :</span></p></td>
-<td>a <a class="link" href="GladeClipboardView.html" title="GladeClipboardView"><span class="type">GladeClipboardView</span></a>
+<td> a <a class="link" href="GladeClipboardView.html" title="GladeClipboardView"><span class="type">GladeClipboardView</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>widget</code></em> :</span></p></td>
-<td>a <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>
+<td> a <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>
 </td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="glade_clipboard_view_remove ()">
+<div class="refsect2" lang="en">
 <a name="glade-clipboard-view-remove"></a><h3>glade_clipboard_view_remove ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                glade_clipboard_view_remove         (<em class="parameter"><code><a class="link" href="GladeClipboardView.html" title="GladeClipboardView"><span class="type">GladeClipboardView</span></a> *view</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> *widget</code></em>);</pre>
+<pre class="programlisting">void                glade_clipboard_view_remove         (<a class="link" href="GladeClipboardView.html" title="GladeClipboardView">GladeClipboardView</a> *view,
+                                                         <a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a> *widget);</pre>
 </div>
 <hr>
-<div class="refsect2" title="glade_clipboard_view_refresh_sel ()">
+<div class="refsect2" lang="en">
 <a name="glade-clipboard-view-refresh-sel"></a><h3>glade_clipboard_view_refresh_sel ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                glade_clipboard_view_refresh_sel    (<em class="parameter"><code><a class="link" href="GladeClipboardView.html" title="GladeClipboardView"><span class="type">GladeClipboardView</span></a> *view</code></em>);</pre>
+<pre class="programlisting">void                glade_clipboard_view_refresh_sel    (<a class="link" href="GladeClipboardView.html" title="GladeClipboardView">GladeClipboardView</a> *view);</pre>
 <p>
 Synchronizes the treeview selection to the clipboard selection.</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>view</code></em> :</span></p></td>
-<td>a <a class="link" href="GladeClipboardView.html" title="GladeClipboardView"><span class="type">GladeClipboardView</span></a>
+<td> a <a class="link" href="GladeClipboardView.html" title="GladeClipboardView"><span class="type">GladeClipboardView</span></a>
 </td>
 </tr></tbody>
 </table></div>
@@ -151,6 +157,6 @@ Synchronizes the treeview selection to the clipboard selection.</p>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14</div>
+          Generated by GTK-Doc V1.12</div>
 </body>
 </html>

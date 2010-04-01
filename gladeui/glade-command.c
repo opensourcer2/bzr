@@ -1889,8 +1889,9 @@ glade_command_break_references (GladeProject *project, GList *widgets)
 void
 glade_command_paste(GList *widgets, GladeWidget *parent, GladePlaceholder *placeholder)
 {
-	GList *list, *copied_widgets = NULL;
+	GList *l, *list, *copied_widgets = NULL;
 	GladeWidget *copied_widget = NULL;
+	GladeProperty *property;
 /* 	GladeProject  *target_project; */
 	gboolean exact;
 	

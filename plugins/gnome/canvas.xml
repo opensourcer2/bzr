@@ -5,19 +5,19 @@
       <set-property-function>glade_gnome_canvas_set_property</set-property-function>
       <properties>
         <property id="scroll-x1" name="Min X">
-	  <tooltip>The minimum X coordinate</tooltip>
+	  <tooltip>The minimum x coordinate</tooltip>
 	  <spec>glade_standard_float_spec</spec>
 	</property>
         <property id="scroll-y1" name="Min Y">
-	  <tooltip>The minimum Y coordinate</tooltip>
+	  <tooltip>The minimum y coordinate</tooltip>
 	  <spec>glade_standard_float_spec</spec>
 	</property>
         <property id="scroll-x2" name="Max X">
-	  <tooltip>The maximum X coordinate</tooltip>
+	  <tooltip>The maximum x coordinate</tooltip>
 	  <spec>glade_standard_float_spec</spec>
 	</property>
         <property id="scroll-y2" name="Max Y">
-	  <tooltip>The maximum Y coordinate</tooltip>
+	  <tooltip>The maximum y coordinate</tooltip>
 	  <spec>glade_standard_float_spec</spec>
 	</property> 
         <property id="pixels-per-unit" name="Pixels per unit">

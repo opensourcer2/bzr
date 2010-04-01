@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=glade3&component=general\n"
 "POT-Creation-Date: 2009-04-18 18:52+0000\n"
-"PO-Revision-Date: 2009-08-22 21:37+0300\n"
+"PO-Revision-Date: 2009-06-12 10:20+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -35,13 +35,13 @@ msgid "Output version information and exit"
 msgstr "Versiooniandmete väljastamine ja programmi töö lõpetamine"
 
 msgid "Disable Devhelp integration"
-msgstr "Devhelp-integratsiooni keelamine"
+msgstr "Devhelp'i integratsiooni keelamine"
 
 msgid "[FILE...]"
 msgstr "[FAIL...]"
 
 msgid "be verbose"
-msgstr "sisukama väljundi lubamine"
+msgstr ""
 
 msgid "Create or edit user interface designs for GTK+ or GNOME applications."
 msgstr "GTK+ ja GNOME rakenduste kasutajaliideste projekteerimine."
@@ -62,7 +62,7 @@ msgstr ""
 
 #, c-format
 msgid "Unable to open '%s', the file does not exist.\n"
-msgstr "Faili '%s' pole võimalik avada, seda faili ei ole olemas.\n"
+msgstr ""
 
 msgid "[Read Only]"
 msgstr "[Kirjutuskaitstud]"
@@ -72,7 +72,7 @@ msgid "Could not display the URL '%s'"
 msgstr "URL-i '%s' pole võimalik kuvada"
 
 msgid "No suitable web browser could be found."
-msgstr "Ei leitud sobilikku veebisirvijat."
+msgstr ""
 
 #. translators: referring to the action of activating a file named '%s'.
 #. *              we also indicate to users that the file may be read-only with
@@ -133,10 +133,10 @@ msgstr "Salvestamiseks pole avatud projekte"
 
 #, c-format
 msgid "Save changes to project \"%s\" before closing?"
-msgstr "Kas salvestada enne sulgemist projekti \"%s\" muudatused?"
+msgstr ""
 
 msgid "Your changes will be lost if you don't save them."
-msgstr "Kui sa muudatusi ei salvesta, siis lähevad need kaotsi."
+msgstr ""
 
 msgid "_Close without Saving"
 msgstr "Sulge _ilma salvestamata"
@@ -337,7 +337,7 @@ msgid "Display items as text only"
 msgstr "Kirjeid näidatakse ainult tekstina"
 
 msgid "Select"
-msgstr "Vali"
+msgstr ""
 
 msgid "Select widgets in the workspace"
 msgstr "Tööalalt vidinate valimine"
@@ -723,8 +723,10 @@ msgstr ""
 msgid "Locking %s by widget %s"
 msgstr ""
 
+#, fuzzy, c-format
+#| msgid "Undo: %s"
 msgid "Unlocking %s"
-msgstr ""
+msgstr "Unustamine: %s"
 
 #, c-format
 msgid "Unable to load image (%s)"
@@ -769,14 +771,16 @@ msgstr "_Omab kontekstipreefiksit"
 msgid "Whether or not the translatable string has a context prefix"
 msgstr "Kas tõlgitav string omab kontekstipreefiksit või mitte"
 
+#, fuzzy
+#| msgid "Comment for translators"
 msgid "Conte_xt for translation:"
-msgstr "_Tõlke kontekst:"
+msgstr "Kommentaar tõlkijatele"
 
 msgid "Co_mments for translators:"
 msgstr "_Kommentaarid tõlkijatele:"
 
 msgid "Select a file from the project resource directory"
-msgstr "Projekti ressursikataloogist faili valimine"
+msgstr ""
 
 msgid "Yes"
 msgstr "Jah"
@@ -790,17 +794,20 @@ msgstr "Nimi"
 msgid "Class"
 msgstr "Klass"
 
-#, c-format
+#, fuzzy, c-format
+#| msgid "Choose a %s in this project"
 msgid "Choose parentless %s(s) in this project"
-msgstr ""
+msgstr "Vali sellest projektist %s"
 
-#, c-format
+#, fuzzy, c-format
+#| msgid "Choose a %s in this project"
 msgid "Choose a parentless %s in this project"
-msgstr ""
+msgstr "Vali sellest projektist %s"
 
-#, c-format
+#, fuzzy, c-format
+#| msgid "Choose a %s in this project"
 msgid "Choose %s(s) in this project"
-msgstr ""
+msgstr "Vali sellest projektist %s"
 
 #, c-format
 msgid "Choose a %s in this project"
@@ -886,7 +893,7 @@ msgid "_Signals"
 msgstr "_Signaalid"
 
 msgid "View documentation for the selected widget"
-msgstr "Valitud vidina kohta dokumentatsiooni vaatamine"
+msgstr ""
 
 msgid "Reset widget properties to their defaults"
 msgstr "Vidinate omadustele nende vaikeväärtuste määramine"
@@ -932,10 +939,10 @@ msgid "_Properties:"
 msgstr "_Omadused:"
 
 msgid "_Select All"
-msgstr "Vali _kõik"
+msgstr ""
 
 msgid "_Unselect All"
-msgstr "_Tühjenda valik"
+msgstr ""
 
 #. Description
 msgid "Property _Description:"
@@ -949,25 +956,25 @@ msgid "X position property"
 msgstr "X-asukoha omadus"
 
 msgid "The property used to set the X position of a child object"
-msgstr "Alamobjekti x-asukoha määramiseks kasutatav omadus"
+msgstr "Lapsobjekti x-asukoha määramiseks kasutatav omadus"
 
 msgid "Y position property"
 msgstr "Y-asukoha omadus"
 
 msgid "The property used to set the Y position of a child object"
-msgstr "Alamobjekti y-asukoha määramiseks kasutatav omadus"
+msgstr "Lapsobjekti y-asukoha määramiseks kasutatav omadus"
 
 msgid "Width property"
 msgstr "Laiuse omadus"
 
 msgid "The property used to set the width of a child object"
-msgstr "Alamobjekti laiuse määramiseks kasutatav omadus"
+msgstr "Lapsobjekti laiuse määramiseks kasutatav omadus"
 
 msgid "Height property"
 msgstr "Kõrguse omadus"
 
 msgid "The property used to set the height of a child object"
-msgstr "Alamobjekti kõrguse määramiseks kasutatav omadus"
+msgstr "Lapsobjekti kõrguse määramiseks kasutatav omadus"
 
 msgid "Can resize"
 msgstr ""
@@ -978,8 +985,10 @@ msgstr ""
 msgid "Widget selector"
 msgstr "Vidinavalija"
 
+#, fuzzy
+#| msgid "The name of the widget"
 msgid "Create root widget"
-msgstr ""
+msgstr "Vidina nimi"
 
 msgid "_Add widget here"
 msgstr ""
@@ -991,7 +1000,7 @@ msgid "_Select"
 msgstr "_Vali"
 
 msgid "Read _documentation"
-msgstr "Vaata _dokumentatsiooni"
+msgstr ""
 
 msgid "Set default value"
 msgstr ""
@@ -1031,7 +1040,7 @@ msgstr ""
 
 #, c-format
 msgid "%s preferences"
-msgstr "Projekti \"%s\" eelistused"
+msgstr ""
 
 #. ******************************************************************
 #. Verify code here (versioning, incompatability checks)
@@ -1174,7 +1183,7 @@ msgstr "Projektis %s on vead, kas salvestada ikkagi?"
 
 #, c-format
 msgid "Project %s has deprecated widgets and/or version mismatches."
-msgstr "Projektil \"%s\" pole aegunud vidinaid ja/või versiooni vastuolusid."
+msgstr ""
 
 #, c-format
 msgid "Unsaved %i"
@@ -1182,10 +1191,10 @@ msgstr "Salvestamata %i"
 
 #, c-format
 msgid "Project %s has no deprecated widgets or version mismatches."
-msgstr "Projektil \"%s\" pole aegunud vidinaid ega versiooni vastuolusid."
+msgstr ""
 
 msgid "Set options in your project"
-msgstr "Määra oma projekti valikud"
+msgstr ""
 
 #. Project format
 msgid "Project file format:"
@@ -1195,39 +1204,43 @@ msgstr "Projektifaili vorming:"
 msgid "Object names are unique:"
 msgstr "Objektide nimed on unikaalsed:"
 
+#, fuzzy
+#| msgid "The active project"
 msgid "within the project"
-msgstr "projekti ulatuses"
+msgstr "Aktiivne projekt"
 
+#, fuzzy
+#| msgid "Toplevels"
 msgid "inside toplevels"
-msgstr "ülemiste tasemete ulatuses"
+msgstr "Ülemine tase"
 
 #. Resource path
 msgid "Image resources are loaded locally:"
-msgstr "Pildiressursid laaditakse lokaalselt:"
+msgstr ""
 
 #. Project directory...
 msgid "From the project directory"
-msgstr "Projektikataloogist"
+msgstr ""
 
 msgid "From a project relative directory"
-msgstr "Kataloogist projektikataloogi suhtes"
+msgstr ""
 
 msgid "From this directory"
-msgstr "Määratud kataloogist"
+msgstr ""
 
 msgid "Choose a path to load image resources"
-msgstr "Pildiressursside laadimise raja valimine"
+msgstr ""
 
 #. Target versions
 msgid "Toolkit version(s) required:"
-msgstr "Vajalikud tööriistakomplektide versioonid:"
+msgstr ""
 
 #, c-format
 msgid "%s catalog"
 msgstr "%s kataloog"
 
 msgid "Verify versions and deprecations:"
-msgstr "Verifitseeri versioone ja aegumisi:"
+msgstr ""
 
 msgid "The GladePropertyClass for this property"
 msgstr "Selle omaduse GladePropertyClass"
@@ -1397,8 +1410,10 @@ msgstr "Mall"
 msgid "A GladeWidget template to base a new widget on"
 msgstr ""
 
+#, fuzzy
+#| msgid "Template"
 msgid "Exact Template"
-msgstr ""
+msgstr "Mall"
 
 msgid "Whether we are creating an exact duplicate when using a template"
 msgstr ""
@@ -1640,9 +1655,11 @@ msgctxt "textattr"
 msgid "Strikethrough Color"
 msgstr "Läbijoonimise värvus"
 
+#, fuzzy
+#| msgid "Scale"
 msgctxt "textattr"
 msgid "Scale"
-msgstr ""
+msgstr "Liugur"
 
 #. XXX Interesting... can we get the defaults ? what can we do to let the user
 #. * unset the value ??
@@ -1761,8 +1778,10 @@ msgstr "<kohandatud>"
 msgid "Tool Item"
 msgstr ""
 
+#, fuzzy
+#| msgid "_Packing"
 msgid "Packing"
-msgstr ""
+msgstr "_Pakend"
 
 msgid "Menu Item"
 msgstr "Menüükirje"
@@ -1892,30 +1911,36 @@ msgstr ""
 msgid "%s is set to manipulate %s directly"
 msgstr ""
 
+#, fuzzy
+#| msgid "Tree View"
 msgid "Tree View Column"
-msgstr ""
+msgstr "Puuvaade"
 
 msgid "Cell Renderer"
 msgstr ""
 
 msgid "Properties and Attributes"
-msgstr "Omadused ja rekvisiidid"
+msgstr ""
 
 msgid "Common Properties and Attributes"
-msgstr "Üldised omadused ja rekvisiidid"
+msgstr ""
 
 #. Text of the textview
 msgid "Text"
 msgstr "Tekst"
 
+#, fuzzy
+#| msgid "Accelerators"
 msgid "Accelerator"
-msgstr ""
+msgstr "Kiirklahvid"
 
 msgid "Combo"
 msgstr ""
 
+#, fuzzy
+#| msgid "Step inc:"
 msgid "Spin"
-msgstr ""
+msgstr "Sammu suurus:"
 
 msgid "Pixbuf"
 msgstr ""
@@ -1968,20 +1993,28 @@ msgstr "Selle vidina kohta käiva vihje tekst"
 msgid "About Dialog"
 msgstr "Dialoog \"Programmist lähemalt\""
 
+#, fuzzy
+#| msgid "Accelerators"
 msgid "Accel Group"
-msgstr ""
+msgstr "Kiirklahvid"
 
 msgid "Accel Label"
 msgstr ""
 
+#, fuzzy
+#| msgid "Accelerator Key"
 msgid "Accelerator Mode column"
-msgstr ""
+msgstr "Kiirklahv"
 
+#, fuzzy
+#| msgid "Accelerator Key"
 msgid "Accelerator Modifiers column"
-msgstr ""
+msgstr "Kiirklahv"
 
+#, fuzzy
+#| msgid "Accelerator Key"
 msgid "Accelerator Renderer"
-msgstr ""
+msgstr "Kiirklahv"
 
 #. Accelerators
 msgid "Accelerators"
@@ -1994,11 +2027,15 @@ msgstr "Hõlbustuse kirjeldus"
 msgid "Accessible Name"
 msgstr "Hõlbustuse nimi"
 
+#, fuzzy
+#| msgid "Actions"
 msgid "Action"
-msgstr "Tegevus"
+msgstr "Tegevused"
 
+#, fuzzy
+#| msgid "Actions"
 msgid "Action Group"
-msgstr "Tegevute grupp"
+msgstr "Tegevused"
 
 msgid "Activatable column"
 msgstr ""
@@ -2007,8 +2044,10 @@ msgstr ""
 msgid "Activate"
 msgstr ""
 
+#, fuzzy
+#| msgid "Actions"
 msgid "Active column"
-msgstr ""
+msgstr "Tegevused"
 
 msgid "Add Parent"
 msgstr ""
@@ -2025,8 +2064,10 @@ msgstr ""
 msgid "Alignment"
 msgstr "Joondus"
 
+#, fuzzy
+#| msgid "Alignment"
 msgid "Alignment column"
-msgstr ""
+msgstr "Joondus"
 
 msgid "All"
 msgstr "Kõik"
@@ -2034,8 +2075,10 @@ msgstr "Kõik"
 msgid "All Events"
 msgstr "Kõik sündmused"
 
+#, fuzzy
+#| msgid "All Files"
 msgid "All Modifiers"
-msgstr ""
+msgstr "Kõik failid"
 
 msgid "Alt Key"
 msgstr "Alt-klahv"
@@ -2064,17 +2107,23 @@ msgstr "Abiline"
 msgid "Attributes"
 msgstr "Rekvisiidid"
 
+#, fuzzy
+#| msgid "Attributes"
 msgid "Attributes column"
-msgstr "Rekvisiitide veerg"
+msgstr "Rekvisiidid"
 
 msgid "Automatic"
 msgstr "Automaatne"
 
+#, fuzzy
+#| msgid "Background Color"
 msgid "Background Color Name column"
-msgstr "Taustavärvuse nime veerg"
+msgstr "Taustavärvus"
 
+#, fuzzy
+#| msgid "Background Color"
 msgid "Background Color column"
-msgstr "Taustavärvuse veerg"
+msgstr "Taustavärvus"
 
 msgid "Before"
 msgstr ""
@@ -2128,11 +2177,15 @@ msgstr "Kalender"
 msgid "Cancel"
 msgstr ""
 
+#, fuzzy
+#| msgid "Background Color"
 msgid "Cell Background Color column"
-msgstr "Lahtri taustavärvuse veerg"
+msgstr "Taustavärvus"
 
+#, fuzzy
+#| msgid "Contents Background Color"
 msgid "Cell Background Color name column"
-msgstr "Lahtri taustavärvuse nime veerg"
+msgstr "Sisu taustavärvus"
 
 msgid "Center"
 msgstr "Keskel"
@@ -2144,7 +2197,7 @@ msgid "Centimeters"
 msgstr ""
 
 msgid "Character"
-msgstr "Märk"
+msgstr ""
 
 msgid "Check Button"
 msgstr "Märkeruut"
@@ -2189,8 +2242,10 @@ msgstr ""
 msgid "Composite Widgets"
 msgstr "Liitvidinad"
 
+#, fuzzy
+#| msgid "_Contents"
 msgid "Condensed"
-msgstr ""
+msgstr "_Sisukord"
 
 msgid "Confirm"
 msgstr ""
@@ -2218,7 +2273,7 @@ msgid "Controller For"
 msgstr ""
 
 msgid "Create Folder"
-msgstr "Kataloogi loomine"
+msgstr ""
 
 msgid "Curve"
 msgstr ""
@@ -2328,8 +2383,10 @@ msgstr ""
 msgid "Enter a list of values to be applied on each row"
 msgstr ""
 
+#, fuzzy
+#| msgid "Font Selection"
 msgid "Entry Completion"
-msgstr ""
+msgstr "Kirjatüübi valimine"
 
 msgid "Error"
 msgstr "Viga"
@@ -2346,8 +2403,10 @@ msgstr ""
 msgid "Expand"
 msgstr ""
 
+#, fuzzy
+#| msgid "Expander"
 msgid "Expanded"
-msgstr "Laiendatud"
+msgstr "Laiendaja"
 
 msgid "Expander"
 msgstr "Laiendaja"
@@ -2361,8 +2420,10 @@ msgstr ""
 msgid "Extra Condensed"
 msgstr ""
 
+#, fuzzy
+#| msgid "Expander"
 msgid "Extra Expanded"
-msgstr ""
+msgstr "Laiendaja"
 
 msgid "Family column"
 msgstr ""
@@ -2382,8 +2443,10 @@ msgstr "Faili valimise dialoog"
 msgid "File Chooser Widget"
 msgstr "Faili valimise vidin"
 
+#, fuzzy
+#| msgid "Libglade Files"
 msgid "File Filter"
-msgstr "Failifilter"
+msgstr "Libglade'i failid"
 
 msgid "File Name"
 msgstr "Faili nimi"
@@ -2415,8 +2478,10 @@ msgstr ""
 msgid "Font Button"
 msgstr "Kirjatüübi valimise nupp"
 
+#, fuzzy
+#| msgid "Property _Description:"
 msgid "Font Description column"
-msgstr ""
+msgstr "Omaduse _kirjeldus:"
 
 msgid "Font Selection"
 msgstr "Kirjatüübi valimine"
@@ -2424,14 +2489,20 @@ msgstr "Kirjatüübi valimine"
 msgid "Font Selection Dialog"
 msgstr "Kirjatüübi valimise dialoog"
 
+#, fuzzy
+#| msgid "Font Selection"
 msgid "Font column"
-msgstr ""
+msgstr "Kirjatüübi valimine"
 
+#, fuzzy
+#| msgid "Foreground Color"
 msgid "Foreground Color Name column"
-msgstr ""
+msgstr "Teksti värvus"
 
+#, fuzzy
+#| msgid "Foreground Color"
 msgid "Foreground Color column"
-msgstr ""
+msgstr "Teksti värvus"
 
 msgid "Forth Mouse Button"
 msgstr "Hiire neljas nupp"
@@ -2449,7 +2520,7 @@ msgid "Grow Only"
 msgstr ""
 
 msgid "Gtk"
-msgstr "Gtk"
+msgstr ""
 
 msgid "Gtk+ Obsolete"
 msgstr "Gtk+ (aegunud)"
@@ -2470,11 +2541,15 @@ msgstr ""
 msgid "Horizontal"
 msgstr "Rõhtne"
 
+#, fuzzy
+#| msgid "Horizontal Panes"
 msgid "Horizontal Alignment"
-msgstr "Rõhtjoondus"
+msgstr "Rõhtpaanid"
 
+#, fuzzy
+#| msgid "Horizontal Panes"
 msgid "Horizontal Alignment column"
-msgstr ""
+msgstr "Rõhtpaanid"
 
 msgid "Horizontal Box"
 msgstr "Rõhtne kast"
@@ -2482,11 +2557,15 @@ msgstr "Rõhtne kast"
 msgid "Horizontal Button Box"
 msgstr "Rõhtne nupukast"
 
+#, fuzzy
+#| msgid "Horizontal Panes"
 msgid "Horizontal Padding"
-msgstr "Rõhtpolsterdus"
+msgstr "Rõhtpaanid"
 
+#, fuzzy
+#| msgid "Horizontal Panes"
 msgid "Horizontal Padding column"
-msgstr ""
+msgstr "Rõhtpaanid"
 
 msgid "Horizontal Panes"
 msgstr "Rõhtpaanid"
@@ -2648,8 +2727,10 @@ msgstr ""
 msgid "Invisible Char Set"
 msgstr ""
 
+#, fuzzy
+#| msgid "Static"
 msgid "Italic"
-msgstr "Kursiiv"
+msgstr "Staatiline"
 
 msgid "Items"
 msgstr "Kirjed"
@@ -2705,14 +2786,20 @@ msgstr ""
 msgid "List Store"
 msgstr ""
 
+#, fuzzy
+#| msgid "Select widgets in the workspace"
 msgid "List of widgets in this group"
-msgstr "Selle grupi vidinate kuvamine"
+msgstr "Tööalalt vidinate valimine"
 
+#, fuzzy
+#| msgid "Locked"
 msgid "Lock Key"
-msgstr ""
+msgstr "Lukus"
 
+#, fuzzy
+#| msgid "Lower:"
 msgid "Low"
-msgstr ""
+msgstr "Väikseim:"
 
 msgid "Markup column"
 msgstr ""
@@ -2783,8 +2870,10 @@ msgstr "Kirjete arv"
 msgid "Number of pages"
 msgstr "Kaartide arv"
 
+#, fuzzy
+#| msgid "The number of pages in the notebook"
 msgid "Number of pages in this assistant"
-msgstr ""
+msgstr "Märkmiku lehtede arv"
 
 msgid "Object instance's name formatted for assistive technology access"
 msgstr ""
@@ -2805,13 +2894,15 @@ msgid "On"
 msgstr ""
 
 msgid "Open"
-msgstr "Avamine"
+msgstr ""
 
 msgid "Option Menu"
 msgstr ""
 
+#, fuzzy
+#| msgid "Creation Function"
 msgid "Orientation column"
-msgstr ""
+msgstr "Loomisfunktsioon"
 
 msgid "Other"
 msgstr "Muu"
@@ -2841,7 +2932,7 @@ msgid "Pixels"
 msgstr ""
 
 msgid "Pointer Motion"
-msgstr "Kursori liikumine"
+msgstr ""
 
 msgid "Pointer Motion Hint"
 msgstr ""
@@ -2865,8 +2956,10 @@ msgstr ""
 msgid "Primary Icon Activatable"
 msgstr ""
 
+#, fuzzy
+#| msgid "Icon Name"
 msgid "Primary Icon Name"
-msgstr "Peaikooni nimi"
+msgstr "Ikooni nimi"
 
 msgid "Primary Icon Pixbuf"
 msgstr ""
@@ -2886,8 +2979,10 @@ msgstr ""
 msgid "Progress Bar"
 msgstr "Edenemisriba"
 
+#, fuzzy
+#| msgid "Progress Bar"
 msgid "Progress Fraction"
-msgstr ""
+msgstr "Edenemisriba"
 
 msgid "Progress Pulse Step"
 msgstr ""
@@ -2913,8 +3008,10 @@ msgstr "Küsimus"
 msgid "Queue"
 msgstr ""
 
+#, fuzzy
+#| msgid "Radio Button"
 msgid "Radio Action"
-msgstr ""
+msgstr "Raadionupp"
 
 msgid "Radio Button"
 msgstr "Raadionupp"
@@ -2925,14 +3022,18 @@ msgstr "Raadionupuga menüükirje"
 msgid "Radio Tool Button"
 msgstr ""
 
+#, fuzzy
+#| msgid "Radio Button"
 msgid "Radio column"
-msgstr ""
+msgstr "Raadionupp"
 
 msgid "Range"
-msgstr "Vahemik"
-
-msgid "Recent Action"
 msgstr ""
+
+#, fuzzy
+#| msgid "Redo the last action"
+msgid "Recent Action"
+msgstr "Viimati unustatud tegevuse uuestitegemine"
 
 msgid "Recent Chooser"
 msgstr "Hiljutiste kirjete valija"
@@ -2941,8 +3042,10 @@ msgid "Recent Chooser Dialog"
 msgstr "Hiljutiste kirjete valimise dialoog"
 
 #. GtkActivatable
+#, fuzzy
+#| msgid "Redo the last action"
 msgid "Related Action"
-msgstr ""
+msgstr "Viimati unustatud tegevuse uuestitegemine"
 
 #. Atk release property
 msgid "Release"
@@ -2982,13 +3085,15 @@ msgid "Ruler"
 msgstr ""
 
 msgid "Save"
-msgstr "Salvestamine"
+msgstr ""
 
 msgid "Scale Button"
 msgstr "Skaleerimisnupp"
 
+#, fuzzy
+#| msgid "Scale Button"
 msgid "Scale column"
-msgstr ""
+msgstr "Skaleerimisnupp"
 
 msgid "Scroll"
 msgstr "Kerimine"
@@ -3003,7 +3108,7 @@ msgid "Secondary Icon Activatable"
 msgstr ""
 
 msgid "Secondary Icon Name"
-msgstr "Teisese ikooni nimi"
+msgstr ""
 
 msgid "Secondary Icon Pixbuf"
 msgstr ""
@@ -3026,8 +3131,10 @@ msgstr "Kataloogi valimine"
 msgid "Semi Condensed"
 msgstr ""
 
+#, fuzzy
+#| msgid "Expander"
 msgid "Semi Expanded"
-msgstr ""
+msgstr "Laiendaja"
 
 msgid "Sensitive column"
 msgstr ""
@@ -3144,8 +3251,10 @@ msgstr ""
 msgid "Stretch column"
 msgstr ""
 
+#, fuzzy
+#| msgid "Strikethrough Color"
 msgid "Strikethrough column"
-msgstr ""
+msgstr "Läbijoonimise värvus"
 
 msgid "Structure"
 msgstr "Struktuur"
@@ -3183,11 +3292,15 @@ msgstr "Teksti sisestuskast"
 msgid "Text Horizontal Alignment column"
 msgstr ""
 
+#, fuzzy
+#| msgid "Text Entry"
 msgid "Text Renderer"
-msgstr ""
+msgstr "Teksti sisestuskast"
 
+#, fuzzy
+#| msgid "Text"
 msgid "Text Tag"
-msgstr ""
+msgstr "Tekst"
 
 msgid "Text Tag Table"
 msgstr ""
@@ -3199,13 +3312,15 @@ msgid "Text View"
 msgstr "Tekstivaade"
 
 msgid "Text below icons"
-msgstr "Tekst ikoonide all"
-
-msgid "Text column"
 msgstr ""
 
+#, fuzzy
+#| msgid "_Text only"
+msgid "Text column"
+msgstr "Ainult _tekst"
+
 msgid "Text only"
-msgstr "Ainult tekst"
+msgstr ""
 
 msgid "The column in the model to load the value from"
 msgstr ""
@@ -3254,8 +3369,10 @@ msgstr ""
 msgid "Third Mouse Button"
 msgstr "Hiire kolmas nupp"
 
+#, fuzzy
+#| msgid "Actions"
 msgid "Toggle Action"
-msgstr ""
+msgstr "Tegevused"
 
 msgid "Toggle Button"
 msgstr ""
@@ -3296,8 +3413,10 @@ msgstr "Ülevalt alla"
 msgid "Toplevels"
 msgstr "Ülemine tase"
 
+#, fuzzy
+#| msgid "Tree View"
 msgid "Tree Model"
-msgstr "Puumudel"
+msgstr "Puuvaade"
 
 msgid "Tree Model Filter"
 msgstr ""
@@ -3305,11 +3424,15 @@ msgstr ""
 msgid "Tree Model Sort"
 msgstr ""
 
+#, fuzzy
+#| msgid "File Selection"
 msgid "Tree Selection"
-msgstr "Puuvalik"
+msgstr "Faili valimine"
 
+#, fuzzy
+#| msgid "Tree View"
 msgid "Tree Store"
-msgstr ""
+msgstr "Puuvaade"
 
 msgid "Tree View"
 msgstr "Puuvaade"
@@ -3320,17 +3443,23 @@ msgstr ""
 msgid "Ultra Condensed"
 msgstr ""
 
+#, fuzzy
+#| msgid "Expander"
 msgid "Ultra Expanded"
-msgstr ""
+msgstr "Laiendaja"
 
+#, fuzzy
+#| msgid "Underline Color"
 msgid "Underline column"
-msgstr ""
+msgstr "Allajoonimise värvus"
 
 msgid "Up"
 msgstr "Üleval"
 
+#, fuzzy
+#| msgid "Palette _Appearance"
 msgid "Use Action Appearance"
-msgstr ""
+msgstr "Paleti _välimus"
 
 msgid "Use Underline"
 msgstr ""
@@ -3348,8 +3477,10 @@ msgstr ""
 msgid "Vertical"
 msgstr "Püstine"
 
+#, fuzzy
+#| msgid "Vertical Panes"
 msgid "Vertical Alignment"
-msgstr "Püstjoondus"
+msgstr "Püstpaanid"
 
 msgid "Vertical Alignment column"
 msgstr ""
@@ -3360,11 +3491,15 @@ msgstr "Püstine kast"
 msgid "Vertical Button Box"
 msgstr "Püstine nupukast"
 
+#, fuzzy
+#| msgid "Vertical Panes"
 msgid "Vertical Padding"
-msgstr "Püstpolsterdus"
+msgstr "Püstpaanid"
 
+#, fuzzy
+#| msgid "Vertical Panes"
 msgid "Vertical Padding column"
-msgstr ""
+msgstr "Püstpaanid"
 
 msgid "Vertical Panes"
 msgstr "Püstpaanid"
@@ -3466,8 +3601,10 @@ msgstr ""
 msgid "Entry Editable"
 msgstr ""
 
+#, fuzzy
+#| msgid "Whether this property is translatable or not"
 msgid "Whether the entry is editable"
-msgstr ""
+msgstr "Kas see omadus on tõlgitav või mitte"
 
 #, c-format
 msgid ""
@@ -3522,8 +3659,10 @@ msgstr ""
 msgid "Add custom button content"
 msgstr ""
 
+#, fuzzy
+#| msgid "Check Button"
 msgid "Stock button"
-msgstr ""
+msgstr "Märkeruut"
 
 msgid "Label with optional image"
 msgstr ""
@@ -3545,14 +3684,18 @@ msgid "Setting %s to use an image from the icon theme"
 msgstr ""
 
 #. Label area frame...
+#, fuzzy
+#| msgid "Label"
 msgid "Edit Label"
-msgstr ""
+msgstr "Silt"
 
 #. Image area frame...
 #. Image content frame...
 #. Internal Image area...
+#, fuzzy
+#| msgid "Image"
 msgid "Edit Image"
-msgstr ""
+msgstr "Pilt"
 
 #, c-format
 msgid "Setting %s to use an image from filename"
@@ -3624,8 +3767,10 @@ msgid "Setting %s to use specific pango word wrapping"
 msgstr ""
 
 #. Label appearance...
+#, fuzzy
+#| msgid "Palette _Appearance"
 msgid "Edit label appearance"
-msgstr ""
+msgstr "Paleti _välimus"
 
 #. Label formatting...
 msgid "Format label"
@@ -3692,11 +3837,12 @@ msgstr "Peamine ikoon"
 
 #. Secondary icon...
 msgid "Secondary icon"
-msgstr "Teisene ikoon"
+msgstr "Teisejärguline ikoon"
 
-#, c-format
+#, fuzzy, c-format
+#| msgid "_Settings"
 msgid "Setting %s action"
-msgstr ""
+msgstr "_Sätted"
 
 #, c-format
 msgid "Setting %s to use action appearance"
@@ -3844,7 +3990,7 @@ msgid "Monday First"
 msgstr "Algab esmaspäevaga"
 
 msgid "Padding"
-msgstr "Polsterdus"
+msgstr ""
 
 msgid "Pixmap"
 msgstr ""
@@ -3892,7 +4038,7 @@ msgid "Top Watermark"
 msgstr ""
 
 msgid "Unknown"
-msgstr "Tundmatu"
+msgstr ""
 
 msgid "Use Alpha"
 msgstr ""

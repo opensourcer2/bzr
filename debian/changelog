@@ -1,3 +1,12 @@
+glade-3 (3.7.0.is.3.6.7-0ubuntu1) lucid; urgency=low
+
+  * Reverting to 3.6.x: 3.7.0 can corrupt some .ui file in complex cases
+    and GNOME finally choosed 3.6.7 for GNOME 2.30
+  * readd 02_spinbutton-adjustment.patch and 03_fix-vbox-orientation.patch,
+    revert libgtk2.0-dev dep
+
+ -- Didier Roche <didrocks@ubuntu.com>  Thu, 01 Apr 2010 12:28:03 +0200
+
 glade-3 (3.7.0-0ubuntu1) lucid; urgency=low
 
   * New upstream release:

@@ -44,9 +44,6 @@ struct _GladeEntryEditor
 
 	GtkWidget *embed;
 
-	GtkWidget *text_radio;
-	GtkWidget *buffer_radio;
-
 	GtkWidget *primary_pixbuf_radio;
 	GtkWidget *primary_stock_radio;
 	GtkWidget *primary_icon_name_radio;
