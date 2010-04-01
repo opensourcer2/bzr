@@ -35,6 +35,7 @@
 enum
 {
 	COLUMN_NAME,
+	COLUMN_GTYPE,
 	COLUMN_COLUMN_NAME,
 	COLUMN_TYPE_EDITABLE,
 	COLUMN_NAME_EDITABLE,
@@ -46,9 +47,48 @@ enum
 static GtkTreeModel *types_model = NULL;
 
 static gint 
-find_by_type_name (const gchar *a, const gchar *b)
+find_by_type (GType *a, GType *b)
 {
-	return strcmp (a, b);
+	return *a - *b;
+}
+
+static gint
+type_alpha_sort (GType *a, GType *b)
+{
+	return strcmp (g_type_name (*a), g_type_name (*b));
+}
+
+static GType 
+lookup_type (const gchar *type_name)
+{
+	GtkTreeIter  iter;
+	gchar       *iter_type_name;
+	GType        type = 0, iter_type;
+
+	if (gtk_tree_model_get_iter_first (types_model, &iter))
+	{
+		do 
+		{
+			iter_type_name = NULL;
+			gtk_tree_model_get (types_model, &iter,
+					    COLUMN_NAME, &iter_type_name,
+					    COLUMN_GTYPE, &iter_type, 
+					    -1);
+			g_assert (iter_type_name);
+
+			if (strcmp (iter_type_name, type_name) == 0)
+			{
+				type = iter_type;
+				g_free (iter_type_name);
+				break;
+			}
+			
+			g_free (iter_type_name);
+
+		}
+		while (gtk_tree_model_iter_next (types_model, &iter));
+	}
+	return type;
 }
 
 static void
@@ -81,25 +121,29 @@ column_types_store_populate_enums_flags (GtkListStore *store,
 
 			if ((enums ? G_TYPE_IS_ENUM (pclass->pspec->value_type) : 
 			     G_TYPE_IS_FLAGS (pclass->pspec->value_type)) &&
-			    !g_list_find_custom (types, g_type_name (pclass->pspec->value_type), 
-						 (GCompareFunc)find_by_type_name))
-				types = g_list_prepend (types, g_strdup (g_type_name (pclass->pspec->value_type)));
-
+			    !g_list_find_custom (types, &(pclass->pspec->value_type), 
+						 (GCompareFunc)find_by_type))
+			{
+				types = g_list_prepend (types, 
+							g_memdup (&(pclass->pspec->value_type), 
+								  sizeof (GType)));
+			}
 		}
 	}
 	g_list_free (adaptors);
 
-	types = g_list_sort (types, (GCompareFunc)find_by_type_name);
+	types = g_list_sort (types, (GCompareFunc)type_alpha_sort);
 
 	for (l = types; l; l = l->next)
 	{
-		gchar *type_name = l->data;
+		GType *type = l->data;
 
 		gtk_list_store_append (store, &iter);
 		gtk_list_store_set (store, &iter,
-				    COLUMN_NAME, type_name,
+				    COLUMN_NAME, g_type_name (*type),
+				    COLUMN_GTYPE, *type,
 				    -1);
-		g_free (type_name);
+		g_free (type);
 	}
 	g_list_free (types);
 }
@@ -131,6 +175,7 @@ column_types_store_populate (GtkListStore *store)
 		gtk_list_store_append (store, &iter);
 		gtk_list_store_set (store, &iter,
 				    COLUMN_NAME, g_type_name (types[i]),
+				    COLUMN_GTYPE, types[i],
 				    -1);
 	}
 
@@ -148,7 +193,7 @@ glade_column_list_copy (GList *list)
 		GladeColumnType *new_data = g_new0(GladeColumnType, 1);
 		GladeColumnType *data = l->data;
 		
-		new_data->type_name = g_strdup (data->type_name);
+		new_data->type = data->type;
 		new_data->column_name = g_strdup (data->column_name);
 		
 		retval = g_list_prepend (retval, new_data);
@@ -160,7 +205,6 @@ glade_column_list_copy (GList *list)
 void
 glade_column_type_free (GladeColumnType *column)
 {
-	g_free (column->type_name);
 	g_free (column->column_name);
 	g_free (column);
 }
@@ -190,6 +234,7 @@ glade_column_list_find_column (GList *list, const gchar *column_name)
 
 	return column;
 }
+
 
 GType
 glade_column_type_list_get_type (void)
@@ -282,17 +327,12 @@ eprop_column_adjust_rows (GladeEditorProperty *eprop, GList *columns)
 	/* Add mising columns and reorder... */
 	for (list = g_list_last (columns); list; list = list->prev)
 	{
-		GType data_type;
-
 		column = list->data;
 
-		if ((data_type = g_type_from_name (column->type_name)) == G_TYPE_INVALID)
-			data_type = G_TYPE_POINTER;
-		
 		if ((idx = glade_model_data_column_index (data_tree, column->column_name)) < 0)
 		{
 			glade_model_data_insert_column (data_tree,
-							data_type,
+							column->type,
 							column->column_name,
 							0);
 
@@ -312,7 +352,7 @@ eprop_column_adjust_rows (GladeEditorProperty *eprop, GList *columns)
 
 static void
 eprop_column_append (GladeEditorProperty *eprop,
-		     const gchar *type_name,
+		     GType type,
 		     const gchar *column_name)
 {
 	GladeEPropColumnTypes *eprop_types = GLADE_EPROP_COLUMN_TYPES (eprop);
@@ -326,7 +366,7 @@ eprop_column_append (GladeEditorProperty *eprop,
 
 	data = g_new0 (GladeColumnType, 1);
 	data->column_name = g_strdup (column_name);
-	data->type_name   = g_strdup (type_name);
+	data->type = type;
 
 	columns = g_list_append (columns, data);
 
@@ -481,11 +521,12 @@ eprop_column_add_new (GladeEPropColumnTypes *eprop_types)
 
 static void
 eprop_column_load (GladeEPropColumnTypes *eprop_types,
-		   const gchar *type_name,
+		   GType type,
 		   const gchar *column_name)
 {
 	gtk_list_store_insert_with_values (eprop_types->store, NULL, -1,
-					   COLUMN_NAME, type_name,
+					   COLUMN_NAME, g_type_name (type),
+					   COLUMN_GTYPE, type,
 					   COLUMN_COLUMN_NAME, column_name,
 					   COLUMN_TYPE_EDITABLE, FALSE,
 					   COLUMN_NAME_EDITABLE, TRUE,
@@ -586,7 +627,7 @@ glade_eprop_column_types_load (GladeEditorProperty *eprop, GladeProperty *proper
 	{
 		GladeColumnType *data = l->data;
 		
-		eprop_column_load (eprop_types, data->type_name, data->column_name);
+		eprop_column_load (eprop_types, data->type, data->column_name);
 		glade_name_context_add_name (eprop_types->context, data->column_name);
 	}
 
@@ -691,15 +732,16 @@ column_type_edited (GtkCellRendererText *cell,
 {
 	GladeEPropColumnTypes *eprop_types = GLADE_EPROP_COLUMN_TYPES (eprop);
 	GtkTreeIter            iter;
+	GType                  type;
 	gchar                 *column_name;
 
 	if (!gtk_tree_model_get_iter_from_string (GTK_TREE_MODEL (eprop_types->store), &iter, path))
 		return;
 
-	if (type_name && type_name[0])
+	if (type_name && (type = lookup_type (type_name)) != 0)
 	{
 		column_name = glade_name_context_new_name (eprop_types->context, type_name);
-		eprop_column_append (eprop, type_name, column_name);
+		eprop_column_append (eprop, type, column_name);
 		g_free (column_name);
 	}
 	else
@@ -724,7 +766,7 @@ types_combo_editing_started (GtkCellRenderer       *renderer,
 	gtk_entry_completion_set_model (completion, types_model);
 	gtk_entry_completion_set_text_column (completion, 0);
 	gtk_entry_completion_set_inline_completion (completion, TRUE);
-	gtk_entry_set_completion (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (editable))), completion);
+	gtk_entry_set_completion (GTK_ENTRY (GTK_BIN (editable)->child), completion);
 	g_object_unref (G_OBJECT (completion));
 }
 
@@ -774,8 +816,9 @@ glade_eprop_column_types_create_input (GladeEditorProperty *eprop)
 		/* We make sure to do this after all the adaptors are parsed 
 		 * because we load the enums/flags from the adaptors
 		 */
-		types_model = (GtkTreeModel *)gtk_list_store_new (1,
-								  G_TYPE_STRING);
+		types_model = (GtkTreeModel *)gtk_list_store_new (2,
+								  G_TYPE_STRING,
+								  G_TYPE_GTYPE);
 
 		column_types_store_populate (GTK_LIST_STORE (types_model));
 	}
@@ -796,6 +839,7 @@ glade_eprop_column_types_create_input (GladeEditorProperty *eprop)
 	
 	eprop_types->store = gtk_list_store_new (N_COLUMNS,
 						 G_TYPE_STRING,
+						 G_TYPE_GTYPE,
 						 G_TYPE_STRING,
 						 G_TYPE_BOOLEAN,
 						 G_TYPE_BOOLEAN,
@@ -835,7 +879,7 @@ glade_eprop_column_types_create_input (GladeEditorProperty *eprop)
 			  G_CALLBACK (column_type_edited), eprop);
 
 	eprop_types->type_column = 
-		gtk_tree_view_column_new_with_attributes (_("Column type"), cell,
+		gtk_tree_view_column_new_with_attributes ("Column type", cell,
 							  "foreground", COLUMN_TYPE_FOREGROUND,
 							  "style", COLUMN_TYPE_STYLE,
 							  "editable", COLUMN_TYPE_EDITABLE,
@@ -857,7 +901,7 @@ glade_eprop_column_types_create_input (GladeEditorProperty *eprop)
 			  G_CALLBACK (types_name_editing_canceled), eprop);
 
 	eprop_types->name_column = 
-		gtk_tree_view_column_new_with_attributes (_("Column name"),  cell,
+		gtk_tree_view_column_new_with_attributes ("Column name",  cell,
 							  "editable", COLUMN_NAME_EDITABLE,
 							  "text", COLUMN_COLUMN_NAME,
 							  NULL);

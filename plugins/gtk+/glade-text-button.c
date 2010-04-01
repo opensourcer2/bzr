@@ -106,9 +106,7 @@ glade_text_button_key_press_event (GtkEntry    *entry,
 {
 	if (key_event->keyval == GDK_Escape)
 	{
-		g_object_get (entry,
-			      "editing-canceled", TRUE,
-			      NULL);
+		entry->editing_canceled = TRUE;
 		gtk_cell_editable_editing_done (GTK_CELL_EDITABLE (button));
 		gtk_cell_editable_remove_widget (GTK_CELL_EDITABLE (button));
 		

@@ -61,7 +61,7 @@ project_changed (GladeProject      *project,
 		 gboolean           execute,
 		 GladeStoreEditor  *store_editor)
 {
-	if (!gtk_widget_get_mapped (GTK_WIDGET (store_editor)))
+	if (!GTK_WIDGET_MAPPED (store_editor))
 		return;
 
 	/* Reload on all commands */
@@ -194,7 +194,7 @@ glade_store_editor_new (GladeWidgetAdaptor *adaptor,
 	gtk_container_add (GTK_CONTAINER (alignment), vbox);
 
 	/* Add descriptive label */
-	label = gtk_label_new (_("Define columns for your liststore; "
+	label = gtk_label_new (_("Define columns for your liststore, "
 				 "giving them meaningful names will help you to retrieve "
 				 "them when setting cell renderer attributes (press the "
 				 "Delete key to remove the selected column)"));
@@ -224,7 +224,7 @@ glade_store_editor_new (GladeWidgetAdaptor *adaptor,
 		gtk_container_add (GTK_CONTAINER (alignment), vbox);
 		
 		/* Add descriptive label */
-		label = gtk_label_new (_("Add remove and edit rows of data (you can optionally use Ctrl+N to add "
+		label = gtk_label_new (_("Add remove and edit rows of data (you can optionally use CNTL-N to add "
 					 "new rows and the Delete key to remove the selected row)"));
 		gtk_label_set_line_wrap (GTK_LABEL(label), TRUE);
 		gtk_label_set_line_wrap_mode (GTK_LABEL(label), PANGO_WRAP_WORD);

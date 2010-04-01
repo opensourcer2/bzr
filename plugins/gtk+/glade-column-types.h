@@ -28,7 +28,7 @@ G_BEGIN_DECLS
 
 typedef struct
 {
-	gchar *type_name;
+	GType type;
 	gchar *column_name;
 } GladeColumnType;
 

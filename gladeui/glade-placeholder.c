@@ -128,7 +128,7 @@ glade_placeholder_init (GladePlaceholder *placeholder)
 	placeholder->placeholder_pixmap = NULL;
 	placeholder->packing_actions = NULL;
 
-	gtk_widget_set_can_focus (GTK_WIDGET (placeholder), TRUE);
+	GTK_WIDGET_SET_FLAGS (GTK_WIDGET (placeholder), GTK_CAN_FOCUS);
 
 	gtk_widget_set_size_request (GTK_WIDGET (placeholder),
 				     WIDTH_REQUISITION,
@@ -178,8 +178,6 @@ static void
 glade_placeholder_realize (GtkWidget *widget)
 {
 	GladePlaceholder *placeholder;
-	GtkAllocation allocation;
-	GdkWindow *window;
 	GdkWindowAttr attributes;
 	gint attributes_mask;
 
@@ -187,14 +185,13 @@ glade_placeholder_realize (GtkWidget *widget)
 
 	placeholder = GLADE_PLACEHOLDER (widget);
 
-	gtk_widget_set_realized (widget, TRUE);
+	GTK_WIDGET_SET_FLAGS (widget, GTK_REALIZED);
 
 	attributes.window_type = GDK_WINDOW_CHILD;
-	gtk_widget_get_allocation (widget, &allocation);
-	attributes.x = allocation.x;
-	attributes.y = allocation.y;
-	attributes.width = allocation.width;
-	attributes.height = allocation.height;
+	attributes.x = widget->allocation.x;
+	attributes.y = widget->allocation.y;
+	attributes.width = widget->allocation.width;
+	attributes.height = widget->allocation.height;
 	attributes.wclass = GDK_INPUT_OUTPUT;
 	attributes.visual = gtk_widget_get_visual (widget);
 	attributes.colormap = gtk_widget_get_colormap (widget);
@@ -207,11 +204,10 @@ glade_placeholder_realize (GtkWidget *widget)
 
 	attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
 
-	window = gdk_window_new (gtk_widget_get_parent_window (widget), &attributes, attributes_mask);
-	gtk_widget_set_window (widget, window);
-	gdk_window_set_user_data (window, placeholder);
+	widget->window = gdk_window_new (gtk_widget_get_parent_window (widget), &attributes, attributes_mask);
+	gdk_window_set_user_data (widget->window, placeholder);
 
-	gtk_widget_style_attach (widget);
+	widget->style = gtk_style_attach (widget->style, widget->window);
 
 	glade_placeholder_send_configure (GLADE_PLACEHOLDER (widget));
 
@@ -223,7 +219,7 @@ glade_placeholder_realize (GtkWidget *widget)
 		g_assert(G_IS_OBJECT(placeholder->placeholder_pixmap));
 	}
 
-	gdk_window_set_back_pixmap (gtk_widget_get_window (GTK_WIDGET (placeholder)), placeholder->placeholder_pixmap, FALSE);
+	gdk_window_set_back_pixmap (GTK_WIDGET (placeholder)->window, placeholder->placeholder_pixmap, FALSE);
 }
 
 static void
@@ -232,11 +228,11 @@ glade_placeholder_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 	g_return_if_fail (GLADE_IS_PLACEHOLDER (widget));
 	g_return_if_fail (allocation != NULL);
 
-	gtk_widget_set_allocation (widget, allocation);
+	widget->allocation = *allocation;
 
-	if (gtk_widget_get_realized (widget))
+	if (GTK_WIDGET_REALIZED (widget))
 	{
-		gdk_window_move_resize (gtk_widget_get_window (widget),
+		gdk_window_move_resize (widget->window,
 					allocation->x, allocation->y,
 					allocation->width, allocation->height);
 
@@ -248,18 +244,16 @@ static void
 glade_placeholder_send_configure (GladePlaceholder *placeholder)
 {
 	GtkWidget *widget;
-	GtkAllocation allocation;
 	GdkEvent *event = gdk_event_new (GDK_CONFIGURE);
 
 	widget = GTK_WIDGET (placeholder);
 
-	event->configure.window = g_object_ref (gtk_widget_get_window (widget));
+	event->configure.window = g_object_ref (widget->window);
 	event->configure.send_event = TRUE;
-	gtk_widget_get_allocation (widget, &allocation);
-	event->configure.x = allocation.x;
-	event->configure.y = allocation.y;
-	event->configure.width = allocation.width;
-	event->configure.height = allocation.height;
+	event->configure.x = widget->allocation.x;
+	event->configure.y = widget->allocation.y;
+	event->configure.width = widget->allocation.width;
+	event->configure.height = widget->allocation.height;
 
 	gtk_widget_event (widget, event);
 	gdk_event_free (event);
@@ -276,16 +270,14 @@ glade_placeholder_get_project (GladePlaceholder *placeholder)
 static gboolean
 glade_placeholder_expose (GtkWidget *widget, GdkEventExpose *event)
 {
-	GtkStyle *style;
 	GdkGC *light_gc;
 	GdkGC *dark_gc;
 	gint w, h;
 
 	g_return_val_if_fail (GLADE_IS_PLACEHOLDER (widget), FALSE);
-
-	style = gtk_widget_get_style (widget);
-	light_gc = style->light_gc[GTK_STATE_NORMAL];
-	dark_gc  = style->dark_gc[GTK_STATE_NORMAL];
+	
+	light_gc = widget->style->light_gc[GTK_STATE_NORMAL];
+	dark_gc  = widget->style->dark_gc[GTK_STATE_NORMAL];
 	gdk_drawable_get_size (event->window, &w, &h);
 
 	gdk_draw_line (event->window, light_gc, 0, 0, w - 1, 0);
@@ -341,7 +333,7 @@ glade_placeholder_button_press (GtkWidget *widget, GdkEventButton *event)
 	placeholder = GLADE_PLACEHOLDER (widget);
 	project = glade_placeholder_get_project (placeholder);
 
-	if (!gtk_widget_has_focus (widget))
+	if (!GTK_WIDGET_HAS_FOCUS (widget))
 		gtk_widget_grab_focus (widget);
 
 	if (event->button == 1 && event->type == GDK_BUTTON_PRESS)
