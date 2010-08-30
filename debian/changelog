@@ -1,3 +1,11 @@
+glade-3 (3.7.0.is.3.6.7-0ubuntu2) maverick; urgency=low
+
+  * debian/patches/04_do_not_escape_utf8.patch:
+    - cherry pick fix for utf8 encodng issue from upstream that causes
+      strings to be not translatable (LP: #625859)
+
+ -- Michael Vogt <michael.vogt@ubuntu.com>  Mon, 30 Aug 2010 11:41:28 +0200
+
 glade-3 (3.7.0.is.3.6.7-0ubuntu1) lucid; urgency=low
 
   * Reverting to 3.6.x: 3.7.0 can corrupt some .ui file in complex cases
