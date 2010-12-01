@@ -527,11 +527,17 @@ catalogs_from_path (GList *catalogs, const gchar *path)
 const GList *
 glade_catalog_load_all (void)
 {
-	GList         *catalogs = NULL, *l;
+	GList         *catalogs = NULL, *l, *adaptors;
 	GladeCatalog  *catalog;
 	const gchar   *search_path;
 	gchar        **split;
+	GString       *icon_warning = NULL;
 	gint           i;
+
+
+	/* Make sure we don't init the catalogs twice */
+	if (loaded_catalogs)
+		return loaded_catalogs;
 	
 	/* First load catalogs from user specified directories ... */
 	if ((search_path = g_getenv (GLADE_ENV_CATALOG_PATH)) != NULL)
@@ -567,7 +573,34 @@ glade_catalog_load_all (void)
 		catalog = l->data;
 		catalog_load (catalog);
 	}
-	
+
+	/* Print a summery of widget adaptors missing icons.
+	 */
+	adaptors = glade_widget_adaptor_list_adaptors ();
+	for (l = adaptors; l; l = l->next)
+       	{
+		GladeWidgetAdaptor *adaptor = l->data;
+
+		if (adaptor->missing_icon)
+       		{
+			if (!icon_warning)
+				icon_warning = g_string_new ("Glade needs artwork; "
+							     "a default icon will be used for "
+							     "the following classes:");
+
+			g_string_append_printf (icon_warning, "\n\t%s\tneeds an icon named '%s'",
+						adaptor->name, adaptor->missing_icon);
+       		}
+
+       	}
+	g_list_free (adaptors);
+
+	if (icon_warning)
+	{
+		g_message ("%s", icon_warning->str);
+		g_string_free (icon_warning, TRUE);
+	}
+
 	loaded_catalogs = catalogs;
 	
 	return loaded_catalogs;
@@ -696,7 +729,6 @@ catalog_destroy (GladeCatalog *catalog)
 
 	if (catalog->adaptors)
 	{
-		/* TODO: free adaptors */
 		g_list_free (catalog->adaptors);
 	}
 

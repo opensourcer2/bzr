@@ -3,18 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GladePalette</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
-<link rel="start" href="index.html" title="Glade User Interface Designer Reference Manual">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.1">
+<link rel="home" href="index.html" title="Glade User Interface Designer Reference Manual">
 <link rel="up" href="dockables.html" title="Part III. Dockable Glade UI Widgets">
 <link rel="prev" href="GladeEditorProperty.html" title="GladeEditorProperty">
 <link rel="next" href="GladeClipboardView.html" title="GladeClipboardView">
-<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.14.1 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="part" href="catalog.html" title="Part I. Adding your custom widgets">
-<link rel="part" href="core.html" title="Part II. Glade Core">
-<link rel="part" href="dockables.html" title="Part III. Dockable Glade UI Widgets">
-<link rel="part" href="misc.html" title="Part IV. Miscellaneous utilities">
-<link rel="index" href="ix01.html" title="Index">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
@@ -39,7 +34,7 @@
                   <a href="#GladePalette.signals" class="shortcut">Signals</a>
 </td></tr>
 </table>
-<div class="refentry" lang="en">
+<div class="refentry" title="GladePalette">
 <a name="GladePalette"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -48,31 +43,30 @@
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv">
+<div class="refsynopsisdiv" title="Synopsis">
 <a name="GladePalette.synopsis"></a><h2>Synopsis</h2>
-<pre class="synopsis">
-                    <a class="link" href="GladePalette.html#GladePalette-struct" title="GladePalette">GladePalette</a>;
+<pre class="synopsis">                    <a class="link" href="GladePalette.html#GladePalette-struct" title="GladePalette">GladePalette</a>;
 enum                <a class="link" href="GladePalette.html#GladeItemAppearance" title="enum GladeItemAppearance">GladeItemAppearance</a>;
-GtkWidget *         <a class="link" href="GladePalette.html#glade-palette-new" title="glade_palette_new ()">glade_palette_new</a>                   (const GList *catalogs);
-void                <a class="link" href="GladePalette.html#glade-palette-deselect-current-item" title="glade_palette_deselect_current_item ()">glade_palette_deselect_current_item</a> (<a class="link" href="GladePalette.html" title="GladePalette">GladePalette</a> *palette,
-                                                         gboolean sticky_aware);
-<a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> * <a class="link" href="GladePalette.html#glade-palette-get-current-item" title="glade_palette_get_current_item ()">glade_palette_get_current_item</a>     (<a class="link" href="GladePalette.html" title="GladePalette">GladePalette</a> *palette);
-<a class="link" href="GladePalette.html#GladeItemAppearance" title="enum GladeItemAppearance">GladeItemAppearance</a>  <a class="link" href="GladePalette.html#glade-palette-get-item-appearance" title="glade_palette_get_item_appearance ()">glade_palette_get_item_appearance</a>  (<a class="link" href="GladePalette.html" title="GladePalette">GladePalette</a> *palette);
-void                <a class="link" href="GladePalette.html#glade-palette-set-item-appearance" title="glade_palette_set_item_appearance ()">glade_palette_set_item_appearance</a>   (<a class="link" href="GladePalette.html" title="GladePalette">GladePalette</a> *palette,
-                                                         <a class="link" href="GladePalette.html#GladeItemAppearance" title="enum GladeItemAppearance">GladeItemAppearance</a> item_appearance);
-gboolean            <a class="link" href="GladePalette.html#glade-palette-get-use-small-item-icons" title="glade_palette_get_use_small_item_icons ()">glade_palette_get_use_small_item_icons</a>
-                                                        (<a class="link" href="GladePalette.html" title="GladePalette">GladePalette</a> *palette);
-void                <a class="link" href="GladePalette.html#glade-palette-set-use-small-item-icons" title="glade_palette_set_use_small_item_icons ()">glade_palette_set_use_small_item_icons</a>
-                                                        (<a class="link" href="GladePalette.html" title="GladePalette">GladePalette</a> *palette,
-                                                         gboolean use_small_item_icons);
-void                <a class="link" href="GladePalette.html#glade-palette-set-show-selector-button" title="glade_palette_set_show_selector_button ()">glade_palette_set_show_selector_button</a>
-                                                        (<a class="link" href="GladePalette.html" title="GladePalette">GladePalette</a> *palette,
-                                                         gboolean show_selector_button);
-gboolean            <a class="link" href="GladePalette.html#glade-palette-get-show-selector-button" title="glade_palette_get_show_selector_button ()">glade_palette_get_show_selector_button</a>
-                                                        (<a class="link" href="GladePalette.html" title="GladePalette">GladePalette</a> *palette);
+<span class="returnvalue">GtkWidget</span> *         <a class="link" href="GladePalette.html#glade-palette-new" title="glade_palette_new ()">glade_palette_new</a>                   (<em class="parameter"><code>const <span class="type">GList</span> *catalogs</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GladePalette.html#glade-palette-deselect-current-item" title="glade_palette_deselect_current_item ()">glade_palette_deselect_current_item</a> (<em class="parameter"><code><a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a> *palette</code></em>,
+                                                         <em class="parameter"><code><span class="type">gboolean</span> sticky_aware</code></em>);
+<a class="link" href="gladeui-glade-widget-adaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor"><span class="returnvalue">GladeWidgetAdaptor</span></a> * <a class="link" href="GladePalette.html#glade-palette-get-current-item" title="glade_palette_get_current_item ()">glade_palette_get_current_item</a>     (<em class="parameter"><code><a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a> *palette</code></em>);
+<a class="link" href="GladePalette.html#GladeItemAppearance" title="enum GladeItemAppearance"><span class="returnvalue">GladeItemAppearance</span></a>  <a class="link" href="GladePalette.html#glade-palette-get-item-appearance" title="glade_palette_get_item_appearance ()">glade_palette_get_item_appearance</a>  (<em class="parameter"><code><a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a> *palette</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GladePalette.html#glade-palette-set-item-appearance" title="glade_palette_set_item_appearance ()">glade_palette_set_item_appearance</a>   (<em class="parameter"><code><a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a> *palette</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GladePalette.html#GladeItemAppearance" title="enum GladeItemAppearance"><span class="type">GladeItemAppearance</span></a> item_appearance</code></em>);
+<span class="returnvalue">gboolean</span>            <a class="link" href="GladePalette.html#glade-palette-get-use-small-item-icons" title="glade_palette_get_use_small_item_icons ()">glade_palette_get_use_small_item_icons</a>
+                                                        (<em class="parameter"><code><a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a> *palette</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GladePalette.html#glade-palette-set-use-small-item-icons" title="glade_palette_set_use_small_item_icons ()">glade_palette_set_use_small_item_icons</a>
+                                                        (<em class="parameter"><code><a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a> *palette</code></em>,
+                                                         <em class="parameter"><code><span class="type">gboolean</span> use_small_item_icons</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GladePalette.html#glade-palette-set-show-selector-button" title="glade_palette_set_show_selector_button ()">glade_palette_set_show_selector_button</a>
+                                                        (<em class="parameter"><code><a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a> *palette</code></em>,
+                                                         <em class="parameter"><code><span class="type">gboolean</span> show_selector_button</code></em>);
+<span class="returnvalue">gboolean</span>            <a class="link" href="GladePalette.html#glade-palette-get-show-selector-button" title="glade_palette_get_show_selector_button ()">glade_palette_get_show_selector_button</a>
+                                                        (<em class="parameter"><code><a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a> *palette</code></em>);
 </pre>
 </div>
-<div class="refsect1" lang="en">
+<div class="refsect1" title="Object Hierarchy">
 <a name="GladePalette.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
   GObject
@@ -85,43 +79,45 @@ gboolean            <a class="link" href="GladePalette.html#glade-palette-get-sh
                                        +----GladePalette
 </pre>
 </div>
-<div class="refsect1" lang="en">
+<div class="refsect1" title="Implemented Interfaces">
 <a name="GladePalette.implemented-interfaces"></a><h2>Implemented Interfaces</h2>
 <p>
 GladePalette implements
  AtkImplementorIface,  GtkBuildable and  GtkOrientable.</p>
 </div>
-<div class="refsect1" lang="en">
+<div class="refsect1" title="Properties">
 <a name="GladePalette.properties"></a><h2>Properties</h2>
 <pre class="synopsis">
-  "<a class="link" href="GladePalette.html#GladePalette--catalogs" title='The "catalogs" property'>catalogs</a>"                 gpointer              : Read / Write / Construct Only
-  "<a class="link" href="GladePalette.html#GladePalette--current-item" title='The "current-item" property'>current-item</a>"             gpointer              : Read
-  "<a class="link" href="GladePalette.html#GladePalette--item-appearance" title='The "item-appearance" property'>item-appearance</a>"          <a class="link" href="GladePalette.html#GladeItemAppearance" title="enum GladeItemAppearance">GladeItemAppearance</a>   : Read / Write
-  "<a class="link" href="GladePalette.html#GladePalette--show-selector-button" title='The "show-selector-button" property'>show-selector-button</a>"     gboolean              : Read / Write
-  "<a class="link" href="GladePalette.html#GladePalette--use-small-item-icons" title='The "use-small-item-icons" property'>use-small-item-icons</a>"     gboolean              : Read / Write
+  "<a class="link" href="GladePalette.html#GladePalette--catalogs" title='The "catalogs" property'>catalogs</a>"                 <span class="type">gpointer</span>              : Read / Write / Construct Only
+  "<a class="link" href="GladePalette.html#GladePalette--current-item" title='The "current-item" property'>current-item</a>"             <span class="type">gpointer</span>              : Read
+  "<a class="link" href="GladePalette.html#GladePalette--item-appearance" title='The "item-appearance" property'>item-appearance</a>"          <a class="link" href="GladePalette.html#GladeItemAppearance" title="enum GladeItemAppearance"><span class="type">GladeItemAppearance</span></a>   : Read / Write
+  "<a class="link" href="GladePalette.html#GladePalette--show-selector-button" title='The "show-selector-button" property'>show-selector-button</a>"     <span class="type">gboolean</span>              : Read / Write
+  "<a class="link" href="GladePalette.html#GladePalette--use-small-item-icons" title='The "use-small-item-icons" property'>use-small-item-icons</a>"     <span class="type">gboolean</span>              : Read / Write
 </pre>
 </div>
-<div class="refsect1" lang="en">
+<div class="refsect1" title="Signals">
 <a name="GladePalette.signals"></a><h2>Signals</h2>
 <pre class="synopsis">
+  "<a class="link" href="GladePalette.html#GladePalette-refresh" title='The "refresh" signal'>refresh</a>"                                        : Run Last
   "<a class="link" href="GladePalette.html#GladePalette-toggled" title='The "toggled" signal'>toggled</a>"                                        : Run Last
 </pre>
 </div>
-<div class="refsect1" lang="en">
+<div class="refsect1" title="Description">
 <a name="GladePalette.description"></a><h2>Description</h2>
 <p>
 <a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a> is responsible for displaying the list of available
 <span class="type">GladeWidgetClass</span> types and publishing the currently selected class
-to the Glade core.</p>
+to the Glade core.
+</p>
 </div>
-<div class="refsect1" lang="en">
+<div class="refsect1" title="Details">
 <a name="GladePalette.details"></a><h2>Details</h2>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="GladePalette">
 <a name="GladePalette-struct"></a><h3>GladePalette</h3>
 <pre class="programlisting">typedef struct _GladePalette GladePalette;</pre>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="enum GladeItemAppearance">
 <a name="GladeItemAppearance"></a><h3>enum GladeItemAppearance</h3>
 <pre class="programlisting">typedef enum
 {
@@ -132,17 +128,18 @@ to the Glade core.</p>
 </pre>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_palette_new ()">
 <a name="glade-palette-new"></a><h3>glade_palette_new ()</h3>
-<pre class="programlisting">GtkWidget *         glade_palette_new                   (const GList *catalogs);</pre>
+<pre class="programlisting"><span class="returnvalue">GtkWidget</span> *         glade_palette_new                   (<em class="parameter"><code>const <span class="type">GList</span> *catalogs</code></em>);</pre>
 <p>
-Creates a new <a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a> widget</p>
+Creates a new <a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a> widget
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>catalogs</code></em> :</span></p></td>
-<td> the widget catalogs for the palette.
+<td>the widget catalogs for the palette.
 </td>
 </tr>
 <tr>
@@ -154,45 +151,47 @@ Creates a new <a class="link" href="GladePalette.html" title="GladePalette"><spa
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_palette_deselect_current_item ()">
 <a name="glade-palette-deselect-current-item"></a><h3>glade_palette_deselect_current_item ()</h3>
-<pre class="programlisting">void                glade_palette_deselect_current_item (<a class="link" href="GladePalette.html" title="GladePalette">GladePalette</a> *palette,
-                                                         gboolean sticky_aware);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                glade_palette_deselect_current_item (<em class="parameter"><code><a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a> *palette</code></em>,
+                                                         <em class="parameter"><code><span class="type">gboolean</span> sticky_aware</code></em>);</pre>
 <p>
-Deselects the currently selected item</p>
+Deselects the currently selected item
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>palette</code></em> :</span></p></td>
-<td> a <a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a>
+<td>a <a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>sticky_aware</code></em> :</span></p></td>
-<td> whether to consider sticky selection mode
+<td>whether to consider sticky selection mode
 </td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_palette_get_current_item ()">
 <a name="glade-palette-get-current-item"></a><h3>glade_palette_get_current_item ()</h3>
-<pre class="programlisting"><a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor">GladeWidgetAdaptor</a> * glade_palette_get_current_item     (<a class="link" href="GladePalette.html" title="GladePalette">GladePalette</a> *palette);</pre>
+<pre class="programlisting"><a class="link" href="gladeui-glade-widget-adaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor"><span class="returnvalue">GladeWidgetAdaptor</span></a> * glade_palette_get_current_item     (<em class="parameter"><code><a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a> *palette</code></em>);</pre>
 <p>
-Gets the <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a> of the currently selected item.</p>
+Gets the <a class="link" href="gladeui-glade-widget-adaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a> of the currently selected item.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>palette</code></em> :</span></p></td>
-<td> a <a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a>
+<td>a <a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a> of currently selected item, or NULL
+<td> the <a class="link" href="gladeui-glade-widget-adaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a> of currently selected item, or NULL
          if no item is selected.
 </td>
 </tr>
@@ -200,17 +199,15 @@ Gets the <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdapto
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_palette_get_item_appearance ()">
 <a name="glade-palette-get-item-appearance"></a><h3>glade_palette_get_item_appearance ()</h3>
-<pre class="programlisting"><a class="link" href="GladePalette.html#GladeItemAppearance" title="enum GladeItemAppearance">GladeItemAppearance</a>  glade_palette_get_item_appearance  (<a class="link" href="GladePalette.html" title="GladePalette">GladePalette</a> *palette);</pre>
-<p>
-</p>
+<pre class="programlisting"><a class="link" href="GladePalette.html#GladeItemAppearance" title="enum GladeItemAppearance"><span class="returnvalue">GladeItemAppearance</span></a>  glade_palette_get_item_appearance  (<em class="parameter"><code><a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a> *palette</code></em>);</pre>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>palette</code></em> :</span></p></td>
-<td> a <a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a>
+<td>a <a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a>
 </td>
 </tr>
 <tr>
@@ -222,41 +219,40 @@ Gets the <a class="link" href="gladeui-GladeWidgetAdaptor.html#GladeWidgetAdapto
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_palette_set_item_appearance ()">
 <a name="glade-palette-set-item-appearance"></a><h3>glade_palette_set_item_appearance ()</h3>
-<pre class="programlisting">void                glade_palette_set_item_appearance   (<a class="link" href="GladePalette.html" title="GladePalette">GladePalette</a> *palette,
-                                                         <a class="link" href="GladePalette.html#GladeItemAppearance" title="enum GladeItemAppearance">GladeItemAppearance</a> item_appearance);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                glade_palette_set_item_appearance   (<em class="parameter"><code><a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a> *palette</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GladePalette.html#GladeItemAppearance" title="enum GladeItemAppearance"><span class="type">GladeItemAppearance</span></a> item_appearance</code></em>);</pre>
 <p>
-Sets the appearance of the palette items.</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>palette</code></em> :</span></p></td>
-<td> a <a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a>
-</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>item_appearance</code></em> :</span></p></td>
-<td> the item appearance
-</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2" lang="en">
-<a name="glade-palette-get-use-small-item-icons"></a><h3>glade_palette_get_use_small_item_icons ()</h3>
-<pre class="programlisting">gboolean            glade_palette_get_use_small_item_icons
-                                                        (<a class="link" href="GladePalette.html" title="GladePalette">GladePalette</a> *palette);</pre>
-<p>
+Sets the appearance of the palette items.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>palette</code></em> :</span></p></td>
-<td> a <a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a>
+<td>a <a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>item_appearance</code></em> :</span></p></td>
+<td>the item appearance
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="glade_palette_get_use_small_item_icons ()">
+<a name="glade-palette-get-use-small-item-icons"></a><h3>glade_palette_get_use_small_item_icons ()</h3>
+<pre class="programlisting"><span class="returnvalue">gboolean</span>            glade_palette_get_use_small_item_icons
+                                                        (<em class="parameter"><code><a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a> *palette</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>palette</code></em> :</span></p></td>
+<td>a <a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a>
 </td>
 </tr>
 <tr>
@@ -268,66 +264,66 @@ Sets the appearance of the palette items.</p>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title="glade_palette_set_use_small_item_icons ()">
 <a name="glade-palette-set-use-small-item-icons"></a><h3>glade_palette_set_use_small_item_icons ()</h3>
-<pre class="programlisting">void                glade_palette_set_use_small_item_icons
-                                                        (<a class="link" href="GladePalette.html" title="GladePalette">GladePalette</a> *palette,
-                                                         gboolean use_small_item_icons);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                glade_palette_set_use_small_item_icons
+                                                        (<em class="parameter"><code><a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a> *palette</code></em>,
+                                                         <em class="parameter"><code><span class="type">gboolean</span> use_small_item_icons</code></em>);</pre>
 <p>
-Sets whether to use small item icons.</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>palette</code></em> :</span></p></td>
-<td> a <a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a>
-</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>use_small_item_icons</code></em> :</span></p></td>
-<td> Whether to use small item icons
-</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2" lang="en">
-<a name="glade-palette-set-show-selector-button"></a><h3>glade_palette_set_show_selector_button ()</h3>
-<pre class="programlisting">void                glade_palette_set_show_selector_button
-                                                        (<a class="link" href="GladePalette.html" title="GladePalette">GladePalette</a> *palette,
-                                                         gboolean show_selector_button);</pre>
-<p>
-Sets whether to show the internal widget selector button</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>palette</code></em> :</span></p></td>
-<td> a <a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a>
-</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>show_selector_button</code></em> :</span></p></td>
-<td> whether to show selector button
-</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2" lang="en">
-<a name="glade-palette-get-show-selector-button"></a><h3>glade_palette_get_show_selector_button ()</h3>
-<pre class="programlisting">gboolean            glade_palette_get_show_selector_button
-                                                        (<a class="link" href="GladePalette.html" title="GladePalette">GladePalette</a> *palette);</pre>
-<p>
+Sets whether to use small item icons.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>palette</code></em> :</span></p></td>
-<td> a <a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a>
+<td>a <a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>use_small_item_icons</code></em> :</span></p></td>
+<td>Whether to use small item icons
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="glade_palette_set_show_selector_button ()">
+<a name="glade-palette-set-show-selector-button"></a><h3>glade_palette_set_show_selector_button ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                glade_palette_set_show_selector_button
+                                                        (<em class="parameter"><code><a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a> *palette</code></em>,
+                                                         <em class="parameter"><code><span class="type">gboolean</span> show_selector_button</code></em>);</pre>
+<p>
+Sets whether to show the internal widget selector button
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>palette</code></em> :</span></p></td>
+<td>a <a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>show_selector_button</code></em> :</span></p></td>
+<td>whether to show selector button
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="glade_palette_get_show_selector_button ()">
+<a name="glade-palette-get-show-selector-button"></a><h3>glade_palette_get_show_selector_button ()</h3>
+<pre class="programlisting"><span class="returnvalue">gboolean</span>            glade_palette_get_show_selector_button
+                                                        (<em class="parameter"><code><a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a> *palette</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>palette</code></em> :</span></p></td>
+<td>a <a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a>
 </td>
 </tr>
 <tr>
@@ -339,52 +335,58 @@ Sets whether to show the internal widget selector button</p>
 </table></div>
 </div>
 </div>
-<div class="refsect1" lang="en">
+<div class="refsect1" title="Property Details">
 <a name="GladePalette.property-details"></a><h2>Property Details</h2>
-<div class="refsect2" lang="en">
+<div class="refsect2" title='The "catalogs" property'>
 <a name="GladePalette--catalogs"></a><h3>The <code class="literal">"catalogs"</code> property</h3>
-<pre class="programlisting">  "catalogs"                 gpointer              : Read / Write / Construct Only</pre>
+<pre class="programlisting">  "catalogs"                 <span class="type">gpointer</span>              : Read / Write / Construct Only</pre>
 <p>The widget catalogs for the palette.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title='The "current-item" property'>
 <a name="GladePalette--current-item"></a><h3>The <code class="literal">"current-item"</code> property</h3>
-<pre class="programlisting">  "current-item"             gpointer              : Read</pre>
+<pre class="programlisting">  "current-item"             <span class="type">gpointer</span>              : Read</pre>
 <p>The GladeWidgetAdaptor of the currently selected item.</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title='The "item-appearance" property'>
 <a name="GladePalette--item-appearance"></a><h3>The <code class="literal">"item-appearance"</code> property</h3>
-<pre class="programlisting">  "item-appearance"          <a class="link" href="GladePalette.html#GladeItemAppearance" title="enum GladeItemAppearance">GladeItemAppearance</a>   : Read / Write</pre>
+<pre class="programlisting">  "item-appearance"          <a class="link" href="GladePalette.html#GladeItemAppearance" title="enum GladeItemAppearance"><span class="type">GladeItemAppearance</span></a>   : Read / Write</pre>
 <p>The appearance of the palette items.</p>
 <p>Default value: GLADE_ITEM_ICON_ONLY</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title='The "show-selector-button" property'>
 <a name="GladePalette--show-selector-button"></a><h3>The <code class="literal">"show-selector-button"</code> property</h3>
-<pre class="programlisting">  "show-selector-button"     gboolean              : Read / Write</pre>
+<pre class="programlisting">  "show-selector-button"     <span class="type">gboolean</span>              : Read / Write</pre>
 <p>Whether to show the internal selector button.</p>
 <p>Default value: TRUE</p>
 </div>
 <hr>
-<div class="refsect2" lang="en">
+<div class="refsect2" title='The "use-small-item-icons" property'>
 <a name="GladePalette--use-small-item-icons"></a><h3>The <code class="literal">"use-small-item-icons"</code> property</h3>
-<pre class="programlisting">  "use-small-item-icons"     gboolean              : Read / Write</pre>
+<pre class="programlisting">  "use-small-item-icons"     <span class="type">gboolean</span>              : Read / Write</pre>
 <p>Whether to use small icons to represent items.</p>
 <p>Default value: FALSE</p>
 </div>
 </div>
-<div class="refsect1" lang="en">
+<div class="refsect1" title="Signal Details">
 <a name="GladePalette.signal-details"></a><h2>Signal Details</h2>
-<div class="refsect2" lang="en">
+<div class="refsect2" title='The "refresh" signal'>
+<a name="GladePalette-refresh"></a><h3>The <code class="literal">"refresh"</code> signal</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a> *gladepalette,
+                                                        <span class="type">gpointer</span>      user_data)         : Run Last</pre>
+</div>
+<hr>
+<div class="refsect2" title='The "toggled" signal'>
 <a name="GladePalette-toggled"></a><h3>The <code class="literal">"toggled"</code> signal</h3>
-<pre class="programlisting">void                user_function                      (<a class="link" href="GladePalette.html" title="GladePalette">GladePalette</a> *gladepalette,
-                                                        gpointer      user_data)         : Run Last</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GladePalette.html" title="GladePalette"><span class="type">GladePalette</span></a> *gladepalette,
+                                                        <span class="type">gpointer</span>      user_data)         : Run Last</pre>
 </div>
 </div>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.12</div>
+          Generated by GTK-Doc V1.14.1</div>
 </body>
 </html>

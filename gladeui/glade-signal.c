@@ -35,8 +35,8 @@
  * glade_signal_new:
  * @name: a name for the signal
  * @handler: a handler function for the signal
- * @after: #gboolean indicating whether this handler should be called after
- *         the default handler
+ * @after: whether this handler should be called after the default emission phase
+ * @swapped: whether the handler's user data should be swapped with the emitter instance.
  *
  * Creates a new #GladeSignal with the given parameters.
  *
@@ -45,14 +45,16 @@
 GladeSignal *glade_signal_new (const gchar *name,
 			       const gchar *handler,
 			       const gchar *userdata,
-			       gboolean     after)
+			       gboolean     after,
+			       gboolean     swapped)
 {
-	GladeSignal *signal = g_new0 (GladeSignal, 1);
+	GladeSignal *signal = g_slice_new0 (GladeSignal);
 
 	signal->name     = g_strdup (name);
 	signal->handler  = g_strdup (handler);
 	signal->userdata = userdata ? g_strdup (userdata) : NULL;
 	signal->after    = after;
+	signal->swapped  = swapped;
 
 	return signal;
 }
@@ -70,8 +72,9 @@ glade_signal_free (GladeSignal *signal)
 
 	g_free (signal->name);
 	g_free (signal->handler);
-	if (signal->userdata) g_free (signal->userdata);
-	g_free (signal);
+	g_free (signal->userdata);
+	g_free (signal->support_warning);
+	g_slice_free (GladeSignal, signal);
 }
 
 /**
@@ -87,10 +90,12 @@ glade_signal_equal (GladeSignal *sig1, GladeSignal *sig2)
 	gboolean ret = FALSE;
 	g_return_val_if_fail (GLADE_IS_SIGNAL (sig1), FALSE);
 	g_return_val_if_fail (GLADE_IS_SIGNAL (sig2), FALSE);
-	
+
+	/* Intentionally ignore support_warning */
 	if (!strcmp (sig1->name, sig2->name)        &&
 	    !strcmp (sig1->handler, sig2->handler)  &&
-	    sig1->after  == sig2->after)
+	    sig1->after   == sig2->after            &&
+	    sig1->swapped == sig2->swapped)
 	{
 		if ((sig1->userdata == NULL && sig2->userdata == NULL) ||
 		    (sig1->userdata != NULL && sig2->userdata != NULL  &&
@@ -110,25 +115,35 @@ glade_signal_equal (GladeSignal *sig1, GladeSignal *sig2)
 GladeSignal *
 glade_signal_clone (const GladeSignal *signal)
 {
-	return glade_signal_new (signal->name,
-				 signal->handler,
-				 signal->userdata,
-				 signal->after);
+	GladeSignal *dup;
 
+	g_return_val_if_fail (GLADE_IS_SIGNAL (signal), NULL);
+
+	dup = glade_signal_new (signal->name,
+				signal->handler,
+				signal->userdata,
+				signal->after,
+				signal->swapped);
+
+	glade_signal_set_support_warning (dup, signal->support_warning);
+	
+	return dup;
 }
 
 /**
  * glade_signal_write:
  * @signal: The #GladeSignal
+ * @fmt: The #GladeProjectFormat to write the signal for
  * @context: A #GladeXmlContext
  * @node: A #GladeXmlNode
  *
  * Writes @signal to @node
  */
 void
-glade_signal_write (GladeSignal     *signal,
-		    GladeXmlContext *context,
-		    GladeXmlNode    *node)
+glade_signal_write (GladeSignal       *signal,
+		    GladeProjectFormat fmt,
+		    GladeXmlContext   *context,
+		    GladeXmlNode      *node)
 {
 	GladeXmlNode *signal_node;
 	gchar        *name;
@@ -138,7 +153,9 @@ glade_signal_write (GladeSignal     *signal,
 	 */
 
 	name = g_strdup (signal->name);
-	glade_util_replace (name, '-', '_');
+
+	if (fmt == GLADE_PROJECT_FORMAT_LIBGLADE)
+		glade_util_replace (name, '-', '_');
 
 	/* Now dump the node values... */
 	signal_node = glade_xml_node_new (context, GLADE_XML_TAG_SIGNAL);
@@ -156,6 +173,14 @@ glade_signal_write (GladeSignal     *signal,
 		glade_xml_node_set_property_string (signal_node, 
 						    GLADE_XML_TAG_AFTER, 
 						    GLADE_XML_TAG_SIGNAL_TRUE);
+
+	/* Always serialize swapped regardless of format (libglade should not complain about this
+	 * and we prefer to not lose data in conversions).
+	 */
+	glade_xml_node_set_property_string (signal_node, 
+					    GLADE_XML_TAG_SWAPPED,
+					    signal->swapped ? 
+					    GLADE_XML_TAG_SIGNAL_TRUE : GLADE_XML_TAG_SIGNAL_FALSE);
 
 	g_free (name);
 }
@@ -195,6 +220,24 @@ glade_signal_read (GladeXmlNode *node)
 	signal->handler  = handler;
 	signal->after    = glade_xml_get_property_boolean (node, GLADE_XML_TAG_AFTER, FALSE);
 	signal->userdata = glade_xml_get_property_string (node, GLADE_XML_TAG_OBJECT);
+	signal->swapped  = glade_xml_get_property_boolean (node, GLADE_XML_TAG_SWAPPED, 
+							   /* If a signal specifies an object, its swapped
+							    * by default behaviour in GtkBuilder */
+							   signal->userdata != NULL);
 
 	return signal;
+}
+
+void
+glade_signal_set_support_warning (GladeSignal *signal,
+				  const gchar *support_warning)
+{
+	g_return_if_fail (GLADE_IS_SIGNAL (signal));
+
+	if (g_strcmp0 (signal->support_warning, support_warning))
+	{
+		g_free (signal->support_warning);
+		signal->support_warning = 
+			support_warning ? g_strdup (support_warning) : NULL;
+	}
 }

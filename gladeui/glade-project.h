@@ -29,6 +29,26 @@ typedef enum
 	GLADE_SUPPORT_LIBGLADE_ONLY        = (0x01 << 3)
 } GladeSupportMask;
 
+/**
+ * GladeProjectModelColumns:
+ * @GLADE_PROJECT_MODEL_ICON_NAME: name of the icon for the widget
+ * @GLADE_PROJECT_MODEL_ICON_NAME_COLUMN_NAME: Name of the widget
+ * @GLADE_PROJECT_MODEL_ICON_NAME_COLUMN_OBJECT: the GObject of the widget
+ * @GLADE_PROJECT_MODEL_ICON_NAME_N_COLUMNS: Number of columns
+ *
+ * The tree view columns provided by the GtkTreeModel implemented
+ * by GladeProject
+ *
+ **/
+typedef enum
+{
+	GLADE_PROJECT_MODEL_COLUMN_ICON_NAME,
+	GLADE_PROJECT_MODEL_COLUMN_NAME,
+	GLADE_PROJECT_MODEL_COLUMN_TYPE_NAME,
+	GLADE_PROJECT_MODEL_COLUMN_OBJECT,
+	GLADE_PROJECT_MODEL_N_COLUMNS
+} GladeProjectModelColumns;
+
 struct _GladeProject
 {
 	GObject parent_instance;
@@ -185,6 +205,16 @@ void          glade_project_set_naming_policy      (GladeProject       *project,
 						    GladeNamingPolicy   policy);
 
 GladeNamingPolicy glade_project_get_naming_policy  (GladeProject       *project);
+void          glade_project_get_target_version     (GladeProject       *project,
+						    const gchar        *catalog,
+						    gint               *major,
+						    gint               *minor);
+
+void          glade_project_update_signal_support_warning (GladeWidget  *widget,
+							   GladeSignal  *signal);
+
+
+gchar        *glade_project_display_dependencies (GladeProject *project);
 
 G_END_DECLS
 

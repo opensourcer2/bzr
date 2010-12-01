@@ -1,3 +1,32 @@
+glade-3 (3.7.1-0ubuntu1) natty; urgency=low
+
+  [ Mathieu Trudel-Lapierre ]
+  * New upstream release 3.7.1.
+    - Now builds with gcc-4.5. (LP: #677374)
+  * debian/patches/02_spinbutton-adjustment.patch: dropped, applied upstream.
+  * debian/patches/03_fix-vbox-orientation.patch: dropped, applied upstream.
+  * debian/patches/04_do_not_escape_utf8.patch: dropped, applied upstream.
+  * debian/control.in: Bump libgtk2.0-dev (Build-)Depends to 2.20.0.
+  * debian/control.in: libgladeui-1-9 becomes libgladeui-1-10 due to SONAME
+    change.
+  * debian/libgladeui-1-10.install: renamed from libgladeui-1-9.install.
+  * debian/rules: update DH_MAKESHLIBS for libgladeui soname change.
+  * debian/patches/90_linking_doc_in_natty.patch: fix linking for doc scanner
+    on Natty.
+  * debian/control: re-applying debian/control.in changes in debian/control.
+  
+  [ Robert Ancell ]
+  * debian/control:
+    - Use standards-version 3.9.1
+    - Fix aditional -> additional spelling mistake
+    - Use tighter dependency on libgladeui-1-10 for libgladeui-1-dev
+  * debian/source:
+    - Use source version 3.0
+  * debian/rules:
+    - Drop simple-patchsys.mk, not required in soruce version 3.0
+
+ -- Robert Ancell <robert.ancell@canonical.com>  Wed, 01 Dec 2010 08:44:38 +0100
+
 glade-3 (3.7.0.is.3.6.7-0ubuntu2) maverick; urgency=low
 
   * debian/patches/04_do_not_escape_utf8.patch:

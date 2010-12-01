@@ -1,6 +1,6 @@
 <glade-catalog name="gtk+"
-	       version="2.16"
-	       targetable="2.14,2.12,2.10,2.8"
+	       version="2.20"
+	       targetable="2.18,2.16,2.14,2.12,2.10,2.8"
 	       supports="libglade,gtkbuilder"
                icon-prefix="gtk"
                library="gladegtk"
@@ -111,6 +111,7 @@
 	<property id="style" disabled="True"/>
 	<property id="sensitive" ignore="True"/>
 	<property id="has-default" ignore="True" common="True"/>
+	<property id="double-buffered" since="2.18"/>
 
 	<!-- Accelerators -->
 	<property id="accelerator" _name="Accelerators" ignore="True" common="True" save="False">
@@ -457,32 +458,13 @@ embedded in another object</_tooltip>
         <property id="accel-path" since="2.14"/>
         <property id="right-justified" since="2.14"/>
         <property id="width-chars" since="2.14"/>
-        <property id="label" _name="Label" translatable="True" gtkbuilder-since="2.16">
-	  <parameter-spec>
-	    <type>GParamString</type>
-	  </parameter-spec>
-	  <_tooltip>The text of the menu item</_tooltip>
-        </property>
-        <property id="use-underline" _name="Use Underline" gtkbuilder-since="2.16">
-	  <parameter-spec>
-	    <type>GParamBoolean</type>
-	  </parameter-spec>
-	  <_tooltip>If set, an underline in the text indicates the next character should be used for the mnemonic accelerator key</_tooltip>
-        </property>
+        <property id="label" _name="Label" translatable="True" gtkbuilder-since="2.16"/>
+        <property id="use-underline" _name="Use Underline" gtkbuilder-since="2.16"/>
 
 	<!-- GtkActivatable -->
-      	<property id="related-action" _name="Related Action" custom-layout="True" since="2.16">
-	  <parameter-spec>
-	    <type>GParamObject</type>
-	    <value-type>GtkAction</value-type>
-	  </parameter-spec>
-	</property>
+      	<property id="related-action" _name="Related Action" custom-layout="True" since="2.16"/>
       	<property id="use-action-appearance" _name="Use Action Appearance" 
-		  custom-layout="True" needs-sync="True" default="False" since="2.16">
-	  <parameter-spec>
-	    <type>GParamBoolean</type>
-	  </parameter-spec>
-	</property>
+		  custom-layout="True" needs-sync="True" default="False" since="2.16"/>
 
 	<!-- Atk click property -->
 	<property id="atk-click" _name="Click" ignore="True" atk-property="True" save="False">
@@ -507,11 +489,7 @@ embedded in another object</_tooltip>
       <remove-child-function>glade_gtk_image_menu_item_remove_child</remove-child-function>
       <create-editable-function>glade_gtk_image_menu_item_create_editable</create-editable-function>
       <properties>
-        <property id="use-stock" default="True" visible="False" save-always="True" gtkbuilder-since="2.16">
-	  <parameter-spec>
-	    <type>GParamBoolean</type>
-	  </parameter-spec>
-        </property>
+        <property id="use-stock" default="True" visible="False" save-always="True" gtkbuilder-since="2.16"/>
 	<property id="stock" stock="True" _name="Stock Item" save="False" custom-layout="True">
 	  <parameter-spec>
 	    <type>GParamString</type>
@@ -522,13 +500,7 @@ embedded in another object</_tooltip>
         <property id="label" save="False" custom-layout="True"/>
         <property id="use-underline" custom-layout="True"/>
 	<property id="image" libglade-unsupported="True" parentless-widget="True" visible="False"/>
-	<property id="accel-group" _name="Accel Group" custom-layout="True" since="2.16" libglade-unsupported="True">
-	  <parameter-spec>
-	    <type>GParamObject</type>
-	    <value-type>GtkAccelGroup</value-type>
-	  </parameter-spec>
-	  <_tooltip>An accel group for accelerators from stock items</_tooltip>
-	</property>
+	<property id="accel-group" _name="Accel Group" custom-layout="True" since="2.16" libglade-unsupported="True"/>
 	<!--
 	This property is added by glade2 gnome support and makes reference to
 	GNOMEUIINFO_MENU_* macros. The read-widget-funcion maps these properties to 
@@ -647,19 +619,10 @@ embedded in another object</_tooltip>
 
       <properties>
 	<!-- GtkActivatable -->
-      	<property id="related-action" _name="Related Action" custom-layout="True" since="2.16">
-	  <parameter-spec>
-	    <type>GParamObject</type>
-	    <value-type>GtkAction</value-type>
-	  </parameter-spec>
-	</property>
-      	<property id="use-action-appearance" _name="Use Action Appearance" custom-layout="True" default="False" since="2.16">
-	  <parameter-spec>
-	    <type>GParamBoolean</type>
-	  </parameter-spec>
-	</property>
+      	<property id="related-action" _name="Related Action" custom-layout="True" since="2.16"/>
+      	<property id="use-action-appearance" _name="Use Action Appearance" custom-layout="True" 
+		  default="False" since="2.16"/>
       </properties>
-
 
     </glade-widget-class>
     
@@ -686,7 +649,7 @@ embedded in another object</_tooltip>
 
 	<!-- Virtual stock comboentry property -->
 	<property id="stock-id" visible="False" stock-icon="True" custom-layout="True">
-          <_tooltip>The stock icon displayed on the item (chose an item from gtk+ stock or from an icon factory)</_tooltip>
+          <_tooltip>The stock icon displayed on the item (choose an item from GTK+ stock or from an icon factory)</_tooltip>
 	</property>
         <property id="label" translatable="True" default="toolbutton" custom-layout="True"/>
 	<property id="label-widget" parentless-widget="True" libglade-unsupported="True" 
@@ -697,7 +660,7 @@ embedded in another object</_tooltip>
 	    <type>GParamObject</type>
 	    <value-type>GdkPixbuf</value-type>
 	  </parameter-spec>
-          <_tooltip>A filname, full or relative path to load an icon for this toolbutton</_tooltip>
+          <_tooltip>A file name, full or relative path to load an icon for this toolbutton</_tooltip>
 	</property>
         <property id="icon-widget" parentless-widget="True" libglade-unsupported="True" 
 		  create-type="GtkImage" custom-layout="True"/>
@@ -737,6 +700,8 @@ embedded in another object</_tooltip>
 	</property>
       </properties>
     </glade-widget-class>
+
+    <glade-widget-class name="GtkSpinner" generic-name="spinner" _title="Spinner" since="2.20"/>
 
     <glade-widget-class name="GtkLabel" generic-name="label" _title="Label">
       <post-create-function>glade_gtk_label_post_create</post-create-function>
@@ -812,7 +777,13 @@ embedded in another object</_tooltip>
 	    <value id="PANGO_WRAP_WORD_CHAR" _name="Word Character"/>
 	  </displayable-values>
 	</property>
+	<property id="track-visited-links" since="2.18"/>
       </properties>
+
+      <signals>
+	<signal id="activate-current-link" since="2.18"/>
+	<signal id="activate-link" since="2.18"/>
+      </signals>
     </glade-widget-class>
 
     <glade-widget-class name="GtkEntry" generic-name="entry" _title="Text Entry">
@@ -820,112 +791,56 @@ embedded in another object</_tooltip>
       <create-editable-function>glade_gtk_entry_create_editable</create-editable-function>
       <set-property-function>glade_gtk_entry_set_property</set-property-function>
       <read-widget-function>glade_gtk_entry_read_widget</read-widget-function>
+      <depends-function>glade_gtk_entry_depends</depends-function>
 
       <signals>
 	<signal id="icon-press" since="2.16"/>
 	<signal id="icon-release" since="2.16"/>
+	<signal id="preedit-changed" since="2.20"/>
       </signals>
 
       <properties>
-	<property id="text" translatable="True"/>
+        <property id="can-focus" save-always="True"/>
+	<property id="text" translatable="True" custom-layout="True"/>
+        <property id="buffer" libglade-unsupported="True" create-type="GtkEntryBuffer" since="2.18" custom-layout="True"/>
+
         <property id="inner-border" since="2.10"/>
         <property id="truncate-multiline" since="2.10"/>
 	<property id="shadow-type" since="2.12"/>
+	<property id="editing-canceled" disabled="True" since="2.20"/>
 	<property id="primary-icon-gicon" disabled="True"/>
 	<property id="secondary-icon-gicon" disabled="True"/>
-	<property id="primary-icon-stock" _name="Primary Stock Icon" since="2.16" custom-layout="True" stock-icon="True">
-	  <parameter-spec>
-	    <type>GParamString</type>
-	  </parameter-spec>
-        </property>
-	<property id="secondary-icon-stock" _name="Secondary Stock Icon" since="2.16" custom-layout="True" stock-icon="True">
-	  <parameter-spec>
-	    <type>GParamString</type>
-	  </parameter-spec>
-        </property>
-	<property id="primary-icon-pixbuf" _name="Primary Icon Pixbuf" since="2.16" custom-layout="True">
-	  <parameter-spec>
-	    <type>GParamObject</type>
-	    <value-type>GdkPixbuf</value-type>
-	  </parameter-spec>
-        </property>
-	<property id="secondary-icon-pixbuf" _name="Secondary Icon Pixbuf" since="2.16" custom-layout="True">
-	  <parameter-spec>
-	    <type>GParamObject</type>
-	    <value-type>GdkPixbuf</value-type>
-	  </parameter-spec>
-        </property>
-	<property id="primary-icon-name" _name="Primary Icon Name" since="2.16" custom-layout="True" themed-icon="True">
-	  <parameter-spec>
-	    <type>GParamString</type>
-	  </parameter-spec>
-        </property>
-	<property id="secondary-icon-name" _name="Secondary Icon Name" since="2.16" custom-layout="True" themed-icon="True">
-	  <parameter-spec>
-	    <type>GParamString</type>
-	  </parameter-spec>
-        </property>
-	<property id="primary-icon-activatable" _name="Primary Icon Activatable" since="2.16" custom-layout="True">
-	  <parameter-spec>
-	    <type>GParamBoolean</type>
-	  </parameter-spec>
-        </property>
-	<property id="secondary-icon-activatable" _name="Secondary Icon Activatable" since="2.16" custom-layout="True">
-	  <parameter-spec>
-	    <type>GParamBoolean</type>
-	  </parameter-spec>
-        </property>
-	<property id="primary-icon-sensitive" _name="Primary Icon Sensitive" since="2.16" custom-layout="True">
-	  <parameter-spec>
-	    <type>GParamBoolean</type>
-	  </parameter-spec>
-        </property>
-	<property id="secondary-icon-sensitive" _name="Secondary Icon Sensitive" since="2.16" custom-layout="True">
-	  <parameter-spec>
-	    <type>GParamBoolean</type>
-	  </parameter-spec>
-        </property>
-	<property id="progress-fraction" _name="Progress Fraction" since="2.16" custom-layout="True">
-	  <parameter-spec>
-	    <type>GParamDouble</type>
-	  </parameter-spec>
-        </property>
-	<property id="progress-pulse-step" _name="Progress Pulse Step" since="2.16" custom-layout="True">
-	  <parameter-spec>
-	    <type>GParamDouble</type>
-	  </parameter-spec>
-        </property>
+	<property id="primary-icon-stock" _name="Primary Stock Icon" since="2.16" custom-layout="True" stock-icon="True"/>
+	<property id="secondary-icon-stock" _name="Secondary Stock Icon" since="2.16" custom-layout="True" stock-icon="True"/>
+	<property id="primary-icon-pixbuf" _name="Primary Icon Pixbuf" since="2.16" custom-layout="True"/>
+	<property id="secondary-icon-pixbuf" _name="Secondary Icon Pixbuf" since="2.16" custom-layout="True"/>
+	<property id="primary-icon-name" _name="Primary Icon Name" since="2.16" custom-layout="True" themed-icon="True"/>
+	<property id="secondary-icon-name" _name="Secondary Icon Name" since="2.16" custom-layout="True" themed-icon="True"/>
+	<property id="primary-icon-activatable" _name="Primary Icon Activatable" since="2.16" custom-layout="True"/>
+	<property id="secondary-icon-activatable" _name="Secondary Icon Activatable" since="2.16" custom-layout="True"/>
+	<property id="primary-icon-sensitive" _name="Primary Icon Sensitive" since="2.16" custom-layout="True"/>
+	<property id="secondary-icon-sensitive" _name="Secondary Icon Sensitive" since="2.16" custom-layout="True"/>
+	<property id="progress-fraction" _name="Progress Fraction" since="2.16" custom-layout="True"/>
+	<property id="progress-pulse-step" _name="Progress Pulse Step" since="2.16" custom-layout="True"/>
 
-	<property id="invisible-char-set" _name="Invisible Char Set" since="2.16">
-	  <parameter-spec>
-	    <type>GParamBoolean</type>
-	  </parameter-spec>
-        </property>
-	<property id="primary-icon-tooltip-text" _name="Primary Icon Tooltip Text" since="2.16">
-	  <parameter-spec>
-	    <type>GParamString</type>
-	  </parameter-spec>
-        </property>
-	<property id="secondary-icon-tooltip-text" _name="Secondary Icon Tooltip Text" since="2.16">
-	  <parameter-spec>
-	    <type>GParamString</type>
-	  </parameter-spec>
-        </property>
-	<property id="primary-icon-tooltip-markup" _name="Primary Icon Tooltip Markup" since="2.16">
-	  <parameter-spec>
-	    <type>GParamString</type>
-	  </parameter-spec>
-        </property>
-	<property id="secondary-icon-tooltip-markup" _name="Secondary Icon Tooltip Markup" since="2.16">
-	  <parameter-spec>
-	    <type>GParamString</type>
-	  </parameter-spec>
-        </property>
+	<property id="invisible-char-set" _name="Invisible Char Set" since="2.16"/>
+	<property id="primary-icon-tooltip-text" translatable="True" _name="Primary Icon Tooltip Text" 
+		  custom-layout="True" since="2.16"/>
+	<property id="secondary-icon-tooltip-text" translatable="True" _name="Secondary Icon Tooltip Text" 
+		  custom-layout="True" since="2.16"/>
+	<property id="primary-icon-tooltip-markup" translatable="True" _name="Primary Icon Tooltip Markup" 
+		  custom-layout="True" since="2.16"/>
+	<property id="secondary-icon-tooltip-markup" translatable="True" _name="Secondary Icon Tooltip Markup" 
+		  custom-layout="True" since="2.16"/>
 
 	<property id="im-module" disabled="True"/>
 
-
-	<!-- Virtual icon edit mode properties -->
+	<!-- Virtual edit mode properties -->
+        <property id="use-entry-buffer" visible="False" save="False" default="False">
+	  <parameter-spec>
+	    <type>GParamBoolean</type>
+	  </parameter-spec>
+        </property>
         <property id="primary-icon-mode" visible="False" save="False">
 	  <parameter-spec>
 	    <type>GParamInt</type>
@@ -961,6 +876,7 @@ embedded in another object</_tooltip>
 	  <_tooltip>Set the text in the view's text buffer</_tooltip>
 	  <visible-lines>2</visible-lines>
 	</property>
+      	<property id="im-module" disabled="True"/>
       	<property id="wrap-mode">
   	  <displayable-values>
 	    <value id="GTK_WRAP_NONE" _name="None"/>
@@ -1017,17 +933,8 @@ embedded in another object</_tooltip>
 	</property>
 
 	<!-- GtkActivatable -->
-      	<property id="related-action" _name="Related Action" custom-layout="True" since="2.16">
-	  <parameter-spec>
-	    <type>GParamObject</type>
-	    <value-type>GtkAction</value-type>
-	  </parameter-spec>
-	</property>
-      	<property id="use-action-appearance" _name="Use Action Appearance" custom-layout="True" default="False" since="2.16">
-	  <parameter-spec>
-	    <type>GParamBoolean</type>
-	  </parameter-spec>
-	</property>
+      	<property id="related-action" _name="Related Action" custom-layout="True" since="2.16"/>
+      	<property id="use-action-appearance" _name="Use Action Appearance" custom-layout="True" default="False" since="2.16"/>
 
 	<!-- Atk click property -->
 	<property id="atk-click" _name="Click" ignore="True" atk-property="True" save="False">
@@ -1078,13 +985,14 @@ embedded in another object</_tooltip>
 
       <signals>
 	<signal id="wrapped" since="2.10"/>
+	<signal id="preedit-changed" since="2.20"/>
       </signals>
 
       <properties>
         <property id="text" disabled="True"/>
         <property id="value" disabled="True"/>
 	<property id="can-focus" default="True"/>
-        <property id="adjustment" default="0 0 100 1 10 10"/>
+        <property id="adjustment" default="0 0 100 1 10 0"/>
         <property id="update-policy">
   	  <displayable-values>
 	    <value id="GTK_UPDATE_ALWAYS" _name="Always"/>
@@ -1123,12 +1031,24 @@ embedded in another object</_tooltip>
 	<property id="extra-widget" parentless-widget="True" libglade-unsupported="True"/>
 	<property id="preview-widget" parentless-widget="True" libglade-unsupported="True"/>
 	<property id="filter" libglade-unsupported="True"/>
+	<property id="create-folders" since="2.18"/>
       </properties>
     </glade-widget-class>
 
     <glade-widget-class name="GtkScaleButton" generic-name="scalebutton" _title="Scale Button" since="2.12">
       <properties>
         <property id="orientation" since="2.14"/>
+      	<property id="size">
+  	  <displayable-values>
+	    <value id="GTK_ICON_SIZE_INVALID" _name="Invalid"/>
+	    <value id="GTK_ICON_SIZE_MENU" _name="Menu"/>
+	    <value id="GTK_ICON_SIZE_SMALL_TOOLBAR" _name="Small Toolbar"/>
+	    <value id="GTK_ICON_SIZE_LARGE_TOOLBAR" _name="Large Toolbar"/>
+	    <value id="GTK_ICON_SIZE_BUTTON" _name="Button"/>
+	    <value id="GTK_ICON_SIZE_DND" _name="Drag &amp; Drop"/>
+	    <value id="GTK_ICON_SIZE_DIALOG" _name="Dialog"/>
+	  </displayable-values>
+	</property>
       </properties>
     </glade-widget-class>
 
@@ -1141,11 +1061,17 @@ embedded in another object</_tooltip>
 	<property id="extra-widget" parentless-widget="True" libglade-unsupported="True"/>
 	<property id="preview-widget" parentless-widget="True" libglade-unsupported="True"/>
 	<property id="filter" libglade-unsupported="True"/>
+	<property id="create-folders" since="2.18"/>
       </properties>
+
+      <signals>
+	<signal id="file-set" since="2.12"/>
+      </signals>
     </glade-widget-class>
 
     <glade-widget-class name="GtkColorButton" generic-name="colorbutton" _title="Color Button">
       <create-editable-function>glade_gtk_container_create_editable</create-editable-function>
+      <set-property-function>glade_gtk_color_button_set_property</set-property-function>
       <properties>
 	<property id="title" translatable="True"/>
 	<property id="color" default="Black"/>
@@ -1212,7 +1138,8 @@ embedded in another object</_tooltip>
 	    <value id="GTK_SENSITIVITY_ON" _name="On"/>
 	    <value id="GTK_SENSITIVITY_OFF" _name="Off"/>
 	  </displayable-values>
-         </property>
+        </property>
+	<property id="editing-canceled" disabled="True" since="2.20"/>
 
 	<!-- Atk press property -->
 	<property id="atk-press" _name="Press" ignore="True" atk-property="True" save="False">
@@ -1228,6 +1155,7 @@ embedded in another object</_tooltip>
     <glade-widget-class name="GtkComboBoxEntry" generic-name="comboboxentry" _title="Combo Box Entry">
       <post-create-function>glade_gtk_combo_box_entry_post_create</post-create-function>
       <get-internal-child-function>glade_gtk_combo_box_entry_get_internal_child</get-internal-child-function>
+      <set-property-function>glade_gtk_combo_box_entry_set_property</set-property-function>
     </glade-widget-class>
 
     <glade-widget-class name="GtkProgressBar" generic-name="progressbar" _title="Progress Bar">
@@ -1308,8 +1236,16 @@ embedded in another object</_tooltip>
 
     </glade-widget-class>
 
-    <glade-widget-class name="GtkHBox" generic-name="hbox" _title="Horizontal Box"/>
-    <glade-widget-class name="GtkVBox" generic-name="vbox" _title="Vertical Box"/>
+    <glade-widget-class name="GtkHBox" generic-name="hbox" _title="Horizontal Box">
+      <properties>
+	<property id="orientation" disabled="True"/>
+      </properties>
+    </glade-widget-class>
+    <glade-widget-class name="GtkVBox" generic-name="vbox" _title="Vertical Box">
+      <properties>
+	<property id="orientation" disabled="True"/>
+      </properties>
+    </glade-widget-class>
 
     <glade-widget-class name="GtkTable" generic-name="table" _title="Table" fixed="True">
       <post-create-function>glade_gtk_table_post_create</post-create-function>
@@ -1349,8 +1285,7 @@ embedded in another object</_tooltip>
             <value id="GTK_FILL" _name="Fill"/>
           </displayable-values>
         </property>
-        <property id="y-options" transfer-on-paste="True">
-        </property>
+        <property id="y-options" transfer-on-paste="True"/>
         <property id="x-padding" transfer-on-paste="True"/>
         <property id="y-padding" transfer-on-paste="True"/>
       </packing-properties>
@@ -1377,9 +1312,16 @@ embedded in another object</_tooltip>
       </packing-properties>
     </glade-widget-class>
 
-    <glade-widget-class name="GtkHPaned" generic-name="hpaned" _title="Horizontal Panes"/>
-
-    <glade-widget-class name="GtkVPaned" generic-name="vpaned" _title="Vertical Panes"/>
+    <glade-widget-class name="GtkHPaned" generic-name="hpaned" _title="Horizontal Panes">
+      <properties>
+	<property id="orientation" disabled="True"/>
+      </properties>
+    </glade-widget-class>
+    <glade-widget-class name="GtkVPaned" generic-name="vpaned" _title="Vertical Panes">
+      <properties>
+	<property id="orientation" disabled="True"/>
+      </properties>
+    </glade-widget-class>
   
     <glade-widget-class name="GtkNotebook" generic-name="notebook" _title="Notebook">
       <post-create-function>glade_gtk_notebook_post_create</post-create-function>
@@ -1465,9 +1407,16 @@ embedded in another object</_tooltip>
       </properties>
     </glade-widget-class>
     
-    <glade-widget-class name="GtkHScale" generic-name="hscale" _title="Horizontal Scale"/>
-    
-    <glade-widget-class name="GtkVScale" generic-name="vscale" _title="Vertical Scale"/>
+    <glade-widget-class name="GtkHScale" generic-name="hscale" _title="Horizontal Scale">
+      <properties>
+	<property id="orientation" disabled="True"/>
+      </properties>
+    </glade-widget-class>
+    <glade-widget-class name="GtkVScale" generic-name="vscale" _title="Vertical Scale">
+      <properties>
+	<property id="orientation" disabled="True"/>
+      </properties>
+    </glade-widget-class>
 
     <glade-widget-class name="GtkCalendar" generic-name="calendar" _title="Calendar">
       <properties>
@@ -1493,13 +1442,21 @@ embedded in another object</_tooltip>
         <property id="active" disabled="True" since="2.14"/>
         <property id="attach-widget" disabled="True" since="2.14"/>
         <property id="monitor" disabled="True" since="2.14"/>
+        <property id="reserve-toggle-size" since="2.18"/>
       </properties>
 
     </glade-widget-class>
     
-    <glade-widget-class name="GtkHScrollbar" generic-name="hscrollbar" _title="Horizontal Scrollbar"/>
-
-    <glade-widget-class name="GtkVScrollbar" generic-name="vscrollbar" _title="Vertical Scrollbar"/>
+    <glade-widget-class name="GtkHScrollbar" generic-name="hscrollbar" _title="Horizontal Scrollbar">
+      <properties>
+	<property id="orientation" disabled="True"/>
+      </properties>
+    </glade-widget-class>
+    <glade-widget-class name="GtkVScrollbar" generic-name="vscrollbar" _title="Vertical Scrollbar">
+      <properties>
+	<property id="orientation" disabled="True"/>
+      </properties>
+    </glade-widget-class>
 
     <glade-widget-class name="GtkButtonBox" _title="Button Box">
       <properties>
@@ -1516,27 +1473,38 @@ embedded in another object</_tooltip>
       </properties>
     </glade-widget-class>
     
-    <glade-widget-class name="GtkHButtonBox" generic-name="hbuttonbox" _title="Horizontal Button Box"/>
-
-    <glade-widget-class name="GtkVButtonBox" generic-name="vbuttonbox" _title="Vertical Button Box"/>
+    <glade-widget-class name="GtkHButtonBox" generic-name="hbuttonbox" _title="Horizontal Button Box">
+      <properties>
+	<property id="orientation" disabled="True"/>
+      </properties>
+    </glade-widget-class>
+    <glade-widget-class name="GtkVButtonBox" generic-name="vbuttonbox" _title="Vertical Button Box">
+      <properties>
+	<property id="orientation" disabled="True"/>
+      </properties>
+    </glade-widget-class>
 
     <glade-widget-class name="GtkHSeparator" generic-name="hseparator" _title="Horizontal Separator">
-      
+      <properties>
+	<property id="orientation" disabled="True"/>
+      </properties>
       <packing-defaults>
 	<parent-class name="GtkVBox">
 	  <child-property id="expand" default="false"/>
 	</parent-class>
       </packing-defaults>
-
     </glade-widget-class>
-
     <glade-widget-class name="GtkVSeparator" generic-name="vseparator" _title="Vertical Separator">
+      <properties>
+	<property id="orientation" disabled="True"/>
+      </properties>
       <packing-defaults>
 	<parent-class name="GtkHBox">
 	  <child-property id="expand" default="false"/>
 	</parent-class>
       </packing-defaults>
     </glade-widget-class>
+
     <glade-widget-class name="GtkStatusbar" generic-name="statusbar" _title="Status Bar">
       <properties>
 	<property id="size" disabled="True" />
@@ -1668,7 +1636,12 @@ embedded in another object</_tooltip>
 	<property id="extra-widget" parentless-widget="True" />
 	<property id="preview-widget" parentless-widget="True" />
 	<property id="filter"/>
+	<property id="create-folders" since="2.18"/>
       </properties>
+
+      <signals>
+	<signal id="file-set" since="2.12"/>
+      </signals>
     </glade-widget-class>
     
     <glade-widget-class name="GtkFontSelectionDialog" generic-name="fontselectiondialog" _title="Font Selection Dialog">
@@ -1677,7 +1650,7 @@ embedded in another object</_tooltip>
       </properties>
     </glade-widget-class>
 
-    <glade-widget-class name="GtkInputDialog" generic-name="inputdialog" _title="Input Dialog">
+    <glade-widget-class name="GtkInputDialog" generic-name="inputdialog" deprecated="True" _title="Input Dialog">
       <properties>
         <property id="has-separator"  disabled="True"/>
       </properties>
@@ -1689,6 +1662,8 @@ embedded in another object</_tooltip>
       <verify-function>glade_gtk_message_dialog_verify_property</verify-function>
 
       <properties>
+        <property id="has-separator"  disabled="True"/>
+
 	<property id="default-width"  default="400" optional="True" optional-default="False"/>
 	<property id="default-height" default="115" optional="True" optional-default="False"/>
 
@@ -1740,9 +1715,16 @@ embedded in another object</_tooltip>
       </properties>
     </glade-widget-class>
 
-    <glade-widget-class name="GtkHRuler" generic-name="hruler" _title="Horizontal Ruler"/>
-    
-    <glade-widget-class name="GtkVRuler" generic-name="vruler" _title="Vertical Ruler"/>
+    <glade-widget-class name="GtkHRuler" generic-name="hruler" _title="Horizontal Ruler">
+      <properties>
+	<property id="orientation" disabled="True"/>
+      </properties>
+    </glade-widget-class>
+    <glade-widget-class name="GtkVRuler" generic-name="vruler" _title="Vertical Ruler">
+      <properties>
+	<property id="orientation" disabled="True"/>
+      </properties>
+    </glade-widget-class>
 
     <glade-widget-class name="GtkCombo" generic-name="combo" _title="Combo" deprecated="True" libglade-only="True">
       <post-create-function>glade_gtk_combo_post_create</post-create-function>
@@ -1822,7 +1804,7 @@ embedded in another object</_tooltip>
     
     <glade-widget-class name="GtkFontSelection" generic-name="fontselection" _title="Font Selection"/>
     
-    <glade-widget-class name="GtkCurve" generic-name="curve" _title="Curve">
+    <glade-widget-class name="GtkCurve" generic-name="curve" _title="Curve" deprecated="True">
       <properties>
 	<property id="curve-type" default="GTK_CURVE_TYPE_SPLINE">
   	  <displayable-values>
@@ -1834,7 +1816,7 @@ embedded in another object</_tooltip>
       </properties>
     </glade-widget-class>
     
-    <glade-widget-class name="GtkGammaCurve" generic-name="gammacurve" _title="Gamma Curve"/>
+    <glade-widget-class name="GtkGammaCurve" generic-name="gammacurve" _title="Gamma Curve" deprecated="True"/>
 
     <glade-widget-class name="GtkFileSelection" generic-name="fileselection" _title="File Selection" deprecated="True" libglade-only="True"/>
     <glade-widget-class name="Custom" generic-name="custom" _title="Custom widget" deprecated="True" libglade-only="True">
@@ -1957,10 +1939,11 @@ embedded in another object</_tooltip>
 			_title="Accel Group" libglade-unsupported="True" toplevel="True"/>
     <glade-widget-class name="GtkAdjustment" generic-name="adjustment" 
 			_title="Adjustment" libglade-unsupported="True" toplevel="True">
+      <write-widget-function>glade_gtk_adjustment_write_widget</write-widget-function>
       <properties>
-	<property id="value" default="0.0"/>
-	<property id="lower" default="0.0"/>
-	<property id="upper" default="100.0"/>
+	<property id="value" default="0.0" save="False"/>
+	<property id="lower" default="0.0" save="False"/>
+	<property id="upper" default="100.0" save="False"/>
 	<property id="page-increment" default="10.0"/>
 	<property id="step-increment" default="1.0"/>
 	<property id="page-size" default="10.0"/>
@@ -1968,12 +1951,30 @@ embedded in another object</_tooltip>
     </glade-widget-class>
 
     <glade-widget-class name="GtkAction" generic-name="action" _title="Action" 
-			libglade-unsupported="True" toplevel="True">
+			libglade-unsupported="True">
+      <post-create-function>glade_gtk_action_post_create</post-create-function>
+      <create-editor-property-function>glade_gtk_widget_create_eprop</create-editor-property-function>
+      <string-from-value-function>glade_gtk_widget_string_from_value</string-from-value-function>
       <properties>
+	<property id="name" disabled="True"/>
+	<property id="label" translatable="True"/>
+	<property id="short-label" translatable="True"/>
+	<property id="tooltip" translatable="True"/>
 	<property id="stock-id" stock-icon="True"/>
-	<property id="icon-name" themed-icon="True"/>
-	<property id="gicon" disabled="True"/>
+	<property id="icon-name" themed-icon="True" since="2.10"/>
+	<property id="gicon" disabled="True" since="2.16"/>
 	<property id="action-group" disabled="True"/>
+	<property id="always-show-image" since="2.20"/>
+
+	<!-- Accelerator -->
+	<property id="accelerator" _name="Accelerator" ignore="True" 
+		  common="False" save="False" weight="2.0">
+	  <parameter-spec>
+	    <type>GParamBoxed</type>
+	    <value-type>GladeAccelGList</value-type>
+	  </parameter-spec>
+	  <_tooltip>An accelerator key for this action</_tooltip>
+	</property>
       </properties>
     </glade-widget-class>
 
@@ -1983,11 +1984,18 @@ embedded in another object</_tooltip>
 			libglade-unsupported="True"/>
     <glade-widget-class name="GtkRecentAction" generic-name="recentaction" _title="Recent Action" 
 			libglade-unsupported="True" since="2.12"/>
+
     <glade-widget-class name="GtkActionGroup" generic-name="actiongroup" _title="Action Group" 
-			libglade-unsupported="True" toplevel="True"/>
+			libglade-unsupported="True" toplevel="True" use-placeholders="False">
+      <add-child-function>glade_gtk_action_group_add_child</add-child-function>
+      <remove-child-function>glade_gtk_action_group_remove_child</remove-child-function>
+      <get-children-function>glade_gtk_action_group_get_children</get-children-function>
+      <replace-child-function>glade_gtk_action_group_replace_child</replace-child-function>
+      <read-child-function>glade_gtk_action_group_read_child</read-child-function>
+      <write-child-function>glade_gtk_action_group_write_child</write-child-function>
+    </glade-widget-class>
+
     <glade-widget-class name="GtkEntryCompletion" generic-name="entrycompletion" _title="Entry Completion" 
-			libglade-unsupported="True" toplevel="True"/>
-    <glade-widget-class name="GtkUIManager" generic-name="uimanager" _title="UI Manager" 
 			libglade-unsupported="True" toplevel="True"/>
 
     <glade-widget-class name="GtkIconFactory" generic-name="iconfactory" _title="Icon Factory" 
@@ -2012,6 +2020,7 @@ embedded in another object</_tooltip>
 
     <glade-widget-class name="GtkListStore" generic-name="liststore" _title="List Store" 
 			libglade-unsupported="True" toplevel="True">
+      <post-create-function>glade_gtk_store_post_create</post-create-function>
       <set-property-function>glade_gtk_store_set_property</set-property-function>
       <create-editor-property-function>glade_gtk_store_create_eprop</create-editor-property-function>
       <create-editable-function>glade_gtk_store_create_editable</create-editable-function>
@@ -2125,7 +2134,8 @@ embedded in another object</_tooltip>
       </actions>
 
       <properties>
-        <property id="title" default="column"/>
+        <property id="sort-column-id" since="2.18"/>
+        <property id="title" default="column" translatable="True"/>
         <property id="sizing">
   	  <displayable-values>
 	    <value id="GTK_TREE_VIEW_COLUMN_GROW_ONLY" _name="Grow Only"/>
@@ -2160,6 +2170,7 @@ embedded in another object</_tooltip>
       </actions>
 
       <properties>
+        <property id="item-padding" since="2.18"/>
         <property id="text-column" disabled="True"/>
         <property id="markup-column" disabled="True"/>
         <property id="pixbuf-column" disabled="True"/>
@@ -3195,6 +3206,54 @@ embedded in another object</_tooltip>
       </properties>
     </glade-widget-class>
 
+    <glade-widget-class name="GtkCellRendererSpinner" generic-name="cellrendererspinner" _title="Spinner Renderer" 
+			libglade-unsupported="True" since="2.20">
+      <properties>
+        <property id="active" save="False" custom-layout="True"/>
+        <property id="attr-active" _name="Active column" save="False" default="-1" custom-layout="True">
+	  <parameter-spec>
+	    <type>GParamInt</type>
+	    <min>-1</min>
+	  </parameter-spec>
+          <_tooltip>The column in the model to load the value from</_tooltip>
+	</property>
+        <property id="use-attr-active" default="True" save="False" visible="False">
+	  <parameter-spec>
+	    <type>GParamBoolean</type>
+	  </parameter-spec>
+	</property>
+
+        <property id="pulse" save="False" custom-layout="True"/>
+        <property id="attr-pulse" _name="Pulse column" save="False" default="-1" custom-layout="True">
+	  <parameter-spec>
+	    <type>GParamInt</type>
+	    <min>-1</min>
+	  </parameter-spec>
+          <_tooltip>The column in the model to load the value from</_tooltip>
+	</property>
+        <property id="use-attr-pulse" default="True" save="False" visible="False">
+	  <parameter-spec>
+	    <type>GParamBoolean</type>
+	  </parameter-spec>
+	</property>
+
+        <property id="size" save="False" custom-layout="True"/>
+        <property id="attr-size" _name="Icon Size" save="False" default="-1" custom-layout="True">
+	  <parameter-spec>
+	    <type>GParamInt</type>
+	    <min>-1</min>
+	  </parameter-spec>
+          <_tooltip>The column in the model to load the value from</_tooltip>
+	</property>
+        <property id="use-attr-size" default="True" save="False" visible="False">
+	  <parameter-spec>
+	    <type>GParamBoolean</type>
+	  </parameter-spec>
+	</property>
+
+      </properties>
+    </glade-widget-class>
+
     <glade-widget-class name="GtkCellRendererToggle" generic-name="cellrenderertoggle" _title="Toggle Renderer" 
 			libglade-unsupported="True">
       <properties>
@@ -3275,12 +3334,16 @@ embedded in another object</_tooltip>
 			libglade-unsupported="True" toplevel="True">
       <properties>
 	<property id="gicon" disabled="True" since="2.14"/>
+	<property id="title" since="2.18" translatable="True"/>
+	<property id="tooltip-text" since="2.16" translatable="True"/>
+	<property id="tooltip-markup" since="2.16" translatable="True"/>
       </properties>
     </glade-widget-class>
 
     <glade-widget-class name="GtkTextBuffer" generic-name="textbuffer" _title="Text Buffer" 
 			libglade-unsupported="True" toplevel="True">
       <post-create-function>glade_gtk_text_buffer_post_create</post-create-function>
+      <set-property-function>glade_gtk_text_buffer_set_property</set-property-function>
       <signals>
 	<signal id="paste-done" since="2.16"/>
       </signals>
@@ -3292,9 +3355,31 @@ embedded in another object</_tooltip>
       </properties>
     </glade-widget-class>
 
+    <glade-widget-class name="GtkEntryBuffer" generic-name="entrybuffer" _title="Entry Buffer" 
+			libglade-unsupported="True" toplevel="True" since="2.18">
+      <post-create-function>glade_gtk_entry_buffer_post_create</post-create-function>
+      <set-property-function>glade_gtk_entry_buffer_set_property</set-property-function>
+      <properties>
+	<property id="text" translatable="True">
+	  <visible-lines>2</visible-lines>
+	</property>
+      </properties>
+    </glade-widget-class>
+
 
     <glade-widget-class name="GtkTextTag" generic-name="texttag" _title="Text Tag" 
-			libglade-unsupported="True" toplevel="True"/>
+			libglade-unsupported="True" toplevel="True">
+      <properties>
+        <property id="direction">
+  	  <displayable-values>
+	    <value id="GTK_TEXT_DIR_NONE" _name="None"/>
+	    <value id="GTK_TEXT_DIR_LTR" _name="Left to Right"/>
+	    <value id="GTK_TEXT_DIR_RTL" _name="Right to Left"/>
+	  </displayable-values>
+	</property>
+      </properties>
+    </glade-widget-class>
+
     <glade-widget-class name="GtkTextTagTable" generic-name="texttagtable" _title="Text Tag Table" 
 			libglade-unsupported="True" toplevel="True"/>
 
@@ -3374,6 +3459,7 @@ embedded in another object</_tooltip>
     <glade-widget-class-ref name="GtkComboBox"/>
     <glade-widget-class-ref name="GtkComboBoxEntry"/>
     <glade-widget-class-ref name="GtkProgressBar"/>
+    <glade-widget-class-ref name="GtkSpinner"/>
 
     <glade-widget-class-ref name="GtkTextView"/>
 
@@ -3415,6 +3501,8 @@ embedded in another object</_tooltip>
   <glade-widget-group name="gtk-text" _title="Text Buffers">
 
     <default-palette-state expanded="False"/>
+ 
+    <glade-widget-class-ref name="GtkEntryBuffer"/>
 
     <glade-widget-class-ref name="GtkTextBuffer"/>
     <glade-widget-class-ref name="GtkTextTag"/>
@@ -3430,7 +3518,6 @@ embedded in another object</_tooltip>
     <glade-widget-class-ref name="GtkWindowGroup"/>
     <glade-widget-class-ref name="GtkAdjustment"/>
     <glade-widget-class-ref name="GtkEntryCompletion"/>
-    <glade-widget-class-ref name="GtkUIManager"/>
     <glade-widget-class-ref name="GtkIconFactory"/>
     <glade-widget-class-ref name="GtkStatusIcon"/>
     <glade-widget-class-ref name="GtkFileFilter"/>

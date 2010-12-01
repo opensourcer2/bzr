@@ -3,8 +3,8 @@ dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.52)
 
 m4_define(glade_major_version, 3)
-m4_define(glade_minor_version, 6)
-m4_define(glade_micro_version, 7)
+m4_define(glade_minor_version, 7)
+m4_define(glade_micro_version, 1)
 m4_define(glade_version, glade_major_version.glade_minor_version.glade_micro_version)
 
 AC_INIT([glade3], [glade_version],
@@ -27,6 +27,11 @@ AM_INIT_AUTOMAKE([1.9 foreign no-dist-gzip dist-bzip2])
 
 AM_MAINTAINER_MODE
 
+# Support silent build rules, requires at least automake-1.11. Disable
+# by either passing --disable-silent-rules to configure or passing V=1
+# to make
+m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
+
 IT_PROG_INTLTOOL([0.35.0])
 
 AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)
@@ -47,8 +52,8 @@ AM_PROG_LIBTOOL
 # If any interfaces have been added since the last public release, then increment GLADE_AGE.
 # If any interfaces have been removed since the last public release, then set GLADE_AGE to 0.
 # Reference: http://www.gnu.org/software/libtool/manual.html#Versioning
-GLADE_REVISION=3
-GLADE_CURRENT=9
+GLADE_REVISION=0
+GLADE_CURRENT=10
 GLADE_AGE=0
 GLADE_CURRENT_MINUS_AGE=`expr $GLADE_CURRENT - $GLADE_AGE`
 AC_SUBST(GLADE_REVISION)
@@ -116,7 +121,7 @@ GTK_DOC_CHECK(1.9)
 dnl ================================================================
 dnl Check for gtk+
 dnl ================================================================
-PKG_CHECK_MODULES(GTK, [gtk+-2.0 >= 2.14.0 gthread-2.0 libxml-2.0 >= 2.4.0])
+PKG_CHECK_MODULES(GTK, [gtk+-2.0 >= 2.20 gthread-2.0 libxml-2.0 >= 2.4.0])
 AC_SUBST(GTK_LIBS)
 AC_SUBST(GTK_CFLAGS)
 

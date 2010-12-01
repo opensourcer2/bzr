@@ -30,7 +30,7 @@
     <copyright> 
       <year>2002</year><year>2000</year> 
       <holder>Michael Vance</holder> 
-    </copyright><copyright><year>2009</year><holder>Mario Blättermann (mariobl@gnome.org)</holder></copyright> 
+    </copyright><copyright><year>2009</year><holder>Mario Blättermann (mariobl@gnome.org)</holder></copyright><copyright><year>2010</year><holder>Mario Reyer (gnome-de@reyer.de)</holder></copyright> 
 
     <publisher> 
       <publishername>GNOME-Dokumentationsprojekt</publishername> 
@@ -267,77 +267,36 @@
          <title>Arbeiten mit Widgets</title>
          <sect2 id="select-widgets-palette">
                 <title>Auswählen von Widgets aus der Palette</title>
-                <para>
-                  You can work with the widgets in the 
-                  <guilabel>Palette</guilabel> window in the following
-ways:
-                </para>
+                <para>Sie können mit den Widgets im <guilabel>Palettenfenster</guilabel> folgendermaßen arbeiten:</para>
                 <variablelist> 
                   <varlistentry> 
-                         <term>Auswahlmethode</term> 
+                         <term>Auswahlmodus</term> 
                          <listitem>
-                                <para>
-                                  To use selection mode,
- click on the 
-                                  <guilabel>Selector</guilabel> arrow. The
-pointer changes to an
-                                  arrow to indicate that selection mode is
-active. In this mode, you use the mouse to select widgets in your project.
-You can then use the <guilabel>Properties</guilabel> window to edit the
-properties of the widgets.</para>
-<para>You can also use the widget context menu to select a widget.
-Right-click on a widget to open the widget context menu.</para><para>You
-can add multiple widgets of a specific type from the
-<guilabel>Palette</guilabel> to your project by holding down the
-<keycap>Control</keycap> key when you select a widget. You need to click on
-the <guilabel>Selector</guilabel> arrow or another widget in the
-<guilabel>Palette</guilabel> to return to normal mode.</para>
+                                <para>Zum Benutzen des Auswahlmodus klicken Sie auf den  <guilabel>Widget-Auswahl</guilabel>-Pfeil. Der Mauszeiger ändert sich zum Pfeil, um auf den aktiven Auswahlmodus aufmerksam zu machen. In diesem Modus verwenden Sie die Maus zum Auswählen von Widgets in Ihrem Projekt. Dann können Sie den <guilabel>Eigenschafteneditor</guilabel> zum Bearbeiten der Eigenschaften der Widgets benutzen.</para>
+<para>Sie können auch das Widget-Kontextmenü zur Auswahl eines Widgets benutzen. Ein Klick mit der rechten Maustaste auf ein Widget öffnet das Widget-Kontextmenü.</para><para>Sie können mehrere Widgets eines bestimmten Typs aus der <guilabel>Palette</guilabel> zu Ihrem Projekt hinzufügen, indem Sie die <keycap>Strg</keycap>-Taste beim Auswählen eines Widgets gedrückt halten. Sie müssen auf den <guilabel>Widget-Auswahl</guilabel>-Pfeil oder ein anderes Widget in der <guilabel>Palette</guilabel> klicken, um in den Normalmodus zurückzukehren.</para>
                          </listitem> 
                   </varlistentry> 
                 </variablelist> 
                 <variablelist> 
                   <varlistentry> 
-                         <term>Widget-Platzierungsmethode</term> 
+                         <term>Widget-Platzierungsmodus</term> 
                          <listitem> 
-                                <para>
-                                  To use widget placement mode, select a
-widget in the 
-                                  <guilabel>Palette</guilabel> window. When
-you select most widgets, the
-                                  pointer changes to a pointer-plus-cross.
-You can then place the widget inside containers,
-                                  top-level  widgets, and so on. After you
-place a widget, the mode returns to
-                                  selection mode.</para>
+                                <para>Zum Benutzen des Platzierungsmodus wählen Sie ein Widget aus der <guilabel>Palette</guilabel>. Wenn Sie mehrere Widgets ausgewählt haben, ändert sich der Mauszeiger in einen Pfeil plus Kreuz. Sie können ein Widget innerhalb eines Containers, Widgets der obersten Ebene usw. platzieren. Nachdem Sie ein Widget platziert haben, wechselt der Modus zurück in den Auswahlmodus.</para>
                          </listitem> 
                   </varlistentry> 
                 </variablelist> 
                 <variablelist> 
                   <varlistentry> 
-                         <term>Top-level placement mode</term> 
+                         <term>Platzierungsmodus in der obersten Ebene</term> 
                          <listitem> 
-                                <para>
-                                  To use top level placement mode, select a
-defined top-level
-                                  widget in the
-<application>Palette</application> window. When you select a top-level
-                                  widget in the 
-                                  <guilabel>Palette</guilabel> window, the
-widget appears
-                                  immediately on your desktop. You can then
-edit the widget. After you select a top-level widget,
-                                  the mode returns to selection mode.
-                                </para>
+                                <para>Zum Benutzen des Platzierungsmodus in der obersten Ebene wählen Sie ein beliebiges Widget der obersten Ebene aus der <application>Palette</application> aus. Wenn Sie ein Widget der obersten Ebene aus der <guilabel>Palette</guilabel> gewählt haben, erscheint das Widget sofort im Entwurfsbereich. Sie können das Widget dann bearbeiten. Nach dem Auswählen eines Widgets der oberste Ebene wechselt der Modus zurück in den Auswahlmodus.</para>
                          </listitem> 
                   </varlistentry> 
                 </variablelist> 
          </sect2>
 <sect2 id="organize-widgets">
 <title>Organisieren von Widgets in Ihrem Projekt</title>
-<para>You use widget containers, or boxes, to layout and organize widgets
-in your project window. You can choose the following widget containers from
-the <guilabel>Palette</guilabel> window:
-</para>
+<para>Benutzen Sie Widget-Containers oder Boxen zur Gestaltung und Organisation von Widgets in Ihrem Projektfenster. Wählen Sie aus folgenden Widget-Containern der <guilabel>Palette</guilabel>:</para>
 <itemizedlist>
 <listitem><para>Horizontale Box</para>
 </listitem><listitem><para>Vertikale Box</para></listitem>
@@ -353,13 +312,7 @@ the <guilabel>Palette</guilabel> window:
 <listitem><para>Sichtfeld</para></listitem>
 </itemizedlist>
 <para>Sie können Boxen ineinander verschachteln, um komplexe Oberflächenstrukturen zu erzeugen. Wenn Sie horizontale und vertikale Boxen erzeugt haben, fragt <application>Glade</application> Sie danach, wie viele Zeilen oder Spalten anfänglich erzeugt werden sollen. Zeilen oder Spalten können Sie jedoch auch nachträglich hinzufügen.</para>
-<para>
-When you have created all the boxes you require, you can add specific
-widgets like labels, buttons, and more complicated widgets into the boxes.
-Notice that <application>Glade</application> packs widgets into the layout
-which eliminates a lot of tedious work. The use of boxes enables windows to
-change size to accommodate different size labels in different languages
-when the application is localized.</para></sect2>
+<para>Wenn Sie alle benötigten Boxen erstellt haben, können Sie spezifische Widgets wie Beschriftungen, Knöpfe, und weitere aufwändige Widgets in die Boxen hinzufügen. Beachten Sie, dass <application>Glade</application> Widgets in das Layout packt, was viel lästige Arbeit vermeidet. Der Gebrauch von Boxen ermöglicht Fenstern, durch Anpassen der Größe, die durch Lokalisieren der Anwendung unterschiedlich großen  Beschriftungen unterzubringen.</para></sect2>
          <sect2 id="place-widgets-clipboard"> 
                 <title>Ablegen eines Widgets in der Zwischenablage</title> 
                 <para>Um ein Widget von seinem Eltern-Widget zu lösen und es in der Zwischenablage zu platzieren, wählen Sie das Widget aus und wählen Sie dann <menuchoice><guimenu>Bearbeiten</guimenu><guisubmenu>Ausschneiden</guisubmenu></menuchoice>. </para>
@@ -380,7 +333,7 @@ when the application is localized.</para></sect2>
          
          <sect2 id="edit-widget"> 
                 <title>Ändern der Eigenschaften eines Widgets</title> 
-                <para>Der Eigenschafteneditor kann dazu verwendet werden, die Eigenschaften eines ausgewählten Widgets anzupassen. Um die Eigenschaften eines Widgets zu ändern, wählen Sie das Widget aus und ändern Sie den entsprechenden Wert in einem der Eingabefelder des Eignschafteneditors.</para>
+                <para>Der Eigenschafteneditor kann dazu verwendet werden, die Eigenschaften eines ausgewählten Widgets anzupassen. Um die Eigenschaften eines Widgets zu ändern, wählen Sie das Widget aus und ändern Sie den entsprechenden Wert in einem der Eingabefelder des Eigenschafteneditors.</para>
                 
                 
          </sect2> 
@@ -388,10 +341,7 @@ when the application is localized.</para></sect2>
   
 <sect1 id="about"> 
     <title>Info zu Glade</title> 
-    <para> Glade is maintained by the Glade developers and GNOME community volunteers.
-      To find more information about Glade, please visit the 
-      <ulink url="http://glade.gnome.org" type="http">Glade 
-      Web site</ulink>.</para>
+    <para>Glade wird von den Glade Entwicklern und der freiwilligen GNOME Gemeinschaft betreut. Weitere Informationen über Glade finden Sie auf der <ulink url="http://glade.gnome.org" type="http">Glade-Website</ulink>.</para>
     <para>Um einen Fehler zu melden oder einen Vorschlag zu dieser Anwendung oder zu diesem Handbuch zu machen, benutzen Sie bitte das<ulink url="http://bugzilla.gnome.org/enter_bug.cgi?product=glade3" type="http">Bugzilla-Fehlererfassungssystem</ulink>.</para>
 
     <para>Eine weitere hervorragende Informationsquelle sind die Mailinglisten der <ulink url="http://lists.ximian.com/mailman/listinfo/glade-users" type="http">Benutzer</ulink> und <ulink url="http://lists.ximian.com/mailman/listinfo/glade-devel" type="http">Entwickler</ulink> von Glade. Sie können sich bei diesen Mailinglisten anmelden und zusätzlich die Listenarchive durchsuchen, die über die gleichen Links erreichbar sind.</para>

@@ -5,19 +5,19 @@
       <set-property-function>glade_gnome_canvas_set_property</set-property-function>
       <properties>
         <property id="scroll-x1" name="Min X">
-	  <tooltip>The minimum x coordinate</tooltip>
+	  <tooltip>The minimum X coordinate</tooltip>
 	  <spec>glade_standard_float_spec</spec>
 	</property>
         <property id="scroll-y1" name="Min Y">
-	  <tooltip>The minimum y coordinate</tooltip>
+	  <tooltip>The minimum Y coordinate</tooltip>
 	  <spec>glade_standard_float_spec</spec>
 	</property>
         <property id="scroll-x2" name="Max X">
-	  <tooltip>The maximum x coordinate</tooltip>
+	  <tooltip>The maximum X coordinate</tooltip>
 	  <spec>glade_standard_float_spec</spec>
 	</property>
         <property id="scroll-y2" name="Max Y">
-	  <tooltip>The maximum y coordinate</tooltip>
+	  <tooltip>The maximum Y coordinate</tooltip>
 	  <spec>glade_standard_float_spec</spec>
 	</property> 
         <property id="pixels-per-unit" name="Pixels per unit">
@@ -38,8 +38,16 @@
         <property id="scroll-y2" disabled="True"/>
         <property id="pixels-per-unit" disabled="True"/>
         <property id="selection-mode" name="Selection Mode">
+	  <parameter-spec>
+	    <type>GParamEnum</type>
+	    <value-type>GnomeIconListMode</value-type>
+	  </parameter-spec>
 	  <tooltip>The selection mode</tooltip>
-	  <spec>glade_gnome_icon_list_selection_mode_spec</spec>
+          <displayable-values>
+            <value id="GNOME_ICON_LIST_ICONS" name="List Icons"></value>
+            <value id="GNOME_ICON_LIST_TEXT_BELOW" name="Text Below"></value>
+            <value id="GNOME_ICON_LIST_TEXT_RIGHT" name="Text Right"></value>
+          </displayable-values>
 	</property>
         <property id="icon-width" default="78" name="Icon Width">
           <tooltip>The width of each icon</tooltip>

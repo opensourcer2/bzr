@@ -1,3 +1,375 @@
+2010-04-14  Tristan Van Berkom <tvb@gnome.org>
+
+	* configure.ac, NEWS: Rolling Glade 3.7.1
+
+	* gladeui/glade-widget.c: Added some clarification to the docs of glade_widget_get_children(),
+	  fixed glade_widget_get_children() to not call g_list_append() in a loop.
+
+2010-05-14  Johannes Schmid <jhs@jsschmid.de>
+
+	* gladeui/glade-app.c: Allow destruction/recreation of the GladeApp object
+
+	* gladeui/glade-signal-editor.[ch]: Some refactoring to make the signal editor
+	  object itself a dockable widget and remove some cruft api (bug 618020)
+
+	* gladeui/glade-project.[ch]: Implement GtkTreeModel
+
+	* gladeui/glade-base-editor.c, gladeui/glade-editor.c: Adjust for new signal
+	  editor api
+
+	* gladeui/glade-inspector.c: Remove duplicate store and use the the GladeProject
+	  as the store directly.
+
+	* src/glade-window.c: Removed some code related to old signal editor api cruft.
+
+2010-05-01  Javier Jardón <jjardon@gnome.org>
+
+	* gladeui/glade-signal-editor.c: Do not show the event box in signal editor
+
+2010-04-01  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-project.c:
+	  - Display GTK+ in caps and always assume GTK+ as a project dependency
+	    (so that empty projects still depend on GTK+ for display purposes).
+	  - Stop showing preferences at project new time (now we have tooltips that tell you this stuff),
+	    finally closing bug 574095.
+
+2010-03-31  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-signal-editor.c: Moved unrefs from finalize --> dispose, unload the loaded
+	  widget and disconnect from support-changed signal, avoid clearing liststore when its owning
+	  view is destroyed and we're unsetting the widget in ->dispose.
+
+	* src/Makefile.am, src/glade-close-button.[ch]: Using Paolo Borelli's close button code for notebook
+	  tab close buttons.
+
+	* src/glade-window.c:
+	  - Added option to disable toolbar in View menu and session data (bug 586194).
+	  - Added option to show notebook tabs for open projects also in the View menu and session data.
+	  - Added option to show/hide statusbar in the View menu and session data.
+
+	* gladeui/glade-palette.c: Made "both" mode use text horizontally again, still get alot of unwanted 
+	  ellipsize here.
+
+	* gladeui/glade-project.c: Added the targets-changed signal to refresh views with data about
+	  target project versions (notebook tabs).
+
+	* gladeui/glade-base-editor.c: Fixed to unref in ->dispose() and to unset the loaded widget
+	  in the signal editor when doing so.
+
+	* gladeui/glade-signal-editor.c: Save some space in treeview column headers.
+
+2010-03-30  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/glade-gtk.c, plugins/gtk+/gtk+.xml.in: Block the glade_gtk_text_buffer_changed()
+	  handler when updating the buffer text (this feedback loop was causing segfaults when undoing
+	  modifications to a text buffer's text).
+
+	* gladeui/glade-signal-editor.c: Fixed access to signal name in object dialog hander (was a crasher).
+
+	* gladeui/glade-widget.c: Fixed GladeWidget to update support warnings on newly added signals.
+
+	* plugins/gtk+/gtk+.xml.in: Removed GtkUIManager as its not really editable in Glade but still
+	  asks for an icon at startup.
+
+2010-03-29  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-editor-property.[ch]: 
+	  - Added glade_editor_property_show_object_dialog()
+	  - Give object dialogs a bigger default size and hide the column headers
+	  - Fixed an assertion and page-size != 0 for adjustment properties in libglade mode
+
+	* gladeui/glade-signal-editor.c: 
+	  - Use glade_editor_property_show_object_dialog() to select project objects for signal user data.
+	  - Added tooltips for the column headers
+	  - Now show an icon and tooltip in rows for signals that are only
+	    supported in the future, refresh them when support changes.
+	  - Dont show swapped column in libglade mode
+	  - Reordered support icon to come before the signal name and let the column be user
+	    resizable along with the others (non-resizable unellipzised signal name columns expand over time)
+
+	* gladeui/glade-widget-adaptor.h, gladeui/glade-property-class.h: Added some version checking macros.
+
+	* gladeui/glade-signal.[ch]: Add support warning meta data to signals
+
+	* gladeui/glade-project.c:
+	  - Simplify code with new version checking macros
+	  - Do the verify on signals for widgets as well as project warnings
+	    (update the signals a verify time).
+
+	* gladeui/glade-widget.c: GladeWidget takes a new "support-changed" to broadcast support changes
+	  on the widget.
+
+	* gladeui/glade-popup.c: Allow adding new actions to action groups from the palette ("Add widget here").
+
+	* plugins/gtk+/glade-accels.[ch]: Moved individual accelerator [de]serialization here, special integration
+	  for action types, for actions only show one accelerator and dont load/save the "activate" signal name.
+
+	* plugins/gtk+/glade-gtk.c, plugins/gtk+/gtk+.xml.in: Added support for GtkActionGroup <--> GtkAction
+	  relationships and support for editing/loading/saving of accelerators which can be associated with
+	  actions inside an action group.
+
+2010-03-28  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/Makefile.am, gladeui/glade-cell-renderer-icon.[ch]: Added activatable pixbuf renderer
+
+	* gladeui/glade-signal-editor.c: Use new activatable pixbuf renderer to render a devhelp icon
+	  and fire signal contextual devhelp searches.
+
+	* plugins/gtk+/glade-model-data.c, plugins/gtk+/glade-attributes.c: Use GladeCellRendererIcon
+	  instead of GladeCellRendererButton which was more convoluted (included only an icon when editing).
+
+	* plugins/gtk+/Makefile.am: Removed glade-cell-renderer-button.[ch]
+
+2010-03-28  Marco Diego Aurélio Mesquita <marcodiegomesquita@gmail.com>
+
+	* gladeui/glade-base-editor.c: Avoid GtkEntry feedback loop with g_signal_handlers_block_by_func(),
+	fixes bug 609612.
+
+2010-03-28  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/glade-gtk.c, plugins/gtk+/gtk+.xml.in:
+	  - Sync attributes when they are set to be used directly and not by the model (fixes loaded state
+	    of explicitly set cell renderer properties). 
+	  - Fix last patch to reset cellrenderer attributes from a GladeProperty::value-changed signal
+	    instead of the property mutator implementation (as the "columns" property is construct-only
+	    and the widget is rebuilt - property reference lists are unavailable at ->set_property time).
+
+	* gladeui/glade-widget-adaptor.[ch]: Add a "scrollable" flag on the adaptor class vtable
+	  introspected by checking if (widget_class->set_scroll_adjustments_signal) != 0.
+
+	* gladeui/glade-utils.[ch]: Added glade_util_check_and_warn_scrollable() to check and warn the
+	  user if they are trying to add a non-scrollable widget to a scrolled window.
+
+	* gladeui/glade-app.c, gladeui/glade-popup.c, gladeui/glade-placeholder.c, plugins/gtk+/glade-gtk.c: 
+	Consult glade_util_check_and_warn_scrollable() before executing commands that introduce objects
+	to the project.
+
+	* gladeui/glade-xml-utils.h: Added "swapped" attribute definition
+
+	* gladeui/glade-signal.c: Added "swapped" attribute and read/write from xml, swapped attribute is
+	always saved, if its missing on load and user_data (object) is set, we assume a swapped default.
+
+	* gladeui/glade-signal-editor.c: Allow toggling "swapped" flag of a signal if user data is set.
+
+	* gladeui/glade-widget.c: Account for new signal "swapped" flag when modifying local signals.
+
+2010-03-27  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-marshallers.list, gladeui/glade-placeholder.c:
+	  Make GladePlaceholder a scrollable widget (hypothetically) to avoid runtime warnings.
+
+	* plugins/gtk+/gtk+.xml.in: Disabled "has-separator" of GtkMessageDialog as it ignores the separator
+	  and the setting is useless (not to mention setting it causes runtime warnings: fixes bug 587288).
+
+	* gladeui/glade-project.[ch]: Expose glade_project_get_target_version()
+
+	* plugins/gtk+/glade-gtk.c:
+	  - check project target gtk+ version to decide initial state
+	    of GtkEntry::buffer.
+	  - Substitute the old manual evaluation with GPC_VERSION_CHECK()
+	  - Avoid critical warnings when setting GtkColorButton properties to NULL
+	  - Avoid critical warnings when setting GtkComboBoxEntry::text-column < 0
+	  - Check for type compatibility before setting cell renderer attributes
+	  - Clear cell renderer attributes before setting liststore column types and resync them after
+	    (Avoids cricital warnings where the underlying data types changed and dont match the properties
+	    of the renderers)
+	  - Fill in the gaps in model data while loading some columns with non serializable types
+	    (fixes severe bug: model data was loaded with missing columns of data).
+
+	* gladeui/glade-property-class.h: Created convenience macro GPC_VERSION_CHECK
+
+	* gladeui/glade-utils.c: Allow loading of libraries installed in optional non-system prefixes;
+	  (so that GtkSourceView catalog is buildable and usable from your jhbuild environment)
+	  assume a path that is: ${prefix}/lib/glade3/modules/../../ and search it after the initial 
+	  module search path.
+
+	* plugins/gtk+/glade-column-types.c, plugins/gtk+/glade-model-data.c: 
+	  allow model data with explicitly G_TYPE_INVALID types.
+
+2010-03-26  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-palette.c: Left aligned and ellipsize end widget group titles (restored normal
+	  Glade palette behavior) and added tooltip to group title (closing bug 558983).
+
+	* src/glade-window.c: Added an idle function to reload GtkPaned positions from the session data
+	  in the case the window fires up maximized.
+
+2010-03-25  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/Makefile.am, gladeui/glade-palette.c:
+	  - Removed glade-palette-box.[ch], glade-palette-expander.[ch] and glade-palette-item.[ch].
+	  - Integrated GtkToolPalette as the internal implementation of Glade's palette (bug 613956).
+
+	* plugins/gtk+/glade-gtk.c: Fix some remaining crashes from the GSEAL() stuff (GtkBoxChild
+	  invalid type dereferencing).
+
+	* plugins/gtk+/gtk+.xml.in, plugins/gnome/gnome.xml.in, plugins/gnome/canvas.xml.in,
+	plugins/gtk+/gtkunixprint.xml.in: Added missing displayable values and rooted out latest
+	resulting startup warnings for GTK+ 2.20.
+
+	* gladeui/glade-widget-adaptor.[ch]: Save the original missing icon name if the icon was
+	  not found.
+
+	* gladeui/glade-catalog.c: Print a summery of all missing icon names for thier classes
+	  (cleans up start up warnings).
+
+2010-03-25  Federico Mena Quintero  <federico@novell.com>
+
+	* plugins/gtk+/gtk+.xml.in: bgo#594231 - Fix the orientation of
+	GtkVBox and other vertically-oriented widgets.  We disable the
+	"orientation" property on those widgets, so that we can use the
+	values that GTK+ actually provides.  GTK+ does not currently
+	report the right defaults for those widgets, so the final values
+	were being overwritten - so vboxes appeared horizontal.  In the
+	future we will make GtkBox et al instantiable so the user can
+	really have orientable containers.
+
+2010-03-24  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-signal.[ch]: Broke api of glade_signal_write(), this api should never
+	  be called outside of the Glade core so its a soft api break.
+
+	* gladeui/glade-widget.c: Call glade_signal_write() with the current project format, fixes bug 600031.
+
+	* plugins/gtk+/gtk+.xml.in: Flag 'save-always' for 'can-focus' property on GtkEntry.
+
+2010-03-20  Javier Jardón <jjardon@gnome.org>
+
+	* gladeui/glade-builtins.c: Use g_timeout_add_seconds() instead of g_timeout_add()
+	  (gnome goal bug 581255).
+
+2010-03-20  Marco Diego Aurélio Mesquita <marcodiegomesquita@gmail.com>
+
+	* src/glade-window.c: Save maximized window state of main window and
+	  all dockable editors in the session data (fixes bug 607670).
+
+2010-03-17  Christian Persch  <chpe@gnome.org>
+
+	* gladeui/glade-xml-utils.c: Save glade files with UTF-8 encoding
+	This avoid putting character entities for non-ASCII characters in the
+	extractable strings. Bug #596205.
+
+2010-03-11  Aaron Brown  <aaron.j.brown@hotmail.com>
+
+	* src/glade-window.c: Changed "Close without saving" acelerator key
+	  from 'c' to 'w', fixes bug 612538.
+
+2010-03-10  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/gtk+.xml.in: Marked GtkSpinner since="2.20"
+
+2010-03-10  Tristan Van Berkom <tvb@gnome.org>
+
+	* configure.ac, NEWS: Rolling Glade 3.7.0
+
+	* plugins/gtk+/gtk+.xml.in: Removed alot of virtually defined properties that were not available 
+	  in GTK+ 2.14, now they are available.
+
+	* plugins/gtk+/glade-gtk.c, plugins/gtk+/glade-entry-editor.c: Enhanced the GtkEntry editor
+	  to allow the user to chose between the "text" and the "buffers" exclusively.
+
+2010-03-10  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/glade-model-data.c: Fixed crasher when double freeing the data tree
+	  in some idle handlers (idle handlers needed for advanced focus handling/keynav), fixes crash bug 608011.
+	  Also make sure to create the adjustment with a 0 page size.
+
+	* plugins/gtk+/gtk+.xml.in: Fixed translation details pointed out by Johannes H. Jensen
+	  in bug 607348.
+	
+2010-03-10  Javier Jardón <jjardon@gnome.org>
+
+	* plugins/gtk+/gtk+.xml.in: Deprecated GtkGammaCurve and GtkCurve
+
+2010-03-09  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/gtk+.xml.in: Deprecated input dialog
+
+2010-03-09  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/glade-gtk.c: Fixed GtkBox & GtkTable regressions introduced
+	  by GSEAL patches.
+
+	* plugins/gtk+/gtk+.xml.in: Updated newly added symbols in GTK+ on widgets already
+	  in the catalog; added new objects from GTK+:
+	  - GtkEntryBuffer
+	  - GtkSpinner
+	  - GtkCellRendererSpinner
+
+2010-03-09  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/glade-gtk.c, plugins/gtk+/glade-column-types.[ch], 
+	  plugins/gtk+/glade-model-data.c: Allow litteral string values for 
+	  column types in the tree store editor, Glade will serialize/deserialize
+	  the string litterally and if there is a valid type returned from
+	  g_type_from_name() (i.e. a valid introduced type by that name); then 
+	  that GType will be used to setup the column types of runtime treestores
+	  in the project; otherwise it will use G_TYPE_POINTER for those columns.
+
+	  This closes bug 597095.
+
+2010-03-09  Marco Diego Aurélio Mesquita <marcodiegomesquita@gmail.com>
+
+	* gladeui/glade-project.c: Avoid collapsing commands when a project is freshly saved
+	  (this fixes a false "unmodified" state after changing the same property before and
+	  after project save).
+
+2010-01-28  Javier Jardon <jjardon@gnome.org>
+
+	* README: Glade requires GTK+ >= 2.20
+
+2009-12-18  Javier Jardón <jjardon@gnome.org>
+
+	* doc/gladeui-docs.sgml: Fix doc location link
+
+2009-12-04  Javier Jardón <jjardon@gnome.org>
+
+	Use accessor functions instead direct access. Second patch
+
+	GTK+ 2.19.0 is now the required version
+	I've used all the GTK+ 2.19.1 api available, still missing:
+	GTK_WIDGET_UNSET_FLAGS (widget, GTK_TOPLEVEL);
+	GTK_WIDGET_SET_FLAGS (widget, GTK_REALIZED);
+	GTK_WIDGET_REALIZED ()
+	GTK_WIDGET_MAPPED ()
+
+	https://bugzilla.gnome.org/show_bug.cgi?id=594957
+
+2009-12-04  Javier Jardón <jjardon@gnome.org>
+
+	Use accessor functions instead direct access.
+
+	GTK+ 2.17.10 is now the required version
+	I've used all the GTK+ 2.18.* api available, still missing:
+	GTK_WIDGET_UNSET_FLAGS (widget, GTK_TOPLEVEL);
+	GTK_WIDGET_SET_FLAGS (widget, GTK_REALIZED);
+	GTK_WIDGET_REALIZED ()
+	GTK_WIDGET_MAPPED ()
+	GTK_VIEWPORT ()->bin_window
+	GTK_ENTRY ()->editing_canceled
+
+	https://bugzilla.gnome.org/show_bug.cgi?id=594957
+
+2009-11-09  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/gtk+.xml.in, plugins/gtk+/glade-gtk.c: Disable default saving behaviour of order dependant 
+	GtkAdjustment properties and installed glade_gtk_adjustment_write_widget() to write the properties out
+	in the following order: "lower", "upper", "value" (fixes bug 578484).
+
+2009-10-12  Javier Jardon <jjardon@gnome.org>
+
+	* configure.ac: Support silent build when using automake >= 1.11
+
+2009-09-14  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-widget.c: Fixed crasher while copying internal widgets (bug 595156)
+
+2009-07-01  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/glade-gtk.c: Fixed loading state of assigned GtkTreeModels of GtkCellRendererCombo
+	objects (bug 566928).
+
 2009-06-29  Tristan Van Berkom <tvb@gnome.org>
 
 	* configure.ac, NEWS: Rolling Glade 3.6.7

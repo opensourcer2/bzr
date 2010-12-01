@@ -26,9 +26,6 @@ libgladeui_1_la_SOURCES = \
 	glade-inspector.c \
 	glade-xml-utils.c \
 	glade-palette.c \
-	glade-palette-item.c \
-	glade-palette-box.c \
-	glade-palette-expander.c \
 	glade-design-layout.c \
 	glade-design-view.c \
 	glade-named-icon-chooser-dialog.c \
@@ -55,9 +52,6 @@ libgladeui_1_la_SOURCES = \
 	glade-app.c \
 	glade-fixed.c \
 	glade-base-editor.c \
-	glade-palette-item.h \
-	glade-palette-box.h \
-	glade-palette-expander.h \
 	glade-popup.h \
 	glade-marshallers.h \
 	glade-accumulators.h \
@@ -65,7 +59,8 @@ libgladeui_1_la_SOURCES = \
 	glade-name-context.c \
 	glade-displayable-values.c \
 	glade-editable.c \
-	glade-editor-table.c
+	glade-editor-table.c \
+	glade-cell-renderer-icon.c
 
 libgladeui_1_la_CPPFLAGS =  \
 	$(common_defines)   \
@@ -97,7 +92,6 @@ libgladeuiinclude_HEADERS = \
 	glade-editor-property.h \
 	glade-signal-editor.h \
 	glade-palette.h \
-	glade-palette-item.h \
 	glade-design-layout.h \
 	glade-design-view.h \
 	glade-widget.h \
@@ -120,7 +114,9 @@ libgladeuiinclude_HEADERS = \
 	glade-name-context.h \
 	glade-displayable-values.h \
 	glade-editable.h \
-	glade-editor-table.h
+	glade-editor-table.h \
+	glade-cell-renderer-icon.h
+
 
 
 if PLATFORM_WIN32

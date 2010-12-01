@@ -1,7 +1,9 @@
---- ltmain.sh~	2007-11-28 04:09:41.000000000 +0800
-+++ ltmain.sh	2007-12-19 21:19:06.000000000 +0800
-@@ -1807,6 +1807,11 @@
- 	arg=`$echo "X$arg" | $Xsed -e "s/^ //"`
+Index: glade3-3.7.1/ltmain.sh
+===================================================================
+--- glade3-3.7.1.orig/ltmain.sh	2010-05-15 07:24:36.000000000 +1000
++++ glade3-3.7.1/ltmain.sh	2010-12-01 10:49:45.141707001 +1100
+@@ -4716,6 +4716,11 @@
+ 	arg=$func_stripname_result
  	;;
  
 +      -Wl,--as-needed)
@@ -10,9 +12,9 @@
 +	;;
 +      
        -Wl,*)
- 	args=`$echo "X$arg" | $Xsed -e "$sed_quote_subst" -e 's/^-Wl,//'`
- 	arg=
-@@ -2150,6 +2155,15 @@
+ 	func_stripname '-Wl,' '' "$arg"
+ 	args=$func_stripname_result
+@@ -5070,6 +5075,15 @@
  	lib=
  	found=no
  	case $deplib in

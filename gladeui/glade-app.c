@@ -106,6 +106,7 @@ static gchar *pixmaps_dir  = NULL;
 static gchar *locale_dir   = NULL;
 
 static GladeApp *singleton_app = NULL;
+static gboolean check_initialised = FALSE;
 
 static void glade_init_check (void);
 
@@ -199,8 +200,9 @@ glade_app_finalize (GObject *app)
 	g_free (modules_dir);
 	g_free (pixmaps_dir);	
 	g_free (locale_dir);
-	
-	glade_catalog_destroy_all ();
+
+	singleton_app = NULL;
+	check_initialised = FALSE;
 
 	G_OBJECT_CLASS (glade_app_parent_class)->finalize (app);
 }
@@ -396,10 +398,8 @@ build_package_paths (void)
 /* initialization function for libgladeui (not GladeApp) */
 static void
 glade_init_check (void)
-{
-	static gboolean initialised = FALSE;
-	
-	if (initialised)
+{	
+	if (check_initialised)
 		return;
 
 	/* Make sure path accessors work on osx */
@@ -410,7 +410,7 @@ glade_init_check (void)
 	bindtextdomain (GETTEXT_PACKAGE, locale_dir);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 
-	initialised = TRUE;
+	check_initialised = TRUE;
 }
 
 static void
@@ -1006,7 +1006,7 @@ glade_app_add_project (GladeProject *project)
 	if (g_list_length (app->priv->projects) == 1 ||
 	    !(view = glade_design_view_get_from_project (project)) ||
 	    !(layout = glade_design_view_get_layout (view)) ||
-	    !GTK_BIN (layout)->child)
+	    !gtk_bin_get_child (GTK_BIN (layout)))
 	{
 		const GList *node;
 		for (node = glade_project_get_objects (project);
@@ -1286,8 +1286,14 @@ glade_app_command_paste (GladePlaceholder *placeholder)
 
 			return;
 		}
+
 	}
-	
+
+	/* Abort operation when adding a non scrollable widget to any kind of GtkScrolledWindow. */
+	if (parent && widget &&
+	    glade_util_check_and_warn_scrollable (parent, widget->adaptor, glade_app_get_window()))
+		return;
+
 	/* Check if we have anything to paste */
 	if (g_list_length (clipboard->selection) == 0)
 	{
@@ -1318,7 +1324,7 @@ glade_app_command_paste (GladePlaceholder *placeholder)
 	 * at a time
  	 */
 	if (GTK_IS_WIDGET (widget->object) && 
-	    GTK_WIDGET_TOPLEVEL (widget->object) == FALSE &&
+	    gtk_widget_is_toplevel (GTK_WIDGET (widget->object)) == FALSE &&
 	    parent && fixed && !GWA_USE_PLACEHOLDERS (parent->adaptor) &&
 	    g_list_length (clipboard->selection) != 1) 
 	{

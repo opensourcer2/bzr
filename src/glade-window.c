@@ -26,6 +26,7 @@
 #include <config.h>
 
 #include "glade-window.h"
+#include "glade-close-button.h"
 
 #include <gladeui/glade.h>
 #include <gladeui/glade-design-view.h>
@@ -60,6 +61,10 @@
 #define CONFIG_KEY_WIDTH            "width"
 #define CONFIG_KEY_HEIGHT           "height"
 #define CONFIG_KEY_DETACHED         "detached"
+#define CONFIG_KEY_MAXIMIZED        "maximized"
+#define CONFIG_KEY_SHOW_TOOLBAR     "show-toolbar"
+#define CONFIG_KEY_SHOW_TABS        "show-tabs"
+#define CONFIG_KEY_SHOW_STATUS      "show-statusbar"
 
 #define GLADE_WINDOW_GET_PRIVATE(object) (G_TYPE_INSTANCE_GET_PRIVATE ((object),  \
 					  GLADE_TYPE_WINDOW,                      \
@@ -77,6 +82,7 @@ typedef struct {
 	GtkWidget	    *paned;		/* GtkPaned in the main window containing which part */
 	gboolean	     first_child;	/* whether this widget is packed with gtk_paned_pack1() */
 	gboolean	     detached;		/* whether this widget should be floating */
+	gboolean	     maximized;		/* whether this widget should be maximized */
 	char		    *title;		/* window title, untranslated */
 	char		    *id;		/* id to use in config file */
 	GdkRectangle         window_pos;	/* x and y == G_MININT means unset */
@@ -470,25 +476,6 @@ update_default_path (GladeWindow *window, GladeProject *project)
 	g_free (path);
 }
 
-static gboolean
-window_state_event_cb (GtkWidget *widget,
-			   GdkEventWindowState *event,
-			   GladeWindow *window)
-{
-	if (event->changed_mask &
-	    (GDK_WINDOW_STATE_MAXIMIZED | GDK_WINDOW_STATE_FULLSCREEN))
-	{
-		gboolean show;
-
-		show = !(event->new_window_state &
-			(GDK_WINDOW_STATE_MAXIMIZED | GDK_WINDOW_STATE_FULLSCREEN));
-
-		gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR (window->priv->statusbar), show);
-	}
-
-	return FALSE;
-}
-
 static GtkWidget *
 create_recent_chooser_menu (GladeWindow *window, GtkRecentManager *manager)
 {
@@ -690,6 +677,77 @@ format_project_list_item_tooltip (GladeProject *project)
 }
 
 static void
+refresh_notebook_tab_for_project (GladeWindow *window, GladeProject *project)
+{
+	GtkWidget *tab_label, *label, *view, *eventbox;
+	GList     *children, *l;
+	gchar     *str;
+
+	children = gtk_container_get_children (GTK_CONTAINER (window->priv->notebook));
+	for (l = children; l; l = l->next)
+	{
+		view = l->data;
+
+		if (project == glade_design_view_get_project (GLADE_DESIGN_VIEW (view)))
+		{
+			GladeProjectFormat fmt = glade_project_get_format (project);
+			gchar *path, *deps;
+
+			tab_label = gtk_notebook_get_tab_label (GTK_NOTEBOOK (window->priv->notebook), view);
+			label     = g_object_get_data (G_OBJECT (tab_label), "tab-label");
+			eventbox  = g_object_get_data (G_OBJECT (tab_label), "tab-event-box");
+
+			str   = get_formatted_project_name_for_display (project, 
+									FORMAT_NAME_MARK_UNSAVED | 
+									FORMAT_NAME_MIDDLE_TRUNCATE);
+			gtk_label_set_text (GTK_LABEL (label), str);
+			g_free (str);
+
+			if (glade_project_get_path (project))
+				path = glade_utils_replace_home_dir_with_tilde (glade_project_get_path (project));
+			else
+				path = glade_project_get_name (project);
+
+
+			deps = glade_project_display_dependencies (project);
+			str =  g_markup_printf_escaped (" <b>%s</b> %s \n"
+							" %s \n"
+						        " <b>%s</b> %s \n"
+						        " <b>%s</b> %s ",
+						        _("Name:"), path,
+							glade_project_get_readonly (project) ? READONLY_INDICATOR : "",
+						        _("Format:"), 
+							fmt == GLADE_PROJECT_FORMAT_GTKBUILDER ? "GtkBuilder" : "Libglade",
+						        _("Requires:"), deps);
+
+			gtk_widget_set_tooltip_markup (eventbox, str);
+			
+			g_free (path);
+			g_free (deps);
+			g_free (str);
+
+			break;
+		}
+	}
+	g_list_free (children);
+}
+
+static void
+refresh_notebook_tabs (GladeWindow *window)
+{
+	GList *list;
+	
+	for (list = glade_app_get_projects (); list; list = list->next)
+		refresh_notebook_tab_for_project (window, GLADE_PROJECT (list->data));
+}
+
+static void
+project_targets_changed_cb (GladeProject *project, GladeWindow *window)
+{
+	refresh_notebook_tab_for_project (window, project);
+}
+
+static void
 refresh_projects_list_item (GladeWindow *window, GladeProject *project)
 {
 	GtkAction *action;
@@ -757,18 +815,24 @@ project_notify_handler_cb (GladeProject *project, GParamSpec *spec, GladeWindow 
 {
 	GtkAction *action;
 
-	if (strcmp (spec->name, "modified") == 0)	
+	if (strcmp (spec->name, "path")   == 0 ||
+	    strcmp (spec->name, "format") == 0)	
+		refresh_notebook_tab_for_project (window, project);
+	else if (strcmp (spec->name, "modified") == 0)	
 	{
 		refresh_title (window);
 		refresh_projects_list_item (window, project);
 	}
 	else if (strcmp (spec->name, "read-only") == 0)	
 	{
+		refresh_notebook_tab_for_project (window, project);
+
 		action = gtk_action_group_get_action (window->priv->project_actions, "Save");
 		gtk_action_set_sensitive (action,
 				  	  !glade_project_get_readonly (project));
 	}
-	else if (strcmp (spec->name, "has-selection") == 0)	
+	else if (strcmp (spec->name, "has-selection") == 0 &&
+		 (project == glade_app_get_project ()))	
 	{
 		action = gtk_action_group_get_action (window->priv->project_actions, "Cut");
 		gtk_action_set_sensitive (action,
@@ -1183,6 +1247,7 @@ save (GladeWindow *window, GladeProject *project, const gchar *path)
 	/* refresh names */
 	refresh_title (window);
 	refresh_projects_list_item (window, project);
+	refresh_notebook_tab_for_project (window, project);
 
 	glade_util_flash_message (window->priv->statusbar,
 				  window->priv->statusbar_actions_context_id,
@@ -1346,7 +1411,7 @@ confirm_close_project (GladeWindow *window, GladeProject *project)
 	gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
 
 	gtk_dialog_add_buttons (GTK_DIALOG (dialog),
-				_("_Close without Saving"), GTK_RESPONSE_NO,
+				_("Close _without Saving"), GTK_RESPONSE_NO,
 				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 				GTK_STOCK_SAVE, GTK_RESPONSE_YES, NULL);
 
@@ -1648,13 +1713,23 @@ notebook_tab_added_cb (GtkNotebook *notebook,
 	g_signal_connect (G_OBJECT (project), "notify::modified",
 			  G_CALLBACK (project_notify_handler_cb),
 			  window);	
-	g_signal_connect (G_OBJECT (project), "selection-changed",
-			  G_CALLBACK (project_selection_changed_cb), window);
+	g_signal_connect (G_OBJECT (project), "notify::path",
+			  G_CALLBACK (project_notify_handler_cb),
+			  window);	
+	g_signal_connect (G_OBJECT (project), "notify::format",
+			  G_CALLBACK (project_notify_handler_cb),
+			  window);	
 	g_signal_connect (G_OBJECT (project), "notify::has-selection",
 			  G_CALLBACK (project_notify_handler_cb),
 			  window);
 	g_signal_connect (G_OBJECT (project), "notify::read-only",
 			  G_CALLBACK (project_notify_handler_cb),
+			  window);
+	g_signal_connect (G_OBJECT (project), "selection-changed",
+			  G_CALLBACK (project_selection_changed_cb), 
+			  window);
+	g_signal_connect (G_OBJECT (project), "targets-changed",
+			  G_CALLBACK (project_targets_changed_cb), 
 			  window);
 
 	/* create inspector */
@@ -1698,6 +1773,9 @@ notebook_tab_removed_cb (GtkNotebook *notebook,
 					      window);
 	g_signal_handlers_disconnect_by_func (G_OBJECT (project),
 					      G_CALLBACK (project_selection_changed_cb),
+					      window);
+	g_signal_handlers_disconnect_by_func (G_OBJECT (project),
+					      G_CALLBACK (project_targets_changed_cb),
 					      window);
 
 
@@ -1777,12 +1855,17 @@ on_dock_resized (GtkWidget         *window,
 		 GdkEventConfigure *event,
 		 ToolDock          *dock)
 {
-	dock->window_pos.width = event->width;
-	dock->window_pos.height = event->height;
+	GdkWindow *gdk_window = gtk_widget_get_window (GTK_WIDGET (gtk_widget_get_toplevel (dock->widget)));
+	dock->maximized = gdk_window_get_state (gdk_window) & GDK_WINDOW_STATE_MAXIMIZED;
 
-	gtk_window_get_position (GTK_WINDOW (window),
-				 &dock->window_pos.x,
-				 &dock->window_pos.y);
+	if(!dock->maximized) {
+		dock->window_pos.width = event->width;
+		dock->window_pos.height = event->height;
+
+		gtk_window_get_position (GTK_WINDOW (window),
+					 &dock->window_pos.x,
+					 &dock->window_pos.y);
+	}
 
 	return FALSE;
 }
@@ -1804,8 +1887,8 @@ toggle_dock_cb (GtkAction *action, GladeWindow *window)
 		toplevel = gtk_widget_get_toplevel (dock->widget);
 
 		g_object_ref (dock->widget);
-		gtk_container_remove (GTK_CONTAINER 
-				      (GTK_BIN (toplevel)->child), dock->widget);
+		gtk_container_remove (GTK_CONTAINER (gtk_bin_get_child (GTK_BIN (toplevel))),
+				      dock->widget);
 
 		if (dock->first_child)
 			gtk_paned_pack1 (GTK_PANED (dock->paned), dock->widget, FALSE, FALSE);
@@ -1847,8 +1930,8 @@ toggle_dock_cb (GtkAction *action, GladeWindow *window)
 		g_signal_connect (G_OBJECT (toplevel), "configure-event",
 				  G_CALLBACK (on_dock_resized), dock);
 
-		if (!GTK_PANED (dock->paned)->child1 &&
-		    !GTK_PANED (dock->paned)->child2)
+		if (!gtk_paned_get_child1 (GTK_PANED (dock->paned)) &&
+		    !gtk_paned_get_child2 (GTK_PANED (dock->paned)))
 			gtk_widget_hide (dock->paned);
 
 
@@ -1862,6 +1945,34 @@ toggle_dock_cb (GtkAction *action, GladeWindow *window)
 
 		gtk_window_present (GTK_WINDOW (toplevel));
 	}
+}
+
+
+static void
+toggle_toolbar_cb (GtkAction *action, GladeWindow *window)
+{
+	if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)))
+		gtk_widget_show (window->priv->toolbar);
+	else
+		gtk_widget_hide (window->priv->toolbar);
+}
+
+static void
+toggle_statusbar_cb (GtkAction *action, GladeWindow *window)
+{
+	if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)))
+		gtk_widget_show (window->priv->statusbar);
+	else
+		gtk_widget_hide (window->priv->statusbar);
+}
+
+static void
+toggle_tabs_cb (GtkAction *action, GladeWindow *window)
+{
+	if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)))
+		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (window->priv->notebook), TRUE);
+	else
+		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (window->priv->notebook), FALSE);
 }
 
 static void
@@ -1982,7 +2093,7 @@ about_cb (GtkAction *action, GladeWindow *window)
 	static const gchar copyright[] =
 		"Copyright \xc2\xa9 2001-2006 Ximian, Inc.\n"
 		"Copyright \xc2\xa9 2001-2006 Joaquin Cuenca Abela, Paolo Borelli, et al.\n"
-		"Copyright \xc2\xa9 2001-2008 Tristan Van Berkom, Juan Pablo Ugarte, et al.";
+		"Copyright \xc2\xa9 2001-2010 Tristan Van Berkom, Juan Pablo Ugarte, et al.";
 	
 	gtk_show_about_dialog (GTK_WINDOW (window),
 			       "name", g_get_application_name (),
@@ -2026,6 +2137,9 @@ static const gchar ui_info[] =
 "      <menuitem action='Preferences'/>"
 "    </menu>"
 "    <menu action='ViewMenu'>"
+"      <menuitem action='ToolbarVisible'/>"
+"      <menuitem action='StatusbarVisible'/>"
+"      <menuitem action='ProjectTabsVisible'/>"
 "      <menu action='PaletteAppearance'>"
 "        <menuitem action='IconsAndLabels'/>"
 "        <menuitem action='IconsOnly'/>"
@@ -2162,6 +2276,18 @@ static GtkToggleActionEntry view_entries[] = {
 	  N_("Dock the editor into the main window"),
 	  G_CALLBACK (toggle_dock_cb), TRUE },
 
+	{ "ToolbarVisible", NULL, N_("Tool_bar"), NULL,
+	  N_("Show the toolbar"),
+	  G_CALLBACK (toggle_toolbar_cb), TRUE },
+
+	{ "StatusbarVisible", NULL, N_("_Statusbar"), NULL,
+	  N_("Show the statusbar"),
+	  G_CALLBACK (toggle_statusbar_cb), TRUE },
+
+	{ "ProjectTabsVisible", NULL, N_("Project _Tabs"), NULL,
+	  N_("Show notebook tabs for loaded projects"),
+	  G_CALLBACK (toggle_tabs_cb), TRUE },
+
 };
 static guint n_view_entries = G_N_ELEMENTS (view_entries);
 
@@ -2184,11 +2310,7 @@ menu_item_selected_cb (GtkWidget *item, GladeWindow *window)
 	GtkAction *action;
 	gchar *tooltip;
 
-#if (GTK_MAJOR_VERSION == 2) && (GTK_MINOR_VERSION < 16)
-	action = gtk_widget_get_action (item);
-#else
 	action = gtk_activatable_get_related_action (GTK_ACTIVATABLE (item));
-#endif
 	g_object_get (G_OBJECT (action), "tooltip", &tooltip, NULL);
 
 	if (tooltip != NULL)
@@ -2311,17 +2433,14 @@ drag_data_received (GtkWidget *widget,
 			guint info, guint time, GladeWindow *window)
 {
 	gchar **uris, **str;
-	gchar *data;
+	const guchar *data;
 
 	if (info != TARGET_URI_LIST)
 		return;
 
-	/* On MS-Windows, it looks like `selection_data->data' is not NULL terminated. */
-	data = g_new (gchar, selection_data->length + 1);
-	memcpy (data, selection_data->data, selection_data->length);
-	data[selection_data->length] = 0;
+	data = gtk_selection_data_get_data (selection_data);
 
-	uris = g_uri_list_extract_uris (data);
+	uris = g_uri_list_extract_uris ((gchar *) data);
 
 	for (str = uris; *str; str++)
 	{
@@ -2404,10 +2523,72 @@ create_drag_resize_tool_button (GtkToolbar *toolbar)
 	return GTK_WIDGET (button);
 }
 
+static void 
+tab_close_button_clicked_cb (GtkWidget    *close_button,
+			     GladeProject *project)
+{
+	GladeDesignView *view;
+	GladeWindow *window = GLADE_WINDOW (glade_app_get_window ());
+	gboolean close;
+
+	view = glade_design_view_get_from_project (project);
+
+	if (glade_project_get_modified (project))
+	{
+		close = confirm_close_project (window, project);
+			if (!close)
+				return;
+	}
+	do_close (window, view);
+}
+
+static GtkWidget *
+create_notebook_tab (GladeWindow *window, GladeProject *project)
+{
+	GtkWidget *tab_label, *ebox, *hbox, *close_button, *label, *dummy_label;
+
+	tab_label = gtk_hbox_new (FALSE, 4);
+	
+	ebox = gtk_event_box_new ();
+	gtk_event_box_set_visible_window (GTK_EVENT_BOX (ebox), FALSE);
+	gtk_box_pack_start (GTK_BOX (tab_label), ebox, TRUE, TRUE, 0);
+
+	hbox = gtk_hbox_new (FALSE, 4);
+	gtk_container_add (GTK_CONTAINER (ebox), hbox);
+
+	close_button = glade_close_button_new ();
+	gtk_widget_set_tooltip_text (close_button, _("Close document"));
+	gtk_box_pack_start (GTK_BOX (tab_label), close_button, FALSE, FALSE, 0);
+
+	g_signal_connect (close_button,
+			  "clicked",
+			  G_CALLBACK (tab_close_button_clicked_cb),
+			  project);
+
+	label = gtk_label_new ("");
+	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+	gtk_misc_set_padding (GTK_MISC (label), 0, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+
+	dummy_label = gtk_label_new ("");
+	gtk_box_pack_start (GTK_BOX (hbox), dummy_label, TRUE, TRUE, 0);
+
+	gtk_widget_show (ebox);
+	gtk_widget_show (hbox);
+	gtk_widget_show (close_button);
+	gtk_widget_show (label);
+	gtk_widget_show (dummy_label);
+
+	g_object_set_data (G_OBJECT (tab_label), "tab-event-box", ebox);
+	g_object_set_data (G_OBJECT (tab_label), "tab-label", label);
+
+	return tab_label;
+}
+
 static void
 add_project (GladeWindow *window, GladeProject *project)
 {
-	GtkWidget *view;
+	GtkWidget *view, *label;
 
  	g_return_if_fail (GLADE_IS_PROJECT (project));
  	
@@ -2418,8 +2599,13 @@ add_project (GladeWindow *window, GladeProject *project)
 	glade_app_add_project (project);
 	g_object_unref (project);
 
-	gtk_notebook_append_page (GTK_NOTEBOOK (window->priv->notebook), GTK_WIDGET (view), NULL);
+	/* Custom notebook tab label (will be refreshed later) */
+	label = create_notebook_tab (window, project);
+
+	gtk_notebook_append_page (GTK_NOTEBOOK (window->priv->notebook), GTK_WIDGET (view), label);
 	gtk_notebook_set_current_page (GTK_NOTEBOOK (window->priv->notebook), -1);	
+
+	refresh_notebook_tab_for_project (window, project);
 
 	/* Kick the inspector in the balls here... */
 	glade_project_selection_changed (project);
@@ -2585,9 +2771,9 @@ glade_window_open_project (GladeWindow *window,
 
 static void
 change_menu_label (GladeWindow *window,
-					const gchar *path,
-					const gchar *action_label,
-					const gchar *action_description)
+		   const gchar *path,
+		   const gchar *action_label,
+		   const gchar *action_description)
 {
 	GtkBin *bin;
 	GtkLabel *label;
@@ -2666,6 +2852,8 @@ update_ui (GladeApp *app, GladeWindow *window)
 		gtk_widget_queue_draw (GTK_WIDGET (window->priv->active_view));
 
 	refresh_undo_redo (window);
+
+	refresh_notebook_tabs (window);
 }
 
 static void
@@ -2707,14 +2895,24 @@ glade_window_configure_event (GtkWidget         *widget,
 	GladeWindow *window = GLADE_WINDOW (widget);
 	gboolean retval;
 
-	window->priv->position.width = event->width;
-	window->priv->position.height = event->height;
+	gboolean is_maximized;
+	GdkWindow *gdk_window = gtk_widget_get_window (GTK_WIDGET (window));
+	is_maximized = gdk_window_get_state (gdk_window) & GDK_WINDOW_STATE_MAXIMIZED;
+
+	if (!is_maximized)
+	{
+		window->priv->position.width = event->width;
+		window->priv->position.height = event->height;
+	}
 
 	retval = GTK_WIDGET_CLASS(glade_window_parent_class)->configure_event (widget, event);
 
-	gtk_window_get_position (GTK_WINDOW (widget),
-				 &window->priv->position.x,
-				 &window->priv->position.y);
+	if (!is_maximized)
+	{
+		gtk_window_get_position (GTK_WINDOW (widget),
+					 &window->priv->position.x,
+					 &window->priv->position.y);
+	}
 
 	return retval;
 }
@@ -2724,15 +2922,17 @@ key_file_set_window_position (GKeyFile     *config,
 			      GdkRectangle *position,
 			      const char   *id,
 			      gboolean      detached,
-			      gboolean      save_detached)
+			      gboolean      save_detached,
+			      gboolean      maximized)
 {
-	char *key_x, *key_y, *key_width, *key_height, *key_detached;
+	char *key_x, *key_y, *key_width, *key_height, *key_detached, *key_maximized;
 
 	key_x = g_strdup_printf ("%s-" CONFIG_KEY_X, id);
 	key_y = g_strdup_printf ("%s-" CONFIG_KEY_Y, id);
 	key_width = g_strdup_printf ("%s-" CONFIG_KEY_WIDTH, id);
 	key_height = g_strdup_printf ("%s-" CONFIG_KEY_HEIGHT, id);
 	key_detached = g_strdup_printf ("%s-" CONFIG_KEY_DETACHED, id);
+	key_maximized = g_strdup_printf ("%s-" CONFIG_KEY_MAXIMIZED, id);
 
 	/* we do not want to save position of docks which
 	 * were never detached */
@@ -2752,6 +2952,11 @@ key_file_set_window_position (GKeyFile     *config,
 		g_key_file_set_boolean (config, CONFIG_GROUP_WINDOWS,
 					key_detached, detached);
 
+	g_key_file_set_boolean (config, CONFIG_GROUP_WINDOWS,
+				key_maximized, maximized);
+
+
+	g_free (key_maximized);
 	g_free (key_detached);
 	g_free (key_height);
 	g_free (key_width);
@@ -2763,16 +2968,36 @@ static void
 save_windows_config (GladeWindow *window, GKeyFile *config)
 {
 	guint i;
+	GdkWindow *gdk_window;
+	gboolean   maximized;
 
 	for (i = 0; i < N_DOCKS; ++i)
 	{
 		ToolDock *dock = &window->priv->docks[i];
 		key_file_set_window_position (config, &dock->window_pos, dock->id, 
-					      dock->detached, TRUE);
+					      dock->detached, TRUE, dock->maximized);
 	}
 
+	gdk_window = gtk_widget_get_window (GTK_WIDGET (window));
+	maximized  = gdk_window_get_state (gdk_window) & GDK_WINDOW_STATE_MAXIMIZED;
+
 	key_file_set_window_position (config, &window->priv->position, 
-				      "main", FALSE, FALSE);
+				      "main", FALSE, FALSE, maximized);
+
+	g_key_file_set_boolean (config, 
+				CONFIG_GROUP_WINDOWS,
+				CONFIG_KEY_SHOW_TOOLBAR, 
+				gtk_widget_get_visible (window->priv->toolbar));
+
+	g_key_file_set_boolean (config, 
+				CONFIG_GROUP_WINDOWS,
+				CONFIG_KEY_SHOW_STATUS, 
+				gtk_widget_get_visible (window->priv->statusbar));
+
+	g_key_file_set_boolean (config, 
+				CONFIG_GROUP_WINDOWS,
+				CONFIG_KEY_SHOW_TABS, 
+				gtk_notebook_get_show_tabs (GTK_NOTEBOOK (window->priv->notebook)));
 }
 
 static void 
@@ -2786,7 +3011,7 @@ static void
 glade_window_config_save (GladeWindow *window)
 {
 	GKeyFile *config = glade_app_get_config ();
-	
+
 	save_windows_config (window, config);
 	
 	/* Save main window paned positions */
@@ -2813,29 +3038,67 @@ static void
 key_file_get_window_position (GKeyFile     *config,
 			      const char   *id,
 			      GdkRectangle *pos,
-			      gboolean     *detached)
+			      gboolean     *detached,
+			      gboolean     *maximized)
 {
-	char *key_x, *key_y, *key_width, *key_height, *key_detached;
+	char *key_x, *key_y, *key_width, *key_height, *key_detached, *key_maximized;
 
 	key_x = g_strdup_printf ("%s-" CONFIG_KEY_X, id);
 	key_y = g_strdup_printf ("%s-" CONFIG_KEY_Y, id);
 	key_width = g_strdup_printf ("%s-" CONFIG_KEY_WIDTH, id);
 	key_height = g_strdup_printf ("%s-" CONFIG_KEY_HEIGHT, id);
 	key_detached = g_strdup_printf ("%s-" CONFIG_KEY_DETACHED, id);
+	key_maximized = g_strdup_printf ("%s-" CONFIG_KEY_MAXIMIZED, id);
 
 	pos->x = key_file_get_int (config, CONFIG_GROUP_WINDOWS, key_x, pos->x);
 	pos->y = key_file_get_int (config, CONFIG_GROUP_WINDOWS, key_y, pos->y);
 	pos->width = key_file_get_int (config, CONFIG_GROUP_WINDOWS, key_width, pos->width);
 	pos->height = key_file_get_int (config, CONFIG_GROUP_WINDOWS, key_height, pos->height);
 
-	if (detached && g_key_file_has_key (config, CONFIG_GROUP_WINDOWS, key_detached, NULL))
-		*detached = g_key_file_get_boolean (config, CONFIG_GROUP_WINDOWS, key_detached, NULL);
+	if (detached)
+	{
+		if (g_key_file_has_key (config, CONFIG_GROUP_WINDOWS, key_detached, NULL))
+			*detached = g_key_file_get_boolean (config, CONFIG_GROUP_WINDOWS, key_detached, NULL);
+		else 
+			*detached = FALSE;
+	}
+
+	if (maximized)
+	{
+		if (g_key_file_has_key (config, CONFIG_GROUP_WINDOWS, key_maximized, NULL))
+			*maximized = g_key_file_get_boolean (config, CONFIG_GROUP_WINDOWS, key_maximized, NULL);
+		else
+			*maximized = FALSE;
+	}
 
 	g_free (key_x);
 	g_free (key_y);
 	g_free (key_width);
 	g_free (key_height);
 	g_free (key_detached);
+	g_free (key_maximized);
+}
+
+
+static void
+load_paned_position (GKeyFile *config, GtkWidget *pane, const gchar *name, gint default_position)
+{
+	gtk_paned_set_position (GTK_PANED (pane),
+				key_file_get_int (config, name, "position", default_position));
+}
+
+static gboolean
+fix_paned_positions_idle (GladeWindow *window)
+{
+	/* When initially maximized/fullscreened we need to deffer this operation 
+	 */
+	GKeyFile *config = glade_app_get_config ();
+			
+	load_paned_position (config, window->priv->left_pane, "left_pane", 200);
+	load_paned_position (config, window->priv->center_pane, "center_pane", 400);
+	load_paned_position (config, window->priv->right_pane, "right_pane", 220);
+
+	return FALSE;
 }
 
 static void
@@ -2845,7 +3108,20 @@ glade_window_set_initial_size (GladeWindow *window, GKeyFile *config)
 		G_MININT, G_MININT, GLADE_WINDOW_DEFAULT_WIDTH, GLADE_WINDOW_DEFAULT_HEIGHT
 	};
 
-	key_file_get_window_position (config, "main", &position, NULL);
+	gboolean maximized;
+
+	key_file_get_window_position (config, "main", &position, NULL, &maximized);
+	if (maximized)
+	{
+		gtk_window_maximize (GTK_WINDOW (window));
+		g_idle_add ((GSourceFunc)fix_paned_positions_idle, window);
+	}
+
+	if (position.width <= 0 || position.height <= 0)
+	{
+		position.width  = GLADE_WINDOW_DEFAULT_WIDTH;
+		position.height = GLADE_WINDOW_DEFAULT_HEIGHT;
+	}
 
 	gtk_window_set_default_size (GTK_WINDOW (window), position.width, position.height);
 
@@ -2854,22 +3130,90 @@ glade_window_set_initial_size (GladeWindow *window, GKeyFile *config)
 }
 
 static void
-load_paned_position (GKeyFile *config, GtkWidget *pane, const gchar *name, gint default_position)
-{
-	gtk_paned_set_position (GTK_PANED (pane),
-				key_file_get_int (config, name, "position", default_position));
-}
-
-static void
 glade_window_config_load (GladeWindow *window)
 {
 	GKeyFile *config = glade_app_get_config ();
-	
-	glade_window_set_initial_size (window, config);
-	
-	load_paned_position (config, window->priv->center_pane, "center_pane", 400);
+	gboolean show_toolbar, show_tabs, show_status;
+	GtkAction *action;
+	GError *error = NULL;
+
+	/* Initial main dimensions */
+	glade_window_set_initial_size (window, config);	
+
+	/* toolbar and tabs */
+	if ((show_toolbar = 
+	     g_key_file_get_boolean (config, CONFIG_GROUP_WINDOWS, CONFIG_KEY_SHOW_TOOLBAR, &error)) == FALSE &&
+	    error != NULL)
+	{
+		show_toolbar = TRUE;
+		error = (g_error_free (error), NULL);
+	}
+
+	if ((show_tabs = 
+	     g_key_file_get_boolean (config, CONFIG_GROUP_WINDOWS, CONFIG_KEY_SHOW_TABS, &error)) == FALSE &&
+	    error != NULL)
+	{
+		show_tabs = TRUE;
+		error = (g_error_free (error), NULL);
+	}
+
+	if ((show_status = 
+	     g_key_file_get_boolean (config, CONFIG_GROUP_WINDOWS, CONFIG_KEY_SHOW_STATUS, &error)) == FALSE &&
+	    error != NULL)
+	{
+		show_status = TRUE;
+		error = (g_error_free (error), NULL);
+	}
+
+	if (show_toolbar)
+		gtk_widget_show (window->priv->toolbar);
+	else
+		gtk_widget_hide (window->priv->toolbar);
+
+	if (show_status)
+		gtk_widget_show (window->priv->statusbar);
+	else
+		gtk_widget_hide (window->priv->statusbar);
+
+	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (window->priv->notebook), show_tabs);
+
+	action = gtk_action_group_get_action (window->priv->static_actions, "ToolbarVisible");
+	gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), show_toolbar);
+
+	action = gtk_action_group_get_action (window->priv->static_actions, "ProjectTabsVisible");
+	gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), show_tabs);
+
+	action = gtk_action_group_get_action (window->priv->static_actions, "StatusbarVisible");
+	gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), show_tabs);
+
+	/* Paned positions */
 	load_paned_position (config, window->priv->left_pane, "left_pane", 200);
+	load_paned_position (config, window->priv->center_pane, "center_pane", 400);
 	load_paned_position (config, window->priv->right_pane, "right_pane", 220);
+}
+
+static gboolean
+glade_window_state_event (GtkWidget           *widget,
+			  GdkEventWindowState *event)
+{
+	GladeWindow *window = GLADE_WINDOW (widget);
+
+	/* Incase GtkWindow decides to do something */
+	if (GTK_WIDGET_CLASS (glade_window_parent_class)->window_state_event)
+		GTK_WIDGET_CLASS (glade_window_parent_class)->window_state_event (widget, event);
+
+	if (event->changed_mask &
+	    (GDK_WINDOW_STATE_MAXIMIZED | GDK_WINDOW_STATE_FULLSCREEN))
+	{
+		gboolean show;
+
+		show = !(event->new_window_state &
+			(GDK_WINDOW_STATE_MAXIMIZED | GDK_WINDOW_STATE_FULLSCREEN));
+
+		gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR (window->priv->statusbar), show);
+	}
+
+	return FALSE;
 }
 
 static void
@@ -2879,6 +3223,7 @@ show_dock_first_time (GladeWindow    *window,
 {
 	GKeyFile *config;
 	int detached = -1;
+	gboolean maximized;
 	GtkAction *action;
 	ToolDock *dock;
 
@@ -2888,10 +3233,12 @@ show_dock_first_time (GladeWindow    *window,
 	dock = &window->priv->docks[dock_type];
 	config = glade_app_get_config ();
 
-	key_file_get_window_position (config, dock->id, &dock->window_pos, &detached);
+	key_file_get_window_position (config, dock->id, &dock->window_pos, &detached, &maximized);
 
 	if (detached == 1)
 		gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), FALSE);
+
+	if (maximized) gtk_window_maximize (GTK_WINDOW (gtk_widget_get_toplevel (dock->widget)));
 }
 
 static void
@@ -2913,6 +3260,7 @@ setup_dock (ToolDock   *dock,
 	dock->paned = paned;
 	dock->first_child = first_child;
 	dock->detached = FALSE;
+	dock->maximized = FALSE;
 }
 
 static void
@@ -2970,13 +3318,8 @@ glade_window_init (GladeWindow *window)
 	undo_action = gtk_ui_manager_get_action (priv->ui, "/MenuBar/EditMenu/Undo");
 	redo_action = gtk_ui_manager_get_action (priv->ui, "/MenuBar/EditMenu/Redo");
 	
-#if (GTK_MAJOR_VERSION == 2) && (GTK_MINOR_VERSION < 16)
-	gtk_action_connect_proxy (undo_action, GTK_WIDGET (priv->undo));
-	gtk_action_connect_proxy (redo_action, GTK_WIDGET (priv->redo));
-#else
 	gtk_activatable_set_related_action (GTK_ACTIVATABLE (priv->undo), undo_action);
 	gtk_activatable_set_related_action (GTK_ACTIVATABLE (priv->redo), redo_action);
-#endif
 	
 	/* main contents */
 	hpaned1 = gtk_hpaned_new ();
@@ -3001,7 +3344,9 @@ glade_window_init (GladeWindow *window)
 
 	/* notebook */
 	priv->notebook = gtk_notebook_new ();
-	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (priv->notebook), FALSE);
+
+	/* Show tabs (user preference) */
+	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (priv->notebook), TRUE);
 	gtk_notebook_set_show_border (GTK_NOTEBOOK (priv->notebook), FALSE);
 	gtk_paned_pack2 (GTK_PANED (hpaned2), priv->notebook, TRUE, FALSE);
 	gtk_widget_show (priv->notebook);
@@ -3033,16 +3378,6 @@ glade_window_init (GladeWindow *window)
 	show_dock_first_time (window, DOCK_PALETTE, "DockPalette");
 	show_dock_first_time (window, DOCK_INSPECTOR, "DockInspector");
 	show_dock_first_time (window, DOCK_EDITOR, "DockEditor");
-
-	/* signal editor */
-	g_signal_connect (G_OBJECT (glade_app_get_editor()->signal_editor),
-	                  "handler-editing-started",
-	                  G_CALLBACK (glade_signal_editor_handler_editing_started_default_impl),
-	                  NULL);
-	g_signal_connect (G_OBJECT (glade_app_get_editor()->signal_editor),
-	                  "userdata-editing-started",
-	                  G_CALLBACK (glade_signal_editor_userdata_editing_started_default_impl),
-	                  NULL);
 
 	/* status bar */
 	priv->statusbar = gtk_statusbar_new ();
@@ -3124,14 +3459,10 @@ glade_window_init (GladeWindow *window)
 			  window);
 			  
 	/* GtkWindow events */
-	g_signal_connect (window, "window-state-event",
-			  G_CALLBACK (window_state_event_cb),
-			  window);
-
 	g_signal_connect (G_OBJECT (window), "key-press-event",
 			  G_CALLBACK (glade_utils_hijack_key_press), window);
 
-       /* GladeApp signals */
+	/* GladeApp signals */
 	g_signal_connect (G_OBJECT (priv->app), "update-ui",
 			  G_CALLBACK (update_ui),
 			  window);
@@ -3149,8 +3480,7 @@ glade_window_init (GladeWindow *window)
 	accel_group = gtk_ui_manager_get_accel_group(priv->ui);
 
 	gtk_window_add_accel_group (GTK_WINDOW (glade_app_get_clipboard_view ()), accel_group);
-	
-	/* Load widget state */
+
 	glade_window_config_load (window);
 
 #ifdef MAC_INTEGRATION
@@ -3179,7 +3509,8 @@ glade_window_class_init (GladeWindowClass *klass)
 	object_class->dispose  = glade_window_dispose;
 	object_class->finalize = glade_window_finalize;
 
-	widget_class->configure_event = glade_window_configure_event;
+	widget_class->configure_event    = glade_window_configure_event;
+	widget_class->window_state_event = glade_window_state_event;
 
 	g_type_class_add_private (klass, sizeof (GladeWindowPrivate));
 }

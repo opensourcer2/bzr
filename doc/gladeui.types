@@ -1,4 +1,7 @@
 #include <glade.h>
+#include <glade-base-editor.h>
+#include <glade-design-layout.h>
+#include <glade-design-view.h>
 
 glade_app_get_type
 glade_clipboard_get_type
