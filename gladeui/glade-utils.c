@@ -58,8 +58,6 @@
 #define GLADE_UTIL_SELECTION_NODE_SIZE 7
 #define GLADE_UTIL_COPY_BUFFSIZE       1024
 
-#define GLADE_DEVHELP_ICON_NAME           "devhelp"
-#define GLADE_DEVHELP_FALLBACK_ICON_FILE  "devhelp.png"
 
 /* List of widgets that have selection
  */
@@ -260,7 +258,7 @@ glade_util_ui_message (GtkWidget           *parent,
 	gtk_window_set_resizable (GTK_WINDOW (dialog), TRUE);
 
 	if (widget)
-		gtk_box_pack_end (GTK_BOX (GTK_DIALOG (dialog)->vbox), 
+		gtk_box_pack_end (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))),
 				  widget, TRUE, TRUE, 2);
 
 	response = gtk_dialog_run (GTK_DIALOG (dialog));
@@ -272,8 +270,28 @@ glade_util_ui_message (GtkWidget           *parent,
 }
 
 
+gboolean
+glade_util_check_and_warn_scrollable (GladeWidget        *parent,
+				      GladeWidgetAdaptor *child_adaptor,
+				      GtkWidget          *parent_widget)
+{
+	if (GTK_IS_SCROLLED_WINDOW (parent->object) &&
+	    GWA_SCROLLABLE_WIDGET (child_adaptor) == FALSE)
+	{
+		GladeWidgetAdaptor *vadaptor = 
+			glade_widget_adaptor_get_by_type (GTK_TYPE_VIEWPORT);
 
-
+		glade_util_ui_message (parent_widget,
+				       GLADE_UI_INFO, NULL,
+				       _("Cannot add non scrollable %s widget to a %s directly.\n"
+					 "Add a %s first."),
+				       child_adaptor->title,
+				       parent->adaptor->title,
+				       vadaptor->title);
+		return TRUE;
+	}
+	return FALSE;
+}
 
 typedef struct {
 	GtkStatusbar *statusbar;
@@ -281,7 +299,7 @@ typedef struct {
 	guint message_id;
 } FlashInfo;
 
-static const guint32 flash_length = 3000;
+static const guint flash_length = 3;
 
 static gboolean
 remove_message_timeout (FlashInfo * fi) 
@@ -320,7 +338,7 @@ glade_util_flash_message (GtkWidget *statusbar, guint context_id, gchar *format,
 	fi->context_id = context_id;	
 	fi->message_id = gtk_statusbar_push (fi->statusbar, fi->context_id, message);
 
-	g_timeout_add (flash_length, (GSourceFunc) remove_message_timeout, fi);
+	g_timeout_add_seconds (flash_length, (GtkFunction) remove_message_timeout, fi);
 
 	g_free (message);
 }
@@ -424,7 +442,7 @@ glade_util_gtk_combo_func (gpointer data)
 	ltext = (gchar *) g_object_get_data (G_OBJECT (listitem),
 					     gtk_combo_string_key);
 	if (!ltext) {
-		label = GTK_BIN (listitem)->child;
+		label = gtk_bin_get_child (GTK_BIN (listitem));
 		if (!label || !GTK_IS_LABEL (label))
 			return NULL;
 		ltext = (gchar*) gtk_label_get_text (GTK_LABEL (label));
@@ -556,7 +574,7 @@ add_format_options (GtkDialog    *dialog,
 
 	gtk_widget_show_all (frame);
 	
-	gtk_box_pack_end (GTK_BOX (dialog->vbox), frame, FALSE, TRUE, 2);
+	gtk_box_pack_end (GTK_BOX (gtk_dialog_get_content_area (dialog)), frame, FALSE, TRUE, 2);
 }
 
 
@@ -712,7 +730,7 @@ glade_util_get_window_positioned_in (GtkWidget *widget)
 {
 	GtkWidget *parent;
 
-	parent = widget->parent;
+	parent = gtk_widget_get_parent (widget);
 
 #ifdef USE_GNOME
 	/* BonoboDockItem widgets use a different window when floating.
@@ -730,9 +748,9 @@ glade_util_get_window_positioned_in (GtkWidget *widget)
 #endif
 
 	if (parent)
-		return parent->window;
+		return gtk_widget_get_window (parent);
 
-	return widget->window;
+	return gtk_widget_get_window (widget);
 }
 
 static void
@@ -801,10 +819,10 @@ glade_util_can_draw_nodes (GtkWidget *sel_widget, GdkWindow *sel_win,
 	GdkWindow *viewport_win = NULL;
 
 	/* Check if the selected widget is inside a viewport. */
-	for (widget = sel_widget->parent; widget; widget = widget->parent) {
+	for (widget = gtk_widget_get_parent (sel_widget); widget; widget = gtk_widget_get_parent (widget)) {
 		if (GTK_IS_VIEWPORT (widget)) {
 			viewport = widget;
-			viewport_win = GTK_VIEWPORT (widget)->bin_window;
+			viewport_win = gtk_viewport_get_bin_window (GTK_VIEWPORT (widget));
 			break;
 		}
 	}
@@ -854,7 +872,7 @@ glade_util_draw_selection_nodes (GdkWindow *expose_win)
 	/* Find the corresponding GtkWidget */
 	gdk_window_get_user_data (expose_win, (gpointer)&expose_widget);
 
-	gc = expose_widget->style->black_gc;
+	gc = gtk_widget_get_style (expose_widget)->black_gc;
 
 	/* Calculate the offset of the expose window within its toplevel. */
 	glade_util_calculate_window_offset (expose_win,
@@ -887,10 +905,13 @@ glade_util_draw_selection_nodes (GdkWindow *expose_win)
 		if (expose_toplevel == sel_toplevel
 		    && glade_util_can_draw_nodes (sel_widget, sel_win,
 						  expose_win)) {
-			x = sel_x + sel_widget->allocation.x - expose_win_x;
-			y = sel_y + sel_widget->allocation.y - expose_win_y;
-			w = sel_widget->allocation.width;
-			h = sel_widget->allocation.height;
+			GtkAllocation allocation;
+
+			gtk_widget_get_allocation (sel_widget, &allocation);
+			x = sel_x + allocation.x - expose_win_x;
+			y = sel_y + allocation.y - expose_win_y;
+			w = allocation.width;
+			h = allocation.height;
 
 			/* Draw the selection nodes if they intersect the
 			   expose window bounds. */
@@ -930,6 +951,8 @@ glade_util_add_selection (GtkWidget *widget)
 void
 glade_util_remove_selection (GtkWidget *widget)
 {
+	GtkWidget *parent;
+
 	g_return_if_fail (GTK_IS_WIDGET (widget));
 	if (!glade_util_has_selection (widget))
 		return;
@@ -939,8 +962,8 @@ glade_util_remove_selection (GtkWidget *widget)
 
 	/* We redraw the parent, since the selection rectangle may not be
 	   cleared if we just redraw the widget itself. */
-	gtk_widget_queue_draw (widget->parent ?
-			       widget->parent : widget);
+	parent = gtk_widget_get_parent (widget);
+	gtk_widget_queue_draw (parent ? parent : widget);
 }
 
 /**
@@ -952,6 +975,7 @@ void
 glade_util_clear_selection (void)
 {
 	GtkWidget *widget;
+	GtkWidget *parent;
 	GList     *list;
 
 	for (list = glade_util_selection;
@@ -959,8 +983,8 @@ glade_util_clear_selection (void)
 	     list = list->next)
 	{
 		widget = list->data;
-		gtk_widget_queue_draw (widget->parent ?
-				       widget->parent : widget);
+		parent = gtk_widget_get_parent (widget);
+		gtk_widget_queue_draw (parent ? parent : widget);
 	}
 	glade_util_selection =
 		(g_list_free (glade_util_selection), NULL);
@@ -1066,7 +1090,7 @@ glade_util_find_iter (GtkTreeModel *model,
 		      gint          column)
 {
 	GtkTreeIter *retval = NULL;
-	GladeWidget *widget;
+	GObject* object;
 	GtkTreeIter *next;
 
 	g_return_val_if_fail (GTK_IS_TREE_MODEL (model), NULL);
@@ -1077,8 +1101,8 @@ glade_util_find_iter (GtkTreeModel *model,
 
 	while (retval == NULL)
 	{
-		gtk_tree_model_get (model, next, column, &widget, -1);
-		if (widget == findme)
+		gtk_tree_model_get (model, next, column, &object, -1);
+		if (object == glade_widget_get_object (findme))
 		{
 			retval = gtk_tree_iter_copy (next);
 			break;
@@ -1092,6 +1116,8 @@ glade_util_find_iter (GtkTreeModel *model,
 				break;
 		}
 
+		g_object_unref (object);
+		
 		if (!gtk_tree_model_iter_next (model, next))
 			break;
 	}
@@ -1472,12 +1498,20 @@ try_load_library (const gchar *library_path,
 GModule *
 glade_util_load_library (const gchar *library_name)
 {
+	gchar        *default_paths[] = { (gchar *)glade_app_get_modules_dir (), 
+					  NULL, /* <-- dynamically allocated */ 
+					  "/lib", 
+					  "/usr/lib", 
+					  "/usr/local/lib", 
+					  NULL };
+
 	GModule      *module = NULL;
-	const gchar  *default_paths[] = { glade_app_get_modules_dir (), "/lib", "/usr/lib", "/usr/local/lib", NULL };
 	const gchar  *search_path;
 	gchar       **split;
 	gint          i;
+
 	
+
 	if ((search_path = g_getenv (GLADE_ENV_MODULE_PATH)) != NULL)
 	{
 		if ((split = g_strsplit (search_path, ":", 0)) != NULL)
@@ -1492,9 +1526,14 @@ glade_util_load_library (const gchar *library_name)
 
 	if (!module)
 	{
+		/* Search ${prefix}/lib after searching ${prefix}/lib/glade3/modules... */
+		default_paths[1] = g_build_filename (glade_app_get_modules_dir (), "..", "..", NULL);
+
 		for (i = 0; default_paths[i] != NULL; i++)
 			if ((module = try_load_library (default_paths[i], library_name)) != NULL)
 				break;
+
+		g_free (default_paths[1]);
 	}
 
 	if (!module)
@@ -1649,18 +1688,19 @@ glade_util_search_devhelp (const gchar *book,
 			   const gchar *search)
 {
 	GError *error = NULL;
-	gchar  *book_comm = NULL, *page_comm = NULL;
+	gchar  *book_comm = NULL, *page_comm = NULL, *search_comm = NULL;
 	gchar  *string;
 
 	g_return_if_fail (glade_util_have_devhelp ());
 
-	if (book) book_comm = g_strdup_printf ("book:%s ", book);
-	if (page) page_comm = g_strdup_printf ("page:%s ", page);
+	if (book) book_comm = g_strdup_printf ("book:%s", book);
+	if (page) page_comm = g_strdup_printf (" page:%s", page);
+	if (search) search_comm = g_strdup_printf (" %s", search);
 
 	string = g_strdup_printf ("devhelp -s \"%s%s%s\"", 
 				   book_comm ? book_comm : "",
 				   page_comm ? page_comm : "",
-				   search ? search : "");
+				   search_comm ? search_comm : "");
 
 	if (g_spawn_command_line_async (string, &error) == FALSE)
 	{
@@ -1671,6 +1711,7 @@ glade_util_search_devhelp (const gchar *book,
 	g_free (string);
 	if (book_comm) g_free (book_comm);
 	if (page_comm) g_free (page_comm);
+	if (search_comm) g_free (search_comm);
 }
 
 GtkWidget *
@@ -1678,6 +1719,7 @@ glade_util_get_placeholder_from_pointer (GtkContainer *container)
 {
 	GtkWidget *toplevel;
 	GtkWidget *retval = NULL, *child;
+	GtkAllocation allocation;
 	GList *c, *l;
 	gint x, y, x2, y2;
 
@@ -1694,15 +1736,15 @@ glade_util_get_placeholder_from_pointer (GtkContainer *container)
 		child = l->data;
 		
 		if (GLADE_IS_PLACEHOLDER (child) &&
-		    GTK_WIDGET_MAPPED (child))
+		    gtk_widget_get_mapped (child))
 		{
 			gtk_widget_translate_coordinates (toplevel, child,
 							  x, y, &x2, &y2);
 
-			
+			gtk_widget_get_allocation (child, &allocation);
 			if (x2 >= 0 && y2 >= 0 &&
-			    x2 <= child->allocation.width &&
-			    y2 <= child->allocation.height)
+			    x2 <= allocation.width &&
+			    y2 <= allocation.height)
 			{
 				retval = child;
 				break;
@@ -2289,7 +2331,10 @@ glade_utils_hijack_key_press (GtkWindow          *win,
 			      GdkEventKey        *event, 
 			      gpointer            user_data)
 {
-	if (win->focus_widget &&
+	GtkWidget *focus_widget;
+
+	focus_widget = gtk_window_get_focus (win);
+	if (focus_widget &&
 	    (event->keyval == GDK_Delete || /* Filter Delete from accelerator keys */
 	     ((event->state & GDK_CONTROL_MASK) && /* CNTL keys... */
 	      ((event->keyval == GDK_c || event->keyval == GDK_C) || /* CNTL-C (copy)  */
@@ -2297,8 +2342,55 @@ glade_utils_hijack_key_press (GtkWindow          *win,
 	       (event->keyval == GDK_v || event->keyval == GDK_V) || /* CNTL-V (paste) */
 	       (event->keyval == GDK_n || event->keyval == GDK_N))))) /* CNTL-N (new project) */
 	{
-		return gtk_widget_event (win->focus_widget, 
+		return gtk_widget_event (focus_widget,
 					 (GdkEvent *)event);
 	}
 	return FALSE;
+}
+
+
+/* copied from gedit */
+gchar *
+glade_utils_replace_home_dir_with_tilde (const gchar *uri)
+{
+	gchar *tmp;
+	gchar *home;
+
+	g_return_val_if_fail (uri != NULL, NULL);
+
+	/* Note that g_get_home_dir returns a const string */
+	tmp = (gchar *)g_get_home_dir ();
+
+	if (tmp == NULL)
+		return g_strdup (uri);
+
+	home = g_filename_to_utf8 (tmp, -1, NULL, NULL, NULL);
+	if (home == NULL)
+		return g_strdup (uri);
+
+	if (strcmp (uri, home) == 0)
+	{
+		g_free (home);
+		
+		return g_strdup ("~");
+	}
+
+	tmp = home;
+	home = g_strdup_printf ("%s/", tmp);
+	g_free (tmp);
+
+	if (g_str_has_prefix (uri, home))
+	{
+		gchar *res;
+
+		res = g_strdup_printf ("~/%s", uri + strlen (home));
+
+		g_free (home);
+		
+		return res;		
+	}
+
+	g_free (home);
+
+	return g_strdup (uri);
 }

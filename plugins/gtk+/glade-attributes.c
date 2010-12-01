@@ -32,7 +32,6 @@
 #include <glib/gi18n-lib.h>
 
 #include "glade-attributes.h"
-#include "glade-cell-renderer-button.h"
 
 #define GLADE_RESPONSE_CLEAR 42
 
@@ -695,11 +694,12 @@ get_row_by_type (GtkTreeModel   *model,
 
 
 static void
-value_button_clicked  (GtkCellRendererToggle *cell_renderer,
-		       gchar                 *path,
-		       GladeEPropAttrs       *eprop_attrs)
+value_icon_activate  (GtkCellRendererToggle *cell_renderer,
+		      gchar                 *path,
+		      GladeEPropAttrs       *eprop_attrs)
 {
 	GtkWidget       *dialog;
+	GtkWidget	*colorsel;
 	GtkTreeIter      iter;
 	PangoAttrType    type;
 	AttrEditType     edit_type;
@@ -722,15 +722,15 @@ value_button_clicked  (GtkCellRendererToggle *cell_renderer,
 	case EDIT_COLOR:
 		dialog = gtk_color_selection_dialog_new (_("Select a color"));
 
+		colorsel = gtk_color_selection_dialog_get_color_selection (GTK_COLOR_SELECTION_DIALOG (dialog));
+
 		/* Get response etc... */
 		if (text && gdk_color_parse (text, &color))
-			gtk_color_selection_set_current_color 
-				(GTK_COLOR_SELECTION (GTK_COLOR_SELECTION_DIALOG (dialog)->colorsel), &color);
+			gtk_color_selection_set_current_color (GTK_COLOR_SELECTION (colorsel), &color);
 
 		gtk_dialog_run (GTK_DIALOG (dialog));
 
-		gtk_color_selection_get_current_color
-			(GTK_COLOR_SELECTION (GTK_COLOR_SELECTION_DIALOG (dialog)->colorsel), &color);
+		gtk_color_selection_get_current_color (GTK_COLOR_SELECTION (colorsel), &color);
 
 		new_text = gdk_color_to_string (&color);
 
@@ -880,9 +880,9 @@ glade_eprop_attrs_view (GladeEditorProperty *eprop)
 			  G_CALLBACK (value_toggled), eprop);
 
 
-	/* Button renderer */
- 	renderer = glade_cell_renderer_button_new ();
-	g_object_set (G_OBJECT (renderer), "entry-editable", FALSE, NULL);
+	/* Text renderer */
+ 	renderer = gtk_cell_renderer_text_new ();
+	g_object_set (G_OBJECT (renderer), "editable", FALSE, NULL);
 	gtk_tree_view_column_pack_start (column, renderer, FALSE);
 	gtk_tree_view_column_set_attributes (column, renderer, 
 					     "editable", COLUMN_BUTTON_ACTIVE,
@@ -891,8 +891,20 @@ glade_eprop_attrs_view (GladeEditorProperty *eprop)
 					     "style", COLUMN_TEXT_STYLE,
 					     "foreground", COLUMN_TEXT_FG,
 					     NULL);
-	g_signal_connect (G_OBJECT (renderer), "clicked",
-			  G_CALLBACK (value_button_clicked), eprop);
+	
+	/* Icon renderer */
+ 	renderer = glade_cell_renderer_icon_new ();
+	g_object_set (G_OBJECT (renderer), 
+		      "icon-name", GTK_STOCK_EDIT,
+		      NULL);
+	gtk_tree_view_column_pack_start (column, renderer, FALSE);
+	gtk_tree_view_column_set_attributes (column, renderer, 
+					     "activatable", COLUMN_BUTTON_ACTIVE,
+					     "visible", COLUMN_BUTTON_ACTIVE,
+					     NULL);
+
+	g_signal_connect (G_OBJECT (renderer), "activate",
+			  G_CALLBACK (value_icon_activate), eprop);
 
 	/* Combo renderer */
  	renderer = gtk_cell_renderer_combo_new ();
@@ -1026,7 +1038,8 @@ glade_eprop_attrs_show_dialog (GtkWidget           *dialog_button,
 
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
 
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), vbox, TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))),
+			    vbox, TRUE, TRUE, 0);
 
 	sw = gtk_scrolled_window_new (NULL, NULL);
 	gtk_widget_show (sw);

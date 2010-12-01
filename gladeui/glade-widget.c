@@ -74,6 +74,7 @@ enum
 	BUTTON_PRESS_EVENT,
 	BUTTON_RELEASE_EVENT,
 	MOTION_NOTIFY_EVENT,
+	SUPPORT_CHANGED,
 	LAST_SIGNAL
 };
 
@@ -212,6 +213,8 @@ glade_widget_add_signal_handler_impl (GladeWidget *widget, GladeSignal *signal_h
 
 	new_signal_handler = glade_signal_clone (signal_handler);
 	g_ptr_array_add (signals, new_signal_handler);
+
+	glade_project_update_signal_support_warning (widget, new_signal_handler);
 }
 
 static void
@@ -247,7 +250,7 @@ glade_widget_change_signal_handler_impl (GladeWidget *widget,
 					 GladeSignal *new_signal_handler)
 {
 	GPtrArray   *signals;
-	GladeSignal *tmp_signal_handler;
+	GladeSignal *signal_handler_iter;
 	guint        i;
 	
 	g_return_if_fail (GLADE_IS_WIDGET (widget));
@@ -262,30 +265,31 @@ glade_widget_change_signal_handler_impl (GladeWidget *widget,
 
 	for (i = 0; i < signals->len; i++)
 	{
-		tmp_signal_handler = g_ptr_array_index (signals, i);
-		if (glade_signal_equal (tmp_signal_handler, old_signal_handler))
+		signal_handler_iter = g_ptr_array_index (signals, i);
+		if (glade_signal_equal (signal_handler_iter, old_signal_handler))
 		{
 			if (strcmp (old_signal_handler->handler,
 				    new_signal_handler->handler) != 0)
 			{
-				g_free (tmp_signal_handler->handler);
-				tmp_signal_handler->handler =
+				g_free (signal_handler_iter->handler);
+				signal_handler_iter->handler =
 					g_strdup (new_signal_handler->handler);
 			}
 
 			/* Handler */
-			if (tmp_signal_handler->handler)
-				g_free (tmp_signal_handler->handler);
-			tmp_signal_handler->handler =
+			if (signal_handler_iter->handler)
+				g_free (signal_handler_iter->handler);
+			signal_handler_iter->handler =
 				g_strdup (new_signal_handler->handler);
 			
 			/* Object */
-			if (tmp_signal_handler->userdata)
-				g_free (tmp_signal_handler->userdata);
-			tmp_signal_handler->userdata = 
+			if (signal_handler_iter->userdata)
+				g_free (signal_handler_iter->userdata);
+			signal_handler_iter->userdata = 
 				g_strdup (new_signal_handler->userdata);
 			
-			tmp_signal_handler->after  = new_signal_handler->after;
+			signal_handler_iter->after    = new_signal_handler->after;
+			signal_handler_iter->swapped  = new_signal_handler->swapped;
 			break;
 		}
 	}
@@ -302,7 +306,7 @@ glade_widget_button_press_event_impl (GladeWidget    *gwidget,
 
 	/* make sure to grab focus, since we may stop default handlers */
 	widget = GTK_WIDGET (glade_widget_get_object (gwidget));
-	if (GTK_WIDGET_CAN_FOCUS (widget) && !GTK_WIDGET_HAS_FOCUS (widget))
+	if (gtk_widget_get_can_focus (widget) && !gtk_widget_has_focus (widget))
 		gtk_widget_grab_focus (widget);
 
 	/* if it's already selected don't stop default handlers, e.g. toggle button */
@@ -780,7 +784,7 @@ glade_widget_constructor (GType                  type,
 	if (gwidget->parent && gwidget->packing_properties == NULL)
 		glade_widget_set_packing_properties (gwidget, gwidget->parent);
 	
-	if (GTK_IS_WIDGET (gwidget->object) && !GTK_WIDGET_TOPLEVEL (gwidget->object))
+	if (GTK_IS_WIDGET (gwidget->object) && !gtk_widget_is_toplevel (GTK_WIDGET (gwidget->object)))
 	{
 		gwidget->visible = TRUE;
 		gtk_widget_show_all (GTK_WIDGET (gwidget->object));
@@ -1256,6 +1260,24 @@ glade_widget_class_init (GladeWidgetClass *klass)
 			      glade_marshal_BOOLEAN__BOXED,
 			      G_TYPE_BOOLEAN, 1,
 			      GDK_TYPE_EVENT | G_SIGNAL_TYPE_STATIC_SCOPE);
+
+
+	/**
+	 * GladeWidget::support-changed:
+	 * @gladewidget: the #GladeWidget which received the signal.
+	 *
+	 * Emitted when property and signal support metadatas and messages
+	 * have been updated.
+	 */
+	glade_widget_signals[SUPPORT_CHANGED] =
+		g_signal_new ("support-changed",
+			      G_TYPE_FROM_CLASS (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      0, NULL, NULL,
+			      g_cclosure_marshal_VOID__VOID,
+			      G_TYPE_NONE, 0);
+
+
 }
 
 /*******************************************************************************
@@ -1335,7 +1357,9 @@ glade_widget_get_internal_child (GladeWidget *parent,
 }
 
 static GladeGetInternalFunc
-glade_widget_get_internal_func (GladeWidget *parent, GladeWidget **parent_ret)
+glade_widget_get_internal_func (GladeWidget  *main_target, 
+				GladeWidget  *parent, 
+				GladeWidget **parent_ret)
 {
 	GladeWidget *gwidget;
 	
@@ -1351,17 +1375,19 @@ glade_widget_get_internal_func (GladeWidget *parent, GladeWidget **parent_ret)
 			if (parent_ret) *parent_ret = gwidget;
 			return adaptor_class->get_internal_child;
 		}
+
+		/* Limit the itterations into where the copy routine stared */
+		if (gwidget == main_target)
+			break;
 	}
-	g_error ("No internal child search function "
-		 "provided for widget class %s (or any parents)",
-		 parent->adaptor->name);
 
 	return NULL;
 }
 
 
 static GladeWidget *
-glade_widget_dup_internal (GladeWidget *parent,
+glade_widget_dup_internal (GladeWidget *main_target,
+			   GladeWidget *parent,
 			   GladeWidget *template_widget,
 			   gboolean     exact)
 {
@@ -1376,28 +1402,31 @@ glade_widget_dup_internal (GladeWidget *parent,
 	g_return_val_if_fail (parent == NULL || GLADE_IS_WIDGET (parent), NULL);
 
 	/* Dont actually duplicate internal widgets, but recurse through them anyway. */
-	if (template_widget->internal)
+	if (parent && template_widget->internal)
 	{
 		GObject *internal_object = NULL;
 
-		if (parent && 
-		    (get_internal = 
-		     glade_widget_get_internal_func (parent, &internal_parent)) != NULL)
+		if ((get_internal = 
+		     glade_widget_get_internal_func (main_target, parent, &internal_parent)) != NULL)
 		{
 			/* We cant use "parent" here, we have to recurse up the hierarchy to find
 			 * the "parent" that has `get_internal_child' support (i.e. internal children
 			 * may have depth).
 			 */
-			internal_object = get_internal (internal_parent->adaptor,
-							internal_parent->object, 
-							template_widget->internal);
-			g_assert (internal_object);
-			
-			gwidget = glade_widget_get_from_gobject (internal_object);
-			g_assert (gwidget);
+			if ((internal_object = get_internal (internal_parent->adaptor,
+							     internal_parent->object, 
+							     template_widget->internal)) != NULL)
+       			{
+				gwidget = glade_widget_get_from_gobject (internal_object);
+				g_assert (gwidget);
+			}
 		}
 	}
-	else
+
+	/* If either it was not internal, or we failed to lookup the internal child
+	* in the copied hierarchy (this can happen when copying an internal vbox from
+	* a composite dialog for instance). */
+	if (gwidget == NULL)
 	{
 		gchar *name = g_strdup (template_widget->name);
 		gwidget = glade_widget_adaptor_create_widget
@@ -1449,9 +1478,9 @@ glade_widget_dup_internal (GladeWidget *parent,
 			else
 			{
 				/* Recurse through every GladeWidget (internal or not) */
-				child_dup = glade_widget_dup_internal (gwidget, child_gwidget, exact);
+				child_dup = glade_widget_dup_internal (main_target, gwidget, child_gwidget, exact);
 
-				if (child_gwidget->internal == NULL)
+				if (child_dup->internal == NULL)
 				{
 					g_object_set_data_full (child_dup->object,
 								"special-child-type",
@@ -1610,7 +1639,7 @@ glade_widget_insert_children (GladeWidget *gwidget, GList *children)
 			 * widgets.
 			 */
 			get_internal = glade_widget_get_internal_func
-				(gwidget, &internal_parent);
+				(NULL, gwidget, &internal_parent);
 
 			internal_object = get_internal (internal_parent->adaptor,
 							internal_parent->object,
@@ -1966,7 +1995,7 @@ glade_widget_show (GladeWidget *widget)
 		if (!layout)
 			return;
 		
-		if (GTK_WIDGET_REALIZED (layout))
+		if (gtk_widget_get_realized (layout))
 			glade_widget_add_to_layout (widget, layout);
 		else
 			g_signal_connect_data (G_OBJECT (layout), "map", 
@@ -2000,10 +2029,13 @@ glade_widget_hide (GladeWidget *widget)
 		
 		if ((view = glade_design_view_get_from_project (glade_widget_get_project (widget))) != NULL)
 		{
-			layout = GTK_WIDGET (glade_design_view_get_layout (view));
+			GtkWidget *child;
 
-			if (GTK_BIN (layout)->child == GTK_WIDGET (widget->object))
-				gtk_container_remove (GTK_CONTAINER (layout), GTK_BIN (layout)->child);
+			layout = GTK_WIDGET (glade_design_view_get_layout (view));
+			child = gtk_bin_get_child (GTK_BIN (layout));
+
+			if (child == GTK_WIDGET (widget->object))
+				gtk_container_remove (GTK_CONTAINER (layout), child);
 		}
 
 		gtk_widget_hide (GTK_WIDGET (widget->object));
@@ -2291,7 +2323,7 @@ glade_widget_dup (GladeWidget *template_widget,
 	g_return_val_if_fail (GLADE_IS_WIDGET (template_widget), NULL);
 	
 	glade_widget_push_superuser ();
-	widget = glade_widget_dup_internal (NULL, template_widget, exact);
+	widget = glade_widget_dup_internal (template_widget, NULL, template_widget, exact);
 	glade_widget_pop_superuser ();
 
 	return widget;
@@ -3269,7 +3301,7 @@ glade_widget_event_private (GtkWidget   *widget,
 
 	/* Find the parenting layout container */
 	while (layout && !GLADE_IS_DESIGN_LAYOUT (layout))
-		layout = layout->parent;
+		layout = gtk_widget_get_parent (layout);
 
 	/* Event outside the logical heirarchy, could be a menuitem
 	 * or other such popup window, we'll presume to send it directly
@@ -3408,6 +3440,44 @@ glade_widget_set_parent (GladeWidget *widget,
 
 	g_object_notify (G_OBJECT (widget), "parent");
 }
+
+/**
+ * glade_widget_get_children:
+ * @widget: A #GladeWidget
+ *
+ * Fetches any wrapped children of @widget.
+ *
+ * Returns: The children of widget
+ *
+ * <note><para>This differs from a direct call to glade_widget_adaptor_get_children() as
+ * it only returns children which have an associated GladeWidget. This function will
+ * not return any placeholders or internal composite children that have not been 
+ * exposed for Glade configuration</para></note>
+ */
+GList *
+glade_widget_get_children (GladeWidget *widget)
+{
+	GList *adapter_children; 
+	GList *real_children = NULL;
+	GList *node;
+
+	g_return_val_if_fail (GLADE_IS_WIDGET (widget), NULL);
+
+	adapter_children = glade_widget_adaptor_get_children (glade_widget_get_adaptor (widget),
+	                                                      widget->object);
+	
+	for (node = adapter_children; node != NULL; node = g_list_next (node))
+	{
+		if (glade_widget_get_from_gobject (node->data))
+		{
+			real_children = g_list_prepend (real_children, node->data);
+		}
+	}
+	g_list_free (adapter_children);
+	
+	return g_list_reverse (real_children);
+}
+	
 
 /**
  * glade_widget_get_toplevel:
@@ -3696,7 +3766,7 @@ glade_widget_read (GladeProject *project,
 	gchar        *klass, *id;
 
 	glade_widget_push_superuser ();
-
+	
 	if (!glade_xml_node_verify
 	    (node, GLADE_XML_TAG_WIDGET (glade_project_get_format (project))))
 		return NULL;
@@ -3760,7 +3830,7 @@ glade_widget_read (GladeProject *project,
 	}
 
 	glade_widget_pop_superuser ();
-
+	
 	return widget;
 }
 
@@ -3828,8 +3898,9 @@ glade_widget_write_placeholder (GladeWidget     *parent,
 }
 
 typedef struct {
-	GladeXmlContext *context;
-	GladeXmlNode    *node;
+	GladeXmlContext    *context;
+	GladeXmlNode       *node;
+	GladeProjectFormat  fmt;
 } WriteSignalsInfo;
 
 static void
@@ -3847,6 +3918,7 @@ glade_widget_adaptor_write_signals (gpointer key,
 	{
 		GladeSignal *signal = g_ptr_array_index (signals, i);
 		glade_signal_write (signal,
+				    info->fmt,
 				    info->context,
 				    info->node);
 	}
@@ -3861,6 +3933,8 @@ glade_widget_write_signals (GladeWidget     *widget,
 
 	info.context = context;
 	info.node = node;
+	info.fmt = glade_project_get_format (widget->project);
+
 	g_hash_table_foreach (widget->signals,
 			      glade_widget_adaptor_write_signals,
 			      &info);
@@ -4188,23 +4262,24 @@ glade_window_is_embedded (GtkWindow *window)
 static void
 embedded_window_realize_handler (GtkWidget *widget)
 {
-	GtkWindow *window;
+	GtkAllocation allocation;
+	GtkStyle *style;
+	GdkWindow *window;
 	GdkWindowAttr attributes;
 	gint attributes_mask;
 
-	window = GTK_WINDOW (widget);
-
-	GTK_WIDGET_SET_FLAGS (widget, GTK_REALIZED);
+	gtk_widget_set_realized (widget, TRUE);
 
 	attributes.window_type = GDK_WINDOW_CHILD;
 	attributes.wclass = GDK_INPUT_OUTPUT;
 	attributes.visual = gtk_widget_get_visual (widget);
 	attributes.colormap = gtk_widget_get_colormap (widget);
 
-	attributes.x = widget->allocation.x;
-	attributes.y = widget->allocation.y;
-	attributes.width = widget->allocation.width;
-	attributes.height = widget->allocation.height;
+	gtk_widget_get_allocation (widget, &allocation);
+	attributes.x = allocation.x;
+	attributes.y = allocation.y;
+	attributes.width = allocation.width;
+	attributes.height = allocation.height;
 
 	attributes.event_mask = gtk_widget_get_events (widget) |
 				GDK_EXPOSURE_MASK              |
@@ -4218,33 +4293,38 @@ embedded_window_realize_handler (GtkWidget *widget)
 	attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
 
 	/* destroy the previously created window */
-	if (GDK_IS_WINDOW (widget->window))
+	window = gtk_widget_get_window (widget);
+	if (GDK_IS_WINDOW (window))
 	{
-		gdk_window_hide (widget->window);
+		gdk_window_hide (window);
 	}
 
-	widget->window = gdk_window_new (gtk_widget_get_parent_window (widget),
-					 &attributes, attributes_mask);
+	window = gdk_window_new (gtk_widget_get_parent_window (widget),
+				 &attributes, attributes_mask);
+	gtk_widget_set_window (widget, window);
 
-	gdk_window_enable_synchronized_configure (widget->window);
+	gdk_window_enable_synchronized_configure (window);
 
-	gdk_window_set_user_data (widget->window, window);
+	gdk_window_set_user_data (window, GTK_WINDOW (widget));
 
-	widget->style = gtk_style_attach (widget->style, widget->window);
-	gtk_style_set_background (widget->style, widget->window, GTK_STATE_NORMAL);
-
+	gtk_widget_style_attach (widget);
+	style = gtk_widget_get_style (widget);
+	gtk_style_set_background (style, window, GTK_STATE_NORMAL);
 }
 
 static void
 embedded_window_size_allocate_handler (GtkWidget *widget)
 {
-	if (GTK_WIDGET_REALIZED (widget))
+	GtkAllocation allocation;
+
+	if (gtk_widget_get_realized (widget))
 	{
-		gdk_window_move_resize (widget->window,
-					widget->allocation.x,
-					widget->allocation.y,
-					widget->allocation.width,
-					widget->allocation.height);
+		gtk_widget_get_allocation (widget, &allocation);
+		gdk_window_move_resize (gtk_widget_get_window (widget),
+					allocation.x,
+					allocation.y,
+					allocation.width,
+					allocation.height);
 	}
 }
 
@@ -4268,7 +4348,7 @@ glade_widget_embed (GladeWidget *gwidget)
 	
 	if (glade_window_is_embedded (window)) return TRUE;
 	
-	if (GTK_WIDGET_REALIZED (widget)) gtk_widget_unrealize (widget);
+	if (gtk_widget_get_realized (widget)) gtk_widget_unrealize (widget);
 
 	GTK_WIDGET_UNSET_FLAGS (widget, GTK_TOPLEVEL);
 	gtk_container_set_resize_mode (GTK_CONTAINER (window), GTK_RESIZE_PARENT);
@@ -4404,4 +4484,20 @@ glade_widget_unlock (GladeWidget    *widget)
 	widget->lock->locked_widgets = 
 		g_list_remove (widget->lock->locked_widgets, widget);
 	widget->lock = NULL;
+}
+
+
+/**
+ * glade_widget_support_changed:
+ * @widget: A #GladeWidget
+ *
+ * Notifies that support metadata has changed on the widget.
+ *
+ */
+void
+glade_widget_support_changed (GladeWidget *widget)
+{
+	g_return_if_fail (GLADE_IS_WIDGET (widget));
+
+	g_signal_emit (widget, glade_widget_signals[SUPPORT_CHANGED], 0);
 }

@@ -99,6 +99,37 @@ typedef struct _GladeWidgetAdaptorClass   GladeWidgetAdaptorClass;
 
 
 /**
+ * GWA_VERSION_CHECK:
+ * @adaptor: A #GladeWidgetAdaptor
+ * @major_version: The major version to check
+ * @minor_version: The minor version to check
+ *
+ * Evaluates to %TRUE if @adaptor is available in its owning library version-@major_verion.@minor_version.
+ *
+ */
+#define GWA_VERSION_CHECK(adaptor, major_version, minor_version)	\
+	((GWA_VERSION_SINCE_MAJOR (adaptor) == major_version) ? \
+	 (GWA_VERSION_SINCE_MINOR (adaptor) <= minor_version) : \
+	 (GWA_VERSION_SINCE_MAJOR (adaptor) <= major_version))
+
+
+
+/**
+ * GWA_BUILDER_VERSION_CHECK:
+ * @adaptor: A #GladeWidgetAdaptor
+ * @major_version: The major version to check
+ * @minor_version: The minor version to check
+ *
+ * Evaluates to %TRUE if @adaptor is available for use with GtkBuilder in its 
+ * owning library version-@major_verion.@minor_version.
+ *
+ */
+#define GWA_BUILDER_VERSION_CHECK(adaptor, major_version, minor_version) \
+	((GWA_BUILDER_SINCE_MAJOR (adaptor) == major_version) ? \
+	 (GWA_BUILDER_SINCE_MINOR (adaptor) <= minor_version) : \
+	 (GWA_BUILDER_SINCE_MAJOR (adaptor) <= major_version))
+
+/**
  * GWA_IS_TOPLEVEL:
  * @obj: A #GladeWidgetAdaptor
  *
@@ -140,6 +171,17 @@ typedef struct _GladeWidgetAdaptorClass   GladeWidgetAdaptorClass;
 #define GWA_DEFAULT_HEIGHT(obj) \
         ((obj) ? GLADE_WIDGET_ADAPTOR_GET_CLASS(obj)->default_height : -1)
 
+
+/**
+ * GWA_SCROLLABLE_WIDGET:
+ * @obj: A #GladeWidgetAdaptor
+ *
+ * Checks whether this is a GtkWidgetClass with scrolling capabilities.
+ */
+#define GWA_SCROLLABLE_WIDGET(obj) \
+        ((obj) ? GLADE_WIDGET_ADAPTOR_GET_CLASS(obj)->scrollable : FALSE)
+
+
 /**
  * GWA_GET_CLASS:
  * @type: A #GType
@@ -159,6 +201,23 @@ typedef struct _GladeWidgetAdaptorClass   GladeWidgetAdaptorClass;
  * Same as GWA_GET_CLASS but casted to GObjectClass
  */
 #define GWA_GET_OCLASS(type) ((GObjectClass*)GWA_GET_CLASS(type))
+
+
+#define GLADE_SIGNAL_CLASS(klass) ((GladeSignalClass *)(klass))
+
+/**
+ * GSC_VERSION_CHECK:
+ * @klass: A #GladeSignalClass
+ * @major_version: The major version to check
+ * @minor_version: The minor version to check
+ *
+ * Evaluates to %TRUE if @klass is available in its owning library version-@major_verion.@minor_version.
+ *
+ */
+#define GSC_VERSION_CHECK(klass, major_version, minor_version)	\
+	((GLADE_SIGNAL_CLASS (klass)->version_since_major == major_version) ? \
+	 (GLADE_SIGNAL_CLASS (klass)->version_since_minor <= minor_version) : \
+	 (GLADE_SIGNAL_CLASS (klass)->version_since_major <= major_version))
 
 
 #define GLADE_VALID_CREATE_REASON(reason) (reason >= 0 && reason < GLADE_CREATE_REASONS)
@@ -550,7 +609,7 @@ struct _GladeSignalClass
 	guint16      version_since_minor;
 
 	const gchar *name;         /* Name of the signal, eg clicked */
-	gchar       *type;         /* Name of the object class that this signal belongs to
+	const gchar *type;         /* Name of the object class that this signal belongs to
 				    * eg GtkButton */
 
 };
@@ -574,7 +633,8 @@ struct _GladeWidgetAdaptor
 				    * button2, buttonX ..
 				    */
 				    
-	gchar       *icon_name;    /* icon name for widget class */
+	gchar       *icon_name;    /* icon name to use for widget class */
+	gchar       *missing_icon; /* the name of the missing icon if it was not found */
 
 	gchar       *title;        /* Translated class name used in the UI */
 
@@ -633,6 +693,11 @@ struct _GladeWidgetAdaptorClass
 
 	guint                      use_placeholders : 1;     /* Whether or not to use placeholders
 							      * to interface with child widgets.
+							      */
+
+	guint                      scrollable : 1;           /* Whether this is a widget class that has
+							      * klass->set_scroll_adjustments_signal != NULL (i.e.
+							      * can be directly added to a GtkScrolledWindow).
 							      */
 
 	gint                       default_width;  /* Default width in GladeDesignLayout */

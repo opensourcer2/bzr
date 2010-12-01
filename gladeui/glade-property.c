@@ -199,24 +199,21 @@ glade_property_update_prop_refs (GladeProperty *property,
 static gboolean
 glade_property_verify (GladeProperty *property, const GValue *value)
 {
-	if (property->klass->packing)
-	{
-		if (property->widget->parent)
-			return glade_widget_adaptor_child_verify_property (property->widget->parent->adaptor,
-									   property->widget->parent->object,
-									   property->widget->object,
-									   property->klass->id,
-									   value);
-		else
-			return FALSE;
-	}
-	else
-	{
-		return glade_widget_adaptor_verify_property (property->widget->adaptor, 
-							     property->widget->object,
-							     property->klass->id,
-							     value);
-	}
+	gboolean ret = FALSE;
+
+	if (property->klass->packing && property->widget->parent)
+		ret = glade_widget_adaptor_child_verify_property (property->widget->parent->adaptor,
+								  property->widget->parent->object,
+								  property->widget->object,
+								  property->klass->id,
+								  value);
+	else if (!property->klass->packing)
+		ret = glade_widget_adaptor_verify_property (property->widget->adaptor, 
+							    property->widget->object,
+							    property->klass->id,
+							    value);
+
+	return ret;
 }
 
 static void
@@ -589,14 +586,14 @@ glade_property_klass_init (GladePropertyKlass *prop_class)
 		(object_class, PROP_I18N_TRANSLATABLE,
 		 g_param_spec_boolean 
 		 ("i18n-translatable", _("Translatable"), 
-		  _("Whether this property is translatable or not"),
+		  _("Whether this property is translatable"),
 		  TRUE, G_PARAM_READWRITE));
 
 	g_object_class_install_property 
 		(object_class, PROP_I18N_HAS_CONTEXT,
 		 g_param_spec_boolean 
 		 ("i18n-has-context", _("Has Context"), 
-		  _("Whether or not the translatable string has a context prefix"),
+		  _("Whether the translatable string has a context prefix"),
 		  FALSE, G_PARAM_READWRITE));
 
 	g_object_class_install_property 

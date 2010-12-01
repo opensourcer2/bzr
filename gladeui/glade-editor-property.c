@@ -259,7 +259,7 @@ eprop_item_label_size_allocate_after (GtkWidget *widget, GtkAllocation *allocati
 	gint width = EDITOR_COLUMN_SIZE;
 	gint icon_width = 0;
 
-	if (GTK_WIDGET_VISIBLE (eprop->warning) && GTK_WIDGET_MAPPED (eprop->warning))
+	if (gtk_widget_get_visible (eprop->warning) && gtk_widget_get_mapped (eprop->warning))
 	{
 		GtkRequisition req = { -1, -1 };
 		gtk_widget_size_request (eprop->warning, &req);
@@ -1097,6 +1097,8 @@ glade_eprop_flags_show_dialog (GtkWidget           *button,
 	GtkWidget *view;
 	GtkWidget *label;
 	GtkWidget *vbox;
+	GtkWidget *content_area;
+	GtkWidget *action_area;
 
 	dialog = gtk_dialog_new_with_buttons (_("Select Fields"),
 					      GTK_WINDOW (gtk_widget_get_toplevel (button)),
@@ -1104,16 +1106,18 @@ glade_eprop_flags_show_dialog (GtkWidget           *button,
 					      GTK_STOCK_CLOSE,
 					      GTK_RESPONSE_CLOSE,
 					      NULL);
-					      
+
 	gtk_window_set_default_size (GTK_WINDOW (dialog), 300, 400);
 	gtk_dialog_set_has_separator (GTK_DIALOG (dialog), FALSE);
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_CLOSE);
 
 	/* HIG spacings */
 	gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
-	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->vbox), 2); /* 2 * 5 + 2 = 12 */
-	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dialog)->action_area), 5);
-	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->action_area), 6);
+	content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+	gtk_box_set_spacing (GTK_BOX (content_area), 2); /* 2 * 5 + 2 = 12 */
+	action_area = gtk_dialog_get_action_area (GTK_DIALOG (dialog));
+	gtk_container_set_border_width (GTK_CONTAINER (action_area), 5);
+	gtk_box_set_spacing (GTK_BOX (action_area), 6);
 
 	vbox = gtk_vbox_new (FALSE, 6);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), 5);
@@ -1126,7 +1130,7 @@ glade_eprop_flags_show_dialog (GtkWidget           *button,
 
 	gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);	
 	gtk_box_pack_start (GTK_BOX (vbox), view, TRUE, TRUE, 0);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), vbox, TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (content_area), vbox, TRUE, TRUE, 0);
 
 	gtk_widget_show (label);
 	gtk_widget_show (view);
@@ -1430,7 +1434,7 @@ glade_eprop_named_icon_show_chooser_dialog (GtkWidget           *button,
 {
 	GtkWidget *dialog;
 
-	dialog = glade_named_icon_chooser_dialog_new ("Select Named Icon",
+	dialog = glade_named_icon_chooser_dialog_new (_("Select Named Icon"),
 						       GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (eprop))),
 						       GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 						       GTK_STOCK_OK, GTK_RESPONSE_OK,
@@ -1531,7 +1535,7 @@ glade_eprop_text_load (GladeEditorProperty *eprop, GladeProperty *property)
 		{
 			const gchar *text = g_value_get_string (property->value);
 			if (!text) text = "";
-			gtk_entry_set_text (GTK_ENTRY (GTK_BIN (eprop_text->text_entry)->child), text);
+			gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (eprop_text->text_entry))), text);
 		}
 		else
 		{
@@ -1689,6 +1693,7 @@ glade_editor_property_show_i18n_dialog (GtkWidget            *parent,
 	GtkWidget     *text_view, *comment_view, *context_view;
 	GtkTextBuffer *text_buffer, *comment_buffer, *context_buffer = NULL;
 	GtkWidget     *translatable_button, *context_button;
+	GtkWidget     *content_area, *action_area;
 	gint           res;
 
 	g_return_val_if_fail (text && context && comment && translatable && has_context, FALSE);
@@ -1710,16 +1715,18 @@ glade_editor_property_show_i18n_dialog (GtkWidget            *parent,
 
 	/* HIG spacings */
 	gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
-	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->vbox), 2); /* 2 * 5 + 2 = 12 */
-	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dialog)->action_area), 5);
-	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->action_area), 6);
+	content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+	gtk_box_set_spacing (GTK_BOX (content_area), 2); /* 2 * 5 + 2 = 12 */
+	action_area = gtk_dialog_get_action_area (GTK_DIALOG (dialog));
+	gtk_container_set_border_width (GTK_CONTAINER (action_area), 5);
+	gtk_box_set_spacing (GTK_BOX (action_area), 6);
 
 
 	vbox = gtk_vbox_new (FALSE, 6);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), 5);
 	gtk_widget_show (vbox);
 
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), vbox, TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (content_area), vbox, TRUE, TRUE, 0);
 
 	/* Text */
 	label = gtk_label_new_with_mnemonic (_("_Text:"));
@@ -1763,14 +1770,14 @@ glade_editor_property_show_i18n_dialog (GtkWidget            *parent,
 	gtk_box_pack_start (GTK_BOX (hbox), translatable_button, FALSE, FALSE, 0);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (translatable_button), *translatable);
 	gtk_widget_set_tooltip_text (translatable_button,
-				     _("Whether this property is translatable or not"));
+				     _("Whether this property is translatable"));
 	
 	/* Has Context */
 	context_button = gtk_check_button_new_with_mnemonic (_("_Has context prefix"));
 	gtk_box_pack_start (GTK_BOX (hbox), context_button, FALSE, FALSE, 0);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (context_button), *has_context);
 	gtk_widget_set_tooltip_text (context_button,
-				     _("Whether or not the translatable string has a context prefix"));
+				     _("Whether the translatable string has a context prefix"));
 	if (fmt == GLADE_PROJECT_FORMAT_LIBGLADE)
 		gtk_widget_show (context_button);
 
@@ -1933,6 +1940,7 @@ glade_editor_property_show_resource_dialog (GladeProject *project, GtkWidget *pa
 {
 
 	GtkWidget     *dialog;
+	GtkWidget     *action_area;
 	gchar         *folder;
 
 	g_return_val_if_fail (filename != NULL, FALSE);
@@ -1954,9 +1962,10 @@ glade_editor_property_show_resource_dialog (GladeProject *project, GtkWidget *pa
 
 	/* HIG spacings */
 	gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
-	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->vbox), 2); /* 2 * 5 + 2 = 12 */
-	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dialog)->action_area), 5);
-	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->action_area), 6);
+	gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), 2); /* 2 * 5 + 2 = 12 */
+	action_area = gtk_dialog_get_action_area (GTK_DIALOG (dialog));
+	gtk_container_set_border_width (GTK_CONTAINER (action_area), 5);
+	gtk_box_set_spacing (GTK_BOX (action_area), 6);
 
 	folder = glade_project_resource_fullpath (project, ".");
 	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dialog), folder);
@@ -2060,7 +2069,7 @@ eprop_text_stock_changed (GtkComboBox *combo,
 	}
 	else if (GTK_IS_COMBO_BOX_ENTRY (combo))
 	{
-		str = gtk_entry_get_text (GTK_ENTRY (GTK_BIN (combo)->child));
+		str = gtk_entry_get_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (combo))));
 		glade_eprop_text_changed_common (eprop, str, eprop->use_command);
 	}
 }
@@ -2079,6 +2088,7 @@ glade_eprop_text_create_input (GladeEditorProperty *eprop)
 	if (klass->stock || klass->stock_icon)
 	{
 		GtkCellRenderer *renderer;
+		GtkWidget       *child;
 		GtkWidget       *combo = gtk_combo_box_entry_new ();
 
 		eprop_text->store = (GtkTreeModel *)
@@ -2100,10 +2110,11 @@ glade_eprop_text_create_input (GladeEditorProperty *eprop)
 
 		/* Dont allow custom items where an actual GTK+ stock item is expected
 		 * (i.e. real items come with labels) */
+		child = gtk_bin_get_child (GTK_BIN (combo));
 		if (klass->stock)	
-			gtk_editable_set_editable (GTK_EDITABLE (GTK_BIN (combo)->child), FALSE);
+			gtk_editable_set_editable (GTK_EDITABLE (child), FALSE);
 		else
-			gtk_editable_set_editable (GTK_EDITABLE (GTK_BIN (combo)->child), TRUE);
+			gtk_editable_set_editable (GTK_EDITABLE (child), TRUE);
 		
 		gtk_widget_show (combo);
 		gtk_box_pack_start (GTK_BOX (hbox), combo, FALSE, FALSE, 0); 
@@ -2214,7 +2225,7 @@ glade_eprop_bool_load (GladeEditorProperty *eprop, GladeProperty *property)
 		
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (eprop_bool->toggle), state);
 		
-		label = GTK_BIN (eprop_bool->toggle)->child;
+		label = gtk_bin_get_child (GTK_BIN (eprop_bool->toggle));
 		gtk_label_set_text (GTK_LABEL (label), state ? _("Yes") : _("No"));
 	}
 }
@@ -2230,7 +2241,7 @@ glade_eprop_bool_changed (GtkWidget           *button,
 	if (eprop->loading) return;
 
 	state = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
-	label = GTK_BIN (button)->child;
+	label = gtk_bin_get_child (GTK_BIN (button));
 	gtk_label_set_text (GTK_LABEL (label), state ? _("Yes") : _("No"));
 
 	g_value_init (&val, G_TYPE_BOOLEAN);
@@ -2443,17 +2454,10 @@ glade_eprop_object_name (const gchar      *name,
 }
 
 static gboolean
-glade_eprop_object_is_selected (GladeEditorProperty *eprop,
-				GladeWidget         *widget)
+search_list (GList     *list,
+	     gpointer   data)
 {
-	GList *list;
-
-	if (GLADE_IS_PARAM_SPEC_OBJECTS (eprop->klass->pspec))
-	{
-		glade_property_get (eprop->property, &list);
-		return g_list_find (list, widget->object) != NULL;
-	}
-	return glade_property_equals (eprop->property, widget->object);
+	return g_list_find (list, data) != NULL;
 }
 
 
@@ -2462,11 +2466,13 @@ glade_eprop_object_is_selected (GladeEditorProperty *eprop,
  * in the model are the associated GladeWidgets.
  */
 static void
-glade_eprop_object_populate_view_real (GladeEditorProperty *eprop,
-				       GtkTreeStore        *model,
-				       GList               *widgets,
+glade_eprop_object_populate_view_real (GtkTreeStore        *model,
 				       GtkTreeIter         *parent_iter,
-				       gboolean             recurse)
+				       GList               *widgets,
+				       GList               *selected_widgets,
+				       GList               *exception_widgets,
+				       GType                object_type,
+				       gboolean             parentless)
 {
 	GList *children, *list;
 	GtkTreeIter       iter;
@@ -2479,34 +2485,14 @@ glade_eprop_object_populate_view_real (GladeEditorProperty *eprop,
 		if ((widget = glade_widget_get_from_gobject (list->data)) != NULL)
 		{
 
-			if (GLADE_IS_PARAM_SPEC_OBJECTS (eprop->klass->pspec))
-			{
-				has_decendant = recurse && glade_widget_has_decendant 
-					(widget, 
-					 glade_param_spec_objects_get_type 
-					 (GLADE_PARAM_SPEC_OBJECTS(eprop->klass->pspec)));
-				good_type = 
-					g_type_is_a
-					(widget->adaptor->type,
-					 glade_param_spec_objects_get_type 
-					 (GLADE_PARAM_SPEC_OBJECTS(eprop->klass->pspec))) ||
-					glade_util_class_implements_interface
-					(widget->adaptor->type, 
-					 glade_param_spec_objects_get_type 
-					 (GLADE_PARAM_SPEC_OBJECTS(eprop->klass->pspec)));
+			has_decendant = !parentless && glade_widget_has_decendant 
+				(widget, object_type);
 
-			}
-			else
-			{
-				has_decendant = recurse && glade_widget_has_decendant 
-					(widget, eprop->klass->pspec->value_type);
+			good_type = (widget->adaptor->type == object_type || 
+				     g_type_is_a (widget->adaptor->type, object_type)  ||
+				     glade_util_class_implements_interface (widget->adaptor->type, object_type));
 
-				good_type = g_type_is_a (widget->adaptor->type, 
-							 eprop->klass->pspec->value_type);
-
-			}
-
-			if (eprop->klass->parentless_widget)
+			if (parentless)
 				good_type = good_type && !GWA_IS_TOPLEVEL (widget->adaptor);
 
 			if (good_type || has_decendant)
@@ -2523,10 +2509,10 @@ glade_eprop_object_populate_view_real (GladeEditorProperty *eprop,
 					  * its not itself.
 					  */
 					 OBJ_COLUMN_SELECTABLE, 
-					 good_type && (widget != eprop->property->widget),
+					 good_type && !search_list (exception_widgets, widget), 
 					 OBJ_COLUMN_SELECTED,
-					 good_type && glade_eprop_object_is_selected
-					 (eprop, widget), -1);
+					 good_type && search_list (selected_widgets, widget), 
+					 -1);
 			}
 
 			if (has_decendant &&
@@ -2536,7 +2522,10 @@ glade_eprop_object_populate_view_real (GladeEditorProperty *eprop,
 				GtkTreeIter *copy = NULL;
 
 				copy = gtk_tree_iter_copy (&iter);
-				glade_eprop_object_populate_view_real (eprop, model, children, copy, recurse);
+				glade_eprop_object_populate_view_real (model, copy, children, 
+								       selected_widgets, 
+								       exception_widgets, 
+								       object_type, parentless);
 				gtk_tree_iter_free (copy);
 
 				g_list_free (children);
@@ -2546,11 +2535,14 @@ glade_eprop_object_populate_view_real (GladeEditorProperty *eprop,
 }
 
 static void
-glade_eprop_object_populate_view (GladeEditorProperty *eprop,
-				  GtkTreeView         *view)
+glade_eprop_object_populate_view (GladeProject        *project,
+				  GtkTreeView         *view,
+				  GList               *selected,
+				  GList               *exceptions,
+				  GType                object_type,
+				  gboolean             parentless)
 {
 	GtkTreeStore  *model = (GtkTreeStore *)gtk_tree_view_get_model (view);
-	GladeProject  *project = glade_app_get_project ();
 	GList         *list, *toplevels = NULL;
 
 	/* Make a list of only the toplevel widgets */
@@ -2565,7 +2557,9 @@ glade_eprop_object_populate_view (GladeEditorProperty *eprop,
 	}
 
 	/* add the widgets and recurse */
-	glade_eprop_object_populate_view_real (eprop, model, toplevels, NULL, !eprop->klass->parentless_widget);
+	glade_eprop_object_populate_view_real (model, NULL, toplevels, selected, exceptions,
+					       object_type,
+					       parentless);
 	g_list_free (toplevels);
 }
 
@@ -2630,8 +2624,7 @@ glade_eprop_object_selected (GtkCellRendererToggle *cell,
 }
 
 static GtkWidget *
-glade_eprop_object_view (GladeEditorProperty *eprop,
-			 gboolean             radio)
+glade_eprop_object_view (gboolean             radio)
 {
 	GtkWidget         *view_widget;
 	GtkTreeModel      *model;
@@ -2652,6 +2645,7 @@ glade_eprop_object_view (GladeEditorProperty *eprop,
 	g_object_set_data (G_OBJECT (model), "radio-list", GINT_TO_POINTER (radio));
 
 	view_widget = gtk_tree_view_new_with_model (model);
+	gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (view_widget), FALSE);
 
 	/* Pass ownership to the view */
 	g_object_unref (G_OBJECT (model));
@@ -2717,10 +2711,10 @@ glade_eprop_object_dialog_title (GladeEditorProperty *eprop)
 
 	if (eprop->klass->parentless_widget)
 		format = GLADE_IS_PARAM_SPEC_OBJECTS (eprop->klass->pspec) ?
-			_("Choose parentless %s(s) in this project") : _("Choose a parentless %s in this project");
+			_("Choose parentless %s type objects in this project") : _("Choose a parentless %s in this project");
 	else
 		format = GLADE_IS_PARAM_SPEC_OBJECTS (eprop->klass->pspec) ?
-			_("Choose %s(s) in this project") : _("Choose a %s in this project");
+			_("Choose %s type objects in this project") : _("Choose a %s in this project");
 
 	if (GLADE_IS_PARAM_SPEC_OBJECTS (eprop->klass->pspec))
 		return g_strdup_printf (format, g_type_name 
@@ -2738,6 +2732,120 @@ glade_eprop_object_dialog_title (GladeEditorProperty *eprop)
 				(eprop->klass->pspec->value_type));
 }
 
+
+gboolean
+glade_editor_property_show_object_dialog (GladeProject       *project,
+					  const gchar        *title,
+					  GtkWidget          *parent, 
+					  GType               object_type,
+					  GladeWidget        *exception,
+					  GladeWidget       **object)
+{
+	GtkWidget     *dialog;
+	GtkWidget     *vbox, *label, *sw;
+	GtkWidget     *tree_view;
+	GtkWidget     *content_area;
+	GtkWidget     *action_area;
+	GList         *selected_list = NULL, *exception_list = NULL;
+	gint           res;
+
+	g_return_val_if_fail (object != NULL, -1);
+
+	if (!parent)
+		parent = glade_app_get_window ();
+
+	dialog = gtk_dialog_new_with_buttons (title,
+					      GTK_WINDOW (parent),
+					      GTK_DIALOG_MODAL,
+					      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					      GTK_STOCK_CLEAR, GLADE_RESPONSE_CLEAR,
+					      GTK_STOCK_OK, GTK_RESPONSE_OK,
+					      NULL);
+	
+	gtk_dialog_set_alternative_button_order (GTK_DIALOG (dialog),
+						 GTK_RESPONSE_OK,
+						 GTK_RESPONSE_CANCEL,
+						 GLADE_RESPONSE_CLEAR,
+						 -1);
+
+	gtk_window_set_default_size (GTK_WINDOW (dialog), 600, 500);
+	
+	gtk_dialog_set_has_separator (GTK_DIALOG (dialog), FALSE);
+	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+
+	/* HIG settings */
+	gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
+	content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+	gtk_box_set_spacing (GTK_BOX (content_area), 2); /* 2 * 5 + 2 = 12 */
+	action_area = gtk_dialog_get_action_area (GTK_DIALOG (dialog));
+	gtk_container_set_border_width (GTK_CONTAINER (action_area), 5);
+	gtk_box_set_spacing (GTK_BOX (action_area), 6);
+
+	vbox = gtk_vbox_new (FALSE, 6);
+	gtk_widget_show (vbox);
+
+	gtk_container_set_border_width (GTK_CONTAINER (vbox), 5);
+
+	gtk_box_pack_start (GTK_BOX (content_area), vbox, TRUE, TRUE, 0);
+
+	/* Checklist */
+	label = gtk_label_new_with_mnemonic (_("O_bjects:"));
+	gtk_widget_show (label);
+	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+	gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
+
+	sw = gtk_scrolled_window_new (NULL, NULL);
+	gtk_widget_show (sw);
+	gtk_box_pack_start (GTK_BOX (vbox), sw, TRUE, TRUE, 0);
+	gtk_widget_set_size_request (sw, 400, 200);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
+					GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw), GTK_SHADOW_IN);
+
+
+	if (*object)
+		selected_list = g_list_prepend (selected_list, *object);
+
+	if (exception)
+		exception_list = g_list_prepend (exception_list, exception);
+
+	tree_view = glade_eprop_object_view (TRUE);
+	glade_eprop_object_populate_view (project,
+					  GTK_TREE_VIEW (tree_view), 
+					  selected_list, exception_list,
+					  object_type, FALSE);
+	g_list_free (selected_list);
+	g_list_free (exception_list);
+
+	gtk_tree_view_expand_all (GTK_TREE_VIEW (tree_view));
+
+	gtk_widget_show (tree_view);
+	gtk_container_add (GTK_CONTAINER (sw), tree_view);
+	
+	gtk_label_set_mnemonic_widget (GTK_LABEL (label), tree_view);
+	
+	/* Run the dialog */
+	res = gtk_dialog_run (GTK_DIALOG (dialog));
+	if (res == GTK_RESPONSE_OK) 
+	{
+		GladeWidget *selected = NULL;
+
+		gtk_tree_model_foreach
+			(gtk_tree_view_get_model (GTK_TREE_VIEW (tree_view)), 
+			 (GtkTreeModelForeachFunc) 
+			 glade_eprop_object_selected_widget, &selected);
+
+		*object = selected;
+	} 
+	else if (res == GLADE_RESPONSE_CLEAR)
+		*object = NULL;
+
+	gtk_widget_destroy (dialog);
+
+	return (res == GTK_RESPONSE_OK || res == GLADE_RESPONSE_CLEAR);
+}
+
+
 static void
 glade_eprop_object_show_dialog (GtkWidget           *dialog_button,
 				GladeEditorProperty *eprop)
@@ -2745,10 +2853,13 @@ glade_eprop_object_show_dialog (GtkWidget           *dialog_button,
 	GtkWidget     *dialog, *parent;
 	GtkWidget     *vbox, *label, *sw;
 	GtkWidget     *tree_view;
+	GtkWidget     *content_area;
+	GtkWidget     *action_area;
 	GladeProject  *project;
 	gchar         *title = glade_eprop_object_dialog_title (eprop);
 	gint           res;
 	GladeWidgetAdaptor *create_adaptor = NULL;
+	GList         *selected_list = NULL, *exception_list = NULL;
 	
 	project = glade_widget_get_project (eprop->property->widget);
 	parent = gtk_widget_get_toplevel (GTK_WIDGET (eprop));
@@ -2800,22 +2911,24 @@ glade_eprop_object_show_dialog (GtkWidget           *dialog_button,
 							 -1);
 	}
 		
-	
+	gtk_window_set_default_size (GTK_WINDOW (dialog), 600, 500);
 	gtk_dialog_set_has_separator (GTK_DIALOG (dialog), FALSE);
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 
 	/* HIG settings */
 	gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
-	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->vbox), 2); /* 2 * 5 + 2 = 12 */
-	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dialog)->action_area), 5);
-	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->action_area), 6);
+	content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+	gtk_box_set_spacing (GTK_BOX (content_area), 2); /* 2 * 5 + 2 = 12 */
+	action_area = gtk_dialog_get_action_area (GTK_DIALOG (dialog));
+	gtk_container_set_border_width (GTK_CONTAINER (action_area), 5);
+	gtk_box_set_spacing (GTK_BOX (action_area), 6);
 
 	vbox = gtk_vbox_new (FALSE, 6);
 	gtk_widget_show (vbox);
 
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), 5);
 
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), vbox, TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (content_area), vbox, TRUE, TRUE, 0);
 
 	/* Checklist */
 	label = gtk_label_new_with_mnemonic (_("O_bjects:"));
@@ -2832,8 +2945,19 @@ glade_eprop_object_show_dialog (GtkWidget           *dialog_button,
 	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw), GTK_SHADOW_IN);
 
 
-	tree_view = glade_eprop_object_view (eprop, TRUE);
-	glade_eprop_object_populate_view (eprop, GTK_TREE_VIEW (tree_view));
+	exception_list = g_list_prepend (exception_list, eprop->property->widget);
+	if (g_value_get_object (eprop->property->value))
+		selected_list = g_list_prepend (selected_list, 
+						glade_widget_get_from_gobject 
+						(g_value_get_object (eprop->property->value)));
+
+	tree_view = glade_eprop_object_view (TRUE);
+	glade_eprop_object_populate_view (project, GTK_TREE_VIEW (tree_view),
+					  selected_list, exception_list,
+					  eprop->klass->pspec->value_type,
+					  eprop->klass->parentless_widget);
+	g_list_free (selected_list);
+	g_list_free (exception_list);
 
 
 	gtk_tree_view_expand_all (GTK_TREE_VIEW (tree_view));
@@ -3077,7 +3201,7 @@ glade_eprop_objects_show_dialog (GtkWidget           *dialog_button,
 	GladeProject  *project;
 	gchar         *title = glade_eprop_object_dialog_title (eprop);
 	gint           res;
-
+	GList         *selected_list = NULL, *exception_list = NULL, *selected_objects = NULL;
 	
 	project = glade_widget_get_project (eprop->property->widget);
 	parent = gtk_widget_get_toplevel (GTK_WIDGET (eprop));
@@ -3091,6 +3215,8 @@ glade_eprop_objects_show_dialog (GtkWidget           *dialog_button,
 					      GTK_STOCK_OK, GTK_RESPONSE_OK,
 					      NULL);
 	g_free (title);
+
+	gtk_window_set_default_size (GTK_WINDOW (dialog), 600, 500);
 	gtk_dialog_set_has_separator (GTK_DIALOG (dialog), FALSE);
 
 	vbox = gtk_vbox_new (FALSE, 6);
@@ -3098,7 +3224,7 @@ glade_eprop_objects_show_dialog (GtkWidget           *dialog_button,
 
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
 
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), vbox, TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), vbox, TRUE, TRUE, 0);
 
 	/* Checklist */
 	label = gtk_label_new (_("Objects:"));
@@ -3114,8 +3240,25 @@ glade_eprop_objects_show_dialog (GtkWidget           *dialog_button,
 					GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw), GTK_SHADOW_IN);
 
-	tree_view = glade_eprop_object_view (eprop, FALSE);
-	glade_eprop_object_populate_view (eprop, GTK_TREE_VIEW (tree_view));
+	tree_view = glade_eprop_object_view (FALSE);
+
+
+	exception_list = g_list_prepend (exception_list, eprop->property->widget);
+
+	if (g_value_get_object (eprop->property->value))
+	{
+		GList *l;
+		glade_property_get (eprop->property, &selected_objects);
+		for (l = selected_objects; l; l = l->next)
+			selected_list = g_list_prepend (selected_list, 
+							glade_widget_get_from_gobject (l->data));
+	}
+	glade_eprop_object_populate_view (project, GTK_TREE_VIEW (tree_view),
+					  selected_list, exception_list,
+					  eprop->klass->pspec->value_type,
+					  eprop->klass->parentless_widget);
+	g_list_free (selected_list);
+	g_list_free (exception_list);
 
 	gtk_tree_view_expand_all (GTK_TREE_VIEW (tree_view));
 
@@ -3246,14 +3389,14 @@ glade_eprop_adj_value_changed (GtkAdjustment *adj, GladeEditorProperty *eprop)
 	data = g_new (EPropAdjIdleData, 1);
 	
 	data->eprop = eprop;
-	data->value = adj->value;
+	data->value = gtk_adjustment_get_value (adj);
 	
 	/* Update GladeEPropAdjustment value spinbutton in an idle funtion */
 	g_idle_add (glade_eprop_adj_set_value_idle, data);
 		
 	/* Set adjustment to the old value */
-	adj->value = gtk_spin_button_get_value (GTK_SPIN_BUTTON (
-					GLADE_EPROP_ADJUSTMENT (eprop)->value));
+	gtk_adjustment_set_value (adj, gtk_spin_button_get_value (GTK_SPIN_BUTTON (
+					GLADE_EPROP_ADJUSTMENT (eprop)->value)));
 }
 
 static void
@@ -3278,21 +3421,32 @@ glade_eprop_adjustment_load (GladeEditorProperty *eprop, GladeProperty *property
 		object = g_value_get_object (property->value);
 
 		if (object)
+		{
 			adj = GTK_ADJUSTMENT (object);
 		
-		/* Keep track of external adjustment changes */
-		g_signal_connect (object, "value-changed",
-				  G_CALLBACK (glade_eprop_adj_value_changed),
-				  eprop);
+			/* Keep track of external adjustment changes */
+			g_signal_connect (object, "value-changed",
+					  G_CALLBACK (glade_eprop_adj_value_changed),
+					  eprop);
 	
-		/* Update adjustment's values */
-		eprop_adj->value_adj->value = adj ? adj->value : 0.0;
-		eprop_adj->value_adj->lower = adj ? adj->lower : 0.0;
-		eprop_adj->value_adj->upper = adj ? adj->upper : 100.0;
-		eprop_adj->value_adj->step_increment = adj ? adj->step_increment : 1;
-		eprop_adj->value_adj->page_increment = adj ? adj->page_increment : 10;
-		eprop_adj->value_adj->page_size = adj ? adj->page_size : 10;
-		
+			/* Update adjustment's values */
+			gtk_adjustment_set_value (eprop_adj->value_adj, gtk_adjustment_get_value (adj));
+			gtk_adjustment_set_lower (eprop_adj->value_adj, gtk_adjustment_get_lower (adj));
+			gtk_adjustment_set_upper (eprop_adj->value_adj, gtk_adjustment_get_upper (adj));
+			gtk_adjustment_set_step_increment (eprop_adj->value_adj, gtk_adjustment_get_step_increment (adj));
+			gtk_adjustment_set_page_increment (eprop_adj->value_adj, gtk_adjustment_get_page_increment (adj));
+			gtk_adjustment_set_page_size (eprop_adj->value_adj, gtk_adjustment_get_page_size (adj));
+		}
+		else
+		{
+			gtk_adjustment_set_value (eprop_adj->value_adj, 0.0);
+			gtk_adjustment_set_lower (eprop_adj->value_adj, 0.0);
+			gtk_adjustment_set_upper (eprop_adj->value_adj, 100.0);
+			gtk_adjustment_set_step_increment (eprop_adj->value_adj, 1);
+			gtk_adjustment_set_page_increment (eprop_adj->value_adj, 10);
+			gtk_adjustment_set_page_size (eprop_adj->value_adj, 0);
+		}
+
 		/* Block Handlers */
 		g_signal_handler_block (eprop_adj->value, eprop_adj->ids.value);
 		g_signal_handler_block (eprop_adj->lower, eprop_adj->ids.lower);
@@ -3302,14 +3456,18 @@ glade_eprop_adjustment_load (GladeEditorProperty *eprop, GladeProperty *property
 		g_signal_handler_block (eprop_adj->page_size, eprop_adj->ids.page_size);
 		
 		/* Update spinbuttons values */
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (eprop_adj->value), eprop_adj->value_adj->value);
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (eprop_adj->lower), eprop_adj->value_adj->lower);
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (eprop_adj->upper), eprop_adj->value_adj->upper);
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (eprop_adj->step_increment), 
-					   eprop_adj->value_adj->step_increment);
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (eprop_adj->page_increment), 
-					   eprop_adj->value_adj->page_increment);
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (eprop_adj->page_size), eprop_adj->value_adj->page_size);
+		gtk_spin_button_set_value (GTK_SPIN_BUTTON (eprop_adj->value),
+					   gtk_adjustment_get_value (eprop_adj->value_adj));
+		gtk_spin_button_set_value (GTK_SPIN_BUTTON (eprop_adj->lower),
+					   gtk_adjustment_get_lower (eprop_adj->value_adj));
+		gtk_spin_button_set_value (GTK_SPIN_BUTTON (eprop_adj->upper),
+					   gtk_adjustment_get_upper (eprop_adj->value_adj));
+		gtk_spin_button_set_value (GTK_SPIN_BUTTON (eprop_adj->step_increment),
+					   gtk_adjustment_get_step_increment (eprop_adj->value_adj));
+		gtk_spin_button_set_value (GTK_SPIN_BUTTON (eprop_adj->page_increment),
+					   gtk_adjustment_get_page_increment (eprop_adj->value_adj));
+		gtk_spin_button_set_value (GTK_SPIN_BUTTON (eprop_adj->page_size),
+					   gtk_adjustment_get_page_size (eprop_adj->value_adj));
 		
 		/* Unblock Handlers */
 		g_signal_handler_unblock (eprop_adj->value, eprop_adj->ids.value);
@@ -3357,12 +3515,12 @@ glade_eprop_adjustment_dup_adj (GladeEditorProperty *eprop)
 	
 	adj = GTK_ADJUSTMENT (object);
 
-	return GTK_ADJUSTMENT (gtk_adjustment_new (adj->value,
-						   adj->lower,
-						   adj->upper,
-						   adj->step_increment,
-						   adj->page_increment,
-						   adj->page_size));
+	return GTK_ADJUSTMENT (gtk_adjustment_new (gtk_adjustment_get_value (adj),
+						   gtk_adjustment_get_lower (adj),
+						   gtk_adjustment_get_upper (adj),
+						   gtk_adjustment_get_step_increment (adj),
+						   gtk_adjustment_get_page_increment (adj),
+						   gtk_adjustment_get_page_size (adj)));
 }
 
 static void
@@ -3373,12 +3531,12 @@ glade_eprop_adjustment_prop_changed_common (GladeEditorProperty *eprop,
 	
 	g_value_init (&value, GTK_TYPE_ADJUSTMENT);
 
-	if (adjustment->value == 0.00 &&
-	    adjustment->lower == 0.00 &&
-	    adjustment->upper == 100.00 &&
-	    adjustment->step_increment == 1.00 &&
-	    adjustment->page_increment == 10.00 &&
-	    adjustment->page_size == 10.00)
+	if (gtk_adjustment_get_value (adjustment) == 0.00 &&
+	    gtk_adjustment_get_lower (adjustment) == 0.00 &&
+	    gtk_adjustment_get_upper (adjustment) == 100.00 &&
+	    gtk_adjustment_get_step_increment (adjustment) == 1.00 &&
+	    gtk_adjustment_get_page_increment (adjustment) == 10.00 &&
+	    gtk_adjustment_get_page_size (adjustment) == 10.00)
 	{
 		gtk_object_destroy (GTK_OBJECT (adjustment));
 		g_value_set_object (&value, NULL);

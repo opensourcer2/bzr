@@ -6,6 +6,9 @@
 
 G_BEGIN_DECLS
 
+#define GLADE_DEVHELP_ICON_NAME           "devhelp"
+#define GLADE_DEVHELP_FALLBACK_ICON_FILE  "devhelp.png"
+
 typedef enum _GladeUtilFileDialogType
 {
         GLADE_FILE_DIALOG_ACTION_OPEN,
@@ -33,6 +36,10 @@ gboolean         glade_util_ui_message           (GtkWidget *parent,
 void		glade_util_flash_message	(GtkWidget *statusbar, 
 						 guint context_id,
 						 gchar *format, ...);
+
+gboolean        glade_util_check_and_warn_scrollable (GladeWidget        *parent,
+						      GladeWidgetAdaptor *child_adaptor,
+						      GtkWidget          *parent_widget);
 
 /* This is a GCompareFunc for comparing the labels of 2 stock items, ignoring
    any '_' characters. It isn't particularly efficient. */
@@ -151,6 +158,8 @@ gint              glade_utils_hijack_key_press (GtkWindow          *win,
 						GdkEventKey        *event, 
 						gpointer            user_data);
 	
+
+gchar           *glade_utils_replace_home_dir_with_tilde (const gchar *uri);
 
 G_END_DECLS
 

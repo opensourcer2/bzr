@@ -30,13 +30,14 @@
 
 #include "glade-model-data.h"
 #include "glade-column-types.h"
-#include "glade-cell-renderer-button.h"
 
 GladeModelData *
 glade_model_data_new (GType type, const gchar *column_name)
 {
 	GladeModelData *data = g_new0 (GladeModelData, 1);
-	g_value_init (&data->value, type);
+	
+	if (type != 0)
+		g_value_init (&data->value, type);
 
 	if (type == G_TYPE_STRING)
 		data->i18n_translatable = TRUE;
@@ -54,8 +55,11 @@ glade_model_data_copy (GladeModelData *data)
 
 	GladeModelData *dup = g_new0 (GladeModelData, 1);
 	
-	g_value_init (&dup->value, G_VALUE_TYPE (&data->value));
-	g_value_copy (&data->value, &dup->value);
+	if (G_VALUE_TYPE (&data->value) != 0)
+	{
+		g_value_init (&dup->value, G_VALUE_TYPE (&data->value));
+		g_value_copy (&data->value, &dup->value);
+	}
 
 	dup->name              = g_strdup (data->name);
 
@@ -71,7 +75,8 @@ glade_model_data_free (GladeModelData *data)
 {
 	if (data)
 	{
-		g_value_unset (&data->value);
+		if (G_VALUE_TYPE (&data->value) != 0)
+			g_value_unset (&data->value);
 	
 		g_free (data->name);
 		g_free (data->i18n_context);
@@ -295,7 +300,7 @@ append_row (GNode *node, GList *columns)
 	for (list = columns; list; list = list->next)
        	{
 		column = list->data;
-		data = glade_model_data_new (column->type, column->column_name);
+		data = glade_model_data_new (g_type_from_name (column->type_name), column->column_name);
 		g_node_append_data (row, data);
 	}
 }
@@ -334,20 +339,14 @@ static gboolean
 update_and_focus_data_tree_idle (GladeEditorProperty *eprop)
 {
 	GladeEPropModelData *eprop_data = GLADE_EPROP_MODEL_DATA (eprop);
-	GValue               value = { 0, };
 
 	eprop_data->want_focus = TRUE;
 	eprop_data->want_next_focus = TRUE;
 	
-	g_value_init (&value, GLADE_TYPE_MODEL_DATA_TREE);
-	g_value_take_boxed (&value, eprop_data->pending_data_tree);
-	glade_editor_property_commit (eprop, &value);
-	g_value_unset (&value);
+	update_data_tree_idle (eprop);
 
 	/* XXX Have to load it regardless if it changed, this is a slow and redundant way... */
 	glade_editor_property_load (eprop, eprop->property);
-
-	eprop_data->pending_data_tree = NULL;
 
 	eprop_data->want_next_focus = FALSE;
 	eprop_data->want_focus = FALSE;
@@ -566,7 +565,7 @@ eprop_model_data_generate_store (GladeEditorProperty *eprop)
 	GArray         *gtypes = g_array_new (FALSE, TRUE, sizeof (GType));
 	GtkTreeIter     iter;
 	gint            column_num, row_num;
-	GType           index_type = G_TYPE_INT, string_type = G_TYPE_STRING;
+	GType           index_type = G_TYPE_INT, string_type = G_TYPE_STRING, pointer_type = G_TYPE_POINTER;
 
 	glade_property_get (eprop->property, &data_tree);
 
@@ -578,7 +577,9 @@ eprop_model_data_generate_store (GladeEditorProperty *eprop)
 	for (iter_node = data_tree->children->children; iter_node; iter_node = iter_node->next)
 	{
 		iter_data = iter_node->data;
-		if (G_VALUE_TYPE (&iter_data->value) == GDK_TYPE_PIXBUF)
+		if (G_VALUE_TYPE (&iter_data->value) == 0)
+			g_array_append_val (gtypes, pointer_type);
+		else if (G_VALUE_TYPE (&iter_data->value) == GDK_TYPE_PIXBUF)
 			g_array_append_val (gtypes, string_type);
 		else
 			g_array_append_val (gtypes, G_VALUE_TYPE (&iter_data->value));
@@ -599,6 +600,9 @@ eprop_model_data_generate_store (GladeEditorProperty *eprop)
 		     column_num++, iter_node = iter_node->next)
 		{
 			iter_data = iter_node->data;
+
+			if (G_VALUE_TYPE (&iter_data->value) == 0)
+				continue;
 
 			/* Special case, show the filename in the cellrenderertext */
 			if (G_VALUE_TYPE (&iter_data->value) == GDK_TYPE_PIXBUF)
@@ -661,9 +665,9 @@ value_toggled (GtkCellRendererToggle *cell,
 }
 
 static void
-value_i18n_clicked (GladeCellRendererButton *cell,
-		   const gchar              *path,
-		   GladeEditorProperty      *eprop)
+value_i18n_activate (GladeCellRendererIcon    *cell,
+		     const gchar              *path,
+		     GladeEditorProperty      *eprop)
 {
 	GladeEPropModelData *eprop_data = GLADE_EPROP_MODEL_DATA (eprop);
 	GtkTreeIter          iter;
@@ -843,11 +847,13 @@ eprop_model_generate_column (GladeEditorProperty *eprop,
 	GtkCellRenderer   *renderer = NULL;
 	GtkAdjustment     *adjustment;
 	GtkListStore      *store;
-	GType              type = G_VALUE_TYPE (&data->value);
+	GType              type = G_TYPE_INVALID;
 
 	gtk_tree_view_column_set_title (column, data->name);
 	gtk_tree_view_column_set_resizable (column, TRUE);
 	gtk_tree_view_column_set_expand (column, TRUE);
+
+	type = G_VALUE_TYPE (&data->value);
 
 	/* Support enum and flag types, and a hardcoded list of fundamental types */
 	if (type == G_TYPE_CHAR ||
@@ -856,17 +862,13 @@ eprop_model_generate_column (GladeEditorProperty *eprop,
 	    type == GDK_TYPE_PIXBUF)
 	{
 		/* Text renderer */
-		if (type == G_TYPE_STRING)
-			renderer = glade_cell_renderer_button_new ();
-		else
-			renderer = gtk_cell_renderer_text_new ();
+		renderer = gtk_cell_renderer_text_new ();
 
 		g_object_set (G_OBJECT (renderer), 
 			      "editable", TRUE, 
 			      "ellipsize", PANGO_ELLIPSIZE_END,
 			      "width", 90,
 			      NULL);
-
 
 		gtk_tree_view_column_pack_start (column, renderer, FALSE);
 		gtk_tree_view_column_set_attributes (column, renderer, 
@@ -885,8 +887,18 @@ eprop_model_generate_column (GladeEditorProperty *eprop,
 		/* Trigger i18n dialog from here */
 		if (type == G_TYPE_STRING)
 		{
-			g_signal_connect (G_OBJECT (renderer), "clicked",
-					  G_CALLBACK (value_i18n_clicked), eprop);
+			GtkCellRenderer *icon_renderer = glade_cell_renderer_icon_new ();
+
+			g_object_set (G_OBJECT (icon_renderer), 
+				      "activatable", TRUE,
+				      "icon-name", GTK_STOCK_EDIT,
+				      NULL);
+
+			gtk_tree_view_column_pack_start (column, icon_renderer, FALSE);
+
+			g_object_set_data (G_OBJECT (icon_renderer), "column-number", GINT_TO_POINTER (colnum));
+			g_signal_connect (G_OBJECT (icon_renderer), "activate",
+					  G_CALLBACK (value_i18n_activate), eprop);
 		}
 
 	}
@@ -914,7 +926,7 @@ eprop_model_generate_column (GladeEditorProperty *eprop,
 	{
 		/* Spin renderer */
 		renderer = gtk_cell_renderer_spin_new ();
-		adjustment = (GtkAdjustment *)gtk_adjustment_new (0, -G_MAXDOUBLE, G_MAXDOUBLE, 100, 100, 100);
+		adjustment = (GtkAdjustment *)gtk_adjustment_new (0, -G_MAXDOUBLE, G_MAXDOUBLE, 100, 100, 0);
 		g_object_set (G_OBJECT (renderer), 
 			      "editable", TRUE, 
 			      "adjustment", adjustment, 
@@ -970,16 +982,12 @@ eprop_model_generate_column (GladeEditorProperty *eprop,
 						     NULL);
 
 	}
-	else if (type == G_TYPE_OBJECT || g_type_is_a (type, G_TYPE_OBJECT))
+	else /* All uneditable types at this point (currently we dont do object data here, TODO) */
 	{
-		/* text renderer and object dialog (or raw text for pixbuf) */;
+		/* text renderer and object dialog (or raw text for pixbuf) */
 		renderer = gtk_cell_renderer_text_new ();
 		g_object_set (G_OBJECT (renderer), "editable", FALSE, NULL);
 		gtk_tree_view_column_pack_start (column, renderer, FALSE);
-		gtk_tree_view_column_set_attributes (column, renderer, 
-						     "text", NUM_COLUMNS + colnum,
-						     NULL);
-
 	}
 
 	g_signal_connect (G_OBJECT (renderer), "editing-started",
@@ -1258,7 +1266,7 @@ glade_eprop_model_data_create_input (GladeEditorProperty *eprop)
 			  G_CALLBACK (eprop_treeview_key_press),
 			  eprop);
 
-	
+	gtk_tree_view_set_grid_lines (GTK_TREE_VIEW (eprop_data->view), GTK_TREE_VIEW_GRID_LINES_BOTH);
 	gtk_tree_view_set_reorderable (GTK_TREE_VIEW (eprop_data->view), TRUE);
 	gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (eprop_data->view), TRUE);
 	gtk_container_add (GTK_CONTAINER (swin), GTK_WIDGET (eprop_data->view));

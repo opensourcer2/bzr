@@ -62,7 +62,7 @@ project_changed (GladeProject      *project,
 		 GladeActivatableEditor *activatable_editor)
 {
 	if (activatable_editor->modifying ||
-	    !GTK_WIDGET_MAPPED (activatable_editor))
+	    !gtk_widget_get_mapped (GTK_WIDGET (activatable_editor)))
 		return;
 
 	/* Reload on all commands */
@@ -286,7 +286,7 @@ reset_properties (GladeWidget *gwidget,
 			
 			/* If theres a widget customly inside... command remove it first... */
 			button = GTK_WIDGET (gwidget->object);
-			child  = GTK_BIN (button)->child;
+			child  = gtk_bin_get_child (GTK_BIN (button));
 			if (child)
 				gchild = glade_widget_get_from_gobject (child);
 			
@@ -378,7 +378,7 @@ glade_activatable_editor_new (GladeWidgetAdaptor *adaptor,
 {
 	GladeActivatableEditor    *activatable_editor;
 	GladeEditorProperty *eprop;
-	GtkWidget           *table, *frame, *alignment, *label, *hbox;
+	GtkWidget           *table, *frame, *alignment, *label;
 	GtkSizeGroup        *group;
 	gchar               *str;
 	gint                 row = 0;
