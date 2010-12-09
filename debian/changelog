@@ -1,3 +1,9 @@
+glade-3 (3.7.1-0ubuntu2) natty; urgency=low
+
+  * Rebuild with python 2.7 as the python default.
+
+ -- Matthias Klose <doko@ubuntu.com>  Thu, 09 Dec 2010 16:48:02 +0000
+
 glade-3 (3.7.1-0ubuntu1) natty; urgency=low
 
   [ Mathieu Trudel-Lapierre ]
