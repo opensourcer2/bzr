@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Glade Parameter</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="Glade User Interface Designer Reference Manual">
 <link rel="up" href="misc.html" title="Part IV. Miscellaneous utilities">
 <link rel="prev" href="misc.html" title="Part IV. Miscellaneous utilities">
 <link rel="next" href="gladeui-Glade-Utils.html" title="Glade Utils">
-<meta name="generator" content="GTK-Doc V1.14.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.15.1 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -26,7 +26,7 @@
                   <a href="#gladeui-Glade-Parameter.description" class="shortcut">Description</a>
 </td></tr>
 </table>
-<div class="refentry" title="Glade Parameter">
+<div class="refentry">
 <a name="gladeui-Glade-Parameter"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -35,7 +35,7 @@
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv" title="Synopsis">
+<div class="refsynopsisdiv">
 <a name="gladeui-Glade-Parameter.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">                    <a class="link" href="gladeui-Glade-Parameter.html#GladeParameter" title="GladeParameter">GladeParameter</a>;
 <a class="link" href="gladeui-Glade-Parameter.html#GladeParameter" title="GladeParameter"><span class="returnvalue">GladeParameter</span></a> *    <a class="link" href="gladeui-Glade-Parameter.html#glade-parameter-new" title="glade_parameter_new ()">glade_parameter_new</a>                 (<em class="parameter"><code><span class="type">void</span></code></em>);
@@ -57,16 +57,16 @@
                                                          <em class="parameter"><code><span class="type">GladeXmlNode</span> *node</code></em>);
 </pre>
 </div>
-<div class="refsect1" title="Description">
+<div class="refsect1">
 <a name="gladeui-Glade-Parameter.description"></a><h2>Description</h2>
 <p>
 Parameters can be set in your catalog file that may determine how
 your plugin will treat certain widget classes.
 </p>
 </div>
-<div class="refsect1" title="Details">
+<div class="refsect1">
 <a name="gladeui-Glade-Parameter.details"></a><h2>Details</h2>
-<div class="refsect2" title="GladeParameter">
+<div class="refsect2">
 <a name="GladeParameter"></a><h3>GladeParameter</h3>
 <pre class="programlisting">typedef struct {
 	gchar *key;   /* The name of the parameter */
@@ -75,7 +75,7 @@ your plugin will treat certain widget classes.
 </pre>
 </div>
 <hr>
-<div class="refsect2" title="glade_parameter_new ()">
+<div class="refsect2">
 <a name="glade-parameter-new"></a><h3>glade_parameter_new ()</h3>
 <pre class="programlisting"><a class="link" href="gladeui-Glade-Parameter.html#GladeParameter" title="GladeParameter"><span class="returnvalue">GladeParameter</span></a> *    glade_parameter_new                 (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <div class="variablelist"><table border="0">
@@ -88,7 +88,7 @@ your plugin will treat certain widget classes.
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="glade_parameter_clone ()">
+<div class="refsect2">
 <a name="glade-parameter-clone"></a><h3>glade_parameter_clone ()</h3>
 <pre class="programlisting"><a class="link" href="gladeui-Glade-Parameter.html#GladeParameter" title="GladeParameter"><span class="returnvalue">GladeParameter</span></a> *    glade_parameter_clone               (<em class="parameter"><code><a class="link" href="gladeui-Glade-Parameter.html#GladeParameter" title="GladeParameter"><span class="type">GladeParameter</span></a> *parameter</code></em>);</pre>
 <div class="variablelist"><table border="0">
@@ -108,7 +108,7 @@ your plugin will treat certain widget classes.
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="glade_parameter_free ()">
+<div class="refsect2">
 <a name="glade-parameter-free"></a><h3>glade_parameter_free ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                glade_parameter_free                (<em class="parameter"><code><a class="link" href="gladeui-Glade-Parameter.html#GladeParameter" title="GladeParameter"><span class="type">GladeParameter</span></a> *parameter</code></em>);</pre>
 <p>
@@ -124,7 +124,7 @@ Frees <em class="parameter"><code>parameter</code></em> and its associated memor
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="glade_parameter_get_float ()">
+<div class="refsect2">
 <a name="glade-parameter-get-float"></a><h3>glade_parameter_get_float ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                glade_parameter_get_float           (<em class="parameter"><code><span class="type">GList</span> *parameters</code></em>,
                                                          <em class="parameter"><code>const <span class="type">gchar</span> *key</code></em>,
@@ -155,7 +155,7 @@ found, it stores a <span class="type">gfloat</span> representation of its value 
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="glade_parameter_get_integer ()">
+<div class="refsect2">
 <a name="glade-parameter-get-integer"></a><h3>glade_parameter_get_integer ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                glade_parameter_get_integer         (<em class="parameter"><code><span class="type">GList</span> *parameters</code></em>,
                                                          <em class="parameter"><code>const <span class="type">gchar</span> *key</code></em>,
@@ -186,7 +186,7 @@ found, it stores a <span class="type">gint</span> representation of its value in
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="glade_parameter_get_boolean ()">
+<div class="refsect2">
 <a name="glade-parameter-get-boolean"></a><h3>glade_parameter_get_boolean ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                glade_parameter_get_boolean         (<em class="parameter"><code><span class="type">GList</span> *parameters</code></em>,
                                                          <em class="parameter"><code>const <span class="type">gchar</span> *key</code></em>,
@@ -217,7 +217,7 @@ found, it stores a <span class="type">gboolean</span> representation of its valu
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="glade_parameter_get_string ()">
+<div class="refsect2">
 <a name="glade-parameter-get-string"></a><h3>glade_parameter_get_string ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                glade_parameter_get_string          (<em class="parameter"><code><span class="type">GList</span> *parameters</code></em>,
                                                          <em class="parameter"><code>const <span class="type">gchar</span> *key</code></em>,
@@ -249,7 +249,7 @@ found, it stores a newly copied string representation of its value into
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="glade_parameter_list_new_from_node ()">
+<div class="refsect2">
 <a name="glade-parameter-list-new-from-node"></a><h3>glade_parameter_list_new_from_node ()</h3>
 <pre class="programlisting"><span class="returnvalue">GList</span> *             glade_parameter_list_new_from_node  (<em class="parameter"><code><span class="type">GList</span> *list</code></em>,
                                                          <em class="parameter"><code><span class="type">GladeXmlNode</span> *node</code></em>);</pre>
@@ -281,6 +281,6 @@ TODO: write me
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14.1</div>
+          Generated by GTK-Doc V1.15.1</div>
 </body>
 </html>

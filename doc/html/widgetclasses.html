@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Widget Adaptor Definitions</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="Glade User Interface Designer Reference Manual">
 <link rel="up" href="catalog.html" title="Part I. Adding your custom widgets">
 <link rel="prev" href="catalogintro.html" title="Introducing the Glade Catalog">
 <link rel="next" href="properties.html" title="Property Class Definitions">
-<meta name="generator" content="GTK-Doc V1.14.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.15.1 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -19,7 +19,7 @@
 <th width="100%" align="center">Glade User Interface Designer Reference Manual</th>
 <td><a accesskey="n" href="properties.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr></table>
-<div class="refentry" title="Widget Adaptor Definitions">
+<div class="refentry">
 <a name="widgetclasses"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -30,8 +30,8 @@ Adding support for custom widgets
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsect1" title="Forward">
-<a name="id371643"></a><h2>Forward</h2>
+<div class="refsect1">
+<a name="id334607"></a><h2>Forward</h2>
 <p>
 Widget support in Glade is provided by the <a class="link" href="gladeui-glade-widget-adaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a> object, each
 `glade-widget-class' definition in the catalog will result in the creation
@@ -108,8 +108,8 @@ Here is the complete example of the form of the `glade-widget-class' definition:
 <p>
     </p>
 </div>
-<div class="refsect1" title="Widget Class Properties">
-<a name="id372093"></a><h2>Widget Class Properties</h2>
+<div class="refsect1">
+<a name="id335056"></a><h2>Widget Class Properties</h2>
 <p>
 The following are all properies of the `glade-widget-class' tag
     </p>
@@ -141,7 +141,7 @@ A boolean property depicting that this widget is currently deprecated.
 <tr>
 <td><p><span class="term">builder-unsupported</span></p></td>
 <td><p>
-A boolean property depicting that this widget is not supported by <span class="type">GtkBuilder</span>.
+A boolean property depicting that this widget is not supported by <a href="http://library.gnome.org/devel/gtk/unstable/GtkBuilder.html"><span class="type">GtkBuilder</span></a>.
           </p></td>
 </tr>
 <tr>
@@ -202,29 +202,29 @@ to be handled with a <a class="link" href="GladeFixed.html" title="GladeFixed"><
 <td><p><span class="term">use-placeholders</span></p></td>
 <td><p>
 Used to inform the core about adaptors that implement
-<span class="type">GtkContainer</span> editing, and whether or not they use <a class="link" href="GladePlaceholder.html" title="GladePlaceholder"><span class="type">GladePlaceholder</span></a>. This property will 
+<a href="http://library.gnome.org/devel/gtk/unstable/GtkContainer.html"><span class="type">GtkContainer</span></a> editing, and whether or not they use <a class="link" href="GladePlaceholder.html" title="GladePlaceholder"><span class="type">GladePlaceholder</span></a>. This property will 
 be inherited from the adaptors parent.
           </p></td>
 </tr>
 <tr>
 <td><p><span class="term">default-width</span></p></td>
 <td><p>
-The default width to load a <span class="type">GtkWindow</span> derived widget in the <a class="link" href="GladeDesignView.html" title="GladeDesignView"><span class="type">GladeDesignView</span></a>.
+The default width to load a <a href="http://library.gnome.org/devel/gtk/unstable/GtkWindow.html"><span class="type">GtkWindow</span></a> derived widget in the <a class="link" href="GladeDesignView.html" title="GladeDesignView"><span class="type">GladeDesignView</span></a>.
 This property will be inherited from the adaptors parent.
           </p></td>
 </tr>
 <tr>
 <td><p><span class="term">default-height</span></p></td>
 <td><p>
-The default height to load a <span class="type">GtkWindow</span> derived widget in the <a class="link" href="GladeDesignView.html" title="GladeDesignView"><span class="type">GladeDesignView</span></a>.
+The default height to load a <a href="http://library.gnome.org/devel/gtk/unstable/GtkWindow.html"><span class="type">GtkWindow</span></a> derived widget in the <a class="link" href="GladeDesignView.html" title="GladeDesignView"><span class="type">GladeDesignView</span></a>.
 This property will be inherited from the adaptors parent.
           </p></td>
 </tr>
 </tbody>
 </table></div>
 </div>
-<div class="refsect1" title="Adapter Methods">
-<a name="id372382"></a><h2>Adapter Methods</h2>
+<div class="refsect1">
+<a name="id335344"></a><h2>Adapter Methods</h2>
 <p>
 The following are all child tags of the `glade-widget-class' tag
     </p>
@@ -371,8 +371,8 @@ be unique and comparable for undo/redo to work properly.
 </tbody>
 </table></div>
 </div>
-<div class="refsect1" title="Action Definitions">
-<a name="id372845"></a><h2>Action Definitions</h2>
+<div class="refsect1">
+<a name="id335807"></a><h2>Action Definitions</h2>
 <p>
 Actions are added under the `actions' and `packing-actions' tags, actions can also
 be nested so as to allow grouping in context menus, example:
@@ -424,8 +424,8 @@ are added to the toolbar.
 </tbody>
 </table></div>
 </div>
-<div class="refsect1" title="Packing Defaults">
-<a name="id372938"></a><h2>Packing Defaults</h2>
+<div class="refsect1">
+<a name="id335900"></a><h2>Packing Defaults</h2>
 <p>
 Default values can be specified for packing properties on your widget when added
 to a said type of parent, as the example shows above; use the `parent-class' to 
@@ -434,8 +434,8 @@ in any `child-property' tags you need for that parent using `id' property to
 specify the property name and the `default' property for the value.
     </p>
 </div>
-<div class="refsect1" title="Signals">
-<a name="id372952"></a><h2>Signals</h2>
+<div class="refsect1">
+<a name="id335914"></a><h2>Signals</h2>
 <p>
 The signal elements are currently only needed for versioning support, use
 the `signal' child tag as described above and set signal `id' to be supported
@@ -443,8 +443,8 @@ since version `since'. Signals are initialized to be supported since the
 introducing <a class="link" href="gladeui-glade-widget-adaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a> was supported.
     </p>
 </div>
-<div class="refsect1" title="Icons">
-<a name="id372970"></a><h2>Icons</h2>
+<div class="refsect1">
+<a name="id335932"></a><h2>Icons</h2>
 <p>
 The Glade palette and other components use icons to represent the various widget classes. 
 It is a good idea to provide icons for your widget classes, as this
@@ -471,6 +471,6 @@ Icon files can be installed under any system icon theme folder.
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14.1</div>
+          Generated by GTK-Doc V1.15.1</div>
 </body>
 </html>

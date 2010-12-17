@@ -30,7 +30,7 @@
     <copyright> 
       <year>2002</year><year>2000</year> 
       <holder>Michael Vance</holder> 
-    </copyright> 
+    </copyright><copyright><year>2009, 2010.</year><holder>YunQiang Su (wzssyqa@gmail.com)</holder></copyright> 
 
     <publisher> 
       <publishername>GNOME 文档项目</publishername> 
@@ -235,7 +235,7 @@
   </sect1>
 
   <sect1 id="working-with-projects"> 
-         <title>Working with Projects</title> 
+         <title>使用工程</title> 
   
  
 <!-- To Create a New Project  -->
@@ -264,51 +264,24 @@
 
 
   <sect1 id="working-with-widgets"> 
-         <title>Working with Widgets</title>
+         <title>使用构件</title>
          <sect2 id="select-widgets-palette">
                 <title>从构件库选择控件</title>
-                <para>
-                  You can work with the widgets in the 
-                  <guilabel>Palette</guilabel> window in the following
-ways:
-                </para>
+                <para>您可以使用如下方法使用构件库：</para>
                 <variablelist> 
                   <varlistentry> 
                          <term>选择模式</term> 
                          <listitem>
-                                <para>
-                                  To use selection mode,
- click on the 
-                                  <guilabel>Selector</guilabel> arrow. The
-pointer changes to an
-                                  arrow to indicate that selection mode is
-active. In this mode, you use the mouse to select widgets in your project.
-You can then use the <guilabel>Properties</guilabel> window to edit the
-properties of the widgets.</para>
-<para>You can also use the widget context menu to select a widget.
-Right-click on a widget to open the widget context menu.</para><para>You
-can add multiple widgets of a specific type from the
-<guilabel>Palette</guilabel> to your project by holding down the
-<keycap>Control</keycap> key when you select a widget. You need to click on
-the <guilabel>Selector</guilabel> arrow or another widget in the
-<guilabel>Palette</guilabel> to return to normal mode.</para>
+                                <para>要使用选择模式，在 <guilabel>选择器</guilabel> 箭头上单击。指针变为箭头以表明选择模式已启用。这种模式中，使用鼠标来选择你的工程中的构件。可以使用 <guilabel>属性</guilabel> 窗口编辑构件的属性。</para>
+<para>您也可以使用构件的右键菜单选择一个构件。在构件上右击来打开构件快捷菜单。</para><para>您可以从 <guilabel>构件库</guilabel> 向您的工程添加多个指定类型的构件，方法是选择构件时按住 <keycap>Control</keycap>。您需要点击 <guilabel>选择器</guilabel> 箭头或 <guilabel>构件库</guilabel> 中的其它构件来返回正常模式。</para>
                          </listitem> 
                   </varlistentry> 
                 </variablelist> 
                 <variablelist> 
                   <varlistentry> 
-                         <term>Widget placement mode</term> 
+                         <term>构件定位模式</term> 
                          <listitem> 
-                                <para>
-                                  To use widget placement mode, select a
-widget in the 
-                                  <guilabel>Palette</guilabel> window. When
-you select most widgets, the
-                                  pointer changes to a pointer-plus-cross.
-You can then place the widget inside containers,
-                                  top-level  widgets, and so on. After you
-place a widget, the mode returns to
-                                  selection mode.</para>
+                                <para>要使用构件定位模式，在 <guilabel>构件库</guilabel> 窗口中选择一个构件。选择多数的构件时，指针变为指针加交叉。您可以然后在容器、顶级构件等中放置构件。放置构件之后，模式返回选择模式。</para>
                          </listitem> 
                   </varlistentry> 
                 </variablelist> 
@@ -371,13 +344,7 @@ place a widget, the mode returns to
     <para>Glade 由 Glade 开发者和 GNOME 社区志愿者维护。要获取更多信息，请访问 <ulink url="http://glade.gnome.org" type="http">Glade Web site</ulink>。</para>
     <para>报告关于本程序和本手册的bug或建议，您可以使用 <ulink url="http://bugzilla.gnome.org/enter_bug.cgi?product=glade3" type="http">bugzilla</ulink>。</para>
 
-    <para>
-      Another excellent source of information are the Glade 
-      <ulink url="http://lists.ximian.com/mailman/listinfo/glade-users" type="http">user</ulink> and 
-      <ulink url="http://lists.ximian.com/mailman/listinfo/glade-devel" type="http">developer</ulink> mailing lists.  In addition to 
-      subscribing, you might also want to browse the list archives, available
-      via these same links.
-    </para>
+    <para>关于 Glade 的另外一个好的消息源是 Glade <ulink url="http://lists.ximian.com/mailman/listinfo/glade-users" type="http">用户</ulink> 和 <ulink url="http://lists.ximian.com/mailman/listinfo/glade-devel" type="http">开发者</ulink> 邮件列表。除了订阅，你可能也行浏览列表归档，可以通过相同的链接访问。</para>
 
     <para>本程序是在自由软件基金会发布的通用公共许可证下发布的，或者是第二版，或者(由您的选择)更新的版本。可以从 <ulink url="ghelp:gpl" type="help">link</ulink> 找到这个许可证的一个副本，也可以从本程序的源代码的 COPYING 文件中找到。</para>
   </sect1> 

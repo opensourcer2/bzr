@@ -754,31 +754,31 @@ glade_util_get_window_positioned_in (GtkWidget *widget)
 }
 
 static void
-glade_util_draw_nodes (GdkWindow *window, GdkGC *gc,
+glade_util_draw_nodes (cairo_t *cr, GdkColor *color,
 		       gint x, gint y,
 		       gint width, gint height)
 {
 	if (width > GLADE_UTIL_SELECTION_NODE_SIZE && height > GLADE_UTIL_SELECTION_NODE_SIZE) {
-		gdk_draw_rectangle (window, gc, TRUE,
-				    x, y,
-				    GLADE_UTIL_SELECTION_NODE_SIZE,
-				    GLADE_UTIL_SELECTION_NODE_SIZE);
-		gdk_draw_rectangle (window, gc, TRUE,
-				    x, y + height - GLADE_UTIL_SELECTION_NODE_SIZE,
-				    GLADE_UTIL_SELECTION_NODE_SIZE,
-				    GLADE_UTIL_SELECTION_NODE_SIZE);
-		gdk_draw_rectangle (window, gc, TRUE,
-				    x + width - GLADE_UTIL_SELECTION_NODE_SIZE, y,
-				    GLADE_UTIL_SELECTION_NODE_SIZE,
-				    GLADE_UTIL_SELECTION_NODE_SIZE);
-		gdk_draw_rectangle (window, gc, TRUE,
-				    x + width - GLADE_UTIL_SELECTION_NODE_SIZE,
-				    y + height - GLADE_UTIL_SELECTION_NODE_SIZE,
-				    GLADE_UTIL_SELECTION_NODE_SIZE,
-				    GLADE_UTIL_SELECTION_NODE_SIZE);
+		glade_utils_cairo_draw_rectangle (cr, color, TRUE,
+						  x, y,
+						  GLADE_UTIL_SELECTION_NODE_SIZE,
+						  GLADE_UTIL_SELECTION_NODE_SIZE);
+		glade_utils_cairo_draw_rectangle (cr, color, TRUE,
+						  x, y + height - GLADE_UTIL_SELECTION_NODE_SIZE,
+						  GLADE_UTIL_SELECTION_NODE_SIZE,
+						  GLADE_UTIL_SELECTION_NODE_SIZE);
+		glade_utils_cairo_draw_rectangle (cr, color, TRUE,
+						  x + width - GLADE_UTIL_SELECTION_NODE_SIZE, y,
+						  GLADE_UTIL_SELECTION_NODE_SIZE,
+						  GLADE_UTIL_SELECTION_NODE_SIZE);
+		glade_utils_cairo_draw_rectangle (cr, color, TRUE,
+						  x + width - GLADE_UTIL_SELECTION_NODE_SIZE,
+						  y + height - GLADE_UTIL_SELECTION_NODE_SIZE,
+						  GLADE_UTIL_SELECTION_NODE_SIZE,
+						  GLADE_UTIL_SELECTION_NODE_SIZE);
 	}
 
-	gdk_draw_rectangle (window, gc, FALSE, x, y, width - 1, height - 1);
+	glade_utils_cairo_draw_rectangle (cr, color, FALSE, x, y, width - 1, height - 1);
 }
 
 /* This calculates the offset of the given window within its toplevel.
@@ -864,15 +864,16 @@ glade_util_draw_selection_nodes (GdkWindow *expose_win)
 	gint expose_win_x, expose_win_y;
 	gint expose_win_w, expose_win_h;
 	GdkWindow   *expose_toplevel;
-	GdkGC *gc;
+	GdkColor *color;
 	GList *elem;
+	cairo_t *cr;
 
 	g_return_if_fail (GDK_IS_WINDOW (expose_win));
 
 	/* Find the corresponding GtkWidget */
 	gdk_window_get_user_data (expose_win, (gpointer)&expose_widget);
 
-	gc = gtk_widget_get_style (expose_widget)->black_gc;
+	color = &(gtk_widget_get_style (expose_widget)->black);
 
 	/* Calculate the offset of the expose window within its toplevel. */
 	glade_util_calculate_window_offset (expose_win,
@@ -882,6 +883,8 @@ glade_util_draw_selection_nodes (GdkWindow *expose_win)
 
 	gdk_drawable_get_size (expose_win,
 			       &expose_win_w, &expose_win_h);
+
+	cr = gdk_cairo_create (expose_win);
 
 	/* Step through all the selected widgets. */
 	for (elem = glade_util_selection; elem; elem = elem->next) {
@@ -917,11 +920,12 @@ glade_util_draw_selection_nodes (GdkWindow *expose_win)
 			   expose window bounds. */
 			if (x < expose_win_w && x + w >= 0
 			    && y < expose_win_h && y + h >= 0) {
-				glade_util_draw_nodes (expose_win, gc,
-						       x, y, w, h);
+				glade_util_draw_nodes (cr, color, x, y, w, h);
 			}
 		}
 	}
+
+	cairo_destroy (cr);
 }
 
 /**
@@ -1090,7 +1094,7 @@ glade_util_find_iter (GtkTreeModel *model,
 		      gint          column)
 {
 	GtkTreeIter *retval = NULL;
-	GObject* object;
+	GObject* object = NULL;
 	GtkTreeIter *next;
 
 	g_return_val_if_fail (GTK_IS_TREE_MODEL (model), NULL);
@@ -1101,23 +1105,38 @@ glade_util_find_iter (GtkTreeModel *model,
 
 	while (retval == NULL)
 	{
+		GladeWidget *widget;
+
 		gtk_tree_model_get (model, next, column, &object, -1);
-		if (object == glade_widget_get_object (findme))
+		if (object &&
+		    gtk_tree_model_get_column_type (model, column) == G_TYPE_OBJECT)
+			g_object_unref (object);
+
+		widget = glade_widget_get_from_gobject (object);
+
+		if (widget == findme)
 		{
 			retval = gtk_tree_iter_copy (next);
 			break;
 		}
-		else if (gtk_tree_model_iter_has_child (model, next))
+		else if (glade_widget_is_ancestor (findme, widget))
 		{
-			GtkTreeIter  child;
-			gtk_tree_model_iter_children (model, &child, next);
-			if ((retval = glade_util_find_iter
-			     (model, &child, findme, column)) != NULL)
-				break;
+			if (gtk_tree_model_iter_has_child (model, next))
+			{
+				GtkTreeIter  child;
+				gtk_tree_model_iter_children (model, &child, next);
+				if ((retval = glade_util_find_iter
+				     (model, &child, findme, column)) != NULL)
+					break;
+			}
+
+			/* Only search the branches where the searched widget
+			 * is actually a child of the this row, optimize the
+			 * searching this way
+			 */
+			break;
 		}
 
-		g_object_unref (object);
-		
 		if (!gtk_tree_model_iter_next (model, next))
 			break;
 	}
@@ -1780,127 +1799,6 @@ glade_util_object_is_loading (GObject *object)
 	return glade_project_is_loading (project);
 }
 
-#ifdef G_OS_WIN32
-
-static gboolean
-glade_util_url_show_win32 (const gchar *url)
-{
-	HINSTANCE h;
-	
-	h = ShellExecuteA (NULL, "open", url, NULL, NULL, SW_SHOWNORMAL);
-	
-	if ((int)h <= 32)
-		return FALSE;
-
-	return TRUE;
-}
-
-#else
-
-/* pilfered from Beast - birnetutils.cc */
-static gboolean
-glade_util_url_show_unix (const gchar *url)
-{
-	static struct {
-	const gchar   *prg, *arg1, *prefix, *postfix;
-	gboolean       asyncronous; /* start asyncronously and check exit code to catch launch errors */
-	volatile gboolean disabled;
-	} browsers[] = {
-
-	/* configurable, working browser launchers */
-	{ "gnome-open",             NULL,           "", "", 0 }, /* opens in background, correct exit_code */
-	{ "exo-open",               NULL,           "", "", 0 }, /* opens in background, correct exit_code */
-
-	/* non-configurable working browser launchers */
-	{ "kfmclient",              "openURL",      "", "", 0 }, /* opens in background, correct exit_code */
-	{ "gnome-moz-remote",       "--newwin",     "", "", 0 }, /* opens in background, correct exit_code */
-
-#if 0   /* broken/unpredictable browser launchers */
-	{ "browser-config",         NULL,            "", "", 0 }, /* opens in background (+ sleep 5), broken exit_code (always 0) */
-	{ "xdg-open",               NULL,            "", "", 0 }, /* opens in foreground (first browser) or background, correct exit_code */
-	{ "sensible-browser",       NULL,            "", "", 0 }, /* opens in foreground (first browser) or background, correct exit_code */
-	{ "htmlview",               NULL,            "", "", 0 }, /* opens in foreground (first browser) or background, correct exit_code */
-#endif
-
-	/* direct browser invocation */
-	{ "x-www-browser",          NULL,           "", "", 1 }, /* opens in foreground, browser alias */
-	{ "firefox",                NULL,           "", "", 1 }, /* opens in foreground, correct exit_code */
-	{ "mozilla-firefox",        NULL,           "", "", 1 }, /* opens in foreground, correct exit_code */
-	{ "mozilla",                NULL,           "", "", 1 }, /* opens in foreground, correct exit_code */
-	{ "konqueror",              NULL,           "", "", 1 }, /* opens in foreground, correct exit_code */
-	{ "opera",                  "-newwindow",   "", "", 1 }, /* opens in foreground, correct exit_code */
-	{ "epiphany",               NULL,           "", "", 1 }, /* opens in foreground, correct exit_code */	
-	{ "galeon",                 NULL,           "", "", 1 }, /* opens in foreground, correct exit_code */
-	{ "amaya",                  NULL,           "", "", 1 }, /* opens in foreground, correct exit_code */
-	{ "dillo",                  NULL,           "", "", 1 }, /* opens in foreground, correct exit_code */
-
-	};
-  
-	guint i;
-	for (i = 0; i < G_N_ELEMENTS (browsers); i++)
-
-		if (!browsers[i].disabled)
-		{
-		        gchar *args[128] = { 0, };
-		        guint n = 0;
-		        gchar *string;
-		        gchar fallback_error[64] = "Ok";
-		        gboolean success;
-
-		        args[n++] = (gchar*) browsers[i].prg;
-		        
-		        if (browsers[i].arg1)
-		        	args[n++] = (gchar*) browsers[i].arg1;
-		        
-		        string = g_strconcat (browsers[i].prefix, url, browsers[i].postfix, NULL);
-		        args[n] = string;
-        
-		        if (!browsers[i].asyncronous) /* start syncronously and check exit code */
-			{
-				gint exit_status = -1;
-				success = g_spawn_sync (NULL, /* cwd */
-		                                        args,
-		                                        NULL, /* envp */
-		                                        G_SPAWN_SEARCH_PATH,
-		                                        NULL, /* child_setup() */
-		                                        NULL, /* user_data */
-		                                        NULL, /* standard_output */
-		                                        NULL, /* standard_error */
-		                                        &exit_status,
-		                                        NULL);
-		                success = success && !exit_status;
-		            
-				if (exit_status)
-					g_snprintf (fallback_error, sizeof (fallback_error), "exitcode: %u", exit_status);
-
-			}
-		        else
-			{
-				success = g_spawn_async (NULL, /* cwd */
-							 args,
-							 NULL, /* envp */
-							 G_SPAWN_SEARCH_PATH,
-							 NULL, /* child_setup() */
-							 NULL, /* user_data */
-							 NULL, /* child_pid */
-							 NULL);
-			}
-			
-			g_free (string);
-			if (success)
-				return TRUE;
-			browsers[i].disabled = TRUE;
-	}
-	
-	/* reset all disabled states if no browser could be found */
-	for (i = 0; i < G_N_ELEMENTS (browsers); i++)
-		browsers[i].disabled = FALSE;
-		     
-	return FALSE;	
-}
-
-#endif
-
 /**
  * glade_util_url_show:
  * @url: An URL to display
@@ -1908,18 +1806,43 @@ glade_util_url_show_unix (const gchar *url)
  * Portable function for showing an URL @url in a web browser.
  *
  * Returns: TRUE if a web browser was successfully launched, or FALSE
- * 
+ *
  */
 gboolean
 glade_util_url_show (const gchar *url)
 {
+	GtkWidget *widget;
+	GError *error = NULL;
+	gboolean ret;
+
 	g_return_val_if_fail (url != NULL, FALSE);
 
-#ifdef G_OS_WIN32
-	return glade_util_url_show_win32 (url);
-#else
-	return glade_util_url_show_unix (url);
-#endif
+	widget = glade_app_get_window ();
+
+	ret = gtk_show_uri (gtk_widget_get_screen (widget),
+	                    url,
+	                    gtk_get_current_event_time (),
+	                    &error);
+	if (error != NULL)
+	{
+		GtkWidget *dialog_widget;
+
+		dialog_widget = gtk_message_dialog_new (GTK_WINDOW (widget),
+		                                        GTK_DIALOG_DESTROY_WITH_PARENT,
+		                                        GTK_MESSAGE_ERROR,
+		                                        GTK_BUTTONS_CLOSE,
+		                                        "%s", _("Could not show link:"));
+		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog_widget),
+		                                          "%s", error->message);
+		g_error_free (error);
+
+		g_signal_connect (dialog_widget, "response",
+		                  G_CALLBACK (gtk_widget_destroy), NULL);
+
+		gtk_window_present (GTK_WINDOW (dialog_widget));
+	}
+
+	return ret;
 }
 
 /**
@@ -2393,4 +2316,49 @@ glade_utils_replace_home_dir_with_tilde (const gchar *uri)
 	g_free (home);
 
 	return g_strdup (uri);
+}
+
+
+void
+glade_utils_cairo_draw_line (cairo_t  *cr,
+			     GdkColor *color,
+			     gint      x1,
+			     gint      y1,
+			     gint      x2,
+			     gint      y2)
+{
+  cairo_save (cr);
+
+  gdk_cairo_set_source_color (cr, color);
+  cairo_set_line_cap (cr, CAIRO_LINE_CAP_SQUARE);
+
+  cairo_move_to (cr, x1 + 0.5, y1 + 0.5);
+  cairo_line_to (cr, x2 + 0.5, y2 + 0.5);
+  cairo_stroke (cr);
+
+  cairo_restore (cr);
+}
+
+
+void
+glade_utils_cairo_draw_rectangle (cairo_t *cr,
+				  GdkColor *color,
+				  gboolean filled,
+				  gint x,
+				  gint y,
+				  gint width,
+				  gint height)
+{
+  gdk_cairo_set_source_color (cr, color);
+
+  if (filled)
+    {
+      cairo_rectangle (cr, x, y, width, height);
+      cairo_fill (cr);
+    }
+  else
+    {
+      cairo_rectangle (cr, x + 0.5, y + 0.5, width, height);
+      cairo_stroke (cr);
+    }
 }

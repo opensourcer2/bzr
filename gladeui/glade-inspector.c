@@ -47,7 +47,11 @@
 
 #include <string.h>
 #include <glib/gi18n-lib.h>
+#if GTK_CHECK_VERSION (2, 21, 8)
+#include <gdk/gdkkeysyms-compat.h>
+#else
 #include <gdk/gdkkeysyms.h>
+#endif
 
 #define GLADE_INSPECTOR_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object),\
 					    GLADE_TYPE_INSPECTOR,                 \
@@ -496,14 +500,9 @@ static void
 glade_inspector_dispose (GObject *object)
 {
 	GladeInspector *inspector = GLADE_INSPECTOR(object);
-	GladeInspectorPrivate *priv = inspector->priv;
 	
-	if (priv->project)
-	{
-		g_object_unref (priv->project);
-		priv->project = NULL;
-	}
-	
+	glade_inspector_set_project (inspector, NULL);
+
 	G_OBJECT_CLASS (glade_inspector_parent_class)->dispose (object);
 }
 
@@ -579,30 +578,50 @@ static void
 selection_foreach_func (GtkTreeModel *model, 
 		        GtkTreePath  *path,
 		        GtkTreeIter  *iter, 
-		        gpointer      data)
+		        GList       **selection)
 {
 	GObject* object;
 	
 	gtk_tree_model_get (model, iter, GLADE_PROJECT_MODEL_COLUMN_OBJECT, &object, -1);
 
 	if (object)
-		glade_app_selection_add (object, FALSE);
+	{
+		*selection = g_list_prepend (*selection, object);
+		g_object_unref (object);
+	}
 }
 
 static void
 selection_changed_cb (GtkTreeSelection *selection,
 		      GladeInspector   *inspector)
 {
+	GList *sel = NULL, *l;
+
+	gtk_tree_selection_selected_foreach (selection,
+					     (GtkTreeSelectionForeachFunc)selection_foreach_func,
+					     &sel);
+
+	/* We dont modify the project selection for a change that
+	 * leaves us with no selection. 
+	 *
+	 * This is typically because the user is changing the name
+	 * of a widget and the filter is active, the new name causes
+	 * the row to go out of the model and the selection to be
+	 * cleared, if we clear the selection we remove the editor
+	 * that the user is trying to type into.
+	 */
+	if (!sel)
+		return;
+
 	g_signal_handlers_block_by_func (inspector->priv->project,
 					 G_CALLBACK (project_selection_changed_cb),
 					 inspector);
-	
+
 	glade_app_selection_clear (FALSE);
-	
-	gtk_tree_selection_selected_foreach (selection,
-					     selection_foreach_func,
-					     inspector);
+	for (l = sel; l; l = l->next)
+		glade_app_selection_add (G_OBJECT (l->data), FALSE);
 	glade_app_selection_changed ();
+	g_list_free (sel);
 
 	g_signal_handlers_unblock_by_func (inspector->priv->project,
 					   G_CALLBACK (project_selection_changed_cb),
@@ -649,7 +668,8 @@ button_press_cb (GtkWidget      *widget,
 						    GLADE_PROJECT_MODEL_COLUMN_OBJECT, &object, -1);
 
 				if (widget != NULL)
-					glade_popup_widget_pop (glade_widget_get_from_gobject (object), event, TRUE);
+					glade_popup_widget_pop (glade_widget_get_from_gobject (object), 
+								event, TRUE);
 				else
 					glade_popup_simple_pop (event);
 				
@@ -671,30 +691,41 @@ static void
 add_columns (GtkTreeView *view)
 {
 	GtkTreeViewColumn *column;
-	GtkCellRenderer *renderer_pixbuf, *renderer_name, *renderer_type;
+	GtkCellRenderer *renderer;
 
 	column = gtk_tree_view_column_new ();
 
-	renderer_pixbuf = gtk_cell_renderer_pixbuf_new ();
-	gtk_tree_view_column_pack_start (column, renderer_pixbuf, FALSE);
+	renderer = gtk_cell_renderer_pixbuf_new ();
+	gtk_tree_view_column_pack_start (column, renderer, FALSE);
 	gtk_tree_view_column_set_attributes (column,
-	                                     renderer_pixbuf,
+	                                     renderer,
 	                                     "icon_name", GLADE_PROJECT_MODEL_COLUMN_ICON_NAME,
 	                                     NULL);
 
-	renderer_name = gtk_cell_renderer_text_new ();
-	gtk_tree_view_column_pack_start (column, renderer_name, FALSE);
+	renderer = gtk_cell_renderer_text_new ();
+	gtk_tree_view_column_pack_start (column, renderer, FALSE);
 	gtk_tree_view_column_set_attributes (column,
-	                                     renderer_name,
+	                                     renderer,
 	                                     "text", GLADE_PROJECT_MODEL_COLUMN_NAME,
 	                                     NULL);
 
-	renderer_type = gtk_cell_renderer_text_new ();
-	g_object_set (renderer_type, "style", PANGO_STYLE_ITALIC, NULL);
-	gtk_tree_view_column_pack_start (column, renderer_type, FALSE);	
+	renderer = gtk_cell_renderer_text_new ();
+	g_object_set (renderer, "style", PANGO_STYLE_ITALIC, NULL);
+	gtk_tree_view_column_pack_start (column, renderer, FALSE);	
 	gtk_tree_view_column_set_attributes (column,
-	                                     renderer_type,
+	                                     renderer,
 	                                     "text", GLADE_PROJECT_MODEL_COLUMN_TYPE_NAME,
+	                                     NULL);
+
+
+	renderer = gtk_cell_renderer_text_new ();
+	g_object_set (G_OBJECT (renderer), 
+		      "style", PANGO_STYLE_ITALIC,
+		      "foreground", "Gray", NULL);
+	gtk_tree_view_column_pack_start (column, renderer, FALSE);	
+	gtk_tree_view_column_set_attributes (column,
+	                                     renderer,
+	                                     "text", GLADE_PROJECT_MODEL_COLUMN_MISC,
 	                                     NULL);
 
 	gtk_tree_view_append_column (view, column);
@@ -775,23 +806,28 @@ glade_inspector_set_project (GladeInspector *inspector,
 
 	if (inspector->priv->project)
 	{
-		disconnect_project_signals (inspector, project);
-		g_object_unref (priv->project);
+		disconnect_project_signals (inspector, inspector->priv->project);
+
+		/* Release our filter which releases the project */
+		gtk_tree_view_set_model (GTK_TREE_VIEW (priv->view), NULL);
+		priv->filter = NULL;
 		priv->project = NULL;
 	}
 	
 	if (project)
 	{		
 		priv->project = project;
-		g_object_ref (priv->project);
 
-		priv->filter = gtk_tree_model_filter_new (GTK_TREE_MODEL (priv->project), NULL);	
+		/* The filter holds our reference to 'project' */
+		priv->filter = gtk_tree_model_filter_new (GTK_TREE_MODEL (priv->project), NULL);
 
 		gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (priv->filter),
 						(GtkTreeModelFilterVisibleFunc)glade_inspector_visible_func,
 						inspector, NULL);
 
 		gtk_tree_view_set_model (GTK_TREE_VIEW (priv->view), priv->filter);
+		g_object_unref (priv->filter); /* pass ownership of the filter to the model */
+
 		connect_project_signals (inspector, project);
 	}
 
@@ -849,6 +885,7 @@ glade_inspector_get_selected_items (GladeInspector *inspector)
 		gtk_tree_model_get (GTK_TREE_MODEL (priv->project), &iter, 
 		                    GLADE_PROJECT_MODEL_COLUMN_OBJECT, &object, -1);
 		
+		g_object_unref (object);
 		items = g_list_prepend (items, glade_widget_get_from_gobject (object));
 	}
 	
