@@ -1,7 +1,6 @@
 [encoding: UTF-8]
 # List of source files containing translatable strings.
 
-
 # Main application
 data/glade-3.desktop.in.in
 src/main.c
@@ -36,10 +35,11 @@ gladeui/glade-widget.c
 gladeui/glade-widget-adaptor.c
 gladeui/glade-xml-utils.c
 gladeui/glade-inspector.c
-gladeui/glade-custom.c
 gladeui/glade-widget-action.c
 gladeui/glade-named-icon-chooser-dialog.c
 gladeui/icon-naming-spec.c
+gladeui/glade-custom.c
+gladeui/glade-previewer.c
 
 # gtk plugin backend
 plugins/gtk+/glade-convert.c
@@ -64,8 +64,8 @@ plugins/gtk+/glade-treeview-editor.c
 plugins/gtk+/glade-entry-editor.c
 plugins/gtk+/glade-activatable-editor.c
 
-# gnome plugin backend
-plugins/gnome/glade-gnome.c
-plugins/gnome/gnome.xml.in
+# gnome plugin
 plugins/gnome/bonobo.xml.in
 plugins/gnome/canvas.xml.in
+plugins/gnome/glade-gnome.c
+plugins/gnome/gnome.xml.in

@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GladeFixed</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="Glade User Interface Designer Reference Manual">
 <link rel="up" href="core.html" title="Part II. Glade Core">
 <link rel="prev" href="GladeWidget.html" title="GladeWidget">
 <link rel="next" href="GladeProperty.html" title="GladeProperty">
-<meta name="generator" content="GTK-Doc V1.14.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.15.1 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -32,7 +32,7 @@
                   <a href="#GladeFixed.signals" class="shortcut">Signals</a>
 </td></tr>
 </table>
-<div class="refentry" title="GladeFixed">
+<div class="refentry">
 <a name="GladeFixed"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -41,20 +41,21 @@
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv" title="Synopsis">
+<div class="refsynopsisdiv">
 <a name="GladeFixed.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">                    <a class="link" href="GladeFixed.html#GladeFixed-struct" title="GladeFixed">GladeFixed</a>;
 </pre>
 </div>
-<div class="refsect1" title="Object Hierarchy">
+<div class="refsect1">
 <a name="GladeFixed.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
   GObject
-   +----<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a>
-         +----GladeFixed
+   +----GInitiallyUnowned
+         +----<a class="link" href="GladeWidget.html" title="GladeWidget">GladeWidget</a>
+               +----GladeFixed
 </pre>
 </div>
-<div class="refsect1" title="Properties">
+<div class="refsect1">
 <a name="GladeFixed.properties"></a><h2>Properties</h2>
 <pre class="synopsis">
   "<a class="link" href="GladeFixed.html#GladeFixed--can-resize" title='The "can-resize" property'>can-resize</a>"               <span class="type">gboolean</span>              : Read / Write / Construct
@@ -64,15 +65,15 @@
   "<a class="link" href="GladeFixed.html#GladeFixed--y-prop" title='The "y-prop" property'>y-prop</a>"                   <span class="type">gchar</span>*                : Read / Write / Construct
 </pre>
 </div>
-<div class="refsect1" title="Signals">
+<div class="refsect1">
 <a name="GladeFixed.signals"></a><h2>Signals</h2>
 <pre class="synopsis">
-  "<a class="link" href="GladeFixed.html#GladeFixed-configure-begin" title='The "configure-begin" signal'>configure-begin</a>"                                : Run Last
-  "<a class="link" href="GladeFixed.html#GladeFixed-configure-child" title='The "configure-child" signal'>configure-child</a>"                                : Run Last
-  "<a class="link" href="GladeFixed.html#GladeFixed-configure-end" title='The "configure-end" signal'>configure-end</a>"                                  : Run Last
+  "<a class="link" href="GladeFixed.html#GladeFixed-configure-begin" title='The "configure-begin" signal'>configure-begin</a>"                                : <code class="literal">Run Last</code>
+  "<a class="link" href="GladeFixed.html#GladeFixed-configure-child" title='The "configure-child" signal'>configure-child</a>"                                : <code class="literal">Run Last</code>
+  "<a class="link" href="GladeFixed.html#GladeFixed-configure-end" title='The "configure-end" signal'>configure-end</a>"                                  : <code class="literal">Run Last</code>
 </pre>
 </div>
-<div class="refsect1" title="Description">
+<div class="refsect1">
 <a name="GladeFixed.description"></a><h2>Description</h2>
 <p>
 <a class="link" href="GladeFixed.html" title="GladeFixed"><span class="type">GladeFixed</span></a> is a specialized <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> to handle free-form child
@@ -90,60 +91,60 @@ If you handle the configure-child/configure-end[/configure-begin] signals
 and dont let them propagate to the GladeFixed, then the x-prop/y-prop/width-prop/height-prop
 properties will be completely ignored and it is up to the implementor to play
 with whatever child packing properties are available to make a closest match
-for the values passed to configure-child via the <span class="type">GdkRectangle</span>.
+for the values passed to configure-child via the <a href="http://library.gnome.org/devel/gdk/unstable/gdk3-Points-Rectangles-and-Regions.html#GdkRectangle"><span class="type">GdkRectangle</span></a>.
 </p>
 </div>
-<div class="refsect1" title="Details">
+<div class="refsect1">
 <a name="GladeFixed.details"></a><h2>Details</h2>
-<div class="refsect2" title="GladeFixed">
+<div class="refsect2">
 <a name="GladeFixed-struct"></a><h3>GladeFixed</h3>
 <pre class="programlisting">typedef struct _GladeFixed GladeFixed;</pre>
 </div>
 </div>
-<div class="refsect1" title="Property Details">
+<div class="refsect1">
 <a name="GladeFixed.property-details"></a><h2>Property Details</h2>
-<div class="refsect2" title='The "can-resize" property'>
+<div class="refsect2">
 <a name="GladeFixed--can-resize"></a><h3>The <code class="literal">"can-resize"</code> property</h3>
 <pre class="programlisting">  "can-resize"               <span class="type">gboolean</span>              : Read / Write / Construct</pre>
 <p>Whether this container supports resizes of child widgets.</p>
 <p>Default value: TRUE</p>
 </div>
 <hr>
-<div class="refsect2" title='The "height-prop" property'>
+<div class="refsect2">
 <a name="GladeFixed--height-prop"></a><h3>The <code class="literal">"height-prop"</code> property</h3>
 <pre class="programlisting">  "height-prop"              <span class="type">gchar</span>*                : Read / Write / Construct</pre>
 <p>The property used to set the height of a child object.</p>
 <p>Default value: "height-request"</p>
 </div>
 <hr>
-<div class="refsect2" title='The "width-prop" property'>
+<div class="refsect2">
 <a name="GladeFixed--width-prop"></a><h3>The <code class="literal">"width-prop"</code> property</h3>
 <pre class="programlisting">  "width-prop"               <span class="type">gchar</span>*                : Read / Write / Construct</pre>
 <p>The property used to set the width of a child object.</p>
 <p>Default value: "width-request"</p>
 </div>
 <hr>
-<div class="refsect2" title='The "x-prop" property'>
+<div class="refsect2">
 <a name="GladeFixed--x-prop"></a><h3>The <code class="literal">"x-prop"</code> property</h3>
 <pre class="programlisting">  "x-prop"                   <span class="type">gchar</span>*                : Read / Write / Construct</pre>
 <p>The property used to set the X position of a child object.</p>
 <p>Default value: "x"</p>
 </div>
 <hr>
-<div class="refsect2" title='The "y-prop" property'>
+<div class="refsect2">
 <a name="GladeFixed--y-prop"></a><h3>The <code class="literal">"y-prop"</code> property</h3>
 <pre class="programlisting">  "y-prop"                   <span class="type">gchar</span>*                : Read / Write / Construct</pre>
 <p>The property used to set the Y position of a child object.</p>
 <p>Default value: "y"</p>
 </div>
 </div>
-<div class="refsect1" title="Signal Details">
+<div class="refsect1">
 <a name="GladeFixed.signal-details"></a><h2>Signal Details</h2>
-<div class="refsect2" title='The "configure-begin" signal'>
+<div class="refsect2">
 <a name="GladeFixed-configure-begin"></a><h3>The <code class="literal">"configure-begin"</code> signal</h3>
 <pre class="programlisting"><span class="returnvalue">gboolean</span>            user_function                      (<a class="link" href="GladeFixed.html" title="GladeFixed"><span class="type">GladeFixed</span></a> *gladewidget,
                                                         <span class="type">GObject</span>    *arg1,
-                                                        <span class="type">gpointer</span>    user_data)        : Run Last</pre>
+                                                        <span class="type">gpointer</span>    user_data)        : <code class="literal">Run Last</code></pre>
 <p>
 Signals the beginning of a Drag/Resize
 </p>
@@ -174,12 +175,12 @@ Signals the beginning of a Drag/Resize
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title='The "configure-child" signal'>
+<div class="refsect2">
 <a name="GladeFixed-configure-child"></a><h3>The <code class="literal">"configure-child"</code> signal</h3>
 <pre class="programlisting"><span class="returnvalue">gboolean</span>            user_function                      (<a class="link" href="GladeFixed.html" title="GladeFixed"><span class="type">GladeFixed</span></a> *gladewidget,
                                                         <span class="type">GObject</span>    *arg1,
                                                         <span class="type">gpointer</span>    arg2,
-                                                        <span class="type">gpointer</span>    user_data)        : Run Last</pre>
+                                                        <span class="type">gpointer</span>    user_data)        : <code class="literal">Run Last</code></pre>
 <p>
 Delegates the Drag/Resize job.
 </p>
@@ -215,11 +216,11 @@ Delegates the Drag/Resize job.
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title='The "configure-end" signal'>
+<div class="refsect2">
 <a name="GladeFixed-configure-end"></a><h3>The <code class="literal">"configure-end"</code> signal</h3>
 <pre class="programlisting"><span class="returnvalue">gboolean</span>            user_function                      (<a class="link" href="GladeFixed.html" title="GladeFixed"><span class="type">GladeFixed</span></a> *gladewidget,
                                                         <span class="type">GObject</span>    *arg1,
-                                                        <span class="type">gpointer</span>    user_data)        : Run Last</pre>
+                                                        <span class="type">gpointer</span>    user_data)        : <code class="literal">Run Last</code></pre>
 <p>
 Signals the end of a Drag/Resize
 </p>
@@ -253,6 +254,6 @@ Signals the end of a Drag/Resize
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14.1</div>
+          Generated by GTK-Doc V1.15.1</div>
 </body>
 </html>

@@ -1,8 +1,20 @@
-glade-3 (3.7.1-0ubuntu2) natty; urgency=low
+glade-3 (3.7.2-0ubuntu1) natty; urgency=low
 
-  * Rebuild with python 2.7 as the python default.
+  * New upstream release 3.7.2.
+  * debian/control: libgladeui-1-10 becomes libgladeui-1-11 due to soname
+    change.
+  * debian/libgladeui-1-11.install: renamed from libgladeui-1-10.install.
+  * debian/rules: update DH_MAKESHLIBS for libgladeui soname change.
+  * debian/control: libgladeui-1-dev should be Arch: any and strictly Depends
+    on the binary version of libglade-1-11. This also corrects the lintian
+    warnings about being binNMUable and a weak library dev dependency.
+  * debian/control: drop Build-Depends-Indep requirements, they are no longer
+    necessary, plus there is no Arch-Indep package left.
 
- -- Matthias Klose <doko@ubuntu.com>  Thu, 09 Dec 2010 16:48:02 +0000
+  [ Michael Terry ]
+  * debian/watch: Fix pattern so that it works
+
+ -- Mathieu Trudel-Lapierre <mathieu-tl@ubuntu.com>  Fri, 17 Dec 2010 16:08:20 -0500
 
 glade-3 (3.7.1-0ubuntu1) natty; urgency=low
 

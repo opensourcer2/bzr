@@ -73,7 +73,6 @@
     <function name="glade_app_set_transient_parent ()" link="GladeApp.html#glade-app-set-transient-parent"/>
     <function name="glade_app_get_transient_parent ()" link="GladeApp.html#glade-app-get-transient-parent"/>
     <function name="glade_app_set_accel_group ()" link="GladeApp.html#glade-app-set-accel-group"/>
-    <function name="glade_app_update_instance_count ()" link="GladeApp.html#glade-app-update-instance-count"/>
     <function name="glade_app_undo_button_new ()" link="GladeApp.html#glade-app-undo-button-new"/>
     <function name="glade_app_redo_button_new ()" link="GladeApp.html#glade-app-redo-button-new"/>
     <function name="glade_app_get_selection ()" link="GladeApp.html#glade-app-get-selection"/>
@@ -127,13 +126,12 @@
     <function name="glade_project_resource_fullpath ()" link="GladeProject.html#glade-project-resource-fullpath"/>
     <function name="glade_project_is_loading ()" link="GladeProject.html#glade-project-is-loading"/>
     <function name="glade_project_get_file_mtime ()" link="GladeProject.html#glade-project-get-file-mtime"/>
-    <function name="glade_project_get_instance_count ()" link="GladeProject.html#glade-project-get-instance-count"/>
-    <function name="glade_project_set_instance_count ()" link="GladeProject.html#glade-project-set-instance-count"/>
     <function name="glade_project_get_modified ()" link="GladeProject.html#glade-project-get-modified"/>
     <function name="The &quot;format&quot; property" link="GladeProject.html#GladeProject--format"/>
     <function name="The &quot;has-selection&quot; property" link="GladeProject.html#GladeProject--has-selection"/>
     <function name="The &quot;modified&quot; property" link="GladeProject.html#GladeProject--modified"/>
     <function name="The &quot;path&quot; property" link="GladeProject.html#GladeProject--path"/>
+    <function name="The &quot;previewable&quot; property" link="GladeProject.html#GladeProject--previewable"/>
     <function name="The &quot;read-only&quot; property" link="GladeProject.html#GladeProject--read-only"/>
     <function name="The &quot;add-widget&quot; signal" link="GladeProject.html#GladeProject-add-widget"/>
     <function name="The &quot;changed&quot; signal" link="GladeProject.html#GladeProject-changed"/>

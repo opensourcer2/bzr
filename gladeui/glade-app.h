@@ -166,9 +166,6 @@ void               glade_app_set_accel_group (GtkAccelGroup *accel_group);
 
 GtkAccelGroup     *glade_app_get_accel_group (void);
  
-void               glade_app_update_instance_count  (GladeProject *project);
-
- 
 GtkWidget         *glade_app_undo_button_new (void);
  
 GtkWidget         *glade_app_redo_button_new (void);
@@ -196,6 +193,8 @@ void               glade_app_selection_clear   (gboolean  emit_signal);
  
 void               glade_app_selection_changed (void);
 
+void               glade_app_queue_selection_changed (void);
+
 /* package paths */
 
 const gchar       *glade_app_get_catalogs_dir  (void) G_GNUC_CONST;
@@ -207,6 +206,8 @@ const gchar       *glade_app_get_plugins_dir   (void) G_GNUC_CONST;
 const gchar       *glade_app_get_pixmaps_dir   (void) G_GNUC_CONST;
 
 const gchar       *glade_app_get_locale_dir    (void) G_GNUC_CONST;
+
+const gchar       *glade_app_get_bin_dir       (void) G_GNUC_CONST;
 
 G_END_DECLS
 

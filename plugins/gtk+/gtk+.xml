@@ -24,6 +24,7 @@
       </signals>
 
       <actions>
+	<action id="preview" name="Preview snapshot"></action>
         <action stock="gtk-edit" id="edit_separate" name="Edit Separately"></action>
         <action stock="gtk-remove" id="remove_parent" name="Remove Parent"></action>
         <action stock="gtk-add" id="add_parent" name="Add Parent">
@@ -267,7 +268,7 @@
 
       <properties>
         <property weight="2.5" id="border-width" common="True"/>
-        <property weight="4.7" id="resize-mode" common="True">
+        <property weight="4.7" ignore="True" id="resize-mode" common="True">
   	  <displayable-values>
 	    <value id="GTK_RESIZE_PARENT" name="Parent"></value>
 	    <value id="GTK_RESIZE_QUEUE" name="Queue"></value>
@@ -310,8 +311,8 @@
         
         <property weight="0" save-always="True" id="position"/>
         <property weight="0.5" transfer-on-paste="True" id="padding"/>
-        <property transfer-on-paste="True" id="expand"/>
-        <property transfer-on-paste="True" id="fill"/>
+        <property transfer-on-paste="True" save-always="True" id="expand"/>
+        <property transfer-on-paste="True" save-always="True" id="fill"/>
         <property transfer-on-paste="True" id="pack-type">
           <displayable-values>
             <value id="GTK_PACK_START" name="Start"></value>
@@ -981,6 +982,7 @@
     </glade-widget-class>
 
     <glade-widget-class name="GtkFileChooserButton" generic-name="filechooserbutton" title="File Chooser Button">
+      <set-property-function>glade_gtk_file_chooser_button_set_property</set-property-function>
 
       <signals>
 	<signal since="2.12" id="file-set"/>
@@ -1003,6 +1005,7 @@
 	<property parentless-widget="True" libglade-unsupported="True" id="preview-widget"/>
 	<property libglade-unsupported="True" id="filter"/>
 	<property since="2.18" id="create-folders"/>
+	<property id="select-multiple" disabled="True"/>
       </properties>
     </glade-widget-class>
 
@@ -1073,10 +1076,10 @@
       <set-property-function>glade_gtk_combo_box_set_property</set-property-function>
       <add-child-function>glade_gtk_cell_layout_add_child</add-child-function>
       <remove-child-function>glade_gtk_cell_layout_remove_child</remove-child-function> 
-      <get-children-function>glade_gtk_cell_layout_get_children</get-children-function>
+      <get-children-function>glade_gtk_combo_box_get_children</get-children-function>
       <read-child-function>glade_gtk_cell_layout_read_child</read-child-function>
       <write-child-function>glade_gtk_cell_layout_write_child</write-child-function>
-      <action-activate-function>glade_gtk_cell_layout_action_activate</action-activate-function>
+      <action-activate-function>glade_gtk_cell_layout_action_activate_as_widget</action-activate-function>
       <child-set-property-function>glade_gtk_cell_layout_set_child_property</child-set-property-function>
       <child-get-property-function>glade_gtk_cell_layout_get_child_property</child-get-property-function>
       
@@ -1200,7 +1203,7 @@
 	<property optional-default="False" optional="True" id="default-width" default="320"/>
 	<property optional-default="False" optional="True" id="default-height" default="260"/>
 	<property id="has-separator" default="False"/>
-	<property save-always="True" id="type-hint"/>
+	<property save-always="True" id="type-hint" default="GDK_WINDOW_TYPE_HINT_DIALOG"/>
       </properties>
 
     </glade-widget-class>
@@ -1813,7 +1816,9 @@
 	<property translatable="True" since="2.10" id="title"/>
 	<property since="2.10" id="header-image"/>
 	<property since="2.10" id="sidebar-image"/>
-        <property id="complete" disabled="True"/>
+        <property ignore="True" id="complete" name="Initially Complete">
+	  <tooltip>Whether this page will initially be marked as complete regardless of user input.</tooltip>
+	</property>
 	<property ignore="True" id="page-type">
   	  <displayable-values>
 	    <value id="GTK_ASSISTANT_PAGE_CONTENT" name="Content"></value>
@@ -1905,7 +1910,7 @@
 	<property save="False" id="upper" default="100.0"/>
 	<property id="page-increment" default="10.0"/>
 	<property id="step-increment" default="1.0"/>
-	<property id="page-size" default="10.0"/>
+	<property id="page-size" default="0.0"/>
       </properties>
     </glade-widget-class>
 
@@ -2106,7 +2111,7 @@
       <get-children-function>glade_gtk_cell_layout_get_children</get-children-function>
       <read-child-function>glade_gtk_cell_layout_read_child</read-child-function>
       <write-child-function>glade_gtk_cell_layout_write_child</write-child-function>
-      <action-activate-function>glade_gtk_cell_layout_action_activate</action-activate-function>
+      <action-activate-function>glade_gtk_cell_layout_action_activate_as_widget</action-activate-function>
       <child-set-property-function>glade_gtk_cell_layout_set_child_property</child-set-property-function>
       <child-get-property-function>glade_gtk_cell_layout_get_child_property</child-get-property-function>
       
@@ -3452,9 +3457,9 @@
 
     <glade-widget-class-ref name="GtkHRuler"/>
     <glade-widget-class-ref name="GtkVRuler"/>
-
     <glade-widget-class-ref name="GtkCurve"/>
     <glade-widget-class-ref name="GtkGammaCurve"/>
+    <glade-widget-class-ref name="Custom"/>
   </glade-widget-group>
 
   <glade-widget-group name="gtk-obsolete" title="Gtk+ Obsolete">

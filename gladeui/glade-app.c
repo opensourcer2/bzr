@@ -94,6 +94,8 @@ struct _GladeAppPrivate
 	GList *undo_list, *redo_list;	/* Lists of buttons to refresh in update-ui signal */
 
 	GladePointerMode pointer_mode;  /* Current mode for the pointer in the workspace */
+
+	guint selection_changed_id; /* for queue_selection_changed() */
 };
 
 static guint glade_app_signals[LAST_SIGNAL] = { 0 };
@@ -104,6 +106,7 @@ static gchar *modules_dir  = NULL;
 static gchar *plugins_dir  = NULL;
 static gchar *pixmaps_dir  = NULL;
 static gchar *locale_dir   = NULL;
+static gchar *bin_dir      = NULL;
 
 static GladeApp *singleton_app = NULL;
 static gboolean check_initialised = FALSE;
@@ -200,6 +203,7 @@ glade_app_finalize (GObject *app)
 	g_free (modules_dir);
 	g_free (pixmaps_dir);	
 	g_free (locale_dir);
+	g_free (bin_dir);
 
 	singleton_app = NULL;
 	check_initialised = FALSE;
@@ -364,6 +368,15 @@ glade_app_get_locale_dir (void)
 	return locale_dir;
 }
 
+const gchar *
+glade_app_get_bin_dir (void)
+{
+	glade_init_check ();
+	
+	return bin_dir;
+}
+
+
 /* build package paths at runtime */
 static void
 build_package_paths (void)
@@ -384,6 +397,7 @@ build_package_paths (void)
 	catalogs_dir = g_build_filename (prefix, "share", PACKAGE, "catalogs", NULL);
 	modules_dir  = g_build_filename (prefix, "lib", PACKAGE, "modules", NULL);
 	locale_dir   = g_build_filename (prefix, "share", "locale", NULL);
+	bin_dir      = g_build_filename (prefix, "bin", NULL);
 
 	g_free (prefix);
 #else
@@ -392,6 +406,7 @@ build_package_paths (void)
 	plugins_dir  = g_strdup (GLADE_PLUGINSDIR);
 	pixmaps_dir  = g_strdup (GLADE_PIXMAPSDIR);
 	locale_dir   = g_strdup (GLADE_LOCALEDIR);
+	bin_dir      = g_strdup (GLADE_BINDIR);
 #endif
 }
 
@@ -929,50 +944,6 @@ glade_app_hide_properties (void)
 }
 
 void
-glade_app_update_instance_count (GladeProject *project)
-{
-	GladeApp  *app;
-	GList *l;
-	gint temp, max = 0, i = 0, uncounted_projects = 0;
-	gchar *project_name;
-
-	g_return_if_fail (GLADE_IS_PROJECT (project));
-		
-	if (glade_project_get_instance_count (project) > 0)
-		return;
-
-	project_name = glade_project_get_name (project);
-
-	app = glade_app_get ();
-
-	for (l = app->priv->projects; l; l = l->next)
-	{
-		GladeProject *prj = GLADE_PROJECT (l->data);
-		gchar *name = glade_project_get_name (project);
-
-		if (prj != project && !g_utf8_collate (name, project_name))
-		{
-			i++;
-			temp = MAX (glade_project_get_instance_count (prj) + 1, i);
-			max  = MAX (temp, max);
-
-			if (glade_project_get_instance_count (prj) < 1)
-				uncounted_projects++;
-		}
-		
-		g_free (name);
-	}
-	
-	g_free (project_name);
-
-	/* Dont reset the initially opened project */
-	if (uncounted_projects > 1 || g_list_find (app->priv->projects, project) == NULL)
-	{
-		glade_project_set_instance_count (project, MAX (max, i));
-	}
-}
-
-void
 glade_app_add_project (GladeProject *project)
 {
 	GladeApp  *app;
@@ -989,7 +960,6 @@ glade_app_add_project (GladeProject *project)
 		glade_app_set_project (project);
 		return;
 	}
-	glade_app_update_instance_count (project);
 	
 	/* Take a reference for GladeApp here... */
 	app->priv->projects = g_list_append (app->priv->projects, 
@@ -1650,6 +1620,25 @@ glade_app_selection_changed (void)
 		glade_project_selection_changed (project);
 	}
 }
+
+static gboolean
+selection_change_idle (GladeApp *app)
+{
+	glade_app_selection_changed ();
+	app->priv->selection_changed_id = 0;
+	return FALSE;
+}
+
+void
+glade_app_queue_selection_changed (void)
+{
+	GladeApp  *app = glade_app_get ();
+
+	if (app->priv->selection_changed_id == 0)
+		app->priv->selection_changed_id = 
+			g_idle_add ((GSourceFunc)selection_change_idle, app);
+}
+
 
 GladeApp*
 glade_app_new (void)

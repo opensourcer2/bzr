@@ -43,7 +43,6 @@
 <ANCHOR id="glade-app-set-transient-parent" href="gladeui/GladeApp.html#glade-app-set-transient-parent">
 <ANCHOR id="glade-app-get-transient-parent" href="gladeui/GladeApp.html#glade-app-get-transient-parent">
 <ANCHOR id="glade-app-set-accel-group" href="gladeui/GladeApp.html#glade-app-set-accel-group">
-<ANCHOR id="glade-app-update-instance-count" href="gladeui/GladeApp.html#glade-app-update-instance-count">
 <ANCHOR id="glade-app-undo-button-new" href="gladeui/GladeApp.html#glade-app-undo-button-new">
 <ANCHOR id="glade-app-redo-button-new" href="gladeui/GladeApp.html#glade-app-redo-button-new">
 <ANCHOR id="glade-app-get-selection" href="gladeui/GladeApp.html#glade-app-get-selection">
@@ -107,14 +106,13 @@
 <ANCHOR id="glade-project-resource-fullpath" href="gladeui/GladeProject.html#glade-project-resource-fullpath">
 <ANCHOR id="glade-project-is-loading" href="gladeui/GladeProject.html#glade-project-is-loading">
 <ANCHOR id="glade-project-get-file-mtime" href="gladeui/GladeProject.html#glade-project-get-file-mtime">
-<ANCHOR id="glade-project-get-instance-count" href="gladeui/GladeProject.html#glade-project-get-instance-count">
-<ANCHOR id="glade-project-set-instance-count" href="gladeui/GladeProject.html#glade-project-set-instance-count">
 <ANCHOR id="glade-project-get-modified" href="gladeui/GladeProject.html#glade-project-get-modified">
 <ANCHOR id="GladeProject.property-details" href="gladeui/GladeProject.html#GladeProject.property-details">
 <ANCHOR id="GladeProject--format" href="gladeui/GladeProject.html#GladeProject--format">
 <ANCHOR id="GladeProject--has-selection" href="gladeui/GladeProject.html#GladeProject--has-selection">
 <ANCHOR id="GladeProject--modified" href="gladeui/GladeProject.html#GladeProject--modified">
 <ANCHOR id="GladeProject--path" href="gladeui/GladeProject.html#GladeProject--path">
+<ANCHOR id="GladeProject--previewable" href="gladeui/GladeProject.html#GladeProject--previewable">
 <ANCHOR id="GladeProject--read-only" href="gladeui/GladeProject.html#GladeProject--read-only">
 <ANCHOR id="GladeProject.signal-details" href="gladeui/GladeProject.html#GladeProject.signal-details">
 <ANCHOR id="GladeProject-add-widget" href="gladeui/GladeProject.html#GladeProject-add-widget">
