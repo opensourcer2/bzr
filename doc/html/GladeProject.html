@@ -51,6 +51,8 @@ enum                <a class="link" href="GladeProject.html#GladeProjectFormat" 
 <a class="link" href="GladeProject.html#GladeProjectFormat" title="enum GladeProjectFormat"><span class="returnvalue">GladeProjectFormat</span></a>  <a class="link" href="GladeProject.html#glade-project-get-format" title="glade_project_get_format ()">glade_project_get_format</a>            (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GladeProject.html#glade-project-set-format" title="glade_project_set_format ()">glade_project_set_format</a>            (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GladeProject.html#GladeProjectFormat" title="enum GladeProjectFormat"><span class="type">GladeProjectFormat</span></a> format</code></em>);
+<span class="returnvalue">gboolean</span>            <a class="link" href="GladeProject.html#glade-project-load-from-file" title="glade_project_load_from_file ()">glade_project_load_from_file</a>        (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">gchar</span> *path</code></em>);
 <a class="link" href="GladeProject.html" title="GladeProject"><span class="returnvalue">GladeProject</span></a> *      <a class="link" href="GladeProject.html#glade-project-load" title="glade_project_load ()">glade_project_load</a>                  (<em class="parameter"><code>const <span class="type">gchar</span> *path</code></em>);
 <span class="returnvalue">gboolean</span>            <a class="link" href="GladeProject.html#glade-project-save" title="glade_project_save ()">glade_project_save</a>                  (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
                                                          <em class="parameter"><code>const <span class="type">gchar</span> *path</code></em>,
@@ -135,6 +137,8 @@ GladeProject implements
   "<a class="link" href="GladeProject.html#GladeProject-changed" title='The "changed" signal'>changed</a>"                                        : <code class="literal">Run First</code>
   "<a class="link" href="GladeProject.html#GladeProject-close" title='The "close" signal'>close</a>"                                          : <code class="literal">Run Last</code>
   "<a class="link" href="GladeProject.html#GladeProject-convert-finished" title='The "convert-finished" signal'>convert-finished</a>"                               : <code class="literal">Run First</code>
+  "<a class="link" href="GladeProject.html#GladeProject-load-progress" title='The "load-progress" signal'>load-progress</a>"                                  : <code class="literal">Run First</code>
+  "<a class="link" href="GladeProject.html#GladeProject-parse-began" title='The "parse-began" signal'>parse-began</a>"                                    : <code class="literal">Run First</code>
   "<a class="link" href="GladeProject.html#GladeProject-parse-finished" title='The "parse-finished" signal'>parse-finished</a>"                                 : <code class="literal">Run First</code>
   "<a class="link" href="GladeProject.html#GladeProject-remove-widget" title='The "remove-widget" signal'>remove-widget</a>"                                  : <code class="literal">Run Last</code>
   "<a class="link" href="GladeProject.html#GladeProject-selection-changed" title='The "selection-changed" signal'>selection-changed</a>"                              : <code class="literal">Run Last</code>
@@ -211,6 +215,12 @@ state; note that conversions should be done through the glade-command api.
 </tr>
 </tbody>
 </table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="glade-project-load-from-file"></a><h3>glade_project_load_from_file ()</h3>
+<pre class="programlisting"><span class="returnvalue">gboolean</span>            glade_project_load_from_file        (<em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">gchar</span> *path</code></em>);</pre>
 </div>
 <hr>
 <div class="refsect2">
@@ -1043,6 +1053,64 @@ NOTE: Some properties are internally handled differently
 when the project is in a said format, this signal is fired after
 the new format is in effect to allow the backend access to both
 before and after.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gladeproject</code></em> :</span></p></td>
+<td>the <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> which received the signal.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GladeProject-load-progress"></a><h3>The <code class="literal">"load-progress"</code> signal</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *gladeproject,
+                                                        <span class="type">gint</span>          objects_total,
+                                                        <span class="type">gint</span>          objects_loaded,
+                                                        <span class="type">gpointer</span>      user_data)           : <code class="literal">Run First</code></pre>
+<p>
+Emitted while <em class="parameter"><code>project</code></em> is loading.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gladeproject</code></em> :</span></p></td>
+<td>the <a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> which received the signal.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>objects_total</code></em> :</span></p></td>
+<td>the total amount of objects to load
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>objects_loaded</code></em> :</span></p></td>
+<td>the current amount of loaded objects
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GladeProject-parse-began"></a><h3>The <code class="literal">"parse-began"</code> signal</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *gladeproject,
+                                                        <span class="type">gpointer</span>      user_data)         : <code class="literal">Run First</code></pre>
+<p>
+Emitted when <em class="parameter"><code>gladeproject</code></em> parsing starts.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">

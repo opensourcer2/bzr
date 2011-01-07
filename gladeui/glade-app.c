@@ -33,7 +33,6 @@
  */
 
 #include "glade.h"
-#include "glade-clipboard-view.h"
 #include "glade-debug.h"
 #include "glade-cursor.h"
 #include "glade-catalog.h"
@@ -305,13 +304,6 @@ glade_app_signal_editor_created_default (GladeApp *app, GladeSignalEditor *signa
 	glade_signal_editor_construct_signals_list (signal_editor);
 }
 
-static gboolean
-clipboard_view_on_delete_cb (GtkWidget *clipboard_view, GdkEvent *e, GladeApp *app)
-{
-	glade_util_hide_window (GTK_WINDOW (clipboard_view));
-	return TRUE;
-}
-
 static GKeyFile *
 glade_app_config_load (GladeApp *app)
 {
@@ -466,11 +458,6 @@ glade_app_init (GladeApp *app)
 	
 	/* Create clipboard */
 	app->priv->clipboard = glade_clipboard_new ();
-	app->priv->clipboard->view = glade_clipboard_view_new (app->priv->clipboard);
-	gtk_window_set_title (GTK_WINDOW (app->priv->clipboard->view), _("Clipboard"));
-	g_signal_connect_after (G_OBJECT (app->priv->clipboard->view), "delete_event",
-			  G_CALLBACK (clipboard_view_on_delete_cb),
-			  app);
 
 	/* Load the configuration file */
 	app->priv->config = glade_app_config_load (app);
@@ -823,13 +810,6 @@ glade_app_get_clipboard (void)
 	return app->priv->clipboard;
 }
 
-GtkWidget *
-glade_app_get_clipboard_view (void)
-{
-	GladeApp *app = glade_app_get ();
-	return app->priv->clipboard->view;
-}
-
 GladeProject *
 glade_app_get_project (void)
 {
@@ -1128,10 +1108,9 @@ glade_app_command_copy (void)
 	gboolean            failed = FALSE;
 
 	app = glade_app_get();
-	if (app->priv->active_project == NULL)
-	{
+	if (app->priv->active_project == NULL ||
+	    glade_project_is_loading (app->priv->active_project))
 		return;
-	}
 
 	for (list = glade_app_get_selection ();
 	     list && list->data; list = list->next)
@@ -1171,7 +1150,8 @@ glade_app_command_cut (void)
 	gboolean            failed = FALSE;
 
 	app = glade_app_get();
-	if (app->priv->active_project == NULL)
+	if (app->priv->active_project == NULL ||
+	    glade_project_is_loading (app->priv->active_project))
 		return;
 	
 	for (list = glade_app_get_selection ();
@@ -1213,8 +1193,16 @@ glade_app_command_paste (GladePlaceholder *placeholder)
 	GladeFixed	   *fixed = NULL;
 
 	app = glade_app_get();
-	if (app->priv->active_project == NULL)
+	if (app->priv->active_project == NULL ||
+	    glade_project_is_loading (app->priv->active_project))
 		return;
+
+	if (placeholder)
+	{
+		if (glade_placeholder_get_project (placeholder) == NULL ||
+		    glade_project_is_loading (glade_placeholder_get_project (placeholder)))
+			return;
+	}
 
 	list      = glade_project_selection_get (app->priv->active_project);
 	clipboard = glade_app_get_clipboard ();
@@ -1336,7 +1324,8 @@ glade_app_command_delete (void)
 	gboolean            failed = FALSE;
 
 	app = glade_app_get();
-	if (app->priv->active_project == NULL)
+	if (app->priv->active_project == NULL ||
+	    glade_project_is_loading (app->priv->active_project))
 		return;
 
 	for (list = glade_app_get_selection ();

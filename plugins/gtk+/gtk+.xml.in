@@ -1,6 +1,6 @@
 <glade-catalog name="gtk+"
-	       version="2.20"
-	       targetable="2.18,2.16,2.14,2.12,2.10,2.8"
+	       version="2.24"
+	       targetable="2.22,2.20,2.18,2.16,2.14,2.12,2.10,2.8"
 	       supports="libglade,gtkbuilder"
                icon-prefix="gtk"
                library="gladegtk"
@@ -57,6 +57,9 @@
 	  <visible-lines>2</visible-lines>
 	</property>
 	<property id="tooltip-markup" since="2.12" weight="4.1" libglade-unsupported="True"/>
+        <property id="can-focus" common="True" save-always="True"/>
+	<property id="has-default" common="True" ignore="True"/>
+	<property id="can-default" common="True" />
 	<property id="visible" default="True" common="True" ignore="True"/>
 	<property id="width-request"  common="True" optional="True" optional-default="False" default="0"/>
 	<property id="height-request" common="True" optional="True" optional-default="False" default="0"/>
@@ -111,7 +114,6 @@
 	<property id="parent" disabled="True"/>
 	<property id="style" disabled="True"/>
 	<property id="sensitive" ignore="True"/>
-	<property id="has-default" ignore="True" common="True"/>
 	<property id="double-buffered" since="2.18"/>
 
 	<!-- Accelerators -->
@@ -296,6 +298,7 @@ embedded in another object</_tooltip>
     <glade-widget-class name="GtkBox" _title="Box" fixed="True">
       <post-create-function>glade_gtk_box_post_create</post-create-function>
       <get-internal-child-function>glade_gtk_box_get_internal_child</get-internal-child-function>
+      <get-children-function>glade_gtk_box_get_children</get-children-function>
       <set-property-function>glade_gtk_box_set_property</set-property-function>
       <get-property-function>glade_gtk_box_get_property</get-property-function>
       <verify-function>glade_gtk_box_verify_property</verify-function>
@@ -801,7 +804,6 @@ embedded in another object</_tooltip>
       </signals>
 
       <properties>
-        <property id="can-focus" save-always="True"/>
 	<property id="text" translatable="True" custom-layout="True"/>
         <property id="buffer" libglade-unsupported="True" create-type="GtkEntryBuffer" since="2.18" custom-layout="True"/>
 
@@ -898,7 +900,6 @@ embedded in another object</_tooltip>
       <write-widget-function>glade_gtk_button_write_widget</write-widget-function>
 
       <properties>
-	<property id="can-focus" save-always="True"/>
 	<property id="receives-default" save-always="True"/>
 	<property id="image" parentless-widget="True" create-type="GtkImage" 
 		  libglade-unsupported="True" custom-layout="True"/>
@@ -992,7 +993,6 @@ embedded in another object</_tooltip>
       <properties>
         <property id="text" disabled="True"/>
         <property id="value" disabled="True"/>
-	<property id="can-focus" default="True"/>
         <property id="adjustment" default="0 0 100 1 10 0"/>
         <property id="update-policy">
   	  <displayable-values>
@@ -1128,6 +1128,8 @@ embedded in another object</_tooltip>
         <property id="active" ignore="True"/>
         <property id="column-span-column" ignore="True"/>
         <property id="row-span-column" ignore="True"/>
+	<property id="entry-text-column" since="2.24"/>
+	<property id="has-entry" since="2.24"/>
 	<property id="items" _name="Items" translatable="True" libglade-only="True">
 	  <parameter-spec>
 	    <type>GParamBoxed</type>
@@ -1155,7 +1157,8 @@ embedded in another object</_tooltip>
       </properties>
     </glade-widget-class>
 
-    <glade-widget-class name="GtkComboBoxEntry" generic-name="comboboxentry" _title="Combo Box Entry">
+    <glade-widget-class name="GtkComboBoxEntry" generic-name="comboboxentry" _title="Combo Box Entry" 
+			deprecated="True">
       <post-create-function>glade_gtk_combo_box_entry_post_create</post-create-function>
       <get-internal-child-function>glade_gtk_combo_box_entry_get_internal_child</get-internal-child-function>
       <set-property-function>glade_gtk_combo_box_entry_set_property</set-property-function>
@@ -1354,6 +1357,7 @@ embedded in another object</_tooltip>
 
       <properties>
 	<property id="group" since="2.12"/>
+	<property id="group-name" since="2.24"/>
 	<property id="page" save="False">
 	  <_tooltip>Set the current page (strictly for editing purposes)</_tooltip>
 	</property>
@@ -1578,7 +1582,6 @@ embedded in another object</_tooltip>
     
     <glade-widget-class name="GtkScrolledWindow" generic-name="scrolledwindow" _title="Scrolled Window">
       <properties>
-        <property id="can-focus" save-always="True"/>
         <property id="window-placement-set" since="2.10" ignore="True"/>
       	<property id="hscrollbar-policy" default="GTK_POLICY_AUTOMATIC">
   	  <displayable-values>
@@ -1626,6 +1629,9 @@ embedded in another object</_tooltip>
 	  <visible-lines>2</visible-lines>
 	</property>
       </properties>
+      <signals>
+	<signal id="activate-link" since="2.24"/>
+      </signals>
    </glade-widget-class>
 
     <glade-widget-class name="GtkColorSelectionDialog" generic-name="colorselectiondialog" _title="Color Selection Dialog">
@@ -1671,9 +1677,6 @@ embedded in another object</_tooltip>
 	<property id="default-height" default="115" optional="True" optional-default="False"/>
 
 	<property common="True" id="sensitive"/>
-	<property common="True" id="can-default"/>
-	<property common="True" id="has-default"/>
-	<property common="True" id="can-focus"/>
 
 	<property id="image" since="2.10" parentless-widget="True"/>
 	<property id="secondary-text" translatable="True" since="2.10"/>
@@ -1750,7 +1753,14 @@ embedded in another object</_tooltip>
     </glade-widget-class>
     
     <glade-widget-class name="GtkOptionMenu" generic-name="optionmenu" _title="Option Menu" deprecated="True" libglade-only="True">
+      <post-create-function>empty</post-create-function>
+      <add-child-function>glade_gtk_option_menu_add_child</add-child-function>
+      <remove-child-function>glade_gtk_option_menu_remove_child</remove-child-function>
+      <get-children-function>glade_gtk_option_menu_get_children</get-children-function>
+
       <properties>
+	<property id="menu" disabled="True"/>
+
 	<!-- Atk press property -->
 	<property id="atk-press" _name="Press" ignore="True" atk-property="True" save="False">
 	  <parameter-spec>
@@ -1960,6 +1970,11 @@ embedded in another object</_tooltip>
       <post-create-function>glade_gtk_action_post_create</post-create-function>
       <create-editor-property-function>glade_gtk_widget_create_eprop</create-editor-property-function>
       <string-from-value-function>glade_gtk_widget_string_from_value</string-from-value-function>
+      <action-activate-function>glade_gtk_action_action_activate</action-activate-function>
+      <actions>
+        <action id="launch_editor" _name="Edit&#8230;" stock="gtk-edit" important="True"/>
+      </actions>
+
       <properties>
 	<property id="name" disabled="True"/>
 	<property id="label" translatable="True"/>
@@ -1998,6 +2013,10 @@ embedded in another object</_tooltip>
       <replace-child-function>glade_gtk_action_group_replace_child</replace-child-function>
       <read-child-function>glade_gtk_action_group_read_child</read-child-function>
       <write-child-function>glade_gtk_action_group_write_child</write-child-function>
+      <action-activate-function>glade_gtk_action_action_activate</action-activate-function>
+      <actions>
+        <action id="launch_editor" _name="Edit&#8230;" stock="gtk-edit" important="True"/>
+      </actions>
     </glade-widget-class>
 
     <glade-widget-class name="GtkEntryCompletion" generic-name="entrycompletion" _title="Entry Completion" 
@@ -2175,6 +2194,7 @@ embedded in another object</_tooltip>
       </actions>
 
       <properties>
+        <property id="item-orientation" since="2.22"/>
         <property id="item-padding" since="2.18"/>
         <property id="text-column" disabled="True"/>
         <property id="markup-column" disabled="True"/>

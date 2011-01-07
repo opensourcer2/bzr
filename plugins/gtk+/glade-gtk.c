@@ -61,7 +61,7 @@
 #define MNEMONIC_INSENSITIVE_MSG   _("This property does not apply unless Use Underline is set.")
 #define NOT_SELECTED_MSG           _("Property not selected")
 #define RESPID_INSENSITIVE_MSG     _("This property is only for use in dialog action buttons")
-#define ACTION_APPEARANCE_MSG      _("This property is set to be controled by an Action")
+#define ACTION_APPEARANCE_MSG      _("This property is set to be controlled by an Action")
 /* -------------------------------- ParamSpecs ------------------------------ */
 /*
 GtkImageMenuItem GnomeUI "stock_item" property special case:
@@ -1411,7 +1411,6 @@ glade_gtk_container_get_child_property (GladeWidgetAdaptor *adaptor,
 						  property_name, value);
 }
 
-
 GList *
 glade_gtk_container_get_children (GladeWidgetAdaptor  *adaptor,
 				  GtkContainer        *container)
@@ -1701,6 +1700,15 @@ sort_box_children (GtkWidget *widget_a, GtkWidget *widget_b)
 	return position_a - position_b;
 }
 
+GList *
+glade_gtk_box_get_children (GladeWidgetAdaptor  *adaptor,
+			    GtkContainer        *container)
+{
+	GList *children = glade_util_container_get_all_children (container);
+
+	return g_list_sort (children, (GCompareFunc)sort_box_children);
+}
+
 void
 glade_gtk_box_set_child_property (GladeWidgetAdaptor *adaptor,
 				  GObject            *container,
@@ -1736,7 +1744,6 @@ glade_gtk_box_set_child_property (GladeWidgetAdaptor *adaptor,
 		
 		/* Get the real value */
 		new_position = g_value_get_int (value);
-
 	}
 
 	if (is_position && recursion == FALSE)
@@ -1816,7 +1823,6 @@ glade_gtk_box_set_child_property (GladeWidgetAdaptor *adaptor,
 
 }
 
-
 void
 glade_gtk_box_get_property (GladeWidgetAdaptor *adaptor,
 			    GObject            *object, 
@@ -1855,7 +1861,7 @@ glade_gtk_box_get_first_blank (GtkBox *box)
 		{
 			gint gwidget_position;
 			GladeProperty *property =
-				glade_widget_get_property (gwidget, "position");
+				glade_widget_get_pack_property (gwidget, "position");
 			gwidget_position = g_value_get_int (property->value);
 
 			if (gwidget_position > position)
@@ -5935,27 +5941,18 @@ glade_gtk_color_button_set_property (GladeWidgetAdaptor *adaptor,
 }
 
 
-/* ----------------------------- GtkButton ------------------------------ */
-
-static void 
-sync_use_appearance (GladeWidget *gwidget)
+/* ----------------------------- GtkActivatable ------------------------------ */
+static void
+activatable_parse_finished (GladeProject *project, 
+			    GladeWidget  *widget)
 {
-	GladeProperty *prop = glade_widget_get_property (gwidget, "use-action-appearance");
-	gboolean       use_appearance = FALSE;
+	GObject *related_action = NULL;
 
-	/* This is the kind of thing we avoid doing at project load time ;-) */
-	if (glade_widget_superuser ())
-		return;
-
-	glade_property_get (prop, &use_appearance);
-	if (use_appearance)
-       	{
-		glade_property_set (prop, FALSE);
-		glade_property_set (prop, TRUE);
-       	}
+	glade_widget_property_get (widget, "related-action", &related_action);
+	if (related_action == NULL)
+		glade_widget_property_set (widget, "use-action-appearance", FALSE);
 }
 
-/* shared between menuitems and toolitems too */
 static void
 evaluate_activatable_property_sensitivity (GObject            *object, 
 					   const gchar        *id,
@@ -6015,6 +6012,25 @@ evaluate_activatable_property_sensitivity (GObject            *object,
 	}
 }
 
+/* ----------------------------- GtkButton ------------------------------ */
+static void 
+sync_use_appearance (GladeWidget *gwidget)
+{
+	GladeProperty *prop = glade_widget_get_property (gwidget, "use-action-appearance");
+	gboolean       use_appearance = FALSE;
+
+	/* This is the kind of thing we avoid doing at project load time ;-) */
+	if (glade_widget_superuser ())
+		return;
+
+	glade_property_get (prop, &use_appearance);
+	if (use_appearance)
+       	{
+		glade_property_set (prop, FALSE);
+		glade_property_set (prop, TRUE);
+       	}
+}
+
 GladeEditable *
 glade_gtk_button_create_editable (GladeWidgetAdaptor  *adaptor,
 				  GladeEditorPageType  type)
@@ -6055,6 +6071,11 @@ glade_gtk_button_post_create (GladeWidgetAdaptor  *adaptor,
 	glade_widget_property_set_sensitive (gbutton, "response-id", FALSE, 
 					     RESPID_INSENSITIVE_MSG);
 	glade_widget_property_set_enabled (gbutton, "response-id", FALSE);
+
+	if (reason == GLADE_CREATE_LOAD)
+		g_signal_connect (G_OBJECT (gbutton->project), "parse-finished",
+				  G_CALLBACK (activatable_parse_finished),
+				  gbutton);
 }
 
 void
@@ -6875,8 +6896,8 @@ glade_gtk_menu_item_action_activate (GladeWidgetAdaptor *adaptor,
 
 	if (shell)
 		gtk_menu_shell_deactivate (GTK_MENU_SHELL (shell));
-}
 
+}
 
 GObject *
 glade_gtk_menu_item_constructor (GType                  type,
@@ -6914,6 +6935,11 @@ glade_gtk_menu_item_post_create (GladeWidgetAdaptor *adaptor,
 		gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
 		gtk_container_add (GTK_CONTAINER (object), label);
 	}
+
+	if (reason == GLADE_CREATE_LOAD)
+		g_signal_connect (G_OBJECT (gitem->project), "parse-finished",
+				  G_CALLBACK (activatable_parse_finished),
+				  gitem);
 }
 
 GList *
@@ -7859,7 +7885,7 @@ glade_gtk_tool_item_post_create (GladeWidgetAdaptor *adaptor,
 				 GObject            *object, 
 				 GladeCreateReason   reason)
 {
-	g_return_if_fail (GTK_IS_TOOL_ITEM (object));
+	GladeWidget *gitem = glade_widget_get_from_gobject (object);
 	
 	if (GTK_IS_SEPARATOR_TOOL_ITEM (object)) return;
 	
@@ -7867,6 +7893,11 @@ glade_gtk_tool_item_post_create (GladeWidgetAdaptor *adaptor,
 	    gtk_bin_get_child (GTK_BIN (object)) == NULL)
 		gtk_container_add (GTK_CONTAINER (object),
 				   glade_placeholder_new ());
+
+	if (reason == GLADE_CREATE_LOAD)
+		g_signal_connect (G_OBJECT (gitem->project), "parse-finished",
+				  G_CALLBACK (activatable_parse_finished),
+				  gitem);
 }
 
 void
@@ -7878,7 +7909,8 @@ glade_gtk_tool_item_set_property (GladeWidgetAdaptor *adaptor,
 	GladeWidget *gwidget = glade_widget_get_from_gobject (object);
 	GladeProperty *property = glade_widget_get_property (gwidget, id);
 
-	//evaluate_activatable_property_sensitivity (object, id, value);
+	evaluate_activatable_property_sensitivity (object, id, value);
+
 	if (GPC_VERSION_CHECK (property->klass, gtk_major_version, gtk_minor_version + 1))
 		GWA_GET_CLASS (GTK_TYPE_CONTAINER)->set_property (adaptor,
 								  object,
@@ -9080,8 +9112,11 @@ glade_gtk_spin_button_set_adjustment (GObject *object, const GValue *value)
 		{
 			GladeWidget *gadj = glade_widget_get_from_gobject (adj);
 
-			/* Silently set any spin-button adjustment page size to 0 */
-			glade_widget_property_set (gadj, "page-size", 0.0F);
+			/* It can be with an old file the GladeWidget is not built yet at load time */
+			if (gadj)
+				/* Silently set any spin-button adjustment page size to 0 */
+				glade_widget_property_set (gadj, "page-size", 0.0F);
+
 			gtk_adjustment_set_page_size (adj, 0);
 		}
 
@@ -9158,6 +9193,40 @@ glade_gtk_combo_get_children (GladeWidgetAdaptor *adaptor, GtkCombo *combo)
 	/* Ensure that we only return one 'combo->list' */
 	if (g_list_find (list, combo->list) == NULL)
 		list = g_list_append (list, combo->list);
+
+	return list;
+}
+
+/* ----------------------------- GtkOptionMenu ------------------------------ */
+void
+glade_gtk_option_menu_add_child (GladeWidgetAdaptor  *adaptor,
+				 GObject             *object, 
+				 GObject             *child)
+{
+	if (GTK_IS_MENU (child))
+		gtk_option_menu_set_menu (GTK_OPTION_MENU (object), GTK_WIDGET (child));
+}
+
+void
+glade_gtk_option_menu_remove_child (GladeWidgetAdaptor  *adaptor,
+				    GObject             *object, 
+				    GObject             *child)
+{
+	if (GTK_IS_MENU (child))
+		gtk_option_menu_remove_menu (GTK_OPTION_MENU (object));
+}
+
+GList *
+glade_gtk_option_menu_get_children (GladeWidgetAdaptor *adaptor, 
+				    GtkOptionMenu      *option_menu)
+{
+	GList *list = NULL;
+	GtkWidget *menu;
+
+	menu = gtk_option_menu_get_menu (option_menu);
+
+	if (menu)
+		list = g_list_prepend (list, menu);
 
 	return list;
 }
@@ -10728,7 +10797,7 @@ glade_gtk_store_read_columns (GladeWidget *widget, GladeXmlNode *node)
 	for (prop = glade_xml_node_get_children_with_comments (columns_node); prop;
 	     prop = glade_xml_node_next_with_comments (prop))
 	{
-		GladeColumnType *data = g_new0 (GladeColumnType, 1);
+		GladeColumnType *data;
 		gchar *type, *comment_str, buffer[256];
 
 		if (!glade_xml_node_verify_silent (prop, GLADE_TAG_COLUMN) &&
@@ -10745,6 +10814,8 @@ glade_gtk_store_read_columns (GladeWidget *widget, GladeXmlNode *node)
 		}
 
 		type = glade_xml_get_property_string_required (prop, GLADE_TAG_TYPE, NULL);
+
+		data              = glade_column_type_new (type, NULL);
 		data->type_name   = g_strdup (type);
 		data->column_name = column_name[0] ? g_strdup (column_name) : g_ascii_strdown (type, -1);
 
@@ -11381,10 +11452,6 @@ glade_gtk_cell_layout_read_child (GladeWidgetAdaptor *adaptor,
 	     glade_xml_search_child
 	     (node, GLADE_XML_TAG_WIDGET(glade_project_get_format(widget->project)))) != NULL)
 	{
-
-		if (internal_name)
-			g_warning ("Cell layout reading internal %s\n", internal_name);
-
 		/* Combo box is a special brand of cell-layout, it can also have the internal entry */
 		if ((child_widget = glade_widget_read (widget->project, 
 						       widget, widget_node, 
@@ -11844,6 +11911,8 @@ glade_gtk_adjustment_write_widget (GladeWidgetAdaptor *adaptor,
 
 
 /*--------------------------- GtkAction ---------------------------------*/
+#define ACTION_ACCEL_INSENSITIVE_MSG _("The accelerator can only be set when inside an Action Group.")
+
 void
 glade_gtk_action_post_create (GladeWidgetAdaptor *adaptor, 
 			      GObject            *object, 
@@ -11857,6 +11926,9 @@ glade_gtk_action_post_create (GladeWidgetAdaptor *adaptor,
 	if (!gtk_action_get_name (GTK_ACTION (object)))
 		glade_widget_property_set (gwidget, "name", "untitled");
 
+	glade_widget_set_action_sensitive (gwidget, "launch_editor", FALSE);
+	glade_widget_property_set_sensitive (gwidget, "accelerator", FALSE, 
+					     ACTION_ACCEL_INSENSITIVE_MSG);
 }
 
 /*--------------------------- GtkActionGroup ---------------------------------*/
@@ -11880,6 +11952,7 @@ glade_gtk_action_group_add_child (GladeWidgetAdaptor *adaptor,
 					(GDestroyNotify)g_list_free);
 
 		glade_widget_property_set_sensitive (gaction, "accelerator", TRUE, NULL);
+		glade_widget_set_action_sensitive (gaction, "launch_editor", TRUE);
 	}
 }
 
@@ -11892,7 +11965,6 @@ glade_gtk_action_group_remove_child (GladeWidgetAdaptor *adaptor,
 	{
 		/* Dont really add/remove actions (because name conflicts inside groups)
 		 */
-		const gchar *insensitive_msg = _("The accelerator can only be set when inside an Action Group.");
 		GladeWidget *ggroup = glade_widget_get_from_gobject (container);
 		GladeWidget *gaction = glade_widget_get_from_gobject (child);
 		GList       *actions = g_object_get_data (G_OBJECT (ggroup), "glade-actions");
@@ -11903,7 +11975,9 @@ glade_gtk_action_group_remove_child (GladeWidgetAdaptor *adaptor,
 		g_object_set_data_full (G_OBJECT (ggroup), "glade-actions", actions, 
 					(GDestroyNotify)g_list_free);
 
-		glade_widget_property_set_sensitive (gaction, "accelerator", FALSE, insensitive_msg);
+		glade_widget_property_set_sensitive (gaction, "accelerator", FALSE, 
+						     ACTION_ACCEL_INSENSITIVE_MSG);
+		glade_widget_set_action_sensitive (gaction, "launch_editor", FALSE);
 	}
 }
 
@@ -11972,4 +12046,68 @@ glade_gtk_action_group_write_child (GladeWidgetAdaptor *adaptor,
 
 	/* Write accelerator here  */
 	glade_gtk_write_accels (widget, context, child_node, FALSE);		
+}
+
+static void
+glade_gtk_action_child_selected (GladeBaseEditor *editor,
+				 GladeWidget *gchild,
+				 gpointer data)
+{
+	glade_base_editor_add_label (editor, _("Action"));
+	
+	glade_base_editor_add_default_properties (editor, gchild);
+	
+	glade_base_editor_add_label (editor, _("Properties"));
+	glade_base_editor_add_editable (editor, gchild, GLADE_PAGE_GENERAL);
+}
+
+static gboolean
+glade_gtk_action_move_child (GladeBaseEditor *editor,
+			     GladeWidget *gparent,
+			     GladeWidget *gchild,
+			     gpointer data)
+{	
+	return FALSE;
+}
+
+static void
+glade_gtk_action_launch_editor (GObject  *action)
+{
+	GladeWidget *widget = glade_widget_get_from_gobject (action);
+	GladeBaseEditor *editor;
+	GladeEditable *action_editor;
+	GtkWidget *window;
+
+	/* Make sure we get the group here */
+	widget = glade_widget_get_toplevel (widget);
+
+	action_editor = glade_widget_adaptor_create_editable (widget->adaptor, GLADE_PAGE_GENERAL);
+
+	/* Editor */
+	editor = glade_base_editor_new (widget->object, action_editor,
+					_("Action"), GTK_TYPE_ACTION,
+					_("Toggle"), GTK_TYPE_TOGGLE_ACTION,
+					_("Radio"), GTK_TYPE_RADIO_ACTION,
+					_("Recent"), GTK_TYPE_RECENT_ACTION,
+					NULL);
+
+	g_signal_connect (editor, "child-selected", G_CALLBACK (glade_gtk_action_child_selected), NULL);
+	g_signal_connect (editor, "move-child", G_CALLBACK (glade_gtk_action_move_child), NULL);
+
+	gtk_widget_show (GTK_WIDGET (editor));
+	
+	window = glade_base_editor_pack_new_window (editor, _("Action Group Editor"), NULL);
+	gtk_widget_show (window);
+}
+
+
+void
+glade_gtk_action_action_activate (GladeWidgetAdaptor *adaptor,
+				  GObject *object,
+				  const gchar *action_path)
+{
+	if (strcmp (action_path, "launch_editor") == 0)
+	{
+		glade_gtk_action_launch_editor (object);
+	}
 }

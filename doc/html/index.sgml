@@ -19,7 +19,6 @@
 <ANCHOR id="glade-app-get-editor" href="gladeui/GladeApp.html#glade-app-get-editor">
 <ANCHOR id="glade-app-get-palette" href="gladeui/GladeApp.html#glade-app-get-palette">
 <ANCHOR id="glade-app-get-clipboard" href="gladeui/GladeApp.html#glade-app-get-clipboard">
-<ANCHOR id="glade-app-get-clipboard-view" href="gladeui/GladeApp.html#glade-app-get-clipboard-view">
 <ANCHOR id="glade-app-get-project" href="gladeui/GladeApp.html#glade-app-get-project">
 <ANCHOR id="glade-app-set-project" href="gladeui/GladeApp.html#glade-app-set-project">
 <ANCHOR id="glade-app-get-pointer-mode" href="gladeui/GladeApp.html#glade-app-get-pointer-mode">
@@ -76,6 +75,7 @@
 <ANCHOR id="glade-project-new" href="gladeui/GladeProject.html#glade-project-new">
 <ANCHOR id="glade-project-get-format" href="gladeui/GladeProject.html#glade-project-get-format">
 <ANCHOR id="glade-project-set-format" href="gladeui/GladeProject.html#glade-project-set-format">
+<ANCHOR id="glade-project-load-from-file" href="gladeui/GladeProject.html#glade-project-load-from-file">
 <ANCHOR id="glade-project-load" href="gladeui/GladeProject.html#glade-project-load">
 <ANCHOR id="glade-project-save" href="gladeui/GladeProject.html#glade-project-save">
 <ANCHOR id="glade-project-get-path" href="gladeui/GladeProject.html#glade-project-get-path">
@@ -119,6 +119,8 @@
 <ANCHOR id="GladeProject-changed" href="gladeui/GladeProject.html#GladeProject-changed">
 <ANCHOR id="GladeProject-close" href="gladeui/GladeProject.html#GladeProject-close">
 <ANCHOR id="GladeProject-convert-finished" href="gladeui/GladeProject.html#GladeProject-convert-finished">
+<ANCHOR id="GladeProject-load-progress" href="gladeui/GladeProject.html#GladeProject-load-progress">
+<ANCHOR id="GladeProject-parse-began" href="gladeui/GladeProject.html#GladeProject-parse-began">
 <ANCHOR id="GladeProject-parse-finished" href="gladeui/GladeProject.html#GladeProject-parse-finished">
 <ANCHOR id="GladeProject-remove-widget" href="gladeui/GladeProject.html#GladeProject-remove-widget">
 <ANCHOR id="GladeProject-selection-changed" href="gladeui/GladeProject.html#GladeProject-selection-changed">
@@ -195,7 +197,6 @@
 <ANCHOR id="glade-widget-get-name" href="gladeui/GladeWidget.html#glade-widget-get-name">
 <ANCHOR id="glade-widget-set-internal" href="gladeui/GladeWidget.html#glade-widget-set-internal">
 <ANCHOR id="glade-widget-get-internal" href="gladeui/GladeWidget.html#glade-widget-get-internal">
-<ANCHOR id="glade-widget-set-object" href="gladeui/GladeWidget.html#glade-widget-set-object">
 <ANCHOR id="glade-widget-get-object" href="gladeui/GladeWidget.html#glade-widget-get-object">
 <ANCHOR id="glade-widget-set-project" href="gladeui/GladeWidget.html#glade-widget-set-project">
 <ANCHOR id="glade-widget-get-project" href="gladeui/GladeWidget.html#glade-widget-get-project">
@@ -617,17 +618,10 @@
 <ANCHOR id="GladePalette.signal-details" href="gladeui/GladePalette.html#GladePalette.signal-details">
 <ANCHOR id="GladePalette-refresh" href="gladeui/GladePalette.html#GladePalette-refresh">
 <ANCHOR id="GladePalette-toggled" href="gladeui/GladePalette.html#GladePalette-toggled">
-<ANCHOR id="GladeClipboardView" href="gladeui/GladeClipboardView.html">
-<ANCHOR id="GladeClipboardView.synopsis" href="gladeui/GladeClipboardView.html#GladeClipboardView.synopsis">
-<ANCHOR id="GladeClipboardView.object-hierarchy" href="gladeui/GladeClipboardView.html#GladeClipboardView.object-hierarchy">
-<ANCHOR id="GladeClipboardView.implemented-interfaces" href="gladeui/GladeClipboardView.html#GladeClipboardView.implemented-interfaces">
-<ANCHOR id="GladeClipboardView.description" href="gladeui/GladeClipboardView.html#GladeClipboardView.description">
-<ANCHOR id="GladeClipboardView.details" href="gladeui/GladeClipboardView.html#GladeClipboardView.details">
-<ANCHOR id="GladeClipboardView-struct" href="gladeui/GladeClipboardView.html#GladeClipboardView-struct">
-<ANCHOR id="glade-clipboard-view-new" href="gladeui/GladeClipboardView.html#glade-clipboard-view-new">
-<ANCHOR id="glade-clipboard-view-add" href="gladeui/GladeClipboardView.html#glade-clipboard-view-add">
-<ANCHOR id="glade-clipboard-view-remove" href="gladeui/GladeClipboardView.html#glade-clipboard-view-remove">
-<ANCHOR id="glade-clipboard-view-refresh-sel" href="gladeui/GladeClipboardView.html#glade-clipboard-view-refresh-sel">
+<ANCHOR id="gladeui-GladeClipboardView" href="gladeui/gladeui-GladeClipboardView.html">
+<ANCHOR id="gladeui-GladeClipboardView.synopsis" href="gladeui/gladeui-GladeClipboardView.html#gladeui-GladeClipboardView.synopsis">
+<ANCHOR id="gladeui-GladeClipboardView.description" href="gladeui/gladeui-GladeClipboardView.html#gladeui-GladeClipboardView.description">
+<ANCHOR id="gladeui-GladeClipboardView.details" href="gladeui/gladeui-GladeClipboardView.html#gladeui-GladeClipboardView.details">
 <ANCHOR id="GladeInspector" href="gladeui/GladeInspector.html">
 <ANCHOR id="GladeInspector.synopsis" href="gladeui/GladeInspector.html#GladeInspector.synopsis">
 <ANCHOR id="GladeInspector.object-hierarchy" href="gladeui/GladeInspector.html#GladeInspector.object-hierarchy">
