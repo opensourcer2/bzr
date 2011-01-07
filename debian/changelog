@@ -1,3 +1,9 @@
+glade-3 (3.7.3-0ubuntu1) natty; urgency=low
+
+  * New upstream release
+
+ -- Robert Ancell <robert.ancell@canonical.com>  Fri, 07 Jan 2011 09:21:48 +1100
+
 glade-3 (3.7.2-0ubuntu1) natty; urgency=low
 
   * New upstream release 3.7.2.

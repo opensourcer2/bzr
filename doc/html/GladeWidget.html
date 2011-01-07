@@ -216,8 +216,6 @@ const <span class="returnvalue">gchar</span> *       <a class="link" href="Glade
 <span class="returnvalue">void</span>                <a class="link" href="GladeWidget.html#glade-widget-set-internal" title="glade_widget_set_internal ()">glade_widget_set_internal</a>           (<em class="parameter"><code><a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> *widget</code></em>,
                                                          <em class="parameter"><code>const <span class="type">gchar</span> *internal</code></em>);
 const <span class="returnvalue">gchar</span> *       <a class="link" href="GladeWidget.html#glade-widget-get-internal" title="glade_widget_get_internal ()">glade_widget_get_internal</a>           (<em class="parameter"><code><a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> *widget</code></em>);
-<span class="returnvalue">void</span>                <a class="link" href="GladeWidget.html#glade-widget-set-object" title="glade_widget_set_object ()">glade_widget_set_object</a>             (<em class="parameter"><code><a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> *gwidget</code></em>,
-                                                         <em class="parameter"><code><span class="type">GObject</span> *new_object</code></em>);
 <span class="returnvalue">GObject</span> *           <a class="link" href="GladeWidget.html#glade-widget-get-object" title="glade_widget_get_object ()">glade_widget_get_object</a>             (<em class="parameter"><code><a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> *widget</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GladeWidget.html#glade-widget-set-project" title="glade_widget_set_project ()">glade_widget_set_project</a>            (<em class="parameter"><code><a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> *widget</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GladeProject.html" title="GladeProject"><span class="type">GladeProject</span></a> *project</code></em>);
@@ -2132,32 +2130,6 @@ Sets the internal name of <em class="parameter"><code>widget</code></em> to <em 
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td> the internal name of <em class="parameter"><code>widget</code></em>
-</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2">
-<a name="glade-widget-set-object"></a><h3>glade_widget_set_object ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                glade_widget_set_object             (<em class="parameter"><code><a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a> *gwidget</code></em>,
-                                                         <em class="parameter"><code><span class="type">GObject</span> *new_object</code></em>);</pre>
-<p>
-Set the runtime object for this GladeWidget wrapper
-(this is used deep in the core and is probably unsafe
-to use elsewhere).
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>gwidget</code></em> :</span></p></td>
-<td>A <a class="link" href="GladeWidget.html" title="GladeWidget"><span class="type">GladeWidget</span></a>
-</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>new_object</code></em> :</span></p></td>
-<td>the new <span class="type">GObject</span> for <em class="parameter"><code>gwidget</code></em>
 </td>
 </tr>
 </tbody>

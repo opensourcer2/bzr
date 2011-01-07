@@ -376,19 +376,15 @@ libgladeui = $(top_builddir)/gladeui/libgladeui-1.la
 # libgladegtk
 gladegtk_LTLIBRARIES = libgladegtk.la
 gladegtkdir = $(pkglibdir)/modules
-libgladegtk_la_CPPLAGS = \
+libgladegtk_la_CPPFLAGS = \
 	-I$(top_srcdir)    \
 	-I$(top_builddir)  \
-	$(AM_CPPFLAGS)
-
-libgladegtk_la_CFLAGS = \
 	-DG_LOG_DOMAIN=\"GladeUI-GTK\" \
-	-I$(top_srcdir)                \
-	-I$(top_builddir)              \
 	$(GTK_CFLAGS)	               \
 	$(PLUGINS_WARN_CFLAGS)         \
-	$(AM_CFLAGS)
+	$(AM_CPPFLAGS)
 
+libgladegtk_la_CFLAGS = $(AM_CFLAGS)
 libgladegtk_la_SOURCES = glade-gtk.c glade-accels.c glade-attributes.c glade-convert.c fixed-bg.xpm \
 	glade-column-types.c  glade-model-data.c glade-text-button.c \
 	glade-icon-sources.c glade-button-editor.c glade-tool-button-editor.c glade-image-editor.c \
@@ -530,156 +526,156 @@ distclean-compile:
 @am__fastdepCC_FALSE@	$(LTCOMPILE) -c -o $@ $<
 
 libgladegtk_la-glade-gtk.lo: glade-gtk.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-gtk.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-gtk.Tpo -c -o libgladegtk_la-glade-gtk.lo `test -f 'glade-gtk.c' || echo '$(srcdir)/'`glade-gtk.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-gtk.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-gtk.Tpo -c -o libgladegtk_la-glade-gtk.lo `test -f 'glade-gtk.c' || echo '$(srcdir)/'`glade-gtk.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgladegtk_la-glade-gtk.Tpo $(DEPDIR)/libgladegtk_la-glade-gtk.Plo
 @am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-gtk.c' object='libgladegtk_la-glade-gtk.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-gtk.lo `test -f 'glade-gtk.c' || echo '$(srcdir)/'`glade-gtk.c
+@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-gtk.lo `test -f 'glade-gtk.c' || echo '$(srcdir)/'`glade-gtk.c
 
 libgladegtk_la-glade-accels.lo: glade-accels.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-accels.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-accels.Tpo -c -o libgladegtk_la-glade-accels.lo `test -f 'glade-accels.c' || echo '$(srcdir)/'`glade-accels.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-accels.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-accels.Tpo -c -o libgladegtk_la-glade-accels.lo `test -f 'glade-accels.c' || echo '$(srcdir)/'`glade-accels.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgladegtk_la-glade-accels.Tpo $(DEPDIR)/libgladegtk_la-glade-accels.Plo
 @am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-accels.c' object='libgladegtk_la-glade-accels.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-accels.lo `test -f 'glade-accels.c' || echo '$(srcdir)/'`glade-accels.c
+@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-accels.lo `test -f 'glade-accels.c' || echo '$(srcdir)/'`glade-accels.c
 
 libgladegtk_la-glade-attributes.lo: glade-attributes.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-attributes.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-attributes.Tpo -c -o libgladegtk_la-glade-attributes.lo `test -f 'glade-attributes.c' || echo '$(srcdir)/'`glade-attributes.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-attributes.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-attributes.Tpo -c -o libgladegtk_la-glade-attributes.lo `test -f 'glade-attributes.c' || echo '$(srcdir)/'`glade-attributes.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgladegtk_la-glade-attributes.Tpo $(DEPDIR)/libgladegtk_la-glade-attributes.Plo
 @am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-attributes.c' object='libgladegtk_la-glade-attributes.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-attributes.lo `test -f 'glade-attributes.c' || echo '$(srcdir)/'`glade-attributes.c
+@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-attributes.lo `test -f 'glade-attributes.c' || echo '$(srcdir)/'`glade-attributes.c
 
 libgladegtk_la-glade-convert.lo: glade-convert.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-convert.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-convert.Tpo -c -o libgladegtk_la-glade-convert.lo `test -f 'glade-convert.c' || echo '$(srcdir)/'`glade-convert.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-convert.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-convert.Tpo -c -o libgladegtk_la-glade-convert.lo `test -f 'glade-convert.c' || echo '$(srcdir)/'`glade-convert.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgladegtk_la-glade-convert.Tpo $(DEPDIR)/libgladegtk_la-glade-convert.Plo
 @am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-convert.c' object='libgladegtk_la-glade-convert.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-convert.lo `test -f 'glade-convert.c' || echo '$(srcdir)/'`glade-convert.c
+@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-convert.lo `test -f 'glade-convert.c' || echo '$(srcdir)/'`glade-convert.c
 
 libgladegtk_la-glade-column-types.lo: glade-column-types.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-column-types.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-column-types.Tpo -c -o libgladegtk_la-glade-column-types.lo `test -f 'glade-column-types.c' || echo '$(srcdir)/'`glade-column-types.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-column-types.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-column-types.Tpo -c -o libgladegtk_la-glade-column-types.lo `test -f 'glade-column-types.c' || echo '$(srcdir)/'`glade-column-types.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgladegtk_la-glade-column-types.Tpo $(DEPDIR)/libgladegtk_la-glade-column-types.Plo
 @am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-column-types.c' object='libgladegtk_la-glade-column-types.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-column-types.lo `test -f 'glade-column-types.c' || echo '$(srcdir)/'`glade-column-types.c
+@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-column-types.lo `test -f 'glade-column-types.c' || echo '$(srcdir)/'`glade-column-types.c
 
 libgladegtk_la-glade-model-data.lo: glade-model-data.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-model-data.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-model-data.Tpo -c -o libgladegtk_la-glade-model-data.lo `test -f 'glade-model-data.c' || echo '$(srcdir)/'`glade-model-data.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-model-data.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-model-data.Tpo -c -o libgladegtk_la-glade-model-data.lo `test -f 'glade-model-data.c' || echo '$(srcdir)/'`glade-model-data.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgladegtk_la-glade-model-data.Tpo $(DEPDIR)/libgladegtk_la-glade-model-data.Plo
 @am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-model-data.c' object='libgladegtk_la-glade-model-data.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-model-data.lo `test -f 'glade-model-data.c' || echo '$(srcdir)/'`glade-model-data.c
+@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-model-data.lo `test -f 'glade-model-data.c' || echo '$(srcdir)/'`glade-model-data.c
 
 libgladegtk_la-glade-text-button.lo: glade-text-button.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-text-button.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-text-button.Tpo -c -o libgladegtk_la-glade-text-button.lo `test -f 'glade-text-button.c' || echo '$(srcdir)/'`glade-text-button.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-text-button.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-text-button.Tpo -c -o libgladegtk_la-glade-text-button.lo `test -f 'glade-text-button.c' || echo '$(srcdir)/'`glade-text-button.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgladegtk_la-glade-text-button.Tpo $(DEPDIR)/libgladegtk_la-glade-text-button.Plo
 @am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-text-button.c' object='libgladegtk_la-glade-text-button.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-text-button.lo `test -f 'glade-text-button.c' || echo '$(srcdir)/'`glade-text-button.c
+@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-text-button.lo `test -f 'glade-text-button.c' || echo '$(srcdir)/'`glade-text-button.c
 
 libgladegtk_la-glade-icon-sources.lo: glade-icon-sources.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-icon-sources.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-icon-sources.Tpo -c -o libgladegtk_la-glade-icon-sources.lo `test -f 'glade-icon-sources.c' || echo '$(srcdir)/'`glade-icon-sources.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-icon-sources.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-icon-sources.Tpo -c -o libgladegtk_la-glade-icon-sources.lo `test -f 'glade-icon-sources.c' || echo '$(srcdir)/'`glade-icon-sources.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgladegtk_la-glade-icon-sources.Tpo $(DEPDIR)/libgladegtk_la-glade-icon-sources.Plo
 @am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-icon-sources.c' object='libgladegtk_la-glade-icon-sources.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-icon-sources.lo `test -f 'glade-icon-sources.c' || echo '$(srcdir)/'`glade-icon-sources.c
+@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-icon-sources.lo `test -f 'glade-icon-sources.c' || echo '$(srcdir)/'`glade-icon-sources.c
 
 libgladegtk_la-glade-button-editor.lo: glade-button-editor.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-button-editor.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-button-editor.Tpo -c -o libgladegtk_la-glade-button-editor.lo `test -f 'glade-button-editor.c' || echo '$(srcdir)/'`glade-button-editor.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-button-editor.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-button-editor.Tpo -c -o libgladegtk_la-glade-button-editor.lo `test -f 'glade-button-editor.c' || echo '$(srcdir)/'`glade-button-editor.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgladegtk_la-glade-button-editor.Tpo $(DEPDIR)/libgladegtk_la-glade-button-editor.Plo
 @am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-button-editor.c' object='libgladegtk_la-glade-button-editor.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-button-editor.lo `test -f 'glade-button-editor.c' || echo '$(srcdir)/'`glade-button-editor.c
+@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-button-editor.lo `test -f 'glade-button-editor.c' || echo '$(srcdir)/'`glade-button-editor.c
 
 libgladegtk_la-glade-tool-button-editor.lo: glade-tool-button-editor.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-tool-button-editor.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-tool-button-editor.Tpo -c -o libgladegtk_la-glade-tool-button-editor.lo `test -f 'glade-tool-button-editor.c' || echo '$(srcdir)/'`glade-tool-button-editor.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-tool-button-editor.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-tool-button-editor.Tpo -c -o libgladegtk_la-glade-tool-button-editor.lo `test -f 'glade-tool-button-editor.c' || echo '$(srcdir)/'`glade-tool-button-editor.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgladegtk_la-glade-tool-button-editor.Tpo $(DEPDIR)/libgladegtk_la-glade-tool-button-editor.Plo
 @am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-tool-button-editor.c' object='libgladegtk_la-glade-tool-button-editor.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-tool-button-editor.lo `test -f 'glade-tool-button-editor.c' || echo '$(srcdir)/'`glade-tool-button-editor.c
+@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-tool-button-editor.lo `test -f 'glade-tool-button-editor.c' || echo '$(srcdir)/'`glade-tool-button-editor.c
 
 libgladegtk_la-glade-image-editor.lo: glade-image-editor.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-image-editor.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-image-editor.Tpo -c -o libgladegtk_la-glade-image-editor.lo `test -f 'glade-image-editor.c' || echo '$(srcdir)/'`glade-image-editor.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-image-editor.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-image-editor.Tpo -c -o libgladegtk_la-glade-image-editor.lo `test -f 'glade-image-editor.c' || echo '$(srcdir)/'`glade-image-editor.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgladegtk_la-glade-image-editor.Tpo $(DEPDIR)/libgladegtk_la-glade-image-editor.Plo
 @am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-image-editor.c' object='libgladegtk_la-glade-image-editor.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-image-editor.lo `test -f 'glade-image-editor.c' || echo '$(srcdir)/'`glade-image-editor.c
+@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-image-editor.lo `test -f 'glade-image-editor.c' || echo '$(srcdir)/'`glade-image-editor.c
 
 libgladegtk_la-glade-image-item-editor.lo: glade-image-item-editor.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-image-item-editor.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-image-item-editor.Tpo -c -o libgladegtk_la-glade-image-item-editor.lo `test -f 'glade-image-item-editor.c' || echo '$(srcdir)/'`glade-image-item-editor.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-image-item-editor.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-image-item-editor.Tpo -c -o libgladegtk_la-glade-image-item-editor.lo `test -f 'glade-image-item-editor.c' || echo '$(srcdir)/'`glade-image-item-editor.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgladegtk_la-glade-image-item-editor.Tpo $(DEPDIR)/libgladegtk_la-glade-image-item-editor.Plo
 @am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-image-item-editor.c' object='libgladegtk_la-glade-image-item-editor.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-image-item-editor.lo `test -f 'glade-image-item-editor.c' || echo '$(srcdir)/'`glade-image-item-editor.c
+@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-image-item-editor.lo `test -f 'glade-image-item-editor.c' || echo '$(srcdir)/'`glade-image-item-editor.c
 
 libgladegtk_la-glade-icon-factory-editor.lo: glade-icon-factory-editor.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-icon-factory-editor.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-icon-factory-editor.Tpo -c -o libgladegtk_la-glade-icon-factory-editor.lo `test -f 'glade-icon-factory-editor.c' || echo '$(srcdir)/'`glade-icon-factory-editor.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-icon-factory-editor.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-icon-factory-editor.Tpo -c -o libgladegtk_la-glade-icon-factory-editor.lo `test -f 'glade-icon-factory-editor.c' || echo '$(srcdir)/'`glade-icon-factory-editor.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgladegtk_la-glade-icon-factory-editor.Tpo $(DEPDIR)/libgladegtk_la-glade-icon-factory-editor.Plo
 @am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-icon-factory-editor.c' object='libgladegtk_la-glade-icon-factory-editor.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-icon-factory-editor.lo `test -f 'glade-icon-factory-editor.c' || echo '$(srcdir)/'`glade-icon-factory-editor.c
+@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-icon-factory-editor.lo `test -f 'glade-icon-factory-editor.c' || echo '$(srcdir)/'`glade-icon-factory-editor.c
 
 libgladegtk_la-glade-store-editor.lo: glade-store-editor.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-store-editor.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-store-editor.Tpo -c -o libgladegtk_la-glade-store-editor.lo `test -f 'glade-store-editor.c' || echo '$(srcdir)/'`glade-store-editor.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-store-editor.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-store-editor.Tpo -c -o libgladegtk_la-glade-store-editor.lo `test -f 'glade-store-editor.c' || echo '$(srcdir)/'`glade-store-editor.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgladegtk_la-glade-store-editor.Tpo $(DEPDIR)/libgladegtk_la-glade-store-editor.Plo
 @am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-store-editor.c' object='libgladegtk_la-glade-store-editor.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-store-editor.lo `test -f 'glade-store-editor.c' || echo '$(srcdir)/'`glade-store-editor.c
+@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-store-editor.lo `test -f 'glade-store-editor.c' || echo '$(srcdir)/'`glade-store-editor.c
 
 libgladegtk_la-glade-label-editor.lo: glade-label-editor.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-label-editor.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-label-editor.Tpo -c -o libgladegtk_la-glade-label-editor.lo `test -f 'glade-label-editor.c' || echo '$(srcdir)/'`glade-label-editor.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-label-editor.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-label-editor.Tpo -c -o libgladegtk_la-glade-label-editor.lo `test -f 'glade-label-editor.c' || echo '$(srcdir)/'`glade-label-editor.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgladegtk_la-glade-label-editor.Tpo $(DEPDIR)/libgladegtk_la-glade-label-editor.Plo
 @am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-label-editor.c' object='libgladegtk_la-glade-label-editor.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-label-editor.lo `test -f 'glade-label-editor.c' || echo '$(srcdir)/'`glade-label-editor.c
+@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-label-editor.lo `test -f 'glade-label-editor.c' || echo '$(srcdir)/'`glade-label-editor.c
 
 libgladegtk_la-glade-cell-renderer-editor.lo: glade-cell-renderer-editor.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-cell-renderer-editor.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-cell-renderer-editor.Tpo -c -o libgladegtk_la-glade-cell-renderer-editor.lo `test -f 'glade-cell-renderer-editor.c' || echo '$(srcdir)/'`glade-cell-renderer-editor.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-cell-renderer-editor.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-cell-renderer-editor.Tpo -c -o libgladegtk_la-glade-cell-renderer-editor.lo `test -f 'glade-cell-renderer-editor.c' || echo '$(srcdir)/'`glade-cell-renderer-editor.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgladegtk_la-glade-cell-renderer-editor.Tpo $(DEPDIR)/libgladegtk_la-glade-cell-renderer-editor.Plo
 @am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-cell-renderer-editor.c' object='libgladegtk_la-glade-cell-renderer-editor.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-cell-renderer-editor.lo `test -f 'glade-cell-renderer-editor.c' || echo '$(srcdir)/'`glade-cell-renderer-editor.c
+@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-cell-renderer-editor.lo `test -f 'glade-cell-renderer-editor.c' || echo '$(srcdir)/'`glade-cell-renderer-editor.c
 
 libgladegtk_la-glade-treeview-editor.lo: glade-treeview-editor.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-treeview-editor.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-treeview-editor.Tpo -c -o libgladegtk_la-glade-treeview-editor.lo `test -f 'glade-treeview-editor.c' || echo '$(srcdir)/'`glade-treeview-editor.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-treeview-editor.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-treeview-editor.Tpo -c -o libgladegtk_la-glade-treeview-editor.lo `test -f 'glade-treeview-editor.c' || echo '$(srcdir)/'`glade-treeview-editor.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgladegtk_la-glade-treeview-editor.Tpo $(DEPDIR)/libgladegtk_la-glade-treeview-editor.Plo
 @am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-treeview-editor.c' object='libgladegtk_la-glade-treeview-editor.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-treeview-editor.lo `test -f 'glade-treeview-editor.c' || echo '$(srcdir)/'`glade-treeview-editor.c
+@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-treeview-editor.lo `test -f 'glade-treeview-editor.c' || echo '$(srcdir)/'`glade-treeview-editor.c
 
 libgladegtk_la-glade-entry-editor.lo: glade-entry-editor.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-entry-editor.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-entry-editor.Tpo -c -o libgladegtk_la-glade-entry-editor.lo `test -f 'glade-entry-editor.c' || echo '$(srcdir)/'`glade-entry-editor.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-entry-editor.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-entry-editor.Tpo -c -o libgladegtk_la-glade-entry-editor.lo `test -f 'glade-entry-editor.c' || echo '$(srcdir)/'`glade-entry-editor.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgladegtk_la-glade-entry-editor.Tpo $(DEPDIR)/libgladegtk_la-glade-entry-editor.Plo
 @am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-entry-editor.c' object='libgladegtk_la-glade-entry-editor.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-entry-editor.lo `test -f 'glade-entry-editor.c' || echo '$(srcdir)/'`glade-entry-editor.c
+@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-entry-editor.lo `test -f 'glade-entry-editor.c' || echo '$(srcdir)/'`glade-entry-editor.c
 
 libgladegtk_la-glade-activatable-editor.lo: glade-activatable-editor.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-activatable-editor.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-activatable-editor.Tpo -c -o libgladegtk_la-glade-activatable-editor.lo `test -f 'glade-activatable-editor.c' || echo '$(srcdir)/'`glade-activatable-editor.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-activatable-editor.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-activatable-editor.Tpo -c -o libgladegtk_la-glade-activatable-editor.lo `test -f 'glade-activatable-editor.c' || echo '$(srcdir)/'`glade-activatable-editor.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgladegtk_la-glade-activatable-editor.Tpo $(DEPDIR)/libgladegtk_la-glade-activatable-editor.Plo
 @am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-activatable-editor.c' object='libgladegtk_la-glade-activatable-editor.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-activatable-editor.lo `test -f 'glade-activatable-editor.c' || echo '$(srcdir)/'`glade-activatable-editor.c
+@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-activatable-editor.lo `test -f 'glade-activatable-editor.c' || echo '$(srcdir)/'`glade-activatable-editor.c
 
 mostlyclean-libtool:
 	-rm -f *.lo

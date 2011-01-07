@@ -27,7 +27,7 @@
       <sub name="GladeEditor" link="gladeui-glade-editor.html"/>
       <sub name="GladeEditorProperty" link="GladeEditorProperty.html"/>
       <sub name="GladePalette" link="GladePalette.html"/>
-      <sub name="GladeClipboardView" link="GladeClipboardView.html"/>
+      <sub name="GladeClipboardView" link="gladeui-GladeClipboardView.html"/>
       <sub name="GladeInspector" link="GladeInspector.html"/>
       <sub name="GladeSignalEditor" link="gladeui-GladeSignalEditor.html"/>
       <sub name="GladeDesignView" link="GladeDesignView.html"/>
@@ -49,7 +49,6 @@
     <keyword type="function" name="glade_app_get_editor ()" link="GladeApp.html#glade-app-get-editor"/>
     <keyword type="function" name="glade_app_get_palette ()" link="GladeApp.html#glade-app-get-palette"/>
     <keyword type="function" name="glade_app_get_clipboard ()" link="GladeApp.html#glade-app-get-clipboard"/>
-    <keyword type="function" name="glade_app_get_clipboard_view ()" link="GladeApp.html#glade-app-get-clipboard-view"/>
     <keyword type="function" name="glade_app_get_project ()" link="GladeApp.html#glade-app-get-project"/>
     <keyword type="function" name="glade_app_set_project ()" link="GladeApp.html#glade-app-set-project"/>
     <keyword type="function" name="glade_app_get_pointer_mode ()" link="GladeApp.html#glade-app-get-pointer-mode"/>
@@ -96,6 +95,7 @@
     <keyword type="function" name="glade_project_new ()" link="GladeProject.html#glade-project-new"/>
     <keyword type="function" name="glade_project_get_format ()" link="GladeProject.html#glade-project-get-format"/>
     <keyword type="function" name="glade_project_set_format ()" link="GladeProject.html#glade-project-set-format"/>
+    <keyword type="function" name="glade_project_load_from_file ()" link="GladeProject.html#glade-project-load-from-file"/>
     <keyword type="function" name="glade_project_load ()" link="GladeProject.html#glade-project-load"/>
     <keyword type="function" name="glade_project_save ()" link="GladeProject.html#glade-project-save"/>
     <keyword type="function" name="glade_project_get_path ()" link="GladeProject.html#glade-project-get-path"/>
@@ -137,6 +137,8 @@
     <keyword type="signal" name="The &quot;changed&quot; signal" link="GladeProject.html#GladeProject-changed"/>
     <keyword type="signal" name="The &quot;close&quot; signal" link="GladeProject.html#GladeProject-close"/>
     <keyword type="signal" name="The &quot;convert-finished&quot; signal" link="GladeProject.html#GladeProject-convert-finished"/>
+    <keyword type="signal" name="The &quot;load-progress&quot; signal" link="GladeProject.html#GladeProject-load-progress"/>
+    <keyword type="signal" name="The &quot;parse-began&quot; signal" link="GladeProject.html#GladeProject-parse-began"/>
     <keyword type="signal" name="The &quot;parse-finished&quot; signal" link="GladeProject.html#GladeProject-parse-finished"/>
     <keyword type="signal" name="The &quot;remove-widget&quot; signal" link="GladeProject.html#GladeProject-remove-widget"/>
     <keyword type="signal" name="The &quot;selection-changed&quot; signal" link="GladeProject.html#GladeProject-selection-changed"/>
@@ -206,7 +208,6 @@
     <keyword type="function" name="glade_widget_get_name ()" link="GladeWidget.html#glade-widget-get-name"/>
     <keyword type="function" name="glade_widget_set_internal ()" link="GladeWidget.html#glade-widget-set-internal"/>
     <keyword type="function" name="glade_widget_get_internal ()" link="GladeWidget.html#glade-widget-get-internal"/>
-    <keyword type="function" name="glade_widget_set_object ()" link="GladeWidget.html#glade-widget-set-object"/>
     <keyword type="function" name="glade_widget_get_object ()" link="GladeWidget.html#glade-widget-get-object"/>
     <keyword type="function" name="glade_widget_set_project ()" link="GladeWidget.html#glade-widget-set-project"/>
     <keyword type="function" name="glade_widget_get_project ()" link="GladeWidget.html#glade-widget-get-project"/>
@@ -522,11 +523,6 @@
     <keyword type="property" name="The &quot;use-small-item-icons&quot; property" link="GladePalette.html#GladePalette--use-small-item-icons"/>
     <keyword type="signal" name="The &quot;refresh&quot; signal" link="GladePalette.html#GladePalette-refresh"/>
     <keyword type="signal" name="The &quot;toggled&quot; signal" link="GladePalette.html#GladePalette-toggled"/>
-    <keyword type="struct" name="GladeClipboardView" link="GladeClipboardView.html#GladeClipboardView-struct"/>
-    <keyword type="function" name="glade_clipboard_view_new ()" link="GladeClipboardView.html#glade-clipboard-view-new"/>
-    <keyword type="function" name="glade_clipboard_view_add ()" link="GladeClipboardView.html#glade-clipboard-view-add"/>
-    <keyword type="function" name="glade_clipboard_view_remove ()" link="GladeClipboardView.html#glade-clipboard-view-remove"/>
-    <keyword type="function" name="glade_clipboard_view_refresh_sel ()" link="GladeClipboardView.html#glade-clipboard-view-refresh-sel"/>
     <keyword type="struct" name="GladeInspector" link="GladeInspector.html#GladeInspector-struct"/>
     <keyword type="function" name="glade_inspector_new ()" link="GladeInspector.html#glade-inspector-new"/>
     <keyword type="function" name="glade_inspector_new_with_project ()" link="GladeInspector.html#glade-inspector-new-with-project"/>

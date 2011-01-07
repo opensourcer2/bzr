@@ -111,8 +111,9 @@ glade_property_dup_impl (GladeProperty *template_prop, GladeWidget *widget)
 	else
 		g_value_copy (template_prop->value, property->value);
 
-	/* Need value in place here ... */
-	glade_property_set_enabled (property, template_prop->enabled);
+	property->enabled = template_prop->enabled;
+	property->state   = template_prop->state;
+
 	glade_property_set_sensitive (property, template_prop->sensitive,
 				      template_prop->insensitive_tooltip);
 	
@@ -245,7 +246,8 @@ glade_property_set_value_impl (GladeProperty *property, const GValue *value)
 #if 0
 	{
 		g_print ("***************************************************\n"); 
-		g_print ("Setting property %s on %s ..\n", 
+		g_print ("Setting %s property %s on %s ..\n", 
+			 property->klass->packing ? "packing" : "normal",
 			 property->klass->id,
 			 property->widget ? property->widget->name : "unknown");
 
@@ -351,8 +353,8 @@ glade_property_sync_impl (GladeProperty *property)
 	 * (other properties may be used for convenience in the plugin).
 	 */
 	if ((property->klass->packing && 
-	     property != glade_widget_get_pack_property (property->widget, property->klass->id)) ||
-	    property != glade_widget_get_property (property->widget, property->klass->id))
+	     !glade_widget_get_pack_property (property->widget, property->klass->id)) ||
+	    !glade_widget_get_property (property->widget, property->klass->id))
 		return;
 
 	property->syncing++;

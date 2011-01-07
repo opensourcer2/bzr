@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<glade-catalog version="2.20" targetable="2.18,2.16,2.14,2.12,2.10,2.8" supports="libglade,gtkbuilder" name="gtk+" library="gladegtk" icon-prefix="gtk" domain="glade3" book="gtk">
+<glade-catalog version="2.24" targetable="2.22,2.20,2.18,2.16,2.14,2.12,2.10,2.8" supports="libglade,gtkbuilder" name="gtk+" library="gladegtk" icon-prefix="gtk" domain="glade3" book="gtk">
   <project-convert-function>glade_gtk_project_convert</project-convert-function>
   <glade-widget-classes>
 
@@ -50,6 +50,9 @@
 	  <visible-lines>2</visible-lines>
 	</property>
 	<property weight="4.1" since="2.12" libglade-unsupported="True" id="tooltip-markup"/>
+        <property save-always="True" id="can-focus" common="True"/>
+	<property ignore="True" id="has-default" common="True"/>
+	<property id="can-default" common="True"/>
 	<property ignore="True" id="visible" default="True" common="True"/>
 	<property optional-default="False" optional="True" id="width-request" default="0" common="True"/>
 	<property optional-default="False" optional="True" id="height-request" default="0" common="True"/>
@@ -103,7 +106,6 @@
 	<property id="parent" disabled="True"/>
 	<property id="style" disabled="True"/>
 	<property ignore="True" id="sensitive"/>
-	<property ignore="True" id="has-default" common="True"/>
 	<property since="2.18" id="double-buffered"/>
 
 	
@@ -282,6 +284,7 @@
     <glade-widget-class name="GtkBox" fixed="True" title="Box">
       <post-create-function>glade_gtk_box_post_create</post-create-function>
       <get-internal-child-function>glade_gtk_box_get_internal_child</get-internal-child-function>
+      <get-children-function>glade_gtk_box_get_children</get-children-function>
       <set-property-function>glade_gtk_box_set_property</set-property-function>
       <get-property-function>glade_gtk_box_get_property</get-property-function>
       <verify-function>glade_gtk_box_verify_property</verify-function>
@@ -777,7 +780,6 @@
       </signals>
 
       <properties>
-        <property save-always="True" id="can-focus"/>
 	<property translatable="True" id="text" custom-layout="True"/>
         <property since="2.18" libglade-unsupported="True" id="buffer" custom-layout="True" create-type="GtkEntryBuffer"/>
 
@@ -870,7 +872,6 @@
       <write-widget-function>glade_gtk_button_write_widget</write-widget-function>
 
       <properties>
-	<property save-always="True" id="can-focus"/>
 	<property save-always="True" id="receives-default"/>
 	<property parentless-widget="True" libglade-unsupported="True" id="image" custom-layout="True" create-type="GtkImage"/>
 	<property visible="False" id="use-stock" custom-layout="True"/>
@@ -963,7 +964,6 @@
       <properties>
         <property id="text" disabled="True"/>
         <property id="value" disabled="True"/>
-	<property id="can-focus" default="True"/>
         <property id="adjustment" default="0 0 100 1 10 0"/>
         <property id="update-policy">
   	  <displayable-values>
@@ -1099,6 +1099,8 @@
         <property ignore="True" id="active"/>
         <property ignore="True" id="column-span-column"/>
         <property ignore="True" id="row-span-column"/>
+	<property since="2.24" id="entry-text-column"/>
+	<property since="2.24" id="has-entry"/>
 	<property translatable="True" libglade-only="True" id="items" name="Items">
 	  <parameter-spec>
 	    <type>GParamBoxed</type>
@@ -1126,7 +1128,7 @@
       </properties>
     </glade-widget-class>
 
-    <glade-widget-class name="GtkComboBoxEntry" generic-name="comboboxentry" title="Combo Box Entry">
+    <glade-widget-class name="GtkComboBoxEntry" generic-name="comboboxentry" deprecated="True" title="Combo Box Entry">
       <post-create-function>glade_gtk_combo_box_entry_post_create</post-create-function>
       <get-internal-child-function>glade_gtk_combo_box_entry_get_internal_child</get-internal-child-function>
       <set-property-function>glade_gtk_combo_box_entry_set_property</set-property-function>
@@ -1320,6 +1322,7 @@
 
       <properties>
 	<property since="2.12" id="group"/>
+	<property since="2.24" id="group-name"/>
 	<property save="False" id="page">
 	  <tooltip>Set the current page (strictly for editing purposes)</tooltip>
 	</property>
@@ -1544,7 +1547,6 @@
     
     <glade-widget-class name="GtkScrolledWindow" generic-name="scrolledwindow" title="Scrolled Window">
       <properties>
-        <property save-always="True" id="can-focus"/>
         <property since="2.10" ignore="True" id="window-placement-set"/>
       	<property id="hscrollbar-policy" default="GTK_POLICY_AUTOMATIC">
   	  <displayable-values>
@@ -1589,6 +1591,9 @@
 	  <visible-lines>2</visible-lines>
 	</property>
       </properties>
+      <signals>
+	<signal since="2.24" id="activate-link"/>
+      </signals>
    </glade-widget-class>
 
     <glade-widget-class name="GtkColorSelectionDialog" generic-name="colorselectiondialog" title="Color Selection Dialog">
@@ -1634,9 +1639,6 @@
 	<property optional-default="False" optional="True" id="default-height" default="115"/>
 
 	<property id="sensitive" common="True"/>
-	<property id="can-default" common="True"/>
-	<property id="has-default" common="True"/>
-	<property id="can-focus" common="True"/>
 
 	<property since="2.10" parentless-widget="True" id="image"/>
 	<property translatable="True" since="2.10" id="secondary-text"/>
@@ -1713,7 +1715,14 @@
     </glade-widget-class>
     
     <glade-widget-class name="GtkOptionMenu" libglade-only="True" generic-name="optionmenu" deprecated="True" title="Option Menu">
+      <post-create-function>empty</post-create-function>
+      <add-child-function>glade_gtk_option_menu_add_child</add-child-function>
+      <remove-child-function>glade_gtk_option_menu_remove_child</remove-child-function>
+      <get-children-function>glade_gtk_option_menu_get_children</get-children-function>
+
       <properties>
+	<property id="menu" disabled="True"/>
+
 	
 	<property save="False" ignore="True" id="atk-press" atk-property="True" name="Press">
 	  <parameter-spec>
@@ -1918,6 +1927,11 @@
       <post-create-function>glade_gtk_action_post_create</post-create-function>
       <create-editor-property-function>glade_gtk_widget_create_eprop</create-editor-property-function>
       <string-from-value-function>glade_gtk_widget_string_from_value</string-from-value-function>
+      <action-activate-function>glade_gtk_action_action_activate</action-activate-function>
+      <actions>
+        <action stock="gtk-edit" important="True" id="launch_editor" name="Edit&#8230;"></action>
+      </actions>
+
       <properties>
 	<property id="name" disabled="True"/>
 	<property translatable="True" id="label"/>
@@ -1951,6 +1965,10 @@
       <replace-child-function>glade_gtk_action_group_replace_child</replace-child-function>
       <read-child-function>glade_gtk_action_group_read_child</read-child-function>
       <write-child-function>glade_gtk_action_group_write_child</write-child-function>
+      <action-activate-function>glade_gtk_action_action_activate</action-activate-function>
+      <actions>
+        <action stock="gtk-edit" important="True" id="launch_editor" name="Edit&#8230;"></action>
+      </actions>
     </glade-widget-class>
 
     <glade-widget-class toplevel="True" name="GtkEntryCompletion" libglade-unsupported="True" generic-name="entrycompletion" title="Entry Completion"></glade-widget-class>
@@ -2120,6 +2138,7 @@
       </actions>
 
       <properties>
+        <property since="2.22" id="item-orientation"/>
         <property since="2.18" id="item-padding"/>
         <property id="text-column" disabled="True"/>
         <property id="markup-column" disabled="True"/>

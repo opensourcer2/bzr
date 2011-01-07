@@ -1,31 +1,31 @@
 ## Previewer
 
-bin_PROGRAMS = glade-previewer
+bin_PROGRAMS = glade-3-previewer
 lib_LTLIBRARIES = libgladeui-1.la
 
-glade_previewer_CPPFLAGS = \
+glade_3_previewer_CPPFLAGS = \
 	-I$(top_srcdir)    \
 	-I$(top_builddir)  \
-	-DGLADE_GNOMEHELPDIR="\"$(HELP_DIR)\""
-	$(AM_CPPFLAGS)
-
-glade_previewer_CFLAGS =   \
+	-DGLADE_GNOMEHELPDIR="\"$(HELP_DIR)\"" \
 	$(GTK_CFLAGS)      \
 	$(IGE_MAC_CFLAGS)  \
 	$(WARN_CFLAGS)     \
+	$(AM_CPPFLAGS)
+
+glade_3_previewer_CFLAGS =   \
 	$(AM_CFLAGS)
 
-glade_previewer_LDFLAGS = $(AM_LDFLAGS)
+glade_3_previewer_LDFLAGS = $(AM_LDFLAGS)
 
-glade_previewer_LDADD = $(top_builddir)/gladeui/libgladeui-1.la $(IGE_MAC_LIBS)
+glade_3_previewer_LDADD = libgladeui-1.la $(IGE_MAC_LIBS)
 
-glade_previewer_SOURCES = \
+glade_3_previewer_SOURCES = \
 	glade-previewer.c
 
 if NATIVE_WIN32
-glade_previewer_LDADD += glade-win32-res.o
+glade_3_previewer_LDADD += glade-win32-res.o
 if !GLADE_UNSTABLE
-glade_previewer_LDFLAGS += -mwindows
+glade_3_previewer_LDFLAGS += -mwindows
 endif
 endif
 
@@ -76,7 +76,6 @@ libgladeui_1_la_SOURCES = \
 	glade-signal.c \
 	glade-signal-editor.c \
 	glade-clipboard.c \
-	glade-clipboard-view.c \
 	glade-command.c \
 	glade-id-allocator.c \
 	glade-id-allocator.h \
@@ -100,13 +99,13 @@ libgladeui_1_la_CPPFLAGS =  \
 	$(common_defines)   \
 	-I$(top_srcdir)     \
 	-I$(top_builddir)   \
-	$(AM_CPPFLAGS)
-
-libgladeui_1_la_CFLAGS =    \
 	$(GTK_CFLAGS)       \
 	$(IGE_MAC_BUNDLE_FLAG) \
 	$(IGE_MAC_CFLAGS)  \
 	$(WARN_CFLAGS)      \
+	$(AM_CPPFLAGS)
+
+libgladeui_1_la_CFLAGS =    \
 	$(AM_CFLAGS)
 
 libgladeui_1_la_LDFLAGS = -version-info $(GLADE_CURRENT):$(GLADE_REVISION):$(GLADE_AGE) $(AM_LDFLAGS)
@@ -134,7 +133,6 @@ libgladeuiinclude_HEADERS = \
 	glade-property-class.h \
 	glade-utils.h \
 	glade-clipboard.h \
-	glade-clipboard-view.h \
 	glade-command.h \
 	glade-app.h \
 	glade-builtins.h \

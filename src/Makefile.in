@@ -292,12 +292,13 @@ top_srcdir = @top_srcdir@
 glade_3_CPPFLAGS = \
 	-I$(top_srcdir)    \
 	-I$(top_builddir)  \
-	-DGLADE_GNOMEHELPDIR="\"$(HELP_DIR)\""
-
-glade_3_CFLAGS = \
+	-DGLADE_GNOMEHELPDIR="\"$(HELP_DIR)\"" \
 	$(GTK_CFLAGS)      \
 	$(IGE_MAC_CFLAGS)  \
 	$(WARN_CFLAGS)     \
+	$(AM_CPPFLAGS)
+
+glade_3_CFLAGS = \
 	$(AM_CFLAGS)
 
 glade_3_LDFLAGS = $(AM_LDFLAGS) $(am__append_2)
@@ -682,7 +683,6 @@ uninstall-am: uninstall-binPROGRAMS
 	pdf pdf-am ps ps-am tags uninstall uninstall-am \
 	uninstall-binPROGRAMS
 
-	$(AM_CPPFLAGS)
 
 glade-win32-res.o: glade-3.rc
 	$(WINDRES) $< $@

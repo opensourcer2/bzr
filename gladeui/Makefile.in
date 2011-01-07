@@ -37,7 +37,7 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 target_triplet = @target@
-bin_PROGRAMS = glade-previewer$(EXEEXT)
+bin_PROGRAMS = glade-3-previewer$(EXEEXT)
 @NATIVE_WIN32_TRUE@am__append_1 = glade-win32-res.o
 @GLADE_UNSTABLE_FALSE@@NATIVE_WIN32_TRUE@am__append_2 = -mwindows
 @PLATFORM_WIN32_TRUE@am__append_3 = -no-undefined
@@ -108,7 +108,6 @@ am_libgladeui_1_la_OBJECTS = libgladeui_1_la-glade-widget-adaptor.lo \
 	libgladeui_1_la-glade-signal.lo \
 	libgladeui_1_la-glade-signal-editor.lo \
 	libgladeui_1_la-glade-clipboard.lo \
-	libgladeui_1_la-glade-clipboard-view.lo \
 	libgladeui_1_la-glade-command.lo \
 	libgladeui_1_la-glade-id-allocator.lo \
 	libgladeui_1_la-glade-marshallers.lo \
@@ -131,16 +130,15 @@ libgladeui_1_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
 	$(libgladeui_1_la_CFLAGS) $(CFLAGS) $(libgladeui_1_la_LDFLAGS) \
 	$(LDFLAGS) -o $@
 PROGRAMS = $(bin_PROGRAMS)
-am_glade_previewer_OBJECTS =  \
-	glade_previewer-glade-previewer.$(OBJEXT)
-glade_previewer_OBJECTS = $(am_glade_previewer_OBJECTS)
-glade_previewer_DEPENDENCIES =  \
-	$(top_builddir)/gladeui/libgladeui-1.la $(am__DEPENDENCIES_1) \
+am_glade_3_previewer_OBJECTS =  \
+	glade_3_previewer-glade-previewer.$(OBJEXT)
+glade_3_previewer_OBJECTS = $(am_glade_3_previewer_OBJECTS)
+glade_3_previewer_DEPENDENCIES = libgladeui-1.la $(am__DEPENDENCIES_1) \
 	$(am__append_1)
-glade_previewer_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
+glade_3_previewer_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
 	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
-	$(glade_previewer_CFLAGS) $(CFLAGS) $(glade_previewer_LDFLAGS) \
-	$(LDFLAGS) -o $@
+	$(glade_3_previewer_CFLAGS) $(CFLAGS) \
+	$(glade_3_previewer_LDFLAGS) $(LDFLAGS) -o $@
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -167,8 +165,8 @@ am__v_CCLD_0 = @echo "  CCLD  " $@;
 AM_V_GEN = $(am__v_GEN_$(V))
 am__v_GEN_ = $(am__v_GEN_$(AM_DEFAULT_VERBOSITY))
 am__v_GEN_0 = @echo "  GEN   " $@;
-SOURCES = $(libgladeui_1_la_SOURCES) $(glade_previewer_SOURCES)
-DIST_SOURCES = $(libgladeui_1_la_SOURCES) $(glade_previewer_SOURCES)
+SOURCES = $(libgladeui_1_la_SOURCES) $(glade_3_previewer_SOURCES)
+DIST_SOURCES = $(libgladeui_1_la_SOURCES) $(glade_3_previewer_SOURCES)
 HEADERS = $(libgladeuiinclude_HEADERS)
 ETAGS = etags
 CTAGS = ctags
@@ -364,21 +362,22 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 lib_LTLIBRARIES = libgladeui-1.la
-glade_previewer_CPPFLAGS = \
+glade_3_previewer_CPPFLAGS = \
 	-I$(top_srcdir)    \
 	-I$(top_builddir)  \
-	-DGLADE_GNOMEHELPDIR="\"$(HELP_DIR)\""
-
-glade_previewer_CFLAGS = \
+	-DGLADE_GNOMEHELPDIR="\"$(HELP_DIR)\"" \
 	$(GTK_CFLAGS)      \
 	$(IGE_MAC_CFLAGS)  \
 	$(WARN_CFLAGS)     \
+	$(AM_CPPFLAGS)
+
+glade_3_previewer_CFLAGS = \
 	$(AM_CFLAGS)
 
-glade_previewer_LDFLAGS = $(AM_LDFLAGS) $(am__append_2)
-glade_previewer_LDADD = $(top_builddir)/gladeui/libgladeui-1.la \
-	$(IGE_MAC_LIBS) $(am__append_1)
-glade_previewer_SOURCES = \
+glade_3_previewer_LDFLAGS = $(AM_LDFLAGS) $(am__append_2)
+glade_3_previewer_LDADD = libgladeui-1.la $(IGE_MAC_LIBS) \
+	$(am__append_1)
+glade_3_previewer_SOURCES = \
 	glade-previewer.c
 
 common_defines = \
@@ -422,7 +421,6 @@ libgladeui_1_la_SOURCES = \
 	glade-signal.c \
 	glade-signal-editor.c \
 	glade-clipboard.c \
-	glade-clipboard-view.c \
 	glade-command.c \
 	glade-id-allocator.c \
 	glade-id-allocator.h \
@@ -446,13 +444,13 @@ libgladeui_1_la_CPPFLAGS = \
 	$(common_defines)   \
 	-I$(top_srcdir)     \
 	-I$(top_builddir)   \
-	$(AM_CPPFLAGS)
-
-libgladeui_1_la_CFLAGS = \
 	$(GTK_CFLAGS)       \
 	$(IGE_MAC_BUNDLE_FLAG) \
 	$(IGE_MAC_CFLAGS)  \
 	$(WARN_CFLAGS)      \
+	$(AM_CPPFLAGS)
+
+libgladeui_1_la_CFLAGS = \
 	$(AM_CFLAGS)
 
 libgladeui_1_la_LDFLAGS = -version-info \
@@ -480,7 +478,6 @@ libgladeuiinclude_HEADERS = \
 	glade-property-class.h \
 	glade-utils.h \
 	glade-clipboard.h \
-	glade-clipboard-view.h \
 	glade-command.h \
 	glade-app.h \
 	glade-builtins.h \
@@ -612,9 +609,9 @@ clean-binPROGRAMS:
 	list=`for p in $$list; do echo "$$p"; done | sed 's/$(EXEEXT)$$//'`; \
 	echo " rm -f" $$list; \
 	rm -f $$list
-glade-previewer$(EXEEXT): $(glade_previewer_OBJECTS) $(glade_previewer_DEPENDENCIES) 
-	@rm -f glade-previewer$(EXEEXT)
-	$(AM_V_CCLD)$(glade_previewer_LINK) $(glade_previewer_OBJECTS) $(glade_previewer_LDADD) $(LIBS)
+glade-3-previewer$(EXEEXT): $(glade_3_previewer_OBJECTS) $(glade_3_previewer_DEPENDENCIES) 
+	@rm -f glade-3-previewer$(EXEEXT)
+	$(AM_V_CCLD)$(glade_3_previewer_LINK) $(glade_3_previewer_OBJECTS) $(glade_3_previewer_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -622,14 +619,13 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/glade_previewer-glade-previewer.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/glade_3_previewer-glade-previewer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-accumulators.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-app.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-base-editor.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-builtins.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-catalog.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-cell-renderer-icon.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-clipboard-view.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-clipboard.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-command.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladeui_1_la-glade-cursor.Plo@am__quote@
@@ -879,14 +875,6 @@ libgladeui_1_la-glade-clipboard.lo: glade-clipboard.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladeui_1_la_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-clipboard.lo `test -f 'glade-clipboard.c' || echo '$(srcdir)/'`glade-clipboard.c
 
-libgladeui_1_la-glade-clipboard-view.lo: glade-clipboard-view.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladeui_1_la_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-clipboard-view.lo -MD -MP -MF $(DEPDIR)/libgladeui_1_la-glade-clipboard-view.Tpo -c -o libgladeui_1_la-glade-clipboard-view.lo `test -f 'glade-clipboard-view.c' || echo '$(srcdir)/'`glade-clipboard-view.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgladeui_1_la-glade-clipboard-view.Tpo $(DEPDIR)/libgladeui_1_la-glade-clipboard-view.Plo
-@am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-clipboard-view.c' object='libgladeui_1_la-glade-clipboard-view.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladeui_1_la_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-clipboard-view.lo `test -f 'glade-clipboard-view.c' || echo '$(srcdir)/'`glade-clipboard-view.c
-
 libgladeui_1_la-glade-command.lo: glade-command.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladeui_1_la_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -MT libgladeui_1_la-glade-command.lo -MD -MP -MF $(DEPDIR)/libgladeui_1_la-glade-command.Tpo -c -o libgladeui_1_la-glade-command.lo `test -f 'glade-command.c' || echo '$(srcdir)/'`glade-command.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgladeui_1_la-glade-command.Tpo $(DEPDIR)/libgladeui_1_la-glade-command.Plo
@@ -999,21 +987,21 @@ libgladeui_1_la-glade-cell-renderer-icon.lo: glade-cell-renderer-icon.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladeui_1_la_CPPFLAGS) $(CPPFLAGS) $(libgladeui_1_la_CFLAGS) $(CFLAGS) -c -o libgladeui_1_la-glade-cell-renderer-icon.lo `test -f 'glade-cell-renderer-icon.c' || echo '$(srcdir)/'`glade-cell-renderer-icon.c
 
-glade_previewer-glade-previewer.o: glade-previewer.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(glade_previewer_CPPFLAGS) $(CPPFLAGS) $(glade_previewer_CFLAGS) $(CFLAGS) -MT glade_previewer-glade-previewer.o -MD -MP -MF $(DEPDIR)/glade_previewer-glade-previewer.Tpo -c -o glade_previewer-glade-previewer.o `test -f 'glade-previewer.c' || echo '$(srcdir)/'`glade-previewer.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/glade_previewer-glade-previewer.Tpo $(DEPDIR)/glade_previewer-glade-previewer.Po
+glade_3_previewer-glade-previewer.o: glade-previewer.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(glade_3_previewer_CPPFLAGS) $(CPPFLAGS) $(glade_3_previewer_CFLAGS) $(CFLAGS) -MT glade_3_previewer-glade-previewer.o -MD -MP -MF $(DEPDIR)/glade_3_previewer-glade-previewer.Tpo -c -o glade_3_previewer-glade-previewer.o `test -f 'glade-previewer.c' || echo '$(srcdir)/'`glade-previewer.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/glade_3_previewer-glade-previewer.Tpo $(DEPDIR)/glade_3_previewer-glade-previewer.Po
 @am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-previewer.c' object='glade_previewer-glade-previewer.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-previewer.c' object='glade_3_previewer-glade-previewer.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(glade_previewer_CPPFLAGS) $(CPPFLAGS) $(glade_previewer_CFLAGS) $(CFLAGS) -c -o glade_previewer-glade-previewer.o `test -f 'glade-previewer.c' || echo '$(srcdir)/'`glade-previewer.c
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(glade_3_previewer_CPPFLAGS) $(CPPFLAGS) $(glade_3_previewer_CFLAGS) $(CFLAGS) -c -o glade_3_previewer-glade-previewer.o `test -f 'glade-previewer.c' || echo '$(srcdir)/'`glade-previewer.c
 
-glade_previewer-glade-previewer.obj: glade-previewer.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(glade_previewer_CPPFLAGS) $(CPPFLAGS) $(glade_previewer_CFLAGS) $(CFLAGS) -MT glade_previewer-glade-previewer.obj -MD -MP -MF $(DEPDIR)/glade_previewer-glade-previewer.Tpo -c -o glade_previewer-glade-previewer.obj `if test -f 'glade-previewer.c'; then $(CYGPATH_W) 'glade-previewer.c'; else $(CYGPATH_W) '$(srcdir)/glade-previewer.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/glade_previewer-glade-previewer.Tpo $(DEPDIR)/glade_previewer-glade-previewer.Po
+glade_3_previewer-glade-previewer.obj: glade-previewer.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(glade_3_previewer_CPPFLAGS) $(CPPFLAGS) $(glade_3_previewer_CFLAGS) $(CFLAGS) -MT glade_3_previewer-glade-previewer.obj -MD -MP -MF $(DEPDIR)/glade_3_previewer-glade-previewer.Tpo -c -o glade_3_previewer-glade-previewer.obj `if test -f 'glade-previewer.c'; then $(CYGPATH_W) 'glade-previewer.c'; else $(CYGPATH_W) '$(srcdir)/glade-previewer.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/glade_3_previewer-glade-previewer.Tpo $(DEPDIR)/glade_3_previewer-glade-previewer.Po
 @am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-previewer.c' object='glade_previewer-glade-previewer.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-previewer.c' object='glade_3_previewer-glade-previewer.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(glade_previewer_CPPFLAGS) $(CPPFLAGS) $(glade_previewer_CFLAGS) $(CFLAGS) -c -o glade_previewer-glade-previewer.obj `if test -f 'glade-previewer.c'; then $(CYGPATH_W) 'glade-previewer.c'; else $(CYGPATH_W) '$(srcdir)/glade-previewer.c'; fi`
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(glade_3_previewer_CPPFLAGS) $(CPPFLAGS) $(glade_3_previewer_CFLAGS) $(CFLAGS) -c -o glade_3_previewer-glade-previewer.obj `if test -f 'glade-previewer.c'; then $(CYGPATH_W) 'glade-previewer.c'; else $(CYGPATH_W) '$(srcdir)/glade-previewer.c'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -1251,7 +1239,6 @@ uninstall-am: uninstall-binPROGRAMS uninstall-libLTLIBRARIES \
 	tags uninstall uninstall-am uninstall-binPROGRAMS \
 	uninstall-libLTLIBRARIES uninstall-libgladeuiincludeHEADERS
 
-	$(AM_CPPFLAGS)
 
 glade-win32-res.o: glade-previewer.rc
 	$(WINDRES) $< $@
