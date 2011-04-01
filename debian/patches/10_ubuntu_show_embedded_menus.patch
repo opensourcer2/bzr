@@ -1,0 +1,40 @@
+Index: glade-3-3.7.3/gladeui/glade-widget.c
+===================================================================
+--- glade-3-3.7.3.orig/gladeui/glade-widget.c	2011-01-06 05:32:23.000000000 -0500
++++ glade-3-3.7.3/gladeui/glade-widget.c	2011-04-01 11:09:42.169080918 -0400
+@@ -1914,6 +1914,26 @@
+ 	return g_list_reverse (packing_props);
+ }
+ 
++/* Tells Ubuntu to show any embedded menu bars */
++static void
++ubuntu_show_menu_bars (GtkWidget *widget)
++{
++	if (GTK_IS_MENU_BAR (widget) &&
++	    g_object_class_find_property (G_OBJECT_GET_CLASS (widget),
++	                                  "ubuntu-local") != NULL)
++	{
++		g_object_set (G_OBJECT (widget),
++		              "ubuntu-local", TRUE,
++		              NULL);
++	}
++	else if (GTK_IS_CONTAINER (widget))
++	{
++		gtk_container_foreach (GTK_CONTAINER (widget),
++		                       (GtkCallback)ubuntu_show_menu_bars,
++		                       NULL);
++	}
++}
++
+ /*******************************************************************************
+                                      API
+  *******************************************************************************/
+@@ -4389,6 +4408,8 @@
+ 	
+ 	if (glade_window_is_embedded (window)) return TRUE;
+ 	
++	ubuntu_show_menu_bars (widget);
++
+ 	if (gtk_widget_get_realized (widget)) gtk_widget_unrealize (widget);
+ 
+ 	GTK_WIDGET_UNSET_FLAGS (widget, GTK_TOPLEVEL);

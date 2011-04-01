@@ -1914,26 +1914,6 @@ glade_widget_create_packing_properties (GladeWidget *container, GladeWidget *wid
 	return g_list_reverse (packing_props);
 }
 
-/* Tells Ubuntu to show any embedded menu bars */
-static void
-ubuntu_show_menu_bars (GtkWidget *widget)
-{
-	if (GTK_IS_MENU_BAR (widget) &&
-	    g_object_class_find_property (G_OBJECT_GET_CLASS (widget),
-	                                  "ubuntu-local") != NULL)
-	{
-		g_object_set (G_OBJECT (widget),
-		              "ubuntu-local", TRUE,
-		              NULL);
-	}
-	else if (GTK_IS_CONTAINER (widget))
-	{
-		gtk_container_foreach (GTK_CONTAINER (widget),
-		                       (GtkCallback)ubuntu_show_menu_bars,
-		                       NULL);
-	}
-}
-
 /*******************************************************************************
                                      API
  *******************************************************************************/
@@ -4409,8 +4389,6 @@ glade_widget_embed (GladeWidget *gwidget)
 	
 	if (glade_window_is_embedded (window)) return TRUE;
 	
-	ubuntu_show_menu_bars (widget);
-
 	if (gtk_widget_get_realized (widget)) gtk_widget_unrealize (widget);
 
 	GTK_WIDGET_UNSET_FLAGS (widget, GTK_TOPLEVEL);
