@@ -24,7 +24,6 @@
       </signals>
 
       <actions>
-	<action id="preview" name="Preview snapshot"></action>
         <action stock="gtk-edit" id="edit_separate" name="Edit Separately"></action>
         <action stock="gtk-remove" id="remove_parent" name="Remove Parent"></action>
         <action stock="gtk-add" id="add_parent" name="Add Parent">
@@ -595,6 +594,64 @@
       </packing-defaults>
     </glade-widget-class>
     
+    <glade-widget-class use-placeholders="False" since="2.20" name="GtkToolPalette" generic-name="toolpalette" title="Tool Palette">
+      <post-create-function>glade_gtk_toolbar_post_create</post-create-function>
+      <add-child-function>glade_gtk_tool_palette_add_child</add-child-function>
+      <remove-child-function>glade_gtk_tool_palette_remove_child</remove-child-function>
+      <child-set-property-function>glade_gtk_tool_palette_set_child_property</child-set-property-function>
+      <child-get-property-function>glade_gtk_tool_palette_get_child_property</child-get-property-function>
+      <action-activate-function>glade_gtk_tool_palette_action_activate</action-activate-function>
+
+      <actions>
+        <action stock="gtk-edit" important="True" id="launch_editor" name="Edit&#8230;"></action>
+      </actions>
+      <properties>
+      	<property id="icon-size-set" disabled="True"/>
+      	<property weight="0.4" save-always="True" optional-default="False" optional="True" id="toolbar-style"/>
+      	<property weight="0.5" optional-default="False" optional="True" id="icon-size"/>
+      </properties>
+
+      <packing-properties>
+        <property save="False" id="position" default="-1" name="Position">
+	  <parameter-spec>
+	    <type>GParamInt</type>
+	    <min>-1</min>
+	  </parameter-spec>
+          <tooltip>The position of the tool item group in the palette</tooltip>
+        </property>
+	<property transfer-on-paste="True" save-always="True" id="expand"/>
+        <property transfer-on-paste="True" id="exclusive"/>
+      </packing-properties>
+    </glade-widget-class>
+
+    <glade-widget-class use-placeholders="False" since="2.20" name="GtkToolItemGroup" generic-name="toolitemgroup" title="Tool Item Group">
+      <post-create-function>empty</post-create-function>
+      <set-property-function>glade_gtk_tool_item_group_set_property</set-property-function>
+      <add-child-function>glade_gtk_tool_item_group_add_child</add-child-function>
+      <remove-child-function>glade_gtk_tool_item_group_remove_child</remove-child-function>
+      <create-editable-function>glade_gtk_tool_item_group_create_editable</create-editable-function>
+      <read-widget-function>glade_gtk_tool_item_group_read_widget</read-widget-function>
+
+      <properties>
+        <property translatable="True" id="label" default="toolitemgroup" custom-layout="True"/>
+	<property parentless-widget="True" id="label-widget" custom-layout="True" create-type="GtkLabel"/>
+
+	
+        <property visible="False" save="False" id="custom-label">
+	  <parameter-spec>
+	    <type>GParamBoolean</type>
+	  </parameter-spec>
+        </property>
+      </properties>
+
+      <packing-properties>
+	<property transfer-on-paste="True" id="expand"/>
+        <property transfer-on-paste="True" id="fill"/>
+        <property transfer-on-paste="True" id="row-new"/>
+        <property transfer-on-paste="True" id="homogeneous"/>
+      </packing-properties>
+    </glade-widget-class>
+
     <glade-widget-class title="GtkToolItem" name="GtkToolItem" generic-name="toolitem">
       <post-create-function>glade_gtk_tool_item_post_create</post-create-function>
       <constructor-function>glade_gtk_tool_item_constructor</constructor-function>
@@ -608,9 +665,8 @@
       </properties>
 
     </glade-widget-class>
-    
+
     <glade-widget-class name="GtkSeparatorToolItem" generic-name="separatortoolitem" title="Separator Tool Item"></glade-widget-class>
-	
 
     <glade-widget-class name="GtkToolButton" generic-name="toolbutton" title="Tool Button">
       <create-editable-function>glade_gtk_tool_button_create_editable</create-editable-function>
@@ -652,10 +708,16 @@
     
     <glade-widget-class name="GtkRadioToolButton" generic-name="radiotoolbutton" title="Radio Tool Button"></glade-widget-class>
     
-    <glade-widget-class name="GtkMenuToolButton" generic-name="menutoolbutton" title="Menu Tool Button">
+    <glade-widget-class use-placeholders="False" name="GtkMenuToolButton" generic-name="menutoolbutton" title="Menu Tool Button">
       <add-child-function>glade_gtk_menu_tool_button_add_child</add-child-function>
       <remove-child-function>glade_gtk_menu_tool_button_remove_child</remove-child-function>
       <get-children-function>glade_gtk_menu_tool_button_get_children</get-children-function>
+      <special-child-type>menu</special-child-type>
+
+      <properties>
+      	<property id="menu" disabled="True"/>
+      </properties>
+
     </glade-widget-class>
 
 
@@ -795,10 +857,10 @@
 	<property since="2.16" id="secondary-icon-pixbuf" custom-layout="True" name="Secondary Icon Pixbuf"></property>
 	<property themed-icon="True" since="2.16" id="primary-icon-name" custom-layout="True" name="Primary Icon Name"></property>
 	<property themed-icon="True" since="2.16" id="secondary-icon-name" custom-layout="True" name="Secondary Icon Name"></property>
-	<property since="2.16" id="primary-icon-activatable" custom-layout="True" name="Primary Icon Activatable"></property>
-	<property since="2.16" id="secondary-icon-activatable" custom-layout="True" name="Secondary Icon Activatable"></property>
-	<property since="2.16" id="primary-icon-sensitive" custom-layout="True" name="Primary Icon Sensitive"></property>
-	<property since="2.16" id="secondary-icon-sensitive" custom-layout="True" name="Secondary Icon Sensitive"></property>
+	<property since="2.16" save-always="True" id="primary-icon-activatable" custom-layout="True" name="Primary Icon Activatable"></property>
+	<property since="2.16" save-always="True" id="secondary-icon-activatable" custom-layout="True" name="Secondary Icon Activatable"></property>
+	<property since="2.16" save-always="True" id="primary-icon-sensitive" custom-layout="True" name="Primary Icon Sensitive"></property>
+	<property since="2.16" save-always="True" id="secondary-icon-sensitive" custom-layout="True" name="Secondary Icon Sensitive"></property>
 	<property since="2.16" id="progress-fraction" custom-layout="True" name="Progress Fraction"></property>
 	<property since="2.16" id="progress-pulse-step" custom-layout="True" name="Progress Pulse Step"></property>
 
@@ -1023,6 +1085,12 @@
 	    <value id="GTK_ICON_SIZE_DIALOG" name="Dialog"></value>
 	  </displayable-values>
 	</property>
+
+	
+	<property id="glade-type" disabled="True"/>
+	<property id="label" disabled="True"/>
+	<property id="use-underline" disabled="True"/>
+	<property id="stock" disabled="True"/>
       </properties>
     </glade-widget-class>
 
@@ -2045,7 +2113,7 @@
 
     <glade-widget-class toplevel="True" name="GtkTreeModelFilter" libglade-unsupported="True" generic-name="treemodelfilter" title="Tree Model Filter"></glade-widget-class>
     <glade-widget-class toplevel="True" name="GtkTreeModelSort" libglade-unsupported="True" generic-name="treemodelsort" title="Tree Model Sort"></glade-widget-class>
-    <glade-widget-class toplevel="True" name="GtkTreeSelection" libglade-unsupported="True" generic-name="treeselection" title="Tree Selection"></glade-widget-class>
+    <glade-widget-class name="GtkTreeSelection" libglade-unsupported="True" generic-name="treeselection" title="Tree Selection"></glade-widget-class>
 
 
     <glade-widget-class name="GtkTreeView" generic-name="treeview" title="Tree View">
@@ -3366,6 +3434,7 @@
     <glade-widget-class-ref name="GtkAspectFrame"/>
     <glade-widget-class-ref name="GtkMenuBar"/>
     <glade-widget-class-ref name="GtkToolbar"/>
+    <glade-widget-class-ref name="GtkToolPalette"/>
     <glade-widget-class-ref name="GtkHPaned"/>
     <glade-widget-class-ref name="GtkVPaned"/>
     <glade-widget-class-ref name="GtkHButtonBox"/>
@@ -3442,7 +3511,6 @@
     <glade-widget-class-ref name="GtkTreeStore"/>
     <glade-widget-class-ref name="GtkTreeModelFilter"/>
     <glade-widget-class-ref name="GtkTreeModelSort"/>
-    <glade-widget-class-ref name="GtkTreeSelection"/>
   </glade-widget-group>
 
   <glade-widget-group name="gtk-text" title="Text Buffers">

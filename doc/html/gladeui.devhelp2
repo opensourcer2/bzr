@@ -131,7 +131,6 @@
     <keyword type="property" name="The &quot;has-selection&quot; property" link="GladeProject.html#GladeProject--has-selection"/>
     <keyword type="property" name="The &quot;modified&quot; property" link="GladeProject.html#GladeProject--modified"/>
     <keyword type="property" name="The &quot;path&quot; property" link="GladeProject.html#GladeProject--path"/>
-    <keyword type="property" name="The &quot;previewable&quot; property" link="GladeProject.html#GladeProject--previewable"/>
     <keyword type="property" name="The &quot;read-only&quot; property" link="GladeProject.html#GladeProject--read-only"/>
     <keyword type="signal" name="The &quot;add-widget&quot; signal" link="GladeProject.html#GladeProject-add-widget"/>
     <keyword type="signal" name="The &quot;changed&quot; signal" link="GladeProject.html#GladeProject-changed"/>

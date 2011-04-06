@@ -98,8 +98,6 @@ gboolean       glade_project_save                (GladeProject *project,
 						  const gchar   *path, 
 						  GError       **error);
 
-void           glade_project_preview             (GladeProject *project, GladeWidget *gwidget);
-
 const gchar   *glade_project_get_path            (GladeProject *project);
 
 gchar         *glade_project_get_name            (GladeProject *project);
@@ -186,8 +184,6 @@ time_t         glade_project_get_file_mtime       (GladeProject *project);
 
 gboolean       glade_project_get_modified         (GladeProject *project);
 
-gboolean       glade_project_get_previewable      (GladeProject *project);
-
 void           glade_project_set_format      	  (GladeProject *project, GladeProjectFormat format);
 
 GladeProjectFormat glade_project_get_format  	  (GladeProject *project);
@@ -218,6 +214,10 @@ void          glade_project_update_signal_support_warning (GladeWidget  *widget,
 
 
 gchar        *glade_project_display_dependencies (GladeProject *project);
+
+void          glade_project_check_reordered (GladeProject       *project,
+					     GladeWidget        *parent,
+					     GList              *old_order);
 
 void          glade_project_push_progress (GladeProject *project);
 gboolean      glade_project_load_cancelled (GladeProject *project);

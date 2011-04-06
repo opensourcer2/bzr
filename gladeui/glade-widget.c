@@ -842,7 +842,8 @@ reset_object_property (GladeProperty *property,
 		       GladeProject  *project)
 {
 	if (glade_property_class_is_object (property->klass, 
-					    glade_project_get_format (project)))
+					    project ? glade_project_get_format (project) :
+					    GLADE_PROJECT_FORMAT_LIBGLADE))
 		glade_property_reset (property);
 }
 
@@ -1948,6 +1949,7 @@ glade_widget_show (GladeWidget *widget)
 	GladeDesignView *view;
 	GtkWidget *layout;
 	GladeProperty *property;
+	GladeProject *project;
 
 	g_return_if_fail (GLADE_IS_WIDGET (widget));
 	
@@ -1969,16 +1971,14 @@ glade_widget_show (GladeWidget *widget)
 			return;
 		}
 
+		project = glade_widget_get_project (widget);
+		if (!project) return;
 
-		view = glade_design_view_get_from_project (glade_widget_get_project (widget));
-
-		if (!view)
-			return;
+		view = glade_design_view_get_from_project (project);
+		if (!view) return;
 
 		layout = GTK_WIDGET (glade_design_view_get_layout (view));
-
-		if (!layout)
-			return;
+		if (!layout) return;
 		
 		if (gtk_widget_get_realized (layout))
 			glade_widget_add_to_layout (widget, layout);
@@ -2334,14 +2334,27 @@ glade_widget_rebuild (GladeWidget *gwidget)
 {
 	GObject            *new_object, *old_object;
 	GladeWidgetAdaptor *adaptor;
+	GladeProject       *project = NULL;
 	GList              *children;
 	gboolean            reselect = FALSE, inproject;
 	GList              *restore_properties = NULL;
-	GList              *save_properties, *l;
-	
+	GList              *save_properties, *l;	
+	GladeWidget        *parent = NULL;
+
+
 	g_return_if_fail (GLADE_IS_WIDGET (gwidget));
 
 	adaptor = gwidget->adaptor;
+
+	if (gwidget->project && 
+	    glade_project_has_object (gwidget->project, gwidget->object))
+		project = gwidget->project;
+
+	if (gwidget->parent && 
+	    glade_widget_adaptor_has_child (gwidget->parent->adaptor,
+					    gwidget->parent->object,
+					    gwidget->object))
+		parent  = gwidget->parent;
 
 	g_object_ref (gwidget);
 
@@ -2355,16 +2368,15 @@ glade_widget_rebuild (GladeWidget *gwidget)
 		(glade_project_has_object
 		 (gwidget->project, gwidget->object) ? TRUE : FALSE) : FALSE;
 
-	if (inproject)
+	if (project)
 	{
-		if (glade_project_is_selected (gwidget->project, 
-					       gwidget->object))
+		if (glade_project_is_selected (project, gwidget->object))
 		{
 			reselect = TRUE;
 			glade_project_selection_remove
-				(gwidget->project, gwidget->object, FALSE);
+				(project, gwidget->object, FALSE);
 		}
-		glade_project_remove_object (gwidget->project, gwidget->object);
+		glade_project_remove_object (project, gwidget->object);
 	}
 
 	/* parentless_widget and object properties that reffer to this widget 
@@ -2398,6 +2410,11 @@ glade_widget_rebuild (GladeWidget *gwidget)
 	}
 	g_list_free (save_properties);
 
+	/* Remove old object from parent
+	 */
+	if (parent)
+		glade_widget_remove_child (parent, gwidget);
+
 	/* Hold a reference to the old widget while we transport properties
 	 * and children from it
 	 */
@@ -2406,12 +2423,6 @@ glade_widget_rebuild (GladeWidget *gwidget)
 
 	/* Only call this once the object has a proper GladeWidget */
 	glade_widget_adaptor_post_create (adaptor, new_object, GLADE_CREATE_REBUILD);
-
-	/* Replace old object with new object in parent
-	 */
-	if (gwidget->parent)
-		glade_widget_replace (gwidget->parent,
-				      old_object, new_object);
 
 	/* Must call dispose for cases like dialogs and toplevels */
 	if (GTK_IS_WINDOW (old_object))
@@ -2425,7 +2436,12 @@ glade_widget_rebuild (GladeWidget *gwidget)
 	glade_widget_push_superuser ();
 	glade_widget_insert_children (gwidget, children);
 	glade_widget_pop_superuser ();
-		
+
+	/* Add new object to parent
+	 */
+	if (parent)
+		glade_widget_add_child (parent, gwidget, FALSE);
+
 	/* Custom properties aren't transfered in build_object, since build_object
 	 * is only concerned with object creation.
 	 */
@@ -2459,13 +2475,11 @@ glade_widget_rebuild (GladeWidget *gwidget)
 	/* If the widget was in a project (and maybe the selection), then
 	 * restore that stuff.
 	 */
-	if (inproject)
+	if (project)
 	{
-		glade_project_add_object (gwidget->project, NULL,
-					  gwidget->object);
+		glade_project_add_object (project, NULL, gwidget->object);
 		if (reselect)
-			glade_project_selection_add
-				(gwidget->project, gwidget->object, TRUE);
+			glade_project_selection_add (project, gwidget->object, TRUE);
 	}
 
  	/* We shouldnt show if its not already visible */
@@ -3247,14 +3261,34 @@ glade_widget_child_set_property (GladeWidget      *widget,
 				 const gchar      *property_name,
 				 const GValue     *value)
 {
+	GList *old_order = NULL;
+
 	g_return_if_fail (GLADE_IS_WIDGET (widget));
 	g_return_if_fail (GLADE_IS_WIDGET (child));
 	g_return_if_fail (property_name != NULL && value != NULL);
+
+
+	if (widget->project &&
+	    widget->in_project)
+		old_order = glade_widget_get_children (widget);
 
 	glade_widget_adaptor_child_set_property (widget->adaptor,
 						 widget->object,
 						 child->object,
 						 property_name, value);
+
+	/* After setting a child property... it's possible the order of children
+	 * in the parent has been effected.
+	 *
+	 * If this is the case then we need to signal the GladeProject that
+	 * it's rows have been reordered so that any connected views update
+	 * themselves properly.
+	 */
+	if (widget->project &&
+	    widget->in_project)
+		glade_project_check_reordered (widget->project, widget, old_order);
+
+	g_list_free (old_order);
 }
 
 /**
@@ -3774,12 +3808,12 @@ glade_widget_read (GladeProject *project,
 
 	if (glade_project_load_cancelled (project))
 		return NULL;
-
-	glade_widget_push_superuser ();
 	
 	if (!glade_xml_node_verify
 	    (node, GLADE_XML_TAG_WIDGET (glade_project_get_format (project))))
 		return NULL;
+
+	glade_widget_push_superuser ();
 
 	if ((klass = 
 	     glade_xml_get_property_string_required
@@ -3809,7 +3843,7 @@ glade_widget_read (GladeProject *project,
 							   "internal child %s of %s",
 							   internal,
 							   glade_widget_get_name (parent));
-						return FALSE;
+						goto out;
 					}
 
 					if (!(widget = 
@@ -3839,6 +3873,7 @@ glade_widget_read (GladeProject *project,
 		g_free (klass);
 	}
 
+ out:
 	glade_widget_pop_superuser ();
 
 	glade_project_push_progress (project);

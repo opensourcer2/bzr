@@ -42,8 +42,8 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/gnome-doc-utils.m4 \
 	$(top_srcdir)/m4/gtk-doc.m4 $(top_srcdir)/m4/intltool.m4 \
 	$(top_srcdir)/m4/libtool.m4 $(top_srcdir)/m4/ltoptions.m4 \
 	$(top_srcdir)/m4/ltsugar.m4 $(top_srcdir)/m4/ltversion.m4 \
-	$(top_srcdir)/m4/lt~obsolete.m4 $(top_srcdir)/m4/python.m4 \
-	$(top_srcdir)/configure.ac
+	$(top_srcdir)/m4/lt~obsolete.m4 $(top_srcdir)/m4/nls.m4 \
+	$(top_srcdir)/m4/python.m4 $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
@@ -274,7 +274,23 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 iconsdir = $(pkgdatadir)/pixmaps/hicolor/22x22/actions
 icons_DATA = \
-        widget-gtk-aboutdialog.png \
+	widget-gtk-entrybuffer.png \
+	widget-gtk-texttagtable.png \
+	widget-gtk-spinner.png \
+	widget-gtk-textbuffer.png \
+	widget-gtk-statusicon.png \
+	widget-gtk-toolpalette.png \
+	widget-gtk-filefilter.png \
+	widget-gtk-texttag.png \
+	widget-gtk-accelgroup.png \
+	widget-gtk-adjustment.png \
+	widget-gtk-treeselection.png \
+	widget-gtk-toolitemgroup.png \
+	widget-gtk-treemodelfilter.png \
+	widget-gtk-sizegroup.png \
+	widget-gtk-cellrendererspinner.png \
+	widget-gtk-treemodelsort.png \
+	widget-gtk-aboutdialog.png \
         widget-gtk-accellabel.png \
         widget-gtk-alignment.png \
         widget-gtk-arrow.png \
@@ -376,13 +392,14 @@ icons_DATA = \
 	widget-gtk-liststore.png \
 	widget-gtk-scalebutton.png \
 	widget-gtk-iconfactory.png \
+	widget-gtk-treeviewcolumn.png \
 	widget-gtk-cellrenderertext.png \
 	widget-gtk-cellrendereraccel.png \
 	widget-gtk-cellrenderercombo.png \
 	widget-gtk-cellrendererspin.png \
 	widget-gtk-cellrendererpixbuf.png \
 	widget-gtk-cellrendererprogress.png \
-	widget-gtk-cellrenderertoggle.png
+	widget-gtk-cellrenderertoggle.png 
 
 EXTRA_DIST = $(icons_DATA)
 all: all-am
