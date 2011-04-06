@@ -47,8 +47,8 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/gnome-doc-utils.m4 \
 	$(top_srcdir)/m4/gtk-doc.m4 $(top_srcdir)/m4/intltool.m4 \
 	$(top_srcdir)/m4/libtool.m4 $(top_srcdir)/m4/ltoptions.m4 \
 	$(top_srcdir)/m4/ltsugar.m4 $(top_srcdir)/m4/ltversion.m4 \
-	$(top_srcdir)/m4/lt~obsolete.m4 $(top_srcdir)/m4/python.m4 \
-	$(top_srcdir)/configure.ac
+	$(top_srcdir)/m4/lt~obsolete.m4 $(top_srcdir)/m4/nls.m4 \
+	$(top_srcdir)/m4/python.m4 $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
@@ -100,7 +100,8 @@ am_libgladegtk_la_OBJECTS = libgladegtk_la-glade-gtk.lo \
 	libgladegtk_la-glade-cell-renderer-editor.lo \
 	libgladegtk_la-glade-treeview-editor.lo \
 	libgladegtk_la-glade-entry-editor.lo \
-	libgladegtk_la-glade-activatable-editor.lo
+	libgladegtk_la-glade-activatable-editor.lo \
+	libgladegtk_la-glade-tool-item-group-editor.lo
 libgladegtk_la_OBJECTS = $(am_libgladegtk_la_OBJECTS)
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
@@ -389,7 +390,8 @@ libgladegtk_la_SOURCES = glade-gtk.c glade-accels.c glade-attributes.c glade-con
 	glade-column-types.c  glade-model-data.c glade-text-button.c \
 	glade-icon-sources.c glade-button-editor.c glade-tool-button-editor.c glade-image-editor.c \
 	glade-image-item-editor.c glade-icon-factory-editor.c glade-store-editor.c glade-label-editor.c \
-	glade-cell-renderer-editor.c glade-treeview-editor.c glade-entry-editor.c glade-activatable-editor.c
+	glade-cell-renderer-editor.c glade-treeview-editor.c glade-entry-editor.c glade-activatable-editor.c \
+	glade-tool-item-group-editor.c
 
 libgladegtk_la_LDFLAGS = -module -avoid-version $(AM_LDFLAGS) \
 	$(am__append_1)
@@ -399,7 +401,7 @@ libgladegtkinclude_HEADERS = glade-gtk.h glade-accels.h glade-attributes.h glade
 	glade-text-button.h glade-icon-sources.h glade-button-editor.h \
 	glade-tool-button-editor.h glade-image-editor.h glade-image-item-editor.h glade-icon-factory-editor.h \
 	glade-store-editor.h glade-label-editor.h glade-cell-renderer-editor.h glade-treeview-editor.h \
-	glade-entry-editor.h glade-activatable-editor.h
+	glade-entry-editor.h glade-activatable-editor.h glade-tool-item-group-editor.h
 
 
 # catalog data
@@ -499,6 +501,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladegtk_la-glade-store-editor.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladegtk_la-glade-text-button.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladegtk_la-glade-tool-button-editor.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladegtk_la-glade-tool-item-group-editor.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgladegtk_la-glade-treeview-editor.Plo@am__quote@
 
 .c.o:
@@ -676,6 +679,14 @@ libgladegtk_la-glade-activatable-editor.lo: glade-activatable-editor.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-activatable-editor.c' object='libgladegtk_la-glade-activatable-editor.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-activatable-editor.lo `test -f 'glade-activatable-editor.c' || echo '$(srcdir)/'`glade-activatable-editor.c
+
+libgladegtk_la-glade-tool-item-group-editor.lo: glade-tool-item-group-editor.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -MT libgladegtk_la-glade-tool-item-group-editor.lo -MD -MP -MF $(DEPDIR)/libgladegtk_la-glade-tool-item-group-editor.Tpo -c -o libgladegtk_la-glade-tool-item-group-editor.lo `test -f 'glade-tool-item-group-editor.c' || echo '$(srcdir)/'`glade-tool-item-group-editor.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgladegtk_la-glade-tool-item-group-editor.Tpo $(DEPDIR)/libgladegtk_la-glade-tool-item-group-editor.Plo
+@am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='glade-tool-item-group-editor.c' object='libgladegtk_la-glade-tool-item-group-editor.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgladegtk_la_CPPFLAGS) $(CPPFLAGS) $(libgladegtk_la_CFLAGS) $(CFLAGS) -c -o libgladegtk_la-glade-tool-item-group-editor.lo `test -f 'glade-tool-item-group-editor.c' || echo '$(srcdir)/'`glade-tool-item-group-editor.c
 
 mostlyclean-libtool:
 	-rm -f *.lo

@@ -131,7 +131,6 @@
     <function name="The &quot;has-selection&quot; property" link="GladeProject.html#GladeProject--has-selection"/>
     <function name="The &quot;modified&quot; property" link="GladeProject.html#GladeProject--modified"/>
     <function name="The &quot;path&quot; property" link="GladeProject.html#GladeProject--path"/>
-    <function name="The &quot;previewable&quot; property" link="GladeProject.html#GladeProject--previewable"/>
     <function name="The &quot;read-only&quot; property" link="GladeProject.html#GladeProject--read-only"/>
     <function name="The &quot;add-widget&quot; signal" link="GladeProject.html#GladeProject-add-widget"/>
     <function name="The &quot;changed&quot; signal" link="GladeProject.html#GladeProject-changed"/>

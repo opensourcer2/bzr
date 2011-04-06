@@ -1,3 +1,73 @@
+2011-04-04  Tristan Van Berkom <tristanvb@openismus.com>
+
+	* configure.ac, NEWS: Rolling Glade 3.8.
+
+	* Backed out 'preview' feature from glade-3-8 branch.
+
+	* gladeui/glade-base-editor.c: Backported fixes from master.
+
+	* gladeui/glade-project.[ch], gladeui/glade-widget.c: Backported glade_project_check_reordered()
+
+	* plugins/gtk+/icons/*: Backported all the new icons.
+
+	* removing glade-previewer.c from POTFILES.in
+
+2011-02-05  Tristan Van Berkom <tristanvb@openismus.com>
+
+	* plugins/gtk+/gtk+.xml.in: Disabling irrelevant properties for GtkScaleButton
+
+	* gladeui/glade-widget.c: Make glade_widget_rebuild() use glade_widget_add/remove
+	  instead of glade_widget_replace().
+
+2011-02-03  Tristan Van Berkom <tristanvb@openismus.com>
+
+	* gladeui/glade-project.c: Fixed GladeProject to only ever report widgets that are
+	  actually in the project from the GtkTreeModel interface.
+
+	* gladeui/glade-widget.[ch], gladeui/glade-project.c, gladeui/glade-utils.c: Now update
+	  the GladeWidget's project pointer when going in and out of a project.
+
+	* src/glade-window.c: Removed user manual link from Help menu, it's not online
+	  as far as I know and no work was done on it, the current user manual needs work
+	  and is just not useful in it's current state.
+
+2011-01-29  Tristan Van Berkom <tristanvb@openismus.com>
+
+	* plugins/gtk+/glade-model-data.c: Avoid committing the data if the data did not
+	  change... committing the data when there is no change can cause the editor to
+	  load itself, this editor does not deal with that well. Fixes crasher bug 622839.
+
+2011-01-24  Tristan Van Berkom <tristanvb@openismus.com>
+
+	* 41 files: Fixed typo in LGPL License file headers.
+
+2011-01-19  Tristan Van Berkom <tristanvb@openismus.com>
+
+	* plugins/gtk+/gtk+.xml.in: Removing treeview's internal GtkTreeSelection from the
+	palette (its only available as an internal widget to a treeview).
+
+2011-01-13  Tristan Van Berkom <tristanvb@openismus.com>
+
+	* plugins/gtk+/glade-attributes.c: Fixed mismatching PangoAttributeType with GType,
+	closes bug 597045.
+
+	* plugins/gtk+/gtk+.xml.in: Made GtkEntry icon properties save-always, fixes bug 629900.
+
+2011-01-09  Tristan Van Berkom <tristanvb@openismus.com>
+
+	* gladeui/glade-editor.c: Make query dialog come with a "Create" button instead
+	of an "OK" button, closes bug 503621.
+
+	* plugins/gtk+/glade-gtk.c: Fixed GtkMenuToolButton to save the "menu" child properly
+
+	* plugins/gtk+/glade-column-types.c: Fixed crash when user performs Drag'n'Drop of
+	< enter column here > and no columns are yet added (fixes bug 633943).
+
+2011-01-08  Tristan Van Berkom <tristanvb@openismus.com>
+
+	* plugins/Makefile.am, plugins/glade-tool-item-group-editor.[ch], plugins/gtk+.xml.in,
+	plugins/glade-gtk.c: Added support for editing GtkToolPalette.
+
 2011-01-06  Tristan Van Berkom <tristanvb@openismus.com>
 
 	* NEWS: Rolling 3.7.3

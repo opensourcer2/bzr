@@ -2,7 +2,7 @@
 /*
  * Copyright (C) 2008 Tristan Van Berkom.
  *
- * This library is free software; you can redistribute it and/or it
+ * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
  * published by the Free Software Foundation; either version 2.1 of
  * the License, or (at your option) any later version.
@@ -328,7 +328,14 @@ update_data_tree_idle (GladeEditorProperty *eprop)
 	
 	g_value_init (&value, GLADE_TYPE_MODEL_DATA_TREE);
 	g_value_take_boxed (&value, eprop_data->pending_data_tree);
-	glade_editor_property_commit (eprop, &value);
+
+	/* Only commit the value if it changed, otherwise this
+	 * can trigger a load.. which we dont handle well in this
+	 * editor 
+	 */
+	if (!glade_property_equals_value (eprop->property, &value))
+		glade_editor_property_commit (eprop, &value);
+
 	g_value_unset (&value);
 
 	eprop_data->pending_data_tree = NULL;
