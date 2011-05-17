@@ -1,3 +1,11 @@
+glade-3 (3.8.0-0ubuntu2) oneiric; urgency=low
+
+  * debian/control: Drop glade and glade-gnome, they are built by the "glade"
+    source package now. We keep this one to build libgladeui-1-{dev,11} for
+    GTK2.
+
+ -- Martin Pitt <martin.pitt@ubuntu.com>  Tue, 17 May 2011 12:46:24 +0200
+
 glade-3 (3.8.0-0ubuntu1) natty; urgency=low
 
   * New upstream release
