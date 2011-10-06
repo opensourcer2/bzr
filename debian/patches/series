@@ -1,4 +1,5 @@
 01_gladeui-types.patch
+05_rename_binaries_to_gtk2.patch
 10_ubuntu_show_embedded_menus.patch
 90_linking_doc_in_natty.patch
 99_ltmain_as-needed.patch

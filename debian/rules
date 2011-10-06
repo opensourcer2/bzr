@@ -7,8 +7,10 @@ include /usr/share/cdbs/1/class/gnome.mk
 include /usr/share/gnome-pkg-tools/1/rules/uploaders.mk
 include /usr/share/gnome-pkg-tools/1/rules/check-dist.mk
 -include /usr/share/gnome-pkg-tools/1/rules/gnome-get-source.mk
+include /usr/share/cdbs/1/rules/autoreconf.mk
 
-GNOME_MODULE := glade3
+GNOME_MODULE := glade-gtk2
+DOC_MODULE := glade-gtk2
 
 SHARED_PKG := $(shell sed -rn 's/^Package:[[:space:]]*(libgladeui-[[:digit:]\.]+-[[:digit:]][[:alnum:]]*)[[:space:]]*$$/\1/p' debian/control)
 
@@ -29,6 +31,14 @@ DEB_SHLIBDEPS_LIBRARY_glade += $(SHARED_PKG)
 DEB_SHLIBDEPS_INCLUDE_glade += debian/$(SHARED_PKG)/usr/lib/
 DEB_SHLIBDEPS_LIBRARY_glade-common += $(SHARED_PKG)
 DEB_SHLIBDEPS_INCLUDE_glade-common += debian/$(SHARED_PKG)/usr/lib/
+
+common-configure-arch common-configure-indep::
+	for file in $$(ls help/*/glade.xml); do \
+		mv $${file} $${file%.xml}-gtk2.xml; \
+	done
+	for file in $$(ls help/*/glade.omf.in); do \
+		mv $${file} $${file%.omf.in}-gtk2.omf.in; \
+	done
 
 # move stuff that will go in glade-gnome
 binary-post-install/$(SHARED_PKG)::

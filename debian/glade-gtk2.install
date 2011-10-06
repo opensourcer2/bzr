@@ -1,6 +1,5 @@
 debian/tmp/usr/bin
 debian/tmp/usr/share/icons/hicolor
 debian/tmp/usr/share/applications
-debian/tmp/usr/share/omf
 debian/tmp/usr/share/gnome
-debian/glade.xpm usr/share/pixmaps/
+debian/glade-gtk2.xpm usr/share/pixmaps/

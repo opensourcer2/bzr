@@ -1,0 +1,6 @@
+?package(glade): \
+   needs="X11" \
+   section="Applications/Programming" \
+   title="Glade GTK2" \
+   icon="/usr/share/pixmaps/glade-gtk2.xpm" \
+   command="/usr/bin/glade-gtk2"

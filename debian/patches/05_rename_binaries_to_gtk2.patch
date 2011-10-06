@@ -1,0 +1,59 @@
+Index: glade-3-3.8.0/help/Makefile.am
+===================================================================
+--- glade-3-3.8.0.orig/help/Makefile.am	2011-10-06 11:37:48.009285855 +0200
++++ glade-3-3.8.0/help/Makefile.am	2011-10-06 11:38:13.401411769 +0200
+@@ -2,7 +2,7 @@
+ include $(top_srcdir)/gnome-doc-utils.make
+ dist-hook: doc-dist-hook
+ 
+-DOC_MODULE = glade
++DOC_MODULE = glade-gtk2
+ DOC_INCLUDES = legal.xml
+ DOC_FIGURES = figures/main-window.png
+ 
+Index: glade-3-3.8.0/src/Makefile.am
+===================================================================
+--- glade-3-3.8.0.orig/src/Makefile.am	2011-10-06 11:37:57.417332505 +0200
++++ glade-3-3.8.0/src/Makefile.am	2011-10-06 11:38:54.333614746 +0200
+@@ -1,8 +1,8 @@
+ ## Process this file with automake to produce Makefile.in
+ 
+-bin_PROGRAMS = glade-3
++bin_PROGRAMS = glade-gtk2
+ 
+-glade_3_CPPFLAGS = \
++glade_gtk2_CPPFLAGS = \
+ 	-I$(top_srcdir)    \
+ 	-I$(top_builddir)  \
+ 	-DGLADE_GNOMEHELPDIR="\"$(HELP_DIR)\"" \
+@@ -11,14 +11,14 @@
+ 	$(WARN_CFLAGS)     \
+ 	$(AM_CPPFLAGS)
+ 
+-glade_3_CFLAGS =           \
++glade_gtk2_CFLAGS =           \
+ 	$(AM_CFLAGS)
+ 
+-glade_3_LDFLAGS = $(AM_LDFLAGS)
++glade_gtk2_LDFLAGS = $(AM_LDFLAGS)
+ 
+-glade_3_LDADD = $(top_builddir)/gladeui/libgladeui-1.la $(IGE_MAC_LIBS)
++glade_gtk2_LDADD = $(top_builddir)/gladeui/libgladeui-1.la $(IGE_MAC_LIBS)
+ 
+-glade_3_SOURCES = \
++glade_gtk2_SOURCES = \
+ 	glade-window.c \
+ 	glade-window.h \
+ 	glade-close-button.c \
+@@ -26,9 +26,9 @@
+ 	main.c
+ 
+ if NATIVE_WIN32
+-glade_3_LDADD += glade-win32-res.o
++glade_gtk2_LDADD += glade-win32-res.o
+ if !GLADE_UNSTABLE
+-glade_3_LDFLAGS += -mwindows
++glade_gtk2_LDFLAGS += -mwindows
+ endif
+ endif
+ 

@@ -11,6 +11,7 @@ XSBC-Original-Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.
 Uploaders: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
 Vcs-Bzr: https://code.launchpad.net/~ubuntu-desktop/glade-3/ubuntu
 Build-Depends: cdbs (>= 0.4.41),
+               dh-autoreconf,
                debhelper (>= 5),
                gettext (>= 0.10.40),
                libgnomeui-dev,
@@ -85,3 +86,57 @@ Description: GTK+ User Interface Build core library (development files)
  .
  This package contains the development files and documentation for the
  library.
+
+Package: glade-gtk2
+Architecture: any
+Section: devel
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: libgtk2.0-dev (>= 2.20.0),
+            python-gtk2-dev (>= 2.10.0),
+            libglade2-dev (>= 1:2.6.0),
+            devhelp
+Suggests: glade-gnome
+Conflicts: glade-gnome (<= 2.91.1),
+           glade-gnome-2 (<= 2.91.1),
+           glade-2 (<= 2.10.0-2),
+           glade-3
+Replaces: glade-gnome (<= 2.91.1),
+          glade-2 (<= 2.10.0-2),
+          glade-gnome-2 (<= 2.91.1),
+          glade-3
+Description: GTK+ 2 User Interface Builder
+ Glade is a RAD tool to enable quick and easy development of user
+ interfaces for the GTK+ 2 toolkit.
+ .
+ The user interfaces designed in Glade are stored in the well-known
+ XML format, enabling easy integration with external tools. You will
+ probably want to use it with tools such as libglade, which can load
+ the XML files and create the interfaces at runtime.
+ .
+ This version is more modular than previous ones, so you can install
+ modules to add additional widgets for Glade to use. You can install
+ the glade-gnome package to provide GNOME widgets, for instance.
+
+Package: glade-gnome
+Architecture: any
+Section: gnome
+Depends: ${misc:Depends},
+         glade-gtk2 (= ${binary:Version}),
+         gnome-common (>= 2.8.0),
+         ${shlibs:Depends}
+Recommends: libgnomeui-dev,
+            libbonoboui2-dev
+Conflicts: glade-gnome-3
+Replaces: glade-gnome-3
+Description: GTK+ 2 User Interface Builder (with GNOME 2 support)
+ Glade is a RAD tool to enable quick and easy development of user
+ interfaces for the GTK+ 2 toolkit.
+ .
+ The user interfaces designed in Glade are stored in the well-known
+ XML format, enabling easy integration with external tools. You will
+ probably want to use it with tools such as libglade, which can load
+ the XML files and create the interfaces at runtime.
+ .
+ This package include the module that allows Glade to provide GNOME
+ widgets in its pallete.

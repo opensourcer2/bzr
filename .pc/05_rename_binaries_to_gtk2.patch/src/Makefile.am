@@ -1,8 +1,8 @@
 ## Process this file with automake to produce Makefile.in
 
-bin_PROGRAMS = glade-gtk2
+bin_PROGRAMS = glade-3
 
-glade_gtk2_CPPFLAGS = \
+glade_3_CPPFLAGS = \
 	-I$(top_srcdir)    \
 	-I$(top_builddir)  \
 	-DGLADE_GNOMEHELPDIR="\"$(HELP_DIR)\"" \
@@ -11,14 +11,14 @@ glade_gtk2_CPPFLAGS = \
 	$(WARN_CFLAGS)     \
 	$(AM_CPPFLAGS)
 
-glade_gtk2_CFLAGS =           \
+glade_3_CFLAGS =           \
 	$(AM_CFLAGS)
 
-glade_gtk2_LDFLAGS = $(AM_LDFLAGS)
+glade_3_LDFLAGS = $(AM_LDFLAGS)
 
-glade_gtk2_LDADD = $(top_builddir)/gladeui/libgladeui-1.la $(IGE_MAC_LIBS)
+glade_3_LDADD = $(top_builddir)/gladeui/libgladeui-1.la $(IGE_MAC_LIBS)
 
-glade_gtk2_SOURCES = \
+glade_3_SOURCES = \
 	glade-window.c \
 	glade-window.h \
 	glade-close-button.c \
@@ -26,9 +26,9 @@ glade_gtk2_SOURCES = \
 	main.c
 
 if NATIVE_WIN32
-glade_gtk2_LDADD += glade-win32-res.o
+glade_3_LDADD += glade-win32-res.o
 if !GLADE_UNSTABLE
-glade_gtk2_LDFLAGS += -mwindows
+glade_3_LDFLAGS += -mwindows
 endif
 endif
 

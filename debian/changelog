@@ -1,3 +1,18 @@
+glade-3 (3.8.0-0ubuntu3) oneiric; urgency=low
+
+  * Add glade-gtk2 package to be able to create/edit gtk2 ui
+    (like with Quickly):
+    - rename debian/glade-3.1 to debian/glade-gtk2.1
+    - rename old glade package to glade-gtk2 (modify all install files, don't
+      ship a glade link to glade-gtk2)
+    - some tweaks in debian/rules to keep translations and co-installable help
+      files
+    - readd glade-gnome package as needed by glade-gtk2
+    - add 05_rename_binaries_to_gtk2.patch to rename the binary and run
+      autoreconf
+
+ -- Didier Roche <didrocks@ubuntu.com>  Thu, 06 Oct 2011 12:54:24 +0200
+
 glade-3 (3.8.0-0ubuntu2) oneiric; urgency=low
 
   * debian/control: Drop glade and glade-gnome, they are built by the "glade"
