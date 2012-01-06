@@ -1,3 +1,10 @@
+glade-3 (3.8.0-0ubuntu4) precise; urgency=low
+
+  * 05_rename_binaries_to_gtk2.patch: list the correct binary name in 
+    the desktop file, thanks Timo Vanwynsberghe (lp: #912838)
+
+ -- Sebastien Bacher <seb128@ubuntu.com>  Fri, 06 Jan 2012 18:18:06 +0100
+
 glade-3 (3.8.0-0ubuntu3) oneiric; urgency=low
 
   * Add glade-gtk2 package to be able to create/edit gtk2 ui

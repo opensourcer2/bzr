@@ -1,7 +1,7 @@
 Index: glade-3-3.8.0/help/Makefile.am
 ===================================================================
---- glade-3-3.8.0.orig/help/Makefile.am	2011-10-06 11:37:48.009285855 +0200
-+++ glade-3-3.8.0/help/Makefile.am	2011-10-06 11:38:13.401411769 +0200
+--- glade-3-3.8.0.orig/help/Makefile.am	2010-08-17 00:29:00.000000000 +0200
++++ glade-3-3.8.0/help/Makefile.am	2012-01-06 18:01:12.000000000 +0100
 @@ -2,7 +2,7 @@
  include $(top_srcdir)/gnome-doc-utils.make
  dist-hook: doc-dist-hook
@@ -13,8 +13,8 @@ Index: glade-3-3.8.0/help/Makefile.am
  
 Index: glade-3-3.8.0/src/Makefile.am
 ===================================================================
---- glade-3-3.8.0.orig/src/Makefile.am	2011-10-06 11:37:57.417332505 +0200
-+++ glade-3-3.8.0/src/Makefile.am	2011-10-06 11:38:54.333614746 +0200
+--- glade-3-3.8.0.orig/src/Makefile.am	2011-04-04 14:15:05.000000000 +0200
++++ glade-3-3.8.0/src/Makefile.am	2012-01-06 18:01:12.000000000 +0100
 @@ -1,8 +1,8 @@
  ## Process this file with automake to produce Makefile.in
  
@@ -57,3 +57,16 @@ Index: glade-3-3.8.0/src/Makefile.am
  endif
  endif
  
+Index: glade-3-3.8.0/data/glade-3.desktop.in.in
+===================================================================
+--- glade-3-3.8.0.orig/data/glade-3.desktop.in.in	2012-01-06 18:06:09.294047338 +0100
++++ glade-3-3.8.0/data/glade-3.desktop.in.in	2012-01-06 18:07:09.658050259 +0100
+@@ -3,7 +3,7 @@
+ _GenericName=Interface Designer
+ _X-GNOME-FullName=Glade Interface Designer
+ _Comment=Create or open user interface designs for GTK+ applications
+-Exec=glade-3 %F
++Exec=glade-gtk2 %F
+ Terminal=false
+ StartupNotify=true
+ Type=Application
