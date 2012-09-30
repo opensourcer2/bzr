@@ -1,3 +1,9 @@
+glade-3 (3.8.0-0ubuntu5) quantal; urgency=low
+
+  * link-gmodule.patch: fix ftbs
+
+ -- Julian Taylor <jtaylor@ubuntu.com>  Sun, 30 Sep 2012 13:41:16 +0200
+
 glade-3 (3.8.0-0ubuntu4) precise; urgency=low
 
   * 05_rename_binaries_to_gtk2.patch: list the correct binary name in 
