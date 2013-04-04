@@ -1,0 +1,14 @@
+Description: Fix FTBFS link gtk-doc scanner against gtk libs.
+Author: Dmitrijs Ledkovs <dmitrij.ledkov@ubuntu.com>
+
+--- glade-3-3.8.0.orig/doc/Makefile.am
++++ glade-3-3.8.0/doc/Makefile.am
+@@ -100,7 +100,7 @@ GTKDOC_CFLAGS= \
+ 	-I$(top_builddir)         \
+ 	`pkg-config --cflags gtk+-2.0`
+ 
+-GTKDOC_LIBS=${top_builddir}/gladeui/libgladeui-1.la
++GTKDOC_LIBS=${top_builddir}/gladeui/libgladeui-1.la $(GTK_LIBS)
+ 
+ # This includes the standard gtk-doc make rules, copied by gtkdocize.
+ include $(top_srcdir)/gtk-doc.make

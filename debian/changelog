@@ -1,3 +1,9 @@
+glade-3 (3.8.0-0ubuntu6) raring; urgency=low
+
+  * Fix FTBFS link gtk-doc scanner against gtk libs.
+
+ -- Dmitrijs Ledkovs <dmitrij.ledkov@ubuntu.com>  Thu, 04 Apr 2013 13:05:43 +0100
+
 glade-3 (3.8.0-0ubuntu5) quantal; urgency=low
 
   * link-gmodule.patch: fix ftbs
