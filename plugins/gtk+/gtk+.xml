@@ -10,7 +10,6 @@
       <get-property-function>glade_gtk_widget_get_property</get-property-function>
       <action-activate-function>glade_gtk_widget_action_activate</action-activate-function>
       <action-submenu-function>glade_gtk_widget_action_submenu</action-submenu-function>
-      <depends-function>glade_gtk_widget_depends</depends-function>
       <read-widget-function>glade_gtk_widget_read_widget</read-widget-function>
       <write-widget-function>glade_gtk_widget_write_widget</write-widget-function>
       <create-editor-property-function>glade_gtk_widget_create_eprop</create-editor-property-function>
@@ -45,10 +44,10 @@
 
       <properties>
 	
-	<property weight="4.2" translatable="True" since="2.12" libglade-unsupported="True" id="tooltip-text">
+	<property weight="4.2" translatable="True" since="2.12" libglade-unsupported="True" ignore="True" id="tooltip-text">
 	  <visible-lines>2</visible-lines>
 	</property>
-	<property weight="4.1" since="2.12" libglade-unsupported="True" id="tooltip-markup"/>
+	<property weight="4.1" since="2.12" libglade-unsupported="True" ignore="True" id="tooltip-markup"/>
         <property save-always="True" id="can-focus" common="True"/>
 	<property ignore="True" id="has-default" common="True"/>
 	<property id="can-default" common="True"/>
@@ -57,7 +56,7 @@
 	<property optional-default="False" optional="True" id="height-request" default="0" common="True"/>
 	<property weight="4.6" ignore="True" id="no-show-all"/>
 
-	<property weight="4.5" translatable="True" libglade-only="True" id="tooltip" default="" common="True" name="Tooltip">
+	<property weight="4.5" translatable="True" libglade-only="True" ignore="True" id="tooltip" default="" common="True" name="Tooltip">
 	  <parameter-spec>
 	    <type>GParamString</type>
 	  </parameter-spec>
@@ -450,8 +449,8 @@
         <property id="use-underline" gtkbuilder-since="2.16" name="Use Underline"></property>
 
 	
-      	<property since="2.16" id="related-action" custom-layout="True" name="Related Action"></property>
-      	<property since="2.16" needs-sync="True" id="use-action-appearance" default="False" custom-layout="True" name="Use Action Appearance"></property>
+      	<property since="2.16" save="False" needs-sync="True" id="related-action" custom-layout="True" name="Related Action"></property>
+      	<property since="2.16" save="False" needs-sync="True" id="use-action-appearance" default="False" custom-layout="True" name="Use Action Appearance"></property>
 
 	
 	<property save="False" ignore="True" id="atk-click" atk-property="True" name="Click">
@@ -660,8 +659,8 @@
 
       <properties>
 	
-      	<property since="2.16" id="related-action" custom-layout="True" name="Related Action"></property>
-      	<property since="2.16" id="use-action-appearance" default="False" custom-layout="True" name="Use Action Appearance"></property>
+      	<property since="2.16" save="False" needs-sync="True" id="related-action" custom-layout="True" name="Related Action"></property>
+      	<property since="2.16" save="False" needs-sync="True" id="use-action-appearance" default="False" custom-layout="True" name="Use Action Appearance"></property>
       </properties>
 
     </glade-widget-class>
@@ -833,7 +832,6 @@
       <create-editable-function>glade_gtk_entry_create_editable</create-editable-function>
       <set-property-function>glade_gtk_entry_set_property</set-property-function>
       <read-widget-function>glade_gtk_entry_read_widget</read-widget-function>
-      <depends-function>glade_gtk_entry_depends</depends-function>
 
       <signals>
 	<signal since="2.16" id="icon-press"/>
@@ -968,8 +966,8 @@
 	</property>
 
 	
-      	<property since="2.16" id="related-action" custom-layout="True" name="Related Action"></property>
-      	<property since="2.16" id="use-action-appearance" default="False" custom-layout="True" name="Use Action Appearance"></property>
+      	<property since="2.16" save="False" needs-sync="True" id="related-action" custom-layout="True" name="Related Action"></property>
+      	<property since="2.16" save="False" needs-sync="True" id="use-action-appearance" default="False" custom-layout="True" name="Use Action Appearance"></property>
 
 	
 	<property save="False" ignore="True" id="atk-click" atk-property="True" name="Click">
@@ -1201,6 +1199,28 @@
       <get-internal-child-function>glade_gtk_combo_box_entry_get_internal_child</get-internal-child-function>
       <set-property-function>glade_gtk_combo_box_entry_set_property</set-property-function>
     </glade-widget-class>
+
+
+    <glade-widget-class name="GtkComboBoxText" generic-name="comboboxtext" title="Combo Box Text">
+      <post-create-function>glade_gtk_combo_box_text_post_create</post-create-function>
+      <create-editor-property-function>glade_gtk_combo_box_text_create_eprop</create-editor-property-function>
+      <string-from-value-function>glade_gtk_combo_box_text_string_from_value</string-from-value-function>
+      <set-property-function>glade_gtk_combo_box_text_set_property</set-property-function>
+      <read-widget-function>glade_gtk_combo_box_text_read_widget</read-widget-function>
+      <write-widget-function>glade_gtk_combo_box_text_write_widget</write-widget-function>
+
+      <properties>
+        <property id="model" disabled="True"/>
+	<property since="2.24" save="False" libglade-unsupported="True" id="glade-items" name="Items">
+	  <parameter-spec>
+	    <type>GParamBoxed</type>
+	    <value-type>GladeStringList</value-type>
+	  </parameter-spec>
+	  <tooltip>The items to show in the combo box</tooltip>
+	</property>
+      </properties>
+    </glade-widget-class>
+
 
     <glade-widget-class name="GtkProgressBar" generic-name="progressbar" title="Progress Bar">
       <properties>
@@ -1954,7 +1974,6 @@
     
     
     <glade-widget-class toplevel="True" name="GtkSizeGroup" libglade-unsupported="True" generic-name="sizegroup" title="Size Group">
-      <depends-function>glade_gtk_size_group_depends</depends-function>
       <read-widget-function>glade_gtk_size_group_read_widget</read-widget-function>
       <write-widget-function>glade_gtk_size_group_write_widget</write-widget-function>
       <set-property-function>glade_gtk_size_group_set_property</set-property-function>
@@ -2124,7 +2143,6 @@
       <add-child-function>glade_gtk_treeview_add_child</add-child-function>
       <remove-child-function>glade_gtk_treeview_remove_child</remove-child-function>
       <action-activate-function>glade_gtk_treeview_action_activate</action-activate-function>
-      <depends-function>glade_gtk_treeview_depends</depends-function>
 
       <actions>
         <action stock="gtk-edit" important="True" id="launch_editor" name="Edit&#8230;"></action>
@@ -3474,6 +3492,7 @@
 
     <glade-widget-class-ref name="GtkComboBox"/>
     <glade-widget-class-ref name="GtkComboBoxEntry"/>
+    <glade-widget-class-ref name="GtkComboBoxText"/>
     <glade-widget-class-ref name="GtkProgressBar"/>
     <glade-widget-class-ref name="GtkSpinner"/>
 

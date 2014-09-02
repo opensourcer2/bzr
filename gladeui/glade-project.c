@@ -49,7 +49,10 @@
 #include "glade-project.h"
 #include "glade-command.h"
 #include "glade-name-context.h"
+#include "glade-object-stub.h"
 
+#include "glade-widget-private.h"
+#include "glade-tsort.h"
 
 #define VALID_ITER(project, iter) ((iter)!= NULL && G_IS_OBJECT ((iter)->user_data) && ((GladeProject*)(project))->priv->stamp == (iter)->stamp)
 
@@ -142,6 +145,8 @@ struct _GladeProjectPrivate
 			       * (full or relative path, null means project directory).
 			       */
 	
+	GList *unknown_catalogs; /* List of CatalogInfo catalogs */
+
 	/* Control on the preferences dialog to update buttons etc when properties change */
 	GtkWidget *prefs_dialog;
 	GtkWidget *glade_radio;
@@ -161,6 +166,12 @@ struct _GladeProjectPrivate
 	gint       progress_full;
 	gboolean   load_cancel;
 };
+
+typedef struct 
+{
+  gchar *catalog;
+  gint position;
+} CatalogInfo;
 
 typedef struct {
 	GladeWidget      *toplevel;
@@ -202,6 +213,8 @@ static void         glade_project_verify_adaptor           (GladeProject       *
 							    gboolean            saving,
 							    gboolean            forwidget,
 							    GladeSupportMask   *mask);
+
+static GladeXmlContext *glade_project_write                (GladeProject       *project);
 
 static GladeWidget *search_ancestry_by_name                 (GladeWidget       *toplevel, 
 							     const gchar       *name);
@@ -354,6 +367,21 @@ glade_project_finalize (GObject *object)
 		g_free (tinfo);
 	}
 	g_list_free (project->priv->toplevels);
+
+	if (project->priv->unknown_catalogs)
+	{
+		GList *l;
+
+		for (l = project->priv->unknown_catalogs; l; l = g_list_next (l))
+		{
+			CatalogInfo *data = l->data;
+			g_free (data->catalog);
+			g_free (data);
+		}
+
+		g_list_free (project->priv->unknown_catalogs);
+		project->priv->unknown_catalogs = NULL;
+	}
 
 	G_OBJECT_CLASS (glade_project_parent_class)->finalize (object);
 }
@@ -631,6 +659,7 @@ glade_project_init (GladeProject *project)
 	priv->prev_redo_item = NULL;
 	priv->first_modification = NULL;
 	priv->first_modification_is_na = FALSE;
+	priv->unknown_catalogs = NULL;
 
 	priv->toplevel_names = glade_name_context_new ();
 	priv->naming_policy = GLADE_POLICY_PROJECT_WIDE;
@@ -1036,6 +1065,7 @@ glade_project_read_requires (GladeProject *project,
 	gchar        *required_lib = NULL;
 	gboolean      loadable = TRUE;
 	guint16       major, minor;
+	gint          position = 0;
 
 	for (node = glade_xml_node_get_children_with_comments (root_node); 
 	     node; node = glade_xml_node_next_with_comments (node))
@@ -1062,6 +1092,17 @@ glade_project_read_requires (GladeProject *project,
 		 */
 		if (!glade_catalog_is_loaded (required_lib))
 		{
+			CatalogInfo *data = g_new0(CatalogInfo, 1);
+
+			data->catalog = required_lib;
+			data->position = position;
+
+			/* Keep a list of unknown catalogs to avoid loosing the requirement */
+			project->priv->unknown_catalogs = g_list_append (project->priv->unknown_catalogs,
+                                                           data);
+			/* Also keep the version */
+			glade_project_set_target_version (project, required_lib, major, minor);
+
 			if (!loadable)
 				g_string_append (string, ", ");
 
@@ -1075,9 +1116,10 @@ glade_project_read_requires (GladeProject *project,
 
 			glade_project_set_target_version
 				(project, required_lib, major, minor);
+			g_free (required_lib);
 		}
-		
-		g_free (required_lib);
+
+		position++;
 	}
 
 	if (!loadable)
@@ -1468,12 +1510,7 @@ glade_project_load_internal (GladeProject *project)
 	/* XXX Need to load project->priv->comment ! */
 	glade_project_read_comment (project, doc);
 
-	if (glade_project_read_requires (project, root, project->priv->path, &has_gtk_dep) == FALSE)
-	{
-		project->priv->loading = FALSE;
-		glade_xml_context_free (context);
-		return FALSE;
-	}
+	glade_project_read_requires (project, root, project->priv->path, &has_gtk_dep);
 
 	glade_project_read_naming_policy (project, root);
 
@@ -1761,69 +1798,6 @@ glade_project_write_resource_path (GladeProject    *project,
 		glade_xml_node_append_child (root, path_node);
 		g_free (comment);
 	}
-}
-
-static gint
-sort_project_dependancies (GObject *a, GObject *b)
-{
-	GladeWidget *ga, *gb;
-
-	ga = glade_widget_get_from_gobject (a);
-	gb = glade_widget_get_from_gobject (b);
-
-	if (glade_widget_adaptor_depends (ga->adaptor, ga, gb))
-		return 1;
-	else if (glade_widget_adaptor_depends (gb->adaptor, gb, ga))
-		return -1;
-	else 
-		return strcmp (ga->name, gb->name);
-}
-
-static GladeXmlContext *
-glade_project_write (GladeProject *project)
-{
-	GladeXmlContext *context;
-	GladeXmlDoc     *doc;
-	GladeXmlNode    *root; /* *comment_node; */
-	GList           *list;
-
-	doc     = glade_xml_doc_new ();
-	context = glade_xml_context_new (doc, NULL);
-	root    = glade_xml_node_new (context, GLADE_XML_TAG_PROJECT (project->priv->format));
-	glade_xml_doc_set_root (doc, root);
-
-	glade_project_update_comment (project);
-	/* comment_node = glade_xml_node_new_comment (context, project->priv->comment); */
-
-	/* XXX Need to append this to the doc ! not the ROOT !
-	   glade_xml_node_append_child (root, comment_node); */
-
-	glade_project_write_required_libs (project, context, root);
-
-	glade_project_write_naming_policy (project, context, root);
-
-	glade_project_write_resource_path (project, context, root);
-
-	/* Sort the whole thing */
-	project->priv->objects = 
-		g_list_sort (project->priv->objects, 
-			     (GCompareFunc)sort_project_dependancies);
-
-	for (list = project->priv->objects; list; list = list->next)
-	{
-		GladeWidget *widget;
-
-		widget = glade_widget_get_from_gobject (list->data);
-
-		/* 
-		 * Append toplevel widgets. Each widget then takes
-		 * care of appending its children.
-		 */
-		if (widget->parent == NULL)
-			glade_widget_write (widget, context, root);
-	}
-	
-	return context;
 }
 
 /**
@@ -2270,25 +2244,37 @@ static gboolean
 glade_project_verify (GladeProject *project, 
 		      gboolean      saving)
 {
-	GString     *string = g_string_new (NULL);
-	GladeWidget *widget;
-	GList       *list;
-	gboolean     ret = TRUE;
-	gchar       *path_name;
+  GString *string = g_string_new (NULL);
+  GList *list;
+  gboolean ret = TRUE;
+  
+  for (list = project->priv->objects; list; list = list->next)
+    {
+      GladeWidget *widget = glade_widget_get_from_gobject (list->data);
+      
+      if (GLADE_IS_OBJECT_STUB (list->data))
+        {
+          gchar *type;
+          g_object_get (list->data, "object-type", &type, NULL);
+          
+          /* translators: reffers to an unknow object named '%s' of type '%s' */
+          g_string_append_printf (string, _("Unknow object %s with type %s\n"), 
+                                  glade_widget_get_name (widget), type);
+          g_free (type);
+        }
+      else
+        {
+          gchar *path_name = glade_widget_generate_path_name (widget);
 
-	for (list = project->priv->objects; list; list = list->next)
-	{
-		widget = glade_widget_get_from_gobject (list->data);
+          glade_project_verify_adaptor (project, glade_widget_get_adaptor (widget),
+                                        path_name, string, saving, FALSE, NULL);
+          glade_project_verify_properties_internal (widget, path_name, string,
+                                                    FALSE);
+          glade_project_verify_signals (widget, path_name, string, FALSE);
 
-		path_name = glade_widget_generate_path_name (widget);
-
-		glade_project_verify_adaptor (project, widget->adaptor, 
-					      path_name, string, saving, FALSE, NULL);
-		glade_project_verify_properties_internal (widget, path_name, string, FALSE);
-		glade_project_verify_signals (widget, path_name, string, FALSE);
-
-		g_free (path_name);
-	}
+          g_free (path_name);
+        }
+    }
 
 	if (string->len > 0)
 	{
@@ -2439,6 +2425,265 @@ glade_project_verify_adaptor (GladeProject       *project,
 	if (mask)
 		*mask = support_mask;
 
+}
+
+
+static gint
+glade_widgets_name_cmp (gconstpointer ga, gconstpointer gb)
+{
+  return g_strcmp0 (glade_widget_get_name ((gpointer)ga),
+                    glade_widget_get_name ((gpointer)gb));
+}
+
+static gint
+glade_node_edge_name_cmp (gconstpointer ga, gconstpointer gb)
+{
+  _NodeEdge *na = (gpointer)ga, *nb = (gpointer)gb;
+  return g_strcmp0 (glade_widget_get_name (nb->successor),
+                    glade_widget_get_name (na->successor));
+}
+
+static inline gboolean
+glade_project_widget_hard_depends (GladeWidget *widget, GladeWidget *another)
+{
+  GList *l;
+
+  for (l = _glade_widget_peek_prop_refs (another); l; l = g_list_next (l))
+    {
+      GladePropertyClass *klass;
+      
+      /* If one of the properties that reference @another is
+       * owned by @widget then @widget depends on @another
+       */
+      if (glade_property_get_widget (l->data) == widget &&
+          (klass = glade_property_get_class (l->data)) &&
+          glade_property_class_get_construct_only (klass))
+        return TRUE;
+    }
+
+  return FALSE;
+}
+
+static GList *
+glade_project_get_graph_deps (GladeProject *project)
+{
+  GladeProjectPrivate *priv = project->priv;
+  GList *l, *edges = NULL;
+  
+  /* Create edges of the directed graph */
+  for (l = priv->objects; l; l = g_list_next (l))
+    {
+      GladeWidget *predecessor = glade_widget_get_from_gobject (l->data);
+      GladeWidget *predecessor_top;
+      GList *ll;
+
+      predecessor_top = glade_widget_get_toplevel (predecessor);
+
+      /* Adds dependencies based on properties refs */
+      for (ll = _glade_widget_peek_prop_refs (predecessor); ll; ll = g_list_next (ll))
+        {
+          GladeWidget *successor = glade_property_get_widget (ll->data);
+          GladeWidget *successor_top;
+
+          /* Ignore widgets that are not part of this project. (ie removed ones) */
+          if (glade_widget_get_project (successor) != project)
+            continue;
+
+          successor_top = glade_widget_get_toplevel (successor);
+
+          /* Ignore objects within the same toplevel */
+          if (predecessor_top != successor_top)
+            edges = _node_edge_prepend (edges, predecessor_top, successor_top);
+        }
+    }
+
+  return edges;
+}
+
+static GList *
+glade_project_get_nodes_from_edges (GladeProject *project, GList *edges)
+{
+  GList *l, *hard_edges = NULL;
+  GList *cycles = NULL;
+
+  /* Collect widgets with circular dependencies */
+  for (l = edges; l; l = g_list_next (l))
+    {
+      _NodeEdge *edge = l->data;
+
+      if (glade_widget_get_parent (edge->successor) == edge->predecessor ||
+          glade_project_widget_hard_depends (edge->predecessor, edge->successor))
+        hard_edges = _node_edge_prepend (hard_edges, edge->predecessor, edge->successor);
+
+      /* Just toplevels */
+      if (glade_widget_get_parent (edge->successor))
+        continue;
+
+      if (!g_list_find (cycles, edge->successor))
+        cycles = g_list_prepend (cycles, edge->successor);
+    }
+
+  /* Sort them alphabetically */
+  cycles = g_list_sort (cycles, glade_widgets_name_cmp);
+
+  if (!hard_edges)
+    return cycles;
+
+  /* Sort them by hard deps */
+  cycles = _glade_tsort (&cycles, &hard_edges);
+  
+  if (hard_edges)
+    {
+      GList *l, *hard_cycles = NULL;
+
+      /* Collect widgets with hard circular dependencies */
+      for (l = hard_edges; l; l = g_list_next (l))
+        {
+          _NodeEdge *edge = l->data;
+
+          /* Just toplevels */
+          if (glade_widget_get_parent (edge->successor))
+            continue;
+
+          if (!g_list_find (hard_cycles, edge->successor))
+            hard_cycles = g_list_prepend (hard_cycles, edge->successor);
+        }
+
+      /* And append to the end of the cycles list */
+      cycles = g_list_concat (cycles, g_list_sort (hard_cycles, glade_widgets_name_cmp));
+
+      /* Opps! there is at least one hard circular dependency,
+       * GtkBuilder will fail to set one of the properties that create the cycle
+       */
+
+      _node_edge_list_free (hard_edges);
+    }
+
+  return cycles;
+}
+
+static GList *
+glade_project_add_hardcoded_dependencies (GList *edges, GladeProject *project)
+{
+  GList *l, *toplevels = project->priv->tree;
+
+  /* Iterate over every toplevel */
+  for (l = toplevels; l; l = g_list_next (l))
+    {
+      GObject *predecessor = l->data;
+
+      /* Looking for a GtkIconFactory */
+      if (GTK_IS_ICON_FACTORY (predecessor))
+        {
+          GladeWidget *predecessor_top = glade_widget_get_from_gobject (predecessor);
+          GList *ll;
+
+          /* add dependency on the GtkIconFactory on every toplevel */
+          for (ll = toplevels; ll; ll = g_list_next (ll))
+            {          
+              GObject *successor = ll->data;
+
+              /* except for GtkIconFactory */
+              if (!GTK_IS_ICON_FACTORY (successor))
+                edges = _node_edge_prepend (edges, predecessor_top,
+                                            glade_widget_get_from_gobject (successor));
+            }
+        }
+    }
+
+  return edges;
+}
+
+static GList *
+glade_project_get_ordered_toplevels (GladeProject *project)
+{
+  GladeProjectPrivate *priv = project->priv;
+  GList *l, *sorted_tree, *tree = NULL;
+  GList *edges;
+
+  /* Create list of toplevels GladeWidgets */
+  for (l = priv->tree; l; l = g_list_next (l))
+    tree = g_list_prepend (tree, glade_widget_get_from_gobject (l->data));
+
+  /* Get dependency graph */
+  edges = glade_project_get_graph_deps (project);
+
+  /* Added hardcoded dependencies */
+  edges = glade_project_add_hardcoded_dependencies (edges, project);
+    
+  /* Sort toplevels alphabetically */
+  tree = g_list_sort (tree, glade_widgets_name_cmp);
+
+  /* Sort dep graph alphabetically using successor name.
+   * _glade_tsort() is a stable sort algorithm so, output of nodes without
+   * dependency depends on the input order
+   */
+  edges = g_list_sort (edges, glade_node_edge_name_cmp);
+  
+  /* Sort tree */
+  sorted_tree = _glade_tsort (&tree, &edges);
+
+  if (edges)
+    {
+      GList *cycles = glade_project_get_nodes_from_edges (project, edges);
+      
+      /* And append to the end of the sorted list */
+      sorted_tree = g_list_concat (sorted_tree, cycles);
+
+      _node_edge_list_free (edges);
+    }
+
+  /* No need to free tree as tsort will consume the list */
+  return sorted_tree;
+}
+
+static GladeXmlContext *
+glade_project_write (GladeProject *project)
+{
+	GladeXmlContext *context;
+	GladeXmlDoc     *doc;
+	GladeXmlNode    *root; /* *comment_node; */
+	GList           *list;
+	GList           *toplevels;
+
+	doc     = glade_xml_doc_new ();
+	context = glade_xml_context_new (doc, NULL);
+	root    = glade_xml_node_new (context, GLADE_XML_TAG_PROJECT (project->priv->format));
+	glade_xml_doc_set_root (doc, root);
+
+	glade_project_update_comment (project);
+	/* comment_node = glade_xml_node_new_comment (context, project->priv->comment); */
+
+	/* XXX Need to append this to the doc ! not the ROOT !
+	   glade_xml_node_append_child (root, comment_node); */
+
+	glade_project_write_required_libs (project, context, root);
+
+	glade_project_write_naming_policy (project, context, root);
+
+	glade_project_write_resource_path (project, context, root);
+
+  /* Get sorted toplevels */
+  toplevels = glade_project_get_ordered_toplevels (project);
+
+  for (list = toplevels; list; list = g_list_next (list))
+    {
+      GladeWidget *widget = list->data;
+
+      /* 
+       * Append toplevel widgets. Each widget then takes
+       * care of appending its children.
+       */
+      if (!glade_widget_get_parent (widget))
+        glade_widget_write (widget, context, root);
+      else
+        g_warning ("Tried to save a non toplevel object '%s' at xml root",
+                   glade_widget_get_name (widget));
+    }
+
+  g_list_free (toplevels);
+	
+	return context;
 }
 
 /**
@@ -2818,7 +3063,8 @@ glade_project_set_widget_name (GladeProject *project,
 
 static void
 glade_project_notify_row_has_child (GladeProject *project,
-				    GladeWidget  *gwidget)
+				    GladeWidget  *gwidget,
+				    gboolean      adding)
 {
 	GladeWidget *parent;
 	gint         siblings;
@@ -2829,7 +3075,7 @@ glade_project_notify_row_has_child (GladeProject *project,
 	{
 		siblings = glade_project_count_children (project, parent);
 
-		if (siblings == 1)
+		if (siblings == (adding ? 1 : 0))
 		{
 			GtkTreePath *path;
 			GtkTreeIter  iter;
@@ -2860,7 +3106,7 @@ glade_project_notify_row_inserted (GladeProject *project,
 	gtk_tree_model_row_inserted (GTK_TREE_MODEL (project), path, &iter);
 	gtk_tree_path_free (path);
 
-	glade_project_notify_row_has_child (project, gwidget);
+	glade_project_notify_row_has_child (project, gwidget, TRUE);
 }
 
 static void 
@@ -2883,58 +3129,57 @@ glade_project_check_reordered (GladeProject       *project,
 			       GladeWidget        *parent,
 			       GList              *old_order)
 {
-  GList       *new_order, *l, *ll;
-  gint        *order, n_children, i;
-  GtkTreeIter  iter;
-  GtkTreePath *path;
+	GList       *new_order, *l, *ll;
+	gint        *order, n_children, i;
+	GtkTreeIter  iter;
+	GtkTreePath *path;
 
-  g_return_if_fail (GLADE_IS_PROJECT (project));
-  g_return_if_fail (GLADE_IS_WIDGET (parent));
-  g_return_if_fail (glade_project_has_object (project,
-                                             glade_widget_get_object (parent)));
+	g_return_if_fail (GLADE_IS_PROJECT (project));
+	g_return_if_fail (GLADE_IS_WIDGET (parent));
+	g_return_if_fail (glade_project_has_object (project,
+											 glade_widget_get_object (parent)));
 
-  new_order = glade_widget_get_children (parent);
+	new_order = glade_widget_get_children (parent);
 
-  /* Check if the list changed */
-  for (l = old_order, ll = new_order; 
-       l && ll; 
-       l = l->next, ll = ll->next)
-    {
-      if (l->data != ll->data)
-       break;
-    }
+	/* Check if the list changed */
+	for (l = old_order, ll = new_order;  l && ll; l = l->next, ll = ll->next)
+	{
+		if (l->data != ll->data)
+			break;
+	}
 
-  if (l || ll)
-    {
-      n_children = glade_project_count_children (project, parent);
-      order = g_new (gint, n_children);
+	if (l || ll)
+	{
+		n_children = glade_project_count_children (project, parent);
+		order = g_new (gint, n_children);
 
-      for (i = 0, l = new_order; l; l = l->next)
-       {
-         GObject *obj = l->data;
+		for (i = 0, l = new_order; l; l = l->next)
+		{
+			GObject *obj = l->data;
 
-         if (glade_project_has_object (project, obj))
-           {
-             GList *node = g_list_find (old_order, obj);
+			if (glade_project_has_object (project, obj))
+			{
+				GList *node = g_list_find (old_order, obj);
 
-             g_assert (node);
+				g_assert (node);
 
-             order[i] = g_list_position (old_order, node);
+				order[i] = g_list_position (old_order, node);
 
-             i++;
-           }
-       }
+				i++;
+			}
+		}
 
-      /* Signal that the rows were reordered */
-      glade_project_model_get_iter_for_object (project, glade_widget_get_object (parent), &iter);
-      path = gtk_tree_model_get_path (GTK_TREE_MODEL (project), &iter);
-      gtk_tree_model_rows_reordered (GTK_TREE_MODEL (project), path, &iter, order);
-      gtk_tree_path_free (path);
+		/* Signal that the rows were reordered */
+		glade_project_model_get_iter_for_object (project, glade_widget_get_object (parent), &iter);
+		path = gtk_tree_model_get_path (GTK_TREE_MODEL (project), &iter);
+		gtk_tree_model_rows_reordered (GTK_TREE_MODEL (project), path, &iter, order);
+		gtk_tree_path_free (path);
 
-      g_free (order);
-    }
+		g_free (order);
 
-  g_list_free (new_order);
+	}
+
+	g_list_free (new_order);
 }
 
 /**
@@ -3113,7 +3358,7 @@ glade_project_remove_object (GladeProject *project, GObject *object)
 	gwidget->in_project = FALSE;
 
 
-	glade_project_notify_row_has_child (project, gwidget);
+	glade_project_notify_row_has_child (project, gwidget, FALSE);
 	g_object_unref (gwidget);
 
 }
@@ -3497,7 +3742,14 @@ glade_project_required_libs (GladeProject *project)
 	if (!required)
 		required = g_list_prepend (required, g_strdup ("gtk+"));
 
-	return g_list_reverse (required);
+	for (l = project->priv->unknown_catalogs; l; l = g_list_next (l))
+	{
+		CatalogInfo *data = l->data;
+		/* Keep position to make sure we do not create a diff when saving */
+		required = g_list_insert (required, g_strdup (data->catalog), data->position);
+	}
+
+	return required;
 }
 
 /**
@@ -4648,8 +4900,9 @@ glade_project_model_get_column_type (GtkTreeModel* model,
 }
 
 static gboolean
-glade_project_model_get_iter (GtkTreeModel * model,
-                              GtkTreeIter * iter, GtkTreePath * path)
+glade_project_model_get_iter (GtkTreeModel *model,
+                              GtkTreeIter  *iter, 
+			      GtkTreePath  *path)
 {
   GladeProject *project = GLADE_PROJECT (model);
   gint         *indices = gtk_tree_path_get_indices (path);

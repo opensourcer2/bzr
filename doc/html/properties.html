@@ -2,22 +2,22 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Property Class Definitions</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<title>Glade User Interface Designer Reference Manual: Property Class Definitions</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
 <link rel="home" href="index.html" title="Glade User Interface Designer Reference Manual">
 <link rel="up" href="catalog.html" title="Part I. Adding your custom widgets">
 <link rel="prev" href="widgetclasses.html" title="Widget Adaptor Definitions">
 <link rel="next" href="pythonsupport.html" title="Python Gtk widgets support">
-<meta name="generator" content="GTK-Doc V1.15.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.20 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
-<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle">
-<td><a accesskey="p" href="widgetclasses.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
-<td><a accesskey="u" href="catalog.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
-<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
-<th width="100%" align="center">Glade User Interface Designer Reference Manual</th>
-<td><a accesskey="n" href="pythonsupport.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="10"><tr valign="middle">
+<td width="100%" align="left" class="shortcuts"></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
+<td><a accesskey="u" href="catalog.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="p" href="widgetclasses.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="n" href="pythonsupport.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
 </tr></table>
 <div class="refentry">
 <a name="properties"></a><div class="titlepage"></div>
@@ -25,15 +25,15 @@
 <td valign="top">
 <h2><span class="refentrytitle">Property Class Definitions</span></h2>
 <p>Property Classes — 
-How to augment or define a <a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass"><span class="type">GladePropertyClass</span></a>
+How to augment or define a <a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="struct GladePropertyClass"><span class="type">GladePropertyClass</span></a>
     </p>
 </td>
-<td valign="top" align="right"></td>
+<td class="gallery_image" valign="top" align="right"></td>
 </tr></table></div>
 <div class="refsect1">
-<a name="id541828"></a><h2>Property Class Configuration</h2>
+<a name="id-1.2.4.3"></a><h2>Property Class Configuration</h2>
 <p>
-Properties are introspected at load time and loaded into <a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="GladePropertyClass"><span class="type">GladePropertyClass</span></a> structures.
+Properties are introspected at load time and loaded into <a class="link" href="gladeui-GladePropertyClass.html#GladePropertyClass" title="struct GladePropertyClass"><span class="type">GladePropertyClass</span></a> structures.
 The behaviour of properties can be modified by the catalog and fake properties can be added
 for editing purposes. Here is an example of the xml form:
       </p>
@@ -62,8 +62,11 @@ for editing purposes. Here is an example of the xml form:
 <p>
 Properties of the 'property' tag:
       </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term">id</span></p></td>
@@ -75,7 +78,7 @@ This is manditory and specifies the property that we are modifying (or adding)
 <td><p><span class="term">name</span></p></td>
 <td><p>
 The name to be used in the interface.
-(if name is not specified; it defaults to the nickname of the <span class="type">GParamSpec</span>)
+(if name is not specified; it defaults to the nickname of the <a href="http://library.gnome.org/devel/gobject/unstable/gobject-GParamSpec.html#GParamSpec"><span class="type">GParamSpec</span></a>)
             </p></td>
 </tr>
 <tr>
@@ -83,7 +86,7 @@ The name to be used in the interface.
 <td><p>
 A 'major.minor' formed version describing the version of the owning catalog in which this 
 property was introduced; example: <code class="literal">since="1.0"</code>. Properties are initialized
-to be supported since the introducing <a class="link" href="gladeui-glade-widget-adaptor.html#GladeWidgetAdaptor" title="GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a> was supported.
+to be supported since the introducing <a class="link" href="gladeui-glade-widget-adaptor.html#GladeWidgetAdaptor" title="struct GladeWidgetAdaptor"><span class="type">GladeWidgetAdaptor</span></a> was supported.
             </p></td>
 </tr>
 <tr>
@@ -149,7 +152,7 @@ Whether to show the property in the editor and reset dialog (default "True")
 <td><p><span class="term">custom-layout</span></p></td>
 <td><p>
 This is used to avoid loading this property in the editor when implementing
-a custom <span class="type">GladeEditable</span> that embeds the base <a class="link" href="gladeui-glade-editor.html#GladeEditorTable" title="GladeEditorTable"><span class="type">GladeEditorTable</span></a> implementation,
+a custom <span class="type">GladeEditable</span> that embeds the base <a class="link" href="gladeui-glade-editor.html#GladeEditorTable" title="struct GladeEditorTable"><span class="type">GladeEditorTable</span></a> implementation,
 custom-layout properties will still show up in the reset dialog (default "False)
             </p></td>
 </tr>
@@ -195,22 +198,25 @@ default values are normally not saved).
 <p>
 Child tags of the 'property' tag:
       </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term">spec</span></p></td>
 <td><p>
-Specifies a function to be used to return a <span class="type">GParamSpec</span> for this property;
+Specifies a function to be used to return a <a href="http://library.gnome.org/devel/gobject/unstable/gobject-GParamSpec.html#GParamSpec"><span class="type">GParamSpec</span></a> for this property;
 this is used to add virtual properties to an object (like the "size" property
-on <a href="http://library.gnome.org/devel/gtk/unstable/GtkBox.html"><span class="type">GtkBox</span></a>).
+on <a href="http://library.gnome.org/devel/gtk3/GtkBox.html"><span class="type">GtkBox</span></a>).
             </p></td>
 </tr>
 <tr>
 <td><p><span class="term">tooltip</span></p></td>
 <td><p>
 The tooltip to be displayed in the property editor for this property. 
-The tooltip defaults to the blurb of the associated <span class="type">GParamSpec</span>.
+The tooltip defaults to the blurb of the associated <a href="http://library.gnome.org/devel/gobject/unstable/gobject-GParamSpec.html#GParamSpec"><span class="type">GParamSpec</span></a>.
             </p></td>
 </tr>
 <tr>
@@ -238,6 +244,6 @@ and the `name' property for the human readable one.
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.15.1</div>
+          Generated by GTK-Doc V1.20</div>
 </body>
 </html>

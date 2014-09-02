@@ -1,3 +1,156 @@
+2013-10-19  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* configure.ac, NEWS: Rolling Glade 3.8.4
+
+	* gladeui/glade-widget.c: Added workaround for Bug 625867
+	 "RadioButton information lost on cut+paste, add/remove parent, etc"
+
+2013-10-14 Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* plugins/gtk+/glade-gtk.c: Fixed glade_gtk_image_get_property() chainup. (was calling set_property)
+	  Fixes bug that prevented the runtime object to show the right pixbuf when copying a GtkImage.
+
+	* plugins/gtk+/glade-activatable-editor.c, plugins/gtk+/glade-tool-button-editor.c:
+	  Misc activatable and tool button editor cleanups.
+	  Removed use of size groups, replaced with table attachment fill prop.
+	  Fixes Bug 616834 "Freeze when changing toolbutton type after renaming it"
+
+2013-10-13 Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* plugins/gtk+/glade-attributes.c: Improved pango text integer attributes editors.
+	  Make the spin button numeric and clear the attr if the new text is an empty string!
+	  This should be enough to close Bug 679006
+	  "The "size" attribute for labels only accepts integer values (not strings like "larger")"
+
+2013-10-12 Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* src/glade-window.c: Fixed bug 584381
+	  "Saving as an existing file name except the extension overwrites without confirmation."
+	  The problem was that if the selected filename did not had an extension we appended append a .glade extension
+	  but did not check if the new filename existed or not.
+	  Now we fixed this problem by selecting the file if it exist and running the dialog again, giving it a chance
+	  to promt the user about overwriting.
+
+	* gladeui/glade-widget.c: Fixed Bug 646259
+	  "SIGSEGV in glade_widget_adaptor_object_construct_object loading ui file"
+	  Do not try to instantiate abstract class objects, this should prevent glade aborting when
+	  trying to load uninstantiable objects.
+
+2013-10-06 Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* build/mingw-w64/nsis_make_installer.sh: Added executable check to build script
+
+2013-10-05 Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* plugins/gtk+/glade-gtk.c: Fixed Bug 694081 "Glade loses widget's tooltips on Cut/Paste"	
+	 As a simple workaround we simply make glade ignore all tooltip related properties at runtime.
+	 You can still edit them as normal, but you just wont be able to see the tooltips in the workspace.
+
+	* gladeui/glade-widget.c: Fixed bug 702886 "SEGV when creating a new GtkDialog (GLib 2.37.x)"
+	  glib changed the order construct properties are set which exposed this bug,
+	  now they are set in the order they are installed in the class.
+	  So we fixed the bug by installing adaptor property first and object last.
+
+	* gladeui/glade-widget.c: Fixed some compiler warnings and added extra check to
+	  glade_widget_set_object() to make sure there is an adaptor.
+
+	* src/glade-window.c: Fixed copyright dates in about dialog
+
+	* gladeui/glade-design-view.c, gladeui/glade-editor.c, gladeui/glade-signal-editor.c:
+	  Made a few ui fixes, like removing unnecessary shadows in the workspace and property editor.
+
+        * data/icons/atk.png: Also replaces old atk icons with a new one.
+
+2012-12-03  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+        * configure.ac, NEWS: Rolling Glade 3.8.3
+
+	* build/mingw-w64: Ported build for mingw to 3.8 branch
+
+2012-07-13  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+	* plugins/gtk+/glade-gtk.c, plugins/gtk+/gtk+.xml.in: Fixed Bug #679589 "Use Action Appearance not 
+	  supported for GTK 2.12 but added to widgets in Glade 3.8.2"
+	  Made sure use-action-appearance is not saved if there is no action defined
+	
+2012-03-26  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+        * configure.ac, NEWS: Rolling Glade 3.8.2
+
+2012-02-15  Juan Pablo Ugarte <juanpablougarte@gmail.com>
+
+        * configure.ac: Backported Bug 665784 fix (added gmodule-2.0 pkgconfig package)
+          Vincent Untz
+
+2011-11-23  Dieter Verfaillie <dieterv@optionexplicit.be>
+
+	* build/mswindows/README, build/mswindows/build_glade.sh:
+	Added custom build scripts for building on MS windows.
+
+2011-11-17  Fredy Paquet <fpa@opag.ch>
+
+	* plugins/gtk+/glade-gtk.c: Improved performance of modifying GtkTable
+	  contents, shows specifically when loading files containing large tables.
+
+	Bug 663516
+
+2011-10-11  Benjamin Otte <otte@redhat.com>
+
+	* gladeui/glade-editor-property.c:
+	Make size groups widget selection work (bug 647984)
+
+2011-10-11  Tristan Van Berkom <tvb@gnome.org>
+
+	* help/Makefile.am: Make help dir use 'glade3' name
+	instead of 'glade' (for bug 646997).
+
+2011-10-10  Tristan Van Berkom <tvb@gnome.org>
+
+	* configure.ac, NEWS: Rolling Glade 3.8.1
+
+2011-10-09  Tristan Van Berkom <tvb@gnome.org>
+
+	* gladeui/glade-project.c: Fix glade_project_notify_has_child() to notify
+	that the children are gone only when the last item on that level disappears.
+
+	Fixes bug 651673
+
+2011-10-09  Fabien Parent <parent.f@gmail.com>
+
+	* gladeui/glade-property.c, gladeui/glade-xml-utils.c:
+
+	Fix a bug on the GtkComboBoxText (and probably others) when adding
+	a special char (like '&') in an item's name: every characters following
+	the special char disappeared while writting the xml file.
+
+	Bug 654609.
+
+2011-10-04  Tristan Van Berkom <tvb@gnome.org>
+
+	* plugins/gtk+/gtk+.xml.in, plugins/gtk+/glade-gtk.c: Ensure 'related-action'
+	and 'use-action-appearance' are serialized in the right order.
+
+	* gladeui/glade-widget-adaptor.c: Implemented a generic ->depends() routine
+	to ensure that liststores are serialized before treemodelfilters which refer to them (bug 657164).
+
+	* gladeui/glade-command.[ch]: Exposed glade_command_add() internal command so that
+	plugins can create command groups that play with adding/removing widgets inline without
+	creating copies of them.
+
+	* plugins/gtk+/glade-gtk.c: Fixed add/remove parent commands so that they work with
+	parentless widget references (i.e. you can add a parent to a GtkToolItemGroup's label widget
+	or a GtkButton's image widget, or remove the parent of a child of a label-widget, etc).
+
+	* gladeui/glade-widget.c: Fixed glade_widget_hide() in the case that the project is
+	  already gone.
+
+	* gladeui/glade-command.c: Fixed glade_command_remove() to push the command on the
+	  right GladeProject pointer.
+
+2011-04-29  Javier Jardón <jjardon@gnome.org>
+
+	* gladeui/glade-utils.c: Correctly detect the required devhelp version
+
 2011-04-04  Tristan Van Berkom <tristanvb@openismus.com>
 
 	* configure.ac, NEWS: Rolling Glade 3.8.

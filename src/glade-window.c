@@ -42,7 +42,7 @@
 #include <gtk/gtk.h>
 
 #ifdef MAC_INTEGRATION
-#  include <ige-mac-integration.h>
+#  include <gtkosxapplication.h>
 #endif
 
 
@@ -1133,6 +1133,15 @@ save (GladeWindow *window, GladeProject *project, const gchar *path)
 	g_free (display_name);
 }
 
+static gboolean
+path_has_extension (const gchar *path)
+{
+  gchar *basename = g_path_get_basename (path);
+  gboolean retval = g_utf8_strrchr (basename, -1, '.') != NULL;
+  g_free (basename);
+  return retval;
+}
+
 static void
 save_as (GladeWindow *window)
 {
@@ -1140,7 +1149,7 @@ save_as (GladeWindow *window)
  	GtkWidget    *filechooser;
  	GtkWidget    *dialog;
 	gchar *path = NULL;
-	gchar *real_path, *ch, *project_name;
+	gchar *project_name;
 	
 	project = glade_design_view_get_project (window->priv->active_view);
 	
@@ -1172,31 +1181,47 @@ save_as (GladeWindow *window)
 		g_free (project_name);
 	}
 	
- 	if (gtk_dialog_run (GTK_DIALOG(filechooser)) == GTK_RESPONSE_OK)
-		path = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (filechooser));
+  while (gtk_dialog_run (GTK_DIALOG (filechooser)) == GTK_RESPONSE_OK)
+    {
+      path = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (filechooser));
+
+      /* Check if selected filename has an extension or not */
+      if (!path_has_extension (path))
+        {
+          gchar *real_path = g_strconcat (path, ".glade", NULL);
+
+          g_free (path);
+          path = real_path;
+
+          /* We added .glade extension!,
+           * check if file exist to avoid overwriting a file without asking
+           */
+          if (g_file_test (path, G_FILE_TEST_EXISTS))
+            {
+              /* Set existing filename and let filechooser ask about overwriting */
+              gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (filechooser), path);
+              g_free (path);
+              path = NULL;
+              continue;
+            }
+        }
+      break;
+    }
 	
  	gtk_widget_destroy (filechooser);
  
  	if (!path)
  		return;
 
-	ch = strrchr (path, '.');
-	if (!ch || strchr (ch, G_DIR_SEPARATOR))
-		real_path = g_strconcat (path, ".glade", NULL);
-	else 
-		real_path = g_strdup (path);
-	
-	g_free (path);
-
 	/* checks if selected path is actually writable */
-	if (glade_util_file_is_writeable (real_path) == FALSE)
+	if (glade_util_file_is_writeable (path) == FALSE)
 	{
 		dialog = gtk_message_dialog_new (GTK_WINDOW (window),
 						 GTK_DIALOG_MODAL,
 						 GTK_MESSAGE_ERROR,
 						 GTK_BUTTONS_OK,
 						 _("Could not save the file %s"),
-						 real_path);
+						 path);
 						 
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
 							  _("You do not have the permissions "
@@ -1209,29 +1234,29 @@ save_as (GladeWindow *window)
 					  dialog);
 
 		gtk_widget_show (dialog);
-		g_free (real_path);
+		g_free (path);
 		return;
 	}
 
 	/* checks if another open project is using selected path */
-	if ((another_project = glade_app_get_project_by_path (real_path)) != NULL)
+	if ((another_project = glade_app_get_project_by_path (path)) != NULL)
 	{
 		if (project != another_project) {
 
 			glade_util_ui_message (GTK_WIDGET (window), 
 					       GLADE_UI_ERROR, NULL,
 				     	       _("Could not save file %s. Another project with that path is open."), 
-					       real_path);
+					       path);
 
-			g_free (real_path);
+			g_free (path);
 			return;
 		}
 
 	}
 
-	save (window, project, real_path);
+	save (window, project, path);
 
-	g_free (real_path);
+	g_free (path);
 }
 
 static void
@@ -1940,7 +1965,7 @@ about_cb (GtkAction *action, GladeWindow *window)
 	static const gchar copyright[] =
 		"Copyright \xc2\xa9 2001-2006 Ximian, Inc.\n"
 		"Copyright \xc2\xa9 2001-2006 Joaquin Cuenca Abela, Paolo Borelli, et al.\n"
-		"Copyright \xc2\xa9 2001-2010 Tristan Van Berkom, Juan Pablo Ugarte, et al.";
+		"Copyright \xc2\xa9 2004-2013 Tristan Van Berkom, Juan Pablo Ugarte, et al.";
 	
 	gtk_show_about_dialog (GTK_WINDOW (window),
 			       "name", g_get_application_name (),
@@ -3369,11 +3394,36 @@ glade_window_init (GladeWindow *window)
 #ifdef MAC_INTEGRATION
 	{
 		/* Fix up the menubar for MacOSX Quartz builds */
+		GtkWidget *sep;
+		GtkOSXApplication *theApp = g_object_new(GTK_TYPE_OSX_APPLICATION, NULL);
 		gtk_widget_hide (menubar);
-		ige_mac_menu_set_menu_bar (GTK_MENU_SHELL (menubar));
-		
-		widget = gtk_ui_manager_get_widget (window->priv->ui, "/MenuBar/FileMenu/Quit");
-		ige_mac_menu_set_quit_menu_item (GTK_MENU_ITEM (widget));
+		gtk_osxapplication_set_menu_bar(theApp, GTK_MENU_SHELL(menubar));
+		widget =
+			gtk_ui_manager_get_widget (window->priv->ui, "/MenuBar/FileMenu/Quit");
+		gtk_widget_hide (widget);
+		widget =
+			gtk_ui_manager_get_widget (window->priv->ui, "/MenuBar/HelpMenu/About");
+		gtk_osxapplication_insert_app_menu_item (theApp, widget, 0);
+		sep = gtk_separator_menu_item_new();
+		g_object_ref(sep);
+		gtk_osxapplication_insert_app_menu_item (theApp, sep, 1);
+
+		widget =
+			gtk_ui_manager_get_widget (window->priv->ui, "/MenuBar/EditMenu/Preferences");
+		gtk_osxapplication_insert_app_menu_item  (theApp, widget, 2);
+		sep = gtk_separator_menu_item_new();
+		g_object_ref(sep);
+		gtk_osxapplication_insert_app_menu_item (theApp, sep, 3);
+
+		widget =
+			gtk_ui_manager_get_widget (window->priv->ui, "/MenuBar/HelpMenu");
+		gtk_osxapplication_set_help_menu(theApp, GTK_MENU_ITEM(widget));
+
+		g_signal_connect(theApp, "NSApplicationWillTerminate",
+				 G_CALLBACK(quit_cb), window);
+
+		gtk_osxapplication_ready(theApp);
+
 	}
 #endif
 

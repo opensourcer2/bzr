@@ -25,6 +25,7 @@ libgladeui_1_la_SOURCES = \
 	glade-placeholder.c \
 	glade-custom.c \
 	glade-inspector.c \
+	glade-object-stub.c \
 	glade-xml-utils.c \
 	glade-palette.c \
 	glade-design-layout.c \
@@ -55,6 +56,7 @@ libgladeui_1_la_SOURCES = \
 	glade-popup.h \
 	glade-marshallers.h \
 	glade-accumulators.h \
+	glade-tsort.c \
 	glade-widget-action.c \
 	glade-name-context.c \
 	glade-displayable-values.c \
@@ -67,8 +69,8 @@ libgladeui_1_la_CPPFLAGS =  \
 	-I$(top_srcdir)     \
 	-I$(top_builddir)   \
 	$(GTK_CFLAGS)       \
-	$(IGE_MAC_BUNDLE_FLAG) \
-	$(IGE_MAC_CFLAGS)  \
+	$(GTK_MAC_BUNDLE_FLAG) \
+	$(GTK_MAC_CFLAGS)  \
 	$(WARN_CFLAGS)      \
 	$(AM_CPPFLAGS)
 
@@ -76,7 +78,7 @@ libgladeui_1_la_CFLAGS =    \
 	$(AM_CFLAGS)
 
 libgladeui_1_la_LDFLAGS = -version-info $(GLADE_CURRENT):$(GLADE_REVISION):$(GLADE_AGE) $(AM_LDFLAGS)
-libgladeui_1_la_LIBADD = $(GTK_LIBS) $(IGE_MAC_LIBS)
+libgladeui_1_la_LIBADD = $(GTK_LIBS) $(GTK_MAC_LIBS)
 
 
 libgladeuiincludedir=$(includedir)/libgladeui-1.0/gladeui
@@ -117,6 +119,14 @@ libgladeuiinclude_HEADERS = \
 	glade-cell-renderer-icon.h
 
 
+noinst_HEADERS = \
+	glade-marshallers.h \
+	glade-design-layout.h \
+	glade-object-stub.h \
+	glade-popup.h \
+	glade-accumulators.h \
+	glade-tsort.h \
+	glade-widget-private.h
 
 if PLATFORM_WIN32
 libgladeui_1_la_LDFLAGS += -no-undefined

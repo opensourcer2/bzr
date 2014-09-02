@@ -231,18 +231,6 @@ glade_gtk_init (const gchar *name)
 }
 
 /* ----------------------------- GtkWidget ------------------------------ */
-gboolean
-glade_gtk_widget_depends (GladeWidgetAdaptor *adaptor,
-			  GladeWidget        *widget,
-			  GladeWidget        *another)
-{
-	if (GTK_IS_ICON_FACTORY (another->object) ||
-	    GTK_IS_ACTION       (another->object) ||
-	    GTK_IS_ACTION_GROUP (another->object))
-		return TRUE; 
-
-	return GWA_GET_CLASS (G_TYPE_OBJECT)->depends (adaptor, widget, another);
-}
 
 #define GLADE_TAG_A11Y_A11Y         "accessibility"
 #define GLADE_TAG_A11Y_ACTION_NAME  "action_name" /* We should make -/_ synonymous */
@@ -824,15 +812,32 @@ glade_gtk_widget_write_widget (GladeWidgetAdaptor *adaptor,
 			       GladeXmlNode       *node)
 {
  	GladeProjectFormat  fmt;
+	GObject *obj;
 
 	fmt = glade_project_get_format (widget->project);
 
 	if (!glade_xml_node_verify (node, GLADE_XML_TAG_WIDGET (fmt)))
 		return;
 
+	/* Make sure use-action-appearance and related-action properties are
+	 * ordered in a sane way */
+	if (fmt == GLADE_PROJECT_FORMAT_GTKBUILDER &&
+	    (obj = glade_widget_get_object (widget)) &&
+	    GTK_IS_ACTIVATABLE (obj) &&
+	    gtk_activatable_get_related_action (GTK_ACTIVATABLE (obj)))
+	{
+		GladeProperty *prop =
+			glade_widget_get_property (widget, "use-action-appearance");
+		if (prop)
+			glade_property_write (prop, context, node);
+
+		prop = glade_widget_get_property (widget, "related-action");
+		if (prop)
+			glade_property_write (prop, context, node);
+	}
+
 	/* First chain up and read in all the normal properties.. */
         GWA_GET_CLASS (G_TYPE_OBJECT)->write_widget (adaptor, widget, context, node);
-
 
 	/* in Libglade the order must be Properties, Atk, Signals, Accels. 
 	 * in builder it doesnt matter so long as signals are after properties
@@ -975,12 +980,6 @@ glade_gtk_widget_set_property (GladeWidgetAdaptor *adaptor,
 			       const gchar        *id,
 			       const GValue       *value)
 {
-        /* FIXME: is this still needed with the new gtk+ tooltips? */
-	if (!strcmp (id, "tooltip"))
-	{
-                id = "tooltip-text";
-        }
-
         GWA_GET_CLASS (G_TYPE_OBJECT)->set_property (adaptor, object, id, value);
 }
 
@@ -990,11 +989,6 @@ glade_gtk_widget_get_property (GladeWidgetAdaptor *adaptor,
 			       const gchar        *id,
 			       GValue             *value)
 {
-	if (!strcmp (id, "tooltip"))
-	{
-                id = "tooltip-text";
-	}
-	
         GWA_GET_CLASS (G_TYPE_OBJECT)->get_property (adaptor, object, id, value);
 }
 
@@ -1021,152 +1015,180 @@ create_command_property_list (GladeWidget *gnew, GList *saved_props)
 	return g_list_reverse (command_properties);
 }
 
-
 void
 glade_gtk_widget_action_activate (GladeWidgetAdaptor *adaptor,
 				  GObject *object,
 				  const gchar *action_path)
 {
 	GladeWidget *gwidget = glade_widget_get_from_gobject (object), *gparent;
-	GList       this_widget = { 0, }, that_widget = { 0, };
-	GtkWidget   *parent = gtk_widget_get_parent (GTK_WIDGET (object));
+	GList this_widget = { 0, }, that_widget = { 0,};
+	GtkWidget *parent = gtk_widget_get_parent (GTK_WIDGET (object));
+	GladeProject *project;
 
 	if (parent)
 		gparent = glade_widget_get_from_gobject (parent);
 	else
 		gparent = NULL;
 
+	project = glade_widget_get_project (gwidget);
+
 	if (strcmp (action_path, "edit_separate") == 0)
 	{
-		GtkWidget *dialog = 
-			glade_editor_dialog_for_widget (gwidget);
+		GtkWidget *dialog = glade_editor_dialog_for_widget (gwidget);
 		gtk_widget_show_all (dialog);
 	}
 	else if (strcmp (action_path, "remove_parent") == 0)
 	{
 		GladeWidget *new_gparent;
+		GladeProperty *property;
 
 		g_return_if_fail (gparent);
-		new_gparent = gparent->parent;
-		
-		glade_command_push_group (_("Removing parent of %s"), 
-					  gwidget->name);
 
-		/* Remove "this" widget */
+		property = glade_widget_get_parentless_widget_ref (gparent);
+		new_gparent = glade_widget_get_parent (gparent);
+
+		glade_command_push_group (_("Removing parent of %s"), glade_widget_get_name (gwidget));
+
+		/* Remove "this" widget, If the parent we're removing is a parentless 
+		 * widget reference, the reference will be implicitly broken by the 'cut' command */
 		this_widget.data = gwidget;
-		glade_command_cut (&this_widget);
-		
+		glade_command_delete (&this_widget);
+
 		/* Delete the parent */
 		that_widget.data = gparent;
 		glade_command_delete (&that_widget);
 
-		/* Add "this" widget to the new parent */
-		glade_command_paste(&this_widget, new_gparent, NULL);
-		
+		/* Add "this" widget to the new parent, if there is no new parent this will re-add
+		 * the widget to the project at the toplevel without a parent
+		 */
+		glade_command_add (&this_widget, new_gparent, NULL, project, FALSE);
+
+		/* If the parent had a parentless widget reference, undoably add the child
+		 * as the new parentless widget reference here */
+		if (property)
+			glade_command_set_property (property, glade_widget_get_object (gwidget));
+
 		glade_command_pop_group ();
 	}
 	else if (strncmp (action_path, "add_parent/", 11) == 0)
 	{
 		GType new_type = 0;
-		
-		if (strcmp (action_path + 11, "alignment") == 0)
-			new_type = GTK_TYPE_ALIGNMENT;
-		else if (strcmp (action_path + 11, "viewport") == 0)
-			new_type = GTK_TYPE_VIEWPORT;
-		else if (strcmp (action_path + 11, "eventbox") == 0)
-			new_type = GTK_TYPE_EVENT_BOX;
-		else if (strcmp (action_path + 11, "frame") == 0)
-			new_type = GTK_TYPE_FRAME;
-		else if (strcmp (action_path + 11, "aspect_frame") == 0)
-			new_type = GTK_TYPE_ASPECT_FRAME;
-		else if (strcmp (action_path + 11, "scrolled_window") == 0)
-			new_type = GTK_TYPE_SCROLLED_WINDOW;
-		else if (strcmp (action_path + 11, "expander") == 0)
-			new_type = GTK_TYPE_EXPANDER;
-		else if (strcmp (action_path + 11, "table") == 0)
-			new_type = GTK_TYPE_TABLE;
-		else if (strcmp (action_path + 11, "hbox") == 0)
-			new_type = GTK_TYPE_HBOX;
-		else if (strcmp (action_path + 11, "vbox") == 0)
-			new_type = GTK_TYPE_VBOX;
-		else if (strcmp (action_path + 11, "hpaned") == 0)
-			new_type = GTK_TYPE_HPANED;
-		else if (strcmp (action_path + 11, "vpaned") == 0)
-			new_type = GTK_TYPE_VPANED;
+		GladeProperty *property;
 
-		
-		if (new_type)
-		{
-			GladeWidgetAdaptor *adaptor = glade_widget_adaptor_get_by_type (new_type);
-			GList              *saved_props, *prop_cmds;
-			GladeProject       *project;
+      if (strcmp (action_path + 11, "alignment") == 0)
+        new_type = GTK_TYPE_ALIGNMENT;
+      else if (strcmp (action_path + 11, "viewport") == 0)
+        new_type = GTK_TYPE_VIEWPORT;
+      else if (strcmp (action_path + 11, "eventbox") == 0)
+        new_type = GTK_TYPE_EVENT_BOX;
+      else if (strcmp (action_path + 11, "frame") == 0)
+        new_type = GTK_TYPE_FRAME;
+      else if (strcmp (action_path + 11, "aspect_frame") == 0)
+        new_type = GTK_TYPE_ASPECT_FRAME;
+      else if (strcmp (action_path + 11, "scrolled_window") == 0)
+        new_type = GTK_TYPE_SCROLLED_WINDOW;
+      else if (strcmp (action_path + 11, "expander") == 0)
+        new_type = GTK_TYPE_EXPANDER;
+      else if (strcmp (action_path + 11, "table") == 0)
+        new_type = GTK_TYPE_TABLE;
+      else if (strcmp (action_path + 11, "hbox") == 0)
+        new_type = GTK_TYPE_HBOX;
+      else if (strcmp (action_path + 11, "vbox") == 0)
+        new_type = GTK_TYPE_VBOX;
+      else if (strcmp (action_path + 11, "hpaned") == 0)
+        new_type = GTK_TYPE_HPANED;
+      else if (strcmp (action_path + 11, "vpaned") == 0)
+        new_type = GTK_TYPE_VPANED;
 
-			/* Dont add non-scrollable widgets to scrolled windows... */
-			if (gparent &&
-			    glade_util_check_and_warn_scrollable (gparent, adaptor, glade_app_get_window()))
-				return;
-			
-			glade_command_push_group (_("Adding parent %s for %s"), 
-						  adaptor->title, gwidget->name);
+      if (new_type)
+        {
+          GladeWidgetAdaptor *adaptor =
+              glade_widget_adaptor_get_by_type (new_type);
+          GList *saved_props, *prop_cmds;
+	  GladeWidget *gnew_parent;
 
-			/* Record packing properties */
-			saved_props = glade_widget_dup_properties (gwidget, gwidget->packing_properties, FALSE, FALSE, FALSE);
-			
-			/* Remove "this" widget */
-			this_widget.data = gwidget;
-			glade_command_cut (&this_widget);
+          /* Dont add non-scrollable widgets to scrolled windows... */
+          if (gparent &&
+              glade_util_check_and_warn_scrollable (gparent, adaptor,
+                                                    glade_app_get_window ()))
+            return;
 
-			if (gparent)
-				project = glade_widget_get_project (gparent);
-			else
-				project = glade_app_get_project ();
-			
-			/* Create new widget and put it where the placeholder was */
-			if ((that_widget.data =
-			     glade_command_create (adaptor, gparent, NULL, project)) != NULL)
-			{
-			
-				/* Remove the alignment that we added in the frame's post_create... */
-				if (new_type == GTK_TYPE_FRAME)
-				{
-					GObject     *frame = glade_widget_get_object (that_widget.data);
-					GladeWidget *galign = glade_widget_get_from_gobject (gtk_bin_get_child (GTK_BIN (frame)));
-					GList        to_delete = { 0, };
-					
-					to_delete.data = galign;
-					glade_command_delete (&to_delete);
-				}
-				
-				/* Create heavy-duty glade-command properties stuff */
-				prop_cmds = create_command_property_list (that_widget.data, saved_props);
-				g_list_foreach (saved_props, (GFunc)g_object_unref, NULL);
-				g_list_free (saved_props);
-				
-				/* Apply the properties in an undoable way */
-				if (prop_cmds)
-					glade_command_set_properties_list (glade_widget_get_project (gparent), prop_cmds);
-				
-				/* Add "this" widget to the new parent */
-				glade_command_paste(&this_widget, GLADE_WIDGET (that_widget.data), NULL);
-			}
-			else
-				/* Create parent was cancelled, paste back to parent */
-				glade_command_paste(&this_widget, gparent, NULL);
+          glade_command_push_group (_("Adding parent %s for %s"),
+                                    adaptor->title, 
+				    glade_widget_get_name (gwidget));
 
-			glade_command_pop_group ();
-		}
-	}
-	else if (strcmp (action_path, "sizegroup_add") == 0)
-	{
-		/* Ignore dummy */
-	}
-	else
-		GWA_GET_CLASS (G_TYPE_OBJECT)->action_activate (adaptor,
-								object,
-								action_path);
+          /* Record packing properties */
+          saved_props =
+	    glade_widget_dup_properties (gwidget, gwidget->packing_properties,
+					 FALSE, FALSE, FALSE);
+
+
+	  property = glade_widget_get_parentless_widget_ref (gwidget);
+
+	  /* Remove "this" widget, If the parent we're removing is a parentless 
+	   * widget reference, the reference will be implicitly broken by the 'cut' command */
+          this_widget.data = gwidget;
+          glade_command_delete (&this_widget);
+
+          /* Create new widget and put it where the placeholder was */
+          if ((gnew_parent =
+               glade_command_create (adaptor, gparent, NULL, project)) != NULL)
+            {
+	      /* Now we created the new parent, if gwidget had a parentless widget reference...
+	       * set that reference to the new parent instead */
+	      if (property)
+		glade_command_set_property (property, glade_widget_get_object (gnew_parent));
+
+              /* Remove the alignment that we added in the frame's post_create... */
+              if (new_type == GTK_TYPE_FRAME)
+                {
+                  GObject *frame = glade_widget_get_object (gnew_parent);
+                  GladeWidget *galign =
+                      glade_widget_get_from_gobject (gtk_bin_get_child (GTK_BIN (frame)));
+                  GList to_delete = { 0, };
+
+                  to_delete.data = galign;
+                  glade_command_delete (&to_delete);
+                }
+
+              /* Create heavy-duty glade-command properties stuff */
+              prop_cmds =
+                  create_command_property_list (gnew_parent, saved_props);
+              g_list_foreach (saved_props, (GFunc) g_object_unref, NULL);
+              g_list_free (saved_props);
+
+              /* Apply the properties in an undoable way */
+              if (prop_cmds)
+                glade_command_set_properties_list 
+		  (glade_widget_get_project (gparent), prop_cmds);
+
+              /* Add "this" widget to the new parent */
+              glade_command_add (&this_widget, gnew_parent, NULL, project, FALSE);
+            }
+          else
+	    {
+	      /* Create parent was cancelled, paste back to parent */
+	      glade_command_add (&this_widget, gparent, NULL, project, FALSE);
+
+	      /* Restore any parentless widget reference if there was one */
+	      if (property)
+		glade_command_set_property (property, glade_widget_get_object (gwidget));
+	    }
+
+          glade_command_pop_group ();
+        }
+    }
+  else if (strcmp (action_path, "sizegroup_add") == 0)
+    {
+      /* Ignore dummy */
+    }
+  else
+    GWA_GET_CLASS (G_TYPE_OBJECT)->action_activate (adaptor,
+                                                    object, action_path);
 }
 
-static GList *list_sizegroups (GladeWidget *gwidget)
+static GList *
+list_sizegroups (GladeWidget *gwidget)
 {
 	GladeProject *project = glade_widget_get_project (gwidget);
 	GList *groups = NULL;
@@ -2737,36 +2759,87 @@ glade_gtk_table_widget_exceeds_bounds (GtkTable *table, gint n_rows, gint n_cols
 	return ret;
 }
 
+#define TABLE_OCCUPIED(occmap, n_columns, col, row) \
+    (occmap)[row * n_columns + col]
+
+static void
+glade_gtk_table_build_occupation_maps(GtkTable *table, guint n_columns, guint n_rows,
+				      gchar **child_map, gpointer **placeholder_map)
+{
+    guint i, j;
+    GList *list, *children = gtk_container_get_children (GTK_CONTAINER (table));
+
+    *child_map = g_malloc0(n_columns * n_rows * sizeof(gchar));  /* gchar is smaller than gboolean */
+    *placeholder_map = g_malloc0(n_columns * n_rows * sizeof(gpointer));
+
+    for (list = children; list && list->data; list = list->next)
+    {
+	GtkTableChild child;
+
+	glade_gtk_table_get_child_attachments (GTK_WIDGET (table),
+					       GTK_WIDGET (list->data), &child);
+
+	if (GLADE_IS_PLACEHOLDER(list->data))
+	{
+	    /* assumption: placeholders are always attached to exactly 1 cell */
+	    TABLE_OCCUPIED(*placeholder_map, n_columns, child.left_attach, child.top_attach) = list->data;
+	}
+	else
+	{
+	    for (i = child.left_attach; i < child.right_attach && i < n_columns; i++)
+	    {
+		for (j = child.top_attach; j < child.bottom_attach && j < n_rows; j++)
+		{
+		    TABLE_OCCUPIED(*child_map, n_columns, i, j) = 1;
+		}
+	    }
+	}
+    }
+    g_list_free (children);
+}
+
 static void
 glade_gtk_table_refresh_placeholders (GtkTable *table)
 {
-	GList *list, *children;
-	guint n_columns, n_rows;
-	gint i, j;
+	guint n_columns, n_rows, i, j;
+	gchar *child_map;
+	gpointer *placeholder_map;
 
 	g_object_get (table,
 		      "n-columns", &n_columns,
 		      "n-rows", &n_rows,
 		      NULL);
 
-	children = gtk_container_get_children (GTK_CONTAINER (table));
-
-	for (list = children; list && list->data; list = list->next)
-	{
-		if (GLADE_IS_PLACEHOLDER (list->data))
-			gtk_container_remove (GTK_CONTAINER (table),
-					      GTK_WIDGET (list->data));
-	}
-	g_list_free (children);
+	glade_gtk_table_build_occupation_maps(table, n_columns, n_rows,
+					     &child_map, &placeholder_map);
 
 	for (i = 0; i < n_columns; i++)
-		for (j = 0; j < n_rows; j++)
-			if (glade_gtk_table_has_child (table, i, j) == FALSE)
-       			{
-				gtk_table_attach_defaults (table,
-							   glade_placeholder_new (),
-							   i, i + 1, j, j + 1);
-			}
+	{
+	    for (j = 0; j < n_rows; j++)
+	    {
+		gpointer placeholder = TABLE_OCCUPIED(placeholder_map, n_columns, i, j);
+
+		if (TABLE_OCCUPIED(child_map, n_columns, i, j))
+		{
+		    if (placeholder)
+		    {
+			gtk_container_remove (GTK_CONTAINER (table), 
+					      GTK_WIDGET (placeholder));
+		    }
+		}
+		else
+		{
+		    if (!placeholder)
+		    {
+			gtk_table_attach_defaults (table, 
+						   glade_placeholder_new (), 
+						   i, i + 1, j, j + 1);
+		    }
+		}
+	    }
+	}
+	g_free(child_map);
+	g_free(placeholder_map);
 	gtk_container_check_resize (GTK_CONTAINER (table));
 }
 
@@ -4719,17 +4792,6 @@ glade_gtk_expander_write_child (GladeWidgetAdaptor *adaptor,
 
 /* -------------------------------- GtkEntry -------------------------------- */
 
-gboolean
-glade_gtk_entry_depends (GladeWidgetAdaptor *adaptor,
-			 GladeWidget        *widget,
-			 GladeWidget        *another)
-{
-	if (GTK_IS_ENTRY_BUFFER (another->object))
-		return TRUE; 
-
-	return GWA_GET_CLASS (GTK_TYPE_WIDGET)->depends (adaptor, widget, another);
-}
-
 
 static void
 glade_gtk_entry_changed (GtkEditable *editable, GladeWidget *gentry)
@@ -5952,57 +6014,54 @@ evaluate_activatable_property_sensitivity (GObject            *object,
 					   const GValue       *value)
 {
 	GladeWidget *gwidget = glade_widget_get_from_gobject (object);
+	gboolean sensitivity;
+	gchar *msg;
 
 	if (!strcmp (id, "related-action"))
-	{
-		GtkAction *action = g_value_get_object (value);
+	  {
+		  GtkAction *action = g_value_get_object (value);
 
-		if (action)
-		{
-			glade_widget_property_set_sensitive (gwidget, "visible", FALSE, ACTION_APPEARANCE_MSG);
-			glade_widget_property_set_sensitive (gwidget, "sensitive", FALSE, ACTION_APPEARANCE_MSG);
+		  if (action)
+		    {
+			    sensitivity = FALSE;
+			    msg = ACTION_APPEARANCE_MSG;
+		    }
+		  else
+		    {
+			    sensitivity = TRUE;
+			    msg = NULL;
+		    }
 
-			glade_widget_property_set_sensitive (gwidget, "accel-group", FALSE, ACTION_APPEARANCE_MSG);
-		} else {
-			glade_widget_property_set_sensitive (gwidget, "visible", TRUE, NULL);
-			glade_widget_property_set_sensitive (gwidget, "sensitive", TRUE, NULL);
-			
-			glade_widget_property_set_sensitive (gwidget, "accel-group", TRUE, NULL);
-		}
-
-	} 
+		  glade_widget_property_set_sensitive (gwidget, "visible", sensitivity, msg);
+		  glade_widget_property_set_sensitive (gwidget, "sensitive", sensitivity, msg);
+		  glade_widget_property_set_sensitive (gwidget, "accel-group", sensitivity, msg);
+		  glade_widget_property_set_sensitive (gwidget, "use-action-appearance", !sensitivity, sensitivity ? msg : NULL);
+	  }
 	else if (!strcmp (id, "use-action-appearance"))
-	{
-		gboolean use_appearance = g_value_get_boolean (value);
-		
+	  {
+		  if (g_value_get_boolean (value))
+		    {
+			    sensitivity = FALSE;
+			    msg = ACTION_APPEARANCE_MSG;
+		    }
+		  else
+		    {
+			    sensitivity = TRUE;
+			    msg = NULL;
+		    }
 
-		if (use_appearance)
-		{
-			glade_widget_property_set_sensitive (gwidget, "label", FALSE, ACTION_APPEARANCE_MSG);
-			glade_widget_property_set_sensitive (gwidget, "use-underline", FALSE, ACTION_APPEARANCE_MSG);
-			glade_widget_property_set_sensitive (gwidget, "stock", FALSE, ACTION_APPEARANCE_MSG);
-			//glade_widget_property_set_sensitive (gwidget, "use-stock", FALSE, ACTION_APPEARANCE_MSG);
-			glade_widget_property_set_sensitive (gwidget, "image", FALSE, ACTION_APPEARANCE_MSG);
-			glade_widget_property_set_sensitive (gwidget, "custom-child", FALSE, ACTION_APPEARANCE_MSG);	
-			glade_widget_property_set_sensitive (gwidget, "stock-id", FALSE, ACTION_APPEARANCE_MSG);
-			glade_widget_property_set_sensitive (gwidget, "label-widget", FALSE, ACTION_APPEARANCE_MSG);
-			glade_widget_property_set_sensitive (gwidget, "icon-name", FALSE, ACTION_APPEARANCE_MSG);
-			glade_widget_property_set_sensitive (gwidget, "icon-widget", FALSE, ACTION_APPEARANCE_MSG);
-			glade_widget_property_set_sensitive (gwidget, "icon", FALSE, ACTION_APPEARANCE_MSG);
-	} else {
-			glade_widget_property_set_sensitive (gwidget, "label", TRUE, NULL);
-			glade_widget_property_set_sensitive (gwidget, "use-underline", TRUE, NULL);
-			glade_widget_property_set_sensitive (gwidget, "stock", TRUE, NULL);
-			//glade_widget_property_set_sensitive (gwidget, "use-stock", TRUE, NULL);
-			glade_widget_property_set_sensitive (gwidget, "image", TRUE, NULL);
-			glade_widget_property_set_sensitive (gwidget, "custom-child", TRUE, NULL);	
-			glade_widget_property_set_sensitive (gwidget, "stock-id", TRUE, NULL);
-			glade_widget_property_set_sensitive (gwidget, "label-widget", TRUE, NULL);
-			glade_widget_property_set_sensitive (gwidget, "icon-name", TRUE, NULL);
-			glade_widget_property_set_sensitive (gwidget, "icon-widget", TRUE, NULL);
-			glade_widget_property_set_sensitive (gwidget, "icon", TRUE, NULL);
-		}
-	}
+		  glade_widget_property_set_sensitive (gwidget, "label", sensitivity, msg);
+		  glade_widget_property_set_sensitive (gwidget, "use-underline", sensitivity, msg);
+		  glade_widget_property_set_sensitive (gwidget, "stock", sensitivity, msg);
+		  //glade_widget_property_set_sensitive (gwidget, "use-stock", sensitivity, msg);
+		  glade_widget_property_set_sensitive (gwidget, "image", sensitivity, msg);
+		  glade_widget_property_set_sensitive (gwidget, "custom-child", sensitivity, msg);
+		  glade_widget_property_set_sensitive (gwidget, "stock-id", sensitivity, msg);
+		  glade_widget_property_set_sensitive (gwidget, "label-widget", sensitivity, msg);
+		  glade_widget_property_set_sensitive (gwidget, "icon-name", sensitivity, msg);
+		  glade_widget_property_set_sensitive (gwidget, "icon-widget", sensitivity, msg);
+		  glade_widget_property_set_sensitive (gwidget, "icon", sensitivity, msg);
+	  }
 }
 
 /* ----------------------------- GtkButton ------------------------------ */
@@ -6310,7 +6369,7 @@ glade_gtk_image_get_property (GladeWidgetAdaptor *adaptor,
 		g_value_unset (&int_value);
 	}
 	else
-		GWA_GET_CLASS (GTK_TYPE_WIDGET)->set_property (adaptor, object,
+		GWA_GET_CLASS (GTK_TYPE_WIDGET)->get_property (adaptor, object,
 							       id, value);
 }
 
@@ -9990,16 +10049,6 @@ glade_gtk_radio_button_set_property (GladeWidgetAdaptor *adaptor,
 }
 
 /*--------------------------- GtkSizeGroup ---------------------------------*/
-gboolean
-glade_gtk_size_group_depends (GladeWidgetAdaptor *adaptor,
-			      GladeWidget        *widget,
-			      GladeWidget        *another)
-{
-	if (GTK_IS_WIDGET (another->object))
-		return TRUE; 
-
-	return GWA_GET_CLASS (G_TYPE_OBJECT)->depends (adaptor, widget, another);
-}
 
 #define GLADE_TAG_SIZEGROUP_WIDGETS "widgets"
 #define GLADE_TAG_SIZEGROUP_WIDGET  "widget"
@@ -12186,17 +12235,6 @@ glade_gtk_treeview_remove_child (GladeWidgetAdaptor *adaptor,
 
 	column = GTK_TREE_VIEW_COLUMN (child);
 	gtk_tree_view_remove_column (view, column);
-}
-
-gboolean
-glade_gtk_treeview_depends (GladeWidgetAdaptor *adaptor,
-			    GladeWidget        *widget,
-			    GladeWidget        *another)
-{
-	if (GTK_IS_TREE_MODEL (another->object))
-		return TRUE; 
-
-	return GWA_GET_CLASS (GTK_TYPE_CONTAINER)->depends (adaptor, widget, another);
 }
 
 /*--------------------------- GtkAdjustment ---------------------------------*/

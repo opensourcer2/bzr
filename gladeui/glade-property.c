@@ -1108,7 +1108,7 @@ glade_property_write (GladeProperty   *property,
 	GladeProjectFormat fmt;
 	GladeXmlNode *prop_node;
 	GladeProject *project;
-	gchar *name, *value, *tmp;
+	gchar *name, *value;
 
 	g_return_if_fail (GLADE_IS_PROPERTY (property));
 	g_return_if_fail (node != NULL);
@@ -1151,13 +1151,6 @@ glade_property_write (GladeProperty   *property,
 		 * funcs that may not like NULL.
 		 */
 		value = g_strdup ("");
-	else
-	{
-		/* Escape the string so that it will be parsed as it should. */
-		tmp = value;
-		value = g_markup_escape_text (value, -1);
-		g_free (tmp);
-	}
 
 	/* Now dump the node values... */
 	prop_node = glade_xml_node_new (context, GLADE_XML_TAG_PROPERTY);
@@ -1470,6 +1463,31 @@ glade_property_get_enabled (GladeProperty *property)
 {
 	g_return_val_if_fail (GLADE_IS_PROPERTY (property), FALSE);
 	return property->enabled;
+}
+
+GladePropertyClass *
+glade_property_get_class (GladeProperty *property)
+{
+  g_return_val_if_fail (GLADE_IS_PROPERTY (property), NULL);
+
+  return property->klass;
+}
+
+void
+glade_property_set_widget (GladeProperty      *property,
+			   GladeWidget        *widget)
+{
+	g_return_if_fail (GLADE_IS_PROPERTY (property));
+
+	property->widget = widget;
+}
+
+GladeWidget *
+glade_property_get_widget (GladeProperty      *property)
+{
+	g_return_val_if_fail (GLADE_IS_PROPERTY (property), NULL);
+
+	return property->widget;
 }
 
 
