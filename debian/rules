@@ -33,11 +33,11 @@ DEB_SHLIBDEPS_LIBRARY_glade-common += $(SHARED_PKG)
 DEB_SHLIBDEPS_INCLUDE_glade-common += debian/$(SHARED_PKG)/usr/lib/
 
 common-configure-arch common-configure-indep::
-	for file in $$(ls help/*/glade.xml); do \
-		mv $${file} $${file%.xml}-gtk2.xml; \
+	for file in $$(ls help/*/glade3.xml); do \
+		mv $${file} $${file%3.xml}-gtk2.xml; \
 	done
-	for file in $$(ls help/*/glade.omf.in); do \
-		mv $${file} $${file%.omf.in}-gtk2.omf.in; \
+	for file in $$(ls help/glade3.omf.in); do \
+		mv $${file} $${file%3.omf.in}-gtk2.omf.in; \
 	done
 
 # move stuff that will go in glade-gnome

@@ -6,7 +6,7 @@ Index: glade-3-3.8.0/help/Makefile.am
  include $(top_srcdir)/gnome-doc-utils.make
  dist-hook: doc-dist-hook
  
--DOC_MODULE = glade
+-DOC_MODULE = glade3
 +DOC_MODULE = glade-gtk2
  DOC_INCLUDES = legal.xml
  DOC_FIGURES = figures/main-window.png
@@ -37,8 +37,8 @@ Index: glade-3-3.8.0/src/Makefile.am
 -glade_3_LDFLAGS = $(AM_LDFLAGS)
 +glade_gtk2_LDFLAGS = $(AM_LDFLAGS)
  
--glade_3_LDADD = $(top_builddir)/gladeui/libgladeui-1.la $(IGE_MAC_LIBS)
-+glade_gtk2_LDADD = $(top_builddir)/gladeui/libgladeui-1.la $(IGE_MAC_LIBS)
+-glade_3_LDADD = $(top_builddir)/gladeui/libgladeui-1.la $(GTK_MAC_LIBS)
++glade_gtk2_LDADD = $(top_builddir)/gladeui/libgladeui-1.la $(GTK_MAC_LIBS)
  
 -glade_3_SOURCES = \
 +glade_gtk2_SOURCES = \

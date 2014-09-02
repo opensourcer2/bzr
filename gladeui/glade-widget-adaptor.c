@@ -42,6 +42,7 @@
 #include "glade-accumulators.h"
 #include "glade-displayable-values.h"
 #include "glade-editor-table.h"
+#include "glade-widget-private.h"
 
 /* For g_file_exists */
 #include <sys/types.h>
@@ -859,10 +860,21 @@ glade_widget_adaptor_object_child_action_activate (GladeWidgetAdaptor *adaptor,
 
 static gboolean
 glade_widget_adaptor_object_depends (GladeWidgetAdaptor *adaptor,
-				     GladeWidget        *widget,
-				     GladeWidget        *another)
+                                     GladeWidget *widget,
+                                     GladeWidget *another)
 {
-	return FALSE;
+  GList *l;
+
+  for (l = _glade_widget_peek_prop_refs (another); l; l = g_list_next (l))
+    {
+      /* If one of the properties that reference @another is
+       * owned by @widget then @widget depends on @another
+       */
+      if (glade_property_get_widget (l->data) == widget)
+        return TRUE;
+    }
+
+  return FALSE;
 }
 
 static void
@@ -3702,4 +3714,3 @@ glade_widget_adaptor_create_editable (GladeWidgetAdaptor   *adaptor,
 	return GLADE_WIDGET_ADAPTOR_GET_CLASS
 		(adaptor)->create_editable (adaptor, type);
 }
-

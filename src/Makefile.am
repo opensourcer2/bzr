@@ -7,7 +7,7 @@ glade_gtk2_CPPFLAGS = \
 	-I$(top_builddir)  \
 	-DGLADE_GNOMEHELPDIR="\"$(HELP_DIR)\"" \
 	$(GTK_CFLAGS)      \
-	$(IGE_MAC_CFLAGS)  \
+	$(GTK_MAC_CFLAGS)  \
 	$(WARN_CFLAGS)     \
 	$(AM_CPPFLAGS)
 
@@ -16,7 +16,7 @@ glade_gtk2_CFLAGS =           \
 
 glade_gtk2_LDFLAGS = $(AM_LDFLAGS)
 
-glade_gtk2_LDADD = $(top_builddir)/gladeui/libgladeui-1.la $(IGE_MAC_LIBS)
+glade_gtk2_LDADD = $(top_builddir)/gladeui/libgladeui-1.la $(GTK_MAC_LIBS)
 
 glade_gtk2_SOURCES = \
 	glade-window.c \

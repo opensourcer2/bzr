@@ -1,4 +1,64 @@
 ===========
+Glade 3.8.5
+===========
+
+	- Backported topological sort object dependancy (Thomas Martitz)
+	- Closes Bug 709609 "[PATCH] Change way of sorting before writing XML output."
+	- Fixes Bug 711858 "editing glade project results in long CPU usage spikes after upgrading to 3.16 and GTK+3.10"
+	- Closes Bug 689667 "backport support for GtkComboBoxText" (Rafał Mużyło)
+	- Backported feature to make GladeProject remember unknown object classes
+
+===========
+Glade 3.8.4
+===========
+	- Added workaround for Bug 625867 "RadioButton information lost on cut+paste, add/remove parent, etc"
+	- Fixed glade_gtk_image_get_property() chainup. (was calling set_property)
+	- Fixed bug that prevented the runtime object to show the right pixbuf when copying a GtkImage.
+	- Improved pango text integer attributes editors. Bug 679006
+	  "The "size" attribute for labels only accepts integer values (not strings like "larger")"
+	- Fixed Bug 616834 "Freeze when changing toolbutton type after renaming it"
+	- Fixed bug 584381 "Saving as an existing file name except the extension overwrites without confirmation."    
+	- Fixed Bug 646259 "SIGSEGV in glade_widget_adaptor_object_construct_object loading ui file"
+	- Fixed Bug 694081 "Glade loses widget's tooltips on Cut/Paste"    
+	- Fixed bug 702886 "SEGV when creating a new GtkDialog (GLib 2.37.x)"
+	- Made a few ui fixes, like removing unnecessary shadows in the workspace and property editor.
+	- Replaced old atk icon with new one.
+
+===========
+Glade 3.8.3
+===========
+
+	- Backported Bug #679589 fix "Use Action Appearance not supported for GTK 2.12
+	  but added to widgets in Glade 3.8.2"
+	- Backported build/mingw-w64 directory with script to cross compile and create
+	  windows installer using nsis
+
+===========
+Glade 3.8.2
+===========
+
+	- Backported Bug 665784 fix (added gmodule-2.0 pkgconfig package) Vincent Untz
+	- Added custom build scripts for building on MS windows. Dieter Verfaillie
+	- Improved performance of modifying GtkTable contents, shows 
+	  specifically when loading files containing large tables.
+	  Fixed bug 663516, Fredy Paquet.
+	- Fixed bug 647984 "Make size groups widget selection work" Benjamin Otte
+	- Make help dir use 'glade3' name instead of 'glade' (for bug 646997).
+
+===========
+Glade 3.8.1
+===========
+	- Correctly detect the required devhelp version (Javier Jardón)
+	- Sort objects in output by property reference, ensures a
+	  GtkTreeModelFilter gets serialized after its 'child-model' (fixes bug 657164)
+	- Fixed crashers when performing "Remove Parent" (bug 657338)
+	- Ensure 'use-action-appearance' is serialized 
+	  before 'related-action' (bug 658497)
+	- Properly escape special characters while serializing 
+	  property values (bug 654609 - Fabien Parent) 
+	- Fix GladeProject to notify "row-has-child-toggled", (fixes bug 651673).
+
+===========
 Glade 3.8.0
 ===========
 	- Added support for GtkToolPalette and GtkToolItemGroup

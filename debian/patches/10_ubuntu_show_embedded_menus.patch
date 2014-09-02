@@ -1,9 +1,9 @@
-Index: glade-3-3.7.3/gladeui/glade-widget.c
+Index: glade3-3.8.5/gladeui/glade-widget.c
 ===================================================================
---- glade-3-3.7.3.orig/gladeui/glade-widget.c	2011-01-06 05:32:23.000000000 -0500
-+++ glade-3-3.7.3/gladeui/glade-widget.c	2011-04-01 11:09:42.169080918 -0400
-@@ -1914,6 +1914,26 @@
- 	return g_list_reverse (packing_props);
+--- glade3-3.8.5.orig/gladeui/glade-widget.c
++++ glade3-3.8.5/gladeui/glade-widget.c
+@@ -1928,6 +1928,26 @@ _glade_widget_peek_prop_refs (GladeWidge
+   return widget->prop_refs;
  }
  
 +/* Tells Ubuntu to show any embedded menu bars */
@@ -29,7 +29,7 @@ Index: glade-3-3.7.3/gladeui/glade-widget.c
  /*******************************************************************************
                                       API
   *******************************************************************************/
-@@ -4389,6 +4408,8 @@
+@@ -4486,6 +4506,8 @@ glade_widget_embed (GladeWidget *gwidget
  	
  	if (glade_window_is_embedded (window)) return TRUE;
  	

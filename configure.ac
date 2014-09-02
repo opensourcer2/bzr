@@ -4,7 +4,7 @@ AC_PREREQ(2.52)
 
 m4_define(glade_major_version, 3)
 m4_define(glade_minor_version, 8)
-m4_define(glade_micro_version, 0)
+m4_define(glade_micro_version, 5)
 m4_define(glade_version, glade_major_version.glade_minor_version.glade_micro_version)
 
 AC_INIT([glade3], [glade_version],
@@ -53,8 +53,8 @@ AM_PROG_LIBTOOL
 # If any interfaces have been removed since the last public release, then set GLADE_AGE to 0.
 # Reference: http://www.gnu.org/software/libtool/manual.html#Versioning
 GLADE_REVISION=0
-GLADE_CURRENT=11
-GLADE_AGE=0
+GLADE_CURRENT=13
+GLADE_AGE=2
 GLADE_CURRENT_MINUS_AGE=`expr $GLADE_CURRENT - $GLADE_AGE`
 AC_SUBST(GLADE_REVISION)
 AC_SUBST(GLADE_CURRENT)
@@ -121,7 +121,7 @@ GTK_DOC_CHECK(1.9)
 dnl ================================================================
 dnl Check for gtk+
 dnl ================================================================
-PKG_CHECK_MODULES(GTK, [gtk+-2.0 >= 2.20 gthread-2.0 gmodule-2.0 libxml-2.0 >= 2.4.0])
+PKG_CHECK_MODULES(GTK, [gtk+-2.0 >= 2.24 gmodule-2.0 gthread-2.0 libxml-2.0 >= 2.4.0])
 AC_SUBST(GTK_LIBS)
 AC_SUBST(GTK_CFLAGS)
 
@@ -230,9 +230,9 @@ dnl ================================================================
 _gdk_tgt=`$PKG_CONFIG --variable=target gdk-2.0`
 AM_CONDITIONAL([GDK_TARGET_QUARTZ], [test x$_gdk_tgt = xquartz])
 if test "x$_gdk_tgt" = xquartz; then 
-   PKG_CHECK_MODULES(IGE_MAC, ige-mac-integration)
+   PKG_CHECK_MODULES(GTK_MAC, gtk-mac-integration)
 
-   IGE_MAC_BUNDLE_FLAG=
+   GTK_MAC_BUNDLE_FLAG=
 
    AC_ARG_ENABLE(mac-bundle,
       AS_HELP_STRING([--enable-mac-bundle], [enable mac bundling]),
@@ -241,12 +241,12 @@ if test "x$_gdk_tgt" = xquartz; then
    if test "x$build_bundle" = xyes; then
       AC_MSG_NOTICE([enableing mac bundle..])
 
-      IGE_MAC_BUNDLE_FLAG=-DMAC_BUNDLE
+      GTK_MAC_BUNDLE_FLAG=-DMAC_BUNDLE
    fi      
 
-   AC_SUBST(IGE_MAC_BUNDLE_FLAG)
-   AC_SUBST(IGE_MAC_LIBS)
-   AC_SUBST(IGE_MAC_CFLAGS)
+   AC_SUBST(GTK_MAC_BUNDLE_FLAG)
+   AC_SUBST(GTK_MAC_LIBS)
+   AC_SUBST(GTK_MAC_CFLAGS)
 fi
 
 AC_SUBST([AM_CPPFLAGS])
@@ -291,6 +291,7 @@ po/Makefile.in
 doc/Makefile
 doc/version.xml
 help/Makefile
+build/mingw-w64/glade.nsi
 ])
 
 AC_OUTPUT

@@ -1,3 +1,16 @@
+glade-3 (3.8.5-0ubuntu1) utopic; urgency=medium
+
+  * New upstream release (LP: #1343983)
+  * debian/rules:
+    - Update for doc file renames
+  * debian/watch:
+    - Package is now a .xz
+  * debian/patches/90_linking_doc_in_natty.patch:
+  * debian/patches/link-gmodule.patch:
+    - Applied upstream
+
+ -- Robert Ancell <robert.ancell@canonical.com>  Tue, 02 Sep 2014 11:11:46 +1200
+
 glade-3 (3.8.0-0ubuntu6) raring; urgency=low
 
   * Fix FTBFS link gtk-doc scanner against gtk libs.
